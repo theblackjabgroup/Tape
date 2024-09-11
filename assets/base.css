@@ -2159,7 +2159,14 @@ input[type='checkbox'] {
   align-content: center;
   grid-area: announcements;
 }
-
+.announcement-bar,
+.announcement-icon {
+  line-height: 0.3rem;
+    text-align: center;
+    padding: 0.5rem 0.5rem;
+    margin: 0;
+    letter-spacing: .1rem;
+}
 .announcement-bar .slider--everywhere {
   margin-bottom: 0;
   scroll-behavior: auto;
@@ -2318,6 +2325,11 @@ input[type='checkbox'] {
 }
 
 .shopify-section-header-sticky {
+  position: sticky;
+  top: 0;
+}
+
+.shopify-section-bar-sticky {
   position: sticky;
   top: 0;
 }
