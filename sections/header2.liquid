@@ -1,43 +1,9 @@
 <script async src="{{ 'header.js' |  asset_url }}"></script>
+<link rel="stylesheet" href="{{ 'header.css' |  asset_url}}">
 
 <style>
-  .semicircles__center {
-    position: absolute;
-    display: block !important;
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    top: 47%;
-    background-color: white;
-  }
-
-  .header__semicircle__left {
-    left: 0;
-    transform: translateY(-50%) translateX(-50%);
-  }
-  .header__semicircle__right {
-    right: 0;
-    transform: translateY(-50%) translateX(50%);
-  }
-
-  #header__semicircle__bottom_container {
-    z-index: 99999;
-    display: flex;
-    position: absolute;
-    bottom: 0;
-    transform: translateY(50%);
-    justify-content: space-between;
-    width: 100%;
-    padding: 0 var(--header__padding__right) 0 var(--header__padding__left);
-  }
-
-  .header_semicircles {
-    display: block !important;
-    width: 32px;
-    height: 32px;
-    background-color: white;
-    border-radius: 50%;
-  }
+  
+  
 </style>
 
 <header class="header">
@@ -153,16 +119,27 @@
     </div>
   </div>
   <div class="header__bottom">
-    <button data-index="0" class="active">Wheelchairs</button>
-    <button data-index="1">Mobility Scooters</button>
-    <button data-index="2">Walking Aids</button>
-    <button data-index="3">Patient Lifts</button>
-    <button data-index="4">Stair Lifts</button>
-    <button data-index="5">Bathroom Aids</button>
-    <button data-index="6">Beds and Mattress</button>
-    <button data-index="7">Orthopedic Supports</button>
-    <button data-index="8">Accessibility Ramps</button>
-    <button data-index="9">Medical Accessories</button>
+    {% for link in section.settings.menu.links %}
+        <a href="{{ link.url }}" {% if link.current %}
+          aria-current="page"
+        {% endif %} class="{% if link.current %} active{% endif %}">{{ link.title }}</a>
+        {% if link.links.size > 0 %}
+            {% for child_link in link.links %}
+              <li>
+                <a href="{{ child_link.url }}">{{ child_link.title }}</a>
+                {% if child_link.links.size > 0 %}
+                  <ul>
+                    {% for grandchild_link in child_link.links %}
+                      <li>
+                        <a href="{{ grandchild_link.url }}">{{ grandchild_link.title }}</a>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+              </li>
+            {% endfor %}
+        {% endif %}
+    {% endfor %}
   </div>
   <div>
     <div
@@ -174,7 +151,9 @@
       style=""
     ></div>
   </div>
-  <div id="header__semicircle__bottom_container"></div>
+  <div class="header__drawer">
+    <div id="header__semicircle__bottom_container"></div>
+  </div>
 </header>
 
 {% schema %}
@@ -184,6 +163,12 @@
     "groups": ["header"]
   },
   "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "default": "main-menu",
+      "label": "t:sections.header.settings.menu.label"
+    },
     {
       "type": "image_picker",
       "id": "image_picker",
