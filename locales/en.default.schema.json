@@ -495,6 +495,10 @@
               "label": "Text",
               "default": "Welcome to our store"
             },
+            "button_text": {
+              "label": "Button Text",
+              "default": "BUY NOW"
+            },
             "text_alignment": {
               "label": "Text alignment",
               "options__1": {

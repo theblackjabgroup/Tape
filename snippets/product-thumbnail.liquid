@@ -25,6 +25,8 @@
   %}
 {% endcomment %}
 
+{{ 'product-page.css' | asset_url | stylesheet_tag }}
+
 {%- liquid
   unless lazy_load == false
     assign lazy = 'lazy'
@@ -42,6 +44,7 @@
 
   if media.media_type == 'image'
     assign image_class = 'image-magnify-' | append: section.settings.image_zoom
+    assign image_class = image_class | append: ' bb-product'
   endif
 -%}
 
@@ -77,7 +80,7 @@
       {% endcase %}
     </span>
     {%- render 'loading-spinner' -%}
-    <div class="product__media media media--transparent">
+    <div class="product__media media media--transparent bb_product__media">
       {{
         media.preview_image
         | image_url: width: 1946

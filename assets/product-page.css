@@ -1,0 +1,40 @@
+.bb-product {
+    top: 50% !important;
+    left: 50% !important;
+    height: 80% !important;
+    width: 80% !important;
+    transform: translate(-50%, -50%);
+}
+
+.bb_product__media {
+    background-color: #EEEEEE;
+}
+
+.gallery-thumbnail{
+    background-color: #EEEEEE;
+}
+
+.ticket-line {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-450%);
+  }
+
+  .ticket-line-first {
+    height: 6px;
+    display: block !important;
+    width: 6px;
+    border-radius: 50%;
+    background-color: #D8D8D8;
+}
+
+.bb-thumbnail-width {
+    width: 90%;
+    height: 90%;
+}
+
+.bb-upper-thumbnail {
+padding-left: 10px;
+}
