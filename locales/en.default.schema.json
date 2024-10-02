@@ -2406,6 +2406,9 @@
         "enable_sticky_info": {
           "label": "Enable sticky content on desktop"
         },
+        "enable_special_offer": {
+          "label": "Enable special offer"
+        },
         "gallery_layout": {
           "label": "Desktop layout",
           "options__1": {
