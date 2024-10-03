@@ -73,6 +73,8 @@
   {%- endif -%}
 
   {% assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' %}
+  {%  assign layout_desktop = section.settings.gallery_layout  %}
+
   <div class="page-width">
     <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
       <div class="grid__item product__media-wrapper">
@@ -96,7 +98,20 @@
                 >
                   {{- block.settings.text -}}
                 </p>
+
               {%- when 'title' -%}
+                                
+              {% if section.settings.enable_special_offer %}
+                <div>
+                {% for i in (0..2) %}
+                <div class="bb-triangle-offer tri-{{i}}"></div>
+                <div class="bb-triangle-offer tri-second-{{i}}"></div>
+                {% endfor  %}
+                <div class="bb-special-offer">
+                  <h2 class="bb-special-offer-text">Special Offer</h2>
+                </div>
+                </div>
+              {% endif %}
                 <div class="product__title" {{ block.shopify_attributes }}>
                   <h1>{{ product.title | escape }}</h1>
                   <a href="{{ product.url }}" class="product__title">
@@ -107,12 +122,21 @@
                 </div>
               {%- when 'price' -%}
                 <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
+                  {% if layout_desktop == "thumbnail" %}
+                    {%- render 'price2',
+                    product: product,
+                    use_variant: true,
+                    show_badges: false,
+                    price_class: 'price--large'
+                  -%}
+                  {% else %}
                   {%- render 'price',
                     product: product,
                     use_variant: true,
                     show_badges: true,
                     price_class: 'price--large'
                   -%}
+                  {% endif %}
                 </div>
                 {%- if product.quantity_price_breaks_configured? -%}
                   <div class="volume-pricing-note" id="Volume-Note-{{ section.id }}">
@@ -851,6 +875,27 @@
       "limit": 1
     },
     {
+      "type": "buy_buttons",
+      "name": "t:sections.main-product.blocks.buy_buttons.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "show_dynamic_checkout",
+          "default": true,
+          "label": "t:sections.main-product.blocks.buy_buttons.settings.show_dynamic_checkout.label",
+          "info": "t:sections.main-product.blocks.buy_buttons.settings.show_dynamic_checkout.info"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_gift_card_recipient",
+          "default": true,
+          "label": "t:sections.main-product.blocks.buy_buttons.settings.show_gift_card_recipient.label",
+          "info": "t:sections.main-product.blocks.buy_buttons.settings.show_gift_card_recipient.info"
+        }
+      ]
+    },
+    {
       "type": "variant_picker",
       "name": "t:sections.main-product.blocks.variant_picker.name",
       "limit": 1,
@@ -894,27 +939,7 @@
         }
       ]
     },
-    {
-      "type": "buy_buttons",
-      "name": "t:sections.main-product.blocks.buy_buttons.name",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "checkbox",
-          "id": "show_dynamic_checkout",
-          "default": true,
-          "label": "t:sections.main-product.blocks.buy_buttons.settings.show_dynamic_checkout.label",
-          "info": "t:sections.main-product.blocks.buy_buttons.settings.show_dynamic_checkout.info"
-        },
-        {
-          "type": "checkbox",
-          "id": "show_gift_card_recipient",
-          "default": true,
-          "label": "t:sections.main-product.blocks.buy_buttons.settings.show_gift_card_recipient.label",
-          "info": "t:sections.main-product.blocks.buy_buttons.settings.show_gift_card_recipient.info"
-        }
-      ]
-    },
+
     {
       "type": "description",
       "name": "t:sections.main-product.blocks.description.name",
@@ -2084,6 +2109,12 @@
       "label": "t:sections.main-product.settings.enable_sticky_info.label"
     },
     {
+      "type": "checkbox",
+      "id": "enable_special_offer",
+      "default": false,
+      "label": "t:sections.main-product.settings.enable_special_offer.label"   
+    },
+    {
       "type": "color_scheme",
       "id": "color_scheme",
       "label": "t:sections.all.colors.label",
@@ -2142,16 +2173,16 @@
       "id": "gallery_layout",
       "options": [
         {
+          "value": "thumbnail",
+          "label": "t:sections.main-product.settings.gallery_layout.options__3.label"
+        },
+        {
           "value": "stacked",
           "label": "t:sections.main-product.settings.gallery_layout.options__1.label"
         },
         {
           "value": "columns",
           "label": "t:sections.main-product.settings.gallery_layout.options__2.label"
-        },
-        {
-          "value": "thumbnail",
-          "label": "t:sections.main-product.settings.gallery_layout.options__3.label"
         },
         {
           "value": "thumbnail_slider",

@@ -476,9 +476,15 @@
         "header__4": {
           "content": "Language selector",
           "info": "To add a language, go to your [language settings.](/admin/settings/languages)"
-        },
+        }, 
         "enable_language_selector": {
           "label": "Enable language selector"
+        },
+        "enable_sticky_bar": {
+          "label": "Enable sticky bar"
+        },
+        "enable_countdown_timer": {
+          "label": "Enable Countdown Timer"
         }
       },
       "blocks": {
@@ -488,6 +494,10 @@
             "text": {
               "label": "Text",
               "default": "Welcome to our store"
+            },
+            "button_text": {
+              "label": "Button Text",
+              "default": "BUY NOW"
             },
             "text_alignment": {
               "label": "Text alignment",
@@ -501,9 +511,29 @@
                 "label": "Right"
               }
             },
+            "countdown_timer_val": {
+              "label": "Expiry date",
+              "default": "YYYY-MM-DD",
+              "info": "YYYY-MM-DD"
+            },
             "link": {
               "label": "Link"
-            }
+            },
+            "text2": {
+              "label": "Information"
+            },
+            "image": {
+              "label": "Icon image"
+            },
+            "link2": {
+              "label": "Link to latest collection"
+            },
+            "enable_desktop_view": {
+              "label": "Hide in Desktop"
+            },
+            "enable_mobile_view": {
+              "label": "Hide in Mobile"
+            },  
           }
         }
       },
@@ -2375,6 +2405,9 @@
         },
         "enable_sticky_info": {
           "label": "Enable sticky content on desktop"
+        },
+        "enable_special_offer": {
+          "label": "Enable special offer"
         },
         "gallery_layout": {
           "label": "Desktop layout",
