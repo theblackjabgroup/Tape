@@ -22,30 +22,59 @@ body {
     font-family: 'Inter', sans-serif;
 }
 
-.strip {
-    position: absolute;
-    width: 110%;
+
+.strip-right {
+    position: absolute; /* Change to relative */
+    width: 110%; /* Full width of the container */
     height: 60px;
-    background-color: white;
-    color: black;
+    background-color: white; /* Set the background color of the strip */
+    color: black; /* Set text color to white */
     font-size: 25px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    top: 50%;
-    left: 50%;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    font-family: 'Inter', sans-serif;
-}
-
-.strip-right {
+    justify-content: center; /* Center text horizontally */
+    /* border: 1px dashed gray; */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
     transform: translate(-50%, -50%) rotate(10deg);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); 
+    font-family: 'Fira Sans', sans-serif; /* Set Fira Sans for strip text */
+  }
+  
+  .strip-left {
+    position: absolute; /* Change to relative */
+    width: 110%; /* Full width of the container */
+    height: 60px;
+    background-color: rgb(
+      221,
+      23,
+      23
+    ); /* Set the background color of the strip */
+    color: white; /* Set text color to white */
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center text horizontally */
+    /* border: 1px dashed gray; */
+    top: 50%; /* Center vertically */
+    left: 10%; /* Center horizontally */
+    transform: translate(-50%, -50%) rotate(-10deg);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); 
+    font-family: 'Fira Sans', sans-serif; /* Set Fira Sans for strip text */ 
+  }
+
+  .strip-right {
+    background-color: white; /* Background color */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%) rotate(10deg); /* Rotation */
 }
 
 .strip-left {
-    background-color: rgb(221, 23, 23);
-    color: white;
-    transform: translate(-50%, -50%) rotate(-10deg);
+    background-color: white; /* Background color */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%) rotate(-10deg); /* Rotation */
 }
 
 .strip-1, .strip-2 {
@@ -58,6 +87,7 @@ body {
 
 .offer-text {
     padding: 0 20px;
+    font-family: 'Fira Sans', sans-serif;
 }
 
 .strip-1 {
@@ -161,5 +191,31 @@ body {
     .footer-content {
         flex-direction: column;
         text-align: left;
+    }
+}
+
+
+
+/* For larger screens */
+@media (min-width: 769px) {
+    .fa-regular {
+        font-size: 16px;
+        left: 49px;
+    }
+}
+
+/* For medium screens */
+@media (max-width: 768px) {
+    .fa-regular {
+        font-size: 14px;
+        left: 35px;
+    }
+}
+
+/* For smaller screens (mobile) */
+@media (max-width: 480px) {
+    .fa-regular {
+        font-size: 16px;
+        left: 18px;
     }
 }
