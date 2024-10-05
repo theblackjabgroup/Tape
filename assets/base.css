@@ -2130,6 +2130,26 @@ input[type='checkbox'] {
   scale: 0.9;
 }
 
+.announcement-bar .custom-button {
+  display: inline-block;
+  padding: 1.5rem 2rem;
+  font-size: 13px;
+  color: black;
+  border-width: 1px;
+  border-color: black;
+  border-style: solid;
+  background-color: transparent;
+  text-decoration: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color .3s ease;
+  margin-left: 3rem;
+}
+
+.announcement-bar .custom-button-upper {
+  padding: 0.3rem 0;
+}
+
 @media screen and (min-width: 990px) {
   .utility-bar__grid--3-col {
     grid-template-columns: 1fr 0.1fr 3fr 0.1fr 1fr;
