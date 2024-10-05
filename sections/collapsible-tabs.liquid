@@ -1,0 +1,113 @@
+{{ 'product-description.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'product-description.js' | asset_url }}" defer="defer"></script>
+
+<div class="collapse-width">
+  <div class="collapse-tab">
+    {%- for block in section.blocks -%}
+      <button class="tablinks" onclick="openTab(event, 'Tab{{ forloop.index }}')">{{ block.settings.heading }}</button>
+    {% endfor %}
+  </div>
+  <div class="product-description-drawer">
+    <div class="product-description-bottom_container">
+      {% for i in (0..14) %}
+        <div class="product-description-semicircles"></div>
+      {% endfor %}
+    </div>
+  </div>
+  <!-- Tab Content -->
+  <div class="product-description-wrapper">
+    {%- for block in section.blocks -%}
+      <div id="Tab{{ forloop.index }}" class="product-description-grid-container">
+          {% if block.settings.Point_1 != '' %}
+            <div class="product-description-paragraph">
+              <div class="product-description-in-semicircles"></div>
+              <p>{{ block.settings.Point_1 }}</p>
+            </div>
+          {% endif %}
+          {% if block.settings.Point_2 != '' %}
+            <div class="product-description-paragraph">
+              <div class="product-description-in-semicircles"></div>
+              <p>{{ block.settings.Point_2 }}</p>
+            </div>
+          {% endif %}
+          {% if block.settings.Point_3 != '' %}
+            <div class="product-description-paragraph">
+              <div class="product-description-in-semicircles"></div>
+              <p>{{ block.settings.Point_3 }}</p>
+            </div>
+          {% endif %}
+          {% if block.settings.Point_4 != '' %}
+            <div class="product-description-paragraph">
+              <div class="product-description-in-semicircles"></div>
+              <p>{{ block.settings.Point_4 }}</p>
+            </div>
+          {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.collapsible_tabs.name",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "t:sections.collapsible_tabs.settings.heading.label",
+      "default": "t:sections.collapsible_tabs.settings.heading.default"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collapsible_row",
+      "name": "t:sections.collapsible_tabs.blocks.collapsible_row.name",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "t:sections.collapsible_tabs.blocks.collapsible_row.settings.heading.default",
+          "label": "t:sections.collapsible_tabs.blocks.collapsible_row.settings.heading.label",
+          "info": "t:sections.collapsible_tabs.blocks.collapsible_row.settings.heading.info"
+        },
+        {
+          "type": "text",
+          "id": "Point_1",
+          "label": "t:sections.collapsible_tabs.blocks.collapsible_row.settings.Point_1.label",
+          "info": "t:sections.collapsible_tabs.blocks.collapsible_row.settings.Point_1.info"
+        },
+        {
+          "type": "text",
+          "id": "Point_2",
+          "label": "t:sections.collapsible_tabs.blocks.collapsible_row.settings.Point_2.label",
+          "info": "t:sections.collapsible_tabs.blocks.collapsible_row.settings.Point_2.info"
+        },
+        {
+          "type": "text",
+          "id": "Point_3",
+          "label": "t:sections.collapsible_tabs.blocks.collapsible_row.settings.Point_3.label",
+          "info": "t:sections.collapsible_tabs.blocks.collapsible_row.settings.Point_3.info"
+        },
+        {
+          "type": "text",
+          "id": "Point_4",
+          "label": "t:sections.collapsible_tabs.blocks.collapsible_row.settings.Point_4.label",
+          "info": "t:sections.collapsible_tabs.blocks.collapsible_row.settings.Point_4.info"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.collapsible_tabs.presets.name",
+      "blocks": [
+        {
+          "type": "collapsible_row"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
