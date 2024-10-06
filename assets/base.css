@@ -105,7 +105,6 @@ body:has(.section-header .drawer-menu) .announcement-bar-section .page-width {
     padding: 0 5rem;
   }
 
-  .header.page-width,
   .utility-bar__grid.page-width {
     padding-left: 3.2rem;
     padding-right: 3.2rem;
@@ -125,10 +124,10 @@ body:has(.section-header .drawer-menu) .announcement-bar-section .page-width {
 }
 
 @media screen and (min-width: 990px) {
-  .header:not(.drawer-menu).page-width {
+  /* .header:not(.drawer-menu).page-width {
     padding-left: 5rem;
     padding-right: 5rem;
-  }
+  } */
 
   .page-width--narrow {
     max-width: 72.6rem;
@@ -2765,6 +2764,7 @@ details[open] > .header__submenu {
   margin-left: -1.2rem;
   grid-area: navigation;
   display: none;
+  width: 100%;
 }
 
 .header--top-center .header__inline-menu,
@@ -2797,7 +2797,10 @@ details[open] > .header__submenu {
 .header__menu-item {
   padding: 1.2rem;
   text-decoration: none;
-  color: rgba(var(--color-foreground), 0.75);
+  font-family:sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: #b4b4b4;
 }
 
 .header__menu-item:hover {
@@ -2828,7 +2831,11 @@ details[open] > .header__menu-item .icon-caret {
 .header__active-menu-item {
   transition: text-decoration-thickness var(--duration-short) ease;
   color: rgb(var(--color-foreground));
-  text-decoration: underline;
+  /* text-decoration: underline; */
+  background: white;
+  color: #454545;
+  border-radius: 4px;
+  padding: 12px 24px;
   text-underline-offset: 0.3rem;
 }
 

@@ -1,0 +1,39 @@
+.semicircles__center {
+  position: absolute;
+  display: block !important;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  top: 47%;
+  background-color: white;
+}
+
+
+
+.header__semicircle__left {
+  left: 0;
+  transform: translateY(-50%) translateX(-50%);
+}
+.header__semicircle__right {
+  right: 0;
+  transform: translateY(-50%) translateX(50%);
+}
+
+.header_semicircles {
+  display: block !important;
+  width: 32px;
+  height: 16px;
+  background-color: white;
+  border-radius: 50rem 50rem 0 0;
+}
+
+#header__semicircle__bottom_container {
+
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 var(--header__padding__right) 0 var(--header__padding__left);
+}
+
