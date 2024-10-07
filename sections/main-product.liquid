@@ -75,9 +75,15 @@
   {% assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' %}
   {%  assign layout_desktop = section.settings.gallery_layout  %}
 
+  {%  assign  thumbnail = false %}
+  {% if layout_desktop == "thumbnail" %}
+    {%  assign  thumbnail = true %}
+  {% endif  %}
+
+
   <div class="page-width">
     <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
-      <div class="grid__item product__media-wrapper">
+    <div class="grid__item product__media-wrapper {% if thumbnail == true %} bb_background {% endif %}">
         {% render 'product-media-gallery', variant_images: variant_images %}
       </div>
       <div class="product__info-wrapper grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
@@ -100,7 +106,6 @@
                 </p>
 
               {%- when 'title' -%}
-                                
               {% if section.settings.enable_special_offer %}
                 <div>
                 {% for i in (0..2) %}
@@ -112,6 +117,12 @@
                 </div>
                 </div>
               {% endif %}
+              {%- if product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
+                <div class="sold-out-tag">
+                  <span class="sold-out-tag-text">SOLD OUT</span>
+                </div>
+              {% endif %}
+
                 <div class="product__title" {{ block.shopify_attributes }}>
                   <h1>{{ product.title | escape }}</h1>
                   <a href="{{ product.url }}" class="product__title">
@@ -464,6 +475,7 @@
                     </volume-pricing>
                   {%- endif -%}
                 </div>
+              
               {%- when 'popup' -%}
                 <modal-opener
                   class="product-popup-modal__opener quick-add-hidden"
@@ -487,7 +499,13 @@
 
               {%- when 'variant_picker' -%}
                 {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
+
               {%- when 'buy_buttons' -%}
+                {%- if product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
+                  <div class="sold-out-text">
+                    <span>Oops! There are not enough items in stock</span>
+                  </div>
+                {% endif %}
                 {%- render 'buy-buttons',
                   block: block,
                   product: product,
@@ -939,7 +957,6 @@
         }
       ]
     },
-
     {
       "type": "description",
       "name": "t:sections.main-product.blocks.description.name",

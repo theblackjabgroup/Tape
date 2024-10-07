@@ -45,6 +45,12 @@
   if media.media_type == 'image'
     assign image_class = 'image-magnify-' | append: section.settings.image_zoom
     assign image_class = image_class | append: ' bb-product'
+    assign image_class_second = 'image-magnify-' | append: section.settings.image_zoom
+    assign image_class_second = image_class_second | append: ' bb-product-second'
+    assign image_class_third = 'image-magnify-' | append: section.settings.image_zoom
+    assign image_class_third = image_class_third | append: ' bb-product-third'
+    assign image_class_fourth = 'image-magnify-' | append: section.settings.image_zoom
+    assign image_class_fourth = image_class_fourth | append: ' bb-product-fourth'
   endif
 -%}
 
@@ -80,12 +86,39 @@
       {% endcase %}
     </span>
     {%- render 'loading-spinner' -%}
-    <div class="product__media media media--transparent bb_product__media">
+    <div class="bb_product__media product__media media media--transparent">
       {{
         media.preview_image
         | image_url: width: 1946
         | image_tag:
           class: image_class,
+          loading: lazy,
+          sizes: sizes,
+          widths: '246, 493, 600, 713, 823, 990, 1100, 1206, 1346, 1426, 1646, 1946'
+      }}
+      {{
+        media.preview_image
+        | image_url: width: 1946
+        | image_tag:
+          class: image_class_second,
+          loading: lazy,
+          sizes: sizes,
+          widths: '246, 493, 600, 713, 823, 990, 1100, 1206, 1346, 1426, 1646, 1946'
+      }}
+      {{
+        media.preview_image
+        | image_url: width: 1946
+        | image_tag:
+          class: image_class_third,
+          loading: lazy,
+          sizes: sizes,
+          widths: '246, 493, 600, 713, 823, 990, 1100, 1206, 1346, 1426, 1646, 1946'
+      }}
+      {{
+        media.preview_image
+        | image_url: width: 1946
+        | image_tag:
+          class: image_class_fourth,
           loading: lazy,
           sizes: sizes,
           widths: '246, 493, 600, 713, 823, 990, 1100, 1206, 1346, 1426, 1646, 1946'
