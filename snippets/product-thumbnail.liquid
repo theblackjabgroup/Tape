@@ -96,6 +96,7 @@
           sizes: sizes,
           widths: '246, 493, 600, 713, 823, 990, 1100, 1206, 1346, 1426, 1646, 1946'
       }}
+      {% if position > 0 and desktop_layout == 'thumbnails'%}
       {{
         media.preview_image
         | image_url: width: 1946
@@ -105,6 +106,7 @@
           sizes: sizes,
           widths: '246, 493, 600, 713, 823, 990, 1100, 1206, 1346, 1426, 1646, 1946'
       }}
+      {% if position > 1 %}
       {{
         media.preview_image
         | image_url: width: 1946
@@ -114,6 +116,7 @@
           sizes: sizes,
           widths: '246, 493, 600, 713, 823, 990, 1100, 1206, 1346, 1426, 1646, 1946'
       }}
+      {% if position > 2 %}
       {{
         media.preview_image
         | image_url: width: 1946
@@ -123,6 +126,9 @@
           sizes: sizes,
           widths: '246, 493, 600, 713, 823, 990, 1100, 1206, 1346, 1426, 1646, 1946'
       }}
+      {% endif  %}
+      {% endif  %}
+      {% endif  %}
     </div>
     <button
       class="product__media-toggle quick-add-hidden product__media-zoom-{{ section.settings.image_zoom }}"
