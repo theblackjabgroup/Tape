@@ -43,12 +43,13 @@
 -%}
 
 {% assign class_name = '' %} <!-- Initialize the class variable -->
-
+{%  assign  thumbnail = false %}
 {% if section.settings.enable_sticky_info %}
   {% assign class_name = 'product__column-sticky' %}
 {% endif %}
 
 {% if section.settings.gallery_layout == 'thumbnail' %}
+  {%  assign  thumbnail = true %}
   {% assign class_name = class_name | append: ' gallery-thumbnail' %}
 {% endif %}
 
@@ -248,6 +249,7 @@
               aria-current="true"
               aria-controls="GalleryViewer-{{ section.id }}"
               aria-describedby="{{ thumbnail_id }}"
+              aria-click=0
             >
               {{
                 featured_media.preview_image
@@ -310,6 +312,7 @@
                 {% endif %}
                 aria-controls="GalleryViewer-{{ section.id }}"
                 aria-describedby="{{ thumbnail_id }}"
+                aria-click=0
               >
                 {{
                   media.preview_image

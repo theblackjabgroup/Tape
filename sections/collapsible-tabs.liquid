@@ -1,6 +1,7 @@
 {{ 'product-description.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'product-description.js' | asset_url }}" defer="defer"></script>
 
+{% if section.blocks.first.settings.heading != blank %}
 <div class="collapse-width">
   <div class="collapse-tab">
     {%- for block in section.blocks -%}
@@ -46,6 +47,7 @@
     {% endfor %}
   </div>
 </div>
+{% endif %}
 
 {% schema %}
 {

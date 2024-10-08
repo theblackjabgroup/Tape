@@ -103,3 +103,9 @@
     /* border-bottom-left-radius: 0px; */
     transform: rotate(180deg);
 }
+
+.sold-out-text {
+    background-color: #FFEDED;
+    color: #E12B56;
+    font-size: 14px;
+}
