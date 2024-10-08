@@ -2454,6 +2454,7 @@ input[type='checkbox'] {
 
 .header__heading-logo {
   height: auto;
+  object-fit: contain;
   max-width: 100%;
 }
 

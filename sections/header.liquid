@@ -73,11 +73,11 @@
   }
 
   .header__logo__container {
-  aspect-ratio: 16/9;
   width: 128px; /* Fixed width */
-  background-color: white;
+  max-height: 100px;
   padding: 0;
   display: flex;
+  justify-content: center;
   flex-shrink: 0; /* Prevent shrinking of the logo container */
 }
 
@@ -85,6 +85,7 @@
   @media screen and (max-width: 990px) {
   .header__logo__container {
     width: 85.71px;
+    max-height: 85.71px;
   }
 }
 {%- endif -%}
