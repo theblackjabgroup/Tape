@@ -96,7 +96,7 @@
           sizes: sizes,
           widths: '246, 493, 600, 713, 823, 990, 1100, 1206, 1346, 1426, 1646, 1946'
       }}
-      {% if position > 0 and desktop_layout == 'thumbnails'%}
+      {% if media_count > 1 and desktop_layout == 'thumbnail'%}
       {{
         media.preview_image
         | image_url: width: 1946
@@ -106,7 +106,7 @@
           sizes: sizes,
           widths: '246, 493, 600, 713, 823, 990, 1100, 1206, 1346, 1426, 1646, 1946'
       }}
-      {% if position > 1 %}
+      {% if media_count > 2 %}
       {{
         media.preview_image
         | image_url: width: 1946
@@ -116,7 +116,7 @@
           sizes: sizes,
           widths: '246, 493, 600, 713, 823, 990, 1100, 1206, 1346, 1426, 1646, 1946'
       }}
-      {% if position > 2 %}
+      {% if media_count > 3 %}
       {{
         media.preview_image
         | image_url: width: 1946
