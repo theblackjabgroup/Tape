@@ -2135,7 +2135,7 @@ input[type='checkbox'] {
   display: inline-block;
   padding: 1.5rem 2rem;
   font-size: 13px;
-  color: rgb(var(--color-button-text));
+  color: rgb(var(--color-button));
   border-width: 1px;
   border-color: rgb(var(--color-badge-border));
   border-style: solid;
