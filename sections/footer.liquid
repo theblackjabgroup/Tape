@@ -1,25 +1,23 @@
 {% comment %}theme-check-disable UndefinedObject{% endcomment %}
 {{ 'section-footer.css' | asset_url | stylesheet_tag }}
-{{ 'component-newsletter.css' | asset_url | stylesheet_tag }}
-{{ 'component-list-menu.css' | asset_url | stylesheet_tag }}
-{{ 'component-list-payment.css' | asset_url | stylesheet_tag }}
-{{ 'component-list-social.css' | asset_url | stylesheet_tag }}
-<div class="container" style="background-color: {{ section.settings.container_bg_color }};">
-  <div class="strip-right" style="background-color: {{ section.settings.right_strip_bg_color }};">
-      <div class="strip-1">
-          <div class="offer-text" style="color: {{ section.settings.subscribe_offers_color }};">{{ section.settings.offer_text }} &rarr;</div>
-          <div class="offer-text" style="color: {{ section.settings.subscribe_offers_color }};">{{ section.settings.offer_text }} &rarr;</div>
-          <div class="offer-text" style="color: {{ section.settings.subscribe_offers_color }};">{{ section.settings.offer_text }} &rarr;</div>
-      </div>
-  </div>
-   <div class="strip-left" style="background-color: {{ section.settings.left_strip_bg_color }};">
-      <div class="strip-2">
-          <div class="offer-text" style="color: {{ section.settings.subscribe_offers_color }};">{{ section.settings.offer_text }} &rarr;</div>
-          <div class="offer-text" style="color: {{ section.settings.subscribe_offers_color }};">{{ section.settings.offer_text }} &rarr;</div>
-          <div class="offer-text" style="color: {{ section.settings.subscribe_offers_color }};">{{ section.settings.offer_text }} &rarr;</div>
-      </div>
-  </div>
+
+<div class="container" style="background-color: {{ section.settings.strip_container_bg_color }};">
+    <div class="strip-right" style="background-color: {{ section.settings.strip_bg_color }};">
+        <div class="strip-1">
+            <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text }} &rarr;</div>
+            <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text }} &rarr;</div>
+            <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text }} &rarr;</div>
+        </div>
+    </div>
+    <div class="strip-left" style="background-color: {{ section.settings.strip_bg_color }};">
+        <div class="strip-2">
+            <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text }} &rarr;</div>
+            <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text }} &rarr;</div>
+            <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text }} &rarr;</div>
+        </div>
+    </div>
 </div>
+
 
 
 <footer style="background-color: {{ section.settings.footer_background_color }}; font-family: 'Inter', sans-serif;">
@@ -31,10 +29,14 @@
                     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
                     <i class="fa-regular fa-envelope email-icon"></i>
                     <input type="email" name="email" class="email-input" placeholder="Enter your mail">
-                    <button class="subscribe-button">Subscribe</button>
+                   <button>{{ section.settings.subscribe_button_text | default: "Subscribe" }}</button>
                 </div>
             </form>
         </div>
+
+
+
+      
     <div class="footer-column">
             <h4 style="color: {{ section.settings.menu_title_color }};">{{ section.settings.menu_title | default: "ABOUT US" }}</h4>
             <ul>
@@ -87,98 +89,95 @@
             </ul>
         </div>
 
-      
-         <div class="footer-column">
-            <h4 style="color: {{ section.settings.menu_title_color }};">{{ section.settings.social_media_title | default: "SOCIAL MEDIA" }}</h4>
-    <ul>
-        <li>
-            <a href="{{ section.settings.facebook_link }}" style="color: {{ section.settings.footer_text_color }};">
-                {{ section.settings.facebook_text | default: 'Facebook' }}
-            </a>
-        </li>
-        <li>
-            <a href="{{ section.settings.twitter_link }}" style="color: {{ section.settings.footer_text_color }};">
-                {{ section.settings.twitter_text | default: 'Twitter' }}
-            </a>
-        </li>
-        <li>
-            <a href="{{ section.settings.instagram_link }}" style="color: {{ section.settings.footer_text_color }};">
-                {{ section.settings.instagram_text | default: 'Instagram' }}
-            </a>
-        </li>
-        <li>
-            <a href="{{ section.settings.linkedin_link }}" style="color: {{ section.settings.footer_text_color }};">
-                {{ section.settings.linkedin_text | default: 'LinkedIn' }}
-            </a>
-        </li>
-    </ul>
+
+
+<div class="footer-column">
+  <h4>{{ section.settings.SOCIAL_MEDIA_TITLE | default: "SOCIAL MEDIA" }}</h4>
+  {%- if section.settings.show_social_icons -%}
+    <div class="social-icons">
+      {%- if settings.social_facebook_link != blank -%}
+        <a href="{{ settings.social_facebook_link }}" class="social-icon" aria-label="{{ 'general.social.links.facebook' | t }}">
+          {{- 'icon-facebook.svg' | inline_asset_content -}}
+        </a>
+      {%- endif -%}
+      {%- if settings.social_instagram_link != blank -%}
+        <a href="{{ settings.social_instagram_link }}" class="social-icon" aria-label="{{ 'general.social.links.instagram' | t }}">
+          {{- 'icon-instagram.svg' | inline_asset_content -}}
+        </a>
+      {%- endif -%}
+      {%- if settings.social_youtube_link != blank -%}
+        <a href="{{ settings.social_youtube_link }}" class="social-icon" aria-label="{{ 'general.social.links.youtube' | t }}">
+          {{- 'icon-youtube.svg' | inline_asset_content -}}
+        </a>
+      {%- endif -%}
+      {%- if settings.social_tiktok_link != blank -%}
+        <a href="{{ settings.social_tiktok_link }}" class="social-icon" aria-label="{{ 'general.social.links.tiktok' | t }}">
+          {{- 'icon-tiktok.svg' | inline_asset_content -}}
+        </a>
+      {%- endif -%}
+      {%- if settings.social_twitter_link != blank -%}
+        <a href="{{ settings.social_twitter_link }}" class="social-icon" aria-label="{{ 'general.social.links.twitter' | t }}">
+          {{- 'icon-twitter.svg' | inline_asset_content -}}
+        </a>
+      {%- endif -%}
+      {%- if settings.social_pinterest_link != blank -%}
+        <a href="{{ settings.social_pinterest_link }}" class="social-icon" aria-label="{{ 'general.social.links.pinterest' | t }}">
+          {{- 'icon-pinterest.svg' | inline_asset_content -}}
+        </a>
+      {%- endif -%}
+      {%- if settings.social_snapchat_link != blank -%}
+        <a href="{{ settings.social_snapchat_link }}" class="social-icon" aria-label="{{ 'general.social.links.snapchat' | t }}">
+          {{- 'icon-snapchat.svg' | inline_asset_content -}}
+        </a>
+      {%- endif -%}
+      {%- if settings.social_tumblr_link != blank -%}
+        <a href="{{ settings.social_tumblr_link }}" class="social-icon" aria-label="{{ 'general.social.links.tumblr' | t }}">
+          {{- 'icon-tumblr.svg' | inline_asset_content -}}
+        </a>
+      {%- endif -%}
+      {%- if settings.social_vimeo_link != blank -%}
+        <a href="{{ settings.social_vimeo_link }}" class="social-icon" aria-label="{{ 'general.social.links.vimeo' | t }}">
+          {{- 'icon-vimeo.svg' | inline_asset_content -}}
+        </a>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
 </div>
+      
     </div>
 </footer>
 
 {% schema %}
-  {
-    "name": "Footer",
-    "settings": [
-
-        {
-      "type": "font",
-  "id": "custom_font",
-  "label": "Custom Font",
+ {
+  "name": "Footer",
+  "settings": [
+    {
+      "id": "color_scheme",
+      "type": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
     },
+    
 {
-  "id": "container_bg_color",
-  "type": "color",
-  "label": "Container Background Color",
-  "default": "#ffffff"
+    "id": "strip_container_bg_color",
+    "type": "color",
+    "label": "Strip Container Background Color",
+    "default": "#ffffff"
 },
-
-      {
-  "id": "right_strip_bg_color",
-  "type": "color",
-    "label": "Right Strip Background Color",    
-  "default": "#ffffff"
-},
-{
-  "label": "Left Strip Background Color",
-  "id": "left_strip_bg_color",
-  "type": "color",
-  "default": "#ffffff"
-},
-      
   {
-            "type": "color",
-            "id": "footer_text_color",
-            "label": "Footer Text Color",
-            "default": "#000"
-        },
-        
-        {
-            "type": "color",
-            "id": "footer_background_color",
-            "label": "Footer Background Color",
-            "default": "#fff"
-        },
-      {
-  "type": "color",
-  "id": "menu_item_color",
-  "label": "Menu Item Text Color",
-  "default": "#000"
-},
-{
-  "type": "color",
-  "id": "menu_title_color",
-  "label": "Menu Title Color",
-  "default": "#000"
-},
-        {
-            "type": "color",
-            "id": "subscribe_offers_color",
-            "label": "Subscribe Offers Color",
-            "default": "#333"
-        },
-
+    "id": "strip_bg_color",
+    "type": "color",
+    "label": "Strip Background Color",
+    "default": "#f0f4f8"
+  },
   {
+    "id": "strip_text_color",
+    "type": "color",
+    "label": "Strip Text Color",
+    "default": "#333333"
+  },
+   
+    {
       "type": "link_list",
       "id": "about_us_menu",
       "label": "About Us Menu"
@@ -222,82 +221,50 @@
       "label": "Resources Menu Title",
       "default": "RESOURCES"
     },
-
-
-      
     {
-        "type": "text",
-        "id": "offer_text",
-        "label": "Offer Text",
-        "default": "Subscribe for exclusive offers!"
-      },
-      {
-        "type": "text",
-        "id": "STAY_CONNECTED_TITLE",
-        "label": "Stay Connected Title",
-        "default": "STAY CONNECTED WITH US"
-      },
-      {
-        "type": "text",
-        "id": "subscribe_button_text",
-        "label": "Subscribe Button Text",
-        "default": "Subscribe"
-      },
-    
-      {
-        "type": "text",
-        "id": "SOCIAL_MEDIA_TITLE",
-        "label": "Social Media Title",
-        "default": "SOCIAL MEDIA"
-      },
+      "type": "text",
+      "id": "offer_text",
+      "label": "Offer Text",
+      "default": "Subscribe for exclusive offers!"
+    },
     {
-    "type": "text",
-    "id": "facebook_link",
-    "label": "Facebook Link",
-    "default": "#"
-},
-{
-    "type": "text",
-    "id": "facebook_text",
-    "label": "Facebook Text",
-    "default": "Facebook"
-},
-{
-    "type": "text",
-    "id": "twitter_link",
-    "label": "Twitter Link",
-    "default": "#"
-},
-{
-    "type": "text",
-    "id": "twitter_text",
-    "label": "Twitter Text",
-    "default": "Twitter"
-},
-{
-    "type": "text",
-    "id": "instagram_link",
-    "label": "Instagram Link",
-    "default": "#"
-},
-{
-    "type": "text",
-    "id": "instagram_text",
-    "label": "Instagram Text",
-    "default": "Instagram"
-},
-{
-    "type": "text",
-    "id": "linkedin_link",
-    "label": "LinkedIn Link",
-    "default": "#"
-},
-{
-    "type": "text",
-    "id": "linkedin_text",
-    "label": "LinkedIn Text",
-    "default": "LinkedIn"
-},
-    ]
-  }
+      "type": "text",
+      "id": "STAY_CONNECTED_TITLE",
+      "label": "Stay Connected Title",
+      "default": "STAY CONNECTED WITH US"
+    },
+    {
+      "type": "text",
+      "id": "subscribe_button_text",
+      "label": "Subscribe Button Text",
+      "default": "Subscribe"
+    },
+  
+  {
+      "type": "text",
+      "id": "SOCIAL_MEDIA_TITLE",
+      "label": "Social Media Title",
+      "default": "SOCIAL MEDIA"
+    },
+   {
+      "type": "header",
+      "content": "Social media icons"
+    },
+    {
+      "type": "paragraph",
+      "content": "To display your social media accounts, link them in your [theme settings](/admin/themes/current/editor?context=settings)."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social_icons",
+      "label": "Show social media icons",
+      "default": true
+    }
+  ]
+}
   {% endschema %}
+
+
+
+
+
