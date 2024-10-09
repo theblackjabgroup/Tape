@@ -1,6 +1,7 @@
-
 function createCircles() {
-    const container = document.getElementById('circle__container');
+  const containers = document.querySelectorAll('#header__semicircle__bottom_container'); // Select all containers with the class
+  
+  containers.forEach(container => {
     const screenWidth = window.innerWidth;
     const circleWidth = 82; // Circle width + margin (1rem = 16px)
     
@@ -10,14 +11,20 @@ function createCircles() {
     // Create circles
     for (let i = 0; i < numCircles; i++) {
       const circle = document.createElement('div');
-      circle.classList.add('header_circles');
+      circle.classList.add('header_semicircles');
       container.appendChild(circle);
     }
-  }
+  });
+}
 
-  // Create circles on load and resize
-  window.onload = createCircles;
-  window.onresize = function() {
-    document.getElementById('circle__container').innerHTML = '';
-    createCircles();
-  };
+// Create circles on load and resize
+window.onload = createCircles;
+window.onresize = function() {
+  const containers = document.querySelectorAll('#header__semicircle__bottom_container');
+  
+  containers.forEach(container => {
+    container.innerHTML = ''; // Clear previous circles
+  });
+  
+  createCircles(); // Recreate circles
+};

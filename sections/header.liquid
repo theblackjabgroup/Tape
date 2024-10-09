@@ -3,6 +3,9 @@
 <link rel="stylesheet" href="{{ 'component-menu-drawer.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-cart-notification.css' | asset_url }}" media="print" onload="this.media='all'">
 
+<script src="{{ 'header.js' | asset_url }}" defer="defer"></script>
+<link rel="stylesheet" href="{{ 'semicircles.css' |  asset_url}}" media="print" onload="this.media='all'">
+
 {%- if settings.predictive_search_enabled -%}
   <link rel="stylesheet" href="{{ 'component-price.css' | asset_url }}" media="print" onload="this.media='all'">
 {%- endif -%}
@@ -13,22 +16,153 @@
 
 
 <style>
+
   header-drawer {
     justify-self: start;
     margin-left: -1.2rem;
   }
 
+{%- if section.settings.menu_type_desktop != "drawer" -%}
+  @media screen and (max-width: 990px) {
+    .semicircles__center {
+      width: 24px;
+      height: 24px;
+      top: 50%;
+  }
+  .header_semicircles {
+  width: 16px;
+  height: 8px;
+  }
+  
+  .header__icon{
+    color: white;
+  }
+  .header__heading-link .h2{
+    color: white;
+}
+.svg-wrapper{
+  width: 24px !important;
+  height: 24px !important;
+  color: white;
+}
+}
+{%- endif -%}
+
   {%- if section.settings.sticky_header_type == 'reduce-logo-size' -%}
     .scrolled-past-header .header__heading-logo-wrapper {
       width: 75%;
     }
-  {%- endif -%}
+    {%- endif -%}
+
+  .header__top{
+    height: 112px;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    border-bottom: 1px solid #d8d8d8;
+    justify-content: space-between;
+  }
+
+  .header__bottom{
+    height: 124px;
+    align-items: center;
+    display: flex;
+    width: 100%;
+  }
+
+  .header__logo__container {
+  width: 128px; /* Fixed width */
+  max-height: 100px;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  flex-shrink: 0; /* Prevent shrinking of the logo container */
+}
+
+{%- if section.settings.menu_type_desktop != "drawer" -%}
+  @media screen and (max-width: 990px) {
+  .header__logo__container {
+    width: 85.71px;
+    max-height: 85.71px;
+  }
+}
+{%- endif -%}
+
+.header__search__container {
+  visibility: visible;
+  height: 40px;
+  background-color: white;
+  padding: 4px 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 637px;
+  flex-grow: 1;
+  border-radius: 4px;
+}
+
+{%- if section.settings.menu_type_desktop != "drawer" -%}
+@media screen and (max-width: 990px) {
+    .header__search__container.desktop__search__bar{
+      visibility: hidden;
+  }
+}
+{%- endif -%}
+
+
+.header__search__button {
+  background: none;
+  padding: 4px;
+  border: none;
+  cursor: pointer;
+}
+
+input[class*="header__search__box"] {
+  border: none;
+  outline: none;
+  width: 100%;
+  background: inherit;
+  height: 100%;
+}
+
+input::placeholder {
+  font-family: sans-serif;
+  color: #b4b4b4;
+  font-size: 16px;
+  font-weight: lighter;
+}
+
+input:focus{
+    box-shadow: none;
+}
+
+.header__icons {
+  gap: 48px;
+  align-items: center;
+}
+
+.svg-wrapper{
+  width: 32px !important;
+  height: 32px !important;
+}
+
 
   {%- if section.settings.menu_type_desktop != "drawer" -%}
     @media screen and (min-width: 990px) {
       header-drawer {
         display: none;
       }
+    }
+  {%- endif -%}
+
+  {%- if section.settings.menu_type_desktop != "drawer" -%}
+    @media screen and (max-width: 990px) {
+      .header__top{
+        height: 72px;
+  }
+      .header__bottom{
+        height: 65px;
+  }
     }
   {%- endif -%}
 
@@ -43,6 +177,8 @@
   }
 
   .list-menu--inline {
+    justify-content: space-between;
+    width: 100%;
     display: inline-flex;
     flex-wrap: wrap;
   }
@@ -70,10 +206,15 @@
       padding-top: 0.5rem;
     }
   }
+
 </style>
 
 {%- style -%}
   .header {
+    overflow-x:clip;
+    display:flex !important;
+    flex-direction: column;
+    position: relative;
     padding: {{ section.settings.padding_top | times: 0.5 | round: 0 }}px 3rem {{ section.settings.padding_bottom | times: 0.5 | round: 0 }}px 3rem;
   }
 
@@ -120,23 +261,24 @@
     endif
   -%}
   <header class="header header--{{ section.settings.logo_position }} header--mobile-{{ section.settings.mobile_logo_position }} page-width{% if section.settings.menu_type_desktop == 'drawer' %} drawer-menu{% endif %}{% if section.settings.menu != blank %} header--has-menu{% endif %}{% if has_app_block %} header--has-app{% endif %}{% if social_links %} header--has-social{% endif %}{% if shop.customer_accounts_enabled %} header--has-account{% endif %}{% if localization_forms %} header--has-localizations{% endif %}">
-    {%- liquid
-      if section.settings.menu != blank
-        render 'header-drawer'
-      endif
+   <div style="" class="header__top">
+     {%- liquid
+     if section.settings.menu != blank
+     render 'header-drawer'
+     endif
+     
+     if section.settings.logo_position == 'top-center' or section.settings.menu == blank
+     render 'header-search', input_id: 'Search-In-Modal-1'
+     endif
+     -%}
 
-      if section.settings.logo_position == 'top-center' or section.settings.menu == blank
-        render 'header-search', input_id: 'Search-In-Modal-1'
-      endif
-    -%}
-
-    {%- if section.settings.logo_position != 'middle-center' -%}
+     {%- if section.settings.logo_position != 'middle-center' -%}
       {%- if request.page_type == 'index' -%}
         <h1 class="header__heading">
       {%- endif -%}
           <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
             {%- if settings.logo != blank -%}
-              <div class="header__heading-logo-wrapper">
+              <div class="header__logo__container">
                 {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
                 {%- assign logo_height = settings.logo_width | divided_by: settings.logo.aspect_ratio -%}
                 {% capture sizes %}(max-width: {{ settings.logo_width | times: 2 }}px) 50vw, {{ settings.logo_width }}px{% endcapture %}
@@ -160,6 +302,96 @@
       {%- endif -%}
     {%- endif -%}
 
+    <form
+        id="header__search__form"
+        action=""
+        class="header__search__container desktop__search__bar"
+      >
+        <label tabindex="0" for="" class="header__search__label">
+          <button
+            type="submit"
+            form="header__search__form"
+            class="header__search__button"
+          >
+            <span>
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 14 14"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12.3333 12.3333L9.53553 9.53554M11 6C11 3.23858 8.76142 1 6 1C3.23858 1 1 3.23858 1 6C1 8.76142 3.23858 11 6 11C8.76142 11 11 8.76142 11 6Z"
+                  stroke="#B4B4B4"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+          </button>
+        </label>
+        <input
+          placeholder="Search"
+          type="text"
+          class="header__search__box"
+        >
+      </form>
+
+      <div class="header__icons">
+
+    {% comment %} Cart Icon {% endcomment %}
+    <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link focus-inset"
+      id="cart-icon-bubble"></a>
+    {% if cart == empty %}
+    <span class="svg-wrapper">{{'icon-cart-empty.svg' | inline_asset_content }}</span>
+    {% else %}
+    <span class="svg-wrapper">{{'icon-cart.svg' | inline_asset_content }}</span>
+    {% endif %}
+    <span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
+    {%- if cart != empty -%}
+    <div class="cart-count-bubble">
+      {%- if cart.item_count < 100 -%} <span aria-hidden="true">{{ cart.item_count }}</span>
+        {%- endif -%}
+        <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
+    </div>
+    {%- endif -%}
+    </a>
+
+    {% comment %} Profile Icon {% endcomment %}
+    {%- if shop.customer_accounts_enabled -%}
+    <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}"
+      class="header__icon header__icon--account link focus-inset">
+      {%- if section.settings.enable_customer_avatar -%}
+      <account-icon>
+        {%- if customer and customer.has_avatar? -%}
+        {{ customer | avatar }}
+        {%- else -%}
+        <span class="svg-wrapper">{{ 'icon-profile.svg' | inline_asset_content }}</span>
+        {%- endif -%}
+      </account-icon>
+      {%- else -%}
+      <span class="svg-wrapper">{{ 'icon-profile.svg' | inline_asset_content }}</span>
+      {%- endif -%}
+      <span class="visually-hidden">
+        {%- liquid
+        if customer
+        echo 'customer.account_fallback' | t
+        else
+        echo 'customer.log_in' | t
+        endif
+        -%}
+      </span>
+    </a>
+    {%- endif -%}
+    <a href="" class="header__icon link focus-inset">
+      <span class="svg-wrapper">{{ 'icon-bell.svg' | inline_asset_content }}</span>
+    </a>
+  </div>
+     </div> 
+
+     <div style="" class="header__bottom">
     {%- liquid
       if section.settings.menu != blank
         if section.settings.menu_type_desktop == 'dropdown'
@@ -170,111 +402,24 @@
       endif
     %}
 
-    {%- if section.settings.logo_position == 'middle-center' -%}
-      {%- if request.page_type == 'index' -%}
-        <h1 class="header__heading">
-      {%- endif -%}
-          <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
-            {%- if settings.logo != blank -%}
-              <div class="header__heading-logo-wrapper">
-                {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
-                {%- assign logo_height = settings.logo_width | divided_by: settings.logo.aspect_ratio -%}
-                {% capture sizes %}(min-width: 750px) {{ settings.logo_width }}px, 50vw{% endcapture %}
-                {% capture widths %}{{ settings.logo_width }}, {{ settings.logo_width | times: 1.5 | round }}, {{ settings.logo_width | times: 2 }}{% endcapture %}
-                {{ settings.logo | image_url: width: 600 | image_tag:
-                  class: 'header__heading-logo',
-                  widths: widths,
-                  height: logo_height,
-                  width: settings.logo_width,
-                  alt: logo_alt,
-                  sizes: sizes,
-                  preload: true
-                }}
-              </div>
-            {%- else -%}
-              <span class="h2">{{ shop.name }}</span>
-            {%- endif -%}
-          </a>
-      {%- if request.page_type == 'index' -%}
-        </h1>
-      {%- endif -%}
-    {%- endif -%}
-
-    <div class="header__icons{% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header__icons--localization header-localization{% endif %}">
-      <div class="desktop-localization-wrapper">
-        {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
-          <localization-form class="small-hide medium-hide" data-prevent-hide>
-            {%- form 'localization', id: 'HeaderCountryForm', class: 'localization-form' -%}
-              <div>
-                <h2 class="visually-hidden" id="HeaderCountryLabel">{{ 'localization.country_label' | t }}</h2>
-                {%- render 'country-localization', localPosition: 'HeaderCountry' -%}
-              </div>
-            {%- endform -%}
-          </localization-form>
-        {% endif %}
-
-        {%- if section.settings.enable_language_selector and localization.available_languages.size > 1 -%}
-          <localization-form class="small-hide medium-hide" data-prevent-hide>
-            {%- form 'localization', id: 'HeaderLanguageForm', class: 'localization-form' -%}
-              <div>
-                <h2 class="visually-hidden" id="HeaderLanguageLabel">{{ 'localization.language_label' | t }}</h2>
-                {%- render 'language-localization', localPosition: 'HeaderLanguage' -%}
-              </div>
-            {%- endform -%}
-          </localization-form>
-        {%- endif -%}
-      </div>
-      {% render 'header-search', input_id: 'Search-In-Modal' %}
-
-      {%- if shop.customer_accounts_enabled -%}
-        <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="header__icon header__icon--account link focus-inset{% if section.settings.menu != blank %} small-hide{% endif %}">
-          {%- if section.settings.enable_customer_avatar -%}
-            <account-icon>
-              {%- if customer and customer.has_avatar? -%}
-                {{ customer | avatar }}
-              {%- else -%}
-                <span class="svg-wrapper">{{ 'icon-account.svg' | inline_asset_content }}</span>
-              {%- endif -%}
-            </account-icon>
-          {%- else -%}
-            <span class="svg-wrapper">{{ 'icon-account.svg' | inline_asset_content }}</span>
-          {%- endif -%}
-          <span class="visually-hidden">
-            {%- liquid
-              if customer
-                echo 'customer.account_fallback' | t
-              else
-                echo 'customer.log_in' | t
-              endif
-            -%}
-          </span>
-        </a>
-      {%- endif -%}
-
       {%- for block in section.blocks -%}
         {%- case block.type -%}
           {%- when '@app' -%}
             {% render block %}
         {%- endcase -%}
       {%- endfor -%}
-
-      <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link focus-inset" id="cart-icon-bubble">
-          {% if cart == empty %}
-            <span class="svg-wrapper">{{'icon-cart-empty.svg' | inline_asset_content }}</span>
-          {% else %}
-            <span class="svg-wrapper">{{'icon-cart.svg' | inline_asset_content }}</span>
-          {% endif %}
-        <span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
-        {%- if cart != empty -%}
-          <div class="cart-count-bubble">
-            {%- if cart.item_count < 100 -%}
-              <span aria-hidden="true">{{ cart.item_count }}</span>
-            {%- endif -%}
-            <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
-          </div>
-        {%- endif -%}
-      </a>
     </div>
+    <div>
+    <div
+      class="semicircles__center header__semicircle__left"
+      style=""
+    ></div>
+    <div
+      class="semicircles__center header__semicircle__right"
+      style=""
+    ></div>
+  </div>
+      <div class="main-header-bottom-semicircle " id="header__semicircle__bottom_container"></div>
   </header>
 </{% if section.settings.sticky_header_type != 'none' %}sticky-header{% else %}div{% endif %}>
 
@@ -441,31 +586,6 @@
   "max_blocks": 3,
   "settings": [
     {
-      "type": "select",
-      "id": "logo_position",
-      "options": [
-        {
-          "value": "top-left",
-          "label": "t:sections.header.settings.logo_position.options__2.label"
-        },
-        {
-          "value": "top-center",
-          "label": "t:sections.header.settings.logo_position.options__3.label"
-        },
-        {
-          "value": "middle-left",
-          "label": "t:sections.header.settings.logo_position.options__1.label"
-        },
-        {
-          "value": "middle-center",
-          "label": "t:sections.header.settings.logo_position.options__4.label"
-        }
-      ],
-      "default": "middle-left",
-      "label": "t:sections.header.settings.logo_position.label",
-      "info": "t:sections.header.settings.logo_help.content"
-    },
-    {
       "type": "link_list",
       "id": "menu",
       "default": "main-menu",
@@ -488,7 +608,7 @@
           "label": "t:sections.header.settings.menu_type_desktop.options__3.label"
         }
       ],
-      "default": "dropdown",
+      "default": "mega",
       "label": "t:sections.header.settings.menu_type_desktop.label",
       "info": "t:sections.header.settings.menu_type_desktop.info"
     },
@@ -575,22 +695,6 @@
     {
       "type": "header",
       "content": "t:sections.header.settings.mobile_layout.content"
-    },
-    {
-      "type": "select",
-      "id": "mobile_logo_position",
-      "options": [
-        {
-          "value": "center",
-          "label": "t:sections.header.settings.mobile_logo_position.options__1.label"
-        },
-        {
-          "value": "left",
-          "label": "t:sections.header.settings.mobile_logo_position.options__2.label"
-        }
-      ],
-      "default": "center",
-      "label": "t:sections.header.settings.mobile_logo_position.label"
     },
     {
       "type": "header",

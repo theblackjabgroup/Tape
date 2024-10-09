@@ -42,12 +42,22 @@
   endif
 -%}
 
+{% assign class_name = '' %} <!-- Initialize the class variable -->
+{%  assign  thumbnail = false %}
+{% if section.settings.enable_sticky_info %}
+  {% assign class_name = 'product__column-sticky' %}
+{% endif %}
+
+{% if section.settings.gallery_layout == 'thumbnail' %}
+  {%  assign  thumbnail = true %}
+  {% assign class_name = class_name | append: ' gallery-thumbnail' %}
+{% endif %}
+
+
 <media-gallery
   id="MediaGallery-{{ section.id }}"
   role="region"
-  {% if section.settings.enable_sticky_info %}
-    class="product__column-sticky"
-  {% endif %}
+  class="{{ class_name }}"
   aria-label="{{ 'products.product.media.gallery_viewer' | t }}"
   data-desktop-layout="{{ section.settings.gallery_layout }}"
 >
@@ -176,6 +186,9 @@
       assign is_not_limited_to_single_item = true
     endif
   -%}
+  {% if section.settings.gallery_layout == 'thumbnail' %}
+    {% render 'ticket-line' %}
+  {% endif %}
   {%- if is_not_limited_to_single_item
     and media_count > 1
     and section.settings.gallery_layout contains 'thumbnail'
@@ -199,7 +212,7 @@
       </button>
       <ul
         id="Slider-Thumbnails-{{ section.id }}"
-        class="thumbnail-list list-unstyled slider slider--mobile{% if section.settings.gallery_layout == 'thumbnail_slider' %} slider--tablet-up{% endif %}"
+        class="thumbnail-list list-unstyled slider slider--mobile{% if section.settings.gallery_layout == 'thumbnail_slider' %} slider--tablet-up{% endif %} {% if section.settings.gallery_layout == 'thumbnail' %} bb-upper-thumbnail" {% endif %}
       >
         {%- capture sizes -%}
           (min-width: {{ settings.page_width }}px) calc(({{ settings.page_width | minus: 100 | times: media_width | round }} - 4rem) / 4),
@@ -236,6 +249,7 @@
               aria-current="true"
               aria-controls="GalleryViewer-{{ section.id }}"
               aria-describedby="{{ thumbnail_id }}"
+              aria-click=0
             >
               {{
                 featured_media.preview_image
@@ -267,7 +281,7 @@
             -%}
             <li
               id="Slide-Thumbnails-{{ section.id }}-{{ forloop.index }}"
-              class="thumbnail-list__item slider__slide{% if section.settings.hide_variants and variant_images contains media.src %} thumbnail-list_item--variant{% endif %}"
+              class="thumbnail-list__item bb-thumbnail-width slider__slide{% if section.settings.hide_variants and variant_images contains media.src %} thumbnail-list_item--variant{% endif %}"
               data-target="{{ section.id }}-{{ media.id }}"
               data-media-position="{{ media_index }}"
             >
@@ -298,6 +312,7 @@
                 {% endif %}
                 aria-controls="GalleryViewer-{{ section.id }}"
                 aria-describedby="{{ thumbnail_id }}"
+                aria-click=0
               >
                 {{
                   media.preview_image
