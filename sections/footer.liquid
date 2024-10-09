@@ -1,6 +1,7 @@
 {% comment %}theme-check-disable UndefinedObject{% endcomment %}
 {{ 'section-footer.css' | asset_url | stylesheet_tag }}
 
+{% if section.settings.enable_strip %}
 <div class="container" style="background-color: {{ section.settings.strip_container_bg_color }};">
     <div class="strip-right" style="background-color: {{ section.settings.strip_bg_color }};">
         <div class="strip-1">
@@ -17,7 +18,7 @@
         </div>
     </div>
 </div>
-
+{% endif %}
 
 
 <footer style="background-color: {{ section.settings.footer_background_color }}; font-family: 'Inter', sans-serif;">
@@ -156,6 +157,13 @@
       "type": "color_scheme",
       "label": "t:sections.all.colors.label",
       "default": "scheme-1"
+    },
+
+ {
+      "type": "checkbox",
+      "id": "enable_strip",
+      "label": "Enable Strip",
+      "default": true
     },
     
 {
