@@ -213,10 +213,10 @@ input:focus{
 
 {%- style -%}
   .header {
+    overflow-x:clip;
     display:flex !important;
     flex-direction: column;
     position: relative;
-    background: #eee;
     padding: {{ section.settings.padding_top | times: 0.5 | round: 0 }}px 3rem {{ section.settings.padding_bottom | times: 0.5 | round: 0 }}px 3rem;
   }
 
@@ -421,7 +421,7 @@ input:focus{
       style=""
     ></div>
   </div>
-      <div id="header__semicircle__bottom_container"></div>
+      <div class="main-header-bottom-semicircle " id="header__semicircle__bottom_container"></div>
   </header>
 </{% if section.settings.sticky_header_type != 'none' %}sticky-header{% else %}div{% endif %}>
 
@@ -610,7 +610,7 @@ input:focus{
           "label": "t:sections.header.settings.menu_type_desktop.options__3.label"
         }
       ],
-      "default": "dropdown",
+      "default": "mega",
       "label": "t:sections.header.settings.menu_type_desktop.label",
       "info": "t:sections.header.settings.menu_type_desktop.info"
     },
