@@ -1,3 +1,5 @@
+var numClick = 0;
+
 if (!customElements.get('media-gallery')) {
   customElements.define(
     'media-gallery',
@@ -11,7 +13,6 @@ if (!customElements.get('media-gallery')) {
         };
         this.mql = window.matchMedia('(min-width: 750px)');
         if (!this.elements.thumbnails) return;
-
         this.elements.viewer.addEventListener('slideChanged', debounce(this.onSlideChanged.bind(this), 500));
         this.elements.thumbnails.querySelectorAll('[data-target]').forEach((mediaToSwitch) => {
           mediaToSwitch
@@ -29,6 +30,8 @@ if (!customElements.get('media-gallery')) {
       }
 
       setActiveMedia(mediaId, prepend) {
+        numClick++;
+
         const activeMedia =
           this.elements.viewer.querySelector(`[data-media-id="${mediaId}"]`) ||
           this.elements.viewer.querySelector('[data-media-id]');
@@ -54,13 +57,13 @@ if (!customElements.get('media-gallery')) {
         this.preventStickyHeader();
         window.setTimeout(() => {
           if (!this.mql.matches || this.elements.thumbnails) {
-            activeMedia.parentElement.scrollTo({ left: activeMedia.offsetLeft });
+       //     activeMedia.parentElement.scrollTo({ left: activeMedia.offsetLeft });
           }
           const activeMediaRect = activeMedia.getBoundingClientRect();
           // Don't scroll if the image is already in view
           if (activeMediaRect.top > -0.5) return;
           const top = activeMediaRect.top + window.scrollY;
-          window.scrollTo({ top: top, behavior: 'smooth' });
+     //     window.scrollTo({ top: top, behavior: 'smooth' });
         });
         this.playActiveMedia(activeMedia);
 
@@ -77,9 +80,10 @@ if (!customElements.get('media-gallery')) {
           .querySelectorAll('button')
           .forEach((element) => element.removeAttribute('aria-current'));
         thumbnail.querySelector('button').setAttribute('aria-current', true);
+
         if (this.elements.thumbnails.isSlideVisible(thumbnail, 10)) return;
 
-        this.elements.thumbnails.slider.scrollTo({ left: thumbnail.offsetLeft });
+      //  this.elements.thumbnails.slider.scrollTo({ left: thumbnail.offsetLeft });
       }
 
       announceLiveRegion(activeItem, position) {
@@ -93,6 +97,11 @@ if (!customElements.get('media-gallery')) {
           }, 2000);
         };
         image.src = image.src;
+        const images = activeItem.querySelectorAll('.product__modal-opener--image img');
+        images.forEach((image) => {
+          image.setAttribute('aria-click', 0);
+          image.setAttribute('aria-click', numClick%4);
+        })
       }
 
       playActiveMedia(activeItem) {

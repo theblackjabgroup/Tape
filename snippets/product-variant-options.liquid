@@ -91,10 +91,14 @@
       {% endif %}
       {{ input_dataset }}
     >
+    {% if option.name == "Color" %}
+    <label for="{{ input_id }}" class="bb-color-box" tabindex="0" style=" background-color: {{ value -}}; "></label>
+      {%- else -%}
     <label for="{{ input_id }}">
-      {{ value -}}
+      {{ value }}
       {{ label_unavailable }}
     </label>
+  {% endif %}
   {%- elsif picker_type == 'dropdown' or picker_type == 'swatch_dropdown' -%}
     <option
       id="{{ input_id }}"

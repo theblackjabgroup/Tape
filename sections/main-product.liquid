@@ -73,9 +73,17 @@
   {%- endif -%}
 
   {% assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' %}
+  {%  assign layout_desktop = section.settings.gallery_layout  %}
+
+  {%  assign  thumbnail = false %}
+  {% if layout_desktop == "thumbnail" %}
+    {%  assign  thumbnail = true %}
+  {% endif  %}
+
+
   <div class="page-width">
     <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
-      <div class="grid__item product__media-wrapper">
+    <div class="grid__item product__media-wrapper {% if thumbnail == true %} bb_background {% endif %}">
         {% render 'product-media-gallery', variant_images: variant_images %}
       </div>
       <div class="product__info-wrapper grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
@@ -96,7 +104,25 @@
                 >
                   {{- block.settings.text -}}
                 </p>
+
               {%- when 'title' -%}
+              {% if section.settings.enable_special_offer %}
+                <div>
+                {% for i in (0..2) %}
+                <div class="bb-triangle-offer tri-{{i}}"></div>
+                <div class="bb-triangle-offer tri-second-{{i}}"></div>
+                {% endfor  %}
+                <div class="bb-special-offer">
+                  <h2 class="bb-special-offer-text">Special Offer</h2>
+                </div>
+                </div>
+              {% endif %}
+              {%- if product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
+                <div class="sold-out-tag">
+                  <span class="sold-out-tag-text">SOLD OUT</span>
+                </div>
+              {% endif %}
+
                 <div class="product__title" {{ block.shopify_attributes }}>
                   <h1>{{ product.title | escape }}</h1>
                   <a href="{{ product.url }}" class="product__title">
@@ -107,12 +133,21 @@
                 </div>
               {%- when 'price' -%}
                 <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
+                  {% if layout_desktop == "thumbnail" %}
+                    {%- render 'price2',
+                    product: product,
+                    use_variant: true,
+                    show_badges: false,
+                    price_class: 'price--large'
+                  -%}
+                  {% else %}
                   {%- render 'price',
                     product: product,
                     use_variant: true,
                     show_badges: true,
                     price_class: 'price--large'
                   -%}
+                  {% endif %}
                 </div>
                 {%- if product.quantity_price_breaks_configured? -%}
                   <div class="volume-pricing-note" id="Volume-Note-{{ section.id }}">
@@ -440,6 +475,7 @@
                     </volume-pricing>
                   {%- endif -%}
                 </div>
+              
               {%- when 'popup' -%}
                 <modal-opener
                   class="product-popup-modal__opener quick-add-hidden"
@@ -463,7 +499,13 @@
 
               {%- when 'variant_picker' -%}
                 {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
+
               {%- when 'buy_buttons' -%}
+                {%- if product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
+                  <div class="sold-out-text">
+                    <span>Oops! There are not enough items in stock</span>
+                  </div>
+                {% endif %}
                 {%- render 'buy-buttons',
                   block: block,
                   product: product,
@@ -851,6 +893,27 @@
       "limit": 1
     },
     {
+      "type": "buy_buttons",
+      "name": "t:sections.main-product.blocks.buy_buttons.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "show_dynamic_checkout",
+          "default": true,
+          "label": "t:sections.main-product.blocks.buy_buttons.settings.show_dynamic_checkout.label",
+          "info": "t:sections.main-product.blocks.buy_buttons.settings.show_dynamic_checkout.info"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_gift_card_recipient",
+          "default": true,
+          "label": "t:sections.main-product.blocks.buy_buttons.settings.show_gift_card_recipient.label",
+          "info": "t:sections.main-product.blocks.buy_buttons.settings.show_gift_card_recipient.info"
+        }
+      ]
+    },
+    {
       "type": "variant_picker",
       "name": "t:sections.main-product.blocks.variant_picker.name",
       "limit": 1,
@@ -891,27 +954,6 @@
             }
           ],
           "default": "circle"
-        }
-      ]
-    },
-    {
-      "type": "buy_buttons",
-      "name": "t:sections.main-product.blocks.buy_buttons.name",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "checkbox",
-          "id": "show_dynamic_checkout",
-          "default": true,
-          "label": "t:sections.main-product.blocks.buy_buttons.settings.show_dynamic_checkout.label",
-          "info": "t:sections.main-product.blocks.buy_buttons.settings.show_dynamic_checkout.info"
-        },
-        {
-          "type": "checkbox",
-          "id": "show_gift_card_recipient",
-          "default": true,
-          "label": "t:sections.main-product.blocks.buy_buttons.settings.show_gift_card_recipient.label",
-          "info": "t:sections.main-product.blocks.buy_buttons.settings.show_gift_card_recipient.info"
         }
       ]
     },
@@ -2084,6 +2126,12 @@
       "label": "t:sections.main-product.settings.enable_sticky_info.label"
     },
     {
+      "type": "checkbox",
+      "id": "enable_special_offer",
+      "default": false,
+      "label": "t:sections.main-product.settings.enable_special_offer.label"   
+    },
+    {
       "type": "color_scheme",
       "id": "color_scheme",
       "label": "t:sections.all.colors.label",
@@ -2142,6 +2190,10 @@
       "id": "gallery_layout",
       "options": [
         {
+          "value": "thumbnail",
+          "label": "t:sections.main-product.settings.gallery_layout.options__3.label"
+        },
+        {
           "value": "stacked",
           "label": "t:sections.main-product.settings.gallery_layout.options__1.label"
         },
@@ -2150,15 +2202,11 @@
           "label": "t:sections.main-product.settings.gallery_layout.options__2.label"
         },
         {
-          "value": "thumbnail",
-          "label": "t:sections.main-product.settings.gallery_layout.options__3.label"
-        },
-        {
           "value": "thumbnail_slider",
           "label": "t:sections.main-product.settings.gallery_layout.options__4.label"
         }
       ],
-      "default": "stacked",
+      "default": "thumbnail",
       "label": "t:sections.main-product.settings.gallery_layout.label"
     },
     {
