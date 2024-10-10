@@ -2148,7 +2148,7 @@ input[type='checkbox'] {
 }
 
 .announcement-bar .custom-button-upper {
-  padding: 0.3rem 0;
+  padding: 0.3rem 0; 
 }
 
 @media screen and (min-width: 990px) {
