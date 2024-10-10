@@ -118,9 +118,6 @@
                       {%- endif -%}
                       <p class="announcement-bar__message h4">
                         <span>{{ block.settings.text | escape }}</span>
-                        {%- if block.settings.link != blank -%}
-                          {% render 'icon-arrow' %}
-                        {%- endif -%}
                       </p>
                       {%- if block.settings.button_text != blank -%}
                         <div class="custom-button-upper">
