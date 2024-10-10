@@ -35,9 +35,10 @@
 }
 
 .mega-menu__list {
-  display: grid;
-  gap: 1.8rem 4rem;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  display: flex;
+  justify-content: space-between;
+  /* gap: 1.8rem 4rem; */
+  /* grid-template-columns: repeat(6, minmax(0, 1fr)); */
   list-style: none;
 }
 
@@ -71,7 +72,7 @@
 .mega-menu__link:hover,
 .mega-menu__link--active {
   color: rgb(var(--color-foreground));
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 .mega-menu__link--active:hover {
