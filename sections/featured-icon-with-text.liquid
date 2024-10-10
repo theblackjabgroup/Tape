@@ -1,10 +1,10 @@
 <script src="{{ 'icon-with-text.js' | asset_url }}" defer="defer"></script>
 {{ 'icon-with-text.css' | asset_url | stylesheet_tag }}
 
-<div style="display: flex; flex-direction: column; gap: 6rem; padding: 20px 0;">
+<div style="display: flex; flex-direction: column; gap: 6rem; padding: 20px 0;" class="color-{{ section.settings.sectionColor }}">
   <div style="display: flex; flex-direction: column; gap: 4px; padding: 0 20px;">
-    <p style="font-weight: 600; font-size: 24px; line-height: 30px;" class="fira-sans-semibold">{{ section.settings.heading }}</p>
-    <p style="font-weight: 500; font-size: 14px; line-height: 21px;" class="inter-medium">{{ section.settings.subheading }}</p>
+    <p style="font-weight: 600; font-size: 24px; line-height: 30px;" class="fira-sans-semibold ">{{ section.settings.heading }}</p>
+    <p style="font-weight: 500; font-size: 14px; line-height: 21px;" class="inter-medium ">{{ section.settings.subheading }}</p>
   </div>
   <div class="icon-with-text-container">
     {% for item in section.blocks %}
