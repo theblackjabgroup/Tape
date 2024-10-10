@@ -1,5 +1,6 @@
 function b_start()
 {
+  /*
     console.log("in bar announcement view");
     const elems = document.getElementsByClassName("bb_view");
 
@@ -44,8 +45,31 @@ function b_start()
       });
       console.log("nodeStr ",nodeStr)
       x.setAttribute('data-hide', nodeStr)
-      */
     }
+    
+    const elems = document.querySelectorAll(".announcement-icon-sub-slider img");
+    const dest = document.getElementById("announcement-icon-sub-id");
+    console.log("dest ", dest);
+    console.log("elems ", elems)
+    elems.forEach((elem) => {
+      const dup = elem.cloneNode(false)
+    dest.appendChild(dup);
+    })
+    */
+   const elem = document.getElementById("announcement-icon-sub-id");
+   const dests = document.getElementsByClassName("announcement-icon-wrapper");
+
+   Array.from(dests).forEach(dest => {
+      if(elem.getAttribute("aria-index") != dest.getAttribute("aria-count"))
+      {
+        dest.setAttribute('aria-hidden', 'true')
+      }
+      else
+      {
+        dest.setAttribute('aria-hidden', 'false')
+      }
+    });
+
 }
 
 b_start();
