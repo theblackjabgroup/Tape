@@ -219,3 +219,42 @@ body {
         left: 18px;
     }
 }
+
+
+.social-icons {
+  display: flex;
+  flex-direction: column; /* Icons will now stack vertically */
+  align-items: center;
+  gap: 10px;
+}
+
+.social-icon {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+}
+
+.social-icon svg {
+  width: 85%;
+  height: 85%;
+  fill: currentColor; /* Ensures original color is used from the SVG itself */
+}
+
+.social-icon:hover {
+  color: inherit; /* Prevents any change on hover */
+}
+
+@media only screen and (max-width: 768px) {
+    .social-icons {
+        flex-direction: row; /* Align icons in a single row */
+        flex-wrap: nowrap; /* Prevent wrapping */
+        overflow-x: auto; /* Allow horizontal scrolling if necessary */
+        gap: 10px; /* Maintain spacing between icons */
+    }
+
+    .social-icon {
+        width: 40px; /* Adjust icon size if necessary */
+        height: 40px; /* Adjust icon size if necessary */
+    }
+}
+
