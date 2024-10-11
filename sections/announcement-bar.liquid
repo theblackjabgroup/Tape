@@ -21,7 +21,7 @@
 <{% if section.settings.enable_sticky_bar %}sticky-bar data-sticky-type = "{{ section.settings.enable_sticky_bar }}"{% else %}div{% endif %} >
   <div class="utility-bar vertical-bar color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator and section.blocks.size > 0 %} utility-bar--bottom-border{% elsif section.settings.show_line_separator and section.settings.show_social and social_icons%} utility-bar--bottom-border-social-only{% endif %}{% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header-localization{% endif %}" {{ block.shopify_attributes }}>
     <div  class="vertical-bar-second-top">
-    {% for i in (0..3) %}
+    {% for i in (0..7) %}
       <div class="vertical-bar-first index-{{i}}"></div>
     {% endfor %}
     </div>
@@ -190,7 +190,7 @@
       </div>
     </div>
     <div class="vertical-bar-second-top">
-      {% for i in (0..3) %}
+      {% for i in (0..7) %}
         <div class="vertical-bar-second index-{{i}}"></div>
       {% endfor %}
       </div>
@@ -280,12 +280,8 @@
         "type": "header",
         "content": "t:sections.announcement-bar.settings.header__4.content",
         "info": "t:sections.announcement-bar.settings.header__4.info"
-      }, {
-        "type": "checkbox",
-        "id": "enable_language_selector",
-        "default": false,
-        "label": "t:sections.announcement-bar.settings.enable_language_selector.label"
-      }, {
+      }, 
+       {
         "type": "checkbox",
         "id": "enable_sticky_bar",
         "default": false,
