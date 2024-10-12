@@ -27,6 +27,7 @@
           endif
         endif
       -%}
+      <!--
       {%- if picker_type == 'swatch' -%}
         <fieldset class="js product-form__input product-form__input--swatch">
           <legend class="form__label">
@@ -42,27 +43,29 @@
             picker_type: picker_type
           %}
         </fieldset>
-      {%- elsif picker_type == 'button' -%}
+        -->
+      {%- if picker_type == 'button' -%}
         <fieldset class="js product-form__input product-form__input--pill">
           <legend class="form__label bb-product-variant-label">{{ option.name }}</legend>
           {% if option.name == "Color" %}
-      <!--    <div class="bb-color-variant">  -->
+          <div class="bb-color-variant">  
           {% render 'product-variant-options',
             product: product,
             option: option,
             block: block,
             picker_type: picker_type
           %}
-     <!--     </div>  
+          </div>  
           {% else  %}
           {% render 'product-variant-options',
           product: product,
           option: option,
           block: block,
           picker_type: picker_type
-        %}-->
+        %}
           {% endif  %}
         </fieldset>
+        <!--
       {%- else -%}
         <div class="product-form__input product-form__input--dropdown">
           <label class="form__label" for="Option-{{ section.id }}-{{ forloop.index0 }}">
@@ -95,6 +98,7 @@
             </span>
           </div>
         </div>
+        -->
       {%- endif -%}
     {%- endfor -%}
 
