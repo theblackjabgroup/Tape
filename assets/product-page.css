@@ -38,12 +38,16 @@
 }
 
 .js .bb_product__media {
-    background-color: #EEEEEE;
+    background-color: var(--background_product_card);
     overflow: visible !important;
 }
 
+.bb-button-secondary {
+    background-color: var(--secondary_product_button_color);
+    border-radius: 7px;
+}
 .gallery-thumbnail{
-    background-color: #EEEEEE;
+    background-color: var(--background_product_card);
     padding-bottom: 10px;
 }
 
@@ -62,7 +66,7 @@
     display: block !important;
     width: 8px;
     border-radius: 50%;
-    background-color: white;
+    background-color: rgb(var(--color-background));
 }
 
 .bb-thumbnail-width {
@@ -112,10 +116,15 @@ padding-left: 5rem;
   }
 
   .bb-price {
-    background-color: #D8D8D8;
+    background-color: var(--product_price_card);
     padding: 0.5rem 3rem;
     border-radius: 3px;
+    color: var(--product_price_font);
   }
+
+   .bb-price-item {
+    color: var(--product_price_secondary_font) !important;
+   }
 
   .bb-ticket-price {
     height: 8px;
@@ -127,6 +136,10 @@ padding-left: 5rem;
     margin: 0 auto;
   }
 
+  .bb-quantity2 {
+    background-color: var(--quatity_selector_background) !important;
+  }
+
   .bb-ticket-left {
     transform: translate(-400%, 120%);
   }
@@ -136,46 +149,47 @@ padding-left: 5rem;
   }
 
   .bb-special-offer{
-    display: block !important;
-    background-color: #929292;
+    display: grid !important;
+    background-color: var(--product_special_offer);
     color: #EEEEEE;
-    width: 50%;
+    width: 65%;
+    grid-template-columns: 1fr 13fr 1fr;
   }
 
   .bb-triangle-offer {
     border-left: 7px solid transparent;
     border-right: 7px solid transparent;
-    position: absolute;
-    border-bottom: 12px solid white;
+    position: relative;
+    border-bottom: 12px solid rgb(var(--color-background));
     height: 0;
     width: 0;
     display: block !important;
   }
 
  .tri-0{
-    transform: rotate(90deg) translate(6%, 50%);
+    transform: rotate(90deg) translate(6%,30%);
  }
  .tri-1{
-    transform: rotate(90deg) translate(67%, 50%);
+    transform: rotate(90deg) translate(0%,30%);
 
  }
  .tri-2{
-    transform: rotate(90deg) translate(130%, 50%);
+    transform: rotate(90deg) translate(-6%,30%);
  }
 
  .tri-second-0{
-    transform: rotate(270deg) translate(-3%, 1370%);
+    transform: rotate(270deg) translate(-6%, 30%)
  }
  .tri-second-1{
-    transform: rotate(270deg) translate(-65%, 1370%);
+    transform: rotate(270deg) translate(0%, 30%);
 
  }
  .tri-second-2{
-    transform: rotate(270deg) translate(-130%, 1370%);
+    transform: rotate(270deg) translate(6%,30%);
  }
   .bb-special-offer-text{
-    color: white;
-    margin: 0px 0rem 0px 2rem;
+    color: var(--utilities);
+    margin: 0 auto;
   }
 
   .bb-product[aria-click="1"] {
@@ -231,7 +245,7 @@ padding-left: 5rem;
     position: absolute;
     width: 16px;
     height: 16px;
-    background-color: white;
+    background-color: rgb(var(--color-background));
     border-radius: 50%;
   }
   
@@ -251,7 +265,7 @@ padding-left: 5rem;
     position: absolute;
     width: 16px;
     height: 16px;
-    background-color: white;
+    background-color: rgb(var(--color-background));
     border-radius: 50%;
   }
   
@@ -271,7 +285,7 @@ padding-left: 5rem;
     position: absolute;
     width: 8px;
     height: 8px;
-    background-color: white;
+    background-color: rgb(var(--color-background));
     border-radius: 50%;
   }
   
@@ -284,7 +298,7 @@ padding-left: 5rem;
   }
 
   .bb_background {
-    background-color: #EEEEEE;
+    background-color: var(--background_product_card);
   }
 
   /*
@@ -294,6 +308,25 @@ padding-left: 5rem;
     }
   }
   */
+
+  .bb-quantity {
+    display: flex;
+    justify-content: space-between;
+  }
+  .bb-quantity-label, .bb-product-variant-label
+  {
+  font-family: 'Fira Sans';
+    font-size: 20px;
+    color: var(--utilities);
+  }
+   .shopify-payment-button {
+    font-family: 'Inter';
+    font-weight: 500;
+   }
+
+   .shopify-payment-button__button{
+    border-radius: 7px !important;
+   }
   @media screen and (max-width: 749px) {
     .bb-test {
         position: relative;

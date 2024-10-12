@@ -40,7 +40,7 @@
   .header__heading-link .h2{
     color: white;
 }
-.svg-wrapper{
+.bb-svg-wrapper{
   width: 24px !important;
   height: 24px !important;
   color: white;
@@ -141,7 +141,7 @@ input:focus{
   align-items: center;
 }
 
-.svg-wrapper{
+.bb-svg-wrapper{
   width: 32px !important;
   height: 32px !important;
 }
@@ -345,9 +345,9 @@ input:focus{
     <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link focus-inset"
       id="cart-icon-bubble"></a>
     {% if cart == empty %}
-    <span class="svg-wrapper">{{'icon-cart-empty.svg' | inline_asset_content }}</span>
+    <span class="bb-svg-wrapper">{{'icon-cart-empty.svg' | inline_asset_content }}</span>
     {% else %}
-    <span class="svg-wrapper">{{'icon-cart.svg' | inline_asset_content }}</span>
+    <span class="bb-svg-wrapper">{{'icon-cart.svg' | inline_asset_content }}</span>
     {% endif %}
     <span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
     {%- if cart != empty -%}
@@ -368,11 +368,11 @@ input:focus{
         {%- if customer and customer.has_avatar? -%}
         {{ customer | avatar }}
         {%- else -%}
-        <span class="svg-wrapper">{{ 'icon-profile.svg' | inline_asset_content }}</span>
+        <span class="bb-svg-wrapper">{{ 'icon-profile.svg' | inline_asset_content }}</span>
         {%- endif -%}
       </account-icon>
       {%- else -%}
-      <span class="svg-wrapper">{{ 'icon-profile.svg' | inline_asset_content }}</span>
+      <span class="bb-svg-wrapper">{{ 'icon-profile.svg' | inline_asset_content }}</span>
       {%- endif -%}
       <span class="visually-hidden">
         {%- liquid
@@ -386,7 +386,7 @@ input:focus{
     </a>
     {%- endif -%}
     <a href="" class="header__icon link focus-inset">
-      <span class="svg-wrapper">{{ 'icon-bell.svg' | inline_asset_content }}</span>
+      <span class="bb-svg-wrapper">{{ 'icon-bell.svg' | inline_asset_content }}</span>
     </a>
   </div>
      </div> 

@@ -66,7 +66,16 @@
         {% else %}
           --gradient-background: {{ scheme.settings.background }};
         {% endif %}
-
+          --background_product_card: {{ scheme.settings.background_product_card }};
+          --secondary_product_button_color: {{ scheme.settings.secondary_product_button_color }};
+          --product_price_card: {{ scheme.settings.product_price_card }};
+          --product_price_font : {{ scheme.settings.product_price_font }};
+          --product_price_secondary_font : {{ scheme.settings.product_price_secondary_font }};
+          --quatity_selector_background: {{ scheme.settings.quatity_selector_background }};
+          --utilities: {{ scheme.settings.utilities }};
+          --product_special_offer: {{ scheme.settings.product_special_offer }};
+          --product_collapsible_rows_section: {{ scheme.settings.product_collapsible_rows_section }};
+          --product_collapsible_rows_section_secondary: {{ scheme.settings.product_collapsible_rows_section_secondary }};
         {% liquid
           assign background_color = scheme.settings.background
           assign background_color_brightness = background_color | color_brightness
