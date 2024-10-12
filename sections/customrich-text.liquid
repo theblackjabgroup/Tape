@@ -1,0 +1,213 @@
+{% style %}
+  .section-{{ section.id }}-padding {
+  padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+  padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+}
+
+@media screen and (min-width: 750px) {
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+}
+  .layout1 {
+  text-align: center;
+  padding: 20px;
+}
+
+.layout1 h2 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.decorative-dots {
+  display: flex;
+  justify-content: center;
+  margin: 15px 0;
+}
+.dot{
+  width: 7px;
+  height: 7px;
+  background-color: #E3E3E3;
+  border-radius: 50%;
+  margin: 0 8px;
+}
+
+
+
+/* Layout 2 - Dots on the sides with background color */
+.layout2 {
+  background-color: #DCDDDD;
+  padding: 40px;
+  position: relative;
+  text-align: center;
+}
+
+.dots-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+ 
+}
+
+.rich-text__blocks {
+  width: 60%; /* Width of the text area */
+  text-align: center; /* Center the text content */
+}
+
+.side-dots {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.side-dots.left,
+.side-dots.right {
+  width: 5%;
+}
+
+.side-dots.left {
+  text-align: right; 
+}
+
+.side-dots.right {
+  text-align: left; 
+}
+
+.dot-l {
+  width: 10px;
+  height: 10px;
+  background-color: #FFFFFF;
+  border-radius: 50%;
+  margin: 8px 0;
+}
+
+
+{% endstyle %}
+<div class="rich-text-section">
+  {% if section.settings.layout_style == 'layout1' %}
+  <div class="layout1">
+    <h2>{{ section.settings.heading | default: "Transforming Healthcare with Innovative Solutions" }}</h2>
+
+    <div class="decorative-dots">
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+    <p class="rich-text__text rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+      {{ section.settings.text | default: "At [Your Company Name], we are dedicated to enhancing patient care and clinical efficiency through state-of-the-art medical products. Our commitment to innovation and quality ensures that healthcare providers have the tools they need to deliver the best possible outcomes for their patients." }}
+    </p>
+  </div>
+  {% else %}
+<div class="layout2">
+ 
+
+  <!-- Dots on both sides -->
+  <div class="dots-container">
+    <div class="side-dots left">
+      <span class="dot-l"></span>
+      <span class="dot-l"></span>
+      <span class="dot-l"></span>
+      <span class="dot-l"></span>
+      <span class="dot-l"></span>
+      <span class="dot-l"></span>
+      <span class="dot-l"></span>
+      <span class="dot-l"></span>
+      <span class="dot-l"></span>
+    </div>
+  
+    <!-- Text Content -->
+    <div class="rich-text__blocks {{ section.settings.content_alignment }}">
+       <h2>{{ section.settings.heading | default: "Transforming Healthcare with Innovative Solutions" }}</h2>
+      <p>{{ section.settings.caption | default: "Delivering Excellence in Medical Products" }}</p>
+      
+      <p class="rich-text__text rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+        {{ section.settings.text | default: "At [Your Company Name], we are dedicated to enhancing patient care and clinical efficiency through state-of-the-art medical products. Our commitment to innovation and quality ensures that healthcare providers have the tools they need to deliver the best possible outcomes for their patients." }}
+      </p>
+    </div>
+
+    <div class="side-dots right">
+      <span class="dot-l"></span>
+      <span class="dot-l"></span>
+      <span class="dot-l"></span>
+      <span class="dot-l"></span>
+      <span class="dot-l"></span>
+      <span class="dot-l"></span>
+      <span class="dot-l"></span>
+      <span class="dot-l"></span>
+      <span class="dot-l"></span>
+    </div>
+  </div>
+</div>
+
+
+
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Richtext",
+  "settings": [
+    {
+        "type":"text",
+        "id": "heading",
+      "default": "Transforming Healthcare with Innovative Solutions",
+      "label": "Heading"
+    },
+     {
+      "type": "text",
+      "id": "caption",
+      "default": "Delivering Excellence in Medical Products",
+      "label": "Caption"
+    },
+    {
+      "type": "textarea",
+      "id": "rich_text_content",
+      "label": "Rich Text Content",
+      "default": "At [Your Company Name], we are dedicated to enhancing patient care and clinical efficiency through state-of-the-art medical products. Our commitment to innovation and quality ensures that healthcare providers have the tools they need to deliver the best possible outcomes for their patients."
+    },
+    {
+      "type": "select",
+      "id": "layout_style",
+      "label": "Choose Layout",
+      "options": [
+        {
+          "value": "layout1",
+          "label": "Layout 1"
+        },
+        {
+          "value": "layout2",
+          "label": "Layout 2"
+        }
+      ],
+      "default": "layout1"
+    }
+  ],
+  "blocks": [{
+      "name":"Richtext",
+     "type":"richtext",
+      "settings": [{
+          "type":"text",
+          "id":"main-heading",
+          "label":"heading"
+      }
+    ]
+  } 
+ ],
+  "presets": [{
+      "name": "richtext",
+  }]
+  
+}
+{% endschema %}
+
