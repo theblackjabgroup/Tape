@@ -275,7 +275,7 @@
                   <label class="quantity__label form__label bb-quantity-label" for="Quantity-{{ section.id }}">
                     {{ 'products.product.quantity.label' | t }}
                     <span class="quantity__rules-cart{% if cart_qty == 0 %} hidden{% endif %}">
-                      {%- render 'loading-spinner' -%}
+                <!--      {%- render 'loading-spinner' -%}  -->
                       <span
                         >(
                         {{- 'products.product.quantity.in_cart_html' | t: quantity: cart_qty -}}
@@ -459,14 +459,16 @@
                         {%- if product.selected_or_first_available_variant.quantity_price_breaks.size >= 3 -%}
                           <show-more-button>
                             <button
-                              class="button-show-more link underlined-link"
-                              id="Show-More-{{ section.id }}"
-                              type="button"
-                            >
-                              <span class="label-show-more label-text"
-                                ><span aria-hidden="true">+ </span>{{ 'products.facets.show_more' | t }}
-                              </span>
-                            </button>
+                            class="button-show-more link underlined-link"
+                            id="Show-More-{{ section.id }}"
+                            type="button"
+                            aria-expanded="false"
+                            aria-controls="content-section-{{ section.id }}"
+                          >
+                            <span class="label-show-more label-text">
+                              <span aria-hidden="true">+ </span>{{ 'products.facets.show_more' | t }}
+                            </span>
+                          </button>
                           </show-more-button>
                         {%- endif -%}
                       {%- endif -%}
