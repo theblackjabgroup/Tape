@@ -5,7 +5,10 @@
     padding: 20px;
   }
   .layout1 p{
-  margin-bottom: 5px;
+      margin-bottom: 5px;
+     font-family:  {{ section.settings.font_richtextsubheading.family | default: "Inter" }}, {{ section.settings.font_richtextsubheading.fallback_families }};
+    font-weight: {{ section.settings.font_richtextsubheading.weight }};
+    font-style: {{ section.settings.font_richtextsubheading.style }};
   }
 
   .layout1 h2 {
@@ -13,7 +16,6 @@
     font-weight: {{ section.settings.font_title.weight }};
     font-style: {{ section.settings.font_title.style }};
     font-size: {{ section.settings.heading_font_size }}px;
-    color: {{ section.settings.heading_color }};
   }
 
   .layout1 .rich-text__text {
@@ -22,7 +24,6 @@
     font-style: {{ section.settings.font_richtext.style }};
     margin: 0 auto;
    font-size: {{ section.settings.text_font_size }}px;
-   color: {{ section.settings.text_color }};
    max-width: 600px;
    line-height: 1.6;
   }
@@ -34,10 +35,10 @@
   }
 
   .dot {
-    width: 7px;
-    height: 7px;
-    background-color:{{ section.settings.text_color }};
-    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    background-color: #303030;
+    border-radius: 100%;
     margin: 0 12px;
   }
 .layout2 {
@@ -46,21 +47,19 @@
 }
 
 
-  .layout2 h2 {
+.layout2 h2 {
     font-family: {{ section.settings.font_title.family }}, {{ section.settings.font_title.fallback_families }};
     font-weight: {{ section.settings.font_title.weight }};
     font-style: {{ section.settings.font_title.style }};
     font-size: {{ section.settings.heading_font_size }}px;
-    color: {{ section.settings.heading_color }};
   }
 
-  .layout2 .rich-text__text {
+.layout2 .rich-text__text {
     font-family: {{ section.settings.font_richtext.family }}, {{ section.settings.font_richtext.fallback_families }};
     font-weight: {{ section.settings.font_richtext.weight }};
     font-style: {{ section.settings.font_richtext.style }};
      margin: 0 auto;
      font-size: {{ section.settings.text_font_size }}px;
-     color: {{ section.settings.text_color }};
      max-width: 600px;
      line-height: 1.6;
   }
@@ -94,9 +93,9 @@
 .dot-l {
   width: 10px;
   height: 10px;
-  background-color: #FFFFFF;
   border-radius: 50%;
   margin: 8px auto; 
+  background-color: #303030; 
 }
 
 
@@ -110,25 +109,55 @@
     .layout2 h2 {
       font-size: {{ section.settings.heading_font_size | times: 0.8 | round: 0 }}px;
     }
+ 
 
     .layout1 .rich-text__text,
     .layout2 .rich-text__text {
       font-size: {{ section.settings.text_font_size | times: 0.9 | round: 0 }}px;
     }
+   .dots-container {
+    flex-direction: column; 
+    justify-content: center;
+    max-width: 100%;
+  }
+ .side-dots.left, .side-dots.right {
+    width: 100%; 
+  }
+  .side-dots {
+    display: flex;
+    flex-direction: row; 
+    justify-content: center;
+    margin-bottom: 20px; 
+  }
+    .side-dots.left {
+      margin-top:10px;
+    order: -1;
+  }
+      .side-dots.right {
+    order: 1;
+        margin-bottom:10px;
+  }
+
+
 
     .rich-text__blocks {
       width: 80%;
+      margin-bottom: 20px;
     }
+  .dot-l {
+    width: 10px;
+    height: 10px;
+    margin: 12px; 
+  }
+    
 
-    .side-dots {
-      display: none;
-    }
+  
   }
 {% endstyle %}
 
-<div class="rich-text-section section-{{ section.id }}-padding">
-  {% if section.settings.layout_style == 'layout1' %}
-    <div class="layout1">
+<div class="rich-text-section color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
+  {% if section.settings.layout_style == 'layout1' %} 
+    <div class="layout1 page-width">
       <h2>{{ section.settings.heading | default: "Transforming Healthcare with Innovative Solutions" }}</h2>
       <div class="decorative-dots">
         {% for i in (1..10) %}
@@ -155,7 +184,7 @@
             {{ section.settings.text }}
           </div>
         </div>
-        <div class="side-dots right">
+        <div class="side-dots right color-{{ section.settings.color_scheme }}">
           {% for i in (1..10) %}
             <span class="dot-l"></span>
           {% endfor %}
@@ -203,6 +232,12 @@
       ],
       "default": "layout1"
     },
+     {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
     {
       "type":"font_picker",
       "id":"font_title",
@@ -213,7 +248,13 @@
         "type":"font_picker",
       "id":"font_richtext",
       "label":"Choose Description Font",
-      "default":"serif"
+       "default":"serif"
+    },
+       {
+        "type":"font_picker",
+      "id":"font_richtextsubheading",
+      "label":"Choose Description Font",
+       "default":"serif"
     },
     {
       "type": "range",
@@ -226,12 +267,7 @@
       "default": 22
     },
    
-    {
-      "type": "color",
-      "id": "heading_color",
-      "label": "Heading Color",
-      "default": "#000000"
-    },
+  
     {
       "type": "range",
       "id": "text_font_size",
@@ -242,18 +278,8 @@
       "label": "Text Font Size",
       "default": 14
     },
-    {
-      "type": "color",
-      "id": "text_color",
-      "label": "Text Color",
-      "default": "#333333"
-    },
-    {
-      "type": "color",
-      "id": "background_color",
-      "label": "Background Color (Layout 2)",
-      "default": "#DCDDDD"
-    },
+   
+    
     {
       "type": "range",
       "id": "padding_top",
