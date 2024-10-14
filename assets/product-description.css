@@ -85,6 +85,7 @@
     letter-spacing: normal;
     grid-template-columns: 0.1fr 8fr;
     gap: 10px;
+    overflow-wrap: anywhere;
 }
 
 .product-description-in-semicircles {

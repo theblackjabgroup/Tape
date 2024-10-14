@@ -139,21 +139,13 @@
                 </div>
               {%- when 'price' -%}
                 <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
-                  {% if layout_desktop == "thumbnail" %}
-                    {%- render 'price2',
-                    product: product,
-                    use_variant: true,
-                    show_badges: false,
-                    price_class: 'price--large'
-                  -%}
-                  {% else %}
                   {%- render 'price',
                     product: product,
                     use_variant: true,
                     show_badges: true,
-                    price_class: 'price--large'
+                    price_class: 'price--large',
+                    main: true
                   -%}
-                  {% endif %}
                 </div>
                 {%- if product.quantity_price_breaks_configured? -%}
                   <div class="volume-pricing-note" id="Volume-Note-{{ section.id }}">
@@ -283,7 +275,7 @@
                   <label class="quantity__label form__label bb-quantity-label" for="Quantity-{{ section.id }}">
                     {{ 'products.product.quantity.label' | t }}
                     <span class="quantity__rules-cart{% if cart_qty == 0 %} hidden{% endif %}">
-                      {%- render 'loading-spinner' -%}
+                <!--      {%- render 'loading-spinner' -%}  -->
                       <span
                         >(
                         {{- 'products.product.quantity.in_cart_html' | t: quantity: cart_qty -}}
@@ -467,14 +459,16 @@
                         {%- if product.selected_or_first_available_variant.quantity_price_breaks.size >= 3 -%}
                           <show-more-button>
                             <button
-                              class="button-show-more link underlined-link"
-                              id="Show-More-{{ section.id }}"
-                              type="button"
-                            >
-                              <span class="label-show-more label-text"
-                                ><span aria-hidden="true">+ </span>{{ 'products.facets.show_more' | t }}
-                              </span>
-                            </button>
+                            class="button-show-more link underlined-link"
+                            id="Show-More-{{ section.id }}"
+                            type="button"
+                            aria-expanded="false"
+                            aria-controls="content-section-{{ section.id }}"
+                          >
+                            <span class="label-show-more label-text">
+                              <span aria-hidden="true">+ </span>{{ 'products.facets.show_more' | t }}
+                            </span>
+                          </button>
                           </show-more-button>
                         {%- endif -%}
                       {%- endif -%}
@@ -497,11 +491,6 @@
                     {{ block.settings.text | default: block.settings.page.title | escape }}
                   </button>
                 </modal-opener>
-              {%- when 'share' -%}
-                {% liquid
-                  assign share_url = product.selected_variant.url | default: product.url | prepend: request.origin
-                  render 'share-button', block: block, share_link: share_url
-                %}
 
               {%- when 'variant_picker' -%}
                 {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
@@ -2177,18 +2166,6 @@
         {
           "value": "thumbnail",
           "label": "t:sections.main-product.settings.gallery_layout.options__3.label"
-        },
-        {
-          "value": "stacked",
-          "label": "t:sections.main-product.settings.gallery_layout.options__1.label"
-        },
-        {
-          "value": "columns",
-          "label": "t:sections.main-product.settings.gallery_layout.options__2.label"
-        },
-        {
-          "value": "thumbnail_slider",
-          "label": "t:sections.main-product.settings.gallery_layout.options__4.label"
         }
       ],
       "default": "thumbnail",
