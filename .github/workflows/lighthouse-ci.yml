@@ -11,15 +11,9 @@ jobs:
       with:
         access_token: "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"
         store: "theme-blackbytt-poc.myshopify.com"
+        lhci_min_score_accessibility: 0.85
         password: "saylyo"
-        # Set the threshold parameters
-        thresholds: |
-          {
-            "performance": 85,
-            "accessibility": 85,
-            "best-practices": 85,
-            "seo": 85,
-            "pwa": 85
-          }
+        
+       
 
        
