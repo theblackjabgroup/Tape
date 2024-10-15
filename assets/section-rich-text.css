@@ -1,4 +1,3 @@
-{{ section.settings.font_title | font_face: font_display: 'swap' }}
 .layout1 {
   text-align: center;
   padding: 20px;
@@ -6,24 +5,9 @@
 
 .layout1 p{
    margin-bottom: 5px;
-  font-family:  {{ section.settings.font_richtextsubheading.family | default: "Inter" }}, {{ section.settings.font_richtextsubheading.fallback_families }};
-  font-weight: {{ section.settings.font_richtextsubheading.weight }};
-  font-style: {{ section.settings.font_richtextsubheading.style }};
 }
-
-.layout1 h2 {
-  font-family:  {{ section.settings.font_title.family | default: "Fira Sans" }}, {{ section.settings.font_title.fallback_families }};
-  font-weight: {{ section.settings.font_title.weight }};
-  font-style: {{ section.settings.font_title.style }};
-  font-size: {{ section.settings.heading_font_size }}px;
-}
-
 .layout1 .rich-text__text {
-  font-family: {{ section.settings.font_richtext.family }}, {{ section.settings.font_richtext.fallback_families }};
-   font-weight: {{ section.settings.font_richtext.weight }};
-  font-style: {{ section.settings.font_richtext.style }};
   margin: 0 auto;
- font-size: {{ section.settings.text_font_size }}px;
  max-width: 600px;
  line-height: 1.6;
 }
@@ -42,24 +26,11 @@
   margin: 0 12px;
 }
 .layout2 {
- background-color: {{ section.settings.background_color }};
   text-align: center;
 }
 
-
-.layout2 h2 {
-  font-family: {{ section.settings.font_title.family }}, {{ section.settings.font_title.fallback_families }};
-  font-weight: {{ section.settings.font_title.weight }};
-  font-style: {{ section.settings.font_title.style }};
-  font-size: {{ section.settings.heading_font_size }}px;
-}
-
 .layout2 .rich-text__text {
-  font-family: {{ section.settings.font_richtext.family }}, {{ section.settings.font_richtext.fallback_families }};
-  font-weight: {{ section.settings.font_richtext.weight }};
-  font-style: {{ section.settings.font_richtext.style }};
    margin: 0 auto;
-   font-size: {{ section.settings.text_font_size }}px;
    max-width: 600px;
    line-height: 1.6;
 }
@@ -105,16 +76,6 @@ background-color: #303030;
   .layout2 {
       text-align: center;
   }
-  .layout1 h2,
-  .layout2 h2 {
-    font-size: {{ section.settings.heading_font_size | times: 0.8 | round: 0 }}px;
-  }
-
-
-  .layout1 .rich-text__text,
-  .layout2 .rich-text__text {
-    font-size: {{ section.settings.text_font_size | times: 0.9 | round: 0 }}px;
-  }
  .dots-container {
   flex-direction: column; 
   justify-content: center;
@@ -149,4 +110,7 @@ background-color: #303030;
   height: 10px;
   margin: 12px; 
 }
+  
+
+
 }
