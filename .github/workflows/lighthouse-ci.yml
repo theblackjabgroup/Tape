@@ -11,6 +11,6 @@ jobs:
       with:
         access_token: "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"
         store: "theme-blackbytt-poc.myshopify.com"
-        Ihci_min_score_accessibility: 0.85
+        lhci_min_score_accessibility: 0.85
         password: "saylyo"
        
