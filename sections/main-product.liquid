@@ -108,12 +108,18 @@
               {%- when 'title' -%}
               {% if section.settings.enable_special_offer %}
                 <div>
-                {% for i in (0..2) %}
-                <div class="bb-triangle-offer tri-{{i}}"></div>
-                <div class="bb-triangle-offer tri-second-{{i}}"></div>
-                {% endfor  %}
                 <div class="bb-special-offer">
+                  <div>
+                  {% for i in (0..2) %}
+                    <div class="bb-triangle-offer tri-{{i}}"></div>
+                  {% endfor  %}
+                    </div>
                   <h2 class="bb-special-offer-text">Special Offer</h2>
+                  <div>
+                    {% for i in (0..2) %}
+                  <div class="bb-triangle-offer tri-second-{{i}}"></div>
+                  {% endfor  %}
+                  </div>
                 </div>
                 </div>
               {% endif %}
@@ -133,21 +139,13 @@
                 </div>
               {%- when 'price' -%}
                 <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
-                  {% if layout_desktop == "thumbnail" %}
-                    {%- render 'price2',
-                    product: product,
-                    use_variant: true,
-                    show_badges: false,
-                    price_class: 'price--large'
-                  -%}
-                  {% else %}
                   {%- render 'price',
                     product: product,
                     use_variant: true,
                     show_badges: true,
-                    price_class: 'price--large'
+                    price_class: 'price--large',
+                    main: true
                   -%}
-                  {% endif %}
                 </div>
                 {%- if product.quantity_price_breaks_configured? -%}
                   <div class="volume-pricing-note" id="Volume-Note-{{ section.id }}">
@@ -265,7 +263,7 @@
               {%- when 'quantity_selector' -%}
                 <div
                   id="Quantity-Form-{{ section.id }}"
-                  class="product-form__input product-form__quantity{% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_vertical_offset < 0 %} product-form__quantity-top{% endif %}"
+                  class="product-form__input product-form__quantity bb-quantity {% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_vertical_offset < 0 %} product-form__quantity-top{% endif %}"
                   {{ block.shopify_attributes }}
                 >
                   {% comment %} TODO: enable theme-check once `item_count_for_variant` is accepted as valid filter {% endcomment %}
@@ -274,10 +272,10 @@
                     | item_count_for_variant: product.selected_or_first_available_variant.id
                   -%}
                   {% # theme-check-enable %}
-                  <label class="quantity__label form__label" for="Quantity-{{ section.id }}">
+                  <label class="quantity__label form__label bb-quantity-label" for="Quantity-{{ section.id }}">
                     {{ 'products.product.quantity.label' | t }}
                     <span class="quantity__rules-cart{% if cart_qty == 0 %} hidden{% endif %}">
-                      {%- render 'loading-spinner' -%}
+                <!--      {%- render 'loading-spinner' -%}  -->
                       <span
                         >(
                         {{- 'products.product.quantity.in_cart_html' | t: quantity: cart_qty -}}
@@ -286,7 +284,7 @@
                     </span>
                   </label>
                   <div class="price-per-item__container">
-                    <quantity-input class="quantity" data-url="{{ product.url }}" data-section="{{ section.id }}">
+                    <quantity-input class="quantity bb-quantity2" data-url="{{ product.url }}" data-section="{{ section.id }}">
                       <button class="quantity__button" name="minus" type="button">
                         <span class="visually-hidden">
                           {{- 'products.product.quantity.decrease' | t: product: product.title | escape -}}
@@ -461,14 +459,16 @@
                         {%- if product.selected_or_first_available_variant.quantity_price_breaks.size >= 3 -%}
                           <show-more-button>
                             <button
-                              class="button-show-more link underlined-link"
-                              id="Show-More-{{ section.id }}"
-                              type="button"
-                            >
-                              <span class="label-show-more label-text"
-                                ><span aria-hidden="true">+ </span>{{ 'products.facets.show_more' | t }}
-                              </span>
-                            </button>
+                            class="button-show-more link underlined-link"
+                            id="Show-More-{{ section.id }}"
+                            type="button"
+                            aria-expanded="false"
+                            aria-controls="content-section-{{ section.id }}"
+                          >
+                            <span class="label-show-more label-text">
+                              <span aria-hidden="true">+ </span>{{ 'products.facets.show_more' | t }}
+                            </span>
+                          </button>
                           </show-more-button>
                         {%- endif -%}
                       {%- endif -%}
@@ -491,11 +491,6 @@
                     {{ block.settings.text | default: block.settings.page.title | escape }}
                   </button>
                 </modal-opener>
-              {%- when 'share' -%}
-                {% liquid
-                  assign share_url = product.selected_variant.url | default: product.url | prepend: request.origin
-                  render 'share-button', block: block, share_link: share_url
-                %}
 
               {%- when 'variant_picker' -%}
                 {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
@@ -961,27 +956,6 @@
       "type": "description",
       "name": "t:sections.main-product.blocks.description.name",
       "limit": 1
-    },
-    {
-      "type": "share",
-      "name": "t:sections.main-product.blocks.share.name",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "text",
-          "id": "share_label",
-          "label": "t:sections.main-product.blocks.share.settings.text.label",
-          "default": "t:sections.main-product.blocks.share.settings.text.default"
-        },
-        {
-          "type": "paragraph",
-          "content": "t:sections.main-product.blocks.share.settings.featured_image_info.content"
-        },
-        {
-          "type": "paragraph",
-          "content": "t:sections.main-product.blocks.share.settings.title_info.content"
-        }
-      ]
     },
     {
       "type": "custom_liquid",
@@ -2135,7 +2109,7 @@
       "type": "color_scheme",
       "id": "color_scheme",
       "label": "t:sections.all.colors.label",
-      "default": "scheme-1"
+      "default": "scheme-6"
     },
     {
       "type": "header",
@@ -2192,18 +2166,6 @@
         {
           "value": "thumbnail",
           "label": "t:sections.main-product.settings.gallery_layout.options__3.label"
-        },
-        {
-          "value": "stacked",
-          "label": "t:sections.main-product.settings.gallery_layout.options__1.label"
-        },
-        {
-          "value": "columns",
-          "label": "t:sections.main-product.settings.gallery_layout.options__2.label"
-        },
-        {
-          "value": "thumbnail_slider",
-          "label": "t:sections.main-product.settings.gallery_layout.options__4.label"
         }
       ],
       "default": "thumbnail",

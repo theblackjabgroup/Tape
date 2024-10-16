@@ -121,6 +121,10 @@
           "label": "Background gradient",
           "info": "Background gradient replaces background where possible."
         },
+        "background_product_card": {
+          "label": "Background Product Card",
+          "info": "Background product card"          
+        },
         "text": {
           "label": "Text"
         },
@@ -131,10 +135,37 @@
           "label": "Solid button label"
         },
         "secondary_button_label": {
-          "label": "Outline button"
+          "label": "Secondary Button button"
         },
         "shadow": {
           "label": "Shadow"
+        },
+        "secondary_product_button_color": {
+          "label": "Secondary Button Color"
+        },
+        "product_price_card": {
+          "label": "Product Price Card"
+        },
+        "product_price_font": {
+          "label": "Product Price"
+        },
+        "product_price_secondary_font": {
+          "label": "Secondary Product Price"
+        },
+        "quatity_selector_background": {
+          "label": "Quantity Selector Background"
+        },
+        "utilities": {
+          "label": "Utilities Color"
+        },
+        "product_special_offer": {
+          "label": "Product Special Offer Color"
+        },
+        "product_collapsible_rows_section": {
+          "label": "Product Collapsible Rows Section Color"
+        },
+        "product_collapsible_rows_section_secondary": {
+          "label": "Product Collapsible Rows Section Secondary Color"
         }
       }
     },

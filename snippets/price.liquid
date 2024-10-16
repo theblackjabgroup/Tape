@@ -4,6 +4,7 @@
   Accepts:
   - product: {Object} Product Liquid object (optional)
   - placeholder: {Boolean} Renders a placeholder price (optional)
+  - main : {Boolean} Checks wether it is caleed from main-product.liquid or not (optional)
   - use_variant: {Boolean} Renders selected or first variant price instead of overall product pricing (optional)
   - show_badges: {Boolean} Renders 'Sale' and 'Sold Out' tags if the product matches the condition (optional)
   - price_class: {String} Adds a price class to the price element (optional)
@@ -91,14 +92,14 @@
         {%- endif -%}
       </div>
       <div class="price__sale">
-        <span class="price-item price-item--sale price-item--last">
+      <span class="price-item price-item--sale price-item--last {% if main %} bb-price {% endif %}">
           <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.sale_price' | t }}</span>
             {{ money_price }}
           </span>
         {%- unless product.price_varies == false and product.compare_at_price_varies %}
           <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.regular_price' | t }}</span>
           <span>
-            <s class="price-item price-item--regular">
+            <s class="price-item price-item--regular {% if main %} bb-price-item {% endif %}">
               {% if settings.currency_code_enabled %}
                 {{ compare_at_price | money_with_currency }}
               {% else %}
@@ -124,6 +125,7 @@
         </span>
       </small>
     </div>
+    <!--
     {%- if show_badges -%}
       <span class="badge price__badge-sale color-{{ settings.sale_badge_color_scheme }}">
         {{ 'products.product.on_sale' | t }}
@@ -133,5 +135,6 @@
         {{ 'products.product.sold_out' | t }}
       </span>
     {%- endif -%}
+    -->
   </div>
 {% endunless %}

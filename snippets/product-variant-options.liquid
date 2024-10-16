@@ -58,31 +58,14 @@
     </span>
   {%- endcapture -%}
 
-  {%- if picker_type == 'swatch' -%}
-    {%- capture help_text -%}
-      <span class="visually-hidden">{{ value | escape }}</span>
-      {{ label_unavailable }}
-    {%- endcapture -%}
-    {%
-      render 'swatch-input',
-      id: input_id,
-      name: input_name,
-      value: value | escape,
-      swatch: value.swatch,
-      product_form_id: product_form_id,
-      checked: value.selected,
-      visually_disabled: option_disabled,
-      shape: block.settings.swatch_shape,
-      help_text: help_text,
-      additional_props: input_dataset
-    %}
-  {%- elsif picker_type == 'button' -%}
+  {%- if picker_type == 'button' -%}
     <input
       type="radio"
       id="{{ input_id }}"
       name="{{ input_name | escape }}"
       value="{{ value | escape }}"
       form="{{ product_form_id }}"
+      aria-label="{% if option.name == 'Color' %} {{ 'Color: ' }}{{ value }} {% else %} {{ value }} {% endif %}"
       {% if value.selected %}
         checked
       {% endif %}
@@ -92,33 +75,12 @@
       {{ input_dataset }}
     >
     {% if option.name == "Color" %}
-    <label for="{{ input_id }}" class="bb-color-box" tabindex="0" style=" background-color: {{ value -}}; "></label>
+    <label for="{{ input_id }}" class="bb-color-box" tabindex="0" style=" background-color: {{ value -}}; " role="radio" aria-checked="{{ value.selected | default: false }}" aria-label="Select color: {{ value }}"></label>
       {%- else -%}
-    <label for="{{ input_id }}">
-      {{ value }}
+    <label for="{{ input_id }}" aria-label="Select option: {{ value }}">
+      {{ value }}  
       {{ label_unavailable }}
     </label>
-  {% endif %}
-  {%- elsif picker_type == 'dropdown' or picker_type == 'swatch_dropdown' -%}
-    <option
-      id="{{ input_id }}"
-      value="{{ value | escape }}"
-      {% if value.selected %}
-        selected="selected"
-      {% endif %}
-      {% if swatch_value and picker_type == 'swatch_dropdown' %}
-        data-option-swatch-value="{{ swatch_value }}"
-        {% if swatch_focal_point %}
-          data-option-swatch-focal-point="{{ swatch_focal_point }}"
-        {% endif %}
-      {% endif %}
-      {{ input_dataset }}
-    >
-      {% if option_disabled -%}
-        {{- 'products.product.value_unavailable' | t: option_value: value -}}
-      {%- else -%}
-        {{- value -}}
-      {%- endif %}
-    </option>
+   {% endif %} 
   {%- endif -%}
 {%- endfor -%}

@@ -5,9 +5,9 @@
     width: 90% !important;
     transform: translate(-50%, -50%);
     z-index: 4;
-}
-
-.bb-product-second {
+  }
+  
+  .bb-product-second {
     top: 50% !important;
     left: 50% !important;
     height: 90% !important;
@@ -15,9 +15,9 @@
     transform: translate(-50%, -50%);
     z-index: 3;
     filter: contrast(0) sepia(5%) brightness(1.60);
-}
-
-.bb-product-third {
+  }
+  
+  .bb-product-third {
     top: 50% !important;
     left: 50% !important;
     height: 90% !important;
@@ -25,9 +25,9 @@
     transform: translate(-50%, -50%);
     z-index: 2;
     filter: contrast(0) sepia(5%) brightness(1.40);
-}
-
-.bb-product-fourth {
+  }
+  
+  .bb-product-fourth {
     top: 50% !important;
     left: 50% !important;
     height: 90% !important;
@@ -35,19 +35,23 @@
     transform: translate(-50%, -50%);
     z-index: 1;
     filter: contrast(0) sepia(5%) brightness(1.20);
-}
-
-.js .bb_product__media {
-    background-color: #EEEEEE;
+  }
+  
+  .js .bb_product__media {
+    background-color: var(--background_product_card);
     overflow: visible !important;
-}
-
-.gallery-thumbnail{
-    background-color: #EEEEEE;
+  }
+  
+  .bb-button-secondary {
+    background-color: var(--secondary_product_button_color);
+    border-radius: 7px;
+  }
+  .gallery-thumbnail{
+    background-color: var(--background_product_card);
     padding-bottom: 10px;
-}
-
-.ticket-line {
+  }
+  
+  .ticket-line {
     margin-top: 60px;
     position: relative;
     overflow: hidden;
@@ -56,41 +60,41 @@
     justify-content: space-between;
     transform: translateY(-150%);
   }
-
+  
   .ticket-line-first {
     height: 8px;
     display: block !important;
     width: 8px;
     border-radius: 50%;
-    background-color: white;
-}
-
-.bb-thumbnail-width {
+    background-color: rgb(var(--color-background));
+  }
+  
+  .bb-thumbnail-width {
     width: 90%;
     height: 90%;
-}
-
-.bb-upper-thumbnail {
-padding-left: 5rem;
-}
-
-.bb-global-media-settings {
+  }
+  
+  .bb-upper-thumbnail {
+  padding-left: 5rem;
+  }
+  
+  .bb-global-media-settings {
     border: none !important;
-}
-
-.index-product-0 {
+  }
+  
+  .index-product-0 {
     height: 16px;
     width: 16px;
     transform: translateX(-50%);
-}
-
-.index-product-20 {
+  }
+  
+  .index-product-20 {
     height: 16px;
     width: 16px;
     transform: translateX(50%);
-}
-
-.bb-color-box {
+  }
+  
+  .bb-color-box {
     width: 20px;
     margin: 0px !important;
     padding: 0px !important;
@@ -99,24 +103,29 @@ padding-left: 5rem;
     border: none !important;
     outline: none !important;
     margin-right: 2.5rem !important;
-}
-
-/*
-.bb-color-box:focus {
+  }
+  
+  /*
+  .bb-color-box:focus {
     border: 1px solid black !important;
-}
-*/
-.bb-color-variant input[type='radio']:checked + label {
+  }
+  */
+  .bb-color-variant input[type='radio']:checked + label {
     border: 1px solid black !important;
     transform: scale(0.9);
   }
-
+  
   .bb-price {
-    background-color: #D8D8D8;
+    background-color: var(--product_price_card);
     padding: 0.5rem 3rem;
     border-radius: 3px;
+    color: var(--product_price_font);
   }
-
+  
+   .bb-price-item {
+    color: var(--product_price_secondary_font) !important;
+   }
+  
   .bb-ticket-price {
     height: 8px;
     width: 8px;
@@ -126,90 +135,95 @@ padding-left: 5rem;
     position: absolute;
     margin: 0 auto;
   }
-
+  
+  .bb-quantity2 {
+    background-color: var(--quatity_selector_background) !important;
+  }
+  
   .bb-ticket-left {
     transform: translate(-400%, 120%);
   }
-
+  
   .bb-ticket-right {
     transform: translate(1365%, 120%);
   }
-
+  
   .bb-special-offer{
-    display: block !important;
-    background-color: #929292;
+    display: grid !important;
+    background-color: var(--product_special_offer);
     color: #EEEEEE;
-    width: 50%;
+    width: 65%;
+    grid-template-columns: 1fr 13fr 1fr;
   }
-
+  
   .bb-triangle-offer {
     border-left: 7px solid transparent;
     border-right: 7px solid transparent;
-    position: absolute;
-    border-bottom: 12px solid white;
+    position: relative;
+    border-bottom: 12px solid rgb(var(--color-background));
     height: 0;
     width: 0;
     display: block !important;
   }
-
- .tri-0{
-    transform: rotate(90deg) translate(6%, 50%);
- }
- .tri-1{
-    transform: rotate(90deg) translate(67%, 50%);
-
- }
- .tri-2{
-    transform: rotate(90deg) translate(130%, 50%);
- }
-
- .tri-second-0{
-    transform: rotate(270deg) translate(-3%, 1370%);
- }
- .tri-second-1{
-    transform: rotate(270deg) translate(-65%, 1370%);
-
- }
- .tri-second-2{
-    transform: rotate(270deg) translate(-130%, 1370%);
- }
-  .bb-special-offer-text{
-    color: white;
-    margin: 0px 0rem 0px 2rem;
+  
+  .tri-0{
+    transform: rotate(90deg) translate(6%,30%);
   }
-
+  .tri-1{
+    transform: rotate(90deg) translate(0%,30%);
+  
+  }
+  .tri-2{
+    transform: rotate(90deg) translate(-6%,30%);
+  }
+  
+  .tri-second-0{
+    transform: rotate(270deg) translate(-6%, 30%)
+  }
+  .tri-second-1{
+    transform: rotate(270deg) translate(0%, 30%);
+  
+  }
+  .tri-second-2{
+    transform: rotate(270deg) translate(6%,30%);
+  }
+  .bb-special-offer-text{
+    color: var(--utilities);
+    margin: 0 auto;
+  }
+  
   .bb-product[aria-click="1"] {
     transform: rotate(-7deg) translate(-44%,-56%);
     border-radius: 2%;
   }
-
-
+  
+  
   .bb-product[aria-click="2"] {
     transform: rotate(7deg) translate(-52%,-36%);
     border-radius: 2%;
   }
-
+  
   .bb-product-second[aria-click="2"] {
     transform: rotate(-7deg) translate(-44%,-56%);
     border-radius: 2%;
   }
-
-
+  
+  
   .bb-product[aria-click="3"] {
     transform: rotate(-0.5deg) translate(-48%,-48%);
     border-radius: 2%;
   }
-
+  
   .bb-product-second[aria-click="3"] {
     transform: rotate(7deg) translate(-52%,-36%);
     border-radius: 2%;
   }
-
+  
   .bb-product-third[aria-click="3"]{
     transform: rotate(-7deg) translate(-44%,-56%);
     border-radius: 2%;
   }
-
+  
   .sold-out-tag {
     background-color: #E12B56;
     color: white;
@@ -224,14 +238,14 @@ padding-left: 5rem;
   .sold-out-tag-text {
     font-size: 14px;
   }
-
+  
   .sold-out-tag::before,
   .sold-out-tag::after {
     content: '';
     position: absolute;
     width: 16px;
     height: 16px;
-    background-color: white;
+    background-color: rgb(var(--color-background));
     border-radius: 50%;
   }
   
@@ -244,14 +258,14 @@ padding-left: 5rem;
     bottom: -5px;
     right: -10px;
   }
-
+  
   .sold-out-tag-text::before,
   .sold-out-tag-text::after {
     content: '';
     position: absolute;
     width: 16px;
     height: 16px;
-    background-color: white;
+    background-color: rgb(var(--color-background));
     border-radius: 50%;
   }
   
@@ -264,14 +278,14 @@ padding-left: 5rem;
     bottom: -5px;
     left: -10px;
   }
-
+  
   .bb-price::before,
   .bb-price::after {
     content: '';
     position: absolute;
     width: 8px;
     height: 8px;
-    background-color: white;
+    background-color: rgb(var(--color-background));
     border-radius: 50%;
   }
   
@@ -282,11 +296,11 @@ padding-left: 5rem;
   .bb-price:after {
     transform: translate(2.5rem, 1rem);
   }
-
+  
   .bb_background {
-    background-color: #EEEEEE;
+    background-color: var(--background_product_card);
   }
-
+  
   /*
   @media screen and (max-width: 980px){
     .bb-pmg .slider-button{
@@ -294,6 +308,25 @@ padding-left: 5rem;
     }
   }
   */
+  
+  .bb-quantity {
+    display: flex;
+    justify-content: space-between;
+  }
+  .bb-quantity-label, .bb-product-variant-label
+  {
+  font-family: 'Fira Sans';
+    font-size: 20px;
+    color: var(--utilities);
+  }
+   .shopify-payment-button {
+    font-family: 'Inter';
+    font-weight: 500;
+   }
+  
+   .shopify-payment-button__button{
+    border-radius: 7px !important;
+   }
   @media screen and (max-width: 749px) {
     .bb-test {
         position: relative;
@@ -308,15 +341,13 @@ padding-left: 5rem;
         margin: 0;
         width: 100%;
     }
-}
-.bb-test {
-
-}
+  }
+  
   @media screen and (max-width: 749px) {
     .bb-pmg{
         top: -10px;
     }
-
+  
     .ticket-line {
         margin-top: 30px;
     }
@@ -325,3 +356,4 @@ padding-left: 5rem;
         justify-content: space-evenly;
     }
   }
+  

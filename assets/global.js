@@ -986,6 +986,7 @@ class SlideshowComponent extends SliderComponent {
 
   setSlideVisibility(event) {
     this.sliderItemsToShow.forEach((item, index) => {
+
       const linkElements = item.querySelectorAll('a');
       if (index === this.currentPage - 1) {
         if (linkElements.length)
@@ -993,6 +994,20 @@ class SlideshowComponent extends SliderComponent {
             button.removeAttribute('tabindex');
           });
         item.setAttribute('aria-hidden', 'false');
+        if(item.getAttribute('aria-roledescription') == "Announcement")
+        {
+          const dests = document.getElementsByClassName("announcement-icon-wrapper");
+          Array.from(dests).forEach(dest => {
+             if(index != dest.getAttribute("aria-count"))
+             {
+               dest.setAttribute('aria-hidden', 'true')
+             }
+             else
+             {
+               dest.setAttribute('aria-hidden', 'false')
+             }
+           });
+        }
         item.removeAttribute('tabindex');
       } else {
         if (linkElements.length)
@@ -1000,6 +1015,7 @@ class SlideshowComponent extends SliderComponent {
             button.setAttribute('tabindex', '-1');
           });
         item.setAttribute('aria-hidden', 'true');
+
         item.setAttribute('tabindex', '-1');
       }
     });

@@ -191,6 +191,8 @@ product-info {
 
 .product-form__submit {
   margin-bottom: 1rem;
+  font-family: 'Inter';
+  font-weight: 500;
 }
 
 .product-form__submit[aria-disabled='true'] + .shopify-payment-button .shopify-payment-button__button[disabled],
@@ -252,6 +254,8 @@ a.product__text {
 
 .product__title > * {
   margin: 0;
+  font-family: 'Fira Sans';
+  font-weight: 700;
 }
 
 .product__title > a {
@@ -352,7 +356,8 @@ a.product__text {
 }
 
 .product-form__quantity .form__label {
-  margin-bottom: 0.6rem;
+  margin: auto 0;
+ /* margin-bottom: 0.6rem; */
 }
 
 .price-per-item__label.form__label {

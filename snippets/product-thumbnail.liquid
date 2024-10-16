@@ -94,6 +94,7 @@
           class: image_class,
           loading: lazy,
           sizes: sizes,
+          alt: media.preview_image.alt,
           widths: '246, 493, 600, 713, 823, 990, 1100, 1206, 1346, 1426, 1646, 1946'
       }}
       {% if media_count > 1 and desktop_layout == 'thumbnail'%}
@@ -104,6 +105,7 @@
           class: image_class_second,
           loading: lazy,
           sizes: sizes,
+          alt: media.preview_image.alt,
           widths: '246, 493, 600, 713, 823, 990, 1100, 1206, 1346, 1426, 1646, 1946'
       }}
       {% if media_count > 2 %}
@@ -114,6 +116,7 @@
           class: image_class_third,
           loading: lazy,
           sizes: sizes,
+          alt: media.preview_image.alt,
           widths: '246, 493, 600, 713, 823, 990, 1100, 1206, 1346, 1426, 1646, 1946'
       }}
       {% if media_count > 3 %}
@@ -124,6 +127,7 @@
           class: image_class_fourth,
           loading: lazy,
           sizes: sizes,
+          alt: media.preview_image.alt,
           widths: '246, 493, 600, 713, 823, 990, 1100, 1206, 1346, 1426, 1646, 1946'
       }}
       {% endif  %}
