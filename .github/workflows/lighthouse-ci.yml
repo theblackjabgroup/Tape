@@ -13,4 +13,7 @@ jobs:
         store: "theme-blackbytt-poc.myshopify.com"
         lhci_min_score_accessibility: 0.85
         password: "saylyo"
+        
+       
+
        
