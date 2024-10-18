@@ -20,11 +20,6 @@
 
 <{% if section.settings.enable_sticky_bar %}sticky-bar data-sticky-type = "{{ section.settings.enable_sticky_bar }}"{% else %}div{% endif %} >
   <div class="utility-bar vertical-bar color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator and section.blocks.size > 0 %} utility-bar--bottom-border{% elsif section.settings.show_line_separator and section.settings.show_social and social_icons%} utility-bar--bottom-border-social-only{% endif %}{% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header-localization{% endif %}" {{ block.shopify_attributes }}>
-    <div  class="vertical-bar-second-top">
-    {% for i in (0..7) %}
-      <div class="vertical-bar-first index-{{i}}"></div>
-    {% endfor %}
-    </div>
     <div class="page-width announcement-width bb-max-width utility-bar__grid{% if announcement_bar and language_country_selector or section.settings.show_social and social_icons %} utility-bar__grid--3-col{% elsif language_country_selector or section.settings.show_social and social_icons %} utility-bar__grid--2-col{% endif %}">
       {%- if section.settings.show_social and social_icons -%}
         {%- render 'social-icons' -%}
@@ -45,8 +40,12 @@
           {% endfor %}
         </div>
       </div>
-      <div class="vertical-line-first"></div>
-      {%- if section.blocks.size == 1 -%}
+      <div  class="vertical-bar-second-top">
+        {% for i in (0..10) %}
+          <div class="vertical-bar-first index-{{i}}"></div>
+        {% endfor %}
+        </div>      
+        {%- if section.blocks.size == 1 -%}
         <div
           class="announcement-bar{% if section.settings.show_social %} announcement-bar--one-announcement{% endif %}"
           role="region"
@@ -54,7 +53,7 @@
           {{ block.shopify_attributes }}>
           {%- if section.blocks.first.settings.text != blank -%}
             <p class="announcement-bar__message h4">
-              <span>{{ section.blocks.first.settings.text | escape }}</span>
+              <span>{{ section.blocks.first.settings.text }}</span>
             </p>
             {%- if section.blocks.first.settings.button_text != blank -%}
               <div class="custom-button-upper">
@@ -65,7 +64,7 @@
                       class=" announcement-bar__link link link--text focus-inset animate-arrow"
                       style="color: white;">
                   {%- endif -%}
-                  {{ section.blocks.first.settings.button_text | escape }}
+                  {{ section.blocks.first.settings.button_text }}
                   {%- if section.blocks.first.settings.link != blank -%}
                     </a>
                   {%- endif -%}
@@ -82,6 +81,7 @@
           aria-roledescription="{{ 'sections.announcements.carousel' | t }}"
           aria-label="{{ 'sections.announcements.announcement_bar' | t }}">
           <div class="announcement-bar-slider slider-buttons">
+            <!--
             <button
               type="button"
               class="slider-button slider-button--prev"
@@ -90,7 +90,9 @@
               aria-controls="Slider-{{ section.id }}">
               <span class="svg-wrapper">
                 {{- 'icon-caret.svg' | inline_asset_content -}}
-              </span>            </button>
+              </span>            
+            </button>
+              -->
             <div
               class="grid grid--1-col slider slider--everywhere"
               id="Slider-{{ section.id }}"
@@ -112,10 +114,33 @@
                     role="region"
                     aria-label="{{ 'sections.header.announcement' | t }}"
                     {{ block.shopify_attributes }}>
+                    <div class="announcement-bar__arrow">
+                    <button
+                    type="button"
+                    class="slider-button slider-button--prev"
+                    name="previous"
+                    aria-label="{{ 'sections.announcements.previous_announcement' | t }}"
+                    aria-controls="Slider-{{ section.id }}">
+                    <span class="svg-wrapper">
+                      {{- 'icon-caret.svg' | inline_asset_content -}}
+                    </span>           
+                     </button>  
                     {%- if block.settings.text != blank -%}
                       <p class="announcement-bar__message h4">
-                        <span>{{ block.settings.text | escape }}</span>
+                        <span>{{ block.settings.text }}</span>
                       </p>
+                    {%- endif -%}
+                    <button
+                    type="button"
+                    class="slider-button slider-button--next"
+                    name="next"
+                    aria-label="{{ 'sections.announcements.next_announcement' | t }}"
+                    aria-controls="Slider-{{ section.id }}">
+                    <span class="svg-wrapper">
+                      {{- 'icon-caret.svg' | inline_asset_content -}}
+                    </span>            
+                    </button>
+                    </div>
                       {%- if block.settings.button_text != blank -%}
                         <div class="custom-button-upper">
                           <div class="custom-button">
@@ -125,18 +150,19 @@
                                 class=" announcement-bar__link link link--text focus-inset animate-arrow"
                                 >
                             {%- endif -%}
-                            {{ block.settings.button_text | escape }}
+                            {{ block.settings.button_text }}
                             {%- if block.settings.link != blank -%}
                               </a>
                             {%- endif -%}
                           </div>
                         </div>
                       {%- endif -%}
-                    {%- endif -%}
                   </div>
                 </div>
               {%- endfor -%}
+
             </div>
+            <!--
             <button
               type="button"
               class="slider-button slider-button--next"
@@ -145,7 +171,7 @@
               aria-controls="Slider-{{ section.id }}">
               <span class="svg-wrapper">
                 {{- 'icon-caret.svg' | inline_asset_content -}}
-              </span>            </button>
+              </span>            </button>  -->
           </div>
         </slideshow-component>
         {%- if request.design_mode -%}
@@ -158,8 +184,12 @@
           </style>
         {%- endif -%}
       {%- endif -%}
-      <div class="vertical-line-second"></div>
-      <div class="localization-wrapper bb-wrapper">
+      <div class="vertical-bar-second-top">
+        {% for i in (0..10) %}
+          <div class="vertical-bar-second index-{{i}}"></div>
+        {% endfor %}
+        </div>  
+              <div class="localization-wrapper bb-wrapper">
         {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
           <localization-form class="small-hide medium-hide">
             {%- form 'localization'
@@ -189,11 +219,7 @@
         {%- endif -%}
       </div>
     </div>
-    <div class="vertical-bar-second-top">
-      {% for i in (0..7) %}
-        <div class="vertical-bar-second index-{{i}}"></div>
-      {% endfor %}
-      </div>
+
     <div
       id="bb-test"
       style="display: none;"
@@ -299,13 +325,13 @@
             "label": "t:sections.announcement-bar.blocks.announcement.settings.image.label"
           },
           {
-            "type": "text",
+            "type": "inline_richtext",
             "id": "text",
             "default": "t:sections.announcement-bar.blocks.announcement.settings.text.default",
             "label": "t:sections.announcement-bar.blocks.announcement.settings.text.label"
           },
           {
-            "type": "text",
+            "type": "inline_richtext",
             "id": "button_text",
             "default": "t:sections.announcement-bar.blocks.announcement.settings.button_text.default",
             "label": "t:sections.announcement-bar.blocks.announcement.settings.button_text.label"

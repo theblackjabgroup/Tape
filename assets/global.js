@@ -724,18 +724,22 @@ class SliderComponent extends HTMLElement {
     this.enableSliderLooping = false;
     this.currentPageElement = this.querySelector('.slider-counter--current');
     this.pageTotalElement = this.querySelector('.slider-counter--total');
-    this.prevButton = this.querySelector('button[name="previous"]');
-    this.nextButton = this.querySelector('button[name="next"]');
-
-    if (!this.slider || !this.nextButton) return;
+    this.prevButtons = this.querySelectorAll('button[name="previous"]');
+    this.nextButtons = this.querySelectorAll('button[name="next"]');
+    console.log("prevButtons ", this.prevButtons)
+    if (!this.slider || !this.nextButtons.length === 0) return;
 
     this.initPages();
     const resizeObserver = new ResizeObserver((entries) => this.initPages());
     resizeObserver.observe(this.slider);
 
     this.slider.addEventListener('scroll', this.update.bind(this));
-    this.prevButton.addEventListener('click', this.onButtonClick.bind(this));
-    this.nextButton.addEventListener('click', this.onButtonClick.bind(this));
+    this.prevButtons.forEach(button => {
+      button.addEventListener('click', this.onButtonClick.bind(this));
+    });
+    this.nextButtons.forEach(button => {
+      button.addEventListener('click', this.onButtonClick.bind(this));
+    });
   }
 
   initPages() {
@@ -757,7 +761,7 @@ class SliderComponent extends HTMLElement {
   update() {
     // Temporarily prevents unneeded updates resulting from variant changes
     // This should be refactored as part of https://github.com/Shopify/dawn/issues/2057
-    if (!this.slider || !this.nextButton) return;
+    if (!this.slider || !this.nextButtons.length === 0) return;
 
     const previousPage = this.currentPage;
     this.currentPage = Math.round(this.slider.scrollLeft / this.sliderItemOffset) + 1;
@@ -781,15 +785,23 @@ class SliderComponent extends HTMLElement {
     if (this.enableSliderLooping) return;
 
     if (this.isSlideVisible(this.sliderItemsToShow[0]) && this.slider.scrollLeft === 0) {
-      this.prevButton.setAttribute('disabled', 'disabled');
+      this.prevButtons.forEach(button => {
+        button.setAttribute('disabled', 'disabled');
+      });
     } else {
-      this.prevButton.removeAttribute('disabled');
+      this.prevButtons.forEach(button => {
+        button.removeAttribute('disabled');
+      });
     }
 
     if (this.isSlideVisible(this.sliderItemsToShow[this.sliderItemsToShow.length - 1])) {
-      this.nextButton.setAttribute('disabled', 'disabled');
+      this.nextButtons.forEach(button => {
+        button.setAttribute('disabled', 'disabled');
+      });
     } else {
-      this.nextButton.removeAttribute('disabled');
+      this.nextButtons.forEach(button => {
+        button.removeAttribute('disabled');
+      });
     }
   }
 
@@ -845,7 +857,16 @@ class SlideshowComponent extends SliderComponent {
         if (this.slider.getAttribute('data-autoplay') === 'true') this.setAutoPlay();
       });
 
-      [this.prevButton, this.nextButton].forEach((button) => {
+      this.prevButtons.forEach((button) => {
+        button.addEventListener(
+          'click',
+          () => {
+            this.announcementBarArrowButtonWasClicked = true;
+          },
+          { once: true }
+        );
+      });
+      this.nextButtons.forEach((button) => {
         button.addEventListener(
           'click',
           () => {
@@ -912,7 +933,9 @@ class SlideshowComponent extends SliderComponent {
   update() {
     super.update();
     this.sliderControlButtons = this.querySelectorAll('.slider-counter__link');
-    this.prevButton.removeAttribute('disabled');
+    this.prevButtons.forEach(button => {
+      button.removeAttribute('disabled');
+    });
 
     if (!this.sliderControlButtons.length) return;
 

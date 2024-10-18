@@ -2109,7 +2109,7 @@ input[type='checkbox'] {
 
 .utility-bar__grid {
   display: grid;
-  grid-template-columns: 1fr 0.01fr 3fr 0.01fr 1fr;
+  grid-template-columns: 1fr 0.05fr 3fr 0.05fr 1fr;
   grid-template-areas: 'announcement-icons vertical-line-first announcements vertical-line-second';
 }
 
@@ -2172,13 +2172,11 @@ input[type='checkbox'] {
     width: 6px;
     color: black;
     border-radius: 50%;
-    left: 0;
     background-color: rgb(var(--color-foreground));
-    transform: translateX(-50%);
 }
 
 .vertical-bar-second-top {
-  top: 3px;
+  padding: 1rem;
   position: relative;
   overflow: hidden;
 }
@@ -2189,25 +2187,23 @@ input[type='checkbox'] {
   width: 6px;
   color: black;
   border-radius: 50%;
-  right: 0;
   background-color: rgb(var(--color-foreground));
-  transform: translateX(50%);
 }
 
 .index-0 {
-  top: 0px;
+  top: 1px;
 }
 
 .index-1 {
-  top: 10px;
+  top: 11px;
 }
 
 .index-2 {
-  top: 20px;
+  top: 21px;
 }
 
 .index-3 {
-  top: 30px;
+  top: 31px;
 }
 
 .index-4 {
@@ -2215,33 +2211,34 @@ input[type='checkbox'] {
 }
 
 .index-5 {
-  top: 50px;
+  top: 51px;
 }
 
 .index-6 {
-  top: 60px;
+  top: 61px;
 }
 
 .index-7 {
-  top: 70px;
+  top: 71px;
 }
 
-.vertical-line-first {
-    border-left: 2px dotted rgb(var(--color-foreground));
-    display: block !important;
-    grid-area: vertical-line-first;
+.index-8 {
+  top: 81px;
 }
 
-.vertical-line-second {
-    border-right: 2px dotted rgb(var(--color-foreground));
-    display: block !important;
-    grid-area: vertical-line-second;
+.index-9 {
+  top: 91px;
+}
+
+.index-10 {
+  top: 101px;
 }
 
 .vertical-bar {
-  grid-template-columns: 0.1fr 18fr 0.1fr !important;
+  grid-template-columns: 18fr !important;
   display: grid !important;
   align-items: initial !important;
+  border-radius: 10px;
 }
 
 .announcement-bar .custom-button {
@@ -2319,7 +2316,11 @@ input[type='checkbox'] {
 
 .announcement-bar-slider,
 .announcement-bar-slider .slider {
-  width: 100%;
+  width: 90%;
+}
+
+.announcement-bar__arrow {
+  display: flex;
 }
 
 .announcement-bar .slider-button--next {
