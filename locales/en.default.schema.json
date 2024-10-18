@@ -528,7 +528,7 @@
             },
             "button_text": {
               "label": "Button Text",
-              "default": "BUY NOW"
+              "default": ""
             },
             "text_alignment": {
               "label": "Text alignment",
