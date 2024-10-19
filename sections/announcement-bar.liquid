@@ -40,11 +40,11 @@
           {% endfor %}
         </div>
       </div>
-      <div  class="vertical-bar-second-top">
+      <div class="vertical-bar-second-top-desktop">
         {% for i in (0..10) %}
           <div class="vertical-bar-first index-{{i}}"></div>
         {% endfor %}
-        </div>      
+      </div>      
         {%- if section.blocks.size == 1 -%}
         <div
           class="announcement-bar{% if section.settings.show_social %} announcement-bar--one-announcement{% endif %}"
@@ -81,18 +81,6 @@
           aria-roledescription="{{ 'sections.announcements.carousel' | t }}"
           aria-label="{{ 'sections.announcements.announcement_bar' | t }}">
           <div class="announcement-bar-slider slider-buttons">
-            <!--
-            <button
-              type="button"
-              class="slider-button slider-button--prev"
-              name="previous"
-              aria-label="{{ 'sections.announcements.previous_announcement' | t }}"
-              aria-controls="Slider-{{ section.id }}">
-              <span class="svg-wrapper">
-                {{- 'icon-caret.svg' | inline_asset_content -}}
-              </span>            
-            </button>
-              -->
             <div
               class="grid grid--1-col slider slider--everywhere"
               id="Slider-{{ section.id }}"
@@ -125,11 +113,34 @@
                       {{- 'icon-caret.svg' | inline_asset_content -}}
                     </span>           
                      </button>  
+                     <div  class="vertical-bar-second-top" style="padding-left: 0.5rem;">
+                      {% for i in (0..10) %}
+                        <div class="vertical-bar-first index-{{i}}"></div>
+                      {% endfor %}
+                    </div>
                     {%- if block.settings.text != blank -%}
-                      <p class="announcement-bar__message h4">
-                        <span>{{ block.settings.text }}</span>
-                      </p>
+                      <div class="announcement-icon-mobile-upper">
+                        <div class="announcement-icon-mobile" >
+                          <div id="announcement-icon-sub-id" class="announcement-icon-sub" >
+                            {%- for block in section.blocks -%}
+                              <div class="announcement-icon-wrapper" aria-count={{ forloop.index | minus: 1}}>
+                              {%- if block.settings.image != blank -%}
+                                {{ block.settings.image | image_url: width: 30, height: 30 | image_tag }}
+                              {% endif %}
+                              </div>
+                            {% endfor %}
+                          </div>
+                        </div>
+                        <p class="announcement-bar__message h4">
+                          <span>{{ block.settings.text }}</span>
+                        </p>
+                      </div>
                     {%- endif -%}
+                    <div  class="vertical-bar-second-top">
+                      {% for i in (0..10) %}
+                        <div class="vertical-bar-first index-{{i}}"></div>
+                      {% endfor %}
+                    </div>
                     <button
                     type="button"
                     class="slider-button slider-button--next"
@@ -184,7 +195,7 @@
           </style>
         {%- endif -%}
       {%- endif -%}
-      <div class="vertical-bar-second-top">
+      <div class="vertical-bar-second-top-desktop">
         {% for i in (0..10) %}
           <div class="vertical-bar-second index-{{i}}"></div>
         {% endfor %}

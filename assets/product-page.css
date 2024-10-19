@@ -355,5 +355,15 @@
         margin-bottom: 0px !important;
         justify-content: space-evenly;
     }
+
+    .slider.slider--mobile{
+      scroll-snap-type: none !important;
+      scroll-behavior: unset !important;
+      scroll-padding-left: 0rem !important;
+    } 
+
+    .bb_product__media {
+      margin-left: 1.5rem;
+    }
   }
   
