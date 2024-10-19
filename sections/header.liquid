@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="{{ 'header.css' | asset_url }}">
 <script src="{{ 'header.js' | asset_url }}" defer></script>
 
-<div class="flex-container ">
+<div class="flex-container color-{{ section.settings.header_section_color_scheme }}">
   <div class="logo-container">
     {% if settings.logo != blank %}
       <img src="{{ settings.logo | image_url }}" alt="{{ shop.name }}" loading="lazy" width="500" height="500">
@@ -10,7 +10,7 @@
     {% endif %}
   </div>
 
-  <header class="header">
+  <header class="header color-{{ section.settings.color_scheme }}">
     <nav>
       <ul class="nav-items">
         {% for link in linklists['main-menu'].links %}
@@ -19,22 +19,22 @@
             {% assign has_dropdown = true %}
           {% endif %}
           <li class="nav-item{% if has_dropdown %} has-dropdown{% endif %}">
-            <a href="{{ link.url }}" class="nav-link{% if link.active %} active{% endif %}">{{ link.title }}</a>
+            <a href="{{ link.url }}" class="nav-link{% if link.active %} active{% endif %} color-{{ section.settings.color_scheme }} ">{{ link.title }}</a>
             {% if has_dropdown %}
-              <div class="dropdown-container">
+              <div class="dropdown-container color-{{ section.settings.color_scheme }}">
                 <ul class="dropdown">
                   {% for childlink in link.links %}
                     <li>
-                      <a href="{{ childlink.url }}" class="dropdown-item{% if childlink.active %} active{% endif %}">
+                      <a href="{{ childlink.url }}" class="dropdown-item{% if childlink.active %} active{% endif %} color-{{ section.settings.color_scheme }}">
                         {{- childlink.title -}}
                       </a>
                       {% if childlink.links != blank %}
-                        <ul class="nested-dropdown">
+                        <ul class="nested-dropdown color-{{ section.settings.color_scheme }}">
                           {% for grandchildlink in childlink.links %}
                             <li>
                               <a
                                 href="{{ grandchildlink.url }}"
-                                class="dropdown-item{% if grandchildlink.active %} active{% endif %}"
+                                class="dropdown-item{% if grandchildlink.active %} active{% endif %} color-{{ section.settings.color_scheme }}"
                               >
                                 {{- grandchildlink.title -}}
                               </a>
@@ -159,7 +159,7 @@
     </div>
   </div>
 
-  <div class="hamburger">
+  <div class="hamburger color-{{ section.settings.color_scheme }}">
     <div class="hamburger-line"></div>
     <div class="hamburger-line"></div>
     <div class="hamburger-line"></div>
@@ -174,14 +174,20 @@
   "settings": [
     {
       "type": "color_scheme",
-      "id": "color_scheme",
-      "label": "t:sections.all.colors.label",
+      "id": "header_section_color_scheme",
+      "label": "Section Color Scheme",
       "default": "scheme-1"
     },
     {
       "type": "color_scheme",
-      "id": "menu_color_scheme",
-      "label": "t:sections.header.settings.menu_color_scheme.label",
+      "id": "color_scheme",
+      "label": "Header Color Scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "mobile_menu_color_scheme",
+      "label": "Mobile Menu Color Scheme",
       "default": "scheme-1"
     },
     {
