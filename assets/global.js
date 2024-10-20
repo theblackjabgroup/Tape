@@ -848,8 +848,7 @@ class SlideshowComponent extends SliderComponent {
     this.sliderControlLinksArray.forEach((link) => link.addEventListener('click', this.linkToSlide.bind(this)));
     this.slider.addEventListener('scroll', this.setSlideVisibility.bind(this));
     this.setSlideVisibility();
-
-    if (this.announcementBarSlider) {
+     if (this.announcementBarSlider) {
       this.announcementBarArrowButtonWasClicked = false;
 
       this.reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');

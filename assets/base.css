@@ -2251,7 +2251,6 @@ input[type='checkbox'] {
   grid-template-columns: 18fr !important;
   display: grid !important;
   align-items: initial !important;
-  border-radius: 10px;
 }
 
 .announcement-bar .custom-button {
@@ -3299,6 +3298,26 @@ details-disclosure > details {
   height: 1.1rem;
 }
 
+ .scroll-enabled {
+  width: 18rem; /* Width of the visible area (bar) */
+  overflow: hidden; /* Hide any text outside the container */
+  white-space: nowrap; /* Prevent text from wrapping to the next line */
+}
+
+/* Hide the animation by default */
+.scrolling-text-container.scroll-enabled .scrolling-text {
+  display: inline-block;
+  animation: scrollText 7s linear infinite; /* Animation to scroll text */
+}
+
+@keyframes scrollText {
+  0% {
+    transform: translateX(90%); /* Start with text outside the right edge */
+  }
+  100% {
+    transform: translateX(-90%); /* End with text outside the left edge */
+  }
+}
 }
 
 .global-media-settings {
