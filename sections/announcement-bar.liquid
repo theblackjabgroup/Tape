@@ -1,5 +1,6 @@
 {{ 'component-slideshow.css' | asset_url | stylesheet_tag }}
 {{ 'component-slider.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'announcementBarView.js' | asset_url }}" defer="defer"></script>
 
 {%- liquid
   assign social_icons = true
@@ -131,9 +132,13 @@
                             {% endfor %}
                           </div>
                         </div>
-                        <p class="announcement-bar__message h4">
-                          <span>{{ block.settings.text }}</span>
-                        </p>
+                        <div class="scrolling-text-container">
+                          <div class="scrolling-text">
+                            <p class="announcement-bar__message h4">
+                              <span class="scrollable-text" aria-count={{ forloop.index | minus: 1}}>{{ block.settings.text }}</span>
+                            </p>
+                          </div>
+                        </div>
                       </div>
                     {%- endif -%}
                     <div  class="vertical-bar-second-top">
@@ -318,6 +323,12 @@
         "content": "t:sections.announcement-bar.settings.header__4.content",
         "info": "t:sections.announcement-bar.settings.header__4.info"
       }, 
+    {
+      "type": "checkbox",
+      "id": "enable_language_selector",
+      "default": false,
+      "label": "t:sections.announcement-bar.settings.enable_language_selector.label"
+    },
        {
         "type": "checkbox",
         "id": "enable_sticky_bar",
