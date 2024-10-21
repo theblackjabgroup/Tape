@@ -24,21 +24,8 @@ body {
     height: 38px;
     text-align: center;
     padding: 7px
-  
 }
 
-
-.debug-info::after {
-    content: '';
-    position: absolute;
-    left: 50%;
-    bottom: -10px;
-    width: 23px;
-    height: 16px;
-    background-color: var(--special-offer-color, #FFD700); 
-    border-radius: 50%;
-    transform: translateX(-50%);
-}
 
 h1, p {
   margin: 0;
@@ -63,7 +50,7 @@ h1 {
 .product-card {
   position: relative;
   flex: 0 0 22%;
-  background-color: #da3535;
+  background-color: seagreen;
   padding: 0px;
   text-align: center;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -118,7 +105,7 @@ h3 {
 }
 
   .price-tag {
-       padding: 8px 11px;
+    padding: 8px 11px;
     border-radius: 3px;
     font-size: 14px;
     font-weight: bold;
@@ -153,7 +140,7 @@ h3 {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  margin-top: 30px;
+  margin-top: 20px;
   gap: 35px;
 }
 
@@ -217,24 +204,15 @@ h3 {
   scrollbar-width: none; /* Firefox */
 }
 
-.dotted-line {
-  border-top: 2px dotted #bbb; /* Thickness and color of the dotted line */
-  width: 80%; /* Width of the line, adjust as needed */
-  margin: 10px auto; /* Center it */
-  position: relative; /* Ensure it stays within the flow of the card */
-  z-index: 1; /* Make sure it's above any background elements */
+.dotted-line-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 46px;
+  position: relative;
+  border-top: 6px dotted; /* Remove the white color here */
 }
 
-/* Offer banner styling */
-.offer-banner {
-  background-color: #ffcc00; /* Background color for the offer banner */
-  color: #000; /* Text color */
-  padding: 5px; /* Padding for spacing */
-  text-align: center; /* Center the text */
-  font-weight: bold; /* Make the text bold */
-  margin-bottom: 10px; /* Space between banner and image */
-  border-radius: 5px; /* Optional: rounded corners */
-}
 
 /* Social media tile */
 .social-media-tile {
@@ -281,3 +259,10 @@ h3 {
     top: 145%;
   }
 }
+
+/* Default style */
+.featured-collection {
+  padding: 20px;
+  border-radius: 8px;
+}
+
