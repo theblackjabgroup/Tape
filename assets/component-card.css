@@ -2,6 +2,15 @@ body {
   font-family: 'Inter', sans-serif;
 }
 
+h1, h3 {
+  font-family: 'Fira Sans', sans-serif;
+}
+
+h2, .model-number {
+  font-family: 'Inter', sans-serif;
+}
+
+
 .featured-collection {
   width: 100%;
   max-width: 1200px;
