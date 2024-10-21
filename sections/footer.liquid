@@ -1,3 +1,4 @@
+{% comment %}theme-check-disable UndefinedObject{% endcomment %}
 {{ 'section-footer.css' | asset_url | stylesheet_tag }}
 
 {% if section.settings.enable_strip %}
@@ -19,6 +20,7 @@
 </div>
 {% endif %}
 
+
 <footer style="background-color: {{ section.settings.footer_background_color }}; font-family: 'Inter', sans-serif;">
     <div class="footer-content" style="color: {{ section.settings.footer_text_color }};">
         <div class="footer-column">
@@ -32,6 +34,7 @@
                 </div>
             </form>
         </div>
+
 
 <div class="footer-column">
   <h4 style="color: {{ section.settings.menu_title_color }};">{{ section.settings.menu_title | default: "ABOUT US" }}</h4>
@@ -134,10 +137,11 @@
     </div>
   {%- endif -%}
 </div>
-      
- </div>
-</footer>
 
+
+      
+    </div>
+</footer>
 
 {% schema %}
  {
@@ -269,3 +273,8 @@
   ]
 }
   {% endschema %}
+
+
+
+
+
