@@ -6,7 +6,7 @@
 
 {% if section.settings.show_subheading %}
   <h2 style="font-size: {{ section.settings.subheading_font_size }}px;">
-      {{ section.settings.subheading_text }}
+      {{ collections[section.settings.collection].title }}
   </h2>
 {% endif %}
 
@@ -20,9 +20,6 @@
 <div class="product-container">
 {% for product in collections[section.settings.collection].products limit: section.settings.products_to_show %}
 <div class="product-card" style="background-color: {{ section.settings.product_card_background_color }};">
-   <div class="debug-info" style="background-color: {{ section.settings.special_offer_background_color }}; color: {{ section.settings.special_offer_text_color }}; --special-offer-color: {{ section.settings.special_offer_background_color }};">
-    Special Offer: 20% Discount {{ product.compare_at_price | money }}
-</div>
    
     <!-- Product Image -->
     <div class="product-image">
@@ -50,36 +47,37 @@
             ₹{{ product.price | money_without_currency }}
         </p>
 
-        <!-- Dotted Line -->
-        <div class="dotted-line"></div>
+       <div class="dotted-line-wrapper" style="border-top-color: {{ section.settings.dotted_line_color }};">
+         <div class="dotted-line"></div>
+       </div>
 
       <!-- Icons -->
-<div class="icons">
-  <div class="icon-wrapper">
-    {% if section.settings.icon_1_image %}
-      <img src="{{ section.settings.icon_1_image | img_url: '50x' }}" alt="{{ section.settings.icon_1_name }}">
-    {% else %}
-      <span class="icon-placeholder">🚚</span>
-    {% endif %}
-    <span class="icon-name">{{ section.settings.icon_1_name }}</span>
-  </div>
-  <div class="icon-wrapper">
-    {% if section.settings.icon_2_image %}
-      <img src="{{ section.settings.icon_2_image | img_url: '50x' }}" alt="{{ section.settings.icon_2_name }}">
-    {% else %}
-      <span class="icon-placeholder">🚛</span>
-    {% endif %}
-    <span class="icon-name">{{ section.settings.icon_2_name }}</span>
-  </div>
-  <div class="icon-wrapper">
-    {% if section.settings.icon_3_image %}
-      <img src="{{ section.settings.icon_3_image | img_url: '50x' }}" alt="{{ section.settings.icon_3_name }}">
-    {% else %}
-      <span class="icon-placeholder">🚜</span>
-    {% endif %}
-    <span class="icon-name">{{ section.settings.icon_3_name }}</span>
-  </div>
-</div>
+      <div class="icons">
+        <div class="icon-wrapper">
+          {% if section.settings.icon_1_image %}
+            <img src="{{ section.settings.icon_1_image | img_url: '50x' }}" alt="{{ section.settings.icon_1_name }}">
+          {% else %}
+            <span class="icon-placeholder">🚚</span>
+          {% endif %}
+          <span class="icon-name">{{ section.settings.icon_1_name }}</span>
+        </div>
+        <div class="icon-wrapper">
+          {% if section.settings.icon_2_image %}
+            <img src="{{ section.settings.icon_2_image | img_url: '50x' }}" alt="{{ section.settings.icon_2_name }}">
+          {% else %}
+            <span class="icon-placeholder">🚛</span>
+          {% endif %}
+          <span class="icon-name">{{ section.settings.icon_2_name }}</span>
+        </div>
+        <div class="icon-wrapper">
+          {% if section.settings.icon_3_image %}
+            <img src="{{ section.settings.icon_3_image | img_url: '50x' }}" alt="{{ section.settings.icon_3_name }}">
+          {% else %}
+            <span class="icon-placeholder">🚜</span>
+          {% endif %}
+          <span class="icon-name">{{ section.settings.icon_3_name }}</span>
+        </div>
+      </div>
     </div>
 </div>
   
@@ -106,10 +104,10 @@
       "default": 36
     },
     {
-      "type": "text",
-      "id": "subheading_text",
-      "label": "Subheading",
-      "default": "Top Series of Products"
+      "type": "checkbox",
+      "id": "show_subheading",
+      "label": "Show collection title as subheading",
+      "default": true
     },
     {
       "type": "range",
@@ -119,12 +117,6 @@
       "max": 40,
       "step": 1,
       "default": 20
-    },
-    {
-      "type": "checkbox",
-      "id": "show_subheading",
-      "label": "Show subheading",
-      "default": true
     },
     {
       "type": "richtext",
@@ -162,6 +154,7 @@
       "default": 4,
       "label": "Number of products to show"
     },
+    
     {
       "type": "color",
       "id": "product_card_background_color",
@@ -182,16 +175,11 @@
     },
     {
       "type": "color",
-      "id": "special_offer_background_color",
-      "label": "Special Offer Banner Background Color",
-      "default": "#FFD700"
+      "id": "dotted_line_color",
+      "label": "Dotted Line Color",
+      "default": "#FFFFFF"
     },
-    {
-      "type": "color",
-      "id": "special_offer_text_color",
-      "label": "Special Offer Banner Text Color",
-      "default": "#000000"
-    },
+    
     {
       "type": "header",
       "content": "Icon Settings"
@@ -204,8 +192,7 @@
     {
       "type": "text",
       "id": "icon_1_name",
-      "label": "Icon 1 Name",
-      
+      "label": "Icon 1 Name"
     },
     {
       "type": "image_picker",
@@ -215,8 +202,7 @@
     {
       "type": "text",
       "id": "icon_2_name",
-      "label": "Icon 2 Name",
-   
+      "label": "Icon 2 Name"
     },
     {
       "type": "image_picker",
@@ -226,8 +212,7 @@
     {
       "type": "text",
       "id": "icon_3_name",
-      "label": "Icon 3 Name",
-      
+      "label": "Icon 3 Name"
     }
   ]
 }
