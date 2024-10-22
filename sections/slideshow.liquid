@@ -4,7 +4,11 @@
   <div class="interactive-slideshow">
     {% for block in section.blocks %}
       <div class="slide {% if forloop.first %}active{% endif %}" data-index="{{ forloop.index0 }}">
-        <img src="{{ block.settings.image | img_url: 'master' }}" alt="{{ block.settings.title }}">
+        {% if block.settings.image != blank %}
+          <img src="{{ block.settings.image | img_url: 'master' }}" alt="{{ block.settings.title }}">
+        {% else %}
+            {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        {% endif %}
         <h3>{{ block.settings.feature }}</h3>
         <div class="slide-text"   style="background-color: {{ section.settings.product_card_background_color }};" >
             <div class="description">
