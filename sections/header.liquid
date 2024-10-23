@@ -3,8 +3,8 @@
 
 <div class="flex-container color-{{ section.settings.header_section_color_scheme }}">
   <div class="logo-container">
-    {% if settings.logo != blank %}
-      <img src="{{ settings.logo | image_url }}" alt="{{ shop.name }}" loading="lazy" width="500" height="500">
+    {% if section.settings.logo or settings.logo != blank %}
+      <img src="{% if section.settings.logo != blank %}{{ section.settings.logo | image_url }}{% else %}{{ settings.logo | image_url }}{% endif %}" alt="{{ shop.name }}" loading="lazy" width="500" height="500">
     {% else %}
       <span>{{ shop.name }}</span>
     {% endif %}
@@ -13,7 +13,7 @@
   <header class="header color-{{ section.settings.color_scheme }}">
     <nav style="width: 100%;">
       <ul class="nav-items">
-        {% for link in linklists['main-menu'].links %}
+        {% for link in section.settings.menu.links %}
           {% assign has_dropdown = false %}
           {% if link.links != blank %}
             {% assign has_dropdown = true %}
@@ -142,7 +142,21 @@
     <div class="mobile-nav-icons-container">
       <div class="mobile-nav-indicators">
         <div class="mobile-nav-green-dot"></div>
-        <p class="currency-indicator">{{ localization.language.iso_code }} ({{ cart.currency.iso_code }})</p>
+
+        <div class="menu-drawer__localization header-localization">
+          {%- if localization.available_countries and localization.available_countries.size > 1 -%}
+            <localization-form>
+              {%- form 'localization', id: 'HeaderCountryMobileForm', class: 'localization-form' -%}
+                <div>
+                  <h2 class="visually-hidden" id="HeaderCountryMobileLabel">
+                    {{ 'localization.country_label' | t }}
+                  </h2>
+                  {%- render 'country-localization', localPosition: 'HeaderCountryMobile' -%}
+                </div>
+              {%- endform -%}
+            </localization-form>
+          {% endif %}
+        </div>
       </div>
       <div class="mobile-nav-icons">
         <div class="nav-icon">
@@ -173,6 +187,12 @@
   "max_blocks": 3,
   "settings": [
     {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    },
+    {
       "type": "color_scheme",
       "id": "header_section_color_scheme",
       "label": "Section Color Scheme",
@@ -190,6 +210,11 @@
       "label": "Mobile Menu Color Scheme",
       "default": "scheme-1"
     },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    }
   ],
   "blocks": [
     {
