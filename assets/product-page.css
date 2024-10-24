@@ -37,11 +37,15 @@
     filter: contrast(0) sepia(5%) brightness(1.20);
   }
   
-  .js .bb_product__media {
+  .bb_product__media {
+    margin-left: 1.5rem;
+  }
+  
+  .bb_product__media_first {
     background-color: var(--background_product_card);
     overflow: visible !important;
   }
-  
+
   .bb-button-secondary {
     background-color: var(--secondary_product_button_color);
     border-radius: 7px;
@@ -189,7 +193,9 @@
   }
   .bb-special-offer-text{
     color: var(--utilities);
-    margin: 0 auto;
+    margin: auto;
+    font-family: 'Inter';
+    font-weight: 500;
   }
   
   .bb-product[aria-click="1"] {
@@ -360,10 +366,19 @@
       scroll-snap-type: none !important;
       scroll-behavior: unset !important;
       scroll-padding-left: 0rem !important;
-    } 
+    }
 
-    .bb_product__media {
-      margin-left: 1.5rem;
+    .bb-price:before {
+      transform: translate(-3.3rem, 0.8rem);
+    }
+    .bb-price:after {
+      transform: translate(2.5rem, 0.8rem);
+    }
+    .quantity {
+      min-height: calc((var(--inputs-border-width)* 2) + 3.5rem);
+    }
+    .bb-special-offer-upper {
+      margin-top: 1.5rem;
     }
   }
   

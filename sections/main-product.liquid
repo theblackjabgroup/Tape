@@ -107,7 +107,7 @@
 
               {%- when 'title' -%}
               {% if section.settings.enable_special_offer %}
-                <div>
+                <div class="bb-special-offer-upper">
                 <div class="bb-special-offer">
                   <div>
                   {% for i in (0..2) %}
@@ -2214,19 +2214,11 @@
       "id": "mobile_thumbnails",
       "options": [
         {
-          "value": "columns",
-          "label": "t:sections.main-product.settings.mobile_thumbnails.options__1.label"
-        },
-        {
           "value": "show",
           "label": "t:sections.main-product.settings.mobile_thumbnails.options__2.label"
-        },
-        {
-          "value": "hide",
-          "label": "t:sections.main-product.settings.mobile_thumbnails.options__3.label"
         }
       ],
-      "default": "hide",
+      "default": "show",
       "label": "t:sections.main-product.settings.mobile_thumbnails.label"
     },
     {

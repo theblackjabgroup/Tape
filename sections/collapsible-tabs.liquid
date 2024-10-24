@@ -47,6 +47,59 @@
     {% endfor %}
   </div>
 </div>
+<div class="mobile-collapsible-tabs">
+  <div class="accordion" id="accordionExample">
+    {%- for block in section.blocks -%}
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="heading{{ forloop.index }}">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ forloop.index }}" aria-expanded="true" aria-controls="collapse{{ forloop.index }}">
+        {{ block.settings.heading }}
+      </button>
+    </h2>
+    <div id="collapse{{ forloop.index }}" class="accordion-collapse collapse" aria-labelledby="heading{{ forloop.index }}" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <div class="product-description-grid-container" style="display: grid">
+          {% if block.settings.Point_1 != '' %}
+            <div class="product-description-paragraph">
+              <div class="product-description-in-semicircles"></div>
+              <p class="product-description-subclass">{{ block.settings.Point_1 }}</p>
+            </div>
+          {% endif %}
+          {% if block.settings.Point_2 != '' %}
+            <div class="product-description-paragraph">
+              <div class="product-description-in-semicircles"></div>
+              <p class="product-description-subclass">{{ block.settings.Point_2 }}</p>
+            </div>
+          {% endif %}
+          {% if block.settings.Point_3 != '' %}
+            <div class="product-description-paragraph">
+              <div class="product-description-in-semicircles"></div>
+              <p class="product-description-subclass">{{ block.settings.Point_3 }}</p>
+            </div>
+          {% endif %}
+          {% if block.settings.Point_4 != '' %}
+            <div class="product-description-paragraph">
+              <div class="product-description-in-semicircles"></div>
+              <p class="product-description-subclass">{{ block.settings.Point_4 }}</p>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+    {% endfor %}
+    <div class="accordion-below">
+<div class="product-description-drawer">
+  <div class="product-description-bottom_container">
+    {% for i in (0..10) %}
+      <div class="product-description-semicircles"></div>
+    {% endfor %}
+  </div>
+</div>
+</div>
+</div>
+</div>
+
 {% endif %}
 
 {% schema %}
