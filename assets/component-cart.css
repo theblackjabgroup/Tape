@@ -143,7 +143,7 @@ h3 {
 }
 
   .price-tag {
-    padding: 8px 11px;
+    padding: 4px 11px;
     border-radius: 3px;
     font-size: 14px;
     font-weight: bold;
@@ -158,8 +158,8 @@ h3 {
     content: "";
     position: absolute;
     top: 50%;
-    width: 10px;
-    height: 20px;
+    width: 11px;
+    height: 14px;
     background-color: var(--pseudo-bg-color, #F7F7F7);
     transform: translateY(-50%);
     border-radius: 50%;
@@ -244,7 +244,7 @@ h3 {
   justify-content: center;
   margin-top: 46px;
   position: relative;
-  border-top: 6px dotted; /* Remove the white color here */
+  border-top: 7px dotted; /* Remove the white color here */
 }
 
 
