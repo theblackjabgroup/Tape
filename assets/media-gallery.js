@@ -97,10 +97,15 @@ if (!customElements.get('media-gallery')) {
           }, 2000);
         };
         image.src = image.src;
+        console.log("activeItem" ,activeItem)
         const images = activeItem.querySelectorAll('.product__modal-opener--image img');
         images.forEach((image) => {
           image.setAttribute('aria-click', 0);
           image.setAttribute('aria-click', numClick%4);
+        })
+        const divs = activeItem.querySelectorAll('.product__media');
+        divs.forEach((div) => {
+          div.classList.add("bb_product__media");
         })
       }
 

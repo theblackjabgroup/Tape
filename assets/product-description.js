@@ -18,6 +18,22 @@ function openTab(evt, tabName) {
 }
 
 // By default, open the first tab
+/*
 document.addEventListener('DOMContentLoaded', (event) => {
     document.getElementsByClassName("tablinks")[0].click();
 });
+*/
+
+let click = 0;
+// Get the bb_product__media div element
+const mediaDivs = document.getElementsByClassName('bb_product__media');
+console.log("mediaDivs ", mediaDivs)
+// Add click event listener
+Array.from(mediaDivs).forEach((mediaDiv) => {
+    const imgTag = mediaDiv.querySelector('img'); // Find the img tag inside the div
+
+    if (imgTag && !imgTag.hasAttribute('aria-click')) {
+      // Apply CSS to the div if img doesn't have aria-click attribute
+      mediaDiv.style.marginLeft = '0rem';  // Example of custom CSS
+    }
+})
