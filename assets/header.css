@@ -16,6 +16,13 @@
   --dropdown-min-height: 150px;
 }
 
+.header-wrapper {
+  width: 100%;
+  padding-top: var(--padding-top);
+  padding-bottom: var(--padding-bottom);
+  height: calc(100% + var(--header-height-auto));
+}
+
 .logo-container {
   height: var(--logo-height);
   width: var(--logo-width);
@@ -24,6 +31,8 @@
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  text-decoration: none;
+  color: rgb(var(--color-foreground));
 }
 
 .logo-container span {
@@ -71,8 +80,9 @@
 }
 
 .header {
-  min-width: var(--header-width);
-  height: var(--header-height);
+  width: var(--header-width);
+  --header-height-auto: auto;
+  height: var(--header-height-auto); 
   padding: 8px 16px;
   display: flex !important;
   justify-content: space-between;
@@ -102,8 +112,10 @@
 
 .nav-items {
   display: flex !important;
+  flex-wrap: wrap;
+  gap: 1rem;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: start;
   align-items: center;
 }
 
@@ -116,7 +128,7 @@
   text-decoration: none;
   padding: 8px 12px;
   border-radius: 4px;
-  font-size: 10px;
+  font-size: var(--font-size);
   font-weight: 500;
   line-height: 1.25rem;
   text-align: center;
@@ -194,7 +206,7 @@
 }
 
 .dropdown-item {
-  padding: 8px 24px;
+  padding:12px 24px;
   text-decoration: none;
   display: block !important;
   cursor: pointer;
@@ -205,6 +217,11 @@
   font-weight: 600;
   z-index: 2;
   white-space: nowrap;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-item:hover {
+  background-color: rgba(var(--color-foreground), 0.2);
 }
 
 .flex-container {
@@ -232,8 +249,8 @@
 }
 
 .nav-icon .svg-wrapper {
-  width: 16px;
-  height: 16px;
+  width: calc(var(--font-size) + 6px);
+  height: calc(var(--font-size) + 6px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -314,9 +331,6 @@ body.drawer-open {
     --nav-icon-size: 28px;
     --dropdown-min-height: 130px;
   }
-  .nav-link {
-    font-size: 8px;
-  }
 }
 
 @media (max-width: 989px) {
@@ -359,9 +373,6 @@ body.drawer-open {
     --header-height: 62px;
     --nav-icon-size: 36px;
     --dropdown-min-height: 170px;
-  }
-  .nav-link {
-    font-size: 12px;
   }
 }
 

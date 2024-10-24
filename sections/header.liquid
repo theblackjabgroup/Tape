@@ -1,14 +1,15 @@
 <link rel="stylesheet" href="{{ 'header.css' | asset_url }}">
 <script src="{{ 'header.js' | asset_url }}" defer></script>
 
-<div class="flex-container color-{{ section.settings.header_section_color_scheme }}">
-  <div class="logo-container">
+<div class="header-wrapper color-{{ section.settings.header_section_color_scheme }}" style="--padding-top: {{ section.settings.padding_top }}px; --padding-bottom: {{ section.settings.padding_bottom }}px;">
+  <div class="flex-container">
+  <a href="{{ routes.root_url }}" class="logo-container">
     {% if section.settings.logo or settings.logo != blank %}
       <img src="{% if section.settings.logo != blank %}{{ section.settings.logo | image_url }}{% else %}{{ settings.logo | image_url }}{% endif %}" alt="{{ shop.name }}" loading="lazy" width="500" height="500">
     {% else %}
       <span>{{ shop.name }}</span>
     {% endif %}
-  </div>
+  </a>
 
   <header class="header color-{{ section.settings.color_scheme }}">
     <nav style="width: 100%;">
@@ -19,7 +20,7 @@
             {% assign has_dropdown = true %}
           {% endif %}
           <li class="nav-item{% if has_dropdown %} has-dropdown{% endif %}">
-            <a href="{{ link.url }}" class="nav-link{% if link.active %} active{% endif %} color-{{ section.settings.color_scheme }} ">{{ link.title }}</a>
+            <a href="{{ link.url }}" class="nav-link{% if link.active %} active{% endif %} color-{{ section.settings.color_scheme }}" style="--font-size: {{ section.settings.font_size }};">{{ link.title }}</a>
             {% if has_dropdown %}
               <div class="dropdown-container color-{{ section.settings.color_scheme }}">
                 <ul class="dropdown">
@@ -144,7 +145,7 @@
         <div class="mobile-nav-green-dot"></div>
 
         <div class="menu-drawer__localization header-localization">
-          {%- if localization.available_countries and localization.available_countries.size > 1 -%}
+          {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
             <localization-form>
               {%- form 'localization', id: 'HeaderCountryMobileForm', class: 'localization-form' -%}
                 <div>
@@ -156,6 +157,18 @@
               {%- endform -%}
             </localization-form>
           {% endif %}
+          {%- if section.settings.enable_language_selector and localization.available_languages.size > 1 -%}
+            <localization-form>
+              {%- form 'localization', id: 'HeaderLanguageMobileForm', class: 'localization-form' -%}
+                <div>
+                  <h2 class="visually-hidden" id="HeaderLanguageMobileLabel">
+                    {{ 'localization.language_label' | t }}
+                  </h2>
+                  {%- render 'language-localization', localPosition: 'HeaderLanguageMobile' -%}
+                </div>
+              {%- endform -%}
+            </localization-form>
+          {%- endif -%}
         </div>
       </div>
       <div class="mobile-nav-icons">
@@ -177,6 +190,7 @@
     <div class="hamburger-line"></div>
     <div class="hamburger-line"></div>
     <div class="hamburger-line"></div>
+  </div>
   </div>
 </div>
 
@@ -214,6 +228,58 @@
       "type": "image_picker",
       "id": "logo",
       "label": "Logo"
+    },
+    {
+      "type": "select",
+      "id": "font_size",
+      "label": "Font Size",
+      "options": [
+        {
+          "value": "10px",
+          "label": "Small"
+        },
+        {
+          "value": "12px",
+          "label": "Regular"
+        },
+        {
+          "value": "14px",
+          "label": "Medium"
+        },
+        {
+          "value": "16px",
+          "label": "Large"
+        }
+      ],
+      "default": "12px"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_country_selector",
+      "default": true,
+      "label": "t:sections.header.settings.enable_country_selector.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_language_selector",
+      "default": true,
+      "label": "t:sections.header.settings.enable_language_selector.label"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top",
+      "default": 8,
+      "min": 0,
+      "max": 100
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom",
+      "default": 8,
+      "min": 0,
+      "max": 100
     }
   ],
   "blocks": [
