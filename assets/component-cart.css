@@ -2,6 +2,14 @@ body {
   font-family: 'Inter', sans-serif;
 }
 
+h1, h3 {
+  font-family: 'Fira Sans', sans-serif;
+}
+
+h2, .model-number {
+  font-family: 'Inter', sans-serif;
+}
+
 .featured-collection {
   width: 100%;
   max-width: 1200px;
@@ -9,35 +17,20 @@ body {
   padding: 20px;
   background-color: rgb(255, 255, 255);
   position: relative;
-  overflow: hidden; 
+  overflow: hidden;
 }
 
 .debug-info {
-    background-color: #7d7373;
-    color: white;
-    text-align: left;
-    font-family: Arial, sans-serif;
-    font-weight: bold;
-    font-size: 13px;
-    text-transform: uppercase;
-    position: relative;
-    height: 38px;
-    text-align: center;
-    padding: 7px
-  
-}
-
-
-.debug-info::after {
-    content: '';
-    position: absolute;
-    left: 50%;
-    bottom: -10px;
-    width: 23px;
-    height: 16px;
-    background-color: var(--special-offer-color, #FFD700); 
-    border-radius: 50%;
-    transform: translateX(-50%);
+  background-color: #7d7373;
+  color: white;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  font-size: 13px;
+  text-transform: uppercase;
+  position: relative;
+  height: 38px;
+  padding: 7px;
 }
 
 h1, p {
@@ -57,37 +50,46 @@ h1 {
   scroll-snap-type: x mandatory;
   gap: 20px;
   scroll-behavior: smooth;
-  padding-bottom: 20px;
+  padding: 20px 0;
+  margin: 0 18px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  align-items: stretch;
+}
+
+.product-container::-webkit-scrollbar {
+  display: none;
 }
 
 .product-card {
   position: relative;
-  flex: 0 0 22%;
-  background-color: #da3535;
-  padding: 0px;
+  flex: 0 0 calc(25% - 15px);
+  min-width: calc(25% - 15px);
+  max-width: calc(25% - 15px);
+  padding: 0;
   text-align: center;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  scroll-snap-align: center;
-  height: 500px; 
+  scroll-snap-align: start;
   display: flex;
   flex-direction: column;
-  overflow: visible; 
+  overflow: visible;
   border-radius: 4px;
-  margin-left: 18px;
+  background-color: #F7F7F7;
+}
+
+.product-image {
+  width: 100%;
+  height: 240px;
+  overflow: hidden;
+  border-radius: 4px 4px 0 0;
+   flex-shrink: 0;
 }
 
 .product-image img {
   width: 100%;
-  height: 240px;
-  background-color: gray;
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  padding: 0;
-  margin: 0;
-  border-radius: 4px;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 h2 {
@@ -98,34 +100,57 @@ h2 {
 }
 
 h3 {
-  font-size: 18px;
-  margin-bottom: 12px;
-  margin-top: 5px;
-  margin-left: -13px;
-  font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 5px;
+    margin-top: 10px;
+    margin-left:14px;
+    font-weight: bold;
+    word-wrap: break-word;      
+    overflow-wrap: break-word; 
+    max-width: 100%;           
+    white-space: normal;       
 }
 
+
+.product-info {
+  padding: 0 15px;
+  text-align: left;
+  flex-grow: 1; /* Allow info section to grow */
+  display: flex;
+  flex-direction: column;
+}
 .model-number {
-  margin-bottom: 10px;
-  margin-left: -123px;
-  margin-top: -10px;
+  margin: 5px 0;
+  text-align: left;
+  padding: 0 15px;
 }
 
-.product-details {
-  margin-top: 10px;
-  padding: 10px 0;
-  border-top: 1px solid #ddd;
+.price-reviews-icons {
+  margin-top: auto;
+  padding: 15px;
+}
+
+.price-tag {
+  padding: 8px 11px;
+  border-radius: 3px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+  display: inline-block;
+  position: relative;
+  background: #FFFFFF;
+  text-align: left;
 }
 
   .price-tag {
-       padding: 8px 11px;
+    padding: 8px 11px;
     border-radius: 3px;
     font-size: 14px;
     font-weight: bold;
     color: #333;
     display: inline-block;
     position: relative;
-    margin-left: -124px;
+    margin-left: -130px;
   }
   
   .price-tag::before,
@@ -147,13 +172,12 @@ h3 {
   .price-tag::after {
     right: -5px;
   }
-  
 
 .icons {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: flex-start;
-  margin-top: 30px;
+  margin-top: 20px;
   gap: 35px;
 }
 
@@ -174,14 +198,11 @@ h3 {
   margin-top: 5px;
 }
 
-
-
-/* Styling for arrow buttons */
 .slider-arrow {
   position: absolute;
-  top: 221%; /* Vertically center the arrows */
+  top: 196%;
   transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.7);
   color: white;
   border: none;
   border-radius: 50%;
@@ -192,66 +213,49 @@ h3 {
   align-items: center;
   cursor: pointer;
   z-index: 10;
-  transition: background-color 0.3s ease, width 0.3s ease, height 0.3s ease;
+  font-size: 20px;
+  transition: all 0.3s ease;
+  opacity: 1;
 }
 
 .slider-arrow.left {
-  left: 10px;
+  left: 10px;  /* Adjusted from 0 to give some padding */
 }
 
 .slider-arrow.right {
-  right: 10px;
+  right: 10px;  /* Adjusted from 0 to give some padding */
 }
 
 .slider-arrow:hover {
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.9);
+  width: 44px;
+  height: 44px;
 }
 
-/* Hide scrollbar in product container */
-.product-container::-webkit-scrollbar {
-  /* display: none; */
+.slider-arrow:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
-/* For other browsers */
-.product-container {
-  scrollbar-width: none; /* Firefox */
+.dotted-line-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 46px;
+  position: relative;
+  border-top: 6px dotted; /* Remove the white color here */
 }
 
-.dotted-line {
-  border-top: 2px dotted #bbb; /* Thickness and color of the dotted line */
-  width: 80%; /* Width of the line, adjust as needed */
-  margin: 10px auto; /* Center it */
-  position: relative; /* Ensure it stays within the flow of the card */
-  z-index: 1; /* Make sure it's above any background elements */
-}
 
-/* Offer banner styling */
-.offer-banner {
-  background-color: #ffcc00; 
-  color: #000; 
-  padding: 5px; 
-  text-align: center; 
-  font-weight: bold; 
-  margin-bottom: 10px; 
-  border-radius: 5px; 
-}
-
-/* Social media tile */
-.social-media-tile {
-  text-align: center;
-  padding: 20px;
-}
-
-.social-media-tile h2 {
-  margin-bottom: 15px;
-}
-
-/* Responsive Styling */
-
-/
 @media screen and (max-width: 1024px) {
   .product-card {
     flex: 0 0 calc(33.333% - 13.333px);
+  }
+  
+  .slider-arrow {
+    width: 35px;
+    height: 35px;
   }
 }
 
@@ -260,8 +264,14 @@ h3 {
     flex: 0 0 calc(50% - 10px);
   }
   
-  .featured-collection__title {
-    font-size: 20px;
+   .featured-collection__title {
+    font-size: 18px;
+  }
+  
+  .slider-arrow {
+    width: 30px;
+    height: 30px;
+    top: 145%;
   }
 }
 
@@ -271,6 +281,7 @@ h3 {
     min-width: 250px;
   }
   
+    
   .featured-collection__title {
     font-size: 18px;
   }
@@ -278,6 +289,31 @@ h3 {
   .slider-arrow {
     width: 30px;
     height: 30px;
-    top: 166%;
+    top: 145%;
+  }
+}
+  
+  .slider-arrow.left {
+    left: 5px;  /* Closer to edge on mobile */
+  }
+  
+  .slider-arrow.right {
+    right: 5px;  /* Closer to edge on mobile */
+  }
+  
+  /* Add better touch targets for mobile */
+  .slider-arrow:hover {
+    width: 32px;
+    height: 32px;
+  }
+  
+  /* Ensure container has proper padding for arrows */
+  .featured-collection {
+    padding: 20px 40px;  /* Added horizontal padding to make room for arrows */
+  }
+  
+  .product-container {
+    margin: 45px;
+    padding: 20px 0;  /* Removed horizontal padding to maximize space */
   }
 }
