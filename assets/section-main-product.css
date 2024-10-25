@@ -965,6 +965,7 @@ a.product__text {
   .thumbnail-slider {
     display: flex;
     align-items: center;
+    margin-bottom: 20px;
   }
 
   .thumbnail-slider .thumbnail-list.slider {
