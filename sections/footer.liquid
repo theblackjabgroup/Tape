@@ -2,7 +2,7 @@
 {{ 'section-footer.css' | asset_url | stylesheet_tag }}
 
 {% if section.settings.enable_strip %}
-<div class="container" style="background-color: {{ section.settings.strip_container_bg_color }};">
+<div class="container1" style="background-color: {{ section.settings.strip_container_bg_color }};">
     <div class="strip-right" style="background-color: {{ section.settings.strip_bg_color }};">
         <div class="strip-1">
             <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text }} &rarr;</div>
@@ -143,8 +143,6 @@
     </div>
   {%- endif -%}
 </div>
-
-
       
     </div>
 </footer>
