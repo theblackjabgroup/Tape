@@ -144,11 +144,11 @@ body {
 .fa-regular {
     font-weight: 400;
     position: absolute;
-    transform: translateY(70%);
+    transform: translateY(93%);
     color: #888;
     font-size: 16px;
     pointer-events: none;
-    left: 49px;
+    margin-left: 8px;
 }
 
 .footer-column form input {
@@ -204,11 +204,11 @@ body {
     }
 }
 
-/* For medium screens */
-@media (max-width: 768px) {
+
+@media (max-width: 820px) {
     .fa-regular {
-        font-size: 14px;
-        left: 35px;
+        font-size: 16px;
+        left: 11px;
     }
 }
 
@@ -216,7 +216,7 @@ body {
 @media (max-width: 480px) {
     .fa-regular {
         font-size: 16px;
-        left: 18px;
+        left: 13px;
     }
 }
 
