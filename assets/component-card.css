@@ -311,7 +311,7 @@ h3 {
     height: 32px;
   }
   
-  /* Ensure container has proper padding for arrows */
+  
   .featured-collection {
     padding: 20px 40px;  /* Added horizontal padding to make room for arrows */
   }
