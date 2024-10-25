@@ -3,194 +3,182 @@
 
 <div class="header-wrapper color-{{ section.settings.header_section_color_scheme }}" style="--padding-top: {{ section.settings.padding_top }}px; --padding-bottom: {{ section.settings.padding_bottom }}px;">
   <div class="flex-container">
-  <a href="{{ routes.root_url }}" class="logo-container">
-    {% if section.settings.logo or settings.logo != blank %}
+    <a href="{{ routes.root_url }}" class="logo-container">
+      {% if section.settings.logo or settings.logo != blank %}
       <img src="{% if section.settings.logo != blank %}{{ section.settings.logo | image_url }}{% else %}{{ settings.logo | image_url }}{% endif %}" alt="{{ shop.name }}" loading="lazy" width="500" height="500">
-    {% else %}
-      <span>{{ shop.name }}</span>
-    {% endif %}
-  </a>
+      {% else %}
+        <span>{{ shop.name }}</span>
+      {% endif %}
+    </a>
 
-  <header class="header color-{{ section.settings.color_scheme }}">
-    <nav style="width: 100%;">
-      <ul class="nav-items">
-        {% for link in section.settings.menu.links %}
-          {% assign has_dropdown = false %}
-          {% if link.links != blank %}
-            {% assign has_dropdown = true %}
-          {% endif %}
-          <li class="nav-item{% if has_dropdown %} has-dropdown{% endif %}">
+    <header class="header color-{{ section.settings.color_scheme }}">
+      <nav style="width: 100%;">
+        <ul class="nav-items" style="--nav-items-justify-content: {{ section.settings.nav_items_justify_content }};">
+          {% for link in section.settings.menu.links %}
+            {% assign has_dropdown = false %}
+            {% if link.links != blank %}
+              {% assign has_dropdown = true %}
+            {% endif %}
+            <li class="nav-item{% if has_dropdown %} has-dropdown{% endif %}">
             <a href="{{ link.url }}" class="nav-link{% if link.active %} active{% endif %} color-{{ section.settings.color_scheme }}" style="--font-size: {{ section.settings.font_size }};">{{ link.title }}</a>
-            {% if has_dropdown %}
-              <div class="dropdown-container color-{{ section.settings.color_scheme }}">
-                <ul class="dropdown">
-                  {% for childlink in link.links %}
-                    <li>
+              {% if has_dropdown %}
+                <div class="dropdown-container color-{{ section.settings.color_scheme }}">
+                  <ul class="dropdown">
+                    {% for childlink in link.links %}
+                      <li>
                       <a href="{{ childlink.url }}" class="dropdown-item{% if childlink.active %} active{% endif %} color-{{ section.settings.color_scheme }}">
-                        {{- childlink.title -}}
+                          {{- childlink.title -}}
+                        </a>
+                        {% if childlink.links != blank %}
+                          <ul class="nested-dropdown color-{{ section.settings.color_scheme }}">
+                            {% for grandchildlink in childlink.links %}
+                              <li>
+                                <a
+                                  href="{{ grandchildlink.url }}"
+                                  class="dropdown-item{% if grandchildlink.active %} active{% endif %} color-{{ section.settings.color_scheme }}"
+                                >
+                                  {{- grandchildlink.title -}}
+                                </a>
+                              </li>
+                            {% endfor %}
+                            <div class="nested-dropdown-overlay">
+                              <div class="nested-dropdown-overlay-circles">
+                                {% for i in (1..100) %}
+                                  <div class="nested-dropdown-overlay-circle"></div>
+                                {% endfor %}
+                              </div>
+                            </div>
+                          </ul>
+                        {% endif %}
+                      </li>
+                    {% endfor %}
+                  </ul>
+                  <div class="dropdown-overlay"></div>
+                </div>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      </nav>
+      <div class="nav-icons">
+        <div class="nav-icon">
+          <a href="{{ routes.search_url }}" class="search-toggle">
+            <span class="svg-wrapper">{{ 'icon-search.svg' | inline_asset_content }}</span>
+          </a>
+        </div>
+        <div class="nav-icon">
+          <a href="{{ routes.cart_url }}" class="js-drawer-open-cart">
+            <span class="svg-wrapper">{{ 'icon-cart.svg' | inline_asset_content }}</span>
+            {% comment %} <span class="cart-count">{{ cart.item_count }}</span> {% endcomment %}
+          </a>
+        </div>
+        <div class="nav-icon">
+          <a href="{{ routes.account_url }}" class="">
+            <span class="svg-wrapper">{{ 'icon-account.svg' | inline_asset_content }}</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <div class="mobile-header-drawer color-{{ section.settings.mobile_menu_color_scheme }}">
+      <div class="mobile-header-drawer-close">
+        <div class="close-icon">
+          <span class="svg-wrapper" style="width: 12px; height: 12px;">
+            {{- 'icon-close.svg' | inline_asset_content -}}
+          </span>
+        </div>
+      </div>
+      <div class="mobile-search-wrapper">
+        <form class="mobile-search-form" action="{{ routes.search_url }}" method="get" role="search">
+          <button type="submit" aria-label="Submit search">
+            <span class="svg-wrapper">{{ 'icon-search.svg' | inline_asset_content }}</span>
+          </button>
+          <input type="search" name="q" placeholder="Search" aria-label="Search">
+        </form>
+      </div>
+      <nav>
+        <ul class="mobile-nav-items">
+          {% for link in linklists['main-menu'].links %}
+            <li class="mobile-nav-item{% if link.links != blank %} has-dropdown{% endif %}">
+              <a href="{{ link.url }}" class="mobile-nav-link">
+                {{ link.title }}
+                {% if link.links != blank %}
+                  <span class="svg-wrapper" style="height: 16px; width: 16px;">
+                    {{- 'icon-caret.svg' | inline_asset_content -}}
+                  </span>
+                {% endif %}
+              </a>
+              {% if link.links != blank %}
+                <ul class="mobile-dropdown">
+                  {% for childlink in link.links %}
+                    <li class="mobile-dropdown-item-container">
+                      <a href="{{ childlink.url }}" class="mobile-dropdown-item">
+                        {{ childlink.title }}
+                        {% if childlink.links != blank %}
+                          <span class="svg-wrapper" style="height: 16px; width: 16px;">
+                            {{- 'icon-caret.svg' | inline_asset_content -}}
+                          </span>
+                        {% endif %}
                       </a>
                       {% if childlink.links != blank %}
-                        <ul class="nested-dropdown color-{{ section.settings.color_scheme }}">
+                        <ul class="mobile-nested-dropdown">
                           {% for grandchildlink in childlink.links %}
                             <li>
-                              <a
-                                href="{{ grandchildlink.url }}"
-                                class="dropdown-item{% if grandchildlink.active %} active{% endif %} color-{{ section.settings.color_scheme }}"
-                              >
+                              <a href="{{ grandchildlink.url }}" class="mobile-dropdown-item">
                                 {{- grandchildlink.title -}}
                               </a>
                             </li>
                           {% endfor %}
-                          <div class="nested-dropdown-overlay">
-                            <div class="nested-dropdown-overlay-circles">
-                              {% for i in (1..100) %}
-                                <div class="nested-dropdown-overlay-circle"></div>
-                              {% endfor %}
-                            </div>
-                          </div>
                         </ul>
                       {% endif %}
                     </li>
                   {% endfor %}
                 </ul>
-                <div class="dropdown-overlay"></div>
-              </div>
-            {% endif %}
-          </li>
-        {% endfor %}
-      </ul>
-    </nav>
-    <div class="nav-icons">
-      <div class="nav-icon">
-        <a href="{{ routes.search_url }}" class="search-toggle">
-          <span class="svg-wrapper">{{ 'icon-search.svg' | inline_asset_content }}</span>
-        </a>
-      </div>
-      <div class="nav-icon">
-        <a href="{{ routes.cart_url }}" class="js-drawer-open-cart">
-          <span class="svg-wrapper">{{ 'icon-cart.svg' | inline_asset_content }}</span>
-          {% comment %} <span class="cart-count">{{ cart.item_count }}</span> {% endcomment %}
-        </a>
-      </div>
-      <div class="nav-icon">
-        <a href="{{ routes.account_url }}" class="">
-          <span class="svg-wrapper">{{ 'icon-account.svg' | inline_asset_content }}</span>
-        </a>
-      </div>
-    </div>
-  </header>
-
-  <div class="mobile-header-drawer color-{{ section.settings.mobile_menu_color_scheme }}">
-    <div class="mobile-header-drawer-close">
-      <div class="close-icon">
-        <span class="svg-wrapper" style="width: 12px; height: 12px;">
-          {{- 'icon-close.svg' | inline_asset_content -}}
-        </span>
-      </div>
-    </div>
-    <div class="mobile-search-wrapper">
-      <form class="mobile-search-form" action="{{ routes.search_url }}" method="get" role="search">
-        <button type="submit" aria-label="Submit search">
-          <span class="svg-wrapper">{{ 'icon-search.svg' | inline_asset_content }}</span>
-        </button>
-        <input type="search" name="q" placeholder="Search" aria-label="Search">
-      </form>
-    </div>
-    <nav>
-      <ul class="mobile-nav-items">
-        {% for link in linklists['main-menu'].links %}
-          <li class="mobile-nav-item{% if link.links != blank %} has-dropdown{% endif %}">
-            <a href="{{ link.url }}" class="mobile-nav-link">
-              {{ link.title }}
-              {% if link.links != blank %}
-                <span class="svg-wrapper" style="height: 16px; width: 16px;">
-                  {{- 'icon-caret.svg' | inline_asset_content -}}
-                </span>
               {% endif %}
-            </a>
-            {% if link.links != blank %}
-              <ul class="mobile-dropdown">
-                {% for childlink in link.links %}
-                  <li class="mobile-dropdown-item-container">
-                    <a href="{{ childlink.url }}" class="mobile-dropdown-item">
-                      {{ childlink.title }}
-                      {% if childlink.links != blank %}
-                        <span class="svg-wrapper" style="height: 16px; width: 16px;">
-                          {{- 'icon-caret.svg' | inline_asset_content -}}
-                        </span>
-                      {% endif %}
-                    </a>
-                    {% if childlink.links != blank %}
-                      <ul class="mobile-nested-dropdown">
-                        {% for grandchildlink in childlink.links %}
-                          <li>
-                            <a href="{{ grandchildlink.url }}" class="mobile-dropdown-item">
-                              {{- grandchildlink.title -}}
-                            </a>
-                          </li>
-                        {% endfor %}
-                      </ul>
-                    {% endif %}
-                  </li>
-                {% endfor %}
-              </ul>
+            </li>
+          {% endfor %}
+        </ul>
+      </nav>
+
+      <div class="mobile-nav-icons-container">
+        <div class="mobile-nav-indicators">
+          <div class="mobile-nav-green-dot"></div>
+
+          <div class="menu-drawer__localization header-localization">
+            {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
+              <localization-form>
+                {%- form 'localization', id: 'HeaderCountryMobileForm', class: 'localization-form' -%}
+                  <div>
+                    <h2 class="visually-hidden" id="HeaderCountryMobileLabel">
+                      {{ 'localization.country_label' | t }}
+                    </h2>
+                    {%- render 'country-localization', localPosition: 'HeaderCountryMobile' -%}
+                  </div>
+                {%- endform -%}
+              </localization-form>
             {% endif %}
-          </li>
-        {% endfor %}
-      </ul>
-    </nav>
-
-    <div class="mobile-nav-icons-container">
-      <div class="mobile-nav-indicators">
-        <div class="mobile-nav-green-dot"></div>
-
-        <div class="menu-drawer__localization header-localization">
-          {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
-            <localization-form>
-              {%- form 'localization', id: 'HeaderCountryMobileForm', class: 'localization-form' -%}
-                <div>
-                  <h2 class="visually-hidden" id="HeaderCountryMobileLabel">
-                    {{ 'localization.country_label' | t }}
-                  </h2>
-                  {%- render 'country-localization', localPosition: 'HeaderCountryMobile' -%}
-                </div>
-              {%- endform -%}
-            </localization-form>
-          {% endif %}
-          {%- if section.settings.enable_language_selector and localization.available_languages.size > 1 -%}
-            <localization-form>
-              {%- form 'localization', id: 'HeaderLanguageMobileForm', class: 'localization-form' -%}
-                <div>
-                  <h2 class="visually-hidden" id="HeaderLanguageMobileLabel">
-                    {{ 'localization.language_label' | t }}
-                  </h2>
-                  {%- render 'language-localization', localPosition: 'HeaderLanguageMobile' -%}
-                </div>
-              {%- endform -%}
-            </localization-form>
-          {%- endif -%}
+          </div>
         </div>
-      </div>
-      <div class="mobile-nav-icons">
-        <div class="nav-icon">
-          <a href="{{ routes.cart_url }}" class="js-drawer-open-cart">
+        <div class="mobile-nav-icons">
+          <div class="nav-icon">
+            <a href="{{ routes.cart_url }}" class="js-drawer-open-cart">
             <span class="svg-wrapper" style="height: 12px; width: 12px;">{{ 'icon-cart.svg' | inline_asset_content }}</span>
-          </a>
-        </div>
-        <div class="nav-icon">
-          <a href="{{ routes.account_url }}" class="">
+            </a>
+          </div>
+          <div class="nav-icon">
+            <a href="{{ routes.account_url }}" class="">
             <span class="svg-wrapper" style="height: 12px; width: 12px;">{{ 'icon-account.svg' | inline_asset_content }}</span>
-          </a>
+            </a>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="hamburger color-{{ section.settings.color_scheme }}">
-    <div class="hamburger-line"></div>
-    <div class="hamburger-line"></div>
-    <div class="hamburger-line"></div>
-  </div>
+    <div class="hamburger color-{{ section.settings.color_scheme }}">
+      <div class="hamburger-line"></div>
+      <div class="hamburger-line"></div>
+      <div class="hamburger-line"></div>
+    </div>
   </div>
 </div>
 
@@ -254,22 +242,41 @@
       "default": "12px"
     },
     {
+      "type": "select",
+      "id": "nav_items_justify_content",
+      "label": "Navigation Items Alignment",
+      "options": [
+        {
+          "value": "start",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "space-between",
+          "label": "Space Between"
+        },
+        {
+          "value": "end",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
       "type": "checkbox",
       "id": "enable_country_selector",
       "default": true,
       "label": "t:sections.header.settings.enable_country_selector.label"
     },
     {
-      "type": "checkbox",
-      "id": "enable_language_selector",
-      "default": true,
-      "label": "t:sections.header.settings.enable_language_selector.label"
-    },
-    {
       "type": "range",
       "id": "padding_top",
       "label": "Padding Top",
       "default": 8,
+      "step": 1,
       "min": 0,
       "max": 100
     },
@@ -278,6 +285,7 @@
       "id": "padding_bottom",
       "label": "Padding Bottom",
       "default": 8,
+      "step": 1,
       "min": 0,
       "max": 100
     }
