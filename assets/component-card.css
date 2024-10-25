@@ -2,7 +2,7 @@ body {
   font-family: 'Inter', sans-serif;
 }
 
-h1, h3 {
+h1, h7 {
   font-family: 'Fira Sans', sans-serif;
 }
 
@@ -99,12 +99,12 @@ h2 {
   margin-left: 25px;
 }
 
-h3 {
+h7 {
   font-size: 18px;
   margin: 10px 0 5px 14px;
   font-weight: bold;
   display: -webkit-box;
-  -webkit-line-clamp: 2; /* Show maximum of 2 lines */
+  -webkit-line-clamp: 3; /* Show maximum of 2 lines */
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -155,7 +155,7 @@ h3 {
     color: #333;
     display: inline-block;
     position: relative;
-    margin-left: -100px;
+    margin-left: -31px;
   }
   
   .price-tag::before,
@@ -164,7 +164,7 @@ h3 {
     position: absolute;
     top: 50%;
     width: 10px;
-    height: 20px;
+    height: 13px;
     background-color: var(--pseudo-bg-color, #F7F7F7);
     transform: translateY(-50%);
     border-radius: 50%;
@@ -311,7 +311,7 @@ h3 {
     height: 32px;
   }
   
-  
+  /* Ensure container has proper padding for arrows */
   .featured-collection {
     padding: 20px 40px;  /* Added horizontal padding to make room for arrows */
   }
