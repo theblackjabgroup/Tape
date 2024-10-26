@@ -20,10 +20,12 @@
 
   <button class="slider-arrow left" onclick="scrollCards(-1)">←</button>
   <button class="slider-arrow right" onclick="scrollCards(1)">→</button>
-
-  <div class="product-container">
-    {% for product in collections[section.settings.collection].products limit: section.settings.products_to_show %}
-      <div class="product-card" style="background-color: {{ section.settings.product_card_background_color }};">
+  
+<div class="product-container">
+{% for product in collections[section.settings.collection].products limit: section.settings.products_to_show %}
+<div class="product-card" style="background-color: {{ section.settings.product_card_background_color }};">
+    
+  
         <!-- Product Image -->
         <div class="product-image">
           <a href="{{ product.url }}">
@@ -242,12 +244,25 @@ document.addEventListener('DOMContentLoaded', function() {
       "label": "Product Card Background Color",
       "default": "#F7F7F7"
     },
+   {
+      "type": "color",
+      "id": "special_offer_background_color",
+      "label": "Special Offer Banner Background Color",
+      "default": "#FFD700"
+    },
+    {
+      "type": "color",
+      "id": "special_offer_text_color",
+      "label": "Special Offer Banner Text Color",
+      "default": "#000000"
+    },
     {
       "type": "color",
       "id": "text_color",
       "label": "Text Color",
       "default": "#333333"
     },
+
     {
       "type": "color",
       "id": "price_background_color",
