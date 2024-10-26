@@ -3,7 +3,7 @@
 <!-- Add this line to include the fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
 
-<div class="featured-collection">
+
   <h1 style="font-size: {{ section.settings.title_font_size }}px;">
     {{ section.settings.title }}
   </h1>
@@ -18,13 +18,15 @@
     <p class="{{ section.settings.description_style }}">{{ section.settings.description }}</p>
   {% endif %}
 
-  <button class="slider-arrow left" onclick="scrollCards(-1)">←</button>
-  <button class="slider-arrow right" onclick="scrollCards(1)">→</button>
+  <button class="slider-arrow1 left" onclick="scrollCards(-1)" aria-label="Previous Slide"></button>
+<button class="slider-arrow1 right" onclick="scrollCards(1)" aria-label="Next Slide"></button>
   
-<div class="product-container">
+ <div class="product-container">
 {% for product in collections[section.settings.collection].products limit: section.settings.products_to_show %}
 <div class="product-card" style="background-color: {{ section.settings.product_card_background_color }};">
-    
+   <div class="debug-info" style="background-color: {{ section.settings.special_offer_background_color }}; color: {{ section.settings.special_offer_text_color }};">
+       {{ section.settings.offer_tag_text }}
+   </div>
   
         <!-- Product Image -->
         <div class="product-image">
@@ -91,7 +93,7 @@
       </div>
     {% endfor %}
   </div>
-</div>
+
 
 <script>
 function scrollCards(direction) {
@@ -234,6 +236,12 @@ document.addEventListener('DOMContentLoaded', function() {
       "default": 4,
       "label": "Number of products to show"
     },
+       {
+      "type": "text",
+      "id": "offer_tag_text",
+      "label": "Offer Tag Text",
+      "default": "SPECIAL OFFER - 20% DISCOUNT"
+    },
     {
       "type": "header",
       "content": "Color Settings"
@@ -262,7 +270,7 @@ document.addEventListener('DOMContentLoaded', function() {
       "label": "Text Color",
       "default": "#333333"
     },
-
+    
     {
       "type": "color",
       "id": "price_background_color",
