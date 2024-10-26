@@ -20,19 +20,6 @@ h2, .model-number {
   overflow: hidden;
 }
 
-.debug-info {
-  background-color: #7d7373;
-  color: white;
-  text-align: center;
-  font-family: Arial, sans-serif;
-  font-weight: bold;
-  font-size: 13px;
-  text-transform: uppercase;
-  position: relative;
-  height: 38px;
-  padding: 7px;
-}
-
 h1, p {
   margin: 0;
 }
@@ -155,7 +142,7 @@ h7 {
     color: #333;
     display: inline-block;
     position: relative;
-    margin-left: -31px;
+    margin-left: -58px;
   }
   
   .price-tag::before,
@@ -289,6 +276,11 @@ h7 {
   .featured-collection__title {
     font-size: 18px;
   }
+  
+  .dotted-line-wrapper{
+      width: 112%;
+    margin-left: -13px;
+  }  
   
   .slider-arrow {
     width: 30px;
