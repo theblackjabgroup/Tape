@@ -47,9 +47,8 @@ p {
   font-size: 24px;
   transform: translate(-50%, 50%) rotate(-90deg);
   transition: all 0.5s ease;
-   width: 90vh;
+  width: 90vh;
   white-space: nowrap;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 .slide.active {
   flex: 1 1 auto;
