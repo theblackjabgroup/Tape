@@ -37,7 +37,7 @@ body {
     top: 50%; /* Center vertically */
     left: 50%; /* Center horizontally */
     transform: translate(-50%, -50%) rotate(10deg);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); 
+    box-shadow: 0 15px 8px rgba(0, 0, 0, 0.3); 
     font-family: 'Fira Sans', sans-serif; /* Set Fira Sans for strip text */
   }
   
@@ -59,7 +59,7 @@ body {
     top: 50%; /* Center vertically */
     left: 10%; /* Center horizontally */
     transform: translate(-50%, -50%) rotate(-10deg);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); 
+    box-shadow: 0 15px 8px rgba(0, 0, 0, 0.3); 
     font-family: 'Fira Sans', sans-serif; /* Set Fira Sans for strip text */ 
   }
 
@@ -219,7 +219,18 @@ body {
         left: 13px;
     }
 }
+.footer-column form button{
+  margin-bottom: 12px;
+    margin-left: 13px;
+}
 
+.footer-column form input {
+      margin-left: 13px;
+}
+
+.footer-column h4{
+  margin-left: 14px;
+}
 
 .social-icons {
   display: flex;
