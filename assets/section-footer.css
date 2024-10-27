@@ -14,7 +14,7 @@ body {
     position: relative;
     overflow: hidden;
     width: 100%;
-    height: 300px;
+    height: 200px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -25,11 +25,11 @@ body {
 
 .strip-right {
     position: absolute; /* Change to relative */
-    width: 110%; /* Full width of the container */
+    width: 114%; /* Full width of the container */
     height: 60px;
     background-color: white; /* Set the background color of the strip */
     color: black; /* Set text color to white */
-    font-size: 25px;
+    font-size: 23px;
     display: flex;
     align-items: center;
     justify-content: center; /* Center text horizontally */
@@ -37,13 +37,13 @@ body {
     top: 50%; /* Center vertically */
     left: 50%; /* Center horizontally */
     transform: translate(-50%, -50%) rotate(10deg);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); 
+    box-shadow: 0 15px 8px rgba(0, 0, 0, 0.3); 
     font-family: 'Fira Sans', sans-serif; /* Set Fira Sans for strip text */
   }
   
   .strip-left {
     position: absolute; /* Change to relative */
-    width: 110%; /* Full width of the container */
+    width: 114%; /* Full width of the container */
     height: 60px;
     background-color: rgb(
       221,
@@ -51,7 +51,7 @@ body {
       23
     ); /* Set the background color of the strip */
     color: white; 
-    font-size: 25px;
+    font-size: 23px;
     display: flex;
     align-items: center;
     justify-content: center; /* Center text horizontally */
@@ -59,22 +59,22 @@ body {
     top: 50%; /* Center vertically */
     left: 10%; /* Center horizontally */
     transform: translate(-50%, -50%) rotate(-10deg);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); 
+    box-shadow: 0 15px 8px rgba(0, 0, 0, 0.3); 
     font-family: 'Fira Sans', sans-serif; /* Set Fira Sans for strip text */ 
   }
 
   .strip-right {
     background-color: white; /* Background color */
-    top: 50%; /* Center vertically */
-    left: 50%; /* Center horizontally */
-    transform: translate(-50%, -50%) rotate(10deg); /* Rotation */
+    top: 42%; /* Center vertically */
+    left: 45%; /* Center horizontally */
+    transform: translate(-51%, -40%) rotate(6deg); /* Rotation */
 }
 
 .strip-left {
     background-color: white; /* Background color */
-    top: 50%; /* Center vertically */
-    left: 50%; /* Center horizontally */
-    transform: translate(-50%, -50%) rotate(-10deg); /* Rotation */
+    top: 64%; /* Center vertically */
+    left: 53%; /* Center horizontally */
+    transform: translate(-47%, -103%) rotate(-6deg); /* Rotation */
 }
 
 .strip-1, .strip-2 {
@@ -219,7 +219,18 @@ body {
         left: 13px;
     }
 }
+.footer-column form button{
+  margin-bottom: 12px;
+    margin-left: 13px;
+}
 
+.footer-column form input {
+      margin-left: 13px;
+}
+
+.footer-column h4{
+  margin-left: 14px;
+}
 
 .social-icons {
   display: flex;
