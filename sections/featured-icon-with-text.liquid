@@ -10,7 +10,7 @@
     {% for item in section.blocks %}
       <div class="card__outer__container">
         <div class="card__container color-{{ section.settings.cardColor }}">
-          <div class="card__inner_container">
+          <div class="card__inner_container color-{{ section.settings.innerCardColor }}">
             <div class="card__contents">
               <div class="card__icon color-{{ section.settings.cardColor }}">
                 {% if item.settings.icon %}
@@ -20,7 +20,7 @@
                   <div style="display: block !important; width: 1px; height: 100%; background: rgba(var(--color-foreground), 0.75); position: absolute; left: 50%; rotate: -45deg;"></div>
                 {% endif %}
               </div>
-              <div class="card__title fira-sans-semibold">
+              <div class="card__title fira-sans-semibold color-{{ section.settings.innerCardColor }}">
                 <p>Pay On Delivery</p>
               </div>
             </div>
@@ -60,7 +60,7 @@
                 </svg>
               </span>
               <p class="inter-regular">
-                {{ item.settings.description }}
+                {{ item.settings.description | truncate: 150 }}
               </p>
             </div>
           </div>
@@ -109,6 +109,12 @@
       "label": "Card Color",
       "id": "cardColor",
       "default": "scheme_3"
+    },
+    {
+      "type": "color_scheme",
+      "label": "Inner Card Color",
+      "id": "innerCardColor",
+      "default": "scheme_1"
     }
   ],
   "blocks": [

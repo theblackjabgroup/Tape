@@ -23,7 +23,7 @@
   position: relative;
   width: 261px;
   height: 261px;
-  background: white;
+  background: rgb(var(--color-background));
   border-radius: inherit;
 }
 
@@ -51,7 +51,7 @@
   line-height: 36px;
   text-align: center;
   font-size: 24px;
-  color: black;
+  color: rgb(var(--color-foreground));
 }
 
 .description__container {
