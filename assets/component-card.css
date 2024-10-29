@@ -186,7 +186,8 @@ h7 {
   justify-content: space-around;
   align-items: flex-start;
   margin-top: 20px;
-  gap: 35px;
+      gap: 4px;
+    margin-right: 130px;
 }
 
 .icon-wrapper {
