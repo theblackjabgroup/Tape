@@ -1,0 +1,132 @@
+{% schema %}
+{
+  "name": "Email Popup",
+  "settings": [
+    {
+      "type": "text",
+      "id": "popup_title",
+      "label": "Popup Title",
+      "default": "Join Our Community!"
+    },
+    {
+      "type": "textarea",
+      "id": "popup_message",
+      "label": "Popup Message",
+      "default": "Stay updated with the latest news, exclusive offers, and expert tips. Sign up for our newsletter and get 10% off your first order!"
+    },
+    {
+      "type": "text",
+      "id": "email_placeholder",
+      "label": "Email Input Placeholder",
+      "default": "Enter your email"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Subscribe Now"
+    },
+    {
+      "type": "color",
+      "id": "base_background_color",
+      "label": "Base Background Color",
+      "default": "#FFFF00"
+    },
+    {
+      "type": "color",
+      "id": "content_background_color",
+      "label": "Content Background Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "header_background_color",
+      "label": "Header Background Color",
+      "default": "#FF0000"
+    },
+    {
+      "type": "color",
+      "id": "header_text_color",
+      "label": "Header Text Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "popup_text_color",
+      "label": "Popup Text Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "button_background_color",
+      "label": "Button Background Color",
+      "default": "#D9D9D9"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_popup",
+      "label": "Display Popup",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "category": "Popups"
+    }
+  ]
+}
+{% endschema %}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="{{ 'popup.css' | asset_url }}">
+
+<div class="popup-base" id="emailPopup" 
+     style="--base-bg: {{ section.settings.base_background_color }};
+            --content-bg: {{ section.settings.content_background_color }};
+            --header-bg: {{ section.settings.header_background_color }};
+            --header-text: {{ section.settings.header_text_color }};
+            --popup-text: {{ section.settings.popup_text_color }};
+            --button-bg: {{ section.settings.button_background_color }};">
+    <div class="popup-content">
+        <div class="popup-header">
+            <div class="header-background">
+              <h2>{{ section.settings.popup_title }}</h2>
+              <button class="close-btn" onclick="closePopup()">&times;</button>
+            </div>
+        </div>
+        <p class="popup-message">{{ section.settings.popup_message }}</p>
+        
+        <div class="input-wrapper">
+            <i class="fa fa-envelope email-icon"></i>
+            <input type="email" id="emailInput" class="email-input" placeholder="{{ section.settings.email_placeholder }}">
+        </div>
+        <button class="subscribe-btn" onclick="handleSubscribe()">{{ section.settings.button_text }}</button>
+        <div class= "triangle">&times;</div>
+    </div>
+</div>
+
+<script>
+    function closePopup() {
+        document.getElementById("emailPopup").style.display = "none";
+    }
+
+    function handleSubscribe() {
+        const emailInput = document.getElementById("emailInput");
+        const email = emailInput.value;
+        
+        if (email) {
+            alert("Subscribed!");
+            emailInput.value = ""; // Clear the input
+            closePopup(); // Close the popup after subscription
+        } else {
+            alert("Please enter your email address!");
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        setTimeout(function() {
+            document.getElementById("emailPopup").style.display = "flex";
+        }, 1000);
+    });
+</script>
