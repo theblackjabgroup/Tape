@@ -9,10 +9,10 @@
         {% else %}
             {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
         {% endif %}
-        <h3>{{ block.settings.feature }}</h3>
+        <h3 style="color:{{ block.settings.feature_color }}">{{ block.settings.feature }}</h3>
         <div class="slide-text"   style="background-color: {{ section.settings.product_card_background_color }};" >
             <div class="description">
-              <p class="feature"  >{{ block.settings.feature }}</p>
+              <p class="feature" style="color: {{ section.settings.text_color }};"  >{{ block.settings.feature }}</p>
               <h2 style="color: {{ section.settings.text_color }};">{{ block.settings.title }}</h2>
               <p style="color: {{ section.settings.text_color }};" >{{ block.settings.content }}</p>
             </div>
@@ -138,6 +138,12 @@ document.addEventListener('DOMContentLoaded', function() {
         "label": "feature",
         "default": "NEW ARRIVAL"
       },
+       {
+      "type": "color",
+      "id": "feature_color",
+      "label": "Text Color",
+      "default": "#333333"
+    },
       {
         "type": "text",
         "id": "title",
@@ -156,6 +162,7 @@ document.addEventListener('DOMContentLoaded', function() {
         "label": "Show Button",
         "default": true
       },
+      
       {
         "type": "text",
         "id": "button_text",
