@@ -35,14 +35,14 @@
           {%- for block in section.blocks -%}
             <div class="announcement-icon-wrapper" aria-count={{ forloop.index | minus: 1}}>
               {%- if block.settings.image != blank -%}
-                {{ block.settings.image | image_url: width: 30, height: 30 | image_tag }}
+                {{ block.settings.image | image_url: width: 40, height: 40 | image_tag }}
               {% endif %}
             </div>
           {% endfor %}
         </div>
       </div>
       <div class="vertical-bar-second-top-desktop">
-        {% for i in (0..10) %}
+        {% for i in (0..4) %}
           <div class="vertical-bar-first index-{{i}}"></div>
         {% endfor %}
       </div>
@@ -54,7 +54,7 @@
           {{ block.shopify_attributes }}>
           <div class="announcement-bar__arrow-first">
           <div class="vertical-bar-second-top" style="padding-left: 0.5rem;">
-            {% for i in (0..10) %}
+            {% for i in (0..4) %}
               <div class="vertical-bar-first-first index-{{i}}"></div>
             {% endfor %}
           </div>
@@ -88,7 +88,7 @@
           {%- endif -%}
           </div>
         <div class="vertical-bar-second-top" style="padding: 0rem;">
-          {% for i in (0..10) %}
+          {% for i in (0..4) %}
             <div class="vertical-bar-first index-{{i}}"></div>
           {% endfor %}
         </div>
@@ -134,7 +134,7 @@
                         </span>
                       </button>
                       <div class="vertical-bar-second-top" style="padding-left: 0.5rem;">
-                        {% for i in (0..10) %}
+                        {% for i in (0..4) %}
                           <div class="vertical-bar-first index-{{i}}"></div>
                         {% endfor %}
                       </div>
@@ -166,7 +166,7 @@
                         {%- endif -%}
                       {%- endif -%}
                       <div class="vertical-bar-second-top">
-                        {% for i in (0..10) %}
+                        {% for i in (0..4) %}
                           <div class="vertical-bar-first index-{{i}}"></div>
                         {% endfor %}
                       </div>
@@ -207,7 +207,7 @@
         {%- endif -%}
       {%- endif -%}
       <div class="vertical-bar-second-top-desktop">
-        {% for i in (0..10) %}
+        {% for i in (0..4) %}
           <div class="vertical-bar-second index-{{i}}"></div>
         {% endfor %}
       </div>
@@ -287,18 +287,7 @@
         "id": "show_line_separator",
         "default": true,
         "label": "t:sections.header.settings.show_line_separator.label"
-      },
-      {
-        "type": "header",
-        "content": "t:sections.announcement-bar.settings.header__1.content",
-        "info": "t:sections.announcement-bar.settings.header__1.info"
-      },
-      {
-        "type": "checkbox",
-        "id": "show_social",
-        "default": false,
-        "label": "t:sections.announcement-bar.settings.show_social.label"
-      }, {
+      },{
         "type": "header",
         "content": "t:sections.announcement-bar.settings.header__2.content"
       }, {
@@ -333,11 +322,6 @@
         "id": "enable_language_selector",
         "default": false,
         "label": "t:sections.announcement-bar.settings.enable_language_selector.label"
-      }, {
-        "type": "checkbox",
-        "id": "enable_sticky_bar",
-        "default": false,
-        "label": "t:sections.announcement-bar.settings.enable_sticky_bar.label"
       }
     ],
     "blocks": [

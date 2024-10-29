@@ -2158,7 +2158,7 @@ input[type='checkbox'] {
 */
 @media screen and (min-width: 890px) {
   .utility-bar__grid--3-col {
-    grid-template-columns: 1fr 0.1fr 3fr 0.1fr 1fr;
+    grid-template-columns: 1fr 0.1fr 5fr 0.1fr 1fr;
     grid-template-areas: 'announcement-icons vertical-line-first announcements vertical-line-second language-currency';
   }
 
@@ -2170,6 +2170,7 @@ input[type='checkbox'] {
   .bb-max-width {
     max-width: 100% !important;
     padding: 0px !important;
+    margin: 1rem 0px !important;
   }
 
   .vertical-bar-second-top-desktop {
@@ -2183,6 +2184,7 @@ input[type='checkbox'] {
   }
   
 .vertical-bar-first {
+    left: 0px;
     height: 6px;
     display: block !important;
     position: absolute;
@@ -2194,6 +2196,7 @@ input[type='checkbox'] {
 
 
 .vertical-bar-second {
+  right: 0px;
   height: 6px;
   display: block !important;
   position: absolute;
@@ -2204,23 +2207,23 @@ input[type='checkbox'] {
 }
 
 .index-0 {
-  top: 1px;
+  top: 0px;
 }
 
 .index-1 {
-  top: 11px;
+  top: calc(var(--announcement-bar-height)*1);
 }
 
 .index-2 {
-  top: 21px;
+  top: calc(var(--announcement-bar-height)*2);
 }
 
 .index-3 {
-  top: 31px;
+  top: calc(var(--announcement-bar-height)*3);
 }
 
 .index-4 {
-  top: 41px;
+  top: calc(var(--announcement-bar-height)*4);
 }
 
 .index-5 {
@@ -2332,7 +2335,7 @@ input[type='checkbox'] {
 
 .announcement-bar-slider,
 .announcement-bar-slider .slider {
-  width: 90%;
+  width: 100%;
 }
 
 .announcement-bar__arrow {
@@ -2420,6 +2423,7 @@ input[type='checkbox'] {
   margin: 0;
   letter-spacing: 0.1rem;
   min-height: 3.8rem;
+  font-family: 'Inter';
 }
 
 .announcement-bar-slider--fade-in-next .announcement-bar__message,
@@ -3181,7 +3185,7 @@ details-disclosure > details {
   }
 }
 
-@media screen and (max-width: 749px) {
+@media screen and (max-width: 890px) {
   .utility-bar__grid.page-width {
     padding-left: 0rem;
     padding-right: 0rem;
@@ -3231,6 +3235,7 @@ details-disclosure > details {
   }
   
   .vertical-bar-first {
+    left: 0px;
     height: 6px;
     display: block !important;
     position: absolute;
@@ -3252,6 +3257,7 @@ details-disclosure > details {
 }
 
 .vertical-bar-second {
+  right: 0px;
   height: 6px;
   display: block !important;
   position: absolute;
@@ -3317,7 +3323,7 @@ details-disclosure > details {
   height: 1.1rem;
 }
 
- .scroll-enabled {
+.scroll-enabled {
   width: 18rem; /* Width of the visible area (bar) */
   overflow: hidden; /* Hide any text outside the container */
   white-space: nowrap; /* Prevent text from wrapping to the next line */
@@ -3326,9 +3332,8 @@ details-disclosure > details {
 /* Hide the animation by default */
 .scrolling-text-container.scroll-enabled .scrolling-text {
   display: inline-block;
-  animation: scrollText 7s linear infinite; /* Animation to scroll text */
+  animation: scrollText 10s linear infinite; /* Animation to scroll text */
 }
-
 @keyframes scrollText {
   0% {
     transform: translateX(90%); /* Start with text outside the right edge */
