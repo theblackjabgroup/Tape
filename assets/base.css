@@ -3268,23 +3268,23 @@ details-disclosure > details {
 }
 
 .index-0 {
-  top: 1px;
+  top: 0px;
 }
 
 .index-1 {
-  top: 11px;
+  top: calc(var(--announcement-bar-height)*1);
 }
 
 .index-2 {
-  top: 21px;
+  top: calc(var(--announcement-bar-height)*2);
 }
 
 .index-3 {
-  top: 31px;
+  top: calc(var(--announcement-bar-height)*3);
 }
 
 .index-4 {
-  top: 41px;
+  top: calc(var(--announcement-bar-height)*4);
 }
 
 .index-5 {
