@@ -1,13 +1,11 @@
 {{ 'collapsible-content.css' | asset_url | stylesheet_tag }}
 <style>
- .faq-item::before,
-.faq-item::after {
-  background-color: rgb(var(--color-background)); /* Ensure this matches the background where the div sits */
+.faq-item{
+  background-color:rgb(var(--color-background));
 }
 .dot {
-  background-color: rgb(var(--color-background));
+ background-color: rgb(var(--color-background));
 }
-  /* layout2  */
 .striaght-line {
   background-color: rgb(var(--color-background));
 }
@@ -24,10 +22,10 @@
     <div class='faq-container '>
        {% for block in section.blocks %}
    
-  <div class="faq-item color-{{ section.settings.color_scheme }}">
-    <span class="faq-number color-{{ section.settings.cardColor }}">{{ block.settings.serialno }}</span>
+  <div class="faq-item color-{{ section.settings.cardColor }}">
+    <span class="faq-number color-{{ section.settings.cardColor }} ">{{ block.settings.serialno }}</span>
           {% if section.settings.layout_style == 'layout1' %}
-    <div class="dots-line">
+    <div class="dots-line" >
       <!-- Dots will be added by JavaScript -->
     </div>
       {% else %}
@@ -35,14 +33,14 @@
               </div>
     {% endif %}
             
-  <div class="faq-content color-{{ section.settings.cardColor }}">
+  <div class="faq-content">
       <div class="faq-question">
-        <div class="question-text">{{ block.settings.questiontext }}</div>
-        <div class="faq-answer">{{ block.settings.solutionans }}</div>
+        <div class="question-text color-{{ section.settings.cardColor }}">{{ block.settings.questiontext }}</div>
+        <div class="faq-answer color-{{ section.settings.cardColor }}">{{ block.settings.solutionans }}</div>
       </div>
       <div>
 
-        <svg class="icon-arrow" width="24" height="24" viewBox="0 0 24 24">
+        <svg class="icon-arrow color-{{ section.settings.cardColor }}" width="24" height="24" viewBox="0 0 24 24">
           <path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
         </svg>
       </div>
@@ -57,7 +55,7 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  // Function to create dots for layout1
+
   const createDots = (dotsLine) => {
     const containerHeight = dotsLine.offsetHeight;
     const dotHeight = 8;
@@ -68,12 +66,11 @@ document.addEventListener('DOMContentLoaded', function() {
     dotsLine.innerHTML = '';
     for (let i = 0; i < numberOfDots; i++) {
       const dot = document.createElement('span');
-      dot.className = 'dot';
+      dot.className = 'dot color-{{ section.settings.color_scheme }}';
       dotsLine.appendChild(dot);
     }
   };
 
-  // Function to handle FAQ item click
   const handleFAQClick = (item) => {
     const answer = item.querySelector('.faq-answer');
     const arrow = item.querySelector('.icon-arrow');
@@ -81,8 +78,6 @@ document.addEventListener('DOMContentLoaded', function() {
     if (answer && arrow) {
       answer.classList.toggle('visible');
       arrow.classList.toggle('rotated');
-      
-      // Check if this is layout1 and update dots if needed
       const dotsLine = item.querySelector('.dots-line');
       if (dotsLine) {
         setTimeout(() => createDots(dotsLine), 200);
@@ -90,9 +85,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   };
 
-  // Initialize all FAQ items
+
   document.querySelectorAll('.faq-item').forEach(item => {
-    // Set up click handler for only the arrow icon
+
     const arrow = item.querySelector('.icon-arrow');
     if (arrow) {
       arrow.addEventListener('click', (e) => {
@@ -101,14 +96,13 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     }
 
-    // Initialize dots for layout1 if applicable
     const dotsLine = item.querySelector('.dots-line');
     if (dotsLine) {
       createDots(dotsLine);
     }
   });
 
-  // Handle window resize for layout1
+ 
   let resizeTimer;
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
