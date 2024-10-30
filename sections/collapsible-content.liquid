@@ -1,13 +1,11 @@
 {{ 'collapsible-content.css' | asset_url | stylesheet_tag }}
 <style>
- .faq-item::before,
-.faq-item::after {
-  background-color: rgb(var(--color-background)); /* Ensure this matches the background where the div sits */
+.faq-item{
+  background-color:rgb(var(--color-background));
 }
 .dot {
-  background-color: rgb(var(--color-background));
+ background-color: rgb(var(--color-background));
 }
-  /* layout2  */
 .striaght-line {
   background-color: rgb(var(--color-background));
 }
@@ -25,9 +23,9 @@
        {% for block in section.blocks %}
    
   <div class="faq-item color-{{ section.settings.cardColor }}">
-    <span class="faq-number ">{{ block.settings.serialno }}</span>
+    <span class="faq-number color-{{ section.settings.cardColor }} ">{{ block.settings.serialno }}</span>
           {% if section.settings.layout_style == 'layout1' %}
-    <div class="dots-line">
+    <div class="dots-line" >
       <!-- Dots will be added by JavaScript -->
     </div>
       {% else %}
@@ -35,14 +33,14 @@
               </div>
     {% endif %}
             
-  <div class="faq-content color-{{ section.settings.cardColor }}">
+  <div class="faq-content">
       <div class="faq-question">
-        <div class="question-text">{{ block.settings.questiontext }}</div>
-        <div class="faq-answer">{{ block.settings.solutionans }}</div>
+        <div class="question-text color-{{ section.settings.cardColor }}">{{ block.settings.questiontext }}</div>
+        <div class="faq-answer color-{{ section.settings.cardColor }}">{{ block.settings.solutionans }}</div>
       </div>
       <div>
 
-        <svg class="icon-arrow" width="24" height="24" viewBox="0 0 24 24">
+        <svg class="icon-arrow color-{{ section.settings.cardColor }}" width="24" height="24" viewBox="0 0 24 24">
           <path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
         </svg>
       </div>
@@ -68,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
     dotsLine.innerHTML = '';
     for (let i = 0; i < numberOfDots; i++) {
       const dot = document.createElement('span');
-      dot.className = 'dot';
+      dot.className = 'dot color-{{ section.settings.color_scheme }}';
       dotsLine.appendChild(dot);
     }
   };

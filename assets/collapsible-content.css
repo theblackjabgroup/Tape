@@ -28,38 +28,49 @@
   box-sizing: border-box;
   transition: all 0.3s ease;
   min-height: 80px;
+  clip-path: polygon(
+        0 0,
+        calc(3rem + 20px) 0,
+        calc(3rem + 22px) 3px,
+        calc(3rem + 24px) 5px,
+        calc(3rem + 26px) 7px,
+        calc(3rem + 28px) 8px,
+        calc(3rem + 30px) 9px,
+        calc(3rem + 32px) 8px,
+        calc(3rem + 34px) 7px,
+        calc(3rem + 36px) 5px,
+        calc(3rem + 38px) 3px,
+        calc(3rem + 40px) 0,
+        100% 0,
+        100% 100%,
+        calc(3rem + 40px) 100%,
+        calc(3rem + 38px) calc(100% - 3px),
+        calc(3rem + 36px) calc(100% - 5px),
+        calc(3rem + 34px) calc(100% - 7px),
+        calc(3rem + 32px) calc(100% - 8px),
+        calc(3rem + 30px) calc(100% - 9px),
+        calc(3rem + 28px) calc(100% - 8px),
+        calc(3rem + 26px) calc(100% - 7px),
+        calc(3rem + 24px) calc(100% - 5px),
+        calc(3rem + 22px) calc(100% - 3px),
+        calc(3rem + 20px) 100%,
+        0 100%
+      );
+
    overflow: hidden; 
 }
+
 .faq-number {
   padding: 0.25rem 0.5rem;
  font-family: 'Fira Sans', sans-serif;
-    font-weight: 500; 
-    font-size: 20px;
+font-weight: 500; 
+  font-size: 20px;
   min-width: 2.5rem;
   text-align: center;
   position: relative;
   z-index: 2;
 }
- .faq-item::before,
-.faq-item::after {
-  content: '';
-  position: absolute;
-  left: calc(3rem + 15px); /* Align with the dots-line */
-  width: 30px; /* Width of the semicircle */
-  height: 35px; /* Height to ensure semicircular shape */
-  background-color:rgb(var(--color-background));
-  border-radius: 50%; /* Creates the semicircle effect */
-  z-index: 1;
-}
 
-.faq-item::before {
-  top: -25px; /* Move it up by half the height to show only half of the circle */
-}
-
-
-.faq-item::after {
-  bottom: -25px; /* Move it down by half the height */
-}
 
 .dots-line {
   position: absolute;
@@ -76,7 +87,6 @@
 .dot {
   width: 8px;
   height: 8px;
-  background-color: rgb(var(--color-background));
   border-radius: 50%;
   flex-shrink: 0;
 }
@@ -87,7 +97,6 @@
   top: 0;
   bottom: 0;
   width: 3px;
-  background-color: rgb(var(--color-background));
   height: 100%;
 }
 .faq-content {
@@ -171,26 +180,51 @@
   }
   .faq-item {
     width: 100%;
-    margin: 1rem 0;
+    margin: 2rem 0;
     padding: 1.25rem;
+    clip-path: polygon(
+        0 0,
+        calc(2.5rem + 15px) 0,
+        calc(2.5rem + 17px) 3px,
+        calc(2.5rem + 19px) 5px,
+        calc(2.5rem + 21px) 7px,
+        calc(2.5rem + 23px) 8px,
+        calc(2.5rem + 25px) 8.5px,
+        calc(2.5rem + 27px) 8px,
+        calc(2.5rem + 29px) 7px,
+        calc(2.5rem + 31px) 5px,
+        calc(2.5rem + 33px) 3px,
+        calc(2.5rem + 35px) 0,
+        100% 0,
+        100% 100%,
+        calc(2.5rem + 35px) 100%,
+        calc(2.5rem + 33px) calc(100% - 3px),
+        calc(2.5rem + 31px) calc(100% - 5px),
+        calc(2.5rem + 29px) calc(100% - 7px),
+        calc(2.5rem + 27px) calc(100% - 8px),
+        calc(2.5rem + 25px) calc(100% - 8.5px),
+        calc(2.5rem + 23px) calc(100% - 8px),
+        calc(2.5rem + 21px) calc(100% - 7px),
+        calc(2.5rem + 19px) calc(100% - 5px),
+        calc(2.5rem + 17px) calc(100% - 3px),
+        calc(2.5rem + 15px) 100%,
+        0 100%
+      );
   }
-  .faq-item::before,
-  .faq-item::after {
-    left: calc(2.5rem + 15px); 
-    width: 25px;
-    height: 30px;
-  }
+
   .dots-line {
-    left: calc(2.5rem + 25px);
+    left: calc(2.5rem + 21px);
     width: 6px;
+     top: 10px;
+  bottom: 10px;
   }
   .striaght-line {
-    left: calc(2.5rem + 26px);
+    left: calc(2.5rem + 21px);
     width: 2px;
   }
   .dot {
-    width: 6px;
-    height: 6px;
+    width: 8px;
+    height: 8px;
   }
   .faq-number {
     font-size: 1.5rem;
