@@ -24,8 +24,8 @@
     <div class='faq-container '>
        {% for block in section.blocks %}
    
-  <div class="faq-item color-{{ section.settings.color_scheme }}">
-    <span class="faq-number color-{{ section.settings.cardColor }}">{{ block.settings.serialno }}</span>
+  <div class="faq-item color-{{ section.settings.cardColor }}">
+    <span class="faq-number ">{{ block.settings.serialno }}</span>
           {% if section.settings.layout_style == 'layout1' %}
     <div class="dots-line">
       <!-- Dots will be added by JavaScript -->
@@ -57,7 +57,7 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  // Function to create dots for layout1
+
   const createDots = (dotsLine) => {
     const containerHeight = dotsLine.offsetHeight;
     const dotHeight = 8;
@@ -73,7 +73,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   };
 
-  // Function to handle FAQ item click
   const handleFAQClick = (item) => {
     const answer = item.querySelector('.faq-answer');
     const arrow = item.querySelector('.icon-arrow');
@@ -81,8 +80,6 @@ document.addEventListener('DOMContentLoaded', function() {
     if (answer && arrow) {
       answer.classList.toggle('visible');
       arrow.classList.toggle('rotated');
-      
-      // Check if this is layout1 and update dots if needed
       const dotsLine = item.querySelector('.dots-line');
       if (dotsLine) {
         setTimeout(() => createDots(dotsLine), 200);
@@ -90,9 +87,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   };
 
-  // Initialize all FAQ items
+
   document.querySelectorAll('.faq-item').forEach(item => {
-    // Set up click handler for only the arrow icon
+
     const arrow = item.querySelector('.icon-arrow');
     if (arrow) {
       arrow.addEventListener('click', (e) => {
@@ -101,14 +98,13 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     }
 
-    // Initialize dots for layout1 if applicable
     const dotsLine = item.querySelector('.dots-line');
     if (dotsLine) {
       createDots(dotsLine);
     }
   });
 
-  // Handle window resize for layout1
+ 
   let resizeTimer;
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);

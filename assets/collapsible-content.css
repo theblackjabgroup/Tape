@@ -1,3 +1,4 @@
+
 .faq-section {
   max-width: 1600px;
   margin: 0 auto;
@@ -46,7 +47,7 @@
   left: calc(3rem + 15px); /* Align with the dots-line */
   width: 30px; /* Width of the semicircle */
   height: 35px; /* Height to ensure semicircular shape */
-  background-color: rgb(var(--color-background)); /* Ensure this matches the background where the div sits */
+  background-color:rgb(var(--color-background));
   border-radius: 50%; /* Creates the semicircle effect */
   z-index: 1;
 }
@@ -132,11 +133,14 @@
     font-family: 'Fira Sans', sans-serif;
     font-weight: bold;
     font-size: 28px;
+    margin-bottom:8px;
 }
 .support-text{
    font-family: 'Inter', sans-serif;
     font-weight: normal; 
     font-size: 16px;
+  line-height: 1.2;
+  margin-top:0px;
 }
 
 
