@@ -28,12 +28,6 @@
     },
     {
       "type": "color",
-      "id": "base_background_color",
-      "label": "Base Background Color",
-      "default": "#FFFF00"
-    },
-    {
-      "type": "color",
       "id": "content_background_color",
       "label": "Content Background Color",
       "default": "#000000"
@@ -63,6 +57,12 @@
       "default": "#D9D9D9"
     },
     {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button Text Color",
+      "default": "#000000"
+    },
+    {
       "type": "checkbox",
       "id": "show_popup",
       "label": "Display Popup",
@@ -82,12 +82,13 @@
 <link rel="stylesheet" href="{{ 'popup.css' | asset_url }}">
 
 <div class="popup-base" id="emailPopup" 
-     style="--base-bg: {{ section.settings.base_background_color }};
-            --content-bg: {{ section.settings.content_background_color }};
+     style="--content-bg: {{ section.settings.content_background_color }};
             --header-bg: {{ section.settings.header_background_color }};
             --header-text: {{ section.settings.header_text_color }};
             --popup-text: {{ section.settings.popup_text_color }};
-            --button-bg: {{ section.settings.button_background_color }};">
+            --button-bg: {{ section.settings.button_background_color }};
+            --button-text: {{ section.settings.button_text_color }};
+                display: none; z-index: 9999;">
     <div class="popup-content">
         <div class="popup-header">
             <div class="header-background">
@@ -117,8 +118,8 @@
         
         if (email) {
             alert("Subscribed!");
-            emailInput.value = ""; // Clear the input
-            closePopup(); // Close the popup after subscription
+            emailInput.value = ""; 
+            closePopup(); 
         } else {
             alert("Please enter your email address!");
         }
