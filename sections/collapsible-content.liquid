@@ -3,7 +3,7 @@
 .faq-item{
   background-color:rgb(var(--color-background));
 }
-.dot {
+.dotcard {
  background-color: rgb(var(--color-background));
 }
 .striaght-line {
@@ -15,7 +15,7 @@
   <div class='faq-main'>
     <!-- Left side -->
     <div class="faq-header">
-      <h2 class="faq-title">{{ section.settings.caption }}</h2>
+      <p class="faq-title" style="margin-bottom: 8px;">{{ section.settings.caption }}</p>
       <p class="support-text">{{ section.settings.description }}</p>
     </div>
   <!--right side -->
@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
     dotsLine.innerHTML = '';
     for (let i = 0; i < numberOfDots; i++) {
       const dot = document.createElement('span');
-      dot.className = 'dot color-{{ section.settings.color_scheme }}';
+      dot.className = 'dotcard color-{{ section.settings.color_scheme }}';
       dotsLine.appendChild(dot);
     }
   };
