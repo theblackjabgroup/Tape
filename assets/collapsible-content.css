@@ -1,255 +1,250 @@
-.faq-header{
-  margin:2.8rem;
-}
+
 .faq-section {
-max-width: 1600px;
-margin: 0 auto;
-padding: 2rem 1rem;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
 }
-.faq-container {
-width: 100%;
-margin-left: 2rem;
-box-sizing: border-box;
-padding-right: 2rem;
+  .faq-container {
+  width: 100%;
+  margin-left: 2rem;
+  box-sizing: border-box;
+  padding-right: 2rem;
 }
-.faq-main {
-display: grid;
-padding: 10px;
-margin: 10px;
-grid-template-columns: 350px 1fr;
-gap: 8rem;
-align-items: start;
+  .faq-main {
+  display: grid;
+  padding: 10px;
+  margin: 10px;
+  grid-template-columns: 350px 1fr;
+  gap: 8rem;
+  align-items: start;
 }
 .faq-item {
-display: flex;
-position: relative;
-background: #f5f5f5;
-padding: 1.5rem;
-margin: 3rem;
-width: calc(100% - 2rem);
-box-sizing: border-box;
-transition: all 0.3s ease;
-min-height: 80px;
-clip-path: polygon(
-      0 0,
-      calc(3rem + 20px) 0,
-      calc(3rem + 22px) 3px,
-      calc(3rem + 24px) 5px,
-      calc(3rem + 26px) 7px,
-      calc(3rem + 28px) 8px,
-      calc(3rem + 30px) 9px,
-      calc(3rem + 32px) 8px,
-      calc(3rem + 34px) 7px,
-      calc(3rem + 36px) 5px,
-      calc(3rem + 38px) 3px,
-      calc(3rem + 40px) 0,
-      100% 0,
-      100% 100%,
-      calc(3rem + 40px) 100%,
-      calc(3rem + 38px) calc(100% - 3px),
-      calc(3rem + 36px) calc(100% - 5px),
-      calc(3rem + 34px) calc(100% - 7px),
-      calc(3rem + 32px) calc(100% - 8px),
-      calc(3rem + 30px) calc(100% - 9px),
-      calc(3rem + 28px) calc(100% - 8px),
-      calc(3rem + 26px) calc(100% - 7px),
-      calc(3rem + 24px) calc(100% - 5px),
-      calc(3rem + 22px) calc(100% - 3px),
-      calc(3rem + 20px) 100%,
-      0 100%
-    );
+  display: flex;
+  position: relative;
+  background: #f5f5f5;
+  padding: 1.5rem;
+  margin: 3rem;
+  width: calc(100% - 2rem);
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+  min-height: 80px;
+  clip-path: polygon(
+        0 0,
+        calc(3rem + 20px) 0,
+        calc(3rem + 22px) 3px,
+        calc(3rem + 24px) 5px,
+        calc(3rem + 26px) 7px,
+        calc(3rem + 28px)  8px,
+        calc(3rem + 30px) 8.5px,
+        calc(3rem + 32px) 8px,
+        calc(3rem + 34px) 7px,
+        calc(3rem + 36px) 5px,
+        calc(3rem + 38px) 3px,
+        calc(3rem + 40px) 0,
+        100% 0,
+        100% 100%,
+        calc(3rem + 40px) 100%,
+        calc(3rem + 38px) calc(100% - 3px),
+        calc(3rem + 36px) calc(100% - 5px),
+        calc(3rem + 34px) calc(100% - 7px),
+        calc(3rem + 32px) calc(100% - 8px),
+        calc(3rem + 30px) calc(100% - 8.5px),
+        calc(3rem + 28px) calc(100% - 8px),
+        calc(3rem + 26px) calc(100% - 7px),
+        calc(3rem + 24px) calc(100% - 5px),
+        calc(3rem + 22px) calc(100% - 3px),
+        calc(3rem + 20px) 100%,
+        0 100%
+      );
 
- overflow: hidden; 
+   overflow: hidden; 
 }
 
 .faq-number {
-padding: 0.25rem 0.5rem;
-font-family: 'Fira Sans', sans-serif;
+  padding: 0.25rem 0.5rem;
+ font-family: 'Fira Sans', sans-serif;
 font-weight: 500; 
-font-size: 20px;
-min-width: 2.5rem;
-text-align: center;
-position: relative;
-z-index: 2;
+  font-size: 20px;
+  min-width: 2.5rem;
+  text-align: center;
+  position: relative;
+  z-index: 2;
 }
 
 
 .dots-line {
-position: absolute;
-left: calc(3rem + 25px);
-top: 0;
-bottom: 0;
-width: 8px;
-display: flex;
-flex-direction: column;
-gap: 10px;
-align-items:stretch;
-height: 100%;
+  position: absolute;
+  left: calc(3rem + 25px);
+  top: 0;
+  bottom: 0;
+  width: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items:stretch;
+  height: 100%;
 }
-.dotcard {
-width: 8px;
-height: 8px;
-border-radius: 50%;
-flex-shrink: 0;
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
 }
-/* layout2  */
+  /* layout2  */
 .striaght-line {
-position: absolute;
-left: calc(3rem + 28px);
-top: 0;
-bottom: 0;
-width: 3px;
-height: 100%;
+  position: absolute;
+  left: calc(3rem + 28px);
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  height: 100%;
 }
 .faq-content {
-display: flex;
-flex: 1;
-margin-left: 40px;
-position: relative;
-z-index: 2;
+  display: flex;
+  flex: 1;
+  margin-left: 40px;
+  position: relative;
+  z-index: 2;
 }
 .faq-question {
-flex: 1;
-margin-right: 1.5rem;
+  flex: 1;
+  margin-right: 1.5rem;
 }
 .question-text {
-font-family: 'Fira Sans', sans-serif;
-  font-weight: 600; /* Semibold is typically weight 600 */
-  font-size: 20px;
+ font-family: 'Fira Sans', sans-serif;
+    font-weight: 600; /* Semibold is typically weight 600 */
+    font-size: 20px;
 }
 .faq-answer {
-margin-top: 0.5rem;
- font-family: 'Inter', sans-serif;
-  font-weight: normal; /* Regular weight is often 'normal' */
-  font-size: 16px;
-line-height: 1.5;
-overflow: hidden;
-max-height: 0;
-opacity: 0;
-transition: all 0.3s ease;
+  margin-top: 0.5rem;
+   font-family: 'Inter', sans-serif;
+    font-weight: normal; /* Regular weight is often 'normal' */
+    font-size: 16px;
+  line-height: 1.5;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: all 0.3s ease;
 }
 .faq-answer.visible {
-max-height: 500px;
-opacity: 1;
-margin-top: 1rem;
+  max-height: 500px;
+  opacity: 1;
+  margin-top: 1rem;
 }
 .icon-arrow {
-cursor: pointer;
-transition: transform 0.3s ease;
+  cursor: pointer;
+  transition: transform 0.3s ease;
 }
 .icon-arrow.rotated {
-transform: rotate(180deg);
+  transform: rotate(180deg);
 }
-.faq-title {
-  font-family: 'Fira Sans', sans-serif;
-  font-weight: bold;
-  font-size: 28px;
-   line-height: 1.2;
+  .faq-title {
+    font-family: 'Fira Sans', sans-serif;
+    font-weight: bold;
+    font-size: 28px;
+    margin-bottom:8px;
 }
 .support-text{
- font-family: 'Inter', sans-serif;
-  font-weight: normal; 
-  font-size: 16px;
-line-height: 1.2;
-margin-top:2px;
+   font-family: 'Inter', sans-serif;
+    font-weight: normal; 
+    font-size: 16px;
+  line-height: 1.2;
+  margin-top:0px;
 }
 
 
 
 @media screen and (max-width: 768px) {
-.faq-section {
-  padding: 1rem 0.5rem;
-}
-.faq-header{
-  margin:0;
-}
+  .faq-section {
+    padding: 1rem 0.5rem;
+  }
 
-.faq-main {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  padding: 0;
-  margin: 0;
-  width: 100%;
-}
-.faq-container {
-  margin-left: 0;
-  margin-right: 0;
-  padding-right: 0;
-  width: 100%;
-}
-.faq-header {
-  width: 100%;
-  padding: 0 1rem;
-  text-align: center; 
-}
-.faq-item {
-  width: 100%;
-  margin: 2rem 0;
-  padding: 1.25rem;
-  clip-path: polygon(
-      0 0,
-      calc(2.5rem + 15px) 0,
-      calc(2.5rem + 17px) 3px,
-      calc(2.5rem + 19px) 5px,
-      calc(2.5rem + 21px) 7px,
-      calc(2.5rem + 23px) 8px,
-      calc(2.5rem + 25px) 8.5px,
-      calc(2.5rem + 27px) 8px,
-      calc(2.5rem + 29px) 7px,
-      calc(2.5rem + 31px) 5px,
-      calc(2.5rem + 33px) 3px,
-      calc(2.5rem + 35px) 0,
-      100% 0,
-      100% 100%,
-      calc(2.5rem + 35px) 100%,
-      calc(2.5rem + 33px) calc(100% - 3px),
-      calc(2.5rem + 31px) calc(100% - 5px),
-      calc(2.5rem + 29px) calc(100% - 7px),
-      calc(2.5rem + 27px) calc(100% - 8px),
-      calc(2.5rem + 25px) calc(100% - 8.5px),
-      calc(2.5rem + 23px) calc(100% - 8px),
-      calc(2.5rem + 21px) calc(100% - 7px),
-      calc(2.5rem + 19px) calc(100% - 5px),
-      calc(2.5rem + 17px) calc(100% - 3px),
-      calc(2.5rem + 15px) 100%,
-      0 100%
-    );
-}
+  .faq-main {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+  .faq-container {
+    margin-left: 0;
+    margin-right: 0;
+    padding-right: 0;
+    width: 100%;
+  }
+  .faq-header {
+    width: 100%;
+    padding: 0 1rem;
+    text-align: center; 
+  }
+  .faq-item {
+    width: 100%;
+    margin: 2rem 0;
+    padding: 1.25rem;
+    clip-path: polygon(
+        0 0,
+        calc(2.5rem + 15px) 0,
+        calc(2.5rem + 17px) 3px,
+        calc(2.5rem + 19px) 5px,
+        calc(2.5rem + 21px) 7px,
+        calc(2.5rem + 23px) 8px,
+        calc(2.5rem + 25px) 8.5px,
+        calc(2.5rem + 27px) 8px,
+        calc(2.5rem + 29px) 7px,
+        calc(2.5rem + 31px) 5px,
+        calc(2.5rem + 33px) 3px,
+        calc(2.5rem + 35px) 0,
+        100% 0,
+        100% 100%,
+        calc(2.5rem + 35px) 100%,
+        calc(2.5rem + 33px) calc(100% - 3px),
+        calc(2.5rem + 31px) calc(100% - 5px),
+        calc(2.5rem + 29px) calc(100% - 7px),
+        calc(2.5rem + 27px) calc(100% - 8px),
+        calc(2.5rem + 25px) calc(100% - 8.5px),
+        calc(2.5rem + 23px) calc(100% - 8px),
+        calc(2.5rem + 21px) calc(100% - 7px),
+        calc(2.5rem + 19px) calc(100% - 5px),
+        calc(2.5rem + 17px) calc(100% - 3px),
+        calc(2.5rem + 15px) 100%,
+        0 100%
+      );
+  }
 
-.dots-line {
-  left: calc(2.5rem + 21px);
-  width: 6px;
-   top: 10px;
-bottom: 10px;
-}
-.striaght-line {
-  left: calc(2.5rem + 23px);
-  width: 4px;
-}
-.dotcard {
-  width: 8px;
-  height: 8px;
-}
-.faq-number {
-  font-size: 1.5rem;
-  min-width: 2rem;
-  padding: 0.25rem;
-}
+  .dots-line {
+    left: calc(2.5rem + 21px);
+    width: 6px;
+     top: 10px;
+  bottom: 10px;
+  }
+  .striaght-line {
+    left: calc(2.5rem + 21px);
+    width: 2px;
+  }
+  .dot {
+    width: 8px;
+    height: 8px;
+  }
+  .faq-number {
+    font-size: 1.5rem;
+    min-width: 2rem;
+    padding: 0.25rem;
+  }
 
-.faq-content {
-  margin-left: 30px;
-}
+  .faq-content {
+    margin-left: 30px;
+  }
 
-.faq-question {
-  margin-right: 1rem;
-}
-.faq-answer.visible {
-  max-height: none; 
-  margin-top: 0.75rem;
-}
-.icon-arrow {
-  width: 20px;
-  height: 20px;
-}
+  .faq-question {
+    margin-right: 1rem;
+  }
+  .faq-answer.visible {
+    max-height: none; 
+    margin-top: 0.75rem;
+  }
+  .icon-arrow {
+    width: 20px;
+    height: 20px;
+  }
 }
