@@ -1,86 +1,5 @@
-{% schema %}
-{
-  "name": "Email Popup",
-  "settings": [
-    {
-      "type": "text",
-      "id": "popup_title",
-      "label": "Popup Title",
-      "default": "Join Our Community!"
-    },
-    {
-      "type": "textarea",
-      "id": "popup_message",
-      "label": "Popup Message",
-      "default": "Stay updated with the latest news, exclusive offers, and expert tips. Sign up for our newsletter and get 10% off your first order!"
-    },
-    {
-      "type": "text",
-      "id": "email_placeholder",
-      "label": "Email Input Placeholder",
-      "default": "Enter your email"
-    },
-    {
-      "type": "text",
-      "id": "button_text",
-      "label": "Button Text",
-      "default": "Subscribe Now"
-    },
-    {
-      "type": "color",
-      "id": "content_background_color",
-      "label": "Content Background Color",
-      "default": "#000000"
-    },
-    {
-      "type": "color",
-      "id": "header_background_color",
-      "label": "Header Background Color",
-      "default": "#FF0000"
-    },
-    {
-      "type": "color",
-      "id": "header_text_color",
-      "label": "Header Text Color",
-      "default": "#FFFFFF"
-    },
-    {
-      "type": "color",
-      "id": "popup_text_color",
-      "label": "Popup Text Color",
-      "default": "#FFFFFF"
-    },
-    {
-      "type": "color",
-      "id": "button_background_color",
-      "label": "Button Background Color",
-      "default": "#D9D9D9"
-    },
-    {
-      "type": "color",
-      "id": "button_text_color",
-      "label": "Button Text Color",
-      "default": "#000000"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_popup",
-      "label": "Display Popup",
-      "default": true
-    }
-  ],
-  "presets": [
-    {
-      "name": "Default",
-      "category": "Popups"
-    }
-  ]
-}
-{% endschema %}
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link rel="stylesheet" href="{{ 'popup.css' | asset_url }}">
-
 <div class="popup-base" id="emailPopup" 
      style="--content-bg: {{ section.settings.content_background_color }};
             --header-bg: {{ section.settings.header_background_color }};
@@ -88,7 +7,7 @@
             --popup-text: {{ section.settings.popup_text_color }};
             --button-bg: {{ section.settings.button_background_color }};
             --button-text: {{ section.settings.button_text_color }};
-                display: none; z-index: 9999;">
+              display: none; z-index: 9999;">
     <div class="popup-content">
         <div class="popup-header">
             <div class="header-background">
@@ -97,7 +16,7 @@
             </div>
         </div>
         <p class="popup-message">{{ section.settings.popup_message }}</p>
-        
+
         <div class="input-wrapper">
             <i class="fa fa-envelope email-icon"></i>
             <input type="email" id="emailInput" class="email-input" placeholder="{{ section.settings.email_placeholder }}">
@@ -106,16 +25,14 @@
         <div class= "triangle">&times;</div>
     </div>
 </div>
-
 <script>
     function closePopup() {
         document.getElementById("emailPopup").style.display = "none";
     }
-
     function handleSubscribe() {
         const emailInput = document.getElementById("emailInput");
         const email = emailInput.value;
-        
+
         if (email) {
             alert("Subscribed!");
             emailInput.value = ""; 
@@ -124,10 +41,112 @@
             alert("Please enter your email address!");
         }
     }
-
     document.addEventListener("DOMContentLoaded", function() {
         setTimeout(function() {
             document.getElementById("emailPopup").style.display = "flex";
         }, 1000);
     });
 </script>
+{% schema %}
+{
+    "name": "Newsletter Popup",
+    "settings": [
+        {
+            "type": "checkbox",
+            "id": "enable_popup",
+            "label": "Enable Popup",
+            "default": true
+        },
+        {
+            "type": "text",
+            "id": "popup_title",
+            "label": "Popup Title",
+            "default": "Subscribe to Our Newsletter"
+        },
+        {
+            "type": "textarea",
+            "id": "popup_message",
+            "label": "Popup Message",
+            "default": "Subscribe to receive updates, access to exclusive deals, and more."
+        },
+        {
+            "type": "text",
+            "id": "email_placeholder",
+            "label": "Email Placeholder",
+            "default": "Enter your email"
+        },
+        {
+            "type": "text",
+            "id": "button_text",
+            "label": "Button Text",
+            "default": "Subscribe"
+        },
+        {
+            "type": "text",
+            "id": "success_message",
+            "label": "Success Message",
+            "default": "Thanks for subscribing!"
+        },
+        {
+            "type": "text",
+            "id": "empty_email_message",
+            "label": "Empty Email Message",
+            "default": "Please enter your email address!"
+        },
+        {
+            "type": "text",
+            "id": "invalid_email_message",
+            "label": "Invalid Email Message",
+            "default": "Please enter a valid email address!"
+        },
+        {
+            "type": "number",
+            "id": "popup_delay",
+            "label": "Popup Delay (milliseconds)",
+            "default": 1000
+        },
+        {
+            "type": "color",
+            "id": "content_background_color",
+            "label": "Content Background Color",
+            "default": "#ffffff"
+        },
+        {
+            "type": "color",
+            "id": "header_background_color",
+            "label": "Header Background Color",
+            "default": "#f5f5f5"
+        },
+        {
+            "type": "color",
+            "id": "header_text_color",
+            "label": "Header Text Color",
+            "default": "#000000"
+        },
+        {
+            "type": "color",
+            "id": "popup_text_color",
+            "label": "Popup Text Color",
+            "default": "#000000"
+        },
+        {
+            "type": "color",
+            "id": "button_background_color",
+            "label": "Button Background Color",
+            "default": "#000000"
+        },
+        {
+            "type": "color",
+            "id": "button_text_color",
+            "label": "Button Text Color",
+            "default": "#ffffff"
+        }
+    ],
+    "presets": [
+        {
+            "name": "Newsletter Popup",
+            "category": "Promotional"
+        }
+    ]
+}
+{% endschema %}
