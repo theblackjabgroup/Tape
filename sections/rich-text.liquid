@@ -8,9 +8,7 @@
 .color-{{ section.settings.color_scheme }} .dot-l {
 background-color: currentColor;
 }
-{{ section.settings.font_title | font_face: font_display: 'swap' }}
-{{ section.settings.font_richtext | font_face: font_display: 'swap' }}
-{{ section.settings.font_richtextsubheading | font_face: font_display: 'swap' }}
+
 
   .layout1 ,
   .layout2 {
@@ -20,39 +18,23 @@ background-color: currentColor;
   .layout2 {
     padding-bottom:{{section.settings.padding_bottom}}px;  
   }
-  .layout1 p{
-    font-family:  {{ section.settings.font_richtextsubheading.family | default: "Inter" }}, {{ section.settings.font_richtextsubheading.fallback_families }};
-    font-weight: {{ section.settings.font_richtextsubheading.weight }};
-    font-style: {{ section.settings.font_richtextsubheading.style }};
-  }
+ 
 
   .layout1 h2 {
-    font-family:  {{ section.settings.font_title.family | default: "Fira Sans" }}, {{ section.settings.font_title.fallback_families }};
-    font-weight: {{ section.settings.font_title.weight }};
-    font-style: {{ section.settings.font_title.style }};
     font-size: {{ section.settings.heading_font_size }}px;
   }
 
   .layout1 .rich-text__text {
-    font-family: {{ section.settings.font_richtext.family }}, {{ section.settings.font_richtext.fallback_families }};
-     font-weight: {{ section.settings.font_richtext.weight }};
-    font-style: {{ section.settings.font_richtext.style }};
    font-size: {{ section.settings.text_font_size }}px;
   }
 .layout2 {
    background-color: {{ section.settings.background_color }};
 }
 .layout2 h2 {
-    font-family: {{ section.settings.font_title.family }}, {{ section.settings.font_title.fallback_families }};
-    font-weight: {{ section.settings.font_title.weight }};
-    font-style: {{ section.settings.font_title.style }};
     font-size: {{ section.settings.heading_font_size }}px;
   }
 
 .layout2 .rich-text__text {
-    font-family: {{ section.settings.font_richtext.family }}, {{ section.settings.font_richtext.fallback_families }};
-    font-weight: {{ section.settings.font_richtext.weight }};
-    font-style: {{ section.settings.font_richtext.style }};
      font-size: {{ section.settings.text_font_size }}px;
   }
   @media screen and (max-width: 749px) {
@@ -72,13 +54,13 @@ background-color: currentColor;
 <div class="rich-text-section color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
   {% if section.settings.layout_style == 'layout1' %} 
     <div class="layout1 page-width">
-      <h2>{{ section.settings.heading | default: "Transforming Healthcare with Innovative Solutions" }}</h2>
+      <h2 class="richtext_heading">{{ section.settings.heading | default: "Transforming Healthcare with Innovative Solutions" }}</h2>
       <div class="decorative-dots">
         {% for i in (1..10) %}
           <span class="dot"></span>
         {% endfor %}
       </div>
-       <p>{{ section.settings.caption | default: "Delivering Excellence in Medical Products" }}</p>
+       <p class="richtext_subheading">{{ section.settings.caption | default: "Delivering Excellence in Medical Products" }}</p>
       <div class="rich-text__text rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
         {{ section.settings.text }}
       </div>
@@ -90,8 +72,8 @@ background-color: currentColor;
       <!-- Dots will be added by JavaScript -->
           </div>
         <div class="rich-text__blocks {{ section.settings.content_alignment }}">
-          <h2>{{ section.settings.heading | default: "Transforming Healthcare with Innovative Solutions" }}</h2>
-           <p>{{ section.settings.caption | default: "Delivering Excellence in Medical Products" }}</p>
+          <h2 class="richtext_heading">{{ section.settings.heading | default: "Transforming Healthcare with Innovative Solutions" }}</h2>
+           <p class="richtext_subheading" >{{ section.settings.caption | default: "Delivering Excellence in Medical Products" }}</p>
          
           <div class="rich-text__text rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
             {{ section.settings.text }}
@@ -105,63 +87,79 @@ background-color: currentColor;
   {% endif %}
 </div>
 
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  
   const dotsContainer = document.querySelector('.rich-text__text');
   const leftDots = document.querySelector('.side-dots.left');
   const rightDots = document.querySelector('.side-dots.right');
   
- 
-  const DOT_SPACE = 17;
+
+  const DOT_WIDTH = 8; 
+  const DOT_MARGIN = 16; 
+  const DOT_TOTAL_SPACE = DOT_WIDTH + DOT_MARGIN; 
   
   function updateDots() {
     if (!dotsContainer || !leftDots || !rightDots) return;
     
-   
-    const containerHeight = dotsContainer.offsetHeight;
-    const paddingSpace = 20;
-    const availableHeight = containerHeight - paddingSpace;
-    const numberOfDots = Math.max(
-      Math.floor(availableHeight / DOT_SPACE),
-      10
-    );
+    // Get the current screen width
+    const screenWidth = window.innerWidth;
     
-    [leftDots, rightDots].forEach(dotContainer => {
-      const currentDots = dotContainer.querySelectorAll('.dot-l').length;
+    // Calculate number of dots based on screen width for mobile
+    if (screenWidth <= 749) { // Mobile breakpoint
+      const availableWidth = screenWidth * 0.8; // Using 80% of screen width
+      const numberOfDots = Math.floor(availableWidth / DOT_TOTAL_SPACE);
       
-      if (numberOfDots > currentDots) {
-     
-        const dotsToAdd = numberOfDots - currentDots;
-        for (let i = 0; i < dotsToAdd; i++) {
+      [leftDots, rightDots].forEach(dotContainer => {
+      
+        dotContainer.innerHTML = '';
+        
+        
+        for (let i = 0; i < numberOfDots; i++) {
           const dot = document.createElement('span');
           dot.className = 'dot-l';
           dotContainer.appendChild(dot);
         }
-      } else if (numberOfDots < currentDots) {
+      });
+    } else {
+   
+      const containerHeight = dotsContainer.offsetHeight;
+      const paddingSpace = 20;
+      const availableHeight = containerHeight - paddingSpace;
+      const numberOfDots = Math.max(
+        Math.floor(availableHeight / 17),
+        10
+      );
+      
+      [leftDots, rightDots].forEach(dotContainer => {
        
-        const dotsToRemove = currentDots - numberOfDots;
-        for (let i = 0; i < dotsToRemove; i++) {
-          if (dotContainer.lastChild) {
-            dotContainer.removeChild(dotContainer.lastChild);
-          }
+        dotContainer.innerHTML = '';
+        
+       
+        for (let i = 0; i < numberOfDots; i++) {
+          const dot = document.createElement('span');
+          dot.className = 'dot-l';
+          dotContainer.appendChild(dot);
         }
-      }
-    });
+      });
+    }
   }
+
   const resizeObserver = new ResizeObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.target === dotsContainer) {
-        requestAnimationFrame(updateDots);
-      }
-    });
+    requestAnimationFrame(updateDots);
   });
   
   if (dotsContainer) {
     resizeObserver.observe(dotsContainer);
-    updateDots();
+    updateDots(); // Initial update
   }
   
+  // Also listen for window resize events
+  window.addEventListener('resize', () => {
+    requestAnimationFrame(updateDots);
+  });
+  
+  // Cleanup
   window.addEventListener('unload', () => {
     if (resizeObserver) {
       resizeObserver.disconnect();
@@ -213,24 +211,6 @@ document.addEventListener('DOMContentLoaded', function() {
       "id": "color_scheme",
       "label": "t:sections.all.colors.label",
       "default": "scheme-1"
-    },
-    {
-      "type":"font_picker",
-      "id":"font_title",
-      "label": "Choose Heading Font",
-      "default":"serif"
-    },
-    {
-        "type":"font_picker",
-      "id":"font_richtext",
-      "label":"Choose Description Font",
-       "default":"serif"
-    },
-       {
-        "type":"font_picker",
-      "id":"font_richtextsubheading",
-      "label":"Choose Subheading Font",
-       "default":"serif"
     },
     {
       "type": "range",
