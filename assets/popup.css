@@ -26,7 +26,7 @@
     flex-direction: column;
     align-items: center;
     padding:30px;
-
+    border-radius: 14px;
 }
 
 .popup-header {
@@ -45,6 +45,7 @@
     background-color: var(--header-bg);
     z-index: 1;
     padding: 10px;
+    border-radius: 14px;
 }
 
 .popup-header h2 {
@@ -66,6 +67,7 @@
     z-index: 1;
     padding: 0 20px 10px 10px;
     right: 0;
+    top: 0;
 }
 
 .popup-message {
@@ -73,16 +75,18 @@
     font-size: 15px;
     color: var(--popup-text);
     text-align: justify;
+    margin-top: 15px;
 }
 
 .input-wrapper {
     position: relative;
     width: 100%;
+    margin-top: 10px;
 }
 
 .email-input {
     width: 100%;
-    padding: 10px 10px 10px 35px;
+    padding: 5px 0 5px 30px;
     border: 1px solid #ccc;
     border-radius: 6px;
     box-sizing: border-box;
@@ -94,12 +98,12 @@
     top: 50%;
     transform: translateY(-50%);
     color: #C9CDD3;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .subscribe-btn {
     width: 50%;
-    padding: 13px;
+    padding: 5px;
     margin: 16px 0;
     background-color: var(--button-bg);
     color: #333;
@@ -122,7 +126,7 @@
     right: 0;
     width: 70px;
     height: 60px;
-    clip-path: polygon(100% 81%, 81% 100%, 100% 100%)
+    clip-path: polygon(100% 81%, 81% 100%, 100% 100%);
     z-index: 1000;
     padding: 30px;
     background-color: var(--header-bg);
