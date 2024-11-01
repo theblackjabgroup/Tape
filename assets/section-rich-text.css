@@ -2,9 +2,25 @@
   text-align: center;
   padding: 20px;
 }
+.richtext_heading{
+  margin-bottom:10px;
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+}
+.richtext_subheading{
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 500; /* Medium weight */
+}
+.rich-text__text{
+   font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: normal;
+}
 
 .layout1 p{
-   margin-bottom: 5px;
+  margin-bottom: 5px;
 }
 .layout1 .rich-text__text {
   margin: 0 auto;
