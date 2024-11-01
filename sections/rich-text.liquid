@@ -87,63 +87,79 @@ background-color: currentColor;
   {% endif %}
 </div>
 
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  
   const dotsContainer = document.querySelector('.rich-text__text');
   const leftDots = document.querySelector('.side-dots.left');
   const rightDots = document.querySelector('.side-dots.right');
   
- 
-  const DOT_SPACE = 20;
+
+  const DOT_WIDTH = 8; 
+  const DOT_MARGIN = 16; 
+  const DOT_TOTAL_SPACE = DOT_WIDTH + DOT_MARGIN; 
   
   function updateDots() {
     if (!dotsContainer || !leftDots || !rightDots) return;
     
-   
-    const containerHeight = dotsContainer.offsetHeight;
-    const paddingSpace = 20;
-    const availableHeight = containerHeight - paddingSpace;
-    const numberOfDots = Math.max(
-      Math.floor(availableHeight / DOT_SPACE),
-      10
-    );
+    // Get the current screen width
+    const screenWidth = window.innerWidth;
     
-    [leftDots, rightDots].forEach(dotContainer => {
-      const currentDots = dotContainer.querySelectorAll('.dot-l').length;
+    // Calculate number of dots based on screen width for mobile
+    if (screenWidth <= 749) { // Mobile breakpoint
+      const availableWidth = screenWidth * 0.8; // Using 80% of screen width
+      const numberOfDots = Math.floor(availableWidth / DOT_TOTAL_SPACE);
       
-      if (numberOfDots > currentDots) {
-     
-        const dotsToAdd = numberOfDots - currentDots;
-        for (let i = 0; i < dotsToAdd; i++) {
+      [leftDots, rightDots].forEach(dotContainer => {
+      
+        dotContainer.innerHTML = '';
+        
+        
+        for (let i = 0; i < numberOfDots; i++) {
           const dot = document.createElement('span');
           dot.className = 'dot-l';
           dotContainer.appendChild(dot);
         }
-      } else if (numberOfDots < currentDots) {
+      });
+    } else {
+   
+      const containerHeight = dotsContainer.offsetHeight;
+      const paddingSpace = 20;
+      const availableHeight = containerHeight - paddingSpace;
+      const numberOfDots = Math.max(
+        Math.floor(availableHeight / 17),
+        10
+      );
+      
+      [leftDots, rightDots].forEach(dotContainer => {
        
-        const dotsToRemove = currentDots - numberOfDots;
-        for (let i = 0; i < dotsToRemove; i++) {
-          if (dotContainer.lastChild) {
-            dotContainer.removeChild(dotContainer.lastChild);
-          }
+        dotContainer.innerHTML = '';
+        
+       
+        for (let i = 0; i < numberOfDots; i++) {
+          const dot = document.createElement('span');
+          dot.className = 'dot-l';
+          dotContainer.appendChild(dot);
         }
-      }
-    });
+      });
+    }
   }
+
   const resizeObserver = new ResizeObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.target === dotsContainer) {
-        requestAnimationFrame(updateDots);
-      }
-    });
+    requestAnimationFrame(updateDots);
   });
   
   if (dotsContainer) {
     resizeObserver.observe(dotsContainer);
-    updateDots();
+    updateDots(); // Initial update
   }
   
+  // Also listen for window resize events
+  window.addEventListener('resize', () => {
+    requestAnimationFrame(updateDots);
+  });
+  
+  // Cleanup
   window.addEventListener('unload', () => {
     if (resizeObserver) {
       resizeObserver.disconnect();
