@@ -1,6 +1,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link rel="stylesheet" href="{{ 'popup.css' | asset_url }}">
-<div class="popup-base" id="emailPopup" 
+
+{% if section.settings.enable_popup %}
+<div class="popup-base color-scheme--{{ section.settings.color_scheme }}" id="emailPopup"
      style="--content-bg: {{ section.settings.content_background_color }};
             --header-bg: {{ section.settings.header_background_color }};
             --header-text: {{ section.settings.header_text_color }};
@@ -22,31 +24,36 @@
             <input type="email" id="emailInput" class="email-input" placeholder="{{ section.settings.email_placeholder }}">
         </div>
         <button class="subscribe-btn" onclick="handleSubscribe()">{{ section.settings.button_text }}</button>
-        <div class= "triangle">&times;</div>
+        <div class="triangle">&times;</div>
     </div>
 </div>
+
 <script>
     function closePopup() {
         document.getElementById("emailPopup").style.display = "none";
     }
+
     function handleSubscribe() {
         const emailInput = document.getElementById("emailInput");
         const email = emailInput.value;
 
         if (email) {
-            alert("Subscribed!");
+            alert("{{ section.settings.success_message }}");
             emailInput.value = ""; 
             closePopup(); 
         } else {
-            alert("Please enter your email address!");
+            alert("{{ section.settings.empty_email_message }}");
         }
     }
+
     document.addEventListener("DOMContentLoaded", function() {
         setTimeout(function() {
             document.getElementById("emailPopup").style.display = "flex";
-        }, 1000);
+        }, {{ section.settings.popup_delay }});
     });
 </script>
+{% endif %}
+
 {% schema %}
 {
     "name": "Newsletter Popup",
@@ -56,6 +63,12 @@
             "id": "enable_popup",
             "label": "Enable Popup",
             "default": true
+        },
+        {
+            "type": "color_scheme",
+            "id": "color_scheme",
+            "label": "t:sections.all.colors.label",
+            "default": "scheme-1"
         },
         {
             "type": "text",

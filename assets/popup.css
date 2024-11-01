@@ -3,15 +3,17 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 400px;
-    height: 350px;
+    width: 350px;
+    height: 300px;
     clip-path: polygon(2% 15%, 0 15%, 2% 0, 100% 0, 100% 80%, 80% 100%, 2% 100%);
     background-color: var(--base-bg);
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1;
+    border-radius: 5%;
 }
+
 .popup-content {
     position: absolute;
     width: 100%;
@@ -24,32 +26,35 @@
     flex-direction: column;
     align-items: center;
     padding:30px;
-    border-radius:20px;
+
 }
+
 .popup-header {
     width: 100%;
     height: 40px;
 }
+
 .header-background {
     display: flex;
     position: absolute;
     top: 0px;
     left: 0px;
     width: 100%;
-    height: 213px;
+    height: 182px;
     clip-path: polygon(0 0, 100% 0, 97% 18%, 0 25%);
     background-color: var(--header-bg);
     z-index: 1;
     padding: 10px;
-    border-radius:20px;
 }
+
 .popup-header h2 {
-    font-size: 2.1rem;
+    font-size: 2.3rem;
     margin: -3px 10px;
     color: var(--header-text);
     position: relative;
     z-index: 1;
 }
+
 .close-btn {
     display: flex;
     font-size: 20px;
@@ -61,40 +66,42 @@
     z-index: 1;
     padding: 0 20px 10px 10px;
     right: 0;
-    top:0;
 }
+
 .popup-message {
-    padding-top: 10px;
-    font-size: 16px;
+    padding-top: 15px;
+    font-size: 15px;
     color: var(--popup-text);
     text-align: justify;
 }
+
 .input-wrapper {
     position: relative;
     width: 100%;
 }
+
 .email-input {
     width: 100%;
     padding: 10px 10px 10px 35px;
     border: 1px solid #ccc;
     border-radius: 6px;
     box-sizing: border-box;
-    margin: 20px 0 10px 0;
 }
+
 .email-icon {
     position: absolute;
     left: 10px;
-    top: 57%;
+    top: 50%;
     transform: translateY(-50%);
     color: #C9CDD3;
     font-size: 16px;
 }
+
 .subscribe-btn {
     width: 50%;
-    padding: 8px;
-    margin: 5px 0 0 0;
+    padding: 13px;
+    margin: 16px 0;
     background-color: var(--button-bg);
-    color: var(--button-text);
     color: #333;
     border: none;
     border-radius: 6px;
@@ -103,6 +110,7 @@
     align-self: flex-start;
     text-align: center;
 }
+
 .subscribe-btn:hover {
     background-color: #555;
     color: white;
@@ -112,9 +120,9 @@
     position: absolute;
     bottom: 0;
     right: 0;
-    width: 80px;
-    height: 70px;
-    clip-path: polygon(100% 81%, 81% 100%, 100% 100%);
+    width: 70px;
+    height: 60px;
+    clip-path: polygon(100% 81%, 81% 100%, 100% 100%)
     z-index: 1000;
     padding: 30px;
     background-color: var(--header-bg);
