@@ -345,6 +345,9 @@ body.drawer-open {
     /* --header-width: calc(100% - var(--logo-width) - var(--hamburger-size) - 24px); */
     --dropdown-min-height: 110px;
   }
+  .flex-container{
+    margin: 0;
+  }
 }
 
 @media (max-width: 768px) {
