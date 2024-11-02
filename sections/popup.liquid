@@ -12,19 +12,19 @@
               display: none; z-index: 9999;">
     <div class="popup-content">
         <div class="popup-header">
-            <div class="header-background">
+            <div class="popup-header-background">
               <h2>{{ section.settings.popup_title }}</h2>
-              <button class="close-btn" onclick="closePopup()">&times;</button>
+              <button class="popup-close-btn" onclick="closePopup()">&times;</button>
             </div>
         </div>
         <p class="popup-message">{{ section.settings.popup_message }}</p>
 
-        <div class="input-wrapper">
+        <div class="popup-input-wrapper">
             <i class="fa fa-envelope email-icon"></i>
-            <input type="email" id="emailInput" class="email-input" placeholder="{{ section.settings.email_placeholder }}">
+            <input type="email" id="emailInput" class="popup-email-input" placeholder="{{ section.settings.email_placeholder }}">
         </div>
-        <button class="subscribe-btn" onclick="handleSubscribe()">{{ section.settings.button_text }}</button>
-        <div class="triangle">&times;</div>
+        <button class="popup-subscribe-btn" onclick="handleSubscribe()">{{ section.settings.button_text }}</button>
+        <div class="popup-triangle">&times;</div>
     </div>
 </div>
 
