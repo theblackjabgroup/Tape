@@ -3,6 +3,7 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  margin:0 20px;
   height: 100vh;
   overflow: hidden;
 }
@@ -58,19 +59,20 @@ p {
 .slide-text {
   position: absolute;
   bottom: 0;
-   margin-left:20px;
-  margin-right:20px;
-  display:flex;
+  left: 20px;
+  right: 20px;
+  display: flex;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   width: calc(100% - 40px);
- 
-  
- transform: translateY(100%); /* Slide in vertically from below */
+  transform: translateY(100%);
   transition: transform 0.5s ease, opacity 0.5s ease;
-  opacity: 0; /* Initially hidden */
   box-sizing: border-box;
+  will-change: transform, opacity; /* Hinting the browser for better performance */
 }
+
+
+
 .description{
   flex:2;
   padding:20px;
@@ -83,8 +85,10 @@ p {
   justify-content: flex-end; 
 }
 .slide.active .slide-text {
-   transform: translateY(0); /* Brings it up into view */
-  opacity: 0.8;
+ 
+  transform: translateY(0);
+  opacity: 1; /* If needed */
+
 
 }
 .slide.active h3 {
