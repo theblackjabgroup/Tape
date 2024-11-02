@@ -3,7 +3,7 @@
 .faq-item{
   background-color:rgb(var(--color-background));
 }
-.dot {
+.collapse_dot {
  background-color: rgb(var(--color-background));
 }
 .striaght-line {
@@ -15,15 +15,15 @@
   <div class='faq-main'>
     <!-- Left side -->
     <div class="faq-header">
-      <h2 class="faq-title">{{ section.settings.caption }}</h2>
-      <p class="support-text">{{ section.settings.description }}</p>
+     <h2 class="faq-title">{{ section.settings.caption | default: 'Help & Support' }}</h2>
+  <p class="support-text">{{ section.settings.description | default: "We're here to assist you with questions about products, sizing, or orders. Our customer support team is available via phone, email, or live chat." }}</p>
     </div>
   <!--right side -->
     <div class='faq-container '>
        {% for block in section.blocks %}
    
   <div class="faq-item color-{{ section.settings.cardColor }}">
-    <span class="faq-number color-{{ section.settings.cardColor }} ">{{ block.settings.serialno }}</span>
+    <span class="faq-number color-{{ section.settings.cardColor }} ">{{ block.settings.serialno}}</span>
           {% if section.settings.layout_style == 'layout1' %}
     <div class="dots-line" >
       <!-- Dots will be added by JavaScript -->
@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
     dotsLine.innerHTML = '';
     for (let i = 0; i < numberOfDots; i++) {
       const dot = document.createElement('span');
-      dot.className = 'dot color-{{ section.settings.color_scheme }}';
+      dot.className = 'collapse_dot color-{{ section.settings.color_scheme }}';
       dotsLine.appendChild(dot);
     }
   };
@@ -119,15 +119,17 @@ document.addEventListener('DOMContentLoaded', function() {
   "tag": "section",
   "class": "section",
   "settings": [
-    {
+  {
       "type": "text",
       "id": "caption",
-      "label": "t:sections.collapsible_content.settings.caption.label"
+      "label": "FAQ Title",
+      "default": "Help & Support"
     },
     {
       "type": "text",
       "id": "description",
-      "label": "t:sections.collapsible_content.settings.caption.label"
+      "label": "FAQ Description",
+      "default": "We're here to assist you with questions about products, sizing, or orders. Our customer support team is available via phone, email, or live chat."
     },
      {
       "type": "select",
