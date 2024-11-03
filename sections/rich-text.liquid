@@ -102,12 +102,12 @@ document.addEventListener('DOMContentLoaded', function() {
   function updateDots() {
     if (!dotsContainer || !leftDots || !rightDots) return;
     
-    // Get the current screen width
+  
     const screenWidth = window.innerWidth;
     
-    // Calculate number of dots based on screen width for mobile
-    if (screenWidth <= 749) { // Mobile breakpoint
-      const availableWidth = screenWidth * 0.8; // Using 80% of screen width
+ 
+    if (screenWidth <= 749) { 
+      const availableWidth = screenWidth * 0.8; 
       const numberOfDots = Math.floor(availableWidth / DOT_TOTAL_SPACE);
       
       [leftDots, rightDots].forEach(dotContainer => {
@@ -124,11 +124,11 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
    
       const containerHeight = dotsContainer.offsetHeight;
-      const paddingSpace = 20;
+      const paddingSpace = 15;
       const availableHeight = containerHeight - paddingSpace;
       const numberOfDots = Math.max(
-        Math.floor(availableHeight / 17),
-        10
+        Math.floor(availableHeight / 15),
+        12
       );
       
       [leftDots, rightDots].forEach(dotContainer => {
@@ -154,7 +154,6 @@ document.addEventListener('DOMContentLoaded', function() {
     updateDots(); // Initial update
   }
   
-  // Also listen for window resize events
   window.addEventListener('resize', () => {
     requestAnimationFrame(updateDots);
   });
