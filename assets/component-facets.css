@@ -85,6 +85,7 @@
 .mobile-facets__sort .select:after,
 .mobile-facets__sort .select:before {
   content: none;
+  background-color: black;
 }
 
 .facet-filters__field .select__select,
@@ -144,12 +145,13 @@
   box-shadow: 0 0 0 0.3rem rgb(var(--color-background)), 0 0 0.5rem 0.4rem rgba(var(--color-foreground), 0.3);
 }
 
+/*
 .facet-filters__sort:focus-visible {
   outline: 0.2rem solid rgba(var(--color-foreground), 0.5);
   outline-offset: 1rem;
-  box-shadow: 0 0 0 1rem rgb(var(--color-background)), 0 0 0.2rem 1.2rem rgba(var(--color-foreground), 0.3);
+  box-shadow: 0 0 0 1rem rgb(var(--color-background)), 0 0 0.2rem 1.2rem rgba(var(--color-foreground), 0.3);  
 }
-
+*/
 .facet-filters__sort.focused {
   outline: 0.2rem solid rgba(var(--color-foreground), 0.5);
   outline-offset: 1rem;
@@ -1143,9 +1145,8 @@ input.mobile-facets__checkbox {
   }
 
   .facets-vertical .facets__summary {
-    padding-top: 1.5rem;
+    padding: 1.5rem;
     margin-bottom: 0;
-    padding-bottom: 1.5rem;
   }
 
   .facets__heading--vertical {

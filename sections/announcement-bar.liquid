@@ -1,5 +1,7 @@
 {{ 'component-slideshow.css' | asset_url | stylesheet_tag }}
 {{ 'component-slider.css' | asset_url | stylesheet_tag }}
+{{ 'announcementBar.css' | asset_url | stylesheet_tag }}
+
 <script src="{{ 'announcementBarView.js' | asset_url }}" defer="defer"></script>
 
 {%- liquid
@@ -15,6 +17,13 @@
   endif
 -%}
 
+{%- style -%}
+  :root {
+  --announcement-bar-background-color: {{ section.settings.announcement_bar_background_color }};
+  --announcement-bar-color: {{ section.settings.announcement_bar_color }};
+  --announcement-bar-text: {{ section.settings.announcement_bar_text }};
+  }
+{% endstyle %}
 {% if social_icons %}
   {{ 'component-list-social.css' | asset_url | stylesheet_tag }}
 {% endif %}
@@ -24,10 +33,16 @@
     margin: 0px {{ section.settings.bar_margin }}px;
   }
 }
+@media screen and (max-width: 749px) {
+  .config-margin-mobile{
+    margin: 0px {{ section.settings.mobile_bar_margin }}px;
+  }
+}
 </style>
 
 <{% if section.settings.enable_sticky_bar %}sticky-bar data-sticky-type = "{{ section.settings.enable_sticky_bar }}"{% else %}div{% endif %} >
-  <div class="utility-bar vertical-bar color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator and section.blocks.size > 0 %} utility-bar--bottom-border{% elsif section.settings.show_line_separator and section.settings.show_social and social_icons%} utility-bar--bottom-border-social-only{% endif %}{% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header-localization{% endif %} config-margin" {{ block.shopify_attributes }} >
+  <div class="bb-announcement-bar-wrapper">
+  <div class="utility-bar vertical-bar color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator and section.blocks.size > 0 %} utility-bar--bottom-border{% elsif section.settings.show_line_separator and section.settings.show_social and social_icons%} utility-bar--bottom-border-social-only{% endif %}{% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header-localization{% endif %} config-margin config-margin-mobile bb-announcement-bar-background" {{ block.shopify_attributes }} >
     <div class="page-width announcement-width bb-max-width utility-bar__grid{% if announcement_bar and language_country_selector or section.settings.show_social and social_icons %} utility-bar__grid--3-col{% elsif language_country_selector or section.settings.show_social and social_icons %} utility-bar__grid--2-col{% endif %}">
       {%- if section.settings.show_social and social_icons -%}
         {%- render 'social-icons' -%}
@@ -136,7 +151,7 @@
                         name="previous"
                         aria-label="{{ 'sections.announcements.previous_announcement' | t }}"
                         aria-controls="Slider-{{ section.id }}">
-                        <span class="svg-wrapper">
+                        <span class="announcement-bar-arrow-svg svg-wrapper">
                           {{- 'icon-caret.svg' | inline_asset_content -}}
                         </span>
                       </button>
@@ -183,7 +198,7 @@
                         name="next"
                         aria-label="{{ 'sections.announcements.next_announcement' | t }}"
                         aria-controls="Slider-{{ section.id }}">
-                        <span class="svg-wrapper">
+                        <span class="announcement-bar-arrow-svg svg-wrapper">
                           {{- 'icon-caret.svg' | inline_asset_content -}}
                         </span>
                       </button>
@@ -227,7 +242,7 @@
               <div>
                 <h2 class="visually-hidden" id="AnnouncementCountryLabel">{{ 'localization.country_label' | t }}</h2>
                 {%- render 'country-localization'
-                  , localPosition: 'AnnouncementCountry' -%}
+                  , localPosition: 'AnnouncementCountry' , ab: true-%}
               </div>
             {%- endform -%}
           </localization-form>
@@ -241,7 +256,7 @@
               <div>
                 <h2 class="visually-hidden" id="AnnouncementLanguageLabel">{{ 'localization.language_label' | t }}</h2>
                 {%- render 'language-localization'
-                  , localPosition: 'AnnouncementLanguage' -%}
+                  , localPosition: 'AnnouncementLanguage', ab: true -%}
               </div>
             {%- endform -%}
           </localization-form>
@@ -253,6 +268,7 @@
       id="bb-test"
       style="display: none;"
       data-hide=""></div>
+  </div>
   </div>
 </{% if section.settings.enable_sticky_bar %}sticky-bar{% else %}div{% endif %}>
 
@@ -283,12 +299,6 @@
       "groups": ["header"]
     },
     "settings": [
-      {
-        "type": "color_scheme",
-        "id": "color_scheme",
-        "label": "t:sections.all.colors.label",
-        "default": "scheme-4"
-      },
       {
         "type": "checkbox",
         "id": "show_line_separator",
@@ -332,11 +342,41 @@
       },  {
       "type": "range",
       "id": "bar_margin",
-      "label": "Margin",
+      "label": "Desktop Margin",
       "min": 0,
-      "max": 30,
+      "max": 100,
+      "step": 1,
+      "default": 30
+    },  {
+      "type": "range",
+      "id": "mobile_bar_margin",
+      "label": "Mobile Margin",
+      "min": 0,
+      "max": 100,
       "step": 1,
       "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Color Settings"
+    },
+    {
+      "type": "color",
+      "id": "announcement_bar_background_color",
+      "label": "Announcement Bar Background Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "announcement_bar_color",
+      "label": "Announcement Bar Color",
+      "default": "#D8D8D8"
+    },
+   {
+      "type": "color",
+      "id": "announcement_bar_text",
+      "label": "Announcement Bar Text Color",
+      "default": "#000000"
     }
     ],
     "blocks": [
