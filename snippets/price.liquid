@@ -5,6 +5,7 @@
   - product: {Object} Product Liquid object (optional)
   - placeholder: {Boolean} Renders a placeholder price (optional)
   - main : {Boolean} Checks wether it is caleed from main-product.liquid or not (optional)
+  - cp : Boolean} Checks wether it is caleed from product card.liquid or not (optional)
   - use_variant: {Boolean} Renders selected or first variant price instead of overall product pricing (optional)
   - show_badges: {Boolean} Renders 'Sale' and 'Sold Out' tags if the product matches the condition (optional)
   - price_class: {String} Adds a price class to the price element (optional)
@@ -36,9 +37,7 @@
     assign money_price_max = price_max | money_with_currency
   endif
 
-  if target == product and product.price_varies
-    assign money_price = 'products.product.price.from_price_html' | t: price: money_price
-  endif
+
 -%}
 
 {%- unless target == null and placeholder == null -%}
@@ -78,7 +77,7 @@
             {%- endunless -%}
           {%- endif -%}
           <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.regular_price' | t }}</span>
-          <span class="price-item price-item--regular">
+          <span class="price-item price-item--regular {% if cp %} bb-price2 {% endif %}">
             {{-
               'products.product.volume_pricing.price_range'
               | t: minimum: money_price_min, maximum: money_price_max
@@ -86,20 +85,20 @@
           </span>
         {%- else -%}
           <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.regular_price' | t }}</span>
-          <span class="price-item price-item--regular">
+          <span class="price-item price-item--regular {% if cp %} bb-price2 {% endif %}">
             {{ money_price }}
           </span>
         {%- endif -%}
       </div>
       <div class="price__sale">
-      <span class="price-item price-item--sale price-item--last {% if main %} bb-price {% endif %}">
+      <span class="price-item price-item--sale price-item--last {% if main %} bb-price {% endif %} {% if cp %} bb-price2 {% endif %}">
           <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.sale_price' | t }}</span>
             {{ money_price }}
           </span>
         {%- unless product.price_varies == false and product.compare_at_price_varies %}
           <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.regular_price' | t }}</span>
           <span>
-            <s class="price-item price-item--regular {% if main %} bb-price-item {% endif %}">
+            <s class="price-item price-item--regular {% if main %} bb-price-item {% endif %} {% if cp %} bb-price-item2 {% endif %}">
               {% if settings.currency_code_enabled %}
                 {{ compare_at_price | money_with_currency }}
               {% else %}
