@@ -3,8 +3,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 350px;
-    height: 300px;
+    width: 312px;
+    height: 272px;
     clip-path: polygon(2% 15%, 0 15%, 2% 0, 100% 0, 100% 80%, 80% 100%, 2% 100%);
     background-color: var(--base-bg);
     display: flex;
@@ -40,7 +40,7 @@
     top: 0px;
     left: 0px;
     width: 100%;
-    height: 182px;
+    height: 165px;
     clip-path: polygon(0 0, 100% 0, 97% 18%, 0 25%);
     background-color: var(--header-bg);
     z-index: 1;
@@ -50,7 +50,7 @@
 
 .popup-header h2 {
     font-size: 2.3rem;
-    margin: -3px 10px;
+    margin: -9px 10px;
     color: var(--header-text);
     position: relative;
     z-index: 1;
@@ -59,34 +59,34 @@
 .popup-close-btn {
     display: flex;
     font-size: 20px;
-    color: #fffbfb;
+    color: var(--header-text);
     cursor: pointer;
     background: none;
     border: none;
     position: absolute;
     z-index: 1;
     padding: 0 20px 10px 10px;
-    right: 0;
-    top:0;
+    right: -6px;
+    top:4px;
 }
 
 .popup-message {
-    padding-top: 15px;
+    padding-top: 13px;
     font-size: 13px;
     color: var(--popup-text);
     text-align: justify;
-    margin-top: 15px;
+    margin-top: 6px;
 }
 
 .popup-input-wrapper {
     position: relative;
     width: 100%;
-    margin-top:20px;
+    margin-top:12px;
 }
 
 .popup-email-input {
     width: 100%;
-    padding: 5px 0 5px 30px;
+    padding: 10px 0 10px 30px;
     border: 1px solid #ccc;
     border-radius: 6px;
     box-sizing: border-box;
@@ -103,10 +103,10 @@
 
 .popup-subscribe-btn {
     width: 50%;
-    padding: 5px;
+    padding: 10px;
     margin: 16px 0;
     background-color: var(--button-bg);
-    color: #333;
+    color: var(--button-text);
     border: none;
     border-radius: 6px;
     cursor: pointer;
@@ -124,8 +124,8 @@
     position: absolute;
     bottom: 0;
     right: 0;
-    width: 70px;
-    height: 60px;
+    width: 65px;
+    height: 45px;
     clip-path: polygon(100% 81%, 81% 100%, 100% 100%)
     z-index: 1000;
     padding: 30px;
@@ -152,7 +152,7 @@
     }
 
     .popup-message {
-        font-size: 14px;
+        font-size: 11px;
     }
 
     .popup-email-input {
@@ -171,21 +171,31 @@
 @media screen and (max-width: 480px) {
     .popup-base {
         width: 80%;
-        min-height: 300px;
+        min-height: 250px;
     }
 
     .popup-content {
         padding: 15px;
     }
+    .email-icon {
+      top:65%;
+      transform: translateY(-80%);
+    }
 
     .popup-header h2 {
-        font-size: 1.5rem;
+        font-size: 1.7rem;
+        margin: -4px 10px;
     }
-
     .popup-header-background {
-        height: 180px;
+        height: 152px;
     }
-
+    .popup-message {
+        font-size: 13px;
+    }
+    .popup-input-wrapper {
+        margin-top: -10px;
+    }
+    
     .popup-close-btn {
         padding: 0 15px 8px 8px;
     }
@@ -193,6 +203,7 @@
     .popup-triangle {
         width: 60px;
         height: 50px;
+        padding: 22px;
     }
   .popup-subscribe-btn {
         width: 50%;
