@@ -65,10 +65,11 @@ p {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   width: calc(100% - 40px);
-  transform: translateY(100%);
-  transition: transform 0.5s ease, opacity 0.5s ease;
+  /* transform: translateY(100%);
   box-sizing: border-box;
-  will-change: transform, opacity; /* Hinting the browser for better performance */
+  will-change: transform, opacity;  */
+   opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 
@@ -87,7 +88,7 @@ p {
 .slide.active .slide-text {
  
   transform: translateY(0);
-  opacity: 1; /* If needed */
+opacity: 0.8;
 
 
 }
@@ -98,7 +99,7 @@ p {
 .feature {
  font-family: 'Inter', sans-serif;
  font-size: 14px;
- font-weight: 500;  /* medium */
+ font-weight: 500; 
  text-transform: uppercase;
  color: #666;
  margin-bottom: 5px;
@@ -141,15 +142,14 @@ p {
   width: 90%;
   height: 100px;
   margin: 10px auto;
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  
 }
 
 .slide.active {
   height: auto;
   width: 90%;
   display: flex;
-  flex-direction: column;
- 
+  flex-direction: column; 
 }
 
 .slide.active img {
