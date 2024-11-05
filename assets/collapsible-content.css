@@ -1,5 +1,5 @@
 .faq-header{
-  margin:3rem;
+  margin-top:3rem;
 }
 .faq-section {
   max-width: 1600px;
@@ -182,6 +182,7 @@ font-weight: 500;
   }
   .faq-header {
     width: 100%;
+    margin-top:0px;
     padding: 0 1rem;
     text-align: center; 
   }
