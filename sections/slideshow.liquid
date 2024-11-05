@@ -36,11 +36,36 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function setActiveSlide(slide, forceActivate = false) {
     if (activeSlide !== slide || forceActivate) {
+      const wasPreviouslyActive = slide.classList.contains('active');
+      
+     
       slides.forEach(s => {
         s.classList.remove('active');
+        const slideText = s.querySelector('.slide-text');
+        if (slideText) {
+          const parent = slideText.parentNode;
+          const clone = slideText.cloneNode(true);
+          parent.removeChild(slideText);
+          parent.appendChild(clone);
+        }
       });
+
+     
       slide.classList.add('active');
       activeSlide = slide;
+
+    
+      if (isMobile && !wasPreviouslyActive) {
+        
+        const rect = slide.getBoundingClientRect();
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+     
+        window.scrollTo({
+          top: scrollTop + rect.top - 10, 
+          behavior: 'smooth'
+        });
+      }
     }
   }
 
@@ -66,8 +91,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     setActiveSlide(slides[0], true);
   }
-
   slides.forEach(handleInteraction);
+
   initializeView();
 
   let resizeTimer;
@@ -76,8 +101,8 @@ document.addEventListener('DOMContentLoaded', function() {
     resizeTimer = setTimeout(initializeView, 250);
   });
 });
-
 </script>
+
 
 
 {% schema %}
