@@ -1,46 +1,50 @@
 {{ 'collapsible-content.css' | asset_url | stylesheet_tag }}
 <style>
 .faq-item{
-  background-color:rgb(var(--color-background));
+  background-color:{{section.settings.cardbackgroundcolor}};
 }
 .collapse_dot {
- background-color: rgb(var(--color-background));
+ background-color: {{section.settings.sectionbgcolor}};
 }
 .striaght-line {
-  background-color: rgb(var(--color-background));
+  background-color: {{section.settings.sectionbgcolor}};
+}
+   .faq-item::before,
+.faq-item::after {
+  background-color:{{section.settings.sectionbgcolor}};
 }
 </style>
 
-<div class="faq-section color-{{ section.settings.color_scheme }} gradient">
-  <div class='faq-main'>
+<div class="faq-section gradient">
+  <div class='faq-main' style="background-color: {{ section.settings.sectionbgcolor }}" >
     <!-- Left side -->
     <div class="faq-header">
-     <h2 class="faq-title">{{ section.settings.caption | default: 'Help & Support' }}</h2>
-  <p class="support-text">{{ section.settings.description | default: "We're here to assist you with questions about products, sizing, or orders. Our customer support team is available via phone, email, or live chat." }}</p>
+     <h2 class="faq-title" style="color: {{ section.settings.textcolor }}">{{ section.settings.caption | default: 'Help & Support' }}</h2>
+  <p class="support-text" style="color: {{ section.settings.textcolor }}">{{ section.settings.description | default: "We're here to assist you with questions about products, sizing, or orders. Our customer support team is available via phone, email, or live chat." }}</p>
     </div>
   <!--right side -->
     <div class='faq-container '>
        {% for block in section.blocks %}
    
-  <div class="faq-item color-{{ section.settings.cardColor }}">
-    <span class="faq-number color-{{ section.settings.cardColor }} ">{{ block.settings.serialno}}</span>
+  <div class="faq-item ">
+    <span class="faq-number " style="color: {{ section.settings.cardtextcolor }}">{{ block.settings.serialno}}</span>
           {% if section.settings.layout_style == 'layout1' %}
     <div class="dots-line" >
       <!-- Dots will be added by JavaScript -->
     </div>
       {% else %}
-            <div class="striaght-line color-{{ section.settings.color_scheme }}">
+            <div class="striaght-line color-{{ section.settings.sectionbgcolor }}">
               </div>
     {% endif %}
             
   <div class="faq-content">
       <div class="faq-question">
-        <div class="question-text color-{{ section.settings.cardColor }}">{{ block.settings.questiontext }}</div>
-        <div class="faq-answer color-{{ section.settings.cardColor }}">{{ block.settings.solutionans }}</div>
+        <div class="question-text" style="color: {{ section.settings.cardtextcolor }}">{{ block.settings.questiontext }}</div>
+        <div class="faq-answer" style="color: {{ section.settings.cardtextcolor }} ">{{ block.settings.solutionans }}</div>
       </div>
       <div>
 
-        <svg class="icon-arrow color-{{ section.settings.cardColor }}" width="24" height="24" viewBox="0 0 24 24">
+        <svg class="icon-arrow " style="color: {{ section.settings.cardtextcolor }}" width="24" height="24" viewBox="0 0 24 24">
           <path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
         </svg>
       </div>
@@ -50,7 +54,7 @@
              </div>
                {% endfor %}
   </div>
-             </div>
+    </div>
 </div>
 
 <script>
@@ -58,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const createDots = (dotsLine) => {
     const containerHeight = dotsLine.offsetHeight;
-    const dotHeight = 8;
+    const dotHeight = 9;
     const dotMargin = 8;
     const dotSpacing = dotHeight + dotMargin;
     const numberOfDots = Math.floor(containerHeight / dotSpacing);
@@ -66,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
     dotsLine.innerHTML = '';
     for (let i = 0; i < numberOfDots; i++) {
       const dot = document.createElement('span');
-      dot.className = 'collapse_dot color-{{ section.settings.color_scheme }}';
+      dot.className = 'collapse_dot ';
       dotsLine.appendChild(dot);
     }
   };
@@ -91,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const arrow = item.querySelector('.icon-arrow');
     if (arrow) {
       arrow.addEventListener('click', (e) => {
-        e.stopPropagation(); // Prevent event bubbling
+        e.stopPropagation(); 
         handleFAQClick(item);
       });
     }
@@ -147,16 +151,29 @@ document.addEventListener('DOMContentLoaded', function() {
       ],
       "default": "layout1"
     },
-    {
-      "type": "color_scheme",
-      "id": "color_scheme",
-      "label": "t:sections.all.colors.label",
-      "default": "scheme-1"
+     {
+      "type": "color",
+      "id": "sectionbgcolor",
+      "label": "Background Color",
+      "default": "#FFFFFF"
     },
      {
-      "type": "color_scheme",
-      "id": "cardColor",
-      "label": "Card Color"
+      "type": "color",
+      "id": "textcolor",
+      "label": "Text Color",
+      "default": "#FFFFFF"
+    },
+     {
+      "type": "color",
+      "id": "cardtextcolor",
+      "label": "Card Text Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "cardbackgroundcolor",
+      "label": "Card Background Color",
+      "default": "#FFFFFF"
     },
     {
       "type": "range",
