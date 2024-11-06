@@ -58,7 +58,7 @@
 }
 .dots-line {
   position: absolute;
-  left: calc(3rem + 25px);
+  left: calc(3rem + 26px);
   top: 0;
   bottom: 0;
   width: 8px;
