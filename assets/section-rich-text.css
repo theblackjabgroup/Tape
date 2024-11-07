@@ -2,12 +2,25 @@
   text-align: center;
   padding: 20px;
 }
-.headingtext{
+.richtext_heading{
   margin-bottom:10px;
-  }
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+}
+.richtext_subheading{
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 500; /* Medium weight */
+}
+.rich-text__text{
+   font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: normal;
+}
 
 .layout1 p{
-   margin-bottom: 5px;
+  margin-bottom: 5px;
 }
 .layout1 .rich-text__text {
   margin: 0 auto;
@@ -55,9 +68,11 @@ text-align: center;
 display: flex;
 flex-direction: column;
 justify-content: space-between;
+height:auto;
 }
 
 .side-dots.left, .side-dots.right {
+height:100%;
 width: 3%;
 padding: 0;
 margin: 0; 
@@ -77,43 +92,47 @@ background-color: #303030;
 @media screen and (max-width: 749px) {
   .layout1,
   .layout2 {
-      text-align: center;
+    text-align: center;
   }
- .dots-container {
-  flex-direction: column; 
-  justify-content: center;
-  max-width: 100%;
-}
-.side-dots.left, .side-dots.right {
-  width: 100%; 
-}
-.side-dots {
-  display: flex;
-  flex-direction: row; 
-  justify-content: center;
-  margin-bottom: 20px; 
-}
-  .side-dots.left {
-    margin-top:10px;
-  order: -1;
-}
-    .side-dots.right {
-  order: 1;
-      margin-bottom:10px;
-}
-
-
+  
+  .dots-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    width: 100%;
+  }
 
   .rich-text__blocks {
     width: 80%;
-    margin-bottom: 20px;
+    margin: 10px auto;
   }
-.dot-l {
-  width: 10px;
-  height: 10px;
-  margin: 12px; 
+
+  .side-dots {
+    width: 100%; /* Full width */
+    display: flex;
+    flex-direction: row !important;
+    justify-content: space-evenly; /* Changed to space-evenly */
+    /* align-items: center; */
+    padding: 10px 0;
+    margin: 0; /* Reset margin */
+  }
+  .side-dots.left, .side-dots.right {
+  height:20px;
+  width: 100%;
+  padding: 0;
+  margin: 0; 
 }
-  
+
+  .dot-l {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #303030;
+    flex-shrink: 0;
+    margin: 0; /* Reset margin */
+  }
+}
 
 
-}
+

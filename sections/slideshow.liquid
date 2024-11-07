@@ -9,10 +9,10 @@
         {% else %}
             {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
         {% endif %}
-        <h3>{{ block.settings.feature }}</h3>
+        <h3 style="color:{{ block.settings.feature_color }}">{{ block.settings.feature }}</h3>
         <div class="slide-text"   style="background-color: {{ section.settings.product_card_background_color }};" >
             <div class="description">
-              <p class="feature"  >{{ block.settings.feature }}</p>
+              <p class="feature" style="color: {{ section.settings.text_color }};"  >{{ block.settings.feature }}</p>
               <h2 style="color: {{ section.settings.text_color }};">{{ block.settings.title }}</h2>
               <p style="color: {{ section.settings.text_color }};" >{{ block.settings.content }}</p>
             </div>
@@ -28,7 +28,6 @@
     {% endfor %}
   </div>
 </div>
-
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   const slides = document.querySelectorAll('.slide');
@@ -37,26 +36,43 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function setActiveSlide(slide, forceActivate = false) {
     if (activeSlide !== slide || forceActivate) {
+      const wasPreviouslyActive = slide.classList.contains('active');
+      
+     
       slides.forEach(s => {
         s.classList.remove('active');
-        const content = s.querySelector('.slide-text');
-        if (content) {
-          content.style.opacity = '0';
+        const slideText = s.querySelector('.slide-text');
+        if (slideText) {
+          const parent = slideText.parentNode;
+          const clone = slideText.cloneNode(true);
+          parent.removeChild(slideText);
+          parent.appendChild(clone);
         }
       });
+
+     
       slide.classList.add('active');
-      const content = slide.querySelector('.slide-text');
-      if (content) {
-        content.style.opacity = '1';
-      }
       activeSlide = slide;
+
+    
+      if (isMobile && !wasPreviouslyActive) {
+        
+        const rect = slide.getBoundingClientRect();
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+     
+        window.scrollTo({
+          top: scrollTop + rect.top - 10, 
+          behavior: 'smooth'
+        });
+      }
     }
   }
 
   function handleInteraction(slide) {
     slide.addEventListener('click', (event) => {
       if (isMobile) {
-        event.preventDefault(); // Prevent default click behavior
+        event.preventDefault();
         setActiveSlide(slide);
       }
     });
@@ -72,15 +88,11 @@ document.addEventListener('DOMContentLoaded', function() {
     isMobile = window.innerWidth <= 768;
     slides.forEach(slide => {
       slide.classList.remove('active');
-      const content = slide.querySelector('.slide-text');
-      if (content) {
-        content.style.opacity = '0';
-      }
     });
     setActiveSlide(slides[0], true);
   }
-
   slides.forEach(handleInteraction);
+
   initializeView();
 
   let resizeTimer;
@@ -90,6 +102,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 </script>
+
 
 
 {% schema %}
@@ -138,6 +151,12 @@ document.addEventListener('DOMContentLoaded', function() {
         "label": "feature",
         "default": "NEW ARRIVAL"
       },
+       {
+      "type": "color",
+      "id": "feature_color",
+      "label": "Text Color",
+      "default": "#333333"
+    },
       {
         "type": "text",
         "id": "title",
@@ -156,6 +175,7 @@ document.addEventListener('DOMContentLoaded', function() {
         "label": "Show Button",
         "default": true
       },
+      
       {
         "type": "text",
         "id": "button_text",

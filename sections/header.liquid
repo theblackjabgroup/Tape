@@ -98,7 +98,7 @@
       </div>
       <nav>
         <ul class="mobile-nav-items">
-          {% for link in linklists['main-menu'].links %}
+          {% for link in section.settings.menu.links %}
             <li class="mobile-nav-item{% if link.links != blank %} has-dropdown{% endif %}">
               <a href="{{ link.url }}" class="mobile-nav-link">
                 {{ link.title }}
