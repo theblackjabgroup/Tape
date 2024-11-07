@@ -222,7 +222,6 @@
     width:50%;
   }
 }
-
 @media (min-width: 1280px) {
     .blog-card {
         flex: 0 0 calc(20% - 16px);
