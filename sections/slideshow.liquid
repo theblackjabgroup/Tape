@@ -9,7 +9,14 @@
         {% else %}
             {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
         {% endif %}
-        <h3 style="color:{{ block.settings.feature_color }}">{{ block.settings.feature }}</h3>
+        <div class="headarrow">
+          
+        <h3 class="headingtext" style="color:{{ block.settings.feature_color }}" >{{ block.settings.feature }}</h3>
+           <span id="info__banner__expand__button" class="svg-wrapper">
+            {{- 'icon-arrow.svg' | inline_asset_content -}}
+          </span>
+        </div>
+        
         <div class="slide-text"   style="background-color: {{ section.settings.product_card_background_color }};" >
             <div class="description">
               <p class="feature" style="color: {{ section.settings.text_color }};"  >{{ block.settings.feature }}</p>
@@ -22,86 +29,96 @@
               <a href="{{ block.settings.button_link }}" class="btn" style="color: {{ section.settings.text_color }}; background-color:{{ section.settings.btn_back_color }}" >{{ block.settings.button_text }}</a>
               {% endif %}
                  </div>
-          
         </div>
       </div>
     {% endfor %}
   </div>
 </div>
-<script>
+ <script>
 document.addEventListener('DOMContentLoaded', function() {
   const slides = document.querySelectorAll('.slide');
   let activeSlide = null;
   let isMobile = window.innerWidth <= 768;
-
-  function setActiveSlide(slide, forceActivate = false) {
-    if (activeSlide !== slide || forceActivate) {
-      const wasPreviouslyActive = slide.classList.contains('active');
-      
-     
-      slides.forEach(s => {
-        s.classList.remove('active');
-        const slideText = s.querySelector('.slide-text');
-        if (slideText) {
-          const parent = slideText.parentNode;
-          const clone = slideText.cloneNode(true);
-          parent.removeChild(slideText);
-          parent.appendChild(clone);
-        }
-      });
-
-     
-      slide.classList.add('active');
-      activeSlide = slide;
-
-    
-      if (isMobile && !wasPreviouslyActive) {
-        
-        const rect = slide.getBoundingClientRect();
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        
-     
-        window.scrollTo({
-          top: scrollTop + rect.top - 10, 
-          behavior: 'smooth'
-        });
+  const setActiveSlide = (slide) => {
+    if (!isMobile) {
+      if (activeSlide !== slide) {
+        slides.forEach(s => s.classList.remove('active'));
+        slide.classList.add('active');
+        activeSlide = slide;
       }
     }
-  }
-
-  function handleInteraction(slide) {
-    slide.addEventListener('click', (event) => {
-      if (isMobile) {
-        event.preventDefault();
-        setActiveSlide(slide);
-      }
-    });
-    
-    slide.addEventListener('mouseenter', () => {
-      if (!isMobile) {
-        setActiveSlide(slide);
-      }
-    });
-  }
-
-  function initializeView() {
-    isMobile = window.innerWidth <= 768;
+  };
+  const toggleSlideText = (slideText,arrow) => {
+    if (slideText.classList.contains('expanded')) {
+      slideText.classList.remove('expanded');
+      arrow.classList.remove('expanded');
+    } else {
+      document.querySelectorAll('.slide-text').forEach(text => text.classList.remove('expanded'));
+      slideText.classList.add('expanded');
+      arrow.classList.add('expanded');
+    }
+  };
+  const addMobileListeners = () => {
     slides.forEach(slide => {
-      slide.classList.remove('active');
+      const arrow = slide.querySelector('.svg-wrapper');
+      const slideText = slide.querySelector('.slide-text');
+      
+      arrow.addEventListener('click', () => toggleSlideText(slideText,arrow));
     });
-    setActiveSlide(slides[0], true);
+  };
+  const removeMobileListeners = () => {
+    slides.forEach(slide => {
+      const heading = slide.querySelector('.svg-wrapper');
+      const clone = heading.cloneNode(true);
+      heading.parentNode.replaceChild(clone, heading);
+    });
+  };
+  const addDesktopListeners = () => {
+    slides.forEach(slide => {
+      slide.addEventListener('mouseenter', () => setActiveSlide(slide));
+    });
+  };
+  const removeDesktopListeners = () => {
+    slides.forEach(slide => {
+      const clone = slide.cloneNode(true);
+      slide.parentNode.replaceChild(clone, slide);
+    });
+  };
+
+  const handleResize = () => {
+    const newIsMobile = window.innerWidth <= 768;
+    if (newIsMobile !== isMobile) {
+      isMobile = newIsMobile;
+      removeActiveState();
+      if (isMobile) {
+        removeMobileListeners();
+        addMobileListeners();
+      } else {
+        removeMobileListeners();
+        addDesktopListeners();
+        setActiveSlide(slides[0]);
+      }
+    }
+  };
+  const removeActiveState = () => {
+    slides.forEach(slide => slide.classList.remove('active'));
+    activeSlide = null;
+  };
+  if (isMobile) {
+    addMobileListeners();
+  } else {
+    addDesktopListeners();
+    setActiveSlide(slides[0]);
   }
-  slides.forEach(handleInteraction);
-
-  initializeView();
-
   let resizeTimer;
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(initializeView, 250);
+    resizeTimer = setTimeout(handleResize, 250);
   });
 });
 </script>
+
+
 
 
 
