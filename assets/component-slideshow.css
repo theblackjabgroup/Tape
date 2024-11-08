@@ -42,13 +42,7 @@ p {
   padding: 20px;
 }
 
-.des-button {
-  flex: 1;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-}
+
 .feature {
   font-family: 'Inter', sans-serif;
   font-size: 14px;
@@ -139,6 +133,13 @@ p {
 .slide.active h3 {
   opacity: 0;
 }
+  .des-button {
+  flex: 1;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
 }
 
 @media screen and (max-width: 1100px) {
@@ -146,22 +147,21 @@ p {
     display: flex;
     overflow-x: scroll;
     scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-    scrollbar-width: none; /* Hide scrollbar Firefox */
-    -ms-overflow-style: none; /* Hide scrollbar IE/Edge */
+    -webkit-overflow-scrolling: touch; 
+    scrollbar-width: none;
+    -ms-overflow-style: none; 
     width: 100%;
-    gap: 0; /* Remove gap to ensure proper snap alignment */
+    gap: 0; 
   }
-  
-  /* Hide scrollbar for Chrome/Safari */
+
   .interactive-slideshow::-webkit-scrollbar {
     display: none;
   }
   
   .slide {
-    flex: 0 0 100%; /* Each slide takes full width */
+    flex: 0 0 100%; 
     width: 100%;
-    min-width: 100%; /* Ensure consistent width */
+    min-width: 100%; 
     height: auto;
     filter: none;
     overflow: hidden;
@@ -169,8 +169,8 @@ p {
     flex-direction: column;
     position: relative;
     margin: 10px 0;
-    scroll-snap-align: start; /* Snap to start of container */
-    scroll-snap-stop: always; /* Force stopping at snap points */
+    scroll-snap-align: start; 
+    scroll-snap-stop: always; 
   }
   
   .slide img {
@@ -211,6 +211,12 @@ p {
     transition: all 0.3s ease;
     cursor: pointer;
   }
+   .des-button {
+  flex: none;
+  padding-left: 20px;
+  display: block;
+  margin-top:15px;
+}
   
   .slide-text {
     will-change: transform, height, opacity, padding;
@@ -229,6 +235,11 @@ p {
     opacity: 1;
     padding: 10px;
   }
+  
+.description {
+  flex: none;
+  padding:0 20px;
+}
   
   .btn {
     align-self: start;
