@@ -110,6 +110,10 @@
               </a>
               {% if link.links != blank %}
                 <ul class="mobile-dropdown">
+                  <div class="mobile-dropdown-overlay" >
+                    <div class="mobile-dropdown-overlay-semicircle left"></div>
+                    <div class="mobile-dropdown-overlay-semicircle right"></div>
+                  </div>
                   {% for childlink in link.links %}
                     <li class="mobile-dropdown-item-container">
                       <a href="{{ childlink.url }}" class="mobile-dropdown-item">
