@@ -34,11 +34,16 @@
     {% endfor %}
   </div>
 </div>
- <script>
-document.addEventListener('DOMContentLoaded', function() {
+<script>
+ document.addEventListener('DOMContentLoaded', function() {
   const slides = document.querySelectorAll('.slide');
+  const slideshow = document.querySelector('.interactive-slideshow');
   let activeSlide = null;
-  let isMobile = window.innerWidth <= 768;
+  let isMobile = window.innerWidth <= 1100;
+  let startX;
+  let scrollLeft;
+  let isDown = false;
+  
   const setActiveSlide = (slide) => {
     if (!isMobile) {
       if (activeSlide !== slide) {
@@ -48,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
   };
-  const toggleSlideText = (slideText,arrow) => {
+  const toggleSlideText = (slideText, arrow) => {
     if (slideText.classList.contains('expanded')) {
       slideText.classList.remove('expanded');
       arrow.classList.remove('expanded');
@@ -58,13 +63,37 @@ document.addEventListener('DOMContentLoaded', function() {
       arrow.classList.add('expanded');
     }
   };
+  const addMobileScrollListeners = () => {
+    slideshow.addEventListener('mousedown', (e) => {
+      isDown = true;
+      slideshow.style.cursor = 'grabbing';
+      startX = e.pageX - slideshow.offsetLeft;
+      scrollLeft = slideshow.scrollLeft;
+    });
+    slideshow.addEventListener('mouseleave', () => {
+      isDown = false;
+      slideshow.style.cursor = 'grab';
+    });
+    slideshow.addEventListener('mouseup', () => {
+      isDown = false;
+      slideshow.style.cursor = 'grab';
+    });
+    slideshow.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - slideshow.offsetLeft;
+      const walk = (x - startX) * 2;
+      slideshow.scrollLeft = scrollLeft - walk;
+    });
+  };
   const addMobileListeners = () => {
     slides.forEach(slide => {
       const arrow = slide.querySelector('.svg-wrapper');
       const slideText = slide.querySelector('.slide-text');
       
-      arrow.addEventListener('click', () => toggleSlideText(slideText,arrow));
+      arrow.addEventListener('click', () => toggleSlideText(slideText, arrow));
     });
+    addMobileScrollListeners();
   };
   const removeMobileListeners = () => {
     slides.forEach(slide => {
@@ -72,6 +101,10 @@ document.addEventListener('DOMContentLoaded', function() {
       const clone = heading.cloneNode(true);
       heading.parentNode.replaceChild(clone, heading);
     });
+    slideshow.removeEventListener('mousedown', () => {});
+    slideshow.removeEventListener('mouseleave', () => {});
+    slideshow.removeEventListener('mouseup', () => {});
+    slideshow.removeEventListener('mousemove', () => {});
   };
   const addDesktopListeners = () => {
     slides.forEach(slide => {
@@ -84,9 +117,8 @@ document.addEventListener('DOMContentLoaded', function() {
       slide.parentNode.replaceChild(clone, slide);
     });
   };
-
   const handleResize = () => {
-    const newIsMobile = window.innerWidth <= 768;
+    const newIsMobile = window.innerWidth <= 1100;
     if (newIsMobile !== isMobile) {
       isMobile = newIsMobile;
       removeActiveState();
@@ -116,8 +148,7 @@ document.addEventListener('DOMContentLoaded', function() {
     resizeTimer = setTimeout(handleResize, 250);
   });
 });
-</script>
-
+</script> 
 
 
 
