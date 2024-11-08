@@ -1,5 +1,6 @@
 .bb-announcement-bar-background {
     background-color: var(--announcement-bar-color);
+    border-radius: 5px;
 }
 
 .announcement-bar-arrow-svg {

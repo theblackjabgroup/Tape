@@ -74,15 +74,16 @@
             id="ProductSubmitButton-{{ section_id }}"
             type="submit"
             name="add"
-            class="product-form__submit button button--full-width {% if show_dynamic_checkout %}button--secondary bb-button-secondary{% else %}button--primary{% endif %}"
+            class="bb-push-bnt product-form__submit button button--full-width {% if show_dynamic_checkout %}button--secondary bb-button-secondary{% else %}button--primary{% endif %}"
             {% if product.selected_or_first_available_variant.available == false
               or quantity_rule_soldout
               or product.selected_or_first_available_variant == null
             %}
               disabled
-            {% endif %}
+            {% endif %} 
           >
-            <span>
+            <span class="push-btn__surface">
+              <span>
               {%- if product.selected_or_first_available_variant == null -%}
                 {{ 'products.product.unavailable' | t }}
               {%- elsif product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
@@ -90,6 +91,7 @@
               {%- else -%}
                 {{ 'products.product.add_to_cart' | t }}
               {%- endif -%}
+              </span>
             </span>
             {%- render 'loading-spinner' -%}
           </button>
