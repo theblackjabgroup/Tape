@@ -11,7 +11,7 @@
       "type": "number",
       "id": "post_limit",
       "label": "Number of Posts to Display",
-      "default": 8
+      "default": 4
     },
     {
       "type": "checkbox",
@@ -61,6 +61,18 @@
       "id": "card_bg_color",
       "label": "Card Background Color",
       "default": "#f0f0f8"
+    },
+    {
+      "type": "color",
+      "id": "button_background_color",
+      "label": "Button Background Color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button Text Color",
+      "default": "#ffffff"
     }
   ],
   "presets": [
@@ -71,7 +83,6 @@
   ]
 }
 {% endschema %}
-
 
 <link rel="stylesheet" href="{{ 'blog-slider.css' | asset_url }}">
 
@@ -93,10 +104,10 @@
             {% assign blog_handle = section.settings.blog %}
             {% assign post_limit = section.settings.post_limit %}
             {% for article in blogs[blog_handle].articles limit: post_limit %}
-            <div class="blog-card" style="background-color: {{ section.settings.background_color }};">
+            <div class="blog-card" style="background-color: {{ section.settings.card_bg_color }};">
                 <!-- Semicircle divs -->
-        <div class="semicircle semicircle-left"  style="background-color: {{ section.settings.background_color }};"><h6></h6></div>
-        <div class="semicircle semicircle-right"  style="background-color: {{ section.settings.background_color }};"><h6></h6></div>
+                <div class="semicircle semicircle-left" style="background-color: {{ section.settings.background_color }};"><h6></h6></div>
+                <div class="semicircle semicircle-right" style="background-color: {{ section.settings.background_color }};"><h6></h6></div>
 
                 {% if article.image %}
                     <img src="{{ article.image | img_url: '450x300', crop: 'center' }}" alt="{{ article.title }}">
@@ -121,7 +132,7 @@
                         <p class="blog-excerpt" style="color: {{ section.settings.text_color }};">{{ article.excerpt | strip_html | truncate: 200 }}</p>
                     {% endif %}
 
-                    <a href="{{ article.url }}" class="blog-read-more-btn" style="background-color: {{ section.settings.text_color }}; color: {{ section.settings.background_color }};">
+                    <a href="{{ article.url }}" class="blog-read-more-btn" style="background-color: {{ section.settings.button_background_color }}; color: {{ section.settings.button_text_color }};">
                         Read more
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -136,13 +147,12 @@
 
     {% if section.settings.show_view_all %}
         <div class="view-all-link">
-            <a href="{{ blogs[blog_handle].url }}" class="blog-view-all" style="color: {{ section.settings.text_color }}; border-color: {{ section.settings.text_color }};">
+            <a href="{{ blogs[blog_handle].url }}" class="blog-view-all" style="color:{{ section.settings.button_background_color }}; border-color: {{ section.settings.button_background_color }};">
                 View All Posts
             </a>
         </div>
     {% endif %}
 </div>
-
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -183,7 +193,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Resize the cards to fit exactly the visible number of cards
     function resizeCards() {
         const visibleSlides = getVisibleSlides();
-        const cardWidthPercentage = (100 / visibleSlides);  // Percentage of screen for each card
+        const cardWidthPercentage = (95 / visibleSlides);  // Percentage of screen for each card
         // Update the flex basis for each card dynamically
         cards.forEach(card => {
             card.style.flex = `0 0 ${cardWidthPercentage}%`;
