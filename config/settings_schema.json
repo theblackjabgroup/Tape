@@ -109,18 +109,6 @@
             "id": "product_special_offer",
             "label": "t:settings_schema.colors.settings.product_special_offer.label",
             "default": "#9BBAE0"           
-          },
-          {
-            "type": "color",
-            "id": "product_collapsible_rows_section",
-            "label": "t:settings_schema.colors.settings.product_collapsible_rows_section.label",
-            "default": "#C7E1BF"           
-          },
-          {
-            "type": "color",
-            "id": "product_collapsible_rows_section_secondary",
-            "label": "t:settings_schema.colors.settings.product_collapsible_rows_section_secondary.label",
-            "default": "#D9F2D1"           
           }
         ],
         "role": {

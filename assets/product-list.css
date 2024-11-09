@@ -131,6 +131,7 @@ summary .icon-caret2 {
 
 .bb-card-content {
     background-color: var(--product-card-background-color);
+    grid-template-rows: minmax(0, 1fr) max-content max-content auto !important;
 }
 
 .ticket-line-upper {
@@ -326,4 +327,16 @@ summary .icon-caret2 {
     width: 20px;
     border-radius: 50%;
     background-color: var(--special-offer-background-color);
+}
+.bb-card-info {
+  padding-left: 2rem !important;
+  grid-row-start: 1;}
+
+.bb-product-list-wrap {
+  padding-bottom: 1.7rem;
+    padding-top: 1.7rem;
+}
+
+.bb-price-sale {
+  display: flex;
 }
