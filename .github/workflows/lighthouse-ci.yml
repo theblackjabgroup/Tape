@@ -6,20 +6,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-          # Clear cookies using Puppeteer before running Lighthouse
-      - name: Clear Cookies
-        run: |
-          node -e "
-            const puppeteer = require('puppeteer');
-            (async () => {
-              const browser = await puppeteer.launch();
-              const page = await browser.newPage();
-              await page.goto('https://theme-blackbytt-poc.myshopify.com');
-              const client = await page.target().createCDPSession();
-              await client.send('Network.clearBrowserCookies');
-              await browser.close();
-            })();
-          "
     - name: Lighthouse
       uses: shopify/lighthouse-ci-action@v1
       with:
