@@ -5,16 +5,16 @@
 <div class="container1" style="background-color: {{ section.settings.strip_container_bg_color }};">
     <div class="strip-right" style="background-color: {{ section.settings.strip_bg_color }};">
         <div class="strip-1">
-            <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text }} &rarr;</div>
-            <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text }} &rarr;</div>
-            <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text }} &rarr;</div>
+            <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text_1 }} &rarr;</div>
+            <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text_1 }} &rarr;</div>
+            <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text_1 }} &rarr;</div>
         </div>
     </div>
     <div class="strip-left" style="background-color: {{ section.settings.strip_bg_color }};">
         <div class="strip-2">
-            <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text }} &rarr;</div>
-            <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text }} &rarr;</div>
-            <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text }} &rarr;</div>
+            <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text_2 }} &rarr;</div>
+            <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text_2 }} &rarr;</div>
+            <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text_2 }} &rarr;</div>
         </div>
     </div>
 </div>
@@ -172,24 +172,45 @@
       "default": true
     },
     
-{
-    "id": "strip_container_bg_color",
-    "type": "color",
-    "label": "Strip Container Background Color",
-    "default": "#ffffff"
-},
   {
-    "id": "strip_bg_color",
-    "type": "color",
-    "label": "Strip Background Color",
-    "default": "#f0f4f8"
-  },
-  {
-    "id": "strip_text_color",
-    "type": "color",
-    "label": "Strip Text Color",
-    "default": "#333333"
-  },
+      "type": "header",
+      "content": "Strip Settings"
+    },
+    {
+      "id": "strip_container_bg_color",
+      "type": "color",
+      "label": "Strip Container Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "id": "strip_bg_color",
+      "type": "color",
+      "label": "Strip Background Color",
+      "default": "#f0f4f8"
+    },
+    {
+      "id": "strip_text_color",
+      "type": "color",
+      "label": "Strip Text Color",
+      "default": "#333333"
+    },
+    
+    {
+      "type": "header",
+      "content": "Strip Text Settings"
+    },
+    {
+      "type": "text",
+      "id": "offer_text_1",
+      "label": "First Strip Text",
+      "default": "Subscribe for exclusive offers!"
+    },
+    {
+      "type": "text",
+      "id": "offer_text_2",
+      "label": "Second Strip Text",
+      "default": "Free shipping on orders over $50!"
+    },
    
    {
             "type": "header",
@@ -275,11 +296,9 @@
       "label": "Show social media icons",
       "default": true
     },
-    {
-      "type": "text",
-      "id": "offer_text",
-      "label": "Offer Text",
-      "default": "Subscribe for exclusive offers!"
+     {
+      "type": "header",
+      "content": "Footer Heading"
     },
     {
       "type": "text",
@@ -287,10 +306,14 @@
       "label": "Stay Connected Title",
       "default": "STAY CONNECTED WITH US"
     },
+     {
+      "type": "header",
+      "content": "Footer button"
+    },
     {
       "type": "text",
       "id": "subscribe_button_text",
-      "label": "Subscribe Button Text",
+      "label": "Button Text",
       "default": "Subscribe"
     }
   ]
