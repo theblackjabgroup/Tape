@@ -65,7 +65,7 @@
               {% if section.settings.icon_1_image %}
                 <img src="{{ section.settings.icon_1_image | img_url: '50x' }}" alt="{{ section.settings.icon_1_name }}">
               {% else %}
-                <span class="icon-placeholder">🚚</span>
+                <span class="icon-placeholder"></span>
               {% endif %}
               <span class="icon-name">{{ section.settings.icon_1_name }}</span>
             </div>
@@ -73,7 +73,7 @@
               {% if section.settings.icon_2_image %}
                 <img src="{{ section.settings.icon_2_image | img_url: '50x' }}" alt="{{ section.settings.icon_2_name }}">
               {% else %}
-                <span class="icon-placeholder">🚛</span>
+                <span class="icon-placeholder"></span>
               {% endif %}
               <span class="icon-name">{{ section.settings.icon_2_name }}</span>
             </div>
@@ -81,7 +81,7 @@
               {% if section.settings.icon_3_image %}
                 <img src="{{ section.settings.icon_3_image | img_url: '50x' }}" alt="{{ section.settings.icon_3_name }}">
               {% else %}
-                <span class="icon-placeholder">🚜</span>
+                <span class="icon-placeholder"></span>
               {% endif %}
               <span class="icon-name">{{ section.settings.icon_3_name }}</span>
             </div>
@@ -90,6 +90,13 @@
       </div>
     {% endfor %}
   </div>
+  
+  <div class="view-all-wrapper">
+    <a href="{{ collections[section.settings.collection].url }}" class="view-all-link">
+      View all Products →
+    </a>
+  </div>
+
 
 
 <script>
