@@ -5,7 +5,10 @@
     {% for block in section.blocks %}
       <div class="slide {% if forloop.first %}active{% endif %}" data-index="{{ forloop.index0 }}">
         {% if block.settings.image != blank %}
-          <img src="{{ block.settings.image | img_url: 'master' }}" alt="{{ block.settings.title }}">
+          <div class="backfold" style="background-color: {{ section.settings.imagefoldcolor }};">
+               <img src="{{ block.settings.image | img_url: 'master' }}" alt="{{ block.settings.title }}">
+          </div>
+       
         {% else %}
             {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
         {% endif %}
@@ -180,6 +183,12 @@
       "type": "color",
       "id": "btn_back_color",
       "label": "Button Background Color",
+      "default": "#F7F7F7"
+  },
+   {
+      "type": "color",
+      "id": "imagefoldcolor",
+      "label": "Image Fold Color",
       "default": "#F7F7F7"
   },
 ],
