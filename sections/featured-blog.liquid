@@ -1,6 +1,6 @@
 {% schema %}
 {
-  "name": "Blog Post",
+  "name": "Blog Posts",
   "settings": [
     {
       "type": "blog",
@@ -29,19 +29,19 @@
       "type": "checkbox",
       "id": "show_excerpt",
       "label": "Show Post Excerpt",
-      "default": true
+      "default": false
     },
     {
       "type": "checkbox",
       "id": "show_view_all",
       "label": "Show 'View All' Link",
-      "default": true
+      "default": false
     },
     {
       "type": "text",
       "id": "section_title",
       "label": "Section Title",
-      "default": "Latest Blog Posts",
+      "default": "Blog Posts",
       "info": "This title will be displayed on the top left of the blog slider."
     },
     {
@@ -77,7 +77,7 @@
   ],
   "presets": [
     {
-      "name": "Blog Post",
+      "name": "Blog Posts",
       "category": "Blog"
     }
   ]
@@ -110,7 +110,7 @@
                 <div class="semicircle semicircle-right" style="background-color: {{ section.settings.background_color }};"><h6></h6></div>
 
                 {% if article.image %}
-                    <img src="{{ article.image | img_url: '450x300', crop: 'center' }}" alt="{{ article.title }}">
+                    <img src="{{ article.image | img_url: '309x309', crop: 'center' }}" alt="{{ article.title }}">
                 {% else %}
                     <img src="{{ 'default-image.jpg' | asset_url }}" alt="Default Image">
                 {% endif %}
