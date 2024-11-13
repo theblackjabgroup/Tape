@@ -94,7 +94,7 @@
   right: calc(-1 * var(--header-width));
   transition: all 0.3s ease;
   box-sizing: border-box;
-  border-radius: 4px;
+  border-radius: 4px 0 0 4px;
   }
 
 .header.show {
@@ -228,7 +228,7 @@
   display: flex !important;
   justify-content: space-between;
   align-items: center;
-  padding: 8px;
+  padding: 8px 0;
   position: relative;
   overflow-x: clip;
   margin: 0 71px 0 71px;
@@ -435,7 +435,7 @@ body.drawer-open {
 
 .mobile-dropdown {
   max-height: 0;
-  overflow: hidden;
+  overflow: visible;
   list-style: none;
   padding: 0;
   margin: 0;

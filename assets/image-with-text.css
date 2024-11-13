@@ -376,23 +376,23 @@ info__banner__contents > .svg-wrapper {
     top: 100%;
   }
 
-  info__banner__contents > .svg-wrapper {
+  .info__banner__contents > .svg-wrapper {
     --svg-wrapper__visibillity: block;
   }
 
-  .svg-wrapper > svg {
+  .info__banner__contents > .svg-wrapper > svg {
     width: 20px;
     height: 20px;
     color: rgb(var(--color-foreground));
   }
 
-  info__banner__contents > .svg-wrapper {
+  .info__banner__contents > .svg-wrapper {
     position: absolute;
     right: 0;
     rotate: 90deg;
     transition: all 0.3s ease;
   }
-  info__banner__contents > .svg-wrapper.show{
+  .info__banner__contents > .svg-wrapper.show{
     rotate: -90deg;
   }
 }
