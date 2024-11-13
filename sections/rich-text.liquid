@@ -5,44 +5,28 @@
 .color-{{ section.settings.color_scheme }} .dot-l {
 background-color: currentColor;
 }
-{{ section.settings.font_title | font_face: font_display: 'swap' }}
-{{ section.settings.font_richtext | font_face: font_display: 'swap' }}
-{{ section.settings.font_richtextsubheading | font_face: font_display: 'swap' }}
-
-  
-  .layout1 p{
-    font-family:  {{ section.settings.font_richtextsubheading.family | default: "Inter" }}, {{ section.settings.font_richtextsubheading.fallback_families }};
-    font-weight: {{ section.settings.font_richtextsubheading.weight }};
-    font-style: {{ section.settings.font_richtextsubheading.style }};
+  .layout1 ,
+  .layout2 {
+    padding-top:{{section.settings.padding_top}}px;  
   }
-
+  .layout1,
+  .layout2 {
+    padding-bottom:{{section.settings.padding_bottom}}px;  
+  }
   .layout1 h2 {
-    font-family:  {{ section.settings.font_title.family | default: "Fira Sans" }}, {{ section.settings.font_title.fallback_families }};
-    font-weight: {{ section.settings.font_title.weight }};
-    font-style: {{ section.settings.font_title.style }};
     font-size: {{ section.settings.heading_font_size }}px;
   }
-
   .layout1 .rich-text__text {
-    font-family: {{ section.settings.font_richtext.family }}, {{ section.settings.font_richtext.fallback_families }};
-     font-weight: {{ section.settings.font_richtext.weight }};
-    font-style: {{ section.settings.font_richtext.style }};
    font-size: {{ section.settings.text_font_size }}px;
   }
 .layout2 {
    background-color: {{ section.settings.background_color }};
 }
 .layout2 h2 {
-    font-family: {{ section.settings.font_title.family }}, {{ section.settings.font_title.fallback_families }};
-    font-weight: {{ section.settings.font_title.weight }};
-    font-style: {{ section.settings.font_title.style }};
     font-size: {{ section.settings.heading_font_size }}px;
   }
 
 .layout2 .rich-text__text {
-    font-family: {{ section.settings.font_richtext.family }}, {{ section.settings.font_richtext.fallback_families }};
-    font-weight: {{ section.settings.font_richtext.weight }};
-    font-style: {{ section.settings.font_richtext.style }};
      font-size: {{ section.settings.text_font_size }}px;
   }
   @media screen and (max-width: 749px) {
@@ -62,13 +46,13 @@ background-color: currentColor;
 <div class="rich-text-section color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
   {% if section.settings.layout_style == 'layout1' %} 
     <div class="layout1 page-width">
-      <h2>{{ section.settings.heading | default: "Transforming Healthcare with Innovative Solutions" }}</h2>
+      <h2 class="richtext_heading">{{ section.settings.heading | default: "Transforming Healthcare with Innovative Solutions" }}</h2>
       <div class="decorative-dots">
         {% for i in (1..10) %}
           <span class="dot"></span>
         {% endfor %}
       </div>
-       <p>{{ section.settings.caption | default: "Delivering Excellence in Medical Products" }}</p>
+       <p class="richtext_subheading">{{ section.settings.caption | default: "Delivering Excellence in Medical Products" }}</p>
       <div class="rich-text__text rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
         {{ section.settings.text }}
       </div>
@@ -76,23 +60,24 @@ background-color: currentColor;
   {% else %}
     <div class="layout2">
     <div class="dots-container">
-        <div class="side-dots left">
-          {% for i in (1..10) %}
-            <span class="dot-l"></span>
+          <div class="side-dots left">
+            {% for i in (1..section.settings.dots_number) %}
+                <span class="dot-l"></span>
           {% endfor %}
-        </div>
+          </div>
         <div class="rich-text__blocks {{ section.settings.content_alignment }}">
-          <h2>{{ section.settings.heading | default: "Transforming Healthcare with Innovative Solutions" }}</h2>
+          <h2 class="richtext_heading">{{ section.settings.heading | default: "Transforming Healthcare with Innovative Solutions" }}</h2>
+           <p class="richtext_subheading" >{{ section.settings.caption | default: "Delivering Excellence in Medical Products" }}</p>
          
           <div class="rich-text__text rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
             {{ section.settings.text }}
           </div>
         </div>
-        <div class="side-dots right color-{{ section.settings.color_scheme }}">
-          {% for i in (1..10) %}
-            <span class="dot-l"></span>
-          {% endfor %}
-        </div>
+         <div class="side-dots right">
+            {% for i in (1..section.settings.dots_number) %}
+                <span class="dot-l"></span>
+            {% endfor %}
+          </div>
       </div>
     </div>
   {% endif %}
@@ -137,28 +122,19 @@ background-color: currentColor;
       "default": "layout1"
     },
      {
+      "type": "range",
+      "id": "dots_number",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "label": "Number of dots",
+      "default": 10
+    },
+     {
       "type": "color_scheme",
       "id": "color_scheme",
       "label": "t:sections.all.colors.label",
       "default": "scheme-1"
-    },
-    {
-      "type":"font_picker",
-      "id":"font_title",
-      "label": "Choose Heading Font",
-      "default":"serif"
-    },
-    {
-        "type":"font_picker",
-      "id":"font_richtext",
-      "label":"Choose Description Font",
-       "default":"serif"
-    },
-       {
-        "type":"font_picker",
-      "id":"font_richtextsubheading",
-      "label":"Choose Subheading Font",
-       "default":"serif"
     },
     {
       "type": "range",
