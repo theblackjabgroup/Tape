@@ -268,11 +268,11 @@
   .headingtext {
     margin-left: 10px;
   }
-.svg-wrapper > svg {
+.headarrow_svg-wrapper > svg {
     width: 20px;
     height: 20px;
   }
-.svg-wrapper {
+.headarrow_svg-wrapper {
     display: flex;
     align-items: center;
     margin-right: 15px;
@@ -315,7 +315,7 @@
     align-self: start;
   }
   
-  .svg-wrapper.expanded {
+  .headarrow_svg-wrapper.expanded {
     rotate: -90deg;
   }
 }
