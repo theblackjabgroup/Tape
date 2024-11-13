@@ -69,7 +69,9 @@ background-color: currentColor;
     <div class="layout2">
     <div class="dots-container">
           <div class="side-dots left">
-      <!-- Dots will be added by JavaScript -->
+            {% for i in (1..section.settings.dots_number) %}
+                <span class="dot-l"></span>
+          {% endfor %}
           </div>
         <div class="rich-text__blocks {{ section.settings.content_alignment }}">
           <h2 class="richtext_heading">{{ section.settings.heading | default: "Transforming Healthcare with Innovative Solutions" }}</h2>
@@ -80,92 +82,14 @@ background-color: currentColor;
           </div>
         </div>
          <div class="side-dots right">
-      <!-- Dots will be added by JavaScript -->
+            {% for i in (1..section.settings.dots_number) %}
+                <span class="dot-l"></span>
+            {% endfor %}
           </div>
       </div>
     </div>
   {% endif %}
 </div>
-
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const dotsContainer = document.querySelector('.rich-text__text');
-  const leftDots = document.querySelector('.side-dots.left');
-  const rightDots = document.querySelector('.side-dots.right');
-  
-
-  const DOT_WIDTH = 8; 
-  const DOT_MARGIN = 16; 
-  const DOT_TOTAL_SPACE = DOT_WIDTH + DOT_MARGIN; 
-  
-  function updateDots() {
-    if (!dotsContainer || !leftDots || !rightDots) return;
-    
-  
-    const screenWidth = window.innerWidth;
-    
- 
-    if (screenWidth <= 749) { 
-      const availableWidth = screenWidth * 0.8; 
-      const numberOfDots = Math.floor(availableWidth / DOT_TOTAL_SPACE);
-      
-      [leftDots, rightDots].forEach(dotContainer => {
-      
-        dotContainer.innerHTML = '';
-        
-        
-        for (let i = 0; i < numberOfDots; i++) {
-          const dot = document.createElement('span');
-          dot.className = 'dot-l';
-          dotContainer.appendChild(dot);
-        }
-      });
-    } else {
-   
-      const containerHeight = dotsContainer.offsetHeight;
-      const paddingSpace = 15;
-      const availableHeight = containerHeight - paddingSpace;
-      const numberOfDots = Math.max(
-        Math.floor(availableHeight / 15),
-        12
-      );
-      
-      [leftDots, rightDots].forEach(dotContainer => {
-       
-        dotContainer.innerHTML = '';
-        
-       
-        for (let i = 0; i < numberOfDots; i++) {
-          const dot = document.createElement('span');
-          dot.className = 'dot-l';
-          dotContainer.appendChild(dot);
-        }
-      });
-    }
-  }
-
-  const resizeObserver = new ResizeObserver((entries) => {
-    requestAnimationFrame(updateDots);
-  });
-  
-  if (dotsContainer) {
-    resizeObserver.observe(dotsContainer);
-    updateDots(); // Initial update
-  }
-  
-  window.addEventListener('resize', () => {
-    requestAnimationFrame(updateDots);
-  });
-  
-  // Cleanup
-  window.addEventListener('unload', () => {
-    if (resizeObserver) {
-      resizeObserver.disconnect();
-    }
-  });
-});
-</script>
 
 {% schema %}
 {
@@ -204,6 +128,15 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       ],
       "default": "layout1"
+    },
+     {
+      "type": "range",
+      "id": "dots_number",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "label": "Number of dots",
+      "default": 10
     },
      {
       "type": "color_scheme",
