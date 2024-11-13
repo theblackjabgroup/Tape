@@ -13,7 +13,7 @@
         {% endif %}
         <div class="headarrow">
         <h3 class="headingtext" style="color:{{ block.settings.feature_color }}" >{{ block.settings.feature }}</h3>
-           <span id="info__banner__expand__button" class="svg-wrapper">
+           <span id="info__banner__expand__button" class="headarrow_svg-wrapper">
             {{- 'icon-arrow.svg' | inline_asset_content -}}
           </span>
         </div>
@@ -87,7 +87,7 @@
   };
   const addMobileListeners = () => {
     slides.forEach(slide => {
-      const arrow = slide.querySelector('.svg-wrapper');
+      const arrow = slide.querySelector('.headarrow_svg-wrapper');
       const slideText = slide.querySelector('.slide-text');
       
       arrow.addEventListener('click', () => toggleSlideText(slideText, arrow));
@@ -96,7 +96,7 @@
   };
   const removeMobileListeners = () => {
     slides.forEach(slide => {
-      const heading = slide.querySelector('.svg-wrapper');
+      const heading = slide.querySelector('.headarrow_svg-wrapper');
       const clone = heading.cloneNode(true);
       heading.parentNode.replaceChild(clone, heading);
     });
