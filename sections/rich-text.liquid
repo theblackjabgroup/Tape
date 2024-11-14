@@ -54,7 +54,7 @@ background-color: currentColor;
     <div class="layout1 page-width">
       <h2 class="richtext_heading">{{ section.settings.heading | default: "Transforming Healthcare with Innovative Solutions" }}</h2>
       <div class="decorative-dots">
-        {% for i in (1..10) %}
+        {% for i in (1..section.settings.dots_number) %}
           <span class="dot"></span>
         {% endfor %}
       </div>
