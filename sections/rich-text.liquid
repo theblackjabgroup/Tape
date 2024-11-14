@@ -1,21 +1,27 @@
+
 {{ 'section-rich-text.css' | asset_url | stylesheet_tag }}
 
 <style>
+
 .color-{{ section.settings.color_scheme }} .dot,
 .color-{{ section.settings.color_scheme }} .dot-l {
 background-color: currentColor;
 }
-{{ section.settings.font_title | font_face: font_display: 'swap' }}
-{{ section.settings.font_richtext | font_face: font_display: 'swap' }}
-{{ section.settings.font_richtextsubheading | font_face: font_display: 'swap' }}
-  .layout1 p{
-    font-family:  {{ section.settings.font_richtextsubheading.family | default: "Inter" }}, {{ section.settings.font_richtextsubheading.fallback_families }};
-    font-weight: {{ section.settings.font_richtextsubheading.weight }};
-    font-style: {{ section.settings.font_richtextsubheading.style }};
+
+  .layout1 ,
+  .layout2 {
+    padding-top:{{section.settings.padding_top}}px;  
   }
+  .layout1,
+  .layout2 {
+    padding-bottom:{{section.settings.padding_bottom}}px;  
+  }
+ 
+
   .layout1 h2 {
     font-size: {{ section.settings.heading_font_size }}px;
   }
+
   .layout1 .rich-text__text {
    font-size: {{ section.settings.text_font_size }}px;
   }
@@ -34,13 +40,15 @@ background-color: currentColor;
     .layout2 h2 {
       font-size: {{ section.settings.heading_font_size | times: 0.8 | round: 0 }}px;
     }
+ 
+
     .layout1 .rich-text__text,
     .layout2 .rich-text__text {
       font-size: {{ section.settings.text_font_size | times: 0.9 | round: 0 }}px;
     }
   }
-</style>
 
+</style>
 <div class="rich-text-section color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
   {% if section.settings.layout_style == 'layout1' %} 
     <div class="layout1 page-width">
@@ -58,11 +66,11 @@ background-color: currentColor;
   {% else %}
     <div class="layout2">
     <div class="dots-container">
-        <div class="side-dots left">
-          {% for i in (1..10) %}
-            <span class="dot-l"></span>
+          <div class="side-dots left">
+            {% for i in (1..section.settings.dots_number) %}
+                <span class="dot-l"></span>
           {% endfor %}
-        </div>
+          </div>
         <div class="rich-text__blocks {{ section.settings.content_alignment }}">
           <h2 class="richtext_heading">{{ section.settings.heading | default: "Transforming Healthcare with Innovative Solutions" }}</h2>
            <p class="richtext_subheading" >{{ section.settings.caption | default: "Delivering Excellence in Medical Products" }}</p>
@@ -71,11 +79,11 @@ background-color: currentColor;
             {{ section.settings.text }}
           </div>
         </div>
-        <div class="side-dots right color-{{ section.settings.color_scheme }}">
-          {% for i in (1..10) %}
-            <span class="dot-l"></span>
-          {% endfor %}
-        </div>
+         <div class="side-dots right">
+            {% for i in (1..section.settings.dots_number) %}
+                <span class="dot-l"></span>
+            {% endfor %}
+          </div>
       </div>
     </div>
   {% endif %}
