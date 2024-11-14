@@ -1,6 +1,10 @@
 {{ 'component-slideshow.css' | asset_url | stylesheet_tag }}
 {{ 'component-slider.css' | asset_url | stylesheet_tag }}
-<script src="{{ 'announcementBarView.js' | asset_url }}" defer="defer"></script>
+{{ 'announcementBar.css' | asset_url | stylesheet_tag }}
+
+<script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
+
+<!--  <script src="{{ 'announcementBarView.js' | asset_url }}" defer="defer"></script> -->  
 
 {%- liquid
   assign social_icons = true
@@ -15,12 +19,41 @@
   endif
 -%}
 
+{%- style -%}
+  :root {
+  --announcement-bar-background-color: {{ section.settings.announcement_bar_background_color }};
+  --announcement-bar-color: {{ section.settings.announcement_bar_color }};
+  --announcement-bar-text: {{ section.settings.announcement_bar_text }};
+  }
+{% endstyle %}
 {% if social_icons %}
   {{ 'component-list-social.css' | asset_url | stylesheet_tag }}
 {% endif %}
+<style>
+@media screen and (min-width: 749px) {
+  .config-margin{
+    margin: 0px {{ section.settings.bar_margin }}px;
+  }
+  .config-tb-margin {
+    margin-top: {{ section.settings.top_bar_margin }}px;
+    margin-bottom: {{ section.settings.bottom_bar_margin }}px;
+  }
+}
+@media screen and (max-width: 749px) {
+  .config-margin-mobile{
+    margin: 0px {{ section.settings.mobile_bar_margin }}px;
+  }
+
+  .config-tb-margin-mobile {
+    margin-top: {{ section.settings.mobile_top_bar_margin }}px;
+    margin-bottom: {{ section.settings.mobile_bottom_bar_margin }}px;
+  }
+}
+</style>
 
 <{% if section.settings.enable_sticky_bar %}sticky-bar data-sticky-type = "{{ section.settings.enable_sticky_bar }}"{% else %}div{% endif %} >
-  <div class="utility-bar vertical-bar color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator and section.blocks.size > 0 %} utility-bar--bottom-border{% elsif section.settings.show_line_separator and section.settings.show_social and social_icons%} utility-bar--bottom-border-social-only{% endif %}{% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header-localization{% endif %}" {{ block.shopify_attributes }}>
+  <div class="bb-announcement-bar-wrapper config-tb-margin">
+  <div class="utility-bar vertical-bar color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator and section.blocks.size > 0 %} utility-bar--bottom-border{% elsif section.settings.show_line_separator and section.settings.show_social and social_icons%} utility-bar--bottom-border-social-only{% endif %}{% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header-localization{% endif %} config-margin config-margin-mobile config-tb-margin config-tb-margin-mobile bb-announcement-bar-background" {{ block.shopify_attributes }} >
     <div class="page-width announcement-width bb-max-width utility-bar__grid{% if announcement_bar and language_country_selector or section.settings.show_social and social_icons %} utility-bar__grid--3-col{% elsif language_country_selector or section.settings.show_social and social_icons %} utility-bar__grid--2-col{% endif %}">
       {%- if section.settings.show_social and social_icons -%}
         {%- render 'social-icons' -%}
@@ -35,14 +68,14 @@
           {%- for block in section.blocks -%}
             <div class="announcement-icon-wrapper" aria-count={{ forloop.index | minus: 1}}>
               {%- if block.settings.image != blank -%}
-                {{ block.settings.image | image_url: width: 30, height: 30 | image_tag }}
+                {{ block.settings.image | image_url: width: 40, height: 40 | image_tag }}
               {% endif %}
             </div>
           {% endfor %}
         </div>
       </div>
       <div class="vertical-bar-second-top-desktop">
-        {% for i in (0..10) %}
+        {% for i in (0..4) %}
           <div class="vertical-bar-first index-{{i}}"></div>
         {% endfor %}
       </div>
@@ -54,7 +87,7 @@
           {{ block.shopify_attributes }}>
           <div class="announcement-bar__arrow-first">
           <div class="vertical-bar-second-top" style="padding-left: 0.5rem;">
-            {% for i in (0..10) %}
+            {% for i in (0..4) %}
               <div class="vertical-bar-first-first index-{{i}}"></div>
             {% endfor %}
           </div>
@@ -75,20 +108,24 @@
                 class=" announcement-bar__link link link--text focus-inset animate-arrow"
                 style="color: white;">
             {%- endif -%}
+            <scrolling-items>
             <div class="scrolling-text-container">
               <div class="scrolling-text">
-            <p class="announcement-bar__message h4">
-              <span class="scrollable-text">{{ section.blocks.first.settings.text }}</span>
-            </p>
+            <div class="announcement-bar-desktop-content">
+              {% if section.blocks.size > 0 and section.blocks.first.settings.text != blank %}
+                <div class="scrollable-text announcement-bar__message h4">{{ section.blocks[0].settings.text }}</div>
+              {% endif %}
             </div>
             </div>
+            </div>
+            </scrolling-items>
             {%- if section.blocks.first.settings.link != blank -%}
               </a>
             {%- endif -%}
           {%- endif -%}
           </div>
         <div class="vertical-bar-second-top" style="padding: 0rem;">
-          {% for i in (0..10) %}
+          {% for i in (0..4) %}
             <div class="vertical-bar-first index-{{i}}"></div>
           {% endfor %}
         </div>
@@ -129,13 +166,13 @@
                         name="previous"
                         aria-label="{{ 'sections.announcements.previous_announcement' | t }}"
                         aria-controls="Slider-{{ section.id }}">
-                        <span class="svg-wrapper">
+                        <span class="announcement-bar-arrow-svg svg-wrapper">
                           {{- 'icon-caret.svg' | inline_asset_content -}}
                         </span>
                       </button>
                       <div class="vertical-bar-second-top" style="padding-left: 0.5rem;">
-                        {% for i in (0..10) %}
-                          <div class="vertical-bar-first index-{{i}}"></div>
+                        {% for i in (0..4) %}
+                          <div class="vertical-bar-first-mobile index-{{i}}"></div>
                         {% endfor %}
                       </div>
                       {%- if block.settings.text != blank -%}
@@ -152,7 +189,7 @@
                             </div>
                           </div>
                             {% endif %}
-
+                          <scrolling-items>
                           <div class="scrolling-text-container">
                             <div class="scrolling-text">
                               <p class="announcement-bar__message h4">
@@ -160,14 +197,15 @@
                               </p>
                             </div>
                           </div>
+                          </scrolling-items>
                         </div>
                         {%- if block.settings.link != blank -%}
                           </a>
                         {%- endif -%}
                       {%- endif -%}
                       <div class="vertical-bar-second-top">
-                        {% for i in (0..10) %}
-                          <div class="vertical-bar-first index-{{i}}"></div>
+                        {% for i in (0..4) %}
+                          <div class="vertical-bar-second-mobile index-{{i}}"></div>
                         {% endfor %}
                       </div>
                       <button
@@ -176,7 +214,7 @@
                         name="next"
                         aria-label="{{ 'sections.announcements.next_announcement' | t }}"
                         aria-controls="Slider-{{ section.id }}">
-                        <span class="svg-wrapper">
+                        <span class="announcement-bar-arrow-svg svg-wrapper">
                           {{- 'icon-caret.svg' | inline_asset_content -}}
                         </span>
                       </button>
@@ -207,7 +245,7 @@
         {%- endif -%}
       {%- endif -%}
       <div class="vertical-bar-second-top-desktop">
-        {% for i in (0..10) %}
+        {% for i in (0..4) %}
           <div class="vertical-bar-second index-{{i}}"></div>
         {% endfor %}
       </div>
@@ -220,7 +258,7 @@
               <div>
                 <h2 class="visually-hidden" id="AnnouncementCountryLabel">{{ 'localization.country_label' | t }}</h2>
                 {%- render 'country-localization'
-                  , localPosition: 'AnnouncementCountry' -%}
+                  , localPosition: 'AnnouncementCountry' , ab: true-%}
               </div>
             {%- endform -%}
           </localization-form>
@@ -234,7 +272,7 @@
               <div>
                 <h2 class="visually-hidden" id="AnnouncementLanguageLabel">{{ 'localization.language_label' | t }}</h2>
                 {%- render 'language-localization'
-                  , localPosition: 'AnnouncementLanguage' -%}
+                  , localPosition: 'AnnouncementLanguage', ab: true -%}
               </div>
             {%- endform -%}
           </localization-form>
@@ -247,6 +285,68 @@
       style="display: none;"
       data-hide=""></div>
   </div>
+  </div>
+
+  <!--
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Select the node that will be observed for mutations
+
+        function updateData() {
+          const screenWidth = window.innerWidth;
+    
+          console.log("in update data")
+          if (screenWidth >= 749) { 
+          const div = document.querySelector('.bb-max-width');      
+          const height = div.offsetHeight;
+          console.log("Height of the div:", height, "px");
+          document.documentElement.style.setProperty('--announcement-bar-height', `${height / 5}px`);
+          const div2 = document.querySelectorAll('.vertical-bar-second-top-desktop');
+          div2.forEach((element) => {
+            element.style.height = `${height + 10}px`;
+          });          
+          }
+          else {
+          const div = document.querySelector('.bb-max-width');      
+          const height = div.offsetHeight;
+          console.log("Height of the div:", height, "px");
+          document.documentElement.style.setProperty('--announcement-bar-height', `${height / 5}px`);
+
+          const div3 = document.querySelectorAll('.vertical-bar-second-top');
+          div3.forEach((element) => {
+            element.style.height = `${height-2}px`
+          });    
+          }
+        }
+
+        const spans = document.querySelectorAll(".scrollable-text");
+
+const resizeObserver = new ResizeObserver((entries) => {
+  // Call updateData for each entry, which represents a resized element
+  entries.forEach(() => {
+    requestAnimationFrame(updateData);
+  });
+});
+
+// Observe each span with the class "scrollable-text"
+spans.forEach((span) => {
+  resizeObserver.observe(span);
+});
+
+// Initial update for all elements
+spans.forEach(() => {
+  updateData();
+});
+
+// Also trigger updateData on window resize
+window.addEventListener('resize', () => {
+  requestAnimationFrame(updateData);
+});
+      });
+      
+    </script>
+
+    -->
 </{% if section.settings.enable_sticky_bar %}sticky-bar{% else %}div{% endif %}>
 
 {% javascript %}
@@ -277,28 +377,11 @@
     },
     "settings": [
       {
-        "type": "color_scheme",
-        "id": "color_scheme",
-        "label": "t:sections.all.colors.label",
-        "default": "scheme-4"
-      },
-      {
         "type": "checkbox",
         "id": "show_line_separator",
         "default": true,
         "label": "t:sections.header.settings.show_line_separator.label"
-      },
-      {
-        "type": "header",
-        "content": "t:sections.announcement-bar.settings.header__1.content",
-        "info": "t:sections.announcement-bar.settings.header__1.info"
-      },
-      {
-        "type": "checkbox",
-        "id": "show_social",
-        "default": false,
-        "label": "t:sections.announcement-bar.settings.show_social.label"
-      }, {
+      },{
         "type": "header",
         "content": "t:sections.announcement-bar.settings.header__2.content"
       }, {
@@ -333,12 +416,82 @@
         "id": "enable_language_selector",
         "default": false,
         "label": "t:sections.announcement-bar.settings.enable_language_selector.label"
-      }, {
-        "type": "checkbox",
-        "id": "enable_sticky_bar",
-        "default": false,
-        "label": "t:sections.announcement-bar.settings.enable_sticky_bar.label"
-      }
+      },
+      {
+      "type": "range",
+      "id": "bar_margin",
+      "label": "Desktop Sideways Margin",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 30
+    },  
+    {
+      "type": "range",
+      "id": "mobile_bar_margin",
+      "label": "Mobile Sideways Margin",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "top_bar_margin",
+      "label": "Desktop Top Margin",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 0
+    },  
+    {
+      "type": "range",
+      "id": "mobile_top_bar_margin",
+      "label": "Mobile Top Margin",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 0
+    },      {
+      "type": "range",
+      "id": "bottom_bar_margin",
+      "label": "Desktop Bottom Margin",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 0
+    },  
+    {
+      "type": "range",
+      "id": "mobile_bottom_bar_margin",
+      "label": "Mobile Bottom Margin",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Color Settings"
+    },
+    {
+      "type": "color",
+      "id": "announcement_bar_background_color",
+      "label": "Announcement Bar Background Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "announcement_bar_color",
+      "label": "Announcement Bar Color",
+      "default": "#D8D8D8"
+    },
+   {
+      "type": "color",
+      "id": "announcement_bar_text",
+      "label": "Announcement Bar Text Color",
+      "default": "#000000"
+    }
     ],
     "blocks": [
       {

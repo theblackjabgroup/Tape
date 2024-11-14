@@ -256,6 +256,7 @@ a.product__text {
   margin: 0;
   font-family: 'Fira Sans';
   font-weight: 700;
+  font-size: 28px;
 }
 
 .product__title > a {
@@ -297,7 +298,7 @@ a.product__text {
   }
 
   .product__info-container .price--on-sale .price-item--regular {
-    font-size: 1.6rem;
+    font-size: 18px;
   }
 
   .product__info-container > *:first-child {
@@ -391,6 +392,13 @@ a.product__text {
 }
 
 @media screen and (max-width: 749px) {
+  .product__title > * {
+    margin: 0;
+    font-family: 'Fira Sans';
+    font-weight: 700;
+    font-size: 24px;
+  }
+
   .product__media-list {
     margin-left: -2.5rem;
     margin-bottom: 3rem;
@@ -1089,7 +1097,9 @@ a.product__text {
 }
 
 .js .product__media {
+  /*
   overflow: hidden !important;
+  */
 }
 
 .thumbnail[aria-current]:focus-visible {

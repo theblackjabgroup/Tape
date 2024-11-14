@@ -1,49 +1,68 @@
-<script src="{{ 'image-with-text.js' | asset_url }}" async></script>
+<script src="{{ 'image-with-text.js' | asset_url }}" defer></script>
 {{ 'image-with-text.css' | asset_url | stylesheet_tag }}
 
-<div class="image__with__text__section color-{{ section.settings.sectionColor }}">
+{% style %}
+  :root {
+    --card-color-scheme: {{ section.settings.card_color_scheme }};
+  }
+{% endstyle %}
+
+<div class="image__with__text__section color-{{ section.settings.sectionColor }}" data-section-id="{{ section.id }}">
   <div class="image__with__text__outer__container">
     <ul class="image__with__text__inner__container">
       {% for item in section.blocks %}
         <li
-          class="image__with__text__card min__card__height card__set card card-rounded"
+          class="image__with__text__card min__card__height card__set card"
           aria-labelledby="gallery-item-{{ forloop.index0}}-trigger"
           tabindex="-1"
           id="gallery-item-{{ forloop.index0 }}"
           style="--current-item: {{ forloop.index0 }}"
+          data-heading="{{ item.settings.heading }}"
+          data-description="{{ item.settings.description }}"
+          data-link="{{ item.settings.link }}"
         >
           <div class="media__container">
-            {% if item.settings.image  %}
+            {% if item.settings.image %}
               <img width="1800" height="1600" class="media" src="{{ item.settings.image |  image_url  }}" alt="">
-              {% else %}
-                <div style="display: block !important; position: absolute; height: 100%; width: 1px; background-color: black; rotate: 45deg; left: 50%;"></div>
-                <div style="display: block !important; position: absolute; height: 100%; width: 1px; background-color: black; rotate: -45deg; left: 50%;"></div>
+            {% else %}
+              <div
+                style="display: block !important; position: absolute; height: 100%; width: 1px; background-color: rgb(var(--color-foreground)); rotate: 45deg; left: 50%;"
+              ></div>
+              <div
+                style="display: block !important; position: absolute; height: 100%; width: 1px; background-color: rgb(var(--color-foreground)); rotate: -45deg; left: 50%;"
+              ></div>
             {% endif %}
           </div>
-          <div class="cpation__container">
+          {% comment %} <div class="cpation__container">
             <p class="caption__card caption__typography" style="--caption-font-color: {{ item.settings.captionColor }}">
               {{ item.settings.text }}
             </p>
+          </div> {% endcomment %}
+        </li>
+      {% endfor %}
+      <div class="info__banner color-{{ section.settings.bannerColor }}">
+        <div class="info__banner__contents">
+          <p class="info__banner__title inter-medium">NEW ARRIVAL</p>
+          <h1 class="info__banner__heading fira-sans-bold">Thanksgiving big billion sale!</h1>
+          <div class="info__banner__details">
+            <p class="info__banner__description inter-regular ">
+              Enhance patient care with our premium medical product, featuring advanced technology for precision and
+              reliability. Ideal for seamless integration into any practice!
+            </p>
+            <a class="info__banner__shopnow__button color-{{ section.settings.bannerColor }}">Shop Now</a>
           </div>
-        </li>
-      {% endfor %}
-    </ul>
-  </div>
-  <div
-    style="
-      margin: 2rem auto;
-      background-color: lightgray;
-      width: fit-content;
-      padding: 1rem 2rem;
-      border-radius: 100px;
-    "
-  >
-    <ul class="dot-items">
-      {% for item in section.blocks %}
-        <li class="dot-item">
-          <a id="gallery-item-{{ forloop.index0 }}-trigger" href="#gallery-item-{{ forloop.index0 }}"> </a>
-        </li>
-      {% endfor %}
+          <span id="info__banner__expand__button" class="svg-wrapper">
+            {{- 'icon-arrow.svg' | inline_asset_content -}}
+          </span>
+        </div>
+        <ul class="dot-items color-{{ section.settings.bannerColor }}">
+          {% for item in section.blocks %}
+            <li class="dot-item">
+              <a id="gallery-item-{{ forloop.index0 }}-trigger" href="#gallery-item-{{ forloop.index0 }}"> </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
     </ul>
   </div>
 </div>
@@ -57,6 +76,17 @@
       "type": "color_scheme",
       "id": "sectionColor",
       "label": "Section Color"
+    },
+    {
+      "type": "color",
+      "id": "card_color_scheme",
+      "label": "Card Color",
+    },
+    {
+      "type": "color_scheme",
+      "label": "Banner Color",
+      "id": "bannerColor",
+      "default": "#000000"
     }
   ],
   "blocks": [
@@ -71,15 +101,27 @@
         },
         {
           "type": "text",
-          "id": "text",
-          "label": "Enter Text",
-          "default":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat accusantium tenetur qui. Minus nullablanditiis quisquam voluptatem facere."
+          "id": "heading",
+          "label": "heading",
+          "default": "Thanksgiving big billion sale!"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "decription",
+          "default":"Enhance patient care with our premium medical product, featuring advanced technology for precision and reliability. Ideal for seamless integration into any practice!"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "link",
+          "default":"/"
         },
         {
           "type": "color",
           "id": "captionColor",
           "label": "Text Color",
-          "default":"#000000"
+          "default": "#000000"
         }
       ]
     }

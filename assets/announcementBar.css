@@ -1,0 +1,19 @@
+.bb-announcement-bar-background {
+    background-color: var(--announcement-bar-color);
+    border-radius: 5px;
+}
+
+.announcement-bar-arrow-svg {
+    color: var(--announcement-bar-text) !important;
+}
+
+.bb-announcement-bar-wrapper {
+    background-color: var(--announcement-bar-background-color);
+}
+
+.bb-localization {
+    color: var(--announcement-bar-text) !important;
+}
+.bb-localization .link{
+    color: var(--announcement-bar-text) !important;
+}

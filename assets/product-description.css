@@ -1,7 +1,7 @@
 /* Style the collapse-tab with the tabs */
 .collapse-tab {
     display: flex;
-    background-color: var(--product_collapsible_rows_section);
+    background-color: var(--collapse_header_background_color);
     padding: 4rem 4rem;
     justify-content: space-around;
 }
@@ -12,7 +12,7 @@
     border: none;
     padding: 10px 20px;
     cursor: pointer;
-    font-size: 1.5rem;
+    font-size: 20px;
     letter-spacing: inherit;
     transition: background-color 0.3s ease;
     font-family: 'Fira Sans';
@@ -22,8 +22,8 @@
 
 /* Style the active tab */
 .collapse-tab button.active {
-    background-color: var(--product_collapsible_rows_section_secondary);
-    color: #225647;
+    background-color: var(--collapse_header_secondary_background_color);
+    color: var(--collapse_header_text_color);
     font-weight: 600;
 }
 
@@ -62,12 +62,13 @@
     display: block !important;
     width: 28px;
     height: 28px;
-    background-color: rgb(var(--color-background));
+    background-color: var(--collapse_body_background_color);
     border-radius: 50%;
 }
 
 .product-description-wrapper{
     padding: 20px;
+    background-color: var(--collapse_body_background_color);
 }
 
 .product-description-grid-container{
@@ -90,10 +91,10 @@
 
 .product-description-in-semicircles {
     display: block !important;
-    margin-top: 20px;
-    width: 15px;
-    height: 30px;
-    background-color: var(--product_collapsible_rows_section);
+    margin-top: 26px;
+    width: 8px;
+    height: 16px;
+    background-color: var(--collapse_header_background_color);
     border-radius: 50%;
     border-top-left-radius: 50px;
     border-bottom-left-radius: 50px;
@@ -111,6 +112,7 @@
 .product-description-subclass {
     margin-top: 20px !important;
     font-family: 'Inter';
+    color: var(--collapse_body_text_color);
 }
 
 .mobile-collapsible-tabs {
@@ -128,7 +130,10 @@
         margin: 0;
     }
     .accordion-button.collapsed {
-        background-color: var(--product_collapsible_rows_section) !important;
+        background-color: var(--collapse_header_background_color) !important;
+    }
+    .accordion-body {
+        background-color: var(--collapse_body_background_color) !important;
     }
     .product-description-grid-container{
         display: grid !important;
@@ -143,8 +148,8 @@
         font-family: 'Fira Sans';
         font-weight: 500;
         line-height: 24px;
-        color: var(--utilities) !important;
-        background-color: var(--product_collapsible_rows_section_secondary) !important;
+        color: var(--collapse_header_text_color) !important;
+        background-color: var(--collapse_header_secondary_background_color) !important;
 
     }
     .product-description-subclass{
@@ -154,7 +159,7 @@
     }
 
     .product-description-in-semicircles {
-        margin-top: 12px;
+        margin-top: 10px;
         width: 7px;
         height: 14px;
     }
@@ -162,10 +167,11 @@
     .product-description-semicircles {
         height: 16px;
         width: 16px;
+        background-color: rgb(var(--color-background));
     }
     .accordion-below {
         height: 30px;
-        background-color: var(--product_collapsible_rows_section);
+        background-color: var(--collapse_header_background_color);
     }
 
     .accordion-button:not(.collapsed)::after {
