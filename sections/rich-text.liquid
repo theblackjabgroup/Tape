@@ -1,8 +1,6 @@
 {{ 'section-rich-text.css' | asset_url | stylesheet_tag }}
 
 <style>
-
-  
 .color-{{ section.settings.color_scheme }} .dot,
 .color-{{ section.settings.color_scheme }} .dot-l {
 background-color: currentColor;
@@ -10,14 +8,11 @@ background-color: currentColor;
 {{ section.settings.font_title | font_face: font_display: 'swap' }}
 {{ section.settings.font_richtext | font_face: font_display: 'swap' }}
 {{ section.settings.font_richtextsubheading | font_face: font_display: 'swap' }}
-
-  
   .layout1 p{
     font-family:  {{ section.settings.font_richtextsubheading.family | default: "Inter" }}, {{ section.settings.font_richtextsubheading.fallback_families }};
     font-weight: {{ section.settings.font_richtextsubheading.weight }};
     font-style: {{ section.settings.font_richtextsubheading.style }};
   }
-
   .layout1 h2 {
     font-size: {{ section.settings.heading_font_size }}px;
   }
@@ -85,85 +80,6 @@ background-color: currentColor;
     </div>
   {% endif %}
 </div>
-
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const dotsContainer = document.querySelector('.rich-text__text');
-  const leftDots = document.querySelector('.side-dots.left');
-  const rightDots = document.querySelector('.side-dots.right');
-  
-
-  const DOT_WIDTH = 8; 
-  const DOT_MARGIN = 16; 
-  const DOT_TOTAL_SPACE = DOT_WIDTH + DOT_MARGIN; 
-  
-  function updateDots() {
-    if (!dotsContainer || !leftDots || !rightDots) return;
-    
-    const screenWidth = window.innerWidth;
-    
- 
-    if (screenWidth <= 749) { 
-      const availableWidth = screenWidth * 0.8; 
-      const numberOfDots = Math.floor(availableWidth / DOT_TOTAL_SPACE);
-      
-      [leftDots, rightDots].forEach(dotContainer => {
-      
-        dotContainer.innerHTML = '';
-        
-        
-        for (let i = 0; i < numberOfDots; i++) {
-          const dot = document.createElement('span');
-          dot.className = 'dot-l';
-          dotContainer.appendChild(dot);
-        }
-      });
-    } else {
-   
-      const containerHeight = dotsContainer.offsetHeight;
-      const paddingSpace = 15;
-      const availableHeight = containerHeight - paddingSpace;
-      const numberOfDots = Math.max(
-        Math.floor(availableHeight / 15),
-        12
-      );
-      
-      [leftDots, rightDots].forEach(dotContainer => {
-       
-        dotContainer.innerHTML = '';
-        
-       
-        for (let i = 0; i < numberOfDots; i++) {
-          const dot = document.createElement('span');
-          dot.className = 'dot-l';
-          dotContainer.appendChild(dot);
-        }
-      });
-    }
-  }
-
-  const resizeObserver = new ResizeObserver((entries) => {
-    requestAnimationFrame(updateDots);
-  });
-  
-  if (dotsContainer) {
-    resizeObserver.observe(dotsContainer);
-    updateDots(); // Initial update
-  }
-  
-  window.addEventListener('resize', () => {
-    requestAnimationFrame(updateDots);
-  });
-  
-  // Cleanup
-  window.addEventListener('unload', () => {
-    if (resizeObserver) {
-      resizeObserver.disconnect();
-    }
-  });
-});
-</script>
 
 {% schema %}
 {
