@@ -1,12 +1,13 @@
 {{ 'video-banner.css' | asset_url | stylesheet_tag }}
-{% comment %} <script src="{{ 'video-banner.js' | asset_url }}" defer></script> {% endcomment %}
+{% comment %}
+<script src="{{ 'video-banner.js' | asset_url }}" defer></script> {% endcomment %}
 
 {% style %}
-  #shopify-section-{{ section.id }} .video-container-wrapper {
-    --background-color: {{ section.settings.background_color }};
-    --indicator-color: {{ section.settings.indicator_color }};
-    --progress-color: rgba(255, 255, 255, 0.75);
-  }
+#shopify-section-{{ section.id }} .video-container-wrapper {
+--background-color: {{ section.settings.background_color }};
+--indicator-color: {{ section.settings.indicator_color }};
+--progress-color: rgba(255, 255, 255, 0.75);
+}
 {% endstyle %}
 
 <div class="video-container-wrapper" data-section-id="{{ section.id }}">
@@ -36,6 +37,8 @@
             | video_tag: controls: false, style: 'position: absolute; top: 0; left: 0; width: 100%; height: 100%;'
             }}
             {%- endif -%}
+            <div class="overlay-left overlay"></div>
+            <div class="overlay-right overlay"></div>
         </div>
         {%- endfor -%}
     </div>
@@ -480,75 +483,75 @@
 
 {% schema %}
 {
-  "name": "Video Banner",
-  "limit": 2,
-  "settings": [
-    {
-      "type": "header",
-      "content": "Video Settings"
-    },
-    {
-      "type": "color",
-      "id": "background_color",
-      "label": "Background Color",
-      "default": "#FFFFFF"
-    },
-    {
-      "type": "color",
-      "id": "indicator_color",
-      "label": "Bottom Indicator Color",
-      "default": "#000000"
-    }
-  ],
-  "blocks": [
-    {
-      "type": "youtube",
-      "name": "YouTube Video",
-      "settings": [
-        {
-          "type": "video_url",
-          "id": "video_url",
-          "label": "YouTube Video URL",
-          "accept": ["youtube"],
-          "info": "Add YouTube video URL"
-        }
-      ]
-    },
-    {
-      "type": "vimeo",
-      "name": "Vimeo Video",
-      "settings": [
-        {
-          "type": "video_url",
-          "id": "video_url",
-          "label": "Vimeo Video URL",
-          "accept": ["vimeo"],
-          "info": "Add Vimeo video URL"
-        }
-      ]
-    },
-    {
-      "type": "video",
-      "name": "MP4 Video",
-      "settings": [
-        {
-          "type": "video",
-          "id": "video_library",
-          "label": "Video",
-          "info": "Select video from media library"
-        }
-      ]
-    }
-  ],
-  "presets": [
-    {
-      "name": "Video Banner",
-      "blocks": [
-        {
-          "type": "youtube"
-        }
-      ]
-    }
-  ]
+"name": "Video Banner",
+"limit": 2,
+"settings": [
+{
+"type": "header",
+"content": "Video Settings"
+},
+{
+"type": "color",
+"id": "background_color",
+"label": "Background Color",
+"default": "#FFFFFF"
+},
+{
+"type": "color",
+"id": "indicator_color",
+"label": "Bottom Indicator Color",
+"default": "#000000"
+}
+],
+"blocks": [
+{
+"type": "youtube",
+"name": "YouTube Video",
+"settings": [
+{
+"type": "video_url",
+"id": "video_url",
+"label": "YouTube Video URL",
+"accept": ["youtube"],
+"info": "Add YouTube video URL"
+}
+]
+},
+{
+"type": "vimeo",
+"name": "Vimeo Video",
+"settings": [
+{
+"type": "video_url",
+"id": "video_url",
+"label": "Vimeo Video URL",
+"accept": ["vimeo"],
+"info": "Add Vimeo video URL"
+}
+]
+},
+{
+"type": "video",
+"name": "MP4 Video",
+"settings": [
+{
+"type": "video",
+"id": "video_library",
+"label": "Video",
+"info": "Select video from media library"
+}
+]
+}
+],
+"presets": [
+{
+"name": "Video Banner",
+"blocks": [
+{
+"type": "youtube"
+}
+]
+}
+]
 }
 {% endschema %}
