@@ -1,13 +1,10 @@
-
 {{ 'section-rich-text.css' | asset_url | stylesheet_tag }}
-
 <style>
 
 .color-{{ section.settings.color_scheme }} .dot,
 .color-{{ section.settings.color_scheme }} .dot-l {
 background-color: currentColor;
 }
-
   .layout1 ,
   .layout2 {
     padding-top:{{section.settings.padding_top}}px;  
@@ -16,12 +13,9 @@ background-color: currentColor;
   .layout2 {
     padding-bottom:{{section.settings.padding_bottom}}px;  
   }
- 
-
   .layout1 h2 {
     font-size: {{ section.settings.heading_font_size }}px;
   }
-
   .layout1 .rich-text__text {
    font-size: {{ section.settings.text_font_size }}px;
   }
@@ -40,15 +34,13 @@ background-color: currentColor;
     .layout2 h2 {
       font-size: {{ section.settings.heading_font_size | times: 0.8 | round: 0 }}px;
     }
- 
-
     .layout1 .rich-text__text,
     .layout2 .rich-text__text {
       font-size: {{ section.settings.text_font_size | times: 0.9 | round: 0 }}px;
     }
   }
-
 </style>
+
 <div class="rich-text-section color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
   {% if section.settings.layout_style == 'layout1' %} 
     <div class="layout1 page-width">
