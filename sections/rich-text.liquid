@@ -1,18 +1,24 @@
 
 {{ 'section-rich-text.css' | asset_url | stylesheet_tag }}
+
 <style>
+
+  
 .color-{{ section.settings.color_scheme }} .dot,
 .color-{{ section.settings.color_scheme }} .dot-l {
 background-color: currentColor;
 }
-  .layout1 ,
-  .layout2 {
-    padding-top:{{section.settings.padding_top}}px;  
+{{ section.settings.font_title | font_face: font_display: 'swap' }}
+{{ section.settings.font_richtext | font_face: font_display: 'swap' }}
+{{ section.settings.font_richtextsubheading | font_face: font_display: 'swap' }}
+
+  
+  .layout1 p{
+    font-family:  {{ section.settings.font_richtextsubheading.family | default: "Inter" }}, {{ section.settings.font_richtextsubheading.fallback_families }};
+    font-weight: {{ section.settings.font_richtextsubheading.weight }};
+    font-style: {{ section.settings.font_richtextsubheading.style }};
   }
-  .layout1,
-  .layout2 {
-    padding-bottom:{{section.settings.padding_bottom}}px;  
-  }
+
   .layout1 h2 {
     font-size: {{ section.settings.heading_font_size }}px;
   }
@@ -60,11 +66,11 @@ background-color: currentColor;
   {% else %}
     <div class="layout2">
     <div class="dots-container">
-          <div class="side-dots left">
-            {% for i in (1..section.settings.dots_number) %}
-                <span class="dot-l"></span>
+        <div class="side-dots left">
+          {% for i in (1..10) %}
+            <span class="dot-l"></span>
           {% endfor %}
-          </div>
+        </div>
         <div class="rich-text__blocks {{ section.settings.content_alignment }}">
           <h2 class="richtext_heading">{{ section.settings.heading | default: "Transforming Healthcare with Innovative Solutions" }}</h2>
            <p class="richtext_subheading" >{{ section.settings.caption | default: "Delivering Excellence in Medical Products" }}</p>
@@ -73,15 +79,94 @@ background-color: currentColor;
             {{ section.settings.text }}
           </div>
         </div>
-         <div class="side-dots right">
-            {% for i in (1..section.settings.dots_number) %}
-                <span class="dot-l"></span>
-            {% endfor %}
-          </div>
+        <div class="side-dots right color-{{ section.settings.color_scheme }}">
+          {% for i in (1..10) %}
+            <span class="dot-l"></span>
+          {% endfor %}
+        </div>
       </div>
     </div>
   {% endif %}
 </div>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const dotsContainer = document.querySelector('.rich-text__text');
+  const leftDots = document.querySelector('.side-dots.left');
+  const rightDots = document.querySelector('.side-dots.right');
+  
+
+  const DOT_WIDTH = 8; 
+  const DOT_MARGIN = 16; 
+  const DOT_TOTAL_SPACE = DOT_WIDTH + DOT_MARGIN; 
+  
+  function updateDots() {
+    if (!dotsContainer || !leftDots || !rightDots) return;
+    
+    const screenWidth = window.innerWidth;
+    
+ 
+    if (screenWidth <= 749) { 
+      const availableWidth = screenWidth * 0.8; 
+      const numberOfDots = Math.floor(availableWidth / DOT_TOTAL_SPACE);
+      
+      [leftDots, rightDots].forEach(dotContainer => {
+      
+        dotContainer.innerHTML = '';
+        
+        
+        for (let i = 0; i < numberOfDots; i++) {
+          const dot = document.createElement('span');
+          dot.className = 'dot-l';
+          dotContainer.appendChild(dot);
+        }
+      });
+    } else {
+   
+      const containerHeight = dotsContainer.offsetHeight;
+      const paddingSpace = 15;
+      const availableHeight = containerHeight - paddingSpace;
+      const numberOfDots = Math.max(
+        Math.floor(availableHeight / 15),
+        12
+      );
+      
+      [leftDots, rightDots].forEach(dotContainer => {
+       
+        dotContainer.innerHTML = '';
+        
+       
+        for (let i = 0; i < numberOfDots; i++) {
+          const dot = document.createElement('span');
+          dot.className = 'dot-l';
+          dotContainer.appendChild(dot);
+        }
+      });
+    }
+  }
+
+  const resizeObserver = new ResizeObserver((entries) => {
+    requestAnimationFrame(updateDots);
+  });
+  
+  if (dotsContainer) {
+    resizeObserver.observe(dotsContainer);
+    updateDots(); // Initial update
+  }
+  
+  window.addEventListener('resize', () => {
+    requestAnimationFrame(updateDots);
+  });
+  
+  // Cleanup
+  window.addEventListener('unload', () => {
+    if (resizeObserver) {
+      resizeObserver.disconnect();
+    }
+  });
+});
+</script>
 
 {% schema %}
 {

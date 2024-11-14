@@ -1,6 +1,15 @@
 {{ 'product-description.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'product-description.js' | asset_url }}" defer="defer"></script>
 
+{%- style -%}
+  :root {
+    --collapse_header_background_color: {{ section.settings.collapse_header_background_color }};
+    --collapse_header_secondary_background_color: {{ section.settings.collapse_header_secondary_background_color }};
+    --collapse_header_text_color: {{ section.settings.collapse_header_text_color }};
+    --collapse_body_background_color: {{ section.settings.collapse_body_background_color }};
+    --collapse_body_text_color: {{ section.settings.collapse_body_text_color }};
+  }
+{% endstyle %}
 {% if section.blocks.first.settings.heading != blank %}
 <div class="collapse-width">
   <div class="collapse-tab">
@@ -47,6 +56,59 @@
     {% endfor %}
   </div>
 </div>
+<div class="mobile-collapsible-tabs">
+  <div class="accordion" id="accordionExample">
+    {%- for block in section.blocks -%}
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="heading{{ forloop.index }}">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ forloop.index }}" aria-expanded="true" aria-controls="collapse{{ forloop.index }}">
+        {{ block.settings.heading }}
+      </button>
+    </h2>
+    <div id="collapse{{ forloop.index }}" class="accordion-collapse collapse" aria-labelledby="heading{{ forloop.index }}" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <div class="product-description-grid-container" style="display: grid">
+          {% if block.settings.Point_1 != '' %}
+            <div class="product-description-paragraph">
+              <div class="product-description-in-semicircles"></div>
+              <p class="product-description-subclass">{{ block.settings.Point_1 }}</p>
+            </div>
+          {% endif %}
+          {% if block.settings.Point_2 != '' %}
+            <div class="product-description-paragraph">
+              <div class="product-description-in-semicircles"></div>
+              <p class="product-description-subclass">{{ block.settings.Point_2 }}</p>
+            </div>
+          {% endif %}
+          {% if block.settings.Point_3 != '' %}
+            <div class="product-description-paragraph">
+              <div class="product-description-in-semicircles"></div>
+              <p class="product-description-subclass">{{ block.settings.Point_3 }}</p>
+            </div>
+          {% endif %}
+          {% if block.settings.Point_4 != '' %}
+            <div class="product-description-paragraph">
+              <div class="product-description-in-semicircles"></div>
+              <p class="product-description-subclass">{{ block.settings.Point_4 }}</p>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+    {% endfor %}
+    <div class="accordion-below">
+<div class="product-description-drawer">
+  <div class="product-description-bottom_container">
+    {% for i in (0..10) %}
+      <div class="product-description-semicircles"></div>
+    {% endfor %}
+  </div>
+</div>
+</div>
+</div>
+</div>
+
 {% endif %}
 
 {% schema %}
@@ -60,7 +122,50 @@
       "id": "heading",
       "label": "t:sections.collapsible_tabs.settings.heading.label",
       "default": "t:sections.collapsible_tabs.settings.heading.default"
-    }
+    },
+    {
+      "type": "color",
+      "id": "collapse_header_background_color",
+      "label": "Collapse Header Background Color",
+      "default": "#C7E1BF"
+    },
+    {
+      "type": "color",
+      "id": "collapse_header_secondary_background_color",
+      "label": "Collapse Header Secondary Background Color",
+      "default": "#D9F2D1"
+    },
+   {
+      "type": "color",
+      "id": "collapse_header_text_color",
+      "label": "Collapse Header Text Color",
+      "default": "#225647"
+    },
+    {
+      "type": "color",
+      "id": "collapse_body_background_color",
+      "label": "Collapse Body Background Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "collapse_body_text_color",
+      "label": "Collapse Body Text Color",
+      "default": "#000000"
+    },
+    
+    {
+      "type": "color",
+      "id": "sort_by_card_color",
+      "label": "Sort By Card Color",
+      "default": "#18332E"
+    },
+    {
+      "type": "color",
+      "id": "sort_by_text_card_color",
+      "label": "Sort By Card Text Color",
+      "default": "#FFFFFF"
+    },
   ],
   "blocks": [
     {

@@ -2,59 +2,44 @@
 {{ 'section-footer.css' | asset_url | stylesheet_tag }}
 
 {% if section.settings.enable_strip %}
-<div class="container" style="background-color: {{ section.settings.strip_container_bg_color }};">
+<div class="container1" style="background-color: {{ section.settings.strip_container_bg_color }};">
     <div class="strip-right" style="background-color: {{ section.settings.strip_bg_color }};">
         <div class="strip-1">
-            <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text }} &rarr;</div>
-            <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text }} &rarr;</div>
-            <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text }} &rarr;</div>
+            <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text_1 }} &rarr;</div>
+            <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text_1 }} &rarr;</div>
+            <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text_1 }} &rarr;</div>
         </div>
     </div>
     <div class="strip-left" style="background-color: {{ section.settings.strip_bg_color }};">
         <div class="strip-2">
-            <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text }} &rarr;</div>
-            <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text }} &rarr;</div>
-            <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text }} &rarr;</div>
+            <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text_2 }} &rarr;</div>
+            <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text_2 }} &rarr;</div>
+            <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text_2 }} &rarr;</div>
         </div>
     </div>
 </div>
 {% endif %}
 
-
 <footer style="background-color: {{ section.settings.footer_background_color }}; font-family: 'Inter', sans-serif;">
     <div class="footer-content" style="color: {{ section.settings.footer_text_color }};">
+        <!-- Email Newsletter Column -->
         <div class="footer-column">
-            <h4 style="color: {{ section.settings.menu_title_color }};">{{ section.settings.STAY_CONNECTED_TITLE }}</h4>
+          <h4 style="color: {{ section.settings.menu_title_color }};">{{ section.settings.STAY_CONNECTED_TITLE }}</h4>
             <form action="{{ shop.url }}" method="post">
                 <div class="form-container">
                     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-                    <i class="fa-regular fa-envelope email-icon"></i>
+       <i class="fa-regular fa-envelope footer-envelope-icon"></i>
                     <input type="email" name="email" class="email-input" placeholder="Enter your mail">
-                   <button>{{ section.settings.subscribe_button_text | default: "Subscribe" }}</button>
+                    <button>{{ section.settings.subscribe_button_text }}</button>
                 </div>
             </form>
         </div>
 
-
-
-      
-    <div class="footer-column">
-            <h4 style="color: {{ section.settings.menu_title_color }};">{{ section.settings.menu_title | default: "ABOUT US" }}</h4>
-            <ul>
-                {% for link in linklists[section.settings.about_us_menu].links %}
-                <li>
-                    <a href="{{ link.url }}" style="color: {{ section.settings.menu_item_color }};">
-                        {{ link.title }}
-                    </a>
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
-
+        <!-- Menu 1 -->
         <div class="footer-column">
-            <h4 style="color: {{ section.settings.menu_title_color }};">{{ section.settings.PRODUCTS_title | default: "PRODUCTS" }}</h4>
+            <h4 style="color: {{ section.settings.menu_title_color }};">{{ section.settings.menu_1_title }}</h4>
             <ul>
-                {% for link in linklists[section.settings.products_menu].links %}
+                {% for link in linklists[section.settings.menu_1_links].links %}
                 <li>
                     <a href="{{ link.url }}" style="color: {{ section.settings.menu_item_color }};">
                         {{ link.title }}
@@ -64,10 +49,11 @@
             </ul>
         </div>
 
+        <!-- Menu 2 -->
         <div class="footer-column">
-            <h4 style="color: {{ section.settings.menu_title_color }};">{{ section.settings.CUSTOMER_SERVICES_title | default: "CUSTOMER SERVICES" }}</h4>
+            <h4 style="color: {{ section.settings.menu_title_color }};">{{ section.settings.menu_2_title }}</h4>
             <ul>
-                {% for link in linklists[section.settings.customer_services_menu].links %}
+                {% for link in linklists[section.settings.menu_2_links].links %}
                 <li>
                     <a href="{{ link.url }}" style="color: {{ section.settings.menu_item_color }};">
                         {{ link.title }}
@@ -77,10 +63,11 @@
             </ul>
         </div>
 
+        <!-- Menu 3 -->
         <div class="footer-column">
-            <h4 style="color: {{ section.settings.menu_title_color }};">{{ section.settings.RESOURCES_title | default: "RESOURCES" }}</h4>
+            <h4 style="color: {{ section.settings.menu_title_color }};">{{ section.settings.menu_3_title }}</h4>
             <ul>
-                {% for link in linklists[section.settings.resources_menu].links %}
+                {% for link in linklists[section.settings.menu_3_links].links %}
                 <li>
                     <a href="{{ link.url }}" style="color: {{ section.settings.menu_item_color }};">
                         {{ link.title }}
@@ -90,54 +77,66 @@
             </ul>
         </div>
 
+        <!-- Menu 4 -->
+        <div class="footer-column">
+            <h4 style="color: {{ section.settings.menu_title_color }};">{{ section.settings.menu_4_title }}</h4>
+            <ul>
+                {% for link in linklists[section.settings.menu_4_links].links %}
+                <li>
+                    <a href="{{ link.url }}" style="color: {{ section.settings.menu_item_color }};">
+                        {{ link.title }}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
 
-
-<div class="footer-column">
-  <h4>{{ section.settings.SOCIAL_MEDIA_TITLE | default: "SOCIAL MEDIA" }}</h4>
-  {%- if section.settings.show_social_icons -%}
-    <div class="social-icons">
-      {%- if settings.social_facebook_link != blank -%}
-        <a href="{{ settings.social_facebook_link }}" class="social-icon" aria-label="{{ 'general.social.links.facebook' | t }}">
-          {{- 'icon-facebook.svg' | inline_asset_content -}}
-        </a>
-      {%- endif -%}
+  <div class="footer-column">
+            <h4 style="color: {{ section.settings.menu_title_color }};">{{ section.settings.menu_5_title }}</h4>
+            {%- if section.settings.show_social_icons -%}
+                <div class="social-icons">
+                    {%- if settings.social_facebook_link != blank -%}
+                        <a href="{{ settings.social_facebook_link }}" class="social-icon" style="color: {{ section.settings.menu_item_color }};">
+                            {{- 'icon-facebook.svg' | inline_asset_content -}}
+                        </a>
+                    {%- endif -%}
       {%- if settings.social_instagram_link != blank -%}
-        <a href="{{ settings.social_instagram_link }}" class="social-icon" aria-label="{{ 'general.social.links.instagram' | t }}">
+        <a href="{{ settings.social_instagram_link }}" class="social-icon" aria-label="{{ 'general.social.links.instagram' | t }}" style="color: {{ section.settings.menu_item_color }};">
           {{- 'icon-instagram.svg' | inline_asset_content -}}
         </a>
       {%- endif -%}
       {%- if settings.social_youtube_link != blank -%}
-        <a href="{{ settings.social_youtube_link }}" class="social-icon" aria-label="{{ 'general.social.links.youtube' | t }}">
+        <a href="{{ settings.social_youtube_link }}" class="social-icon" aria-label="{{ 'general.social.links.youtube' | t }}" style="color: {{ section.settings.menu_item_color }};">
           {{- 'icon-youtube.svg' | inline_asset_content -}}
         </a>
       {%- endif -%}
       {%- if settings.social_tiktok_link != blank -%}
-        <a href="{{ settings.social_tiktok_link }}" class="social-icon" aria-label="{{ 'general.social.links.tiktok' | t }}">
+        <a href="{{ settings.social_tiktok_link }}" class="social-icon" aria-label="{{ 'general.social.links.tiktok' | t }}" style="color: {{ section.settings.menu_item_color }};">
           {{- 'icon-tiktok.svg' | inline_asset_content -}}
         </a>
       {%- endif -%}
       {%- if settings.social_twitter_link != blank -%}
-        <a href="{{ settings.social_twitter_link }}" class="social-icon" aria-label="{{ 'general.social.links.twitter' | t }}">
+        <a href="{{ settings.social_twitter_link }}" class="social-icon" aria-label="{{ 'general.social.links.twitter' | t }}" style="color: {{ section.settings.menu_item_color }};">
           {{- 'icon-twitter.svg' | inline_asset_content -}}
         </a>
       {%- endif -%}
       {%- if settings.social_pinterest_link != blank -%}
-        <a href="{{ settings.social_pinterest_link }}" class="social-icon" aria-label="{{ 'general.social.links.pinterest' | t }}">
+        <a href="{{ settings.social_pinterest_link }}" class="social-icon" aria-label="{{ 'general.social.links.pinterest' | t }}" style="color: {{ section.settings.menu_item_color }};">
           {{- 'icon-pinterest.svg' | inline_asset_content -}}
         </a>
       {%- endif -%}
       {%- if settings.social_snapchat_link != blank -%}
-        <a href="{{ settings.social_snapchat_link }}" class="social-icon" aria-label="{{ 'general.social.links.snapchat' | t }}">
+        <a href="{{ settings.social_snapchat_link }}" class="social-icon" aria-label="{{ 'general.social.links.snapchat' | t }}" style="color: {{ section.settings.menu_item_color }};">
           {{- 'icon-snapchat.svg' | inline_asset_content -}}
         </a>
       {%- endif -%}
       {%- if settings.social_tumblr_link != blank -%}
-        <a href="{{ settings.social_tumblr_link }}" class="social-icon" aria-label="{{ 'general.social.links.tumblr' | t }}">
+        <a href="{{ settings.social_tumblr_link }}" class="social-icon" aria-label="{{ 'general.social.links.tumblr' | t }}" style="color: {{ section.settings.menu_item_color }};">
           {{- 'icon-tumblr.svg' | inline_asset_content -}}
         </a>
       {%- endif -%}
       {%- if settings.social_vimeo_link != blank -%}
-        <a href="{{ settings.social_vimeo_link }}" class="social-icon" aria-label="{{ 'general.social.links.vimeo' | t }}">
+        <a href="{{ settings.social_vimeo_link }}" class="social-icon" aria-label="{{ 'general.social.links.vimeo' | t }}" style="color: {{ section.settings.menu_item_color }};">
           {{- 'icon-vimeo.svg' | inline_asset_content -}}
         </a>
       {%- endif -%}
@@ -158,7 +157,14 @@
       "label": "t:sections.all.colors.label",
       "default": "scheme-1"
     },
-
+    
+ {
+      "type": "color",
+      "id": "menu_item_color",
+      "label": "Menu Item Color",
+      "default": "#333333"
+    },
+    
  {
       "type": "checkbox",
       "id": "enable_strip",
@@ -166,94 +172,116 @@
       "default": true
     },
     
-{
-    "id": "strip_container_bg_color",
-    "type": "color",
-    "label": "Strip Container Background Color",
-    "default": "#ffffff"
-},
   {
-    "id": "strip_bg_color",
-    "type": "color",
-    "label": "Strip Background Color",
-    "default": "#f0f4f8"
-  },
-  {
-    "id": "strip_text_color",
-    "type": "color",
-    "label": "Strip Text Color",
-    "default": "#333333"
-  },
-   
+      "type": "header",
+      "content": "Strip Settings"
+    },
     {
-      "type": "link_list",
-      "id": "about_us_menu",
-      "label": "About Us Menu"
+      "id": "strip_container_bg_color",
+      "type": "color",
+      "label": "Strip Container Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "id": "strip_bg_color",
+      "type": "color",
+      "label": "Strip Background Color",
+      "default": "#f0f4f8"
+    },
+    {
+      "id": "strip_text_color",
+      "type": "color",
+      "label": "Strip Text Color",
+      "default": "#333333"
+    },
+    
+    {
+      "type": "header",
+      "content": "Strip Text Settings"
     },
     {
       "type": "text",
-      "id": "menu_title",
-      "label": "About Us Menu Title",
-      "default": "ABOUT US"
-    },
-    {
-      "type": "link_list",
-      "id": "products_menu",
-      "label": "Products Menu"
-    },
-    {
-      "type": "text",
-      "id": "PRODUCTS_title",
-      "label": "Products Menu Title",
-      "default": "PRODUCTS"
-    },
-    {
-      "type": "link_list",
-      "id": "customer_services_menu",
-      "label": "Customer Services Menu"
-    },
-    {
-      "type": "text",
-      "id": "CUSTOMER_SERVICES_title",
-      "label": "Customer Services Menu Title",
-      "default": "CUSTOMER SERVICES"
-    },
-    {
-      "type": "link_list",
-      "id": "resources_menu",
-      "label": "Resources Menu"
-    },
-    {
-      "type": "text",
-      "id": "RESOURCES_title",
-      "label": "Resources Menu Title",
-      "default": "RESOURCES"
-    },
-    {
-      "type": "text",
-      "id": "offer_text",
-      "label": "Offer Text",
+      "id": "offer_text_1",
+      "label": "First Strip Text",
       "default": "Subscribe for exclusive offers!"
     },
     {
       "type": "text",
-      "id": "STAY_CONNECTED_TITLE",
-      "label": "Stay Connected Title",
-      "default": "STAY CONNECTED WITH US"
+      "id": "offer_text_2",
+      "label": "Second Strip Text",
+      "default": "Free shipping on orders over $50!"
     },
-    {
-      "type": "text",
-      "id": "subscribe_button_text",
-      "label": "Subscribe Button Text",
-      "default": "Subscribe"
-    },
-  
-  {
-      "type": "text",
-      "id": "SOCIAL_MEDIA_TITLE",
-      "label": "Social Media Title",
-      "default": "SOCIAL MEDIA"
-    },
+   
+   {
+            "type": "header",
+            "content": "Menu 1"
+        },
+        {
+            "type": "text",
+            "id": "menu_1_title",
+            "label": "Menu Title 1",
+            "default": "ABOUT US"
+        },
+        {
+            "type": "link_list",
+            "id": "menu_1_links",
+            "label": "Menu 1 Links"
+        },
+        {
+            "type": "header",
+            "content": "Menu 2"
+        },
+        {
+            "type": "text",
+            "id": "menu_2_title",
+            "label": "Menu Title 2",
+            "default": "PRODUCTS"
+        },
+        {
+            "type": "link_list",
+            "id": "menu_2_links",
+            "label": "Menu 2 Links"
+        },
+        {
+            "type": "header",
+            "content": "Menu 3"
+        },
+        {
+            "type": "text",
+            "id": "menu_3_title",
+            "label": "Menu Title 3",
+            "default": "CUSTOMER SERVICES"
+        },
+        {
+            "type": "link_list",
+            "id": "menu_3_links",
+            "label": "Menu 3 Links"
+        },
+        {
+            "type": "header",
+            "content": "Menu 4"
+        },
+        {
+            "type": "text",
+            "id": "menu_4_title",
+            "label": "Menu Title 4",
+            "default": "RESOURCES"
+        },
+        {
+            "type": "link_list",
+            "id": "menu_4_links",
+            "label": "Menu 4 Links"
+        },
+        {
+            "type": "header",
+            "content": "Menu 5"
+        },
+        {
+            "type": "text",
+            "id": "menu_5_title",
+            "label": "Menu Title 5",
+            "default": "SOCIAL MEDIA"
+        },
    {
       "type": "header",
       "content": "Social media icons"
@@ -267,12 +295,27 @@
       "id": "show_social_icons",
       "label": "Show social media icons",
       "default": true
+    },
+     {
+      "type": "header",
+      "content": "Footer Heading"
+    },
+    {
+      "type": "text",
+      "id": "STAY_CONNECTED_TITLE",
+      "label": "Stay Connected Title",
+      "default": "STAY CONNECTED WITH US"
+    },
+     {
+      "type": "header",
+      "content": "Footer button"
+    },
+    {
+      "type": "text",
+      "id": "subscribe_button_text",
+      "label": "Button Text",
+      "default": "Subscribe"
     }
   ]
 }
   {% endschema %}
-
-
-
-
-

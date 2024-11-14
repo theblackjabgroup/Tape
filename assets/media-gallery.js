@@ -57,13 +57,13 @@ if (!customElements.get('media-gallery')) {
         this.preventStickyHeader();
         window.setTimeout(() => {
           if (!this.mql.matches || this.elements.thumbnails) {
-       //     activeMedia.parentElement.scrollTo({ left: activeMedia.offsetLeft });
+            activeMedia.parentElement.scrollTo({ left: activeMedia.offsetLeft });
           }
           const activeMediaRect = activeMedia.getBoundingClientRect();
           // Don't scroll if the image is already in view
           if (activeMediaRect.top > -0.5) return;
           const top = activeMediaRect.top + window.scrollY;
-     //     window.scrollTo({ top: top, behavior: 'smooth' });
+          window.scrollTo({ top: top, behavior: 'smooth' });
         });
         this.playActiveMedia(activeMedia);
 
@@ -83,7 +83,7 @@ if (!customElements.get('media-gallery')) {
 
         if (this.elements.thumbnails.isSlideVisible(thumbnail, 10)) return;
 
-      //  this.elements.thumbnails.slider.scrollTo({ left: thumbnail.offsetLeft });
+        this.elements.thumbnails.slider.scrollTo({ left: thumbnail.offsetLeft });
       }
 
       announceLiveRegion(activeItem, position) {
@@ -97,10 +97,15 @@ if (!customElements.get('media-gallery')) {
           }, 2000);
         };
         image.src = image.src;
+        console.log("activeItem" ,activeItem)
         const images = activeItem.querySelectorAll('.product__modal-opener--image img');
         images.forEach((image) => {
           image.setAttribute('aria-click', 0);
           image.setAttribute('aria-click', numClick%4);
+        })
+        const divs = activeItem.querySelectorAll('.product__media');
+        divs.forEach((div) => {
+          div.classList.add("bb_product__media");
         })
       }
 

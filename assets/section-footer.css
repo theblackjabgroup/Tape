@@ -10,11 +10,11 @@ body {
     font-family: 'Inter', sans-serif;
 }
 
-.container {
+.container1 {
     position: relative;
     overflow: hidden;
     width: 100%;
-    height: 300px;
+    height: 200px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -25,11 +25,11 @@ body {
 
 .strip-right {
     position: absolute; /* Change to relative */
-    width: 110%; /* Full width of the container */
+    width: 114%; /* Full width of the container */
     height: 60px;
     background-color: white; /* Set the background color of the strip */
     color: black; /* Set text color to white */
-    font-size: 25px;
+    font-size: 23px;
     display: flex;
     align-items: center;
     justify-content: center; /* Center text horizontally */
@@ -37,21 +37,21 @@ body {
     top: 50%; /* Center vertically */
     left: 50%; /* Center horizontally */
     transform: translate(-50%, -50%) rotate(10deg);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); 
+    box-shadow: 0 15px 8px rgba(0, 0, 0, 0.3); 
     font-family: 'Fira Sans', sans-serif; /* Set Fira Sans for strip text */
   }
   
   .strip-left {
     position: absolute; /* Change to relative */
-    width: 110%; /* Full width of the container */
+    width: 114%; /* Full width of the container */
     height: 60px;
     background-color: rgb(
       221,
       23,
       23
     ); /* Set the background color of the strip */
-    color: white; /* Set text color to white */
-    font-size: 25px;
+    color: white; 
+    font-size: 23px;
     display: flex;
     align-items: center;
     justify-content: center; /* Center text horizontally */
@@ -59,22 +59,22 @@ body {
     top: 50%; /* Center vertically */
     left: 10%; /* Center horizontally */
     transform: translate(-50%, -50%) rotate(-10deg);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); 
+    box-shadow: 0 15px 8px rgba(0, 0, 0, 0.3); 
     font-family: 'Fira Sans', sans-serif; /* Set Fira Sans for strip text */ 
   }
 
   .strip-right {
     background-color: white; /* Background color */
-    top: 50%; /* Center vertically */
-    left: 50%; /* Center horizontally */
-    transform: translate(-50%, -50%) rotate(10deg); /* Rotation */
+    top: 42%; /* Center vertically */
+    left: 45%; /* Center horizontally */
+    transform: translate(-51%, -40%) rotate(6deg); /* Rotation */
 }
 
 .strip-left {
     background-color: white; /* Background color */
-    top: 50%; /* Center vertically */
-    left: 50%; /* Center horizontally */
-    transform: translate(-50%, -50%) rotate(-10deg); /* Rotation */
+    top: 64%; /* Center vertically */
+    left: 53%; /* Center horizontally */
+    transform: translate(-47%, -103%) rotate(-6deg); /* Rotation */
 }
 
 .strip-1, .strip-2 {
@@ -119,7 +119,7 @@ body {
 
 .footer-column h4 {
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 .footer-column ul {
@@ -141,14 +141,14 @@ body {
     color: #007bff;
 }
 
-.fa-regular {
+.footer-envelope-icon {
     font-weight: 400;
     position: absolute;
-    transform: translateY(70%);
+    transform: translateY(93%);
     color: #888;
     font-size: 16px;
     pointer-events: none;
-    left: 49px;
+      margin-left: 13px;
 }
 
 .footer-column form input {
@@ -198,32 +198,48 @@ body {
 
 /* For larger screens */
 @media (min-width: 769px) {
-    .fa-regular {
+   .footer-envelope-icon {
         font-size: 16px;
         left: 49px;
     }
 }
 
-/* For medium screens */
-@media (max-width: 768px) {
-    .fa-regular {
-        font-size: 14px;
-        left: 35px;
-    }
+
+@media screen and (max-width: 990px){
+  .footer-envelope-icon {
+    margin-left: -18px;
+    margin-top: -2px;
+  }
 }
 
 /* For smaller screens (mobile) */
 @media (max-width: 480px) {
-    .fa-regular {
+    .footer-envelope-icon {
         font-size: 16px;
-        left: 18px;
+        left: 45px;
+      margin-top: 1px;
     }
 }
+.footer-column form button{
+  margin-bottom: 12px;
+    margin-left: 13px;
+}
 
+.footer-column form input {
+      margin-left: 13px;
+}
+
+.footer-column h4{
+  margin-left: 14px;
+}
+
+.footer-column ul li a {
+      margin-left: 13px;
+}
 
 .social-icons {
   display: flex;
-  flex-direction: column; /* Icons will now stack vertically */
+  flex-direction: column;
   align-items: center;
   gap: 10px;
 }
@@ -237,24 +253,23 @@ body {
 .social-icon svg {
   width: 85%;
   height: 85%;
-  fill: currentColor; /* Ensures original color is used from the SVG itself */
+  fill: currentColor; 
 }
 
 .social-icon:hover {
-  color: inherit; /* Prevents any change on hover */
+  color: inherit;
 }
 
 @media only screen and (max-width: 768px) {
     .social-icons {
-        flex-direction: row; /* Align icons in a single row */
-        flex-wrap: nowrap; /* Prevent wrapping */
-        overflow-x: auto; /* Allow horizontal scrolling if necessary */
-        gap: 10px; /* Maintain spacing between icons */
+        flex-direction: row; 
+        flex-wrap: nowrap;
+        overflow-x: auto; 
+        gap: 10px;
     }
 
     .social-icon {
-        width: 40px; /* Adjust icon size if necessary */
-        height: 40px; /* Adjust icon size if necessary */
+        width: 40px;
+        height: 40px;
     }
 }
-

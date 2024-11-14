@@ -1,0 +1,552 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font: inter;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: #f5f5f5;
+  padding-top: 75px;
+  border: 5px solid #D9D9D9;
+}
+
+.blog-article-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 30px;
+  padding: 10px;
+}
+
+.blog-article-content {
+  padding-right: 20px;
+  color: black;
+  padding-left: 43px;
+}
+
+.blog-image-section {
+  position: relative;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 638px;
+  height: 812px;
+}
+
+.blog-article-header {
+  margin-bottom: 20px;
+}
+
+.blog-article-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.blog-article-meta {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.blog-article-section {
+  margin-bottom: 20px;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.section-content {
+  font-size: 16px;
+  line-height: 1.6;
+  color: black;
+}
+
+.benefits-list {
+  list-style-type: none;
+}
+
+.benefits-list li {
+  margin-bottom: 15px;
+}
+
+.benefits-list li ul {
+  margin-top: 5px;
+  margin-left: 20px;
+  color: black;
+}
+
+.blog-image-content {
+  background-color: #D8D8D8;
+  padding: 20px;
+  border-radius: 10px 10px 0 0;
+  padding-bottom: 40px;
+  height: 729px;
+  width: 585px;
+  overflow: hidden;
+  position: relative;
+}
+
+.blog-main-image {
+  width: 546px;
+  height: 521px;
+  border-radius: 25px;
+  padding: 13px;
+  margin-bottom: 17px;
+  object-fit: cover;
+}
+
+.blog-image-dots {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.blog-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.blog-thumbnail-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  margin: 30px 10px 30px 20px;
+}
+
+.blog-thumbnail {
+  aspect-ratio: 1;
+  background-color: #fff;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.blog-thumbnail::before,
+.blog-thumbnail::after {
+  content: "";
+  position: absolute;
+  width: 100px;
+  height: 2px;
+  background-color: #B4B4B4;
+}
+
+.blog-thumbnail::before {
+  transform: rotate(45deg);
+}
+
+.blog-thumbnail::after {
+  transform: rotate(-45deg);
+}
+
+.blog-semicircle {
+  content: '';
+  position: absolute;
+  width: 25px;
+  height: 30px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.blog-semicircle-left {
+  top: 555px;
+  left: -14px;
+}
+
+.blog-semicircle-right {
+  top: 555px;
+  right: -14px;
+}
+
+.blog-social-container {
+  padding: 0 20px 0 20px;
+  box-shadow: none;
+  width: 584.5px;
+  height: 59px;
+  position: relative;
+  background: #D8D8D8;
+  margin: 20px 0;
+  clip-path: polygon(
+    0 0, 0 2px, 12px 5px, 0 8px, 0 12px, 12px 15px,
+    0 18px, 0 22px, 12px 25px, 0 28px, 0 34px,
+    100% 34px, 100% 28px, calc(100% - 12px) 25px,
+    100% 22px, 100% 18px, calc(100% - 12px) 15px,
+    100% 12px, 100% 8px, calc(100% - 12px) 5px,
+    100% 2px, 100% 0
+  );
+}
+
+.blog-social-bar {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+}
+
+.blog-interaction-buttons {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  padding: 5px 0 10px 30px;
+}
+
+.blog-interaction-buttons i {
+  font-size: 19px;
+  color: #555;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.blog-social-links {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: #555;
+  font-size: 14px;
+  padding: 5px 20px 10px 0;
+}
+
+.blog-divider {
+  height: 20px;
+  width: 1px;
+  background-color: #999;
+  margin: 0 10px;
+}
+
+.blog-social-icon {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  color: #555;
+  text-decoration: none;
+}
+
+.blog-link {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+.blog-link:hover {
+  text-decoration: underline;
+}
+
+.blog-dotted-line {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  margin: 20px 0;
+}
+
+.blog-circle {
+  width: 12px;
+  height: 12px;
+  background-color: #D9D9D9;
+  border-radius: 50%;
+}
+
+.blog-semicircle2 {
+  width: 23px;
+  height: 24px;
+  background-color: #D9D9D9;
+  position: relative;
+  border-radius: 50%;
+}
+
+.blog-semicircle2-l {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  left: -10px;
+}
+
+.blog-semicircle2-r {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  right: -10px;
+}
+
+.blog-dotted-line2 {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  margin: 30px 0;
+}
+
+.blog-circle3 {
+  width: 12px;
+  height: 12px;
+  background-color: #D9D9D9;
+  border-radius: 50%;
+}
+
+.blog-semicircle3 {
+  width: 23px;
+  height: 24px;
+  background-color: #D9D9D9;
+  position: relative;
+  border-radius: 50%;
+}
+
+.blog-semicircle3-l {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  left: -10px;
+}
+
+.blog-semicircle3-r {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  right: -10px;
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  .article-template__comment-wrapper {
+    padding: 20px;
+  }
+
+  .page-width--narrow {
+    max-width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .article-template__comment-fields input,
+  .blog-article-template__comment-fields textarea {
+    font-size: 14px;
+  }
+
+  .blog-button {
+    font-size: 14px;
+  }
+}
+
+/* General Comment Section Styles */
+.article-template__comment-wrapper {
+  background-color: #f5f5f5;
+  padding: 30px;
+  border-radius: 8px;
+  margin-top: 30px;
+}
+
+.article-template__comment-wrapper,
+.article-template__comment-wrapper * {
+  color: #000 !important;
+}
+
+.article-template__comments-comment p {
+  font-size: 10px;
+}
+
+.page-width--narrow {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.article-template__comments {
+  margin-top: 20px;
+}
+
+/* Comment Fields and Input Styles */
+.article-template__comment-fields {
+  margin-bottom: 20px;
+}
+/* Headings and Labels */
+.article-template__comment-wrapper .field__input label,
+.article-template__comment-wrapper .field__input h2,
+.article-template__comment-wrapper #CommentForm-body h2,
+.article-template__comment-wrapper .text-area field__input,
+.article-template__comment-wrapper label {
+  color: #000 !important; /* Force black color for the heading */
+}
+
+
+.article-template__comments-comment {
+  background-color: white;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  color: #000; /* Black text */
+}
+
+.field--with-error .form__message {
+  background-color: #f5f5f5; /* Light gray */
+  color: #000; /* Black text */
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+}
+
+/* Input Styles */
+.article-template__comment-fields input,
+.article-template__comment-fields textarea,
+  {
+  color: #000; /* Black text */
+  background-color: #fff; /* White background */
+  padding: 10px;
+  border: 1px solid #ddd; /* Initial border color (light gray) */
+  border-radius: 5px;
+  width: 100%;
+}
+
+/* Focused Input Styles */
+.article-template__comment-fields input:focus,
+.article-template__comment-fields textarea:focus {
+  outline: none;
+  border-color: #000 !important; /* Black border on focus */
+}
+
+
+/* Submit Button Styles */
+.article-template__comment-wrapper input[type="submit"] {
+  background-color: #888; /* Gray background */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.article-template__comment-wrapper input[type="submit"]:hover {
+  background-color: #666; /* Darker gray on hover */
+}
+
+/* Success Message */
+.form-status {
+  background-color: #d4edda; /* Light green for success */
+  color: #155724; /* Dark green text for success message */
+  padding: 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+/* Footer Styles for Comment */
+.article-template__comments-comment footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #555;
+}
+
+
+
+.field {
+  margin: 10px 0;
+      border-radius: 10px;
+  border: 1px solid black;
+}
+  .article-template__comment-wrapper input[type="submit"]{
+    color: white;
+  }
+
+
+/* Media Queries */
+@media screen and (max-width: 1200px) {
+  .blog-article-container {
+    grid-template-columns: 2fr 1fr; /* Keeps 2 columns on medium screens */
+  }
+
+  .blog-image-content {
+    height: 629px; /* Keep height fixed on larger screens */
+    width: 485px;  /* Keep width fixed */
+  }
+
+  .blog-main-image {
+    width: 446px; /* Keeps width fixed */
+    height: 421px; /* Keeps height fixed */
+  }
+  .blog-image-section{
+    width: 500px;
+  }
+  
+.blog-semicircle-left {
+  top: 457px;
+}
+  .blog-semicircle-right {
+  top: 457px;
+}
+  .blog-social-container {
+    width: 485px;
+  }
+  .blog-image-dots{
+    gap: 10px;
+  }
+  .blog-thumbnail-grid{
+    margin: 30px 10px 30px 0;
+  }
+  .blog-dotted-line {
+    gap: 14px;
+  }
+  .blog-semicircle2-r{
+    right:-6px;
+  }
+  .blog-semicircle2-l{
+    left: -6px;
+}
+  .blog-dotted-line2 {
+    gap: 14px;
+  }
+  .blog-semicircle3-r{
+    right:-6px;
+  }
+  .blog-semicircle3-l{
+    left: -6px;
+}
+}
+
+@media screen and (max-width: 768px) {
+  .blog-article-container {
+    grid-template-columns: 1fr; /* Single column for smaller screens */
+  }
+
+  .blog-image-content {
+    height: auto;  /* Allow the image content to adjust height on smaller screens */
+    width: 100%;   /* Full width on smaller screens */
+    padding-bottom: 20px;  /* Adjust padding for responsiveness */
+  }
+
+  .blog-main-image {
+    width: 100%; /* Full width of the parent container on small screens */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 15px; /* Slightly rounded corners on small screens */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .blog-main-image {
+    width: 100%; /* Full width on very small screens */
+    height: auto; /* Automatically adjust height */
+  }
+
+  .blog-image-content {
+    width: 100%; /* Full width on very small screens */
+    height: auto; /* Adjust height to maintain proportions */
+  }
+}
+  .blog-suggested-articles-section {
+    padding: 20px 0;
+    color: black;
+  }
+  .blog-suggested-articles-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .blog-suggested-article {
+    width: calc(25% - 16px);
+    text-align: center;
+  }

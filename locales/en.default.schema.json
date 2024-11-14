@@ -160,12 +160,6 @@
         },
         "product_special_offer": {
           "label": "Product Special Offer Color"
-        },
-        "product_collapsible_rows_section": {
-          "label": "Product Collapsible Rows Section Color"
-        },
-        "product_collapsible_rows_section_secondary": {
-          "label": "Product Collapsible Rows Section Secondary Color"
         }
       }
     },
@@ -528,7 +522,7 @@
             },
             "button_text": {
               "label": "Button Text",
-              "default": "BUY NOW"
+              "default": ""
             },
             "text_alignment": {
               "label": "Text alignment",

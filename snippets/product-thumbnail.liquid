@@ -66,10 +66,12 @@
     class="product__modal-opener product__modal-opener--{{ media.media_type }}"
     data-modal="#ProductModal-{{ modal_id }}"
   >
+                <!---
     <span
       class="product__media-icon motion-reduce quick-add-hidden{% if media.media_type == 'image' %} product__media-icon--{{ section.settings.image_zoom }}{% endif %}"
       aria-hidden="true"
     >
+
       {% case media.media_type %}
         {% when 'video', 'external_video' %}
           <span class="svg-wrapper">
@@ -85,8 +87,10 @@
           </span>
       {% endcase %}
     </span>
+                    --->
+
     {%- render 'loading-spinner' -%}
-    <div class="bb_product__media product__media media media--transparent">
+    <div class="bb_product__media_first product__media media media--transparent">
       {{
         media.preview_image
         | image_url: width: 1946

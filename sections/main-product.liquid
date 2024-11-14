@@ -82,8 +82,13 @@
 
 
   <div class="page-width">
-    <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
+    <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-show grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
     <div class="grid__item product__media-wrapper {% if thumbnail == true %} bb_background {% endif %}">
+      {%- if product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
+        <div class="sold-out-tag-mobile">
+          <span class="sold-out-tag-text">SOLD OUT</span>
+        </div>
+      {% endif %}
         {% render 'product-media-gallery', variant_images: variant_images %}
       </div>
       <div class="product__info-wrapper grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
@@ -107,7 +112,7 @@
 
               {%- when 'title' -%}
               {% if section.settings.enable_special_offer %}
-                <div>
+                <div class="bb-special-offer-upper">
                 <div class="bb-special-offer">
                   <div>
                   {% for i in (0..2) %}
@@ -2190,43 +2195,14 @@
     },
     {
       "type": "select",
-      "id": "image_zoom",
-      "options": [
-        {
-          "value": "lightbox",
-          "label": "t:sections.main-product.settings.image_zoom.options__1.label"
-        },
-        {
-          "value": "hover",
-          "label": "t:sections.main-product.settings.image_zoom.options__2.label"
-        },
-        {
-          "value": "none",
-          "label": "t:sections.main-product.settings.image_zoom.options__3.label"
-        }
-      ],
-      "default": "lightbox",
-      "label": "t:sections.main-product.settings.image_zoom.label",
-      "info": "t:sections.main-product.settings.image_zoom.info"
-    },
-    {
-      "type": "select",
       "id": "mobile_thumbnails",
       "options": [
         {
-          "value": "columns",
-          "label": "t:sections.main-product.settings.mobile_thumbnails.options__1.label"
-        },
-        {
           "value": "show",
           "label": "t:sections.main-product.settings.mobile_thumbnails.options__2.label"
-        },
-        {
-          "value": "hide",
-          "label": "t:sections.main-product.settings.mobile_thumbnails.options__3.label"
         }
       ],
-      "default": "hide",
+      "default": "show",
       "label": "t:sections.main-product.settings.mobile_thumbnails.label"
     },
     {

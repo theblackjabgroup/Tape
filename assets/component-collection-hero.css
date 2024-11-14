@@ -36,7 +36,11 @@
 }
 
 .collection-hero__title {
-  margin: 2.5rem 0;
+  margin: 1.5rem 0;
+  font-family: 'Fira Sans';
+  font-size: 28px;
+    line-height: 34px;
+    font-weight: 600;
 }
 
 .collection-hero__title + .collection-hero__description {
@@ -54,7 +58,8 @@
   }
 
   .collection-hero__description {
-    max-width: 66.67%;
+    max-width: calc(var(--page-width)/1.8);
+    font-family: 'Inter';
   }
 
   .collection-hero--with-image .collection-hero__description {
