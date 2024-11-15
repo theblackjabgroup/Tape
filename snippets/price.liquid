@@ -43,7 +43,7 @@
 {%- unless target == null and placeholder == null -%}
   <div
     class="
-      price
+      price bb_price
       {%- if price_class %} {{ price_class }}{% endif -%}
       {%- if available == false %} price--sold-out{% endif -%}
       {%- if compare_at_price > price and product.quantity_price_breaks_configured? != true %} price--on-sale{% endif -%}
@@ -77,7 +77,7 @@
             {%- endunless -%}
           {%- endif -%}
           <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.regular_price' | t }}</span>
-          <span class="price-item price-item--regular {% if cp %} bb-price2 {% endif %}">
+          <span class="{% if cp %} bb-price2 {% endif %} price-item price-item--regular ">
             {{-
               'products.product.volume_pricing.price_range'
               | t: minimum: money_price_min, maximum: money_price_max
@@ -85,13 +85,13 @@
           </span>
         {%- else -%}
           <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.regular_price' | t }}</span>
-          <span class="price-item price-item--regular {% if cp %} bb-price2 {% endif %}">
+          <span class="{% if cp %} bb-price2 {% endif %} price-item price-item--regular ">
             {{ money_price }}
           </span>
         {%- endif -%}
       </div>
       <div class="price__sale bb-price-sale">
-      <span class="price-item price-item--sale price-item--last {% if main %} bb-price {% endif %} {% if cp %} bb-price2 {% endif %}">
+      <span class="{% if cp %} bb-price2 {% endif %} price-item price-item--sale price-item--last {% if main %} bb-price {% endif %} ">
           <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.sale_price' | t }}</span>
             {{ money_price }}
           </span>

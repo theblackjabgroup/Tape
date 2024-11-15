@@ -26,10 +26,13 @@
   :root {
   --filter-by-banner-color: {{ section.settings.filter_by_banner_color }};
   --filter-by-text-color: {{ section.settings.filter_by_text_color }};
+  --mobile-filter-by-text-color: {{ section.settings.mobile_filter_by_text_color }};
   --filter-by-card-color: {{ section.settings.filter_by_card_color }};
   --filter-by-card-text-color: {{ section.settings.filter_by_card_text_color }};
+  --mobile-filter-by-card-text-color: {{ section.settings.mobile_filter_by_card_text_color }};
   --sort-by-card-color: {{ section.settings.sort_by_card_color }};
   --sort-by-text-card-color: {{ section.settings.sort_by_text_card_color }};
+  --mobile-sort-by-text-color: {{ section.settings.mobile_sort_by_text_color }};
   --product-card-background-color : {{ section.settings.product_card_background_color }};
   --product_price_card: {{ section.settings.product_price_card }};
   --product_price_card_text: {{ section.settings.product_price_card_text }};
@@ -431,6 +434,12 @@
     },
     {
       "type": "color",
+      "id": "mobile_filter_by_text_color",
+      "label": "Filter By Text Color(Mobile Version)",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
       "id": "filter_by_card_color",
       "label": "Filter By Product Card Color",
       "default": "#C7E1BF"
@@ -441,7 +450,12 @@
       "label": "Filter By Card Text Color",
       "default": "#000000"
     },
-    
+    {
+      "type": "color",
+      "id": "mobile_filter_by_card_text_color",
+      "label": "Filter By Card Text Color (Mobile Version)",
+      "default": "#000000"
+    },   
     {
       "type": "color",
       "id": "sort_by_card_color",
@@ -453,6 +467,12 @@
       "id": "sort_by_text_card_color",
       "label": "Sort By Card Text Color",
       "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "mobile_sort_by_text_color",
+      "label": "Sort By Text Color (Mobile Version)",
+      "default": "#000000"
     },
     {
       "type": "color",
