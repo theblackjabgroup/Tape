@@ -1,11 +1,15 @@
 {{ 'component-slideshow.css' | asset_url | stylesheet_tag }}
-
+<style>
+  .slide .backfold::before {
+   background-color: {{ section.settings.imagefoldcolor }};
+  }
+</style>
 <div class="rich-text-section color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
   <div class="interactive-slideshow">
     {% for block in section.blocks %}
       <div class="slide {% if forloop.first %}active{% endif %}" data-index="{{ forloop.index0 }}">
         {% if block.settings.image != blank %}
-          <div class="backfold" style="background-color: {{ section.settings.imagefoldcolor }};">
+          <div class="backfold">
                <img src="{{ block.settings.image | img_url: 'master' }}" alt="{{ block.settings.title }}">
           </div>
         {% else %}
@@ -38,7 +42,7 @@
   const slides = document.querySelectorAll('.slide');
   const slideshow = document.querySelector('.interactive-slideshow');
   let activeSlide = null;
-  let isMobile = window.innerWidth <= 1100;
+  let isMobile = window.innerWidth <= 900;
   let startX;
   let scrollLeft;
   let isDown = false;
