@@ -51,11 +51,18 @@
 .interactive-slideshow {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: start; 
   align-items: center;
-  margin: 0 20px;
+  margin: 0 auto;
+  padding: 0 20px; 
   height: 100vh;
-  overflow: hidden;
+  overflow-x: auto; 
+  -ms-overflow-style: none; 
+  scrollbar-width: none; 
+}
+
+.interactive-slideshow::-webkit-scrollbar {
+  display: none; 
 }
 .slide {
   width: 100px;
@@ -124,9 +131,9 @@
   margin-bottom: 20px;
 }
 .slide.active {
-  flex: 1 1 auto;
-  width: 60%;
+  width: 600px; 
   filter: grayscale(0);
+  transition: all 0.5s ease-in-out;
 }
 .slide-text {
   position: absolute;
