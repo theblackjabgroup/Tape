@@ -169,7 +169,8 @@
   gap: 1rem;
   justify-content: center;
 }
-.dot {
+.card__count__container > .dot {
+  background: red;
   display: block !important;
   width: 6px;
   height: 6px;
@@ -177,7 +178,7 @@
   transition: all 0.45s ease;
 }
 
-.dot.active {
+.card__count__container > .dot.active {
   width: 23px;
   border-radius: 13px;
 }
