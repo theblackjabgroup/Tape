@@ -170,7 +170,7 @@
   justify-content: center;
 }
 .card__count__container > .dot {
-  background: red;
+  background: black;
   display: block !important;
   width: 6px;
   height: 6px;
