@@ -8,10 +8,13 @@
       "label": "Select Blog"
     },
     {
-      "type": "number",
+      "type": "range",
       "id": "post_limit",
       "label": "Number of Posts to Display",
-      "default": 4
+      "default": 4,
+      "min": 2,
+      "max": 7,
+      "step": 1
     },
     {
       "type": "checkbox",
@@ -46,6 +49,12 @@
     },
     {
       "type": "color",
+      "id": "section_title_color",
+      "label": "Section Title Color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
       "id": "background_color",
       "label": "Background Color",
       "default": "#ffffff"
@@ -65,7 +74,7 @@
     {
       "type": "color",
       "id": "button_background_color",
-      "label": "Button Background Color",
+      "label": "Button Color",
       "default": "#333333"
     },
     {
@@ -88,8 +97,8 @@
 
 <div class="blog-slider-section" style="background-color: {{ section.settings.background_color }};">
     <!-- Title Section -->
-    <div class="blog-slider-title" style="color: {{ section.settings.text_color }};">
-        <h2>{{ section.settings.section_title }}</h2>
+    <div class="blog-slider-title" >
+       <h2 style="color: {{ section.settings.section_title_color }};">{{ section.settings.section_title }}</h2>
     </div>
 
     <!-- Arrow Buttons -->
@@ -103,6 +112,7 @@
         <div class="blog-slider-wrapper" id="sliderWrapper">
             {% assign blog_handle = section.settings.blog %}
             {% assign post_limit = section.settings.post_limit %}
+          {% if blog_handle != blank and blogs[blog_handle].articles.size > 0 %}
             {% for article in blogs[blog_handle].articles limit: post_limit %}
             <div class="blog-card" style="background-color: {{ section.settings.card_bg_color }};">
                 <!-- Semicircle divs -->
@@ -112,7 +122,7 @@
                 {% if article.image %}
                     <img src="{{ article.image | img_url: '309x309', crop: 'center' }}" alt="{{ article.title }}">
                 {% else %}
-                    <img src="{{ 'default-image.jpg' | asset_url }}" alt="Default Image">
+                    <img src="{{ 'blog.jpg' | asset_url }}" alt="Default Image">
                 {% endif %}
                 <div class="blog-card-content" style="background-color: {{ section.settings.card_bg_color }};">
                     <h3 class="blog-card-title" style="color: {{ section.settings.text_color }};">{{ article.title | escape }}</h3>
@@ -142,11 +152,52 @@
                 </div>
             </div>
             {% endfor %}
+          {% else %}
+                <!-- Placeholder Blog Cards for Preview with Default Image -->
+                {% for i in (1..4) %}
+                    <div class="blog-card" style="background-color: {{ section.settings.card_bg_color }};">
+                        <!-- Semicircle divs -->
+                        <div class="semicircle semicircle-left" style="background-color: {{ section.settings.background_color }};"><h6></h6></div>
+                        <div class="semicircle semicircle-right" style="background-color: {{ section.settings.background_color }};"><h6></h6></div>
+
+                        <!-- Default Placeholder Image -->
+                        <img src="{{ 'blog.jpg' | asset_url }}" alt="Default Image" style="width: 100%; height: 309px; object-fit: cover;">
+
+                        <div class="blog-card-content">
+                            <h3 class="blog-card-title" style="color: {{ section.settings.text_color }};">Sample Blog Post {{ i }}</h3>
+
+                            {% if section.settings.show_author or section.settings.show_date %}
+                                <div class="blog-meta">
+                                    {% if section.settings.show_author %}
+                                        <span class="blog-author" style="color: {{ section.settings.text_color }}">John Doe</span>
+                                    {% endif %}
+                                    {% if section.settings.show_date %}
+                                        <span class="blog-date" style="color: {{ section.settings.text_color }}">January {{ i }}, 2024</span>
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+
+                            {% if section.settings.show_excerpt %}
+                                <p class="blog-excerpt" style="color: {{ section.settings.text_color }};">This is a preview of how your blog post will look. Select a blog to display your actual content.</p>
+                            {% endif %}
+
+                            <a href="#" class="blog-read-more-btn" style="background-color: {{ section.settings.button_background_color }}; color: {{ section.settings.button_text_color }};">
+                                Read more
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                    <polyline points="12 5 19 12 12 19"></polyline>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
         </div>
     </div>
 
     {% if section.settings.show_view_all %}
-        <div class="view-all-link">
+        <div class="blog-view-all-link">
             <a href="{{ blogs[blog_handle].url }}" class="blog-view-all" style="color:{{ section.settings.button_background_color }}; border-color: {{ section.settings.button_background_color }};">
                 View All Posts
             </a>
@@ -158,91 +209,98 @@
 document.addEventListener('DOMContentLoaded', function() {
     let currentSlide = 0;
     const sliderWrapper = document.getElementById('sliderWrapper');
-    const cards = sliderWrapper.querySelectorAll('.blog-card');
-    const totalSlides = cards.length;
     const leftArrow = document.querySelector('.arrow-left');
     const rightArrow = document.querySelector('.arrow-right');
     const gap = 20;  // Gap between cards
 
-    // Function to calculate the width of a single card, including the gap
-    function getSlideWidth() {
-        const cardWidth = cards[0].offsetWidth;
-        return cardWidth + gap;  // Include the gap in the card width
-    }
+    function updateCards() {
+        // Get all current cards and update total slides
+        const cards = sliderWrapper.querySelectorAll('.blog-card');
+        const totalSlides = cards.length;
 
-    // Function to update the state of the arrows (disabled or not)
-    function updateArrowState() {
-        const visibleSlides = getVisibleSlides();
-        leftArrow.disabled = currentSlide === 0;
-        rightArrow.disabled = currentSlide >= totalSlides - visibleSlides;
-    }
-
-    // Function to calculate how many slides are visible based on screen width
-    function getVisibleSlides() {
-        let visibleSlides = 0;
-        if (window.innerWidth < 768) {
-            visibleSlides = totalSlides <= 1 ? totalSlides : 1;  // Small screens show 1 card
-        } else if (window.innerWidth < 1024) {
-            visibleSlides = totalSlides <= 3 ? totalSlides : 3;  // Medium screens show 3 cards
-        } else {
-            visibleSlides = totalSlides <= 4 ? totalSlides : 4;  // Large screens show 4 cards
+        // Function to calculate the width of a single card, including the gap
+        function getSlideWidth() {
+            const cardWidth = cards[0]?.offsetWidth || 0;
+            return cardWidth + gap;  // Include the gap in the card width
         }
-        return visibleSlides;
-    }
 
-    // Resize the cards to fit exactly the visible number of cards
-    function resizeCards() {
-        const visibleSlides = getVisibleSlides();
-        const cardWidthPercentage = (95 / visibleSlides);  // Percentage of screen for each card
-        // Update the flex basis for each card dynamically
-        cards.forEach(card => {
-            card.style.flex = `0 0 ${cardWidthPercentage}%`;
-        });
-    }
+        // Function to update the state of the arrows (disabled or not)
+        function updateArrowState() {
+            const visibleSlides = getVisibleSlides();
+            leftArrow.disabled = currentSlide === 0;
+            rightArrow.disabled = currentSlide >= totalSlides - visibleSlides;
+        }
 
-    // Function to move the slider based on direction (left or right)
-    window.moveSlide = function(direction) {
-        const visibleSlides = getVisibleSlides();
-        const maxSlides = totalSlides - visibleSlides;
+        // Function to calculate how many slides are visible based on screen width
+        function getVisibleSlides() {
+            let visibleSlides = 0;
+            if (window.innerWidth < 768) {
+                visibleSlides = totalSlides <= 1 ? totalSlides : 1;  // Small screens show 1 card
+            } else if (window.innerWidth < 1024) {
+                visibleSlides = totalSlides <= 3 ? totalSlides : 3;  // Medium screens show 3 cards
+            } else {
+                visibleSlides = totalSlides <= 4 ? totalSlides : 4;  // Large screens show 4 cards
+            }
+            return visibleSlides;
+        }
 
-        // Update the currentSlide index with bounds checking
-        currentSlide = Math.min(Math.max(currentSlide + direction, 0), maxSlides);
+        // Resize the cards to fit exactly the visible number of cards
+        function resizeCards() {
+            const visibleSlides = getVisibleSlides();
+            const cardWidthPercentage = (95 / visibleSlides);  // Percentage of screen for each card
+            // Update the flex basis for each card dynamically
+            cards.forEach(card => {
+                card.style.flex = `0 0 ${cardWidthPercentage}%`;
+            });
+        }
 
-        // Calculate the slide width (including the gap) and the offset
-        const slideWidth = getSlideWidth();
-        const offset = -currentSlide * slideWidth;
-
-        // Apply the translation to the slider wrapper
-        sliderWrapper.style.transform = `translateX(${offset}px)`;
-        updateArrowState();
-    };
-
-    // Initialize the state of the arrows
-    updateArrowState();
-
-    let resizeTimer;
-    // Event listener to handle window resize
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            resizeCards();  // Resize cards when window is resized
+        // Function to move the slider based on direction (left or right)
+        window.moveSlide = function(direction) {
             const visibleSlides = getVisibleSlides();
             const maxSlides = totalSlides - visibleSlides;
-            currentSlide = Math.min(currentSlide, maxSlides);
 
-            // Recalculate the offset based on the new window size and card width
+            // Update the currentSlide index with bounds checking
+            currentSlide = Math.min(Math.max(currentSlide + direction, 0), maxSlides);
+
+            // Calculate the slide width (including the gap) and the offset
             const slideWidth = getSlideWidth();
             const offset = -currentSlide * slideWidth;
 
-            // Apply the calculated translation to the slider wrapper
+            // Apply the translation to the slider wrapper
             sliderWrapper.style.transform = `translateX(${offset}px)`;
             updateArrowState();
-        }, 250);
-    });
+        };
 
-    // Initialize card size and layout on page load
-    resizeCards();
+        // Initialize card size and layout on page load
+        resizeCards();
+        updateArrowState();
+
+        // Resize the cards when the window is resized
+        let resizeTimer;
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function() {
+                resizeCards();  // Resize cards on window resize
+                const visibleSlides = getVisibleSlides();
+                const maxSlides = totalSlides - visibleSlides;
+                currentSlide = Math.min(currentSlide, maxSlides);
+
+                // Recalculate the offset based on the new window size and card width
+                const slideWidth = getSlideWidth();
+                const offset = -currentSlide * slideWidth;
+
+                // Apply the calculated translation to the slider wrapper
+                sliderWrapper.style.transform = `translateX(${offset}px)`;
+                updateArrowState();
+            }, 250);
+        });
+    }
+
+    // Initialize the slider on page load
+    updateCards();
+
+    // Monitor for changes in the number of cards (e.g., if blogs are added or removed)
+    const observer = new MutationObserver(updateCards);
+    observer.observe(sliderWrapper, { childList: true });
 });
-
-
 </script>
