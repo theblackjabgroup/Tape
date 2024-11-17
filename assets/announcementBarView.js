@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function() {
           div.style.display = 'inline-block';  // Ensures the content behaves like inline text
           div.style.whiteSpace = 'nowrap';     // Forces the content to remain on one line
           */
-    
+     
           const spanTextElements = document.querySelectorAll('.scrollable-text');
           const scrollingContainers = document.querySelectorAll('.scrolling-text-container');
         
