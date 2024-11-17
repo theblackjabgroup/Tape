@@ -186,7 +186,7 @@ class FacetFiltersForm extends HTMLElement {
     });
 
     FacetFiltersForm.toggleActiveFacets(false);
-  }
+  } 
 
   static renderAdditionalElements(html) {
     const mobileElementSelectors = ['.mobile-facets__open', '.mobile-facets__count', '.sorting'];
