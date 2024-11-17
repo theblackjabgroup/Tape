@@ -176,6 +176,7 @@ class FacetFiltersForm extends HTMLElement {
     }
   }
 
+  // renderActiveFacets
   static renderActiveFacets(html) {
     const activeFacetElementSelectors = ['.active-facets-mobile', '.active-facets-desktop'];
 
