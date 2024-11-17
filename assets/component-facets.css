@@ -508,7 +508,7 @@
 .swatch-input-wrapper {
   display: flex;
 }
-
+ 
 .facet-checkbox > svg,
 .facet-checkbox > .svg-wrapper {
   background-color: rgb(var(--color-background));

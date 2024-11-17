@@ -753,7 +753,7 @@ class SliderComponent extends HTMLElement {
     this.prevButtons = this.querySelectorAll('button[name="previous"]');
     this.nextButtons = this.querySelectorAll('button[name="next"]');
     if (!this.slider || !this.nextButtons.length === 0) return;
-
+ 
     this.initPages();
     const resizeObserver = new ResizeObserver((entries) => this.initPages());
     resizeObserver.observe(this.slider);

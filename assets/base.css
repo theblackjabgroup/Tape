@@ -1633,7 +1633,7 @@ details[open] > .share-button__fallback {
   font-size: 1.2rem;
   color: rgba(var(--color-foreground), 0.75);
 }
-
+ 
 .field:hover.field:after,
 .select:hover.select:after,
 .select__select:hover.select__select:after,
