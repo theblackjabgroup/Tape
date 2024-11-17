@@ -24,6 +24,7 @@
   --announcement-bar-background-color: {{ section.settings.announcement_bar_background_color }};
   --announcement-bar-color: {{ section.settings.announcement_bar_color }};
   --announcement-bar-text: {{ section.settings.announcement_bar_text }};
+  --announcement-bar-mobile-margin: {{ section.settings.mobile_bar_margin }}px;
   }
 {% endstyle %}
 {% if social_icons %}
@@ -250,6 +251,7 @@
         {% endfor %}
       </div>
       <div class="localization-wrapper bb-wrapper">
+        <div class="bb-mobile-nav-green-dot"></div>
         {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
           <localization-form class="small-hide medium-hide">
             {%- form 'localization'

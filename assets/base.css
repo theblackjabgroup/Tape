@@ -3129,6 +3129,21 @@ details-disclosure > details {
   background-attachment: fixed;
 }
 
+.announcement-bar-section {
+  background-color: var(--announcement-bar-background-color);
+}
+
+@media screen and (min-width: 749px) {
+.bb-mobile-nav-green-dot {
+  display: block !important;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: green;
+  margin: auto;
+  margin-left: 1rem;
+}
+}
 @media screen and (forced-colors: active) {
   .icon {
     color: CanvasText;
@@ -3373,7 +3388,7 @@ details-disclosure > details {
 }
 
 .scroll-enabled {
-  width: 18rem; 
+  width: calc(180px - var(--announcement-bar-mobile-margin)); 
   overflow: hidden; 
   white-space: nowrap; 
 }
