@@ -13,6 +13,7 @@
 
 .bb-localization {
     color: var(--announcement-bar-text) !important;
+    padding-left: 0.5rem !important;
 }
 .bb-localization .link{
     color: var(--announcement-bar-text) !important;
