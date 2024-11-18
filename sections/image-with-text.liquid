@@ -4,10 +4,11 @@
 {% style %}
   :root {
     --card-color-scheme: {{ section.settings.card_color_scheme }};
+    --section-color: {{ section.settings.sectionColor }};
   }
 {% endstyle %}
 
-<div class="image__with__text__section color-{{ section.settings.sectionColor }}" data-section-id="{{ section.id }}">
+<div class="image__with__text__section" style="background-color: var(--section-color)" data-section-id="{{ section.id }}">
   <div class="image__with__text__outer__container">
     <ul class="image__with__text__inner__container">
       {% for item in section.blocks %}
@@ -33,11 +34,6 @@
               ></div>
             {% endif %}
           </div>
-          {% comment %} <div class="cpation__container">
-            <p class="caption__card caption__typography" style="--caption-font-color: {{ item.settings.captionColor }}">
-              {{ item.settings.text }}
-            </p>
-          </div> {% endcomment %}
         </li>
       {% endfor %}
       <div class="info__banner color-{{ section.settings.bannerColor }}">
@@ -73,7 +69,7 @@
   "limit": 1,
   "settings": [
     {
-      "type": "color_scheme",
+      "type": "color",
       "id": "sectionColor",
       "label": "Section Color"
     },
