@@ -1,0 +1,22 @@
+
+* {
+    padding: 0;
+    margin: 0;
+  }
+
+
+.scroll-tracker{
+    padding: 0 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    color: white;
+    line-height: 0;
+    color: rgb(var(--color-foreground));
+    font-size: x-small;
+    height: fit-content;
+}
+.scroll-tracker > p{
+  font-size: x-small;
+}
