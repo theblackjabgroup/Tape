@@ -212,58 +212,25 @@
     scroll-snap-align: start; 
     scroll-snap-stop: always; 
 }
-.slide .backfold{
-      display: block;
-      margin: 0 auto;
-      order: 1;
-      width: 85%;
-      height: 250px;  
-     position: relative;
-     overflow: hidden;
+.slide .backfold {
+    display: block;
+    margin: 0 auto;
+    order: 1;
+    width: 85%;
+    height: 250px;
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16/9; /* Adjust to your desired ratio */
 }
+
 .slide img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain; /* Preserve image proportions */
     display: block;
 }
-.slide .backfold::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    border-style: solid;
-    box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.4);
-    width: 0;
-    opacity: 0;
-    border-width: 0;
-    border-color: #FFF #FFF rgba(255, 255, 255, 0.3) rgba(255, 255, 255, 0.3);
-    border-radius: 0 0 0 5px;
-    z-index: 1;
-    transition: none;
-    animation: foldIn 0.8s ease forwards;
-}
-.slide:hover .backfold::before {
-    opacity: 1;
-    border-width: 20px;
-    transition: all 0.5s ease;
-    transition-delay: 0.5s;
-}
-.slide:not(:hover) .backfold::before {
-    border-width: 0;
-    opacity: 0;
-    transition: all 0.3s ease;
-}
-@keyframes foldIn {
-    0% {
-      width: 0;
-      opacity: 0;
-    }
-    100% {
-      width: 20px;
-      opacity: 1;
-    }
-}
+
+
 .headarrow {
     order: 2;
     display: flex;
