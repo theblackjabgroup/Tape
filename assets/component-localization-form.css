@@ -312,6 +312,7 @@
 .field__input {
   font-size: 10px !important;
   padding: 0;
+  border-radius: 8px;
 }
 
 .field__button{
