@@ -23,19 +23,74 @@
 
         <div id="video-{{ section.id }}-{{ forloop.index }}" class="video-wrapper"
             style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-            {%- if block.type == 'youtube' -%}
-            <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
-                src="https://www.youtube.com/embed/{{ video_id }}?enablejsapi=1&controls=0"
-                allow="autoplay; encrypted-media" allowfullscreen></iframe>
-            {%- elsif block.type == 'vimeo' -%}
-            <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
-                src="https://player.vimeo.com/video/{{ video_id }}?controls=0" allow="autoplay; encrypted-media"
-                allowfullscreen></iframe>
+            {%- if block.type == 'youtube' or block.type == 'vimeo' -%}
+                {%- # Get thumbnail URL based on video type -%}
+                {%- liquid assign poster_url = block.settings.placeholder_image | default: 'hero-apparel-3' -%}
+                <button
+                    id="Deferred-Poster-Modal-{{ video_id }}-{{ forloop.index }}"
+                    class="video-section__poster media deferred-media__poster media--landscape"
+                    type="button"
+                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; cursor: pointer;"
+                    onclick="this.style.display='none'; this.nextElementSibling.style.display='block';"
+                >
+                    {%- if block.settings.placeholder_image != blank -%}
+                        {{ block.settings.placeholder_image | image_url: width: 1920 | image_tag }}
+                    {%- else -%}
+                        {{ poster_url | placeholder_svg_tag: 'placeholder-svg placeholder' }}
+                    {%- endif -%}
+                    
+                    <span class="deferred-media__poster-button motion-reduce" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="12" cy="12" r="12" fill="rgba(0, 0, 0, 0.6)"/>
+                            <path d="M9 7.5L17 12L9 16.5V7.5Z" fill="white"/>
+                        </svg>
+                    </span>
+                </button>
+
+                <div class="video-embed" style="display: none;">
+                    {%- if block.type == 'youtube' -%}
+                        <iframe
+                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+                            src="https://www.youtube.com/embed/{{ video_id }}?enablejsapi=1&controls=0"
+                            allow="autoplay; encrypted-media"
+                            allowfullscreen
+                        ></iframe>
+                    {%- elsif block.type == 'vimeo' -%}
+                        <iframe
+                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+                            src="https://player.vimeo.com/video/{{ video_id }}?controls=0"
+                            allow="autoplay; encrypted-media"
+                            allowfullscreen
+                        ></iframe>
+                    {%- endif -%}
+                </div>
             {%- else -%}
-            {{
-            block.settings.video_library
-            | video_tag: controls: false, style: 'position: absolute; top: 0; left: 0; width: 100%; height: 100%;'
-            }}
+                <button
+                    class="video-section__poster media deferred-media__poster media--landscape"
+                    type="button" 
+                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; cursor: pointer;"
+                    onclick="this.style.display='none'; this.nextElementSibling.style.display='block'; "
+                >
+                    {%- if block.settings.placeholder_image != blank -%}
+                        {{ block.settings.placeholder_image | image_url: width: 1920 | image_tag }}
+                    {%- else -%}
+                        {{ 'hero-apparel-3' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
+                    {%- endif -%}
+                    
+                    <span class="deferred-media__poster-button motion-reduce" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="12" cy="12" r="12" fill="rgba(0, 0, 0, 0.6)"/>
+                            <path d="M9 7.5L17 12L9 16.5V7.5Z" fill="white"/>
+                        </svg>
+                    </span>
+                </button>
+
+                <div style="display: none;">
+                    {{
+                    block.settings.video_library
+                    | video_tag: controls: false, style: 'position: absolute; top: 0; left: 0; width: 100%; height: 100%;'
+                    }}
+                </div>
             {%- endif -%}
             <div class="overlay-left overlay"></div>
             <div class="overlay-right overlay"></div>
@@ -82,6 +137,7 @@
                     this.playButton = this.container.querySelector(".play-button-icon");
                     this.pauseButton = this.container.querySelector(".pause-button-icon");
                     this.videos = this.container.querySelectorAll("video");
+                    this.playButtons = this.container.querySelectorAll(".deferred-media__poster-button");
 
                     // Validate required elements exist
                     if (!this.videoContainer || !this.playButton || !this.pauseButton) {
@@ -232,7 +288,10 @@
             // Toggle play/pause state with error handling
             togglePlayPause() {
                 try {
-                    const activeVideo = this.container.querySelector(".video-wrapper.active video");
+                    const activeWrapper = this.container.querySelector(".video-wrapper.active");
+                    const activeVideo = activeWrapper.querySelector("video");
+                    const playButton = activeWrapper.querySelector(".deferred-media__poster-button");
+                    
                     if (!activeVideo) throw new Error("No active video found");
 
                     if (activeVideo.paused) {
@@ -242,10 +301,16 @@
                         });
                         this.playButton.classList.add("hidden");
                         this.pauseButton.classList.add("visible");
+                        if(playButton) {
+                            playButton.style.display = 'none';
+                        }
                     } else {
                         activeVideo.pause();
                         this.playButton.classList.remove("hidden");
                         this.pauseButton.classList.remove("visible");
+                        if(playButton) {
+                            playButton.style.display = 'block';
+                        }
                     }
                 } catch (error) {
                     console.error("Error toggling play/pause:", error);
@@ -274,13 +339,22 @@
             updatePlayPauseButton(video) {
                 try {
                     if (!video) throw new Error("Invalid video element");
+                    
+                    const wrapper = video.closest('.video-wrapper');
+                    const playButton = wrapper.querySelector(".deferred-media__poster-button");
 
                     if (video.paused) {
                         this.playButton.classList.remove("hidden");
                         this.pauseButton.classList.remove("visible");
+                        if(playButton) {
+                            playButton.style.display = 'block';
+                        }
                     } else {
                         this.playButton.classList.add("hidden");
                         this.pauseButton.classList.add("visible");
+                        if(playButton) {
+                            playButton.style.display = 'none';
+                        }
                     }
                 } catch (error) {
                     console.error("Error updating play/pause button:", error);
@@ -298,6 +372,13 @@
                                 video.pause();
                                 video.currentTime = 0;
                                 this.resetProgressBar(this.progressIndicators[index]);
+                                
+                                // Show play button for stopped videos
+                                const wrapper = video.closest('.video-wrapper');
+                                const playButton = wrapper.querySelector(".deferred-media__poster-button");
+                                if(playButton) {
+                                    playButton.style.display = 'block';
+                                }
                             }
                         } catch (error) {
                             console.error(`Error stopping video ${index}:`, error);
@@ -315,6 +396,20 @@
                     this.playButton.addEventListener("click", () => this.togglePlayPause());
                     this.pauseButton.addEventListener("click", () => this.togglePlayPause());
 
+                    // Add click handlers for individual video play buttons
+                    this.playButtons.forEach(button => {
+                        button.addEventListener("click", () => {
+                            const wrapper = button.closest('.video-wrapper');
+                            const video = wrapper.querySelector('video');
+                            if(video) {
+                                video.play().catch(error => {
+                                    console.error("Error playing video:", error);
+                                });
+                                button.style.display = 'none';
+                            }
+                        });
+                    });
+
                     // Video-specific events
                     this.videos.forEach((video) => {
                         video.addEventListener("timeupdate", () => this.updateProgressBar());
@@ -329,6 +424,11 @@
                                 const activeIndicator = this.container.querySelector(
                                     ".progress-indicator.active"
                                 );
+                                const wrapper = video.closest('.video-wrapper');
+                                const playButton = wrapper.querySelector(".deferred-media__poster-button");
+                                if(playButton) {
+                                    playButton.style.display = 'block';
+                                }
                                 if (!activeIndicator) throw new Error("No active indicator found");
                                 this.resetProgressBar(activeIndicator);
                             } catch (error) {
@@ -401,6 +501,11 @@
                                 this.videos.forEach((video) => {
                                     video.pause();
                                     video.currentTime = 0;
+                                    const wrapper = video.closest('.video-wrapper');
+                                    const playButton = wrapper.querySelector(".deferred-media__poster-button");
+                                    if(playButton) {
+                                        playButton.style.display = 'block';
+                                    }
                                 });
 
                                 // Reset all progress bars
@@ -514,6 +619,12 @@
 "label": "YouTube Video URL",
 "accept": ["youtube"],
 "info": "Add YouTube video URL"
+},
+{
+"type": "image_picker",
+"id": "placeholder_image",
+"label": "Custom Placeholder Image",
+"info": "Optional: Upload a custom placeholder image"
 }
 ]
 },
@@ -527,6 +638,12 @@
 "label": "Vimeo Video URL",
 "accept": ["vimeo"],
 "info": "Add Vimeo video URL"
+},
+{
+"type": "image_picker",
+"id": "placeholder_image",
+"label": "Custom Placeholder Image",
+"info": "Optional: Upload a custom placeholder image"
 }
 ]
 },
@@ -539,6 +656,12 @@
 "id": "video_library",
 "label": "Video",
 "info": "Select video from media library"
+},
+{
+"type": "image_picker",
+"id": "placeholder_image",
+"label": "Custom Placeholder Image",
+"info": "Optional: Upload a custom placeholder image"
 }
 ]
 }
