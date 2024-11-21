@@ -180,7 +180,6 @@
 #info__banner__expand__button{
   --info__banner__expand__button__visibillity: none;
   display: var(--info__banner__expand__button__visibillity);
-  display: flex;
   align-items: center;
   justify-content: center;
 }
@@ -404,7 +403,7 @@ info__banner__contents > .svg-wrapper {
     rotate: -90deg;
   }
   #info__banner__expand__button{
-    --info__banner__expand__button__visibillity: block;
+    --info__banner__expand__button__visibillity: flex;
   }
 }
 
