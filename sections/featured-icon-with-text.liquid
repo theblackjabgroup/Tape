@@ -13,7 +13,7 @@
 }
 {% endstyle %}
 
-<div style="display: flex; flex-direction: column; gap: 6rem; padding: 20px 0;" class="featured-icon-with-text-section">
+<div style="display: flex; flex-direction: column; gap: 6rem; padding: 20px 0;" class="featured-icon-with-text-section" data-section-id="{{ section.id }}">
   <div style="display: flex; flex-direction: column; gap: 4px; padding: 0 20px;">
     <p style="font-weight: 600; font-size: 24px; line-height: 30px; color: var(--featured-icon-with-text-section-headings-color)" class="fira-sans-semibold">{{ section.settings.heading }}</p>
     <p style="font-weight: 500; font-size: 14px; line-height: 21px; color: var(--featured-icon-with-text-section-headings-color)" class="inter-medium">{{ section.settings.subheading }}</p>
@@ -90,7 +90,6 @@
 {% schema %}
 {
   "name": "Icon With Text",
-  "limit": 1,
   "tag": "section",
   "disabled_on": {
     "groups": [
