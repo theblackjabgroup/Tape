@@ -55,18 +55,21 @@
   }
 {%- endstyle -%}
 
+{% assign sort_default = "Alphabetically, A-Z" %}
+
 <div class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }} bb-product-list-background">
   {%- paginate collection.products by section.settings.products_per_page -%}
     {% comment %} Sort is the first tabbable element when filter type is vertical {% endcomment %}
     {%- if section.settings.enable_sorting and section.settings.filter_type == 'vertical' -%}
       <facet-filters-form class="facets facets-vertical-sort page-width2 small-hide bb-facet-sort-form">
-        <form class="facets-vertical-form" id="FacetSortForm">
+        <form class="facets-vertical-form" id="FacetSortForm" onsubmit="saveDropdownSelection()" method="POST">
           <div class="sort-upper-div">
           <div class="bb-facet-sort facet-filters sorting caption">
             <div class="facet-filters__field">
               <h2 class="facet-filters__label caption-large text-body">
                 <label class="bb-sortby" for="SortBy">{{ 'products.facets.sort_by_label' | t }}</label>
               </h2>
+              <!---
               <div class="select">
                 {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
                 <select
@@ -90,31 +93,27 @@
                   {{- 'icon-caret2.svg' | inline_asset_content -}}
                 </span>
               </div>
+              --->
+        <div class="bb-sort-dropdown">
+          <button 
+            class="bb-sort-options dropdown-toggle" 
+            type="button" 
+            id="dropdownMenuButton1" 
+            data-bs-toggle="dropdown" 
+            aria-expanded="false">
+            {{ sort_default }}
+          </button>
+          <div class="dropdown-menu bb-dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            {%- for option in collection.sort_options -%}
+                <input type="hidden" id="{{ option.value | escape }}" name="sort_by" id="dropdownValue" value="{{ option.value | escape }}" class="option">
+                <label for="{{ option.value | escape }}" class="bb-dropdown-item dropdown-item select-item" onclick='updateDropdownText(this)'>{{ option.name | escape }}</label>
+             <!--   <a class="dropdown-item" href="#" onclick="updateDropdownText( {{ option.value | escape }} )">{{ option.name | escape }}</a>   -->
+            {%- endfor -%}  
+          </div>
+        </div>
             </div>
           </div>
           </div>
-<!--
-          <div class="product-count-vertical light" role="status">
-            <h2 class="product-count__text text-body">
-              <span id="ProductCountDesktop">
-                {%- if collection.results_count -%}
-                  {{
-                    'templates.search.results_with_count'
-                    | t: terms: collection.terms, count: collection.results_count
-                  }}
-                {%- elsif collection.products_count == collection.all_products_count -%}
-                  {{ 'products.facets.product_count_simple' | t: count: collection.products_count }}
-                {%- else -%}
-                  {{
-                    'products.facets.product_count'
-                    | t: product_count: collection.products_count, count: collection.all_products_count
-                  }}
-                {%- endif -%}
-              </span>
-            </h2>
-            {%- render 'loading-spinner' -%}
-          </div>
---->
         </form>
       </facet-filters-form>
     {%- endif -%}
@@ -212,6 +211,38 @@
         {%- endif -%}
       </div>
     </div>
+
+    
+    <script>
+      // Function to update the button text and hidden input value
+      function updateDropdownText(element) {
+        const button = document.getElementById('dropdownMenuButton1');
+        const hiddenInput = document.getElementById('dropdownValue');
+        const selectedText = element.textContent;
+    
+        button.textContent = selectedText; // Update button text
+        hiddenInput.value = selectedText; // Update hidden input value
+      }
+    
+      // Function to save the dropdown selection on submit
+      function saveDropdownSelection() {
+        const hiddenInput = document.getElementById('dropdownValue');
+        localStorage.setItem('dropdownSelected', hiddenInput.value); // Save selection to localStorage
+      }
+    
+      // Restore dropdown text on page load
+      document.addEventListener('DOMContentLoaded', () => {
+        const savedText = localStorage.getItem('dropdownSelected');
+        const button = document.getElementById('dropdownMenuButton1');
+        const hiddenInput = document.getElementById('dropdownValue');
+    
+        if (savedText) {
+          button.textContent = savedText; // Restore button text
+          hiddenInput.value = savedText; // Restore hidden input value
+        }
+      });
+    </script>
+    
   {%- endpaginate -%}
   {% if section.settings.image_shape == 'arch' %}
     {{ 'mask-arch.svg' | inline_asset_content }}

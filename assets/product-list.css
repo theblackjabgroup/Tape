@@ -117,8 +117,14 @@ summary .icon-caret2 {
     font-size: 20px;
     font-weight: 500;
     font-family: 'Fira Sans';
-    padding-right: 2.75rem !important;
     color: var(--sort-by-text-card-color);
+    background-color: var(--sort-by-card-color);
+    border: none;
+    margin-left: 0rem !important;
+}
+
+.bb-dropdown-menu {
+  transform: translate3d(-93px, 43px, 0px) !important;
 }
 
 .select .icon-caret2 {
@@ -128,6 +134,11 @@ summary .icon-caret2 {
 .bb-sort-svg-wrapper {
     width: 1.2rem !important;
     color: var(--sort-by-text-card-color);
+}
+
+.bb-dropdown-item {
+  font-family: 'Fira Sans';
+  border-top: .1rem solid rgba(var(--color-foreground), .1);
 }
 
 .bb-card-upper-name {
@@ -209,7 +220,7 @@ summary .icon-caret2 {
   }
 
   .icon-upper-wrapper {
-    display: flex;
+    display: flex !important;
     gap: 3rem;
     margin-left: 2rem;
   }
@@ -359,13 +370,16 @@ summary .icon-caret2 {
   display: block;
 }
 
+.bb-sort-dropdown {
+  position: relative;
+}
 @media screen and (max-width: 749px) {
   .mobile-view {
     display: block;
   }
 
   .desktop-view {
-    display: none;
+    display: none !important;
   }
 
   .bb-card-info {
@@ -470,6 +484,7 @@ summary .icon-caret2 {
     background-color: #FFFFFF;
     color: black;
     font-family: 'Fira Sans';
+    border-top: .1rem solid rgba(var(--color-foreground), .1);
   }
   
   .select-item:hover {
