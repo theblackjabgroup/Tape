@@ -46,7 +46,7 @@ background-color: currentColor;
     <div class="layout1 page-width">
       <h2 class="richtext_heading">{{ section.settings.heading | default: "Transforming Healthcare with Innovative Solutions" }}</h2>
       <div class="decorative-dots">
-        {% for i in (1..section.settings.dots_number) %}
+        {% for i in (1..section.settings.dots_number1) %}
           <span class="dot"></span>
         {% endfor %}
       </div>
@@ -59,7 +59,7 @@ background-color: currentColor;
     <div class="layout2">
     <div class="dots-container">
           <div class="side-dots left">
-            {% for i in (1..section.settings.dots_number) %}
+            {% for i in (1..section.settings.dots_number2) %}
                 <span class="dot-l"></span>
           {% endfor %}
           </div>
@@ -72,7 +72,7 @@ background-color: currentColor;
           </div>
         </div>
          <div class="side-dots right">
-            {% for i in (1..section.settings.dots_number) %}
+            {% for i in (1..section.settings.dots_number2) %}
                 <span class="dot-l"></span>
             {% endfor %}
           </div>
@@ -121,11 +121,20 @@ background-color: currentColor;
     },
      {
       "type": "range",
-      "id": "dots_number",
+      "id": "dots_number1",
+      "min": 1,
+      "max": 12,
+      "step": 1,
+      "label": "Number of dots layout1",
+      "default": 10
+    },
+      {
+      "type": "range",
+      "id": "dots_number2",
       "min": 10,
       "max": 24,
       "step": 1,
-      "label": "Number of dots",
+      "label": "Number of dots layout2",
       "default": 10
     },
      {

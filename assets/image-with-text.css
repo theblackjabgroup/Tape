@@ -150,7 +150,7 @@
   --info__banner__height: 100%;
   --info__banner__position: absolute;
   --info__banner__top: 50%;
-  --info__banner__left: 25%;
+  --info__banner__left: 15%;
   --info__banner__transform: translate(0, -50%);
   --info__banner__padding: 16px;
   --info__banner__color: rgba(var(--color-background), 0.8);
@@ -175,6 +175,13 @@
 
 .info__banner__shopnow__button {
   --info__banner__shopnow__button__visibillity: block;
+}
+
+#info__banner__expand__button{
+  --info__banner__expand__button__visibillity: none;
+  display: var(--info__banner__expand__button__visibillity);
+  align-items: center;
+  justify-content: center;
 }
 
 .info__banner {
@@ -394,6 +401,9 @@ info__banner__contents > .svg-wrapper {
   }
   .info__banner__contents > .svg-wrapper.show{
     rotate: -90deg;
+  }
+  #info__banner__expand__button{
+    --info__banner__expand__button__visibillity: flex;
   }
 }
 

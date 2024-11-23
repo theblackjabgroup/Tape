@@ -67,7 +67,7 @@
     text-align: left;
     display: flex;
     flex-direction: column;
-    height: 550px;
+    min-height: 450px;
     position: relative;
     transition: flex 0.3s ease; /* Smooth resizing */
 }
@@ -120,13 +120,13 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-    height: 70px;
+    height: 65px;
 }
 
 .blog-meta {
-    font-size: 0.85rem;
+    font-size: 1rem;
     color: #777;
-    margin-top: 5px;
+    margin: 5px 0 10px 0;
     display: flex;
     gap: 10px;
     align-items: center;
@@ -135,7 +135,7 @@
 
 .blog-author,
 .blog-date {
-    font-size: 0.85rem;
+    font-size: 1rem;
     color: #777;
 }
 
@@ -149,14 +149,16 @@
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
-    height: 60px;
+    height: 35px;
 }
 
 .blog-read-more-btn {
     font-family: 'Inter', sans-serif;
     font-weight: 500;
-    background-color: #000;
-    color: #fff;
+    background: linear-gradient(to right, gray 50%, black 50%);
+    background-size: 200% 100%;
+    background-position: 100% 0;
+    color: white;
     border: none;
     padding: 8px 16px;
     border-radius: 5px;
@@ -169,7 +171,12 @@
     justify-content: center;
     gap: 8px;
     width: 50%;
+  transition: background-position 1.5s ease-in-out, transform 0.3s ease;
 }
+.blog-read-more-btn:hover{
+   background-position: 0 0;
+}
+
 
 .blog-read-more-btn svg {
     width: 18px;
@@ -181,10 +188,10 @@
     transform: translateX(4px);
 }
 
-.view-all-link {
+.blog-view-all-link {
     text-align: center;
     margin-top: 15px;
-    width: 95%;
+    width: 100%;
 }
 
 .blog-view-all {
@@ -196,11 +203,12 @@
     border-radius: 5px;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
-
-.blog-view-all:hover {
-    background-color: #0066cc;
-    color: #fff;
+.blog-view-all:hover,
+.blog-view-all:focus {
+  box-shadow: inset 6.5em 0 0 0 var(--hover);
+  cursor: pointer;
 }
+
 
 @media (max-width: 767px) {
     .blog-card {
@@ -213,7 +221,7 @@
 
     .blog-meta,
     .blog-excerpt {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
     }
   .blog-read-more-btn{
     width:50%;
@@ -234,7 +242,7 @@
         flex: 0 0 calc(25% - 15px);
     }
   .blog-read-more-btn{
-    width:50%;
+    width:60%;
   }
 }
 @media (min-width: 1280px) {

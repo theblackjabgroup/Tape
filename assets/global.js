@@ -69,6 +69,7 @@ class HTMLUpdateUtility {
 }
 
 document.querySelectorAll('[id^="Details-"] summary').forEach((summary) => {
+  
   summary.setAttribute('role', 'button');
   summary.setAttribute('aria-expanded', summary.parentNode.hasAttribute('open'));
 
@@ -82,6 +83,7 @@ document.querySelectorAll('[id^="Details-"] summary').forEach((summary) => {
 
   if (summary.closest('header-drawer, menu-drawer')) return;
   summary.parentElement.addEventListener('keyup', onKeyUpEscape);
+  
 });
 
 const trapFocusHandlers = {};
@@ -203,6 +205,7 @@ function removeTrapFocus(elementToFocus = null) {
 }
 
 function onKeyUpEscape(event) {
+  
   if (event.code.toUpperCase() !== 'ESCAPE') return;
 
   const openDetailsElement = event.target.closest('details[open]');
@@ -212,6 +215,7 @@ function onKeyUpEscape(event) {
   openDetailsElement.removeAttribute('open');
   summaryElement.setAttribute('aria-expanded', false);
   summaryElement.focus();
+  
 }
 
 class QuantityInput extends HTMLElement {
@@ -430,7 +434,7 @@ class MenuDrawer extends HTMLElement {
   }
 
   bindEvents() {
-    this.querySelectorAll('summary').forEach((summary) =>
+    this.querySelectorAll('.mobile-facets__open-wrapper').forEach((summary) =>
       summary.addEventListener('click', this.onSummaryClick.bind(this))
     );
     this.querySelectorAll(
@@ -438,7 +442,7 @@ class MenuDrawer extends HTMLElement {
     ).forEach((button) => button.addEventListener('click', this.onCloseButtonClick.bind(this)));
   }
 
-  onKeyUp(event) {
+  onKeyUp(event) {  
     if (event.code.toUpperCase() !== 'ESCAPE') return;
 
     const openDetailsElement = event.target.closest('details[open]');
@@ -719,23 +723,19 @@ customElements.define('deferred-media', DeferredMedia);
 class ScrollingItems extends HTMLElement {
 constructor() {
   super();
-  console.log("in scrolling")
    this.spanTextElements = document.querySelectorAll('.scrollable-text');
    this.scrollingContainers = document.querySelectorAll('.scrolling-text-container');
     // Check if text length is greater than 20 characters
     this.spanTextElements.forEach((spanTextElement, index) => {
-    console.log("FIRST", spanTextElement, spanTextElement.textContent.length)
     const scrollingContainer = this.scrollingContainers[index];   
     // Check if text length is greater than 20 characters
     if (spanTextElement && spanTextElement.textContent.length > 25) {
-      console.log("HEREEEE", spanTextElement, spanTextElement.textContent.length);
       scrollingContainer.classList.add('scroll-enabled'); // Enable scrolling
     }
     });
     setTimeout(() => {
     this.x = document.querySelector('.bb-max-width');
     this.height = this.x.offsetHeight;
-    console.log("Height of the div:", this.height, "px");
     document.documentElement.style.setProperty('--announcement-bar-height', `${this.height / 5}px`); 
   }, 100); // 2000 ms = 2 seconds
   }
@@ -752,9 +752,8 @@ class SliderComponent extends HTMLElement {
     this.pageTotalElement = this.querySelector('.slider-counter--total');
     this.prevButtons = this.querySelectorAll('button[name="previous"]');
     this.nextButtons = this.querySelectorAll('button[name="next"]');
-    console.log("prevButtons ", this.prevButtons)
     if (!this.slider || !this.nextButtons.length === 0) return;
-
+ 
     this.initPages();
     const resizeObserver = new ResizeObserver((entries) => this.initPages());
     resizeObserver.observe(this.slider);
