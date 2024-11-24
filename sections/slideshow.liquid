@@ -2,8 +2,10 @@
 <style>
   .slide .backfold::before {
    background-color: {{ section.settings.imagefoldcolor }};
-  }
+    }
 </style>
+
+
 <div class="rich-text-section color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
   <div class="interactive-slideshow">
     {% for block in section.blocks %}
