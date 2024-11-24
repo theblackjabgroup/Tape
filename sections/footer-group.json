@@ -1,23 +1,37 @@
-
 {
-  "name": "t:sections.footer.name",
+  "name": "Footer Group",
   "type": "footer",
   "sections": {
     "footer": {
       "type": "footer",
       "settings": {
         "color_scheme": "scheme-1",
-        "newsletter_enable": true,
-        "newsletter_heading": "Subscribe to our emails",
-        "enable_follow_on_shop": true,
-        "show_social": true,
-        "enable_country_selector": true,
-        "enable_language_selector": true,
-        "payment_enable": true,
-        "show_policy": true,
-        "margin_top": 0,
-        "padding_top": 36,
-        "padding_bottom": 36
+        "menu_item_color": "#fdf4d7",
+        "enable_strip": true,
+        "strip_container_bg_color": "#282828",
+        "strip_bg_color": "#ff5500",
+        "strip_text_color": "#000000",
+        "offer_text_1": "Subscribe for exclusive offers!",
+        "offer_text_2": "Free shipping on orders over $50!",
+        "menu_1_title": "ABOUT US",
+        "menu_1_links": "customer-account-main-menu",
+        "menu_2_title": "PRODUCTS",
+        "menu_2_links": "menu-2",
+        "menu_3_title": "CUSTOMER SERVICES",
+        "menu_3_links": "customer-account-main-menu",
+        "menu_4_title": "RESOURCES",
+        "menu_4_links": "main-menu",
+        "menu_5_title": "SOCIAL MEDIA",
+        "show_social_icons": false,
+        "bold_newsletter_section": false,
+        "STAY_CONNECTED_TITLE": "STAY CONNECTED WITH US",
+        "bold_stay_connected_title": true,
+        "thank_you_message_color": "#333333",
+        "thank_you_message_text": "Thank you for subscribing!",
+        "subscribe_button_text": "Subscribe",
+        "footer_text_color": "#000000",
+        "footer_text": "All Items are Reserved @2024",
+        "barcode_color": "#fdf4d7"
       }
     }
   },
