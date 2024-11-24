@@ -1,7 +1,7 @@
 [
   {
     "name": "theme_info",
-    "theme_name": "Dawn",
+    "theme_name": "Mumbai",
     "theme_version": "15.1.0",
     "theme_author": "Shopify",
     "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
@@ -110,18 +110,7 @@
             "label": "t:settings_schema.colors.settings.product_special_offer.label",
             "default": "#9BBAE0"           
           },
-          {
-            "type": "color",
-            "id": "product_collapsible_rows_section",
-            "label": "t:settings_schema.colors.settings.product_collapsible_rows_section.label",
-            "default": "#C7E1BF"           
-          },
-          {
-            "type": "color",
-            "id": "product_collapsible_rows_section_secondary",
-            "label": "t:settings_schema.colors.settings.product_collapsible_rows_section_secondary.label",
-            "default": "#D9F2D1"           
-          }
+          
         ],
         "role": {
           "text": "text",
