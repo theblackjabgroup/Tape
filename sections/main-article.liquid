@@ -1,99 +1,231 @@
-{{ 'section-blog-post.css' | asset_url | stylesheet_tag }}
+{% schema %}
+{
+  "name": "Default Blog Posts",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social_sharing",
+      "label": "Show Social Sharing Buttons",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_thumbnails",
+      "label": "Show Article Thumbnails",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_date",
+      "label": "Show Article Date",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_read_time",
+      "label": "Show Read Time",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "article",
+      "name": "Suggested Blogs",
+      "settings": [
+        {
+          "type": "blog",
+          "id": "selected_blog",
+          "label": "Select Blog"
+        },
+        {
+          "type": "article",
+          "id": "selected_article",
+          "label": "Select Article"
+        },
+        {
+          "type": "color",
+          "id": "slider_background_color",
+          "label": "Slider Background Color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "slider_text_color",
+          "label": "Slider Text Color",
+          "default": "#333333"
+        },
+        {
+          "type": "color",
+          "id": "slider_button_text_color",
+          "label": "Button Text Color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "checkbox",
+          "id": "slider_show_author",
+          "label": "Show Author",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "slider_show_date",
+          "label": "Show Date",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "slider_show_excerpt",
+          "label": "Show Excerpt",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default Blog Posts",
+      "category": "Blog",
+      "blocks": [
+        {
+          "type": "article",
+          "settings": {
+            "selected_blog": "news",
+            "selected_article": " "
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
 
-<article class="article-template">
-  {%- for block in section.blocks -%}
-    {%- case block.type -%}
-      {%- when '@app' -%}
-        <div class="page-width page-width--narrow">
-          {% render block %}
-        </div>
-      {%- when 'featured_image' -%}
-        {%- if article.image -%}
-          <div
-            class="article-template__hero-container{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
-            {{ block.shopify_attributes }}
-          >
-            <div
-              class="article-template__hero-{{ block.settings.image_height }} media"
-              {% if block.settings.image_height == 'adapt' and article.image %}
-                style="padding-bottom: {{ 1 | divided_by: article.image.aspect_ratio | times: 100 }}%;"
-              {% endif %}
-            >
-              <img
-                srcset="
-                  {% if article.image.width >= 350 %}{{ article.image | image_url: width: 350 }} 350w,{% endif %}
-                  {% if article.image.width >= 750 %}{{ article.image | image_url: width: 750 }} 750w,{% endif %}
-                  {% if article.image.width >= 1100 %}{{ article.image | image_url: width: 1100 }} 1100w,{% endif %}
-                  {% if article.image.width >= 1500 %}{{ article.image | image_url: width: 1500 }} 1500w,{% endif %}
-                  {% if article.image.width >= 2200 %}{{ article.image | image_url: width: 2200 }} 2200w,{% endif %}
-                  {% if article.image.width >= 3000 %}{{ article.image | image_url: width: 3000 }} 3000w,{% endif %}
-                  {{ article.image | image_url }} {{ article.image.width }}w
-                "
-                sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 }}px, (min-width: 750px) calc(100vw - 10rem), 100vw"
-                src="{{ article.image | image_url: width: 1100 }}"
-                loading="eager"
-                fetchpriority="high"
-                width="{{ article.image.width }}"
-                height="{{ article.image.height }}"
-                alt="{{ article.image.alt | escape }}"
-              >
+<link rel="stylesheet" href="{{ 'main-article.css' | asset_url }}">
+<div class="blog-article-container {% unless article.image %}no-image{% endunless %}">
+  <div class="blog-article-content {% unless article.image %}centered-content{% endunless %}">
+    <div class="blog-article-header">
+      <h1 class="blog-article-title">{{ article.title }}</h1>
+      <div class="blog-article-meta">
+        {% if section.settings.show_date %}
+          {{ article.published_at | date: "%m/%d/%Y" }} &nbsp;&nbsp; 
+          {{ article.published_at | date: "%I:%M %p" }} &nbsp;&nbsp; • &nbsp;&nbsp;
+        {% endif %}
+        {% if section.settings.show_read_time %}
+          {% assign words_per_minute = 200 %}
+          {% assign word_count = article.content | strip_html | split: ' ' | size %}
+          {% assign read_time = word_count | divided_by: words_per_minute %}
+          {% if read_time == 0 %}{% assign read_time = 1 %}{% endif %}
+          {{ read_time }} min read
+        {% endif %}
+      </div>
+    </div>
+    <div class="blog-article-section">
+      {{ article.content }}
+    </div>
+    {% if blog.next_article or blog.previous_article %}
+      <div class="blog-article-section">
+        {% if blog.previous_article %}
+          <a href="{{ blog.previous_article.url }}" class="link">← Previous Article</a>
+        {% endif %}
+        {% if blog.next_article %}
+          <a href="{{ blog.next_article.url }}" class="link">Next Article →</a>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {% unless article.image %}
+      {% if section.settings.show_social_sharing %}
+        <div class="blog-social-container centered-social">
+          <div class="blog-social-bar">
+            <div class="blog-interaction-buttons">
+              <i class="far fa-thumbs-up"></i>
+              <i class="far fa-paper-plane" data-url="{{ shop.url }}{{ article.url }}"></i>
+              <i class="fa-regular fa-comment"></i>
+              <i class="far fa-bookmark"></i>
+            </div>
+            <div class="blog-social-links">
+              Follow us on:
+              <div class="blog-divider"></div>
+              <a href="{{ settings.social_facebook_link }}" class="blog-social-icon" target="_blank">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="{{ settings.social_instagram_link }}" class="blog-social-icon" target="_blank">
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a href="{{ settings.social_twitter_link }}" class="blog-social-icon" target="_blank">
+                <i class="fab fa-twitter"></i>
+              </a>
             </div>
           </div>
-        {%- endif -%}
-
-      {%- when 'title' -%}
-        <header
-          class="page-width page-width--narrow{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
-          {{ block.shopify_attributes }}
-        >
-          <h1
-            class="article-template__title"
-          >
-            {{ article.title | escape }}
-          </h1>
-          {%- if block.settings.blog_show_date -%}
-            <span class="circle-divider caption-with-letter-spacing">
-              {{- article.published_at | time_tag: format: 'date' -}}
-            </span>
-          {%- endif -%}
-          {%- if block.settings.blog_show_author -%}
-            <span class="caption-with-letter-spacing">
-              <span>{{ article.author }}</span>
-            </span>
-          {%- endif -%}
-        </header>
-
-      {%- when 'content' -%}
-        <div
-          class="article-template__content page-width page-width--narrow rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-          {{ block.shopify_attributes }}
-        >
-          {{ article.content }}
         </div>
-
-      {%- when 'share' -%}
-        <div
-          class="article-template__social-sharing page-width page-width--narrow{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-          {{ block.shopify_attributes }}
-        >
-          {% assign share_url = request.origin | append: article.url %}
-          {% render 'share-button', block: block, share_link: share_url %}
-        </div>
-    {%- endcase -%}
-  {%- endfor -%}
-
-  <div class="article-template__back element-margin-top center{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-    <a href="{{ blog.url }}" class="article-template__link link animate-arrow">
-      <span class="icon-wrap">
-        <span class="svg-wrapper">
-          {{- 'icon-arrow.svg' | inline_asset_content -}}
-        </span>
-      </span>
-      {{ 'blogs.article.back_to_blog' | t: title: blog.title | escape }}
-    </a>
+      {% endif %}
+    {% endunless %}
   </div>
-  {%- if blog.comments_enabled? -%}
-    <div class="article-template__comment-wrapper background-secondary">
+
+  {% if article.image %}
+    <div class="blog-image-section">
+      <div class="blog-image-content">
+        <img src="{{ article.image | img_url: '546x521', crop: 'center' }}" alt="{{ article.image.alt | escape }}" class="blog-main-image">
+        {% if section.settings.show_thumbnails %}
+          <div class="blog-image-dots">
+            {% for i in (1..25) %}
+              <span class="blog-dot"></span>
+              <div class="blog-semicircle blog-semicircle-left" style="background-color: {{ section.settings.background_color }};"><h6></h6></div>
+              <div class="blog-semicircle blog-semicircle-right" style="background-color: {{ section.settings.background_color }};"><h6></h6></div>
+            {% endfor %}
+          </div>
+          <div class="blog-thumbnail-grid">
+            {% for i in (1..5) %}
+              <div class="blog-thumbnail"><h2></h2></div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+
+      {% if section.settings.show_social_sharing %}
+        <div class="blog-social-container">
+          <div class="blog-social-bar">
+            <div class="blog-interaction-buttons">
+              <i class="far fa-thumbs-up"></i>
+              <i class="far fa-paper-plane" data-url="{{ shop.url }}{{ article.url }}"></i>
+              <i class="fa-regular fa-comment"></i>
+              <i class="far fa-bookmark"></i>
+            </div>
+            <div class="blog-social-links">
+              Follow us on:
+              <div class="blog-divider"></div>
+              <a href="{{ settings.social_facebook_link }}" class="blog-social-icon" target="_blank">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="{{ settings.social_instagram_link }}" class="blog-social-icon" target="_blank">
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a href="{{ settings.social_twitter_link }}" class="blog-social-icon" target="_blank">
+                <i class="fab fa-twitter"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  {% endif %}
+</div>
+
+<div class="blog-dotted-line">
+  <span class="blog-semicircle2 blog-semicircle2-l"></span>
+  {% for i in (1..43) %}
+    <span class="blog-circle"></span>
+  {% endfor %}
+  <span class="blog-semicircle2 blog-semicircle2-r"></span>
+</div>
+ 
+{%- if blog.comments_enabled? -%}
+    <div class="article-template__comment-wrapper ">
       <div
         id="comments"
         class="page-width page-width--narrow{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
@@ -110,7 +242,7 @@
                 <article id="{{ comment.id }}" class="article-template__comments-comment">
                   {{ comment.content }}
                   <footer class="right">
-                    <span class="circle-divider caption-with-letter-spacing">{{ comment.author }}</span>
+                    <span class="circle-divider caption">{{ comment.author }}</span>
                   </footer>
                 </article>
               {%- endif -%}
@@ -119,8 +251,8 @@
                 <article id="{{ comment.id }}" class="article-template__comments-comment">
                   {{ comment.content }}
                   <footer class="right">
-                    <span class="circle-divider caption-with-letter-spacing">{{ comment.author }}</span
-                    ><span class="caption-with-letter-spacing">
+                    <span class="circle-divider">{{ comment.author }}</span
+                    ><span class="caption">
                       {{- comment.created_at | time_tag: format: 'date' -}}
                     </span>
                   </footer>
@@ -281,103 +413,207 @@
           {%- if blog.moderated? -%}
             <p class="article-template__comment-warning caption">{{ 'blogs.article.moderated' | t }}</p>
           {%- endif -%}
-          <input type="submit" class="button" value="{{ 'blogs.article.post' | t }}">
+          <input type="submit" class="blog-button" value="{{ 'blogs.article.post' | t }}">
         {% endform %}
       </div>
     </div>
   {%- endif -%}
-</article>
+  <div class="blog-dotted-line2">
+  <!-- Left semicircle -->
+  <span class="blog-semicircle3 blog-semicircle3-l" ></span>
+  
+  <!-- Circles in the middle -->
+  {% for i in (1..43) %} <!-- Adjust the number of circles for desired length -->
+    <span class="blog-circle3"></span>
+  {% endfor %}
+  
+  <!-- Right semicircle -->
+  <span class="blog-semicircle3 blog-semicircle3-r"></span>
+</div>
+
+<div class="custom-blog-slider-section" style="background-color: {{ section.settings.background_color }};">
+    <!-- Title Section -->
+    <div class="custom-blog-slider-title" style="{{ section.settings.slider_section_title }};">
+        <h2>Suggested Blogs</h2>
+    </div>
+    <!-- Arrow Buttons -->
+    <div class="custom-blog-arrow-buttons">
+        <button class="custom-arrow custom-arrow-left" onclick="moveSlide(-1)">‹</button>
+        <button class="custom-arrow custom-arrow-right" onclick="moveSlide(1)">›</button>
+    </div>   
+<div class="custom-blog-slider-container">
+    <div class="custom-blog-slider-wrapper" id="sliderWrapper" style="display: flex; flex-wrap: nowrap; gap: 20px;">
+        {% assign count = 0 %}
+        {% for block in section.blocks %}
+            {% if count < 7 %}
+                {% assign article = blogs[block.settings.selected_blog].articles | where: "handle", block.settings.selected_article | first %}
+                {% if article %}
+                    <div class="custom-blog-card" style="background-color: {{ block.settings.slider_card_bg_color }}; flex: 0 0 auto;">
+                        <!-- Semicircles -->
+                        <div class="blog-semicircle custom-blog-semicircle-left" style="background-color: {{ block.settings.slider_background_color }};"><h2></h2></div>
+                        <div class="blog-semicircle custom-blog-semicircle-right" style="background-color: {{ block.settings.slider_background_color }};"><h2></h2></div>
+
+                        <!-- Blog Image -->
+                        {% if article.image %}
+                            <img src="{{ article.image | img_url: '309x309', crop: 'center' }}" alt="{{ article.title }}" class="custom-blog-image">
+                        {% else %}
+                            <img src="{{ 'blog.jpg' | asset_url }}" alt="Default Image" class="custom-blog-image">
+                        {% endif %}
+
+                        <!-- Blog Content -->
+                        <div class="custom-blog-card-content">
+                            <h3 class="custom-blog-card-title" style="color: {{ block.settings.slider_text_color }};">
+                                {{ article.title | escape }}
+                            </h3>
+
+                            {% if block.settings.slider_show_author or block.settings.slider_show_date %}
+                                <div class="custom-blog-meta">
+                                    {% if block.settings.slider_show_author %}
+                                        <span class="custom-blog-author" style="color: {{ block.settings.slider_text_color }}">{{ article.author }}</span>
+                                    {% endif %}
+                                    {% if block.settings.slider_show_date %}
+                                        <span class="custom-blog-date" style="color: {{ block.settings.slider_text_color }}">{{ article.published_at | date: "%B %d, %Y" }}</span>
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+
+                            {% if block.settings.slider_show_excerpt %}
+                                <p class="custom-blog-excerpt" style="color: {{ block.settings.slider_text_color }};">
+                                    {{ article.excerpt | strip_html | truncate: 200 }}
+                                </p>
+                            {% endif %}
+
+                            <a href="{{ article.url }}" class="custom-blog-read-more-btn" style="background-color: {{ block.settings.slider_button_background_color }}; color: {{ block.settings.slider_button_text_color }};">
+                                Read more
+                                <svg class="article-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                    <polyline points="12 5 19 12 12 19"></polyline>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                {% endif %}
+                {% assign count = count | plus: 1 %}
+            {% endif %}
+        {% endfor %}
+      
+    </div>
+</div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    let currentSlide = 0;
+    const sliderWrapper = document.getElementById('sliderWrapper');
+    const leftArrow = document.querySelector('.custom-arrow-left');
+    const rightArrow = document.querySelector('.custom-arrow-right');
+
+    function getGap() {
+        // Dynamically fetch the gap from the container's computed styles
+        return parseInt(window.getComputedStyle(sliderWrapper.parentElement).gap) || 20;
+    }
+
+    function getVisibleSlides() {
+        // Determine visible slides based on screen width
+        if (window.innerWidth < 768) return 1;
+        if (window.innerWidth < 1024) return 2;
+        if (window.innerWidth < 1200) return 3;
+        return 4;
+    }
+
+    function resizeCards() {
+        const cards = sliderWrapper.querySelectorAll('.custom-blog-card');
+        const visibleSlides = getVisibleSlides();
+        const cardWidthPercentage = 95 / visibleSlides;
+
+        cards.forEach((card) => {
+            card.style.flex = `0 0 ${cardWidthPercentage}%`;
+        });
+    }
+
+    function updateArrowState(totalSlides, visibleSlides) {
+        // Enable or disable arrows based on slide position
+        leftArrow.disabled = currentSlide === 0;
+        rightArrow.disabled = currentSlide >= totalSlides - visibleSlides;
+    }
+
+    function updateSliderPosition() {
+        const slideWidth = sliderWrapper.querySelector('.custom-blog-card').offsetWidth + getGap();
+        const offset = -currentSlide * slideWidth;
+
+        sliderWrapper.style.transform = `translateX(${offset}px)`;
+    }
+
+    function moveSlide(direction) {
+        const cards = sliderWrapper.querySelectorAll('.custom-blog-card');
+        const totalSlides = cards.length;
+        const visibleSlides = getVisibleSlides();
+        const maxSlides = totalSlides - visibleSlides;
+
+        currentSlide = Math.min(Math.max(currentSlide + direction, 0), maxSlides);
+
+        updateSliderPosition();
+        updateArrowState(totalSlides, visibleSlides);
+    }
+
+    function initializeSlider() {
+        const cards = sliderWrapper.querySelectorAll('.custom-blog-card');
+        if (cards.length === 0) return;
+
+        resizeCards();
+        updateArrowState(cards.length, getVisibleSlides());
+        updateSliderPosition();
+
+        leftArrow.addEventListener('click', () => moveSlide(-1));
+        rightArrow.addEventListener('click', () => moveSlide(1));
+
+        window.addEventListener('resize', () => {
+            resizeCards();
+            updateArrowState(cards.length, getVisibleSlides());
+            updateSliderPosition();
+        });
+    }
+
+    initializeSlider();
+
+    // Observe dynamic changes to the slider content
+    const observer = new MutationObserver(initializeSlider);
+    observer.observe(sliderWrapper, { childList: true });
+});
+
+    </script>
+
+
+
+
 
 <script type="application/ld+json">
   {{ article | structured_data }}
 </script>
 
-{% schema %}
-{
-  "name": "t:sections.main-article.name",
-  "tag": "section",
-  "class": "section",
-  "blocks": [
-    {
-      "type": "@app"
-    },
-    {
-      "type": "featured_image",
-      "name": "t:sections.main-article.blocks.featured_image.name",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "select",
-          "id": "image_height",
-          "options": [
-            {
-              "value": "adapt",
-              "label": "t:sections.main-article.blocks.featured_image.settings.image_height.options__1.label"
-            },
-            {
-              "value": "small",
-              "label": "t:sections.main-article.blocks.featured_image.settings.image_height.options__2.label"
-            },
-            {
-              "value": "medium",
-              "label": "t:sections.main-article.blocks.featured_image.settings.image_height.options__3.label"
-            },
-            {
-              "value": "large",
-              "label": "t:sections.main-article.blocks.featured_image.settings.image_height.options__4.label"
-            }
-          ],
-          "default": "adapt",
-          "label": "t:sections.main-article.blocks.featured_image.settings.image_height.label",
-          "info": "t:sections.main-article.blocks.featured_image.settings.image_height.info"
-        }
-      ]
-    },
-    {
-      "type": "title",
-      "name": "t:sections.main-article.blocks.title.name",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "checkbox",
-          "id": "blog_show_date",
-          "default": true,
-          "label": "t:sections.main-article.blocks.title.settings.blog_show_date.label"
-        },
-        {
-          "type": "checkbox",
-          "id": "blog_show_author",
-          "default": false,
-          "label": "t:sections.main-article.blocks.title.settings.blog_show_author.label"
-        }
-      ]
-    },
-    {
-      "type": "content",
-      "name": "t:sections.main-article.blocks.content.name",
-      "limit": 1
-    },
-    {
-      "type": "share",
-      "name": "t:sections.main-article.blocks.share.name",
-      "limit": 2,
-      "settings": [
-        {
-          "type": "text",
-          "id": "share_label",
-          "label": "t:sections.main-article.blocks.share.settings.text.label",
-          "default": "t:sections.main-article.blocks.share.settings.text.default"
-        },
-        {
-          "type": "paragraph",
-          "content": "t:sections.main-article.blocks.share.settings.featured_image_info.content"
-        },
-        {
-          "type": "paragraph",
-          "content": "t:sections.main-article.blocks.share.settings.title_info.content"
-        }
-      ]
+
+{% javascript %}
+document.addEventListener('DOMContentLoaded', function() {
+  // Handle the dot navigation click event
+  document.querySelectorAll('.dot').forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+      document.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
+      dot.classList.add('active');
+    });
+  });
+
+  // Handle the share button click event
+  document.querySelector('.share-button')?.addEventListener('click', function() {
+    const url = this.dataset.url;
+    if (navigator.share) {
+      navigator.share({
+        title: {{ article.title | json }},
+        url: url
+      });
+    } else {
+      navigator.clipboard.writeText(url);
     }
-  ]
-}
-{% endschema %}
+  });
+
+
+{% endjavascript %}
