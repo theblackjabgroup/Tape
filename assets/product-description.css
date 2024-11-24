@@ -4,6 +4,8 @@
     background-color: var(--collapse_header_background_color);
     padding: 4rem 4rem;
     justify-content: space-around;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 /* Style the buttons inside the collapse-tab */
@@ -25,6 +27,7 @@
     background-color: var(--collapse_header_secondary_background_color);
     color: var(--collapse_header_text_color);
     font-weight: 600;
+    border-radius: 10px;
 }
 
 /* Style the tab content */
@@ -75,7 +78,7 @@
     padding: 10px;
     display: none;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
+  /*  grid-template-rows: repeat(2, 1fr);  */
     gap: 10px 40px;
     padding: 10px;
 }
