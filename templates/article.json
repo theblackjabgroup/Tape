@@ -1,1 +1,221 @@
-{"sections":{"main":{"type":"main-article","blocks":{"featured_image":{"type":"featured_image","settings":{"image_height":"adapt"}},"title":{"type":"title","settings":{"blog_show_date":true,"blog_show_author":false}},"share":{"type":"share","settings":{"share_label":"Share"}},"content":{"type":"content","settings":{}}},"block_order":["featured_image","title","share","content"],"settings":{}}},"order":["main"]}
+{
+  "sections": {
+    "main": {
+      "type": "main-article",
+      "blocks": {
+        "featured_image": {
+          "type": "featured_image",
+          "settings": {}
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "share": {
+          "type": "share",
+          "settings": {}
+        },
+        "content": {
+          "type": "content",
+          "settings": {}
+        },
+        "article_KJMQ8Y": {
+          "type": "article",
+          "settings": {
+            "selected_blog": "news",
+            "selected_article": "news/building-a-comprehensive-medical-supply-inventory",
+            "slider_background_color": "#282828",
+            "slider_text_color": "#225647",
+            "slider_button_text_color": "#ffffff",
+            "slider_show_author": false,
+            "slider_show_date": false,
+            "slider_show_excerpt": false
+          }
+        },
+        "article_6PiU3m": {
+          "type": "article",
+          "settings": {
+            "selected_blog": "news",
+            "selected_article": "news/transforming-patient-care-through-innovative-medical-products",
+            "slider_background_color": "#282828",
+            "slider_text_color": "#9bbae0",
+            "slider_button_text_color": "#ffffff",
+            "slider_show_author": false,
+            "slider_show_date": false,
+            "slider_show_excerpt": false
+          }
+        },
+        "article_JcmtTi": {
+          "type": "article",
+          "settings": {
+            "selected_blog": "news",
+            "selected_article": "news/blogp2",
+            "slider_background_color": "#282828",
+            "slider_text_color": "#333333",
+            "slider_button_text_color": "#ffffff",
+            "slider_show_author": false,
+            "slider_show_date": false,
+            "slider_show_excerpt": false
+          }
+        },
+        "article_TeeQYW": {
+          "type": "article",
+          "settings": {
+            "selected_blog": "news",
+            "selected_article": "news/harnessing-cutting-edge-technology-in-medical-devices",
+            "slider_background_color": "#282828",
+            "slider_text_color": "#9db792",
+            "slider_button_text_color": "#ffffff",
+            "slider_show_author": false,
+            "slider_show_date": false,
+            "slider_show_excerpt": false
+          }
+        },
+        "article_yfQHyM": {
+          "type": "article",
+          "settings": {
+            "selected_blog": "news",
+            "selected_article": "news/blogp1",
+            "slider_background_color": "#282828",
+            "slider_text_color": "#333333",
+            "slider_button_text_color": "#ffffff",
+            "slider_show_author": false,
+            "slider_show_date": false,
+            "slider_show_excerpt": false
+          }
+        }
+      },
+      "block_order": [
+        "featured_image",
+        "title",
+        "share",
+        "content",
+        "article_KJMQ8Y",
+        "article_6PiU3m",
+        "article_JcmtTi",
+        "article_TeeQYW",
+        "article_yfQHyM"
+      ],
+      "settings": {
+        "background_color": "#383232",
+        "show_social_sharing": true,
+        "show_thumbnails": true,
+        "show_date": true,
+        "show_read_time": true
+      }
+    }
+  },
+  "order": [
+    "main"
+  ],
+  "schema": {
+    "name": "Article template",
+    "tag": "article",
+    "blocks": {
+      "featured_image": {
+        "type": "featured_image",
+        "name": "Featured Image",
+        "limit": 1
+      },
+      "title": {
+        "type": "title",
+        "name": "Title",
+        "limit": 1
+      },
+      "share": {
+        "type": "share",
+        "name": "Share buttons",
+        "limit": 1
+      },
+      "content": {
+        "type": "content",
+        "name": "Content",
+        "limit": 1
+      },
+      "article": {
+        "type": "article",
+        "name": "Article",
+        "settings": [
+          {
+            "type": "blog",
+            "id": "selected_blog",
+            "label": "Blog"
+          },
+          {
+            "type": "article",
+            "id": "selected_article",
+            "label": "Article"
+          },
+          {
+            "type": "color",
+            "id": "slider_background_color",
+            "label": "Background Color",
+            "default": "#282828"
+          },
+          {
+            "type": "color",
+            "id": "slider_text_color",
+            "label": "Text Color",
+            "default": "#333333"
+          },
+          {
+            "type": "color",
+            "id": "slider_button_text_color",
+            "label": "Button Text Color",
+            "default": "#ffffff"
+          },
+          {
+            "type": "checkbox",
+            "id": "slider_show_author",
+            "label": "Show author",
+            "default": false
+          },
+          {
+            "type": "checkbox",
+            "id": "slider_show_date",
+            "label": "Show date",
+            "default": false
+          },
+          {
+            "type": "checkbox",
+            "id": "slider_show_excerpt",
+            "label": "Show excerpt",
+            "default": false
+          }
+        ]
+      }
+    },
+    "settings": [
+      {
+        "type": "color",
+        "id": "background_color",
+        "label": "Background Color",
+        "default": "#383232"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_social_sharing",
+        "label": "Show social sharing buttons",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_thumbnails",
+        "label": "Show thumbnails",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_date",
+        "label": "Show date",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_read_time",
+        "label": "Show read time",
+        "default": true
+      }
+    ]
+  }
+}
