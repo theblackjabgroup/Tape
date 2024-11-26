@@ -130,7 +130,9 @@
           {%- if card_product.available == false -%}
             <div class="bb_card_badge_sold card__badge {{ settings.badge_position }}">
               <div class="sold-out-tag-pl">
-                <span class="sold-out-tag-pl-text">SOLD OUT</span>
+                <img src="{{ 'Group 5109.png' |  asset_url }}" class="desktop-view" alt="Default image" width="100" height="100">
+                <img src="{{ 'Group 5143.png' |  asset_url }}" class="mobile-view" alt="Default image" width="100" height="100">
+             <!--   <span class="sold-out-tag-pl-text">SOLD OUT</span>  -->
               </div>
             </div>
           {%- elsif card_product.compare_at_price > card_product.price and card_product.available -%}
