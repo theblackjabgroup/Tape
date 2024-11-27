@@ -97,7 +97,7 @@
           <div class="announcement-icon-mobile">
             <div id="announcement-icon-sub-id" class="announcement-icon-sub">
                 <div class="announcement-icon-wrapper" aria-count = "0">
-                    {{ section.blocks.first.settings.image | image_url: width: 30, height: 30 | image_tag }}
+                    {{ section.blocks.first.settings.image | image_url: width: 100, height: 100 | image_tag }}
                 </div>
             </div>
           </div>
@@ -185,7 +185,7 @@
                           <div class="announcement-icon-mobile">
                             <div id="announcement-icon-sub-id" class="announcement-icon-sub">
                                 <div class="announcement-icon-wrapper" aria-count={{ forloop.index | minus: 1}}>
-                                    {{ block.settings.image | image_url: width: 30, height: 30 | image_tag }}
+                                    {{ block.settings.image | image_url: width: 100, height: 100 | image_tag }}
                                 </div>
                             </div>
                           </div>

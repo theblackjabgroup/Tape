@@ -4,6 +4,7 @@ class FacetFiltersForm extends HTMLElement {
     this.onActiveFilterClick = this.onActiveFilterClick.bind(this);
 
     this.debouncedOnSubmit = debounce((event) => {
+      console.log("event ",event)
       this.onSubmitHandler(event);
     }, 800);
 
@@ -56,6 +57,9 @@ class FacetFiltersForm extends HTMLElement {
     });
 
     if (updateURLHash) FacetFiltersForm.updateURLHash(searchParams);
+
+
+
   }
 
   static renderSectionFromFetch(url, event) {
@@ -63,10 +67,29 @@ class FacetFiltersForm extends HTMLElement {
       .then((response) => response.text())
       .then((responseText) => {
         const html = responseText;
+        console.log("html ", html)
         FacetFiltersForm.filterData = [...FacetFiltersForm.filterData, { html, url }];
         FacetFiltersForm.renderFilters(html, event);
         FacetFiltersForm.renderProductGridContainer(html);
     //    FacetFiltersForm.renderProductCount(html);
+      let sortText = new Map();
+      sortText.set("manual", "Featured");
+      sortText.set("best-selling", "Best selling");
+      sortText.set("title-ascending", "Alphabetically, A-Z");
+      sortText.set("title-descending", "Alphabetically, Z-A");
+      sortText.set("price-ascending", "Price, low to high");
+      sortText.set("price-descending", "Price, high to low");
+      sortText.set("created-ascending", "Date, old to new");
+      sortText.set("created-descending", "Date, new to old");
+
+      const button = document.getElementById('dropdownMenuButton1');
+      const hiddenInput = document.getElementById('dropdownValue');
+      const selectedText = sortText.get(event.srcElement.defaultValue);
+      button.textContent = selectedText; // Update button text
+      hiddenInput.value = selectedText; // Update hidden input value
+      console.log("selectedText ",event.srcElement)
+      console.log("in updateDropdownText button ", button)
+
         if (typeof initializeScrollAnimationTrigger === 'function') initializeScrollAnimationTrigger(html.innerHTML);
       });
   }
@@ -262,6 +285,7 @@ class FacetFiltersForm extends HTMLElement {
 
   onSubmitHandler(event) {
     event.preventDefault();
+  
     const sortFilterForms = document.querySelectorAll('facet-filters-form form');
     if (event.srcElement.className == 'mobile-facets__checkbox') {
       const searchParams = this.createSearchParams(event.target.closest('form'));

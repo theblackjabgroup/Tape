@@ -50,6 +50,7 @@
 .gallery-thumbnail {
   background-color: var(--background_product_card);
   padding-bottom: 10px;
+  border-radius: 10px;
 }
 
 .ticket-line {

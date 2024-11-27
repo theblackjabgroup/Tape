@@ -32,6 +32,8 @@
   --mobile-filter-by-card-text-color: {{ section.settings.mobile_filter_by_card_text_color }};
   --sort-by-card-color: {{ section.settings.sort_by_card_color }};
   --sort-by-text-card-color: {{ section.settings.sort_by_text_card_color }};
+  --sort-by-card-dropdown-color : {{ section.settings.sort_by_card_dropdown_color }};
+  --sort-by-text-card-dropdown-color: {{ section.settings.sort_by_text_card_dropdown_color }};
   --mobile-sort-by-text-color: {{ section.settings.mobile_sort_by_text_color }};
   --product-card-background-color : {{ section.settings.product_card_background_color }};
   --product_price_card: {{ section.settings.product_price_card }};
@@ -55,7 +57,7 @@
   }
 {%- endstyle -%}
 
-{% assign sort_default = "Alphabetically, A-Z" %}
+{% assign sort_default = "Featured" %}
 
 <div class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }} bb-product-list-background">
   {%- paginate collection.products by section.settings.products_per_page -%}
@@ -101,12 +103,13 @@
             id="dropdownMenuButton1" 
             data-bs-toggle="dropdown" 
             aria-expanded="false">
-            {{ sort_default }}
+            {{ sort_default }}  
           </button>
           <div class="dropdown-menu bb-dropdown-menu" aria-labelledby="dropdownMenuButton1">
             {%- for option in collection.sort_options -%}
-                <input type="hidden" id="{{ option.value | escape }}" name="sort_by" id="dropdownValue" value="{{ option.value | escape }}" class="option">
-                <label for="{{ option.value | escape }}" class="bb-dropdown-item dropdown-item select-item" onclick='updateDropdownText(this)'>{{ option.name | escape }}</label>
+           <!--   id="{{ option.value | escape }}"  --> 
+                <input type="hidden" name="sort_by" id="dropdownValue" value="{{ option.value | escape }}" class="option">
+                <label for="{{ option.value | escape }}" class="bb-dropdown-item dropdown-item select-item">{{ option.name | escape }}</label>
              <!--   <a class="dropdown-item" href="#" onclick="updateDropdownText( {{ option.value | escape }} )">{{ option.name | escape }}</a>   -->
             {%- endfor -%}  
           </div>
@@ -211,37 +214,6 @@
         {%- endif -%}
       </div>
     </div>
-
-    
-    <script>
-      // Function to update the button text and hidden input value
-      function updateDropdownText(element) {
-        const button = document.getElementById('dropdownMenuButton1');
-        const hiddenInput = document.getElementById('dropdownValue');
-        const selectedText = element.textContent;
-    
-        button.textContent = selectedText; // Update button text
-        hiddenInput.value = selectedText; // Update hidden input value
-      }
-    
-      // Function to save the dropdown selection on submit
-      function saveDropdownSelection() {
-        const hiddenInput = document.getElementById('dropdownValue');
-        localStorage.setItem('dropdownSelected', hiddenInput.value); // Save selection to localStorage
-      }
-    
-      // Restore dropdown text on page load
-      document.addEventListener('DOMContentLoaded', () => {
-        const savedText = localStorage.getItem('dropdownSelected');
-        const button = document.getElementById('dropdownMenuButton1');
-        const hiddenInput = document.getElementById('dropdownValue');
-    
-        if (savedText) {
-          button.textContent = savedText; // Restore button text
-          hiddenInput.value = savedText; // Restore hidden input value
-        }
-      });
-    </script>
     
   {%- endpaginate -%}
   {% if section.settings.image_shape == 'arch' %}
@@ -498,6 +470,18 @@
       "id": "sort_by_text_card_color",
       "label": "Sort By Card Text Color",
       "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "sort_by_card_dropdown_color",
+      "label": "Sort By Card Dropdown Color",
+      "default": "#C7E1BF"
+    },
+    {
+      "type": "color",
+      "id": "sort_by_text_card_dropdown_color",
+      "label": "Sort By Card Dropdown Text Color",
+      "default": "#000000"
     },
     {
       "type": "color",

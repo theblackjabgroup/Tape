@@ -75,6 +75,10 @@
     right: 10px !important;
 }
 
+.facet-checkbox__text-bb {
+  font-family: 'Fira Sans';
+}
+
 summary .icon-caret2 {
     height: 0.8rem !important;
 }
@@ -125,6 +129,7 @@ summary .icon-caret2 {
 
 .bb-dropdown-menu {
   transform: translate3d(-93px, 43px, 0px) !important;
+  background-color: var(--sort-by-card-dropdown-color );
 }
 
 .select .icon-caret2 {
@@ -138,7 +143,8 @@ summary .icon-caret2 {
 
 .bb-dropdown-item {
   font-family: 'Fira Sans';
-  border-top: .1rem solid rgba(var(--color-foreground), .1);
+  border-top: .1rem solid rgba(var(--sort-by-text-card-dropdown-color), .1);
+  color: var(--sort-by-text-card-dropdown-color) !important;
 }
 
 .bb-card-upper-name {
@@ -273,16 +279,20 @@ summary .icon-caret2 {
   }
 
   .sold-out-tag-pl {
-    background-color: #E12B56;
     color: white;
     width: 9rem;
      padding: 6px 2px; 
     display: flex;
     justify-content: center;
     border: none;
-    margin-left: 2rem;
+    margin-left: 1rem;
   }
   
+  .sold-out-tag-pl>img {
+    width: 100%;
+    height: 100%;
+  }
+
   .sold-out-tag-pl-text {
     font-size: 14px;
     font-family: 'Inter';
@@ -471,6 +481,7 @@ summary .icon-caret2 {
     border-radius: .3rem;
     overflow: hidden;
     z-index: 2;
+    background-color: var(--sort-by-card-dropdown-color ) !important;
   }
   
   .option {
@@ -484,7 +495,8 @@ summary .icon-caret2 {
     background-color: #FFFFFF;
     color: black;
     font-family: 'Fira Sans';
-    border-top: .1rem solid rgba(var(--color-foreground), .1);
+    border-top: .1rem solid rgba(var(--sort-by-text-card-dropdown-color), .1);
+    color: var(--sort-by-text-card-dropdown-color);
   }
   
   .select-item:hover {
@@ -656,7 +668,9 @@ input[type="bb-radio"]:checked + label {
 }
 
 .sold-out-tag-pl {
-  margin-left: 1rem;
+  margin-left: 0rem;
+  padding: 6px 8px;
+  width: 8rem;
 }
 
 .sold-out-tag-pl-text{
