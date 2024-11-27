@@ -154,6 +154,8 @@ summary .icon-caret2 {
 .bb-card-content {
     background-color: var(--product-card-background-color);
     grid-template-rows: minmax(0, 1fr) max-content max-content auto !important;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
 .ticket-line-upper {
@@ -227,7 +229,7 @@ summary .icon-caret2 {
 
   .icon-upper-wrapper {
     display: flex !important;
-    gap: 3rem;
+    gap: 1.5rem;
     margin-left: 2rem;
   }
 
@@ -266,6 +268,7 @@ summary .icon-caret2 {
 
   .bb-card-media-wrapper {
     border: none !important;
+    background-color: var(--product-list-background-color);
   }
 
   .sale-pro-text{
@@ -497,6 +500,7 @@ summary .icon-caret2 {
     font-family: 'Fira Sans';
     border-top: .1rem solid rgba(var(--sort-by-text-card-dropdown-color), .1);
     color: var(--sort-by-text-card-dropdown-color);
+    background-color: var(--sort-by-card-dropdown-color);
   }
   
   .select-item:hover {
