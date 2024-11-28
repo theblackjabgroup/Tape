@@ -1572,7 +1572,7 @@ details[open] > .share-button__fallback {
 .customer select {
   -webkit-appearance: none;
   appearance: none;
-  background-color: rgb(var(--color-background));
+  background-color: rgb(var(--color-product_price_font));
   color: rgb(var(--color-foreground));
   font-family: var(--font-body-family);
   font-style: var(--font-body-style);
@@ -1651,9 +1651,8 @@ details[open] > .share-button__fallback {
 .customer .field input:focus-visible,
 .customer select:focus-visible,
 .localization-form__select:focus-visible.localization-form__select:after {
-  box-shadow: 0 0 0 calc(0.1rem + var(--inputs-border-width)) rgba(var(--color-foreground));
   outline: 0;
-  border-radius: var(--inputs-radius);
+  border-radius: 4px;
 }
 
 .field__input:focus,
@@ -1661,9 +1660,8 @@ details[open] > .share-button__fallback {
 .customer .field input:focus,
 .customer select:focus,
 .localization-form__select:focus.localization-form__select:after {
-  box-shadow: 0 0 0 calc(0.1rem + var(--inputs-border-width)) rgba(var(--color-foreground));
   outline: 0;
-  border-radius: var(--inputs-radius);
+  border-radius: 4px;
 }
 
 .localization-form__select:focus {
