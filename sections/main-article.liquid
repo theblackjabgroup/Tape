@@ -3,6 +3,12 @@
   "name": "Default Blog Posts",
   "settings": [
     {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
       "type": "checkbox",
       "id": "show_social_sharing",
       "label": "Show Social Sharing Buttons",
@@ -25,13 +31,12 @@
       "id": "show_read_time",
       "label": "Show Read Time",
       "default": true
-    },
+    }
   ],
   "blocks": [
     {
       "type": "article",
       "name": "Suggested Blogs",
-      "limit": 7,
       "settings": [
         {
           "type": "blog",
@@ -82,12 +87,7 @@
       ]
     }
   ],
-  "presets": [
-    {
-      "name": "Default Blog Posts",
-      "category": "Blog"
-    }
-  ]
+ 
 }
 {% endschema %}
 
@@ -204,12 +204,12 @@
 
 <div class="blog-dotted-line">
   <span class="blog-semicircle2 blog-semicircle2-l"></span>
-  {% for i in (1..43) %}
+  {% for i in (1..30) %}
     <span class="blog-circle"></span>
   {% endfor %}
   <span class="blog-semicircle2 blog-semicircle2-r"></span>
 </div>
-
+ 
 {%- if blog.comments_enabled? -%}
     <div class="article-template__comment-wrapper ">
       <div
@@ -409,7 +409,7 @@
   <span class="blog-semicircle3 blog-semicircle3-l" ></span>
   
   <!-- Circles in the middle -->
-  {% for i in (1..43) %} <!-- Adjust the number of circles for desired length -->
+  {% for i in (1..30) %} <!-- Adjust the number of circles for desired length -->
     <span class="blog-circle3"></span>
   {% endfor %}
   
@@ -482,6 +482,7 @@
                 {% assign count = count | plus: 1 %}
             {% endif %}
         {% endfor %}
+      
     </div>
 </div>
 </div>
