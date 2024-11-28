@@ -20,7 +20,7 @@ body {
 
 .blog-article-content {
   padding-right: 20px;
-  color: black;
+  color: white;
   padding-left: 43px;
 }
 
@@ -131,7 +131,7 @@ body {
 .blog-dot {
   width: 8px;
   height: 8px;
-  background-color: #ffffff;
+  background-color: #282828;
   border-radius: 50%;
   cursor: pointer;
 }
@@ -178,7 +178,7 @@ body {
   position: absolute;
   width: 30px;
   height: 30px;
-  background-color: #ffffff;
+  background-color: #282828;
   border-radius: 50%;
   z-index: 1;
 }
@@ -202,11 +202,11 @@ body {
   background: #D8D8D8;
   margin: 20px 0;
   clip-path: polygon(
-    0 0, 0 2px, 12px 5px, 0 8px, 0 12px, 12px 15px,
-    0 18px, 0 22px, 12px 25px, 0 28px, 0 34px,
-    100% 34px, 100% 28px, calc(100% - 12px) 25px,
-    100% 22px, 100% 18px, calc(100% - 12px) 15px,
-    100% 12px, 100% 8px, calc(100% - 12px) 5px,
+    0 0, 0 2px, 13px 5px, 0 10px, 0 10px, 13px 15px,
+    0 20px, 0 20px, 12px 25px, 0 28px, 0 31px,
+    100% 31px, 100% 28px, calc(100% - 13px) 26px,
+    100% 20px, 100% 20px, calc(100% - 13px) 16px,
+    100% 11px, 100% 11px, calc(100% - 13px) 6px,
     100% 2px, 100% 0
   );
 }
@@ -267,7 +267,7 @@ body {
 .blog-dotted-line {
   display: flex;
   align-items: center;
-  gap: 22px;
+  gap: 35px;
   margin: 20px 0;
 }
 
@@ -301,7 +301,7 @@ body {
 .blog-dotted-line2 {
   display: flex;
   align-items: center;
-  gap: 22px;
+  gap: 35px;
   margin: 30px 0;
 }
 
@@ -515,7 +515,7 @@ body {
     margin: 30px 10px 30px 0;
   }
   .blog-dotted-line {
-    gap: 14px;
+    gap: 25px;
   }
   .blog-semicircle2-r{
     right:-6px;
@@ -524,7 +524,7 @@ body {
     left: -6px;
 }
   .blog-dotted-line2 {
-    gap: 14px;
+    gap: 25px;
   }
   .blog-semicircle3-r{
     right:-6px;
@@ -550,11 +550,12 @@ body {
       margin-bottom: 1rem;
     }
   .blog-interaction-buttons{
-  padding: 10px;
-    gap:7px;
+              padding: 0 2px 5px 2px;
+            gap: 7px;
+
   }
   .blog-interaction-buttons i{
-    font-size:10px;
+    font-size:13px;
   }
   .blog-social-links{
     gap:7px;
@@ -566,11 +567,12 @@ body {
     width: 270px;
   }
   .blog-interaction-buttons{
-  padding: 10px;
-    gap:7px;
+                     padding: 0 2px 5px 2px;
+            gap: 7px;
+
   }
   .blog-interaction-buttons i{
-    font-size:10px;
+    font-size:13px;
   }
   .blog-social-links{
     gap:7px;
@@ -588,6 +590,9 @@ body {
   }
   .blog-image-dots{
     gap: 4px;
+  }
+  .blog-circle:nth-child(n+14) {
+    display: none; /* Hide dots after the 15th one */
   }
   .blog-semicircle{
     height:20px;
@@ -619,13 +624,6 @@ body {
   .blog-social-container{
     width: 300px;
   }
-  .blog-interaction-buttons{
-  padding: 10px;
-    gap:7px;
-  }
-  .blog-interaction-buttons i{
-    font-size:10px;
-  }
   .blog-social-links{
     gap:7px;
     padding: 5px 1px 10px 0;
@@ -638,12 +636,12 @@ body {
     font-size:0.9rem;
   }
   .blog-dotted-line{
-    gap:4px;
+    gap:17px;
     margin:0;
   }
   .blog-circle {
-    height:6px;
-    width:6px;
+    height:7px;
+    width:14px;
   }
   .blog-semicircle2{
     width:49px;
@@ -655,12 +653,15 @@ body {
     right:-9px;
   }
   .blog-dotted-line2{
-    gap: 3px;
+    gap: 17px;
     margin: 18px 0;
   }
+  .blog-circle3:nth-child(n+14) {
+    display: none; 
+  }
   .blog-circle3{
-    height:6px;
-    width:6px;
+    height:7px;
+    width:14px;
   }
     .custom-blog-semicircle-left{
     top: 300px;
@@ -671,7 +672,7 @@ body {
     right:-10px;
   }
   .blog-semicircle3 {
-    width:33px;
+    width:40px;
   }
 }
   
@@ -718,7 +719,7 @@ body {
 }
 
 .custom-arrow {
-    color: black;
+    color: whitesmoke;
     border: none;
     padding: 0px 5px;
     cursor: pointer;
