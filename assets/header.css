@@ -25,17 +25,15 @@
 }
 
 .logo-container {
-  height: var(--logo-height);
+  min-height: var(--logo-height);
   width: var(--logo-width);
   display: flex !important;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
   text-decoration: none;
 }
 
 .logo-container span {
-  border: 1px solid #ccc;
   color: rgb(var(--color-foreground));
   font-family: Arial, sans-serif;
   font-size: 14px;
@@ -348,6 +346,7 @@ body.drawer-open {
   }
   .flex-container{
     margin: 0;
+    padding: 0 20px;
   }
 }
 
@@ -385,7 +384,7 @@ body.drawer-open {
   width: 266px;
   height: 508px;
   display: flex;
-  z-index: 10000;
+  z-index: 10000000000000;
   flex-direction: column;
   gap: 16px;
 }
