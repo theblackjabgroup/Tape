@@ -1,107 +1,158 @@
 {{ 'component-slideshow.css' | asset_url | stylesheet_tag }}
-
+<style>
+  .slide .backfold::before {
+   background-color: {{ section.settings.imagefoldcolor }};
+  }
+</style>
 <div class="rich-text-section color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
   <div class="interactive-slideshow">
     {% for block in section.blocks %}
       <div class="slide {% if forloop.first %}active{% endif %}" data-index="{{ forloop.index0 }}">
         {% if block.settings.image != blank %}
-          <img src="{{ block.settings.image | img_url: 'master' }}" alt="{{ block.settings.title }}">
+          <div class="backfold">
+               <img src="{{ block.settings.image | img_url: 'master' }}" alt="{{ block.settings.title }}">
+          </div>
         {% else %}
             {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
         {% endif %}
-        <h3 style="color:{{ block.settings.feature_color }}">{{ block.settings.feature }}</h3>
-        <div class="slide-text"   style="background-color: {{ section.settings.product_card_background_color }};" >
+        <div class="headarrow">
+        <h3 class="headingtext" style="color:{{ block.settings.feature_color }}" >{{ block.settings.feature }}</h3>
+           <span id="info__banner__expand__button" class="headarrow_svg-wrapper">
+            {{- 'icon-arrow.svg' | inline_asset_content -}}
+          </span>
+        </div>
+        <div class="slide-text"  style="background-color: {{ section.settings.product_card_background_color }};" >
             <div class="description">
               <p class="feature" style="color: {{ section.settings.text_color }};"  >{{ block.settings.feature }}</p>
               <h2 style="color: {{ section.settings.text_color }};">{{ block.settings.title }}</h2>
-              <p style="color: {{ section.settings.text_color }};" >{{ block.settings.content }}</p>
+              <p class="feature1" style="color:{{ section.settings.text_color }};" >{{ block.settings.content }}</p>
             </div>
-         
             <div class="des-button">
                {% if block.settings.show_button %}
               <a href="{{ block.settings.button_link }}" class="btn" style="color: {{ section.settings.text_color }}; background-color:{{ section.settings.btn_back_color }}" >{{ block.settings.button_text }}</a>
               {% endif %}
                  </div>
-          
         </div>
       </div>
     {% endfor %}
   </div>
 </div>
 <script>
-document.addEventListener('DOMContentLoaded', function() {
+ document.addEventListener('DOMContentLoaded', function() {
   const slides = document.querySelectorAll('.slide');
+  const slideshow = document.querySelector('.interactive-slideshow');
   let activeSlide = null;
-  let isMobile = window.innerWidth <= 768;
-
-  function setActiveSlide(slide, forceActivate = false) {
-    if (activeSlide !== slide || forceActivate) {
-      const wasPreviouslyActive = slide.classList.contains('active');
-      
-     
-      slides.forEach(s => {
-        s.classList.remove('active');
-        const slideText = s.querySelector('.slide-text');
-        if (slideText) {
-          const parent = slideText.parentNode;
-          const clone = slideText.cloneNode(true);
-          parent.removeChild(slideText);
-          parent.appendChild(clone);
-        }
-      });
-
-     
-      slide.classList.add('active');
-      activeSlide = slide;
-
-    
-      if (isMobile && !wasPreviouslyActive) {
-        
-        const rect = slide.getBoundingClientRect();
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        
-     
-        window.scrollTo({
-          top: scrollTop + rect.top - 10, 
-          behavior: 'smooth'
-        });
+  let isMobile = window.innerWidth <= 900;
+  let startX;
+  let scrollLeft;
+  let isDown = false;
+  
+  const setActiveSlide = (slide) => {
+    if (!isMobile) {
+      if (activeSlide !== slide) {
+        slides.forEach(s => s.classList.remove('active'));
+        slide.classList.add('active');
+        activeSlide = slide;
       }
     }
-  }
-
-  function handleInteraction(slide) {
-    slide.addEventListener('click', (event) => {
-      if (isMobile) {
-        event.preventDefault();
-        setActiveSlide(slide);
-      }
+  };
+  const toggleSlideText = (slideText, arrow) => {
+    if (slideText.classList.contains('expanded')) {
+      slideText.classList.remove('expanded');
+      arrow.classList.remove('expanded');
+    } else {
+      document.querySelectorAll('.slide-text').forEach(text => text.classList.remove('expanded'));
+      slideText.classList.add('expanded');
+      arrow.classList.add('expanded');
+    }
+  };
+  const addMobileScrollListeners = () => {
+    slideshow.addEventListener('mousedown', (e) => {
+      isDown = true;
+      slideshow.style.cursor = 'grabbing';
+      startX = e.pageX - slideshow.offsetLeft;
+      scrollLeft = slideshow.scrollLeft;
     });
-    
-    slide.addEventListener('mouseenter', () => {
-      if (!isMobile) {
-        setActiveSlide(slide);
-      }
+    slideshow.addEventListener('mouseleave', () => {
+      isDown = false;
+      slideshow.style.cursor = 'grab';
     });
-  }
-
-  function initializeView() {
-    isMobile = window.innerWidth <= 768;
+    slideshow.addEventListener('mouseup', () => {
+      isDown = false;
+      slideshow.style.cursor = 'grab';
+    });
+    slideshow.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - slideshow.offsetLeft;
+      const walk = (x - startX) * 2;
+      slideshow.scrollLeft = scrollLeft - walk;
+    });
+  };
+  const addMobileListeners = () => {
     slides.forEach(slide => {
-      slide.classList.remove('active');
+      const arrow = slide.querySelector('.headarrow_svg-wrapper');
+      const slideText = slide.querySelector('.slide-text');
+      
+      arrow.addEventListener('click', () => toggleSlideText(slideText, arrow));
     });
-    setActiveSlide(slides[0], true);
+    addMobileScrollListeners();
+  };
+  const removeMobileListeners = () => {
+    slides.forEach(slide => {
+      const heading = slide.querySelector('.headarrow_svg-wrapper');
+      const clone = heading.cloneNode(true);
+      heading.parentNode.replaceChild(clone, heading);
+    });
+    slideshow.removeEventListener('mousedown', () => {});
+    slideshow.removeEventListener('mouseleave', () => {});
+    slideshow.removeEventListener('mouseup', () => {});
+    slideshow.removeEventListener('mousemove', () => {});
+  };
+  const addDesktopListeners = () => {
+    slides.forEach(slide => {
+      slide.addEventListener('mouseenter', () => setActiveSlide(slide));
+    });
+  };
+  const removeDesktopListeners = () => {
+    slides.forEach(slide => {
+      const clone = slide.cloneNode(true);
+      slide.parentNode.replaceChild(clone, slide);
+    });
+  };
+  const handleResize = () => {
+    const newIsMobile = window.innerWidth <= 1100;
+    if (newIsMobile !== isMobile) {
+      isMobile = newIsMobile;
+      removeActiveState();
+      if (isMobile) {
+        removeMobileListeners();
+        addMobileListeners();
+      } else {
+        removeMobileListeners();
+        addDesktopListeners();
+        setActiveSlide(slides[0]);
+      }
+    }
+  };
+  const removeActiveState = () => {
+    slides.forEach(slide => slide.classList.remove('active'));
+    activeSlide = null;
+  };
+  if (isMobile) {
+    addMobileListeners();
+  } else {
+    addDesktopListeners();
+    setActiveSlide(slides[0]);
   }
-  slides.forEach(handleInteraction);
-
-  initializeView();
-
   let resizeTimer;
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(initializeView, 250);
+    resizeTimer = setTimeout(handleResize, 250);
   });
 });
-</script>
+</script> 
+
 
 
 
@@ -119,7 +170,7 @@ document.addEventListener('DOMContentLoaded', function() {
   {
       "type": "color",
       "id": "product_card_background_color",
-      "label": "Product Card Background Color",
+      "label": "Banner Color",
       "default": "#F7F7F7"
   },
   {
@@ -132,6 +183,12 @@ document.addEventListener('DOMContentLoaded', function() {
       "type": "color",
       "id": "btn_back_color",
       "label": "Button Background Color",
+      "default": "#F7F7F7"
+  },
+   {
+      "type": "color",
+      "id": "imagefoldcolor",
+      "label": "Image Fold Color",
       "default": "#F7F7F7"
   },
 ],
@@ -148,7 +205,7 @@ document.addEventListener('DOMContentLoaded', function() {
        {
         "type": "text",
         "id": "feature",
-        "label": "feature",
+        "label": "Feature",
         "default": "NEW ARRIVAL"
       },
        {

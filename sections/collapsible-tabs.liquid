@@ -1,6 +1,15 @@
 {{ 'product-description.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'product-description.js' | asset_url }}" defer="defer"></script>
 
+{%- style -%}
+  :root {
+    --collapse_header_background_color: {{ section.settings.collapse_header_background_color }};
+    --collapse_header_secondary_background_color: {{ section.settings.collapse_header_secondary_background_color }};
+    --collapse_header_text_color: {{ section.settings.collapse_header_text_color }};
+    --collapse_body_background_color: {{ section.settings.collapse_body_background_color }};
+    --collapse_body_text_color: {{ section.settings.collapse_body_text_color }};
+  }
+{% endstyle %}
 {% if section.blocks.first.settings.heading != blank %}
 <div class="collapse-width">
   <div class="collapse-tab">
@@ -113,12 +122,56 @@
       "id": "heading",
       "label": "t:sections.collapsible_tabs.settings.heading.label",
       "default": "t:sections.collapsible_tabs.settings.heading.default"
-    }
+    },
+    {
+      "type": "color",
+      "id": "collapse_header_background_color",
+      "label": "Collapse Header Background Color",
+      "default": "#C7E1BF"
+    },
+    {
+      "type": "color",
+      "id": "collapse_header_secondary_background_color",
+      "label": "Collapse Header Secondary Background Color",
+      "default": "#D9F2D1"
+    },
+   {
+      "type": "color",
+      "id": "collapse_header_text_color",
+      "label": "Collapse Header Text Color",
+      "default": "#225647"
+    },
+    {
+      "type": "color",
+      "id": "collapse_body_background_color",
+      "label": "Collapse Body Background Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "collapse_body_text_color",
+      "label": "Collapse Body Text Color",
+      "default": "#000000"
+    },
+    
+    {
+      "type": "color",
+      "id": "sort_by_card_color",
+      "label": "Sort By Card Color",
+      "default": "#18332E"
+    },
+    {
+      "type": "color",
+      "id": "sort_by_text_card_color",
+      "label": "Sort By Card Text Color",
+      "default": "#FFFFFF"
+    },
   ],
   "blocks": [
     {
       "type": "collapsible_row",
       "name": "t:sections.collapsible_tabs.blocks.collapsible_row.name",
+      "limit": 6,
       "settings": [
         {
           "type": "text",

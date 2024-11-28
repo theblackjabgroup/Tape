@@ -23,13 +23,18 @@
 {%- endif -%}
 
 {%- style -%}
-  :root {
+  :root { 
   --filter-by-banner-color: {{ section.settings.filter_by_banner_color }};
   --filter-by-text-color: {{ section.settings.filter_by_text_color }};
+  --mobile-filter-by-text-color: {{ section.settings.mobile_filter_by_text_color }};
   --filter-by-card-color: {{ section.settings.filter_by_card_color }};
   --filter-by-card-text-color: {{ section.settings.filter_by_card_text_color }};
+  --mobile-filter-by-card-text-color: {{ section.settings.mobile_filter_by_card_text_color }};
   --sort-by-card-color: {{ section.settings.sort_by_card_color }};
   --sort-by-text-card-color: {{ section.settings.sort_by_text_card_color }};
+  --sort-by-card-dropdown-color : {{ section.settings.sort_by_card_dropdown_color }};
+  --sort-by-text-card-dropdown-color: {{ section.settings.sort_by_text_card_dropdown_color }};
+  --mobile-sort-by-text-color: {{ section.settings.mobile_sort_by_text_color }};
   --product-card-background-color : {{ section.settings.product_card_background_color }};
   --product_price_card: {{ section.settings.product_price_card }};
   --product_price_card_text: {{ section.settings.product_price_card_text }};
@@ -52,18 +57,21 @@
   }
 {%- endstyle -%}
 
+{% assign sort_default = "Featured" %}
+
 <div class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }} bb-product-list-background">
   {%- paginate collection.products by section.settings.products_per_page -%}
     {% comment %} Sort is the first tabbable element when filter type is vertical {% endcomment %}
     {%- if section.settings.enable_sorting and section.settings.filter_type == 'vertical' -%}
       <facet-filters-form class="facets facets-vertical-sort page-width2 small-hide bb-facet-sort-form">
-        <form class="facets-vertical-form" id="FacetSortForm">
+        <form class="facets-vertical-form" id="FacetSortForm" onsubmit="saveDropdownSelection()" method="POST">
           <div class="sort-upper-div">
           <div class="bb-facet-sort facet-filters sorting caption">
             <div class="facet-filters__field">
               <h2 class="facet-filters__label caption-large text-body">
                 <label class="bb-sortby" for="SortBy">{{ 'products.facets.sort_by_label' | t }}</label>
               </h2>
+              <!---
               <div class="select">
                 {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
                 <select
@@ -87,31 +95,28 @@
                   {{- 'icon-caret2.svg' | inline_asset_content -}}
                 </span>
               </div>
+              --->
+        <div class="bb-sort-dropdown">
+          <button 
+            class="bb-sort-options dropdown-toggle" 
+            type="button" 
+            id="dropdownMenuButton1" 
+            data-bs-toggle="dropdown" 
+            aria-expanded="false">
+            {{ sort_default }}  
+          </button>
+          <div class="dropdown-menu bb-dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            {%- for option in collection.sort_options -%}
+           <!--   id="{{ option.value | escape }}"  --> 
+                <input type="hidden" name="sort_by" id="dropdownValue" value="{{ option.value | escape }}" class="option">
+                <label for="{{ option.value | escape }}" class="bb-dropdown-item dropdown-item select-item">{{ option.name | escape }}</label>
+             <!--   <a class="dropdown-item" href="#" onclick="updateDropdownText( {{ option.value | escape }} )">{{ option.name | escape }}</a>   -->
+            {%- endfor -%}  
+          </div>
+        </div>
             </div>
           </div>
           </div>
-<!--
-          <div class="product-count-vertical light" role="status">
-            <h2 class="product-count__text text-body">
-              <span id="ProductCountDesktop">
-                {%- if collection.results_count -%}
-                  {{
-                    'templates.search.results_with_count'
-                    | t: terms: collection.terms, count: collection.results_count
-                  }}
-                {%- elsif collection.products_count == collection.all_products_count -%}
-                  {{ 'products.facets.product_count_simple' | t: count: collection.products_count }}
-                {%- else -%}
-                  {{
-                    'products.facets.product_count'
-                    | t: product_count: collection.products_count, count: collection.all_products_count
-                  }}
-                {%- endif -%}
-              </span>
-            </h2>
-            {%- render 'loading-spinner' -%}
-          </div>
---->
         </form>
       </facet-filters-form>
     {%- endif -%}
@@ -187,7 +192,7 @@
                     >
                       {% render 'card-product2',
                         card_product: product,
-                        media_aspect_ratio: section.settings.image_ratio,
+                        media_aspect_ratio: "square",
                         image_shape: section.settings.image_shape,
                         show_secondary_image: section.settings.show_secondary_image,
                         show_vendor: section.settings.show_vendor,
@@ -209,6 +214,7 @@
         {%- endif -%}
       </div>
     </div>
+    
   {%- endpaginate -%}
   {% if section.settings.image_shape == 'arch' %}
     {{ 'mask-arch.svg' | inline_asset_content }}
@@ -233,7 +239,7 @@
       "type": "range",
       "id": "columns_desktop",
       "min": 1,
-      "max": 6,
+      "max": 3,
       "step": 1,
       "default": 3,
       "label": "t:sections.main-collection-product-grid.settings.columns_desktop.label"
@@ -241,26 +247,6 @@
     {
       "type": "header",
       "content": "t:sections.main-collection-product-grid.settings.header__3.content"
-    },
-    {
-      "type": "select",
-      "id": "image_ratio",
-      "options": [
-        {
-          "value": "adapt",
-          "label": "t:sections.main-collection-product-grid.settings.image_ratio.options__1.label"
-        },
-        {
-          "value": "portrait",
-          "label": "t:sections.main-collection-product-grid.settings.image_ratio.options__2.label"
-        },
-        {
-          "value": "square",
-          "label": "t:sections.main-collection-product-grid.settings.image_ratio.options__3.label"
-        }
-      ],
-      "default": "adapt",
-      "label": "t:sections.main-collection-product-grid.settings.image_ratio.label"
     },
     {
       "type": "select",
@@ -311,37 +297,16 @@
     },
     {
       "type": "checkbox",
-      "id": "show_vendor",
-      "default": false,
-      "label": "t:sections.main-collection-product-grid.settings.show_vendor.label"
-    },
-    {
-      "type": "checkbox",
       "id": "show_rating",
       "default": false,
       "label": "t:sections.main-collection-product-grid.settings.show_rating.label",
       "info": "t:sections.main-collection-product-grid.settings.show_rating.info"
     },
     {
-      "type": "select",
-      "id": "quick_add",
-      "default": "none",
-      "label": "t:sections.main-collection-product-grid.settings.quick_add.label",
-      "info": "t:sections.main-collection-product-grid.settings.quick_add.info",
-      "options": [
-        {
-          "value": "none",
-          "label": "t:sections.main-collection-product-grid.settings.quick_add.options.option_1"
-        },
-        {
-          "value": "standard",
-          "label": "t:sections.main-collection-product-grid.settings.quick_add.options.option_2"
-        },
-        {
-          "value": "bulk",
-          "label": "t:sections.main-collection-product-grid.settings.quick_add.options.option_3"
-        }
-      ]
+      "type": "checkbox",
+      "id": "enable_offer",
+      "default": true,
+      "label": "Enable Offer Label"
     },
     {
       "type": "header",
@@ -359,16 +324,8 @@
       "id": "filter_type",
       "options": [
         {
-          "value": "horizontal",
-          "label": "t:sections.main-collection-product-grid.settings.filter_type.options__1.label"
-        },
-        {
           "value": "vertical",
           "label": "t:sections.main-collection-product-grid.settings.filter_type.options__2.label"
-        },
-        {
-          "value": "drawer",
-          "label": "t:sections.main-collection-product-grid.settings.filter_type.options__3.label"
         }
       ],
       "default": "vertical",
@@ -462,6 +419,12 @@
     },
     {
       "type": "color",
+      "id": "mobile_filter_by_text_color",
+      "label": "Filter By Text Color(Mobile Version)",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
       "id": "filter_by_card_color",
       "label": "Filter By Product Card Color",
       "default": "#C7E1BF"
@@ -472,7 +435,12 @@
       "label": "Filter By Card Text Color",
       "default": "#000000"
     },
-    
+    {
+      "type": "color",
+      "id": "mobile_filter_by_card_text_color",
+      "label": "Filter By Card Text Color (Mobile Version)",
+      "default": "#000000"
+    },   
     {
       "type": "color",
       "id": "sort_by_card_color",
@@ -484,6 +452,24 @@
       "id": "sort_by_text_card_color",
       "label": "Sort By Card Text Color",
       "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "sort_by_card_dropdown_color",
+      "label": "Sort By Card Dropdown Color",
+      "default": "#C7E1BF"
+    },
+    {
+      "type": "color",
+      "id": "sort_by_text_card_dropdown_color",
+      "label": "Sort By Card Dropdown Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "mobile_sort_by_text_color",
+      "label": "Sort By Text Color (Mobile Version)",
+      "default": "#000000"
     },
     {
       "type": "color",

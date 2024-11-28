@@ -1,18 +1,30 @@
 <script src="{{ 'icon-with-text.js' | asset_url }}" defer="defer"></script>
 {{ 'icon-with-text.css' | asset_url | stylesheet_tag }}
 
-<div style="display: flex; flex-direction: column; gap: 6rem; padding: 20px 0;" class="color-{{ section.settings.sectionColor }}">
+{% style %}
+  :root {
+    --featured-icon-with-text-section-color: {{ section.settings.sectionColor }};
+    --featured-icon-with-text-section-headings-color: {{ section.settings.sectionHeadingsColor }};
+    --featured-icon-with-text-card-color: {{ section.settings.cardColor }};
+    --featured-icon-with-text-inner-card-color: {{ section.settings.innerCardColor }};
+    --featured-icon-with-text-title-color: {{ section.settings.titleColor }};
+    --featured-icon-with-text-description-color: {{ section.settings.descriptionColor }};
+    --featured-icon-with-text-icon-color: {{ section.settings.iconColor }};
+}
+{% endstyle %}
+
+<div style="display: flex; flex-direction: column; gap: 6rem; padding: 20px 0;" class="featured-icon-with-text-section" data-section-id="{{ section.id }}">
   <div style="display: flex; flex-direction: column; gap: 4px; padding: 0 20px;">
-    <p style="font-weight: 600; font-size: 24px; line-height: 30px;" class="fira-sans-semibold ">{{ section.settings.heading }}</p>
-    <p style="font-weight: 500; font-size: 14px; line-height: 21px;" class="inter-medium ">{{ section.settings.subheading }}</p>
+    <p style="font-weight: 600; font-size: 24px; line-height: 30px; color: var(--featured-icon-with-text-section-headings-color)" class="fira-sans-semibold">{{ section.settings.heading }}</p>
+    <p style="font-weight: 500; font-size: 14px; line-height: 21px; color: var(--featured-icon-with-text-section-headings-color)" class="inter-medium">{{ section.settings.subheading }}</p>
   </div>
   <div class="icon-with-text-container">
     {% for item in section.blocks %}
       <div class="card__outer__container">
-        <div class="card__container color-{{ section.settings.cardColor }}">
-          <div class="card__inner_container color-{{ section.settings.innerCardColor }}">
+        <div class="card__container">
+          <div class="card__inner_container">
             <div class="card__contents">
-              <div class="card__icon color-{{ section.settings.cardColor }}">
+              <div class="card__icon" style="background-color: var(--featured-icon-with-text-card-color);">
                 {% if item.settings.icon %}
                   <img src="{{ item.settings.icon |  image_url  }}" width="100" height="100" alt="icon">
                 {% else %}
@@ -20,12 +32,12 @@
                   <div style="display: block !important; width: 1px; height: 100%; background: rgba(var(--color-foreground), 0.75); position: absolute; left: 50%; rotate: -45deg;"></div>
                 {% endif %}
               </div>
-              <div class="card__title fira-sans-semibold color-{{ section.settings.innerCardColor }}">
-                <p>Pay On Delivery</p>
+              <div class="card__title fira-sans-semibold">
+                <p>{{ item.settings.title }}</p>
               </div>
             </div>
             <div class="description__button__outer__container">
-              <button class="description__button__container color-{{ section.settings.cardColor }}">
+              <button class="description__button__container">
                 <span class="description__button__inner_container">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -43,7 +55,7 @@
                 </span>
               </button>
             </div>
-            <div class="description__container color-{{ section.settings.cardColor }}">
+            <div class="description__container">
               <span class="description__close__button">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -59,8 +71,8 @@
                   />
                 </svg>
               </span>
-              <p class="inter-regular">
-                {{ item.settings.description | truncate: 150 }}
+              <p class="inter-regular" style="color: var(--featured-icon-with-text-description-color);">
+                {{ item.settings.description }}
               </p>
             </div>
           </div>
@@ -78,7 +90,6 @@
 {% schema %}
 {
   "name": "Icon With Text",
-  "limit": 1,
   "tag": "section",
   "disabled_on": {
     "groups": [
@@ -96,26 +107,50 @@
       "type": "text",
       "label": "Subheading",
       "id": "subheading",
-      "default": "See how we prioritize your well-being"
+      "default": "Prioritize your well-being"
     },
     {
-      "type": "color_scheme",
-      "label": "Section Color",
+      "type": "color",
+      "label": "Section Headings Color",
+      "id": "sectionHeadingsColor",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "label": "Section Background Color",
       "id": "sectionColor",
-      "default": "scheme_1"
+      "default": "#F5F5F5"
     },
     {
-      "type": "color_scheme",
+      "type": "color",
       "label": "Card Color",
       "id": "cardColor",
-      "default": "scheme_3"
+      "default": "#d1d1d1"
     },
     {
-      "type": "color_scheme",
+      "type": "color",
       "label": "Inner Card Color",
       "id": "innerCardColor",
-      "default": "scheme_1"
-    }
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "label": "Title Color",
+      "id": "titleColor",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "label": "Description Color",
+      "id": "descriptionColor",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "label": "Icon Color",
+      "id": "iconColor",
+      "default": "#000000"
+    },
   ],
   "blocks": [
     {
@@ -129,9 +164,15 @@
         },
         {
           "type": "text",
+          "id": "title",
+          "label": "Enter Title",
+          "default": "Pay On Delivery"
+        },
+        {
+          "type": "text",
           "id": "description",
           "label": "Enter Description",
-          "default":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio dignissimos a tempore quis debitis nihil magnam labore ipsam blanditiis, voluptate iste deserunt doloribus aliquam?"
+          "default":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio dignissimos a tempore quis debitis nihil magnam labore ipsam blanditiis, voluptate iste deserunt doloribus aliquam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio dignissimos a tempore quis debitis nihil magnam labore ipsam blanditiis, voluptate iste deserunt doloribus aliquam?"
         }
       ]
     }

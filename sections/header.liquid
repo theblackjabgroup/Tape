@@ -1,7 +1,13 @@
 <link rel="stylesheet" href="{{ 'header.css' | asset_url }}">
 <script src="{{ 'header.js' | asset_url }}" defer></script>
-
-<div class="header-wrapper color-{{ section.settings.header_section_color_scheme }}" style="--padding-top: {{ section.settings.padding_top }}px; --padding-bottom: {{ section.settings.padding_bottom }}px;">
+<script defer src="{{'scroll-tracker.js' |  asset_url}}"></script>
+<link rel="stylesheet" href="{{'scroll-tracker.css' |  asset_url}}" media="print" onload="this.media='all'">
+{% style %}
+  :root{
+    --header-section-color-scheme: {{ section.settings.header_section_color_scheme }};
+  }
+{% endstyle %}
+<{% if section.settings.sticky_header_type != 'none' %}sticky-header data-sticky-type="{{ section.settings.sticky_header_type }}"{% else %}div{% endif %} class="header-wrapper color-{{ section.settings.header_section_color_scheme }}" style="--padding-top: {{ section.settings.padding_top }}px; --padding-bottom: {{ section.settings.padding_bottom }}px;">
   <div class="flex-container">
     <a href="{{ routes.root_url }}" class="logo-container">
       {% if section.settings.logo or settings.logo != blank %}
@@ -60,6 +66,9 @@
           {% endfor %}
         </ul>
       </nav>
+      {%- if section.settings.enable_scroll_tracking -%}
+        <div class="scroll-tracker"><p><span id="scrollDistance"></span>Km</p> <span class="svg-wrapper" style="height: 12px; width: 12px;">{{ 'icon-arrow.svg' | inline_asset_content }}</span></div>
+      {%- endif -%}
       <div class="nav-icons">
         <div class="nav-icon">
           <a href="{{ routes.search_url }}" class="search-toggle">
@@ -180,7 +189,68 @@
       <div class="hamburger-line"></div>
     </div>
   </div>
-</div>
+</{% if section.settings.sticky_header_type != 'none' %}sticky-header{% else %}div{% endif %}>
+
+{% javascript %}
+  class StickyHeader extends HTMLElement {
+    constructor() {
+      super();
+    }
+
+    connectedCallback() {
+      this.header = document.querySelector('.section-header');
+      this.headerIsAlwaysSticky = this.getAttribute('data-sticky-type') === 'always' || this.getAttribute('data-sticky-type') === 'reduce-logo-size';
+      this.headerBounds = {};
+
+      this.setHeaderHeight();
+
+      window.matchMedia('(max-width: 990px)').addEventListener('change', this.setHeaderHeight.bind(this));
+
+      if (this.headerIsAlwaysSticky) {
+        this.header.classList.add('shopify-section-header-sticky');
+      };
+
+      this.currentScrollTop = 0;
+      this.preventReveal = false;
+
+      this.onScrollHandler = this.onScroll.bind(this);
+      window.addEventListener('scroll', this.onScrollHandler, false);
+    }
+
+    setHeaderHeight() {
+      document.documentElement.style.setProperty('--header-height', `${this.header.offsetHeight}px`);
+    }
+
+    disconnectedCallback() {
+      window.removeEventListener('scroll', this.onScrollHandler);
+    }
+
+    onScroll() {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+      if (scrollTop > this.currentScrollTop && scrollTop > this.header.offsetHeight) {
+        requestAnimationFrame(this.hide.bind(this));
+      } else if (scrollTop < this.currentScrollTop) {
+        requestAnimationFrame(this.reveal.bind(this));
+      }
+
+      this.currentScrollTop = scrollTop;
+    }
+
+    hide() {
+      if (this.headerIsAlwaysSticky) return;
+      this.header.classList.add('shopify-section-header-hidden', 'shopify-section-header-sticky');
+    }
+
+    reveal() {
+      if (this.headerIsAlwaysSticky) return;
+      this.header.classList.add('shopify-section-header-sticky', 'animate');
+      this.header.classList.remove('shopify-section-header-hidden');
+    }
+  }
+
+  customElements.define('sticky-header', StickyHeader);
+{% endjavascript %}
 
 {% schema %}
 {
@@ -195,10 +265,10 @@
       "default": "main-menu"
     },
     {
-      "type": "color_scheme",
+      "type": "color",
       "id": "header_section_color_scheme",
       "label": "Section Color Scheme",
-      "default": "scheme-1"
+      "default": "#ffffff"
     },
     {
       "type": "color_scheme",
@@ -266,10 +336,40 @@
       "default": "center"
     },
     {
+      "type": "select",
+      "id": "sticky_header_type",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:sections.header.settings.sticky_header_type.options__1.label"
+        },
+        {
+          "value": "on-scroll-up",
+          "label": "t:sections.header.settings.sticky_header_type.options__2.label"
+        },
+        {
+          "value": "always",
+          "label": "t:sections.header.settings.sticky_header_type.options__3.label"
+        },
+        {
+          "value": "reduce-logo-size",
+          "label": "t:sections.header.settings.sticky_header_type.options__4.label"
+        }
+      ],
+      "default": "on-scroll-up",
+      "label": "t:sections.header.settings.sticky_header_type.label"
+    },
+    {
       "type": "checkbox",
       "id": "enable_country_selector",
       "default": true,
       "label": "t:sections.header.settings.enable_country_selector.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_scroll_tracking",
+      "label": "Enable Scroll Tracking",
+      "default": true
     },
     {
       "type": "range",

@@ -3,6 +3,10 @@
 .faq-item{
   background-color:{{section.settings.cardbackgroundcolor}};
 }
+.faq-main{
+   padding-top:{{section.settings.padding_top}}px;
+  padding-bottom:{{section.settings.padding_bottom}}px;
+}
 .collapse_dot {
  background-color: {{section.settings.sectionbgcolor}};
 }
@@ -30,7 +34,13 @@
     <span class="faq-number " style="color: {{ section.settings.cardtextcolor }}">{{ block.settings.serialno}}</span>
           {% if section.settings.layout_style == 'layout1' %}
     <div class="dots-line" >
-      <!-- Dots will be added by JavaScript -->
+        <span class="collapse_dot"></span>
+      <span class="collapse_dot"></span>
+      <span class="collapse_dot"></span>
+       <span class="collapse_dot"></span>
+      <span class="collapse_dot"></span>
+     
+        <!-- Dots will be added by JavaScript -->
     </div>
       {% else %}
             <div class="striaght-line color-{{ section.settings.sectionbgcolor }}">
@@ -202,12 +212,24 @@ document.addEventListener('DOMContentLoaded', function() {
       "type": "collapsible_row",
       "name": "t:sections.collapsible_content.blocks.collapsible_row.name",
       "settings": [
-           {
-      "type": "text",
-      "id": "serialno",
-      "default": "01",
-      "label": "t:sections.collapsible_content.settings.caption.label"
-    },
+        {
+  "type": "select",
+  "id": "serialno",
+  "label": "Bullet Number",
+  "options": [
+    { "label": "1", "value": "01" },
+    { "label": "2", "value": "02" },
+    { "label": "3", "value": "03" },
+    { "label": "4", "value": "04" },
+    { "label": "5", "value": "05" },
+    { "label": "6", "value": "06" },
+    { "label": "7", "value": "07" },
+    { "label": "8", "value": "08" },
+    { "label": "9", "value": "09" },
+    { "label": "10", "value": "10" }
+  ],
+  "default": "01"
+},
         {
           "type": "text",
           "id": "questiontext",

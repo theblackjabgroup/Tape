@@ -1,15 +1,10 @@
-
 {{ 'section-rich-text.css' | asset_url | stylesheet_tag }}
-
 <style>
 
-  
 .color-{{ section.settings.color_scheme }} .dot,
 .color-{{ section.settings.color_scheme }} .dot-l {
 background-color: currentColor;
 }
-
-
   .layout1 ,
   .layout2 {
     padding-top:{{section.settings.padding_top}}px;  
@@ -18,12 +13,9 @@ background-color: currentColor;
   .layout2 {
     padding-bottom:{{section.settings.padding_bottom}}px;  
   }
- 
-
   .layout1 h2 {
     font-size: {{ section.settings.heading_font_size }}px;
   }
-
   .layout1 .rich-text__text {
    font-size: {{ section.settings.text_font_size }}px;
   }
@@ -42,21 +34,19 @@ background-color: currentColor;
     .layout2 h2 {
       font-size: {{ section.settings.heading_font_size | times: 0.8 | round: 0 }}px;
     }
- 
-
     .layout1 .rich-text__text,
     .layout2 .rich-text__text {
       font-size: {{ section.settings.text_font_size | times: 0.9 | round: 0 }}px;
     }
   }
-
 </style>
+
 <div class="rich-text-section color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
   {% if section.settings.layout_style == 'layout1' %} 
     <div class="layout1 page-width">
       <h2 class="richtext_heading">{{ section.settings.heading | default: "Transforming Healthcare with Innovative Solutions" }}</h2>
       <div class="decorative-dots">
-        {% for i in (1..10) %}
+        {% for i in (1..section.settings.dots_number1) %}
           <span class="dot"></span>
         {% endfor %}
       </div>
@@ -69,7 +59,9 @@ background-color: currentColor;
     <div class="layout2">
     <div class="dots-container">
           <div class="side-dots left">
-      <!-- Dots will be added by JavaScript -->
+            {% for i in (1..section.settings.dots_number2) %}
+                <span class="dot-l"></span>
+          {% endfor %}
           </div>
         <div class="rich-text__blocks {{ section.settings.content_alignment }}">
           <h2 class="richtext_heading">{{ section.settings.heading | default: "Transforming Healthcare with Innovative Solutions" }}</h2>
@@ -80,92 +72,14 @@ background-color: currentColor;
           </div>
         </div>
          <div class="side-dots right">
-      <!-- Dots will be added by JavaScript -->
+            {% for i in (1..section.settings.dots_number2) %}
+                <span class="dot-l"></span>
+            {% endfor %}
           </div>
       </div>
     </div>
   {% endif %}
 </div>
-
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const dotsContainer = document.querySelector('.rich-text__text');
-  const leftDots = document.querySelector('.side-dots.left');
-  const rightDots = document.querySelector('.side-dots.right');
-  
-
-  const DOT_WIDTH = 8; 
-  const DOT_MARGIN = 16; 
-  const DOT_TOTAL_SPACE = DOT_WIDTH + DOT_MARGIN; 
-  
-  function updateDots() {
-    if (!dotsContainer || !leftDots || !rightDots) return;
-    
-  
-    const screenWidth = window.innerWidth;
-    
- 
-    if (screenWidth <= 749) { 
-      const availableWidth = screenWidth * 0.8; 
-      const numberOfDots = Math.floor(availableWidth / DOT_TOTAL_SPACE);
-      
-      [leftDots, rightDots].forEach(dotContainer => {
-      
-        dotContainer.innerHTML = '';
-        
-        
-        for (let i = 0; i < numberOfDots; i++) {
-          const dot = document.createElement('span');
-          dot.className = 'dot-l';
-          dotContainer.appendChild(dot);
-        }
-      });
-    } else {
-   
-      const containerHeight = dotsContainer.offsetHeight;
-      const paddingSpace = 15;
-      const availableHeight = containerHeight - paddingSpace;
-      const numberOfDots = Math.max(
-        Math.floor(availableHeight / 15),
-        12
-      );
-      
-      [leftDots, rightDots].forEach(dotContainer => {
-       
-        dotContainer.innerHTML = '';
-        
-       
-        for (let i = 0; i < numberOfDots; i++) {
-          const dot = document.createElement('span');
-          dot.className = 'dot-l';
-          dotContainer.appendChild(dot);
-        }
-      });
-    }
-  }
-
-  const resizeObserver = new ResizeObserver((entries) => {
-    requestAnimationFrame(updateDots);
-  });
-  
-  if (dotsContainer) {
-    resizeObserver.observe(dotsContainer);
-    updateDots(); // Initial update
-  }
-  
-  window.addEventListener('resize', () => {
-    requestAnimationFrame(updateDots);
-  });
-  
-  // Cleanup
-  window.addEventListener('unload', () => {
-    if (resizeObserver) {
-      resizeObserver.disconnect();
-    }
-  });
-});
-</script>
 
 {% schema %}
 {
@@ -204,6 +118,24 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       ],
       "default": "layout1"
+    },
+     {
+      "type": "range",
+      "id": "dots_number1",
+      "min": 1,
+      "max": 12,
+      "step": 1,
+      "label": "Number of dots layout1",
+      "default": 10
+    },
+      {
+      "type": "range",
+      "id": "dots_number2",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "label": "Number of dots layout2",
+      "default": 10
     },
      {
       "type": "color_scheme",

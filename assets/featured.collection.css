@@ -144,7 +144,6 @@ h7 {
   padding: 15px;
   flex-shrink: 0;
 }
-
 .price-tag {
   padding: 8px 11px;
   border-radius: 3px;
@@ -152,24 +151,25 @@ h7 {
   font-weight: bold;
   color: #333;
   display: inline-block;
-  position: relative;
+  position: absolute;
+  left: 30px; /* Fixed left position */
   background: #FFFFFF;
   text-align: left;
-  margin-left: auto; /* Updated to use margin-left: auto */
-  margin-right: 125px; /* Added margin-right */
+  max-width: 100%; /* Limit the width to prevent overflow */
 }
 
 .price-tag::before,
-.price-tag::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  width: 10px;
-  height: 13px;
-  background-color: var(--pseudo-bg-color, #F7F7F7);
-  transform: translateY(-50%);
-  border-radius: 50%;
-}
+  .price-tag::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 10px;
+    height: 13px;
+    background-color: var(--pseudo-bg-color, #F7F7F7);
+    transform: translateY(-50%);
+    border-radius: 50%;
+  }
+  
 
 .price-tag::before {
   left: -5px;
@@ -278,13 +278,44 @@ h7 {
   width: 100%;
   display: flex;
   justify-content: center;
-  margin-top: 46px;
+  margin-top: 80px;
   position: relative;
   border-top: 6px dotted;
 }
 
+.view-all-wrapper {
+  display: none;
+  width: 100%;
+  padding: 0 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
 
-/* @media screen and (min-width: 1440px) {
+.view-all-link {
+display: block;
+    width: 83%;
+    padding: 12px 20px;
+    background-color: #fff;
+    border: 1px solid #000;
+    border-radius: 4px;
+    text-align: center;
+    color: #333;
+    margin-bottom: 28px;
+    text-decoration: none;
+    font-family: Inter, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all .3s ease;
+    transform: translateY(0);
+    box-shadow: 5px 6px 0px #000, 0 0 0 transparent;
+}
+
+.view-all-link:active {
+  /* Pressed-in state */
+  transform: translateY(6px);
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2), 0 0 0 transparent; /* Adjusted box-shadow */
+}
+ @media screen and (min-width: 1440px) {
   .product-card {
     flex: 0 0 calc(20% - 16px);
     min-width: calc(20% - 16px);
@@ -299,7 +330,7 @@ h7 {
     right: 30px;
   }
 }
- */
+
 /* Tablet view (3 cards) */
 @media screen and (max-width: 1124px) {
   .product-card {
@@ -330,15 +361,14 @@ h7 {
     font-size: 11px;
     font-weight: 500;
   }
-   
- 
+
   .slider-arrow1.right {
     right: 20px;
-    top: 155%;
+   
   }
   
   .slider-arrow1.left {
-    top: 155%;
+    
     left: 85%;
   }
 }
@@ -360,17 +390,21 @@ h7 {
   }
   
   .dotted-line-wrapper {
-    width: 112%;
-    margin-left: -13px;
+    width: 109%;
+    margin-left: -12px;
   }
   
   .slider-arrow1 {
     display: none;
   }
-
+  
+  .view-all-wrapper {
+    display: block; /* Show only on mobile */
+  }
   
   .product-container {
     margin: 20px;
     padding: 20px 0;
+    margin-bottom: 10px; /* Add some space above the view all button */
   }
 }

@@ -1,12 +1,19 @@
 <script src="{{ 'image-with-text.js' | asset_url }}" defer></script>
 {{ 'image-with-text.css' | asset_url | stylesheet_tag }}
 
-<div class="image__with__text__section color-{{ section.settings.sectionColor }}" data-section-id="{{ section.id }}">
+{% style %}
+  :root {
+    --card-color-scheme: {{ section.settings.card_color_scheme }};
+    --section-color: {{ section.settings.sectionColor }};
+  }
+{% endstyle %}
+
+<div class="image__with__text__section" style="background-color: var(--section-color)" data-section-id="{{ section.id }}">
   <div class="image__with__text__outer__container">
     <ul class="image__with__text__inner__container">
       {% for item in section.blocks %}
         <li
-          class="image__with__text__card min__card__height card__set card  color-{{ section.settings.card_color_scheme }}"
+          class="image__with__text__card min__card__height card__set card"
           aria-labelledby="gallery-item-{{ forloop.index0}}-trigger"
           tabindex="-1"
           id="gallery-item-{{ forloop.index0 }}"
@@ -27,29 +34,24 @@
               ></div>
             {% endif %}
           </div>
-          {% comment %} <div class="cpation__container">
-            <p class="caption__card caption__typography" style="--caption-font-color: {{ item.settings.captionColor }}">
-              {{ item.settings.text }}
-            </p>
-          </div> {% endcomment %}
         </li>
       {% endfor %}
-      <div class="info__banner">
+      <div class="info__banner color-{{ section.settings.bannerColor }}">
         <div class="info__banner__contents">
           <p class="info__banner__title inter-medium">NEW ARRIVAL</p>
           <h1 class="info__banner__heading fira-sans-bold">Thanksgiving big billion sale!</h1>
           <div class="info__banner__details">
-            <p class="info__banner__description inter-regular">
+            <p class="info__banner__description inter-regular ">
               Enhance patient care with our premium medical product, featuring advanced technology for precision and
               reliability. Ideal for seamless integration into any practice!
             </p>
-            <a class="info__banner__shopnow__button">Shop Now</a>
+            <a class="info__banner__shopnow__button color-{{ section.settings.bannerColor }}">Shop Now</a>
           </div>
           <span id="info__banner__expand__button" class="svg-wrapper">
             {{- 'icon-arrow.svg' | inline_asset_content -}}
           </span>
         </div>
-        <ul class="dot-items">
+        <ul class="dot-items color-{{ section.settings.bannerColor }}">
           {% for item in section.blocks %}
             <li class="dot-item">
               <a id="gallery-item-{{ forloop.index0 }}-trigger" href="#gallery-item-{{ forloop.index0 }}"> </a>
@@ -59,42 +61,116 @@
       </div>
     </ul>
   </div>
-  {% comment %}
-    <div
-      style="
-        margin: 2rem auto;
-        background-color: lightgray;
-        width: fit-content;
-        padding: 1rem 2rem;
-        border-radius: 100px;
-      "
-    >
-       <ul class="dot-items">
-        {% for item in section.blocks %}
-          <li class="dot-item">
-            <a id="gallery-item-{{ forloop.index0 }}-trigger" href="#gallery-item-{{ forloop.index0 }}"> </a>
-          </li>
-        {% endfor %}
-      </ul>
-    </div>
-  {% endcomment %}
 </div>
+
+<script>
+  // Select all dots, image containers, and banner elements
+const dotItems = document.querySelectorAll('.dot-item');
+const cards = document.querySelectorAll('.image__with__text__card');
+const container = document.querySelector('.image__with__text__outer__container');
+
+// Select elements for updating the banner content
+const bannerHeading = document.querySelector('.info__banner__heading');
+const bannerDescription = document.querySelector('.info__banner__description');
+const bannerLink = document.querySelector('.info__banner__shopnow__button');
+
+let ticking = false; // Prevent multiple events from being processed at once
+
+// Function to update the banner content based on the current slide
+const updateBannerContent = (currentIndex) => {
+  console.log("Current Index:", currentIndex);
+  const currentCard = cards[currentIndex];
+  if (currentCard) {
+    const heading = currentCard.getAttribute('data-heading');
+    const description = currentCard.getAttribute('data-description');
+    const link = currentCard.getAttribute('data-link');
+    console.log("Banner Content:", heading, description, link);
+
+    // Update the banner content
+    bannerHeading.textContent = heading || "Default Heading";
+    bannerDescription.textContent = description || "Default Description";
+    bannerLink.setAttribute('href', link || "#");
+  }
+};
+
+// Function to update dot scaling based on scroll position
+const updateDotScaling = () => {
+  const scrollPosition = container.scrollLeft;
+  const galleryWidth = cards[0].offsetWidth;
+
+   // Calculate which two items are involved in the transition
+  const currentIndex = Math.floor(scrollPosition / galleryWidth);
+  const percentageScrolled = (scrollPosition % galleryWidth) / galleryWidth;
+  
+  // Reset all dots to the default size
+  dotItems.forEach(dot => {
+    dot.style.width = '8px';
+    dot.style.height = '8px';
+  });
+
+  // Scale the current dot and next dot based on scroll position
+  if (dotItems[currentIndex]) {
+    dotItems[currentIndex].style.width = `${48 - (percentageScrolled * 40)}px`;
+  }
+
+  if (dotItems[currentIndex + 1]) {
+    dotItems[currentIndex + 1].style.width = `${8 + (percentageScrolled * 40)}px`;
+  }
+
+  // Update the banner content based on the exact current index
+  updateBannerContent(Math.round(scrollPosition / galleryWidth));
+};
+
+// Throttled scroll handler using requestAnimationFrame
+const onScroll = () => {
+  if (!ticking) {
+    window.requestAnimationFrame(() => {
+      updateDotScaling();
+      ticking = false;
+    });
+    ticking = true;
+  }
+};
+
+// Listen to scroll events on the container
+container.addEventListener('scroll', onScroll);
+
+// Set up initial state
+document.addEventListener('DOMContentLoaded', () => {
+  dotItems[0].style.width = '48px';  // The first dot starts as the active one
+  updateBannerContent(0); // Initialize banner content with the first card
+});
+
+// Expand button functionality for showing/hiding banner details
+const infoBannerExpandButton = document.getElementById('info__banner__expand__button');
+const infoBannerDetails = document.querySelector('.info__banner__details');
+
+// Add click event listener to toggle the "show" class
+infoBannerExpandButton.addEventListener('click', () => {
+  infoBannerDetails.classList.toggle('show');
+  infoBannerExpandButton.classList.toggle('show');
+});
+</script>
 
 {% schema %}
 {
   "name": "Image With Text",
-  "limit": 1,
   "settings": [
     {
-      "type": "color_scheme",
+      "type": "color",
       "id": "sectionColor",
       "label": "Section Color"
     },
     {
-      "type": "color_scheme",
+      "type": "color",
       "id": "card_color_scheme",
-      "label": "Card Color",
-      "default": "scheme-1"
+      "label": "Card Color"
+    },
+    {
+      "type": "color_scheme",
+      "label": "Banner Color",
+      "id": "bannerColor",
+      "default": "#000000"
     }
   ],
   "blocks": [

@@ -74,9 +74,7 @@
                         "product_price_secondary_font": "#225647",
                         "quatity_selector_background": "#9DB792",
                         "utilities":"#18332E",
-                        "product_special_offer": "#9BBAE0",
-                        "product_collapsible_rows_section": "#C7E1BF",
-                        "product_collapsible_rows_section_secondary": "#D9F2D1"
+                        "product_special_offer": "#9BBAE0"
                     }
                 }
             },

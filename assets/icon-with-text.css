@@ -2,6 +2,9 @@
   margin: 0;
   padding: 0;
 }
+.featured-icon-with-text-section {
+  background-color: var(--featured-icon-with-text-section-color);
+}
 .icon-with-text-container {
   display: flex;
   overflow-x: scroll;
@@ -18,12 +21,13 @@
   width: 309px;
   height: 309px;
   border-radius: 8px;
+  background-color: var(--featured-icon-with-text-card-color);
 }
 .card__inner_container {
   position: relative;
   width: 261px;
   height: 261px;
-  background: rgb(var(--color-background));
+  background: var(--featured-icon-with-text-inner-card-color);
   border-radius: inherit;
 }
 
@@ -51,7 +55,7 @@
   line-height: 36px;
   text-align: center;
   font-size: 24px;
-  color: rgb(var(--color-foreground));
+  color: var(--featured-icon-with-text-title-color);
 }
 
 .description__container {
@@ -70,6 +74,7 @@
   transition: all 0.45s ease-in-out;
   border-radius: 50%;
   position: absolute;
+  background-color: var(--featured-icon-with-text-card-color);
 }
 
 .description__container > p {
@@ -95,6 +100,7 @@
   width: 69px;
   height: 69px;
   border-radius: 0 50% 0 0;
+  background-color: var(--featured-icon-with-text-card-color);
 }
 
 .description__button__container::before {
@@ -106,7 +112,7 @@
   height: 15px;
   width: 30px;
   border-radius: 0 0 0 50%;
-  box-shadow: -18px 0 0 0 rgb(var(--color-background));
+  box-shadow: -18px 0 0 0 var( --featured-icon-with-text-card-color);
 }
 .description__button__container::after {
   content: "";
@@ -117,7 +123,7 @@
   height: 30px;
   width: 15px;
   border-radius: 0 0 0 50%;
-  box-shadow: 0 18px 0 0 rgb(var(--color-background));
+  box-shadow: 0 18px 0 0 var( --featured-icon-with-text-card-color);
 }
 .description__button__inner_container {
   display: flex;
@@ -139,6 +145,7 @@
 .icon {
   width: 24px;
   height: 24px;
+  color: var(--featured-icon-with-text-icon-color);
 }
 @media only screen and (max-width: 990px) {
   .icon-with-text-container {
@@ -162,7 +169,8 @@
   gap: 1rem;
   justify-content: center;
 }
-.dot {
+.card__count__container > .dot {
+  background: black;
   display: block !important;
   width: 6px;
   height: 6px;
@@ -170,7 +178,7 @@
   transition: all 0.45s ease;
 }
 
-.dot.active {
+.card__count__container > .dot.active {
   width: 23px;
   border-radius: 13px;
 }

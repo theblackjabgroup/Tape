@@ -1,5 +1,6 @@
 .bb-announcement-bar-background {
     background-color: var(--announcement-bar-color);
+    border-radius: 5px;
 }
 
 .announcement-bar-arrow-svg {
@@ -12,6 +13,7 @@
 
 .bb-localization {
     color: var(--announcement-bar-text) !important;
+    padding-left: 0.5rem !important;
 }
 .bb-localization .link{
     color: var(--announcement-bar-text) !important;
