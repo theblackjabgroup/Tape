@@ -20,7 +20,7 @@
           style="--current-item: {{ forloop.index0 }}"
           data-heading="{{ item.settings.heading }}"
           data-description="{{ item.settings.description }}"
-          data-link="{{ item.settings.link }}"
+          data-link="{{ item.settings.url }}"
         >
           <div class="media__container">
             {% if item.settings.image %}
@@ -89,7 +89,9 @@ const updateBannerContent = (currentIndex) => {
     // Update the banner content
     bannerHeading.textContent = heading || "Default Heading";
     bannerDescription.textContent = description || "Default Description";
-    bannerLink.setAttribute('href', link || "#");
+    if (link) {
+      bannerLink.href = link;
+    }
   }
 };
 
