@@ -95,7 +95,7 @@
     margin: 0 auto;
     scroll-snap-align: center;
     flex-shrink: 0;
-    opacity: 0;
+    opacity: 1;
     pointer-events: none;
 }
 
