@@ -3271,6 +3271,8 @@ details-disclosure > details {
 
   .vertical-bar-second-top {
     padding: 2rem;
+    padding-right: 0;
+    padding-left: 1rem;
     position: relative;
     overflow: hidden;
   }
