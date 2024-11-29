@@ -8,6 +8,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="theme-color" content="{{ settings.color_background }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" rel="stylesheet">
+
     <link rel="canonical" href="{{ canonical_url }}">
 
     {%- if settings.favicon != blank -%}
@@ -106,19 +108,15 @@
   </head>
 
   <body class="gradient gift-card">
-    <header>
-      <div class="gift-card__price">
-        <h1>
-          {% if settings.currency_code_enabled %}
-            {{ gift_card.balance | money_with_currency }}
-          {% else %}
-            {{ gift_card.balance | money }}
-          {% endif %}
-        </h1>
-        {%- if gift_card.enabled == false or gift_card.expired -%}
-          <p class="badge badge--expired">{{ 'gift_cards.issued.expired' | t }}</p>
-        {%- endif -%}
-      </div>
+    <div class="gift-container-design">
+      
+   
+    <div class="gift-container">
+       <header>
+    
+          <h1 class="gift-card-title">Your Gift Card</h1>
+          <p class="gift-card-theme">Theme-{{ shop.name }}</p>
+      
       {% if gift_card.expires_on %}
         {%- assign gift_card_expiration_date = gift_card.expires_on | date: '%B %e, %Y' -%}
         <p class="gift-card__text">
@@ -133,22 +131,31 @@
           {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
           {{ settings.logo | image_url: width: 570 | image_tag: class: 'gift-card__image', alt: logo_alt }}
         {%- else %}
-          <img
-            class="gift-card__image"
-            src="{{ 'gift-card/card.svg' | shopify_asset_url }}"
-            alt=""
-            height="{{ 570 | divided_by: 1.5 }}"
-            width="570"
-            loading="eager"
-          >
+         <div class="gift-card-card">
+    <div class="gift-card-amount">
+      <span>
+        {{ gift_card.initial_value | money_without_trailing_zeros }}
+      </span></div>
+    <div class="gift-card-code">
+      <span>{{ gift_card.code | format_code }}</span>
+    </div>
+      <button class="copy-button" onclick="copyCode()">Copy</button>
+    
+    <div class="gift-card-corner"></div>
+  </div>
         {%- endif %}
       </div>
-      <h2>{{ shop.name }}</h2>
       <div class="gift-card__text-wrapper">
-        <p class="gift-card__text">{{ 'gift_cards.issued.how_to_use_gift_card' | t }}</p>
+        <p class="gift-card__text">Use this code to redeem you gift</p>
+        <div class="separator">
+          <span>OR</span>
+        </div>
       </div>
-      <p id="gift-card-code" class="gift-card__number">{{ gift_card.code | format_code }}</p>
+      <!-- <p id="gift-card-code" class="gift-card__number">{{ gift_card.code | format_code }}</p> -->
       <div class="gift-card__qr-code" data-identifier="{{ gift_card.qr_identifier }}"></div>
+      <div>
+         <p class="scan_qr"> Scan the QR code</p>
+      </div>
       {%- if gift_card.pass_url -%}
         <a href="{{ gift_card.pass_url }}" class="gift_card__apple-wallet no-print">
           <img
@@ -158,8 +165,11 @@
             alt="{{ 'gift_cards.issued.add_to_apple_wallet' | t }}"
             loading="lazy"
           >
+         
         </a>
       {%- endif -%}
+    
+       
       <div class="gift-card__buttons no-print">
         <span class="gift-card__copy-success form__message" role="status"></span>
         <template>
@@ -168,7 +178,8 @@
           </span>
           {{ 'gift_cards.issued.copy_code_success' | t }}
         </template>
-        <button class="button gift-card__copy-button">{{ 'gift_cards.issued.copy_code' | t }}</button>
+        <div class="button-container">
+           <button class="button gift-card__copy-button">Print Gift Card</button>
         <a
           href="{{ shop.url }}"
           class="button button--secondary"
@@ -176,13 +187,18 @@
           rel="noopener"
           aria-describedby="a11y-new-window-message"
         >
-          {{ 'gift_cards.issued.shop_link' | t }}
+          Shop Now
         </a>
+        </div>
+        
+       
       </div>
     </main>
 
     <div hidden>
       <span id="a11y-new-window-message">{{ 'accessibility.link_messages.new_window' | t }}</span>
+    </div>
+    </div>
     </div>
   </body>
 </html>

@@ -51,7 +51,6 @@
 .interactive-slideshow {
   display: flex;
   flex-direction: row;
-  justify-content: start; 
   align-items: center;
   margin: 0 auto;
   padding: 0 20px; 
