@@ -4,7 +4,7 @@
    background-color: {{ section.settings.imagefoldcolor }};
   }
 </style>
-<div class="rich-text-section color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
+<div class="slideshow-section color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
   <div class="interactive-slideshow">
     {% for block in section.blocks %}
       <div class="slide {% if forloop.first %}active{% endif %}" data-index="{{ forloop.index0 }}">
@@ -46,7 +46,21 @@
   let startX;
   let scrollLeft;
   let isDown = false;
-  
+   function adjustJustifyContent() {
+   
+    if (!isMobile) {
+      if (slideshow.scrollWidth <= slideshow.clientWidth) {
+        slideshow.style.justifyContent = 'center';
+      } else {
+        slideshow.style.justifyContent = 'flex-start';
+      }
+    } else {
+
+      slideshow.style.justifyContent = '';
+    }
+  }
+  adjustJustifyContent();
+ 
   const setActiveSlide = (slide) => {
     if (!isMobile) {
       if (activeSlide !== slide) {
@@ -147,6 +161,8 @@
   }
   let resizeTimer;
   window.addEventListener('resize', () => {
+      isMobile = window.innerWidth <= 900;
+    adjustJustifyContent();
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(handleResize, 250);
   });
@@ -170,7 +186,7 @@
   {
       "type": "color",
       "id": "product_card_background_color",
-      "label": "Product Card Background Color",
+      "label": "Banner Color",
       "default": "#F7F7F7"
   },
   {
@@ -205,7 +221,7 @@
        {
         "type": "text",
         "id": "feature",
-        "label": "feature",
+        "label": "Feature",
         "default": "NEW ARRIVAL"
       },
        {
