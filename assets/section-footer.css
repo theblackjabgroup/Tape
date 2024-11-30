@@ -14,7 +14,7 @@ body {
     position: relative;
     overflow: hidden;
     width: 100%;
-    height: 200px;
+    height: 230px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -24,57 +24,57 @@ body {
 
 
 .strip-right {
-    position: absolute; /* Change to relative */
-    width: 114%; /* Full width of the container */
+    position: absolute; 
+    width: 114%; 
     height: 60px;
-    background-color: white; /* Set the background color of the strip */
-    color: black; /* Set text color to white */
+    background-color: white; 
+    color: black; 
     font-size: 23px;
     display: flex;
     align-items: center;
-    justify-content: center; /* Center text horizontally */
-    /* border: 1px dashed gray; */
-    top: 50%; /* Center vertically */
-    left: 50%; /* Center horizontally */
+    justify-content: center; 
+    
+    top: 50%; 
+    left: 50%; 
     transform: translate(-50%, -50%) rotate(10deg);
     box-shadow: 0 15px 8px rgba(0, 0, 0, 0.3); 
-    font-family: 'Fira Sans', sans-serif; /* Set Fira Sans for strip text */
+    font-family: 'Fira Sans', sans-serif; 
   }
   
   .strip-left {
-    position: absolute; /* Change to relative */
-    width: 114%; /* Full width of the container */
+    position: absolute; 
+    width: 114%; 
     height: 60px;
     background-color: rgb(
       221,
       23,
       23
-    ); /* Set the background color of the strip */
+    ); 
     color: white; 
     font-size: 23px;
     display: flex;
     align-items: center;
-    justify-content: center; /* Center text horizontally */
-    /* border: 1px dashed gray; */
-    top: 50%; /* Center vertically */
-    left: 10%; /* Center horizontally */
+    justify-content: center; 
+    
+    top: 50%;
+    left: 10%; 
     transform: translate(-50%, -50%) rotate(-10deg);
     box-shadow: 0 15px 8px rgba(0, 0, 0, 0.3); 
-    font-family: 'Fira Sans', sans-serif; /* Set Fira Sans for strip text */ 
+    font-family: 'Fira Sans', sans-serif; 
   }
 
   .strip-right {
-    background-color: white; /* Background color */
-    top: 42%; /* Center vertically */
-    left: 45%; /* Center horizontally */
-    transform: translate(-51%, -40%) rotate(6deg); /* Rotation */
+    background-color: white;
+    top: 45%; 
+    left: 45%; 
+    transform: translate(-51%, -40%) rotate(6deg); 
 }
 
 .strip-left {
-    background-color: white; /* Background color */
-    top: 64%; /* Center vertically */
-    left: 53%; /* Center horizontally */
-    transform: translate(-47%, -103%) rotate(-6deg); /* Rotation */
+    background-color: white;
+    top: 62%; 
+    left: 53%; 
+    transform: translate(-47%, -103%) rotate(-6deg); 
 }
 
 .strip-1, .strip-2 {
@@ -128,7 +128,16 @@ body {
     margin-bottom: 15px;
 }
 
+* Specifically target menu columns except newsletter */
+.footer-column:not(#newsletter-section1) {
+    display: flex;
+    flex-direction: column;
+}
 
+.footer-column:not(#newsletter-section1) h4 {
+    font-weight: bold;
+    margin-bottom: 15px;
+}
 .footer-column ul {
     list-style: none;
     padding: 0;
@@ -141,11 +150,7 @@ body {
 .footer-column ul li a {
     text-decoration: none;
     color: #333;
-    transition: color 0.3s ease;
-}
-
-.footer-column ul li a:hover {
-    color: #007bff;
+    transition: none; /* Remove transition effect */
 }
 
 .footer-envelope-icon1 {
@@ -166,6 +171,7 @@ body {
     font-family: 'Inter', sans-serif;
     width: 70%;
     font-size: 14px;
+  border-radius:10px;
 }
 
 .footer-column form button {
@@ -193,14 +199,7 @@ body {
     margin-left: 5px;
     font-size: 14px;
 }
-
-
-@media (max-width: 768px) {
-    .footer-content {
-        flex-direction: column;
-        text-align: left;
-    }
-   .social-icons {
+ .social-icons {
         flex-direction: row; 
         flex-wrap: nowrap;
         overflow-x: auto; 
@@ -211,6 +210,13 @@ body {
         width: 40px;
         height: 40px;
     }
+
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        text-align: left;
+    }
+
 }
 
 
@@ -243,17 +249,19 @@ body {
   .footer-content {
     padding: 0;
   }
+  
   .footer-column {
     margin-bottom: 0;
-   
   }
 
-.footer-envelope-icon{
-margin-left:10px;
-}
-  .footer-column form button{
-    margin-right:10px;
+  .footer-envelope-icon {
+    margin-left: 10px;
   }
+
+  .footer-column form button {
+    margin-right: 10px;
+  }
+
   .footer-column:not(#newsletter-section1) h4 {
     position: relative;
     padding: 15px 20px;
@@ -264,15 +272,20 @@ margin-left:10px;
     align-items: center;
     font-size: 16px;
   }
+.language-currency-dropdown {
+          margin-left: -18px;
+}
   /* Newsletter section specific styles */
   #newsletter-section1 {
-    padding: 0px 18px;
+   margin-left: 17px;
   }
+
   #newsletter-section1 h4 {
     margin-bottom: 15px;
     cursor: default;
   }
-  /* Dropdown arrow only for non-newsletter sections */
+
+  /* Dropdown arrow for all collapsible sections including social media */
   .footer-column:not(#newsletter-section1) h4::after {
     content: '';
     width: 10px;
@@ -293,10 +306,13 @@ margin-left:10px;
     font-family: 'Inter', sans-serif;
     width: 70%;
     font-size: 14px;
-}
+  }
+
   .footer-column:not(#newsletter-section1) h4.active::after {
     transform: rotate(-135deg);
   }
+
+  /* Menu list styles */
   .footer-column:not(#newsletter-section1) ul {
     max-height: 0;
     overflow: hidden;
@@ -304,37 +320,447 @@ margin-left:10px;
     margin: 0;
     padding: 0;
   }
+
   .footer-column:not(#newsletter-section1) ul.show {
     max-height: 500px;
     transition: max-height 0.3s ease-in;
   }
+
   .footer-column ul li {
     margin: 0;
     padding: 10px 20px;
   }
+
   .footer-column ul li a {
     opacity: 0.8;
     font-size: 14px;
     display: block;
     width: 100%;
   }
+
   .footer-column form {
     padding: 0 20px 20px;
   }
 
+  /* Social icons specific styles */
   .social-icons {
-    padding: 15px 20px;
+        display: none;  /* Default to hidden */
+        padding: 15px 20px;
+        gap: 15px;
+        flex-wrap: wrap;
+       justify-content: center; /* Center the icons */
+    }
+
+    .social-icons.show {
+        display: flex;  /* Show when class 'show' is applied */
+    }
+
+  
+}
+
+#LocalizationDropdown {
+    margin-top: 15px; /* Adjust spacing from the newsletter button */
+}
+
+.language-currency-dropdown {
+    font-family: inherit;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    outline: none; /* Removes default focus border */
+    box-shadow: none; /* Ensures no shadow appears */
+    transition: none; /* Disables any transition effects */
+}
+
+.language-currency-dropdown option {
+    background-color: #fff; /* Dropdown background */
+    color: #333; /* Option text color */
+  
+  
+}
+
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+.footer-section {
+    padding: 40px;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+}
+
+.container1 {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 230px;
     display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-  }
-  .social-icon {
-    opacity: 0.8;
-  }
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    font-family: 'Inter', sans-serif;
 }
-/* Hide dropdown arrows on larger screens */
-@media (min-width: 481px) {
+
+
+.strip-right {
+    position: absolute; 
+    width: 114%; 
+    height: 60px;
+    background-color: white; 
+    color: black; 
+    font-size: 23px;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%) rotate(10deg);
+    box-shadow: 0 15px 8px rgba(0, 0, 0, 0.3); 
+    font-family: 'Fira Sans', sans-serif; 
+  }
+  
+  .strip-left {
+    position: absolute; 
+    width: 114%; 
+    height: 60px;
+    background-color: rgb(
+      221,
+      23,
+      23
+    ); 
+    color: white; 
+    font-size: 23px;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    
+    top: 50%;
+    left: 10%; 
+    transform: translate(-50%, -50%) rotate(-10deg);
+    box-shadow: 0 15px 8px rgba(0, 0, 0, 0.3); 
+    font-family: 'Fira Sans', sans-serif; 
+  }
+
+  .strip-right {
+    background-color: white;
+    top: 45%; 
+    left: 45%; 
+    transform: translate(-51%, -40%) rotate(6deg); 
+}
+
+.strip-left {
+    background-color: white;
+    top: 62%; 
+    left: 53%; 
+    transform: translate(-47%, -103%) rotate(-6deg); 
+}
+
+.strip-1, .strip-2 {
+    display: flex;
+    white-space: nowrap;
+    width: 100%;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+}
+
+.offer-text {
+    padding: 0 20px;
+    font-family: 'Fira Sans', sans-serif;
+}
+
+.strip-1 {
+    animation: scrollLeftToRight 10s linear infinite;
+}
+
+.strip-2 {
+    animation: scrollRightToLeft 10s linear infinite;
+}
+
+@keyframes scrollLeftToRight {
+    0% { transform: translateX(-100%); }
+    50% { transform: translateX(0%); }
+    100% { transform: translateX(100%); }
+}
+
+@keyframes scrollRightToLeft {
+    0% { transform: translateX(100%); }
+    50% { transform: translateX(0%); }
+    100% { transform: translateX(-100%); }
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 20px;
+    font-family: 'Inter', sans-serif;
+}
+
+#stay-connected-title {
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+/* Style for other footer column headings */
+.footer-column h4:not(#stay-connected-title) {
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+* Specifically target menu columns except newsletter */
+.footer-column:not(#newsletter-section1) {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-column:not(#newsletter-section1) h4 {
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-column ul li {
+    margin: 5px 0;
+}
+
+.footer-column ul li a {
+    text-decoration: none;
+    color: #333;
+    transition: none; /* Remove transition effect */
+}
+
+.footer-envelope-icon1 {
+    font-weight: 400;
+    position: absolute;
+    transform: translateY(93%);
+    color: #888;
+    font-size: 16px;
+    pointer-events: none;
+      margin-left: 13px;
+}
+
+.footer-column form input {
+    padding: 10px 10px 10px 65px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 14px;
+    font-family: 'Inter', sans-serif;
+    width: 70%;
+    font-size: 14px;
+  border-radius:10px;
+}
+
+.footer-column form button {
+    border-radius: 5px;
+    font-size: 15px;
+    width: 120px;
+    height: 40px;
+    padding: 5px 10px;
+    background: linear-gradient(to right, gray 50%, black 50%);
+    background-size: 200% 100%;
+    background-position: 100% 0;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-position 1.5s ease-in-out, transform 0.3s ease;
+}
+
+.footer-column form button:hover {
+    background-position: 0 0;
+}
+
+.footer-column form button::after {
+    content: '→';
+    position: relative;
+    margin-left: 5px;
+    font-size: 14px;
+}
+ .social-icons {
+        flex-direction: row; 
+        flex-wrap: nowrap;
+        overflow-x: auto; 
+        gap: 10px;
+    }
+
+    .social-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        text-align: left;
+    }
+
+}
+
+
+
+/* For larger screens */
+@media (min-width: 769px) {
+   .footer-envelope-icon {
+        font-size: 16px;
+        left: 49px;
+    }
+}
+
+
+@media screen and (max-width: 990px){
+  .footer-envelope-icon {
+    margin-left: -24px;
+    /* margin-top: -2px; */
+  }
+
+  @media screen and (min-width: 1400px){
+.fa-regular, .far {
+    font-weight: 400;
+    margin-left: 40px;
+}
+
+  }
+
+/* Mobile Footer Menu Styles */
+@media (max-width: 480px) {
+  .footer-content {
+    padding: 0;
+  }
+  
+  .footer-column {
+    margin-bottom: 0;
+  }
+
+  .footer-envelope-icon {
+    margin-left: 10px;
+  }
+
+  .footer-column form button {
+    margin-right: 10px;
+  }
+
+  .footer-column:not(#newsletter-section1) h4 {
+    position: relative;
+    padding: 15px 20px;
+    margin: 0;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+  }
+.language-currency-dropdown {
+          margin-left: -18px;
+}
+  /* Newsletter section specific styles */
+  #newsletter-section1 {
+   margin-left: 17px;
+  }
+
+  #newsletter-section1 h4 {
+    margin-bottom: 15px;
+    cursor: default;
+  }
+
+  /* Dropdown arrow for all collapsible sections including social media */
   .footer-column:not(#newsletter-section1) h4::after {
-    display: none;
+    content: '';
+    width: 10px;
+    height: 10px;
+    border-right: 2px solid currentColor; 
+    border-bottom: 2px solid currentColor;
+    transform: rotate(45deg);
+    transition: transform 0.3s ease;
+    position: absolute;
+    right: 20px;
   }
+
+  .footer-column form input {
+    padding: 10px 10px 10px 50px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 14px;
+    font-family: 'Inter', sans-serif;
+    width: 70%;
+    font-size: 14px;
+  }
+
+  .footer-column:not(#newsletter-section1) h4.active::after {
+    transform: rotate(-135deg);
+  }
+
+  /* Menu list styles */
+  .footer-column:not(#newsletter-section1) ul {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    margin: 0;
+    padding: 0;
+  }
+
+  .footer-column:not(#newsletter-section1) ul.show {
+    max-height: 500px;
+    transition: max-height 0.3s ease-in;
+  }
+
+  .footer-column ul li {
+    margin: 0;
+    padding: 10px 20px;
+  }
+
+  .footer-column ul li a {
+    opacity: 0.8;
+    font-size: 14px;
+    display: block;
+    width: 100%;
+  }
+
+  .footer-column form {
+    padding: 0 20px 20px;
+  }
+
+  /* Social icons specific styles */
+  .social-icons {
+        display: none;  /* Default to hidden */
+        padding: 15px 20px;
+        gap: 15px;
+        flex-wrap: wrap;
+       justify-content: center; /* Center the icons */
+    }
+
+    .social-icons.show {
+        display: flex;  /* Show when class 'show' is applied */
+    }
+
+  
 }
+
+#LocalizationDropdown {
+    margin-top: 15px; /* Adjust spacing from the newsletter button */
+}
+
+.language-currency-dropdown {
+    font-family: inherit;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    outline: none; /* Removes default focus border */
+    box-shadow: none; /* Ensures no shadow appears */
+    transition: none; /* Disables any transition effects */
+}
+
+.language-currency-dropdown option {
+    background-color: #fff; /* Dropdown background */
+    color: #333; /* Option text color */
+  
+  
+}
+
+
