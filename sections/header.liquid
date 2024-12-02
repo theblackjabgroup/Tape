@@ -1,6 +1,5 @@
 <link rel="stylesheet" href="{{ 'header.css' | asset_url }}">
 <script src="{{ 'header.js' | asset_url }}" defer></script>
-<script defer src="{{'scroll-tracker.js' |  asset_url}}"></script>
 <link rel="stylesheet" href="{{'scroll-tracker.css' |  asset_url}}" media="print" onload="this.media='all'">
 {% style %}
   :root{
@@ -250,13 +249,63 @@
   }
 
   customElements.define('sticky-header', StickyHeader);
+
+  // Initialize scroll tracking variables
+let scrollDistance = parseFloat(localStorage.getItem('scrollDistance')) || 0;
+let prevScrollY = window.scrollY;
+
+// Update scroll distance display on page load
+document.addEventListener('DOMContentLoaded', () => {
+  const scrollDistanceEl = document.getElementById('scrollDistance');
+  if (scrollDistanceEl) {
+    scrollDistanceEl.textContent = scrollDistance.toFixed(2);
+  }
+});
+
+// Throttle scroll handler for better performance
+let ticking = false;
+
+// Calculate and update scroll distance
+const updateScrollDistance = () => {
+  if (ticking) return;
+
+  ticking = true;
+  window.requestAnimationFrame(() => {
+    const currentScrollY = window.scrollY;
+    const deltaY = Math.abs(currentScrollY - prevScrollY);
+
+    // Convert pixels to kilometers
+    scrollDistance += deltaY / 1000000;
+
+    // Update display and save to localStorage
+    const scrollDistanceEl = document.getElementById('scrollDistance');
+    if (scrollDistanceEl) {
+      scrollDistanceEl.textContent = scrollDistance.toFixed(2);
+      localStorage.setItem('scrollDistance', scrollDistance);
+    }
+
+    prevScrollY = currentScrollY;
+    ticking = false;
+  });
+};
+
+// Add scroll event listener
+window.addEventListener('scroll', updateScrollDistance, { passive: true });
+
+// Smooth scroll to bottom functionality
+document.getElementById('scroll-to-bottom')?.addEventListener('click', () => {
+  window.scrollTo({
+    top: document.body.scrollHeight,
+    behavior: 'smooth'
+  });
+});
+
 {% endjavascript %}
 
 {% schema %}
 {
   "name": "t:sections.header.name",
   "class": "section-header",
-  "max_blocks": 3,
   "settings": [
     {
       "type": "link_list",

@@ -112,6 +112,7 @@
   --dot-items__visibillity: flex;
 }
 .dot-items {
+  background: none;
   display: var(--dot-items__visibillity);
   justify-content: center;
   position: absolute;
