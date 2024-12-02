@@ -34,12 +34,12 @@
                     <button type="submit">{{ section.settings.subscribe_button_text }}</button>
                 </div>
             </form>
- <div id="LocalizationDropdown" style="margin-top: 15px;">
+<div id="LocalizationDropdown" style="margin-top: 15px;">
     <form method="get" action="{{ localization.current_country.url }}">
         <select 
             class="language-currency-dropdown" 
             name="locale" 
-            style="color: {{ section.settings.menu_item_color }}; background: none; border: none; padding: 0; cursor: pointer; appearance: none; font-size: inherit;">
+            style="color: {{ section.settings.menu_item_color }}; background-color: transparent; border: none {{ section.settings.menu_item_color }}; padding: 5px; width: 100%; max-width: 280px;">
             {% for country in localization.available_countries %}
             <option 
                 value="{{ country.url }}" 
@@ -51,6 +51,7 @@
         <button type="submit" style="display: none;"></button> <!-- Hidden button for form submission -->
     </form>
 </div>
+
 
  </div>
 
@@ -121,47 +122,55 @@
                 <div class="social-icons">
                     {%- if settings.social_facebook_link != blank -%}
                         <a href="{{ settings.social_facebook_link }}" class="social-icon" style="color: {{ section.settings.menu_item_color }};">
-                            {{- 'icon-facebook.svg' | inline_asset_content |  replace: '<svg', '<svg style="height: 25px; fill: ' | append: settings.social_icon_color  -}}
-        </a>
+                            {{- 'icon-facebook.svg' | inline_asset_content   |  replace: '<svg', '<svg style="height: 25px; fill: ' | append: settings.social_icon_color  -}}
+                        </a>
                     {%- endif -%}
       {%- if settings.social_instagram_link != blank -%}
         <a href="{{ settings.social_instagram_link }}" class="social-icon" aria-label="{{ 'general.social.links.instagram' | t }}" style="color: {{ section.settings.menu_item_color }};">
-          {{- 'icon-instagram.svg' | inline_asset_content | replace: '<svg', '<svg style="height: 25px; fill: ' | append: settings.social_icon_color  -}}
+          {{- 'icon-instagram.svg' | inline_asset_content  |  replace: '<svg', '<svg style="height: 25px; fill: ' | append: settings.social_icon_color  -}}
+      
         </a>
       {%- endif -%}
       {%- if settings.social_youtube_link != blank -%}
         <a href="{{ settings.social_youtube_link }}" class="social-icon" aria-label="{{ 'general.social.links.youtube' | t }}" style="color: {{ section.settings.menu_item_color }};">
-          {{- 'icon-youtube.svg' | inline_asset_content | replace: '<svg', '<svg style="height: 25px; fill: ' | append: settings.social_icon_color  -}}
+          {{- 'icon-youtube.svg' | inline_asset_content  |  replace: '<svg', '<svg style="height: 25px; fill: ' | append: settings.social_icon_color  -}}
+      
         </a>
       {%- endif -%}
       {%- if settings.social_tiktok_link != blank -%}
         <a href="{{ settings.social_tiktok_link }}" class="social-icon" aria-label="{{ 'general.social.links.tiktok' | t }}" style="color: {{ section.settings.menu_item_color }};">
-          {{- 'icon-tiktok.svg' | inline_asset_content | replace: '<svg', '<svg style="height: 25px; fill: ' | append: settings.social_icon_color  -}}
+          {{- 'icon-tiktok.svg' | inline_asset_content  |  replace: '<svg', '<svg style="height: 25px; fill: ' | append: settings.social_icon_color  -}}
+       
         </a>
       {%- endif -%}
       {%- if settings.social_twitter_link != blank -%}
         <a href="{{ settings.social_twitter_link }}" class="social-icon" aria-label="{{ 'general.social.links.twitter' | t }}" style="color: {{ section.settings.menu_item_color }};">
-          {{- 'icon-twitter.svg' | inline_asset_content | replace: '<svg', '<svg style="height: 25px; fill: ' | append: settings.social_icon_color  -}}
+          {{- 'icon-twitter.svg' | inline_asset_content  |  replace: '<svg', '<svg style="height: 25px; fill: ' | append: settings.social_icon_color  -}}
+       
         </a>
       {%- endif -%}
       {%- if settings.social_pinterest_link != blank -%}
         <a href="{{ settings.social_pinterest_link }}" class="social-icon" aria-label="{{ 'general.social.links.pinterest' | t }}" style="color: {{ section.settings.menu_item_color }};">
-          {{- 'icon-pinterest.svg' | inline_asset_content | replace: '<svg', '<svg style="height: 25px; fill: ' | append: settings.social_icon_color  -}}
+          {{- 'icon-pinterest.svg' | inline_asset_content  |  replace: '<svg', '<svg style="height: 25px; fill: ' | append: settings.social_icon_color  -}}
+        
         </a>
       {%- endif -%}
       {%- if settings.social_snapchat_link != blank -%}
         <a href="{{ settings.social_snapchat_link }}" class="social-icon" aria-label="{{ 'general.social.links.snapchat' | t }}" style="color: {{ section.settings.menu_item_color }};">
-          {{- 'icon-snapchat.svg' | inline_asset_content | replace: '<svg', '<svg style="height: 25px; fill: ' | append: settings.social_icon_color  -}}
+          {{- 'icon-snapchat.svg' | inline_asset_content  |  replace: '<svg', '<svg style="height: 25px; fill: ' | append: settings.social_icon_color  -}}
+       
         </a>
       {%- endif -%}
       {%- if settings.social_tumblr_link != blank -%}
         <a href="{{ settings.social_tumblr_link }}" class="social-icon" aria-label="{{ 'general.social.links.tumblr' | t }}" style="color: {{ section.settings.menu_item_color }};">
-          {{- 'icon-tumblr.svg' | inline_asset_content | replace: '<svg', '<svg style="height: 25px; fill: ' | append: settings.social_icon_color  -}}
+          {{- 'icon-tumblr.svg' | inline_asset_content  |  replace: '<svg', '<svg style="height: 25px; fill: ' | append: settings.social_icon_color  -}}
+        
         </a>
       {%- endif -%}
       {%- if settings.social_vimeo_link != blank -%}
         <a href="{{ settings.social_vimeo_link }}" class="social-icon" aria-label="{{ 'general.social.links.vimeo' | t }}" style="color: {{ section.settings.menu_item_color }};">
-          {{- 'icon-vimeo.svg' | inline_asset_content | replace: '<svg', '<svg style="height: 25px; fill: ' | append: settings.social_icon_color  -}}
+          {{- 'icon-vimeo.svg' | inline_asset_content  |  replace: '<svg', '<svg style="height: 25px; fill: ' | append: settings.social_icon_color  -}}
+       
         </a>
       {%- endif -%}
     </div>
