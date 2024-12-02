@@ -10,12 +10,12 @@
       "label": "Footer Text Color",
       "default": "#ffffff"
     },
-    {
-      "type": "text",
-      "id": "footer_text",
-      "label": "Footer Text",
-      "default": "All items are reserved ©2024"
-    },
+  {
+  "type": "text",
+  "id": "powered_by",
+  "label": "CopyRight",
+ 
+},
     {
       "type": "color",
       "id": "barcode_color",
@@ -157,6 +157,10 @@
 
 
 <div class="barcode-footer">
-  {{ section.settings.footer_text }}
+ {%- assign powered_by = shop.name -%}
+        {%- if section.settings.powered_by != blank -%}
+          {%- assign powered_by = section.settings.powered_by -%}
+        {%- endif -%}
+        <p>&copy; {{ 'now' | date: "%Y" }} {{ powered_by }}. <small class="copyright__content">{{ powered_by_link }}</small>.</p>
 </div>
 
