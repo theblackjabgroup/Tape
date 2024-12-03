@@ -44,17 +44,43 @@ background-color: currentColor;
 <div class="rich-text-section color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
   {% if section.settings.layout_style == 'layout1' %} 
     <div class="layout1 page-width">
-      <h2 class="richtext_heading">{{ section.settings.heading | default: "Transforming Healthcare with Innovative Solutions" }}</h2>
+      <h2 class="richtext_heading">
+       {% for block in section.blocks %}
+                {% if block.type == 'heading' %}
+                      {{ block.settings.heading }}
+                {% endif %}
+            {% endfor %}  
+      </h2>
       <div class="decorative-dots">
         {% for i in (1..section.settings.dots_number1) %}
           <span class="dot"></span>
         {% endfor %}
       </div>
-       <p class="richtext_subheading">{{ section.settings.caption | default: "Delivering Excellence in Medical Products" }}</p>
+       <p class="richtext_subheading">
+           {% for block in section.blocks %}
+                {% if block.type == 'subheading' %}
+                      {{ block.settings.caption }}
+                {% endif %}
+            {% endfor %}
+       </p>
       <div class="rich-text__text rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-        {{ section.settings.text }}
+            {% for block in section.blocks %}
+                {% if block.type == 'text' %}
+                      {{ block.settings.text }}
+                {% endif %}
+            {% endfor %}
       </div>
-    </div>
+         {% for block in section.blocks %}
+    {% if block.type == 'button' and block.settings.show_button %}
+        <div class="rich_text_button"> 
+      <a href="{{ block.settings.button_link }}" class="rich_text_btn" >
+        {{ block.settings.button_text }}
+      </a>
+        </div>
+       {% endif %}
+  {% endfor %}
+         </div>
+    
   {% else %}
     <div class="layout2">
     <div class="dots-container">
@@ -64,12 +90,33 @@ background-color: currentColor;
           {% endfor %}
           </div>
         <div class="rich-text__blocks {{ section.settings.content_alignment }}">
-          <h2 class="richtext_heading">{{ section.settings.heading | default: "Transforming Healthcare with Innovative Solutions" }}</h2>
-           <p class="richtext_subheading" >{{ section.settings.caption | default: "Delivering Excellence in Medical Products" }}</p>
-         
-          <div class="rich-text__text rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-            {{ section.settings.text }}
-          </div>
+          <h2 class="richtext_heading"> {% for block in section.blocks %}
+                {% if block.type == 'heading' %}
+                      {{ block.settings.heading }}
+                {% endif %}
+            {% endfor %}  </h2>
+           <p class="richtext_subheading" >  {% for block in section.blocks %}
+                {% if block.type == 'subheading' %}
+                      {{ block.settings.caption }}
+                {% endif %}
+            {% endfor %}
+          </p>
+      <div class="rich-text__text rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+     {% for block in section.blocks %}
+      {% if block.type == 'text' %}
+      {{ block.settings.text }}
+    {% endif %}
+  {% endfor %}
+</div>
+           {% for block in section.blocks %}
+    {% if block.type == 'button' and block.settings.show_button %}
+        <div class="rich_text_button"> 
+      <a href="{{ block.settings.button_link }}" class="rich_text_btn" >
+        {{ block.settings.button_text }}
+      </a>
+        </div>
+       {% endif %}
+  {% endfor %}
         </div>
          <div class="side-dots right">
             {% for i in (1..section.settings.dots_number2) %}
@@ -81,28 +128,14 @@ background-color: currentColor;
   {% endif %}
 </div>
 
+
+
+
 {% schema %}
 {
   "name": "Rich Text",
   "settings": [
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "Transforming Healthcare with Innovative Solutions"
-    },
-    {
-      "type": "text",
-      "id": "caption",
-      "label": "Caption",
-      "default": "Delivering Excellence in Medical Products"
-    },
-    {
-      "type": "textarea",
-      "id": "text",
-      "label": "Text",
-      "default": "At [Your Company Name], we are dedicated to enhancing patient care and clinical efficiency through state-of-the-art medical products. Our commitment to innovation and quality ensures that healthcare providers have the tools they need to deliver the best possible outcomes for their patients."
-    },
+  
     {
       "type": "select",
       "id": "layout_style",
@@ -188,10 +221,87 @@ background-color: currentColor;
       "default": 40
     }
   ],
+  "blocks": [
+  {
+      "type": "heading",
+      "name": "Heading",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Transforming Healthcare with Innovative Solutions"
+        }
+      ]
+    },
+ {
+      "type": "subheading",
+      "name": "Sub Heading",
+      "settings": [
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Caption",
+          "default": "Delivering Excellence in Medical Products"
+        }
+      ]
+    },
+  {
+      "type": "text",
+      "name": "Text",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "At [Your Company Name], we are dedicated to enhancing patient care and clinical efficiency through state-of-the-art medical products. Our commitment to innovation and quality ensures that healthcare providers have the tools they need to deliver the best possible outcomes for their patients."
+        }
+      ]
+    },
+{
+      "type": "button",
+      "name": "Button",
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "Learn More"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_button",
+          "label": "Show Button",
+          "default": false
+        }
+      ]
+    }
+    
+],
   "presets": [
     {
-      "name": "Rich Text"
-    }
+      "name": "Rich Text",
+      "blocks": [
+        {
+          "type": "heading"
+        },
+        {
+          "type": "subheading"
+        },
+        {
+          "type": "text"
+        },
+        {
+          "type": "button"
+        }
+      ]
+    },
+   
   ]
 }
 {% endschema %}
