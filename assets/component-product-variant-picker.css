@@ -58,14 +58,14 @@ variant-selects {
 
 /* Custom styles for Pill display type */
 .product-form__input--pill input[type='radio'] + label {
-  border: var(--variant-pills-border-width) solid rgba(var(--color-foreground), var(--variant-pills-border-opacity));
-  background-color: rgb(var(--color-background));
-  color: rgba(var(--color-foreground));
-  border-radius: var(--variant-pills-radius);
+ /* border: var(--variant-pills-border-width) solid rgba(var(--color-foreground), var(--variant-pills-border-opacity));  */
+  background-color: #D9D9D9;
+  color: black;
+  /*border-radius: var(--variant-pills-radius); */
   color: rgb(var(--color-foreground));
   display: inline-block;
   margin: 0.7rem 0.5rem 0.2rem 0;
-  padding: 1rem 2rem;
+  padding: 1rem 3rem;
   font-size: 1.4rem;
   letter-spacing: 0.1rem;
   line-height: 1;
@@ -73,7 +73,27 @@ variant-selects {
   transition: border var(--duration-short) ease;
   cursor: pointer;
   position: relative;
+  border-radius: 5px;
   font-family: 'Inter';
+}
+.product-form__input--pill input[type='radio'] + label::before {
+  content: "" !important;
+  position: absolute !important;
+  width: 8px;
+  height: 8px;
+  background-color: rgb(var(--color-background));
+  border-radius: 50% !important;
+  transform: translate(-3px,14px);
+  }
+   
+.product-form__input--pill input[type='radio'] + label::after {
+content: "";
+position: absolute;
+width: 8px;
+height: 8px;
+background-color: rgb(var(--color-background));
+border-radius: 50%;
+transform: translate(25px, 3px);
 }
 
 .product-form__input--pill input[type='radio'] + label:before {
@@ -83,7 +103,6 @@ variant-selects {
   right: calc(var(--variant-pills-border-width) * -1);
   bottom: calc(var(--variant-pills-border-width) * -1);
   left: calc(var(--variant-pills-border-width) * -1);
-  z-index: -1;
   border-radius: var(--variant-pills-radius);
   box-shadow: var(--variant-pills-shadow-horizontal-offset) var(--variant-pills-shadow-vertical-offset)
     var(--variant-pills-shadow-blur-radius) rgba(var(--color-shadow), var(--variant-pills-shadow-opacity));
@@ -96,6 +115,7 @@ variant-selects {
 .product-form__input--pill input[type='radio']:checked + label {
   background-color: rgb(var(--color-foreground));
   color: rgb(var(--color-background));
+  border: 2px solid black;
 }
 
 @media screen and (forced-colors: active) {
