@@ -145,6 +145,9 @@ body {
 
 .footer-column ul li {
     margin: 5px 0;
+    white-space: nowrap;
+  width:6px;
+    text-overflow: ellipsis;
 }
 
 .footer-column ul li a {
@@ -379,5 +382,3 @@ body {
   
   
 }
-
-
