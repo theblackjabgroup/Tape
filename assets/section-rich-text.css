@@ -1,6 +1,10 @@
 .layout1 {
   text-align: center;
   padding: 20px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  display: flex;
 }
 .richtext_heading{
   margin-bottom:10px;
@@ -8,15 +12,20 @@
     font-size: 28px;
     font-weight: bold;
 }
+
+
 .richtext_subheading{
     font-family: 'Inter', sans-serif;
     font-size: 20px;
-    font-weight: 500; /* Medium weight */
+    font-weight: 500; 
 }
 .rich-text__text{
    font-family: 'Inter', sans-serif;
     font-size: 16px;
     font-weight: normal;
+}
+.rich-text__text p {
+  margin-bottom: 1em;
 }
 
 .layout1 p{
@@ -60,8 +69,12 @@ max-width:900px;
 }
 
 .rich-text__blocks {
-width: 60%;
+width: 70%;
 text-align: center;
+   flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    display: flex;
 }
 
 .side-dots {
@@ -77,16 +90,32 @@ width: 3%;
 padding: 0;
 margin: 0; 
 }
-
-
 .dot-l {
-width: 10px;
-height: 10px;
-border-radius: 50%;
-margin: 8px auto; 
-background-color: #303030; 
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin: 8px auto; 
+  background-color: #303030; 
 }
-
+.rich_text_button{
+    border: 1px solid black; 
+    border-radius: 5px;     
+    padding:10px;
+    width:30%;
+    margin:10px 0;
+}
+.rich_text_btn {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+  display: inline-block;
+  color: black;
+  text-decoration: none;
+  align-self: end;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
 
 
 @media screen and (max-width: 749px) {
@@ -94,7 +123,20 @@ background-color: #303030;
   .layout2 {
     text-align: center;
   }
+  .layout1{
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+  }
   
+  .rich_text_button{
+    border: 1px solid black; 
+    border-radius: 5px;     
+    padding:10px;
+    width:60%;
+    margin:10px 0;
+  }
   .dots-container {
     display: flex;
     flex-direction: column;
@@ -106,16 +148,19 @@ background-color: #303030;
   .rich-text__blocks {
     width: 80%;
     margin: 10px auto;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    display: flex;
   }
 
   .side-dots {
-    width: 100%; /* Full width */
+    width: 100%; 
     display: flex;
     flex-direction: row !important;
-    justify-content: space-evenly; /* Changed to space-evenly */
-    /* align-items: center; */
+    justify-content: space-evenly; 
     padding: 10px 0;
-    margin: 0; /* Reset margin */
+    margin: 0; 
   }
   .side-dots.left, .side-dots.right {
   height:20px;
@@ -130,7 +175,7 @@ background-color: #303030;
     border-radius: 50%;
     background-color: #303030;
     flex-shrink: 0;
-    margin: 0; /* Reset margin */
+    margin: 0; 
   }
 }
 
