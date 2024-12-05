@@ -11,7 +11,7 @@
     justify-content: center;
     align-items: center;
     z-index: 1;
-    border-radius: 5%;
+    border-radius: 8px;
 }
 
 .popup-content {
@@ -25,8 +25,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 30px;
-    border-radius: 6px;
+    padding: 20px;
+    border-radius: 8px;
 }
 
 
@@ -46,7 +46,7 @@
     background-color: var(--header-bg);
     z-index: 1;
     padding: 10px;
-    border-radius:6px;
+    border-radius:8px;
 }
 
 .popup-header h2 {
@@ -56,6 +56,21 @@
     position: relative;
     z-index: 1;
 }
+.popup-message a {
+    color: #1a73e8; /* Vibrant link color */
+    text-decoration: none; /* Remove underline by default */
+    font-weight: 500; /* Medium weight for readability */
+    border-bottom: 1px solid #1a73e8; /* Underline effect using border */
+    padding-bottom: 2px; /* Space for the underline */
+    transition: color 0.3s ease, border-color 0.3s ease; /* Smooth transitions */
+}
+
+.popup-message a:hover {
+    color: #0c47b8; /* Darker color on hover */
+    border-bottom-color: #0c47b8; /* Change underline color on hover */
+    text-decoration: none; /* Ensure no default underline */
+}
+
 
 .popup-close-btn {
     display: flex;
@@ -146,13 +161,13 @@
 @media screen and (max-width: 768px) {
     .popup-base {
         position: fixed;
-        top: 40%;
+        top: 50%;
         left: 50%; 
         transform: translate(-50%, -50%); 
         width: 80%;
         min-height: 300px;
         margin: 0;
-        border-radius: 5%;
+        border-radius: 8px;
     }
 
     .popup-content {
@@ -187,7 +202,7 @@
 
 @media screen and (max-width: 480px) {
     .popup-base {
-        top: 40%;
+        top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         width: 90%;
