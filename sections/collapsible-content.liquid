@@ -1,37 +1,42 @@
 {{ 'collapsible-content.css' | asset_url | stylesheet_tag }}
 <style>
 .faq-item{
-  background-color:{{section.settings.cardbackgroundcolor}};
+  background-color: rgb(var(--color-button));  
 }
 .faq-main{
    padding-top:{{section.settings.padding_top}}px;
   padding-bottom:{{section.settings.padding_bottom}}px;
 }
+
+
 .collapse_dot {
- background-color: {{section.settings.sectionbgcolor}};
+ background-color:rgb(var(--color-background));
 }
 .striaght-line {
-  background-color: {{section.settings.sectionbgcolor}};
+  background-color: rgb(var(--color-background));
 }
-   .faq-item::before,
+.faq-item::before,
 .faq-item::after {
-  background-color:{{section.settings.sectionbgcolor}};
+  background-color:rgb(var(--color-background));
+}
+.faq-main{
+  background-color:rgb(var(--color-background));
 }
 </style>
 
 <div class="faq-section gradient">
-  <div class='faq-main' style="background-color: {{ section.settings.sectionbgcolor }}" >
+  <div class='faq-main color-{{ section.settings.color_scheme }}' >
     <!-- Left side -->
     <div class="faq-header">
-     <h2 class="faq-title" style="color: {{ section.settings.textcolor }}">{{ section.settings.caption | default: 'Help & Support' }}</h2>
-  <p class="support-text" style="color: {{ section.settings.textcolor }}">{{ section.settings.description | default: "We're here to assist you with questions about products, sizing, or orders. Our customer support team is available via phone, email, or live chat." }}</p>
+     <h2 class="faq-title" >{{ section.settings.caption | default: 'Help & Support' }}</h2>
+  <p class="support-text" >{{ section.settings.description | default: "We're here to assist you with questions about products, sizing, or orders. Our customer support team is available via phone, email, or live chat." }}</p>
     </div>
   <!--right side -->
     <div class='faq-container '>
        {% for block in section.blocks %}
    
   <div class="faq-item ">
-    <span class="faq-number " style="color: {{ section.settings.cardtextcolor }}">{{ block.settings.serialno}}</span>
+    <span class="faq-number " >{{ block.settings.serialno}}</span>
           {% if section.settings.layout_style == 'layout1' %}
     <div class="dots-line" >
         <span class="collapse_dot"></span>
@@ -40,21 +45,20 @@
        <span class="collapse_dot"></span>
       <span class="collapse_dot"></span>
      
-        <!-- Dots will be added by JavaScript -->
     </div>
       {% else %}
-            <div class="striaght-line color-{{ section.settings.sectionbgcolor }}">
+            <div class="striaght-line">
               </div>
     {% endif %}
             
   <div class="faq-content">
       <div class="faq-question">
-        <div class="question-text" style="color: {{ section.settings.cardtextcolor }}">{{ block.settings.questiontext }}</div>
-        <div class="faq-answer" style="color: {{ section.settings.cardtextcolor }} ">{{ block.settings.solutionans }}</div>
+        <div class="question-text" >{{ block.settings.questiontext }}</div>
+        <div class="faq-answer">{{ block.settings.solutionans }}</div>
       </div>
       <div>
 
-        <svg class="icon-arrow " style="color: {{ section.settings.cardtextcolor }}" width="24" height="24" viewBox="0 0 24 24">
+        <svg class="icon-arrow "  width="24" height="24" viewBox="0 0 24 24">
           <path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
         </svg>
       </div>
@@ -133,8 +137,14 @@ document.addEventListener('DOMContentLoaded', function() {
   "tag": "section",
   "class": "section",
   "settings": [
-  {
-      "type": "text",
+     {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+        "type": "text",
       "id": "caption",
       "label": "FAQ Title",
       "default": "Help & Support"
@@ -160,31 +170,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       ],
       "default": "layout1"
-    },
-     {
-      "type": "color",
-      "id": "sectionbgcolor",
-      "label": "Background Color",
-      "default": "#225647",
-    },
-     {
-      "type": "color",
-      "id": "textcolor",
-      "label": "Text Color",
-      "default": "#282828"
-    },
-     {
-      "type": "color",
-      "id": "cardtextcolor",
-      "label": "Card Text Color",
-      "default": "#0B0B0B"
-    },
-    {
-      "type": "color",
-      "id": "cardbackgroundcolor",
-      "label": "Card Background Color",
-      "default": "#FFFFFF"
-    },
+    },   
     {
       "type": "range",
       "id": "padding_top",
