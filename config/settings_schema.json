@@ -25,26 +25,23 @@
         "type": "color_scheme_group",
         "id": "color_schemes",
         "definition": [
+           {
+        "type": "header",
+        "content": "General"
+      },
           {
             "type": "color",
             "id": "background",
-            "label": "t:settings_schema.colors.settings.background.label",
+            "label": "Background",
             "default": "#FFFFFF"
-          },
-          {
-            "type": "color_background",
-            "id": "background_gradient",
-            "label": "t:settings_schema.colors.settings.background_gradient.label",
-            "info": "t:settings_schema.colors.settings.background_gradient.info"
           },
           {
             "type": "color",
             "id": "background_product_card",
-            "label": "t:settings_schema.colors.settings.background_product_card.label",
-            "info": "t:settings_schema.colors.settings.background_product_card.info",
+            "label": "Foreground",
             "default": "#FDF4D7"
           },
-          {
+         {
             "type": "color",
             "id": "text",
             "label": "t:settings_schema.colors.settings.text.label",
@@ -52,21 +49,37 @@
           },
           {
             "type": "color",
-            "id": "button",
-            "label": "t:settings_schema.colors.settings.button_background.label",
-            "default": "#121212"
-          },
-          {
-            "type": "color",
             "id": "button_label",
-            "label": "t:settings_schema.colors.settings.button_label.label",
+            "label": "Button Color",
             "default": "#FFFFFF"
           },
           {
             "type": "color",
             "id": "secondary_button_label",
-            "label": "t:settings_schema.colors.settings.secondary_button_label.label",
+            "label": "Button Text Color",
             "default": "#121212"
+          },
+           {
+        "type": "header",
+        "content": "Cards"
+      },
+           {
+            "type": "color",
+            "id": "button",
+            "label": "Card Background",
+            "default": "#121212"
+          },
+          {
+            "type": "color",
+            "id": "utilities",
+            "label": "Card Foreground",
+            "default": "#18332E"           
+          },
+          {
+            "type": "color_background",
+            "id": "background_gradient",
+            "label": "t:settings_schema.colors.settings.background_gradient.label",
+            "info": "t:settings_schema.colors.settings.background_gradient.info"
           },
           {
             "type": "color",
@@ -100,16 +113,12 @@
           },
           {
             "type": "color",
-            "id": "utilities",
-            "label": "t:settings_schema.colors.settings.utilities.label",
-            "default": "#18332E"           
-          },
-          {
-            "type": "color",
             "id": "product_special_offer",
             "label": "t:settings_schema.colors.settings.product_special_offer.label",
             "default": "#9BBAE0"           
           },
+          
+        ],
         "role": {
           "text": "text",
           "background": {

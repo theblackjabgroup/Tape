@@ -9,6 +9,12 @@
     font-family: 'Fira Sans';
     font-weight: 500;
 }
+.custom-placeholder .placeholder-svg{
+     width: 100%; /* Desired width */
+    height: 309px; /* Desired height */
+    display: block; /* Ensures it behaves like a block-level element */
+    object-fit: contain; /* Adjusts how the content fits inside */
+}
 
 .blog-slider-section {
     position: relative;
@@ -56,7 +62,6 @@
     will-change: transform; 
     justify-content: flex-start;
 }
-
 .blog-card {
     flex: 0 0 auto;
     border-radius: 5px;
