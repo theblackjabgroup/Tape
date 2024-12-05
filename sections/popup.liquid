@@ -28,7 +28,11 @@
               <button class="popup-close-btn" onclick="closePopup()">&times;</button>
             </div>
         </div>
-        <p class="popup-message">{{ section.settings.popup_message }}</p>
+   <p class="popup-message">
+  {{section.settings.popup_message | richtext  }}
+</p>
+
+
 
         <div class="popup-input-wrapper">
             <i class="fa fa-envelope email-icon"></i>
@@ -97,10 +101,10 @@
             "default": "Join Our Community!"
         },
         {
-            "type": "textarea",
+            "type": "richtext",
             "id": "popup_message",
             "label": "Popup Message",
-            "default": "Stay updated with the latest news, exclusive offers, and expert tips. Sign up for our newsletter and get 10% off your first order!"
+            "default": "<p>Stay updated with the latest news, exclusive offers, and expert tips. Sign up for our newsletter and get 10% off your first order!</p>"
         },
         {
             "type": "text",
