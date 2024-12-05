@@ -45,7 +45,7 @@
             <div class="product-stories-video-column__content-item-wrap">
               <!-- Box above the video column -->
               <span class="product-stories-heading-background">
-                <h2 class="product-stories-heading">{{ section.settings.video_title }} </h2>
+                <h2 class="product-stories-heading">{{ block.settings.video_title }} </h2>
               </span>
               
               <!-- Video column content -->
@@ -182,11 +182,15 @@
       "default": "Join us on TikTok for exclusive releases, unboxing and try-on videos, reviews, and more from our top brands and stylists."
     },
     {
-            "type": "text",
-            "id": "video_title",
-            "label": "Video Heading",
-            "default": "Mattress Soft Ergonomic!"
-        },
+      "type": "range",
+      "id": "font_size",
+      "label": "Font Size",
+      "default": 100,
+      "min": 50,
+      "max": 100,
+      "unit": "%",
+      "step": 1
+    },
     {
       "type": "checkbox",
       "id": "play_onload",
@@ -216,16 +220,6 @@
         { "value": "social_youtube_link", "label": "YouTube" },
         { "value": "social_vimeo_link", "label": "Vimeo" }
       ]
-    },
-    {
-      "type": "range",
-      "id": "font_size",
-      "label": "Font Size",
-      "default": 100,
-      "min": 70,
-      "max": 100,
-      "unit": "%",
-      "step": 1
     },
       {
       "type": "color_scheme",
@@ -264,6 +258,12 @@
       "name": "Video Column",
       "limit": 3,
       "settings": [
+            {
+            "type": "text",
+            "id": "video_title",
+            "label": "Video Heading",
+            "default": "Mattress Soft Ergonomic!"
+        },
         {
           "type": "text",
           "id": "youtube_url",
