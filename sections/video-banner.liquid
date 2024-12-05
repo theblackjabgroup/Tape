@@ -3,13 +3,11 @@
 
 {% style %}
 #shopify-section-{{ section.id }} .video-container-wrapper {
---background-color: {{ section.settings.background_color }};
---indicator-color: {{ section.settings.indicator_color }};
 --progress-color: rgba(255, 255, 255, 0.75);
 }
 {% endstyle %}
 
-<div class="video-container-wrapper" data-section-id="{{ section.id }}">
+<div class="video-container-wrapper color-{{ section.settings.background_color }}" data-section-id="{{ section.id }}">
     <div class="video-container">
         {%- for block in section.blocks -%}
         {%- liquid
@@ -115,16 +113,9 @@
 "content": "Video Settings"
 },
 {
-"type": "color",
+"type": "color_scheme",
 "id": "background_color",
-"label": "Background Color",
-"default": "#FFFFFF"
-},
-{
-"type": "color",
-"id": "indicator_color",
-"label": "Bottom Indicator Color",
-"default": "#000000"
+"label": "Background Color"
 }
 ],
 "blocks": [
