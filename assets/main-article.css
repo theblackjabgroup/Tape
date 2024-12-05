@@ -26,11 +26,11 @@ body {
 
 .blog-image-section {
   position: relative;
-  border-radius: 10px;
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
   width: 638px;
-  height: 812px;
+  height: 712px;
 }
 
 .blog-article-header {
@@ -104,9 +104,9 @@ body {
 .blog-image-content {
   background-color: #D8D8D8;
   padding: 20px;
-  border-radius: 10px 10px 0 0;
+  border-radius: 5px;
   padding-bottom: 40px;
-  height: 729px;
+  height: 629px;
   width: 585px;
   overflow: hidden;
   position: relative;
@@ -135,7 +135,7 @@ body {
   border-radius: 50%;
   cursor: pointer;
 }
-
+/* 
 .blog-thumbnail-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -171,7 +171,7 @@ body {
 
 .blog-thumbnail::after {
   transform: rotate(-45deg);
-}
+} */
 
 .blog-semicircle {
   content: '';
@@ -222,11 +222,11 @@ body {
   display: flex;
   gap: 15px;
   align-items: center;
-  padding: 5px 0 10px 30px;
+  padding: 0 0 10px 30px;
 }
 
 .blog-interaction-buttons i {
-  font-size: 19px;
+  font-size: 14px;
   color: #555;
   cursor: pointer;
   transition: color 0.2s;
@@ -238,7 +238,7 @@ body {
   gap: 15px;
   color: #555;
   font-size: 14px;
-  padding: 5px 20px 10px 0;
+  padding: 0 20px 10px 0;
 }
 
 .blog-divider {
@@ -267,7 +267,7 @@ body {
 .blog-dotted-line {
   display: flex;
   align-items: center;
-  gap: 35px;
+  gap: 30px;
   margin: 20px 0;
 }
 
@@ -301,7 +301,7 @@ body {
 .blog-dotted-line2 {
   display: flex;
   align-items: center;
-  gap: 35px;
+  gap: 30px;
   margin: 30px 0;
 }
 
@@ -352,7 +352,7 @@ body {
   .blog-button {
     font-size: 14px;
   }
-  .article-template__comment-wrapper, .article-template__comment-wrapper *{
+  .article-template_comment-wrapper, .article-template_comment-wrapper *{
     font-size:10px;
   }
 }
@@ -388,10 +388,10 @@ body {
   margin-bottom: 20px;
 }
 /* Headings and Labels */
-.article-template__comment-wrapper .field__input label,
-.article-template__comment-wrapper .field__input h2,
+.article-template_comment-wrapper .field_input label,
+.article-template_comment-wrapper .field_input h2,
 .article-template__comment-wrapper #CommentForm-body h2,
-.article-template__comment-wrapper .text-area field__input,
+.article-template_comment-wrapper .text-area field_input,
 .article-template__comment-wrapper label {
   color: #000 !important; /* Force black color for the heading */
 }
@@ -461,7 +461,7 @@ body {
 .article-template__comments-comment footer {
   display: flex;
   justify-content: space-between;
-  font-size: 14px;
+  font-size: 10px;
   color: #555;
 }
 
@@ -487,7 +487,7 @@ body {
   }
 
   .blog-image-content {
-    height: 629px; /* Keep height fixed on larger screens */
+    height: 529px; /* Keep height fixed on larger screens */
     width: 485px;  /* Keep width fixed */
   }
 
@@ -515,7 +515,7 @@ body {
     margin: 30px 10px 30px 0;
   }
   .blog-dotted-line {
-    gap: 25px;
+    gap: 21px;
   }
   .blog-semicircle2-r{
     right:-6px;
@@ -524,8 +524,9 @@ body {
     left: -6px;
 }
   .blog-dotted-line2 {
-    gap: 25px;
+    gap: 21px;
   }
+
   .blog-semicircle3-r{
     right:-6px;
   }
@@ -533,6 +534,7 @@ body {
     left: -6px;
 }
 }
+
 
 @media screen and (max-width: 768px) {
   .blog-article-container {
@@ -591,7 +593,7 @@ body {
   .blog-image-dots{
     gap: 4px;
   }
-  .blog-circle:nth-child(n+14) {
+  .blog-circle:nth-child(n+15) {
     display: none; /* Hide dots after the 15th one */
   }
   .blog-semicircle{
@@ -636,7 +638,7 @@ body {
     font-size:0.9rem;
   }
   .blog-dotted-line{
-    gap:17px;
+    gap:19px;
     margin:0;
   }
   .blog-circle {
@@ -653,10 +655,10 @@ body {
     right:-9px;
   }
   .blog-dotted-line2{
-    gap: 17px;
+    gap: 19px;
     margin: 18px 0;
   }
-  .blog-circle3:nth-child(n+14) {
+  .blog-circle3:nth-child(n+15) {
     display: none; 
   }
   .blog-circle3{
@@ -675,7 +677,46 @@ body {
     width:40px;
   }
 }
-  
+
+
+@media (max-width: 990px){
+   .blog-dotted-line2 {
+    gap: 18px; /* Increase gap for wider screens */
+    margin: 25px 0; /* Adjust margin for more spacing */
+  }
+ .blog-dotted-line{
+    gap: 18px; /* Increase gap for wider screens */
+    margin: 25px 0; /* Adjust margin for more spacing */
+  }
+}
+
+@media screen and (min-width: 1900px) and (max-width: 2880px) {
+  .blog-dotted-line2,
+  .blog-dotted-line {
+    gap: 44px; 
+    margin: 25px 0;
+  }
+}
+
+/* Styles for screens at exactly 2880px */
+@media screen and (width: 2880px) {
+  .blog-dotted-line2,
+  .blog-dotted-line {
+    gap: 69px; 
+    margin: 35px 0; 
+  }
+}
+
+/* Styles for screens larger than 2880px */
+@media screen and (min-width: 2881px) {
+  .blog-dotted-line2,
+  .blog-dotted-line {
+    gap: 69px; 
+    margin: 35px 0; 
+  }
+}
+
+
 
 @media screen and (max-width: 480px) {
   .blog-main-image {
@@ -766,7 +807,7 @@ body {
     box-sizing: border-box; /* Ensure the card width includes padding and borders */
     margin: 0; /* Remove default margin */
     border-radius: 5px;
-    background-color: #ffffff;
+    /* background-color: #ffffff; */
     overflow: hidden;
     text-align: left;
     display: flex;
@@ -961,3 +1002,5 @@ body {
         width: 50%;
     }
 }
+
+
