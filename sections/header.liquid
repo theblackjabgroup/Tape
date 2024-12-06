@@ -3,10 +3,10 @@
 <link rel="stylesheet" href="{{'scroll-tracker.css' |  asset_url}}" media="print" onload="this.media='all'">
 {% style %}
   :root{
-    --header-section-color-scheme: {{ section.settings.header_section_color_scheme }};
+    --header-section-color-scheme: {{ section.settings.color_scheme }};
   }
 {% endstyle %}
-<{% if section.settings.sticky_header_type != 'none' %}sticky-header data-sticky-type="{{ section.settings.sticky_header_type }}"{% else %}div{% endif %} class="header-wrapper color-{{ section.settings.header_section_color_scheme }}" style="--padding-top: {{ section.settings.padding_top }}px; --padding-bottom: {{ section.settings.padding_bottom }}px;">
+<{% if section.settings.sticky_header_type != 'none' %}sticky-header data-sticky-type="{{ section.settings.sticky_header_type }}"{% else %}div{% endif %} class="header-wrapper color-{{ section.settings.color_scheme }}" style="--padding-top: {{ section.settings.padding_top }}px; --padding-bottom: {{ section.settings.padding_bottom }}px;">
   <div class="flex-container">
     <a href="{{ routes.root_url }}" class="logo-container">
       {% if section.settings.logo or settings.logo != blank %}
@@ -314,21 +314,9 @@ document.getElementById('scroll-to-bottom')?.addEventListener('click', () => {
       "default": "main-menu"
     },
     {
-      "type": "color",
-      "id": "header_section_color_scheme",
-      "label": "Section Color Scheme",
-      "default": "#ffffff"
-    },
-    {
       "type": "color_scheme",
       "id": "color_scheme",
       "label": "Header Color Scheme",
-      "default": "scheme-1"
-    },
-    {
-      "type": "color_scheme",
-      "id": "mobile_menu_color_scheme",
-      "label": "Mobile Menu Color Scheme",
       "default": "scheme-1"
     },
     {
