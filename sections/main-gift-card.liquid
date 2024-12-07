@@ -1,0 +1,206 @@
+{%- assign formatted_initial_value_stripped = formatted_initial_value | strip_html -%}
+{%- assign formatted_initial_value = gift_card.initial_value | money_without_trailing_zeros | strip_html -%}
+ <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@600&display=swap" rel="stylesheet">
+<style>
+  .main ,
+  .gift-container-design,
+  .semicircle ,
+  .semicircle-down,
+  .gift-container-design::before,
+  .gift-container-design::after{
+      background-color:{{section.settings.background_color}};
+  }
+  .gift-container{
+      background-color:{{section.settings.card_color}};
+  }
+  .gift_card-logo{
+      width:{{section.settings.logo_max_width}}px;  
+      height:146px;
+  }
+  .gift-card-card{
+      {% if section.settings.card_image %}
+          background-image: url('{{ section.settings.card_image | img_url: 'master' }}');
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+       {% endif %}
+  }
+  @media (max-width: 768px) {
+    .gift-card-main{
+        {% if section.settings.card_image %}
+          background-image: url('{{ section.settings.card_image | img_url: 'master' }}');
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+       {% endif %}
+    }
+    .gift_card-logo{
+    height:105px;
+    }
+    .gift-card-card{
+       background-image:none;
+    }
+  }
+
+</style>
+ <div class="main " >
+  <div class="gift-container-design" >
+      <div class="semicircle-border">
+        <div class="semicircle"></div>
+        <div class="semicircle"></div>
+        <div class="semicircle"></div>
+        <div class="semicircle"></div>
+        <div class="semicircle"></div>
+        <div class="semicircle"></div>
+        <div class="semicircle"></div>
+        <div class="semicircle"></div>
+      </div>
+    <div class="gift-container" >
+       <header>
+          <h1 class="gift-card-title">Your Gift Card</h1>
+           {% if section.settings.logo %}
+          <div class="gift_card-logo">  <img src="{{ section.settings.logo | img_url: 'master' }}" alt="{{ block.settings.title }}"> </div>
+          {% else  %}
+              <p class="gift-card-theme">Theme-{{ shop.name }}</p>
+             {% endif %}
+         
+      {% if gift_card.expires_on %}
+        {%- assign gift_card_expiration_date = gift_card.expires_on | date: '%B %e, %Y' -%}
+        <p class="gift-card__text">
+          {{ 'gift_cards.issued.expiration_date' | t: expires_on: gift_card_expiration_date }}
+        </p>
+      {% endif %}
+    </header>
+    <main>
+      <div class="gift-card__image-wrapper">
+        {%- if settings.logo != blank -%}
+          {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
+          {{ settings.logo | image_url: width: 570 | image_tag: class: 'gift-card__image', alt: logo_alt }}
+        {%- else %}
+  <div class="gift-card-card">
+    <div class="triangle-top"><h2></h2></div>
+    <div class="gift-card-main">
+        <div class="gift-card-amount">
+      <span>
+        {{ gift_card.initial_value | money_without_trailing_zeros }}
+      </span></div>
+    <div class="gift-card-code">
+      <span>{{ gift_card.code | format_code }}</span>
+    </div>
+    </div>
+      
+      <button class="copy-button" onclick="copyCode()">Copy</button>
+   <div class="gift-card-triangle"><h2></h2></div>
+  </div>
+        {%- endif %}
+      </div>
+      <div class="gift-card__text-wrapper">
+        <p class="gift-card__text">Use this code to redeem you gift</p>
+        <div class="separator">
+          <span>OR</span>
+        </div>
+      </div>
+
+      <div class="gift-card__qr-code" data-identifier="{{ gift_card.qr_identifier }}"></div>
+      <div class="scan_qr_code">
+         <p class="scan_qr"> Scan the QR code</p>
+      </div>
+      {%- if gift_card.pass_url -%}
+        <a href="{{ gift_card.pass_url }}" class="gift_card__apple-wallet no-print">
+          <img
+            src="{{ 'gift-card/add-to-apple-wallet.svg' | shopify_asset_url }}"
+            width="120"
+            height="40"
+            alt="{{ 'gift_cards.issued.add_to_apple_wallet' | t }}"
+            loading="lazy"
+          >
+        </a>
+      {%- endif -%}
+      <div class="gift-card__buttons no-print">
+        <span class="gift-card__copy-success form__message" role="status"></span>
+        <template>
+          <span class="svg-wrapper">
+            {{- 'icon-success.svg' | inline_asset_content -}}
+          </span>
+          {{ 'gift_cards.issued.copy_code_success' | t }}
+        </template>
+        <div class="button-container">
+           <button class="button gift-card__copy-button">Print Gift Card</button>
+        <a
+          href="{{ shop.url }}"
+          class="button button--secondary"
+          target="_blank"
+          rel="noopener"
+          aria-describedby="a11y-new-window-message"
+        >
+         <span>Shop Now</span> 
+        </a>
+        </div>
+       </div>
+    </main>
+    <div hidden>
+      <span id="a11y-new-window-message">{{ 'accessibility.link_messages.new_window' | t }}</span>
+    </div>
+    </div>
+      <div class="semicircle-border-down">
+        <div class="semicircle-down"></div>
+        <div class="semicircle-down"></div>
+        <div class="semicircle-down"></div>
+        <div class="semicircle-down"></div>
+        <div class="semicircle-down"></div>
+        <div class="semicircle-down"></div>
+        <div class="semicircle-down"></div>
+        <div class="semicircle-down"></div>
+      </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.main-gift-card.name",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.main-gift-card.settings.header_1.content"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "t:sections.main-gift-card.settings.logo.label"
+    },
+    {
+      "type": "range",
+      "id": "logo_max_width",
+      "min": 50,
+      "max": 250,
+      "step": 10,
+      "default": 100,
+      "unit": "px",
+      "label": "t:sections.main-gift-card.settings.logo_max_width.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.main-gift-card.settings.header_2.content"
+    },
+    {
+      "type": "image_picker",
+      "id": "card_image",
+      "label": "t:sections.main-gift-card.settings.card_image.label"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#FFFFFF"
+    },
+     {
+      "type": "color",
+      "id": "card_color",
+      "label": "Card Color",
+      "default": "#FFFFFF"
+    },
+  ]
+}
+{% endschema %}
