@@ -725,12 +725,16 @@ constructor() {
   super();
    this.spanTextElements = document.querySelectorAll('.scrollable-text');
    this.scrollingContainers = document.querySelectorAll('.scrolling-text-container');
+   this.scrollingText = document.querySelectorAll('.scrolling-text');
     // Check if text length is greater than 20 characters
     this.spanTextElements.forEach((spanTextElement, index) => {
-    const scrollingContainer = this.scrollingContainers[index];   
+    const scrollingContainer = this.scrollingContainers[index];
+    const scrollingText = this.scrollingText[index];   
     // Check if text length is greater than 20 characters
     if (spanTextElement && spanTextElement.textContent.length > 25) {
       scrollingContainer.classList.add('scroll-enabled'); // Enable scrolling
+      scrollingText.style.animationDuration = spanTextElement.textContent.length/2 + "s";
+      console.log("Nik ", spanTextElement.textContent.length/2 , scrollingText.style.animationDuration) 
     }
     });
     setTimeout(() => {
