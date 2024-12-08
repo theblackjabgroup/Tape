@@ -3407,7 +3407,7 @@ details-disclosure > details {
 
 .scrolling-text-container.scroll-enabled .scrolling-text {
   display: inline-block;
-  animation: scrollText 10s linear infinite; 
+  animation: scrollText linear infinite; 
 }
 @keyframes scrollText {
   0% {
