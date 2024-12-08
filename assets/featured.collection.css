@@ -264,7 +264,7 @@ h7 {
 
 .slider-arrow1:hover::before,
 .slider-arrow1:hover::after {
-  background: #333;
+  background: #fff;
   width: 18px;
 }
 
@@ -294,6 +294,7 @@ h7 {
 .view-all-link {
 display: block;
     width: 83%;
+  margin-left:20px;
     padding: 12px 20px;
     background-color: #fff;
     border: 1px solid #000;
