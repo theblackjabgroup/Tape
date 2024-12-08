@@ -177,13 +177,13 @@ body {
   border-radius:10px;
 }
 
-.footer-column form button {
+/* .footer-column form button {
     border-radius: 5px;
     font-size: 15px;
     width: 120px;
     height: 40px;
     padding: 5px 10px;
-    background: linear-gradient(to right, gray 50%, black 50%);
+    
     background-size: 200% 100%;
     background-position: 100% 0;
     color: white;
@@ -201,7 +201,7 @@ body {
     position: relative;
     margin-left: 5px;
     font-size: 14px;
-}
+}  */
  .social-icons {
         flex-direction: row; 
         flex-wrap: nowrap;
