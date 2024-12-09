@@ -80,6 +80,7 @@
 
 .bb-upper-thumbnail {
   padding-left: 5rem;
+  padding-bottom: 20px;
 }
 
 .bb-global-media-settings {
@@ -324,6 +325,8 @@ border-radius: 50%;
 
 #product-upper-bg {
   background-color: var(--background_product_card);
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px
 }
 
 .bb-variant-circle input[type='radio'] + label {
@@ -573,6 +576,16 @@ border-radius: 50%;
 }
 
 @media screen and (max-width: 749px) {
+
+  .product-media-container.constrain-height.media-fit-contain {
+    --contained-width: calc(var(--constrained-height) * var(--aspect-ratio)); 
+  }
+
+  #bb_product__media_first {
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+  }
+
   .bb-pmg {
     top: -10px;
   }
