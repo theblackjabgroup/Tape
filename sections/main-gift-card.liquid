@@ -2,6 +2,36 @@
 {%- assign formatted_initial_value = gift_card.initial_value | money_without_trailing_zeros | strip_html -%}
  <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@600&display=swap" rel="stylesheet">
 <style>
+.triangle-top,
+  gift-card-triangle,
+  {
+   background-color: #FDF4D7;
+     background-color: #FDF4D7;
+}
+  .button--secondary {
+    background-color:text-coloe;
+  }
+.gift-card-title{
+  color: #FDF4D7;
+}
+  .gift-card-theme,
+  .scan_qr_code,
+  .gift-card__text-wrapper,
+  .gift-card__text,
+  .button{
+    color:ljoije
+  }
+  .gift-card-amount span{
+color:ooseioj
+  }
+  .gift-card-code span{
+    color;joijwe
+  }
+  .separator::before,
+.separator::after {
+  border-bottom: 1px solid #e0e0e0;
+}
+  
   .main ,
   .gift-container-design,
   .semicircle ,
@@ -200,6 +230,18 @@
       "id": "card_color",
       "label": "Card Color",
       "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "btn_color",
+      "label": "Button Color",
+      "default": "#000000"
     },
   ]
 }
