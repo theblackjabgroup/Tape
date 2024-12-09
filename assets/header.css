@@ -142,6 +142,7 @@
 .nav-link::before {
   content: '';
   position: absolute;
+  border-radius: 4px;
   top: 0;
   left: 0;
   right: 0;
@@ -169,6 +170,7 @@
   transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
   padding: 16px;
   white-space: nowrap;
+  border-radius: 4px;
 }
 
 .dropdown-container.show {
@@ -188,6 +190,7 @@
 
 .nested-dropdown {
   position: absolute;
+  border-radius: 4px;
   left: 100%;
   top: 0;
   height: fit-content;
@@ -206,6 +209,7 @@
 
 .dropdown-item {
   padding:12px 24px;
+  border-radius: 4px;
   text-decoration: none;
   display: block !important;
   cursor: pointer;
