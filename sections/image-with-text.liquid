@@ -8,7 +8,7 @@
   }
 {% endstyle %}
 
-<div class="image__with__text__section" style="background-color: var(--section-color)" data-section-id="{{ section.id }}">
+<div class="image__with__text__section color-{{ section.settings.sectionColor }}" data-section-id="{{ section.id }}">
   <div class="image__with__text__outer__container">
     <ul class="image__with__text__inner__container">
       {% for item in section.blocks %}
@@ -160,7 +160,7 @@ infoBannerExpandButton.addEventListener('click', () => {
   "name": "Image With Text",
   "settings": [
     {
-      "type": "color",
+      "type": "color_scheme",
       "id": "sectionColor",
       "label": "Section Color"
     },

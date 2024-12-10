@@ -3,8 +3,6 @@
 
 {% style %}
   :root {
-    --featured-icon-with-text-section-color: {{ section.settings.sectionColor }};
-    --featured-icon-with-text-section-headings-color: {{ section.settings.sectionHeadingsColor }};
     --featured-icon-with-text-card-color: {{ section.settings.cardColor }};
     --featured-icon-with-text-inner-card-color: {{ section.settings.innerCardColor }};
     --featured-icon-with-text-title-color: {{ section.settings.titleColor }};
@@ -13,7 +11,7 @@
 }
 {% endstyle %}
 
-<div style="display: flex; flex-direction: column; gap: 6rem; padding: 20px 0;" class="featured-icon-with-text-section" data-section-id="{{ section.id }}">
+<div style="display: flex; flex-direction: column; gap: 6rem; padding: 20px 0;" class="color-{{ section.settings.sectionColor }}" data-section-id="{{ section.id }}">
   <div style="display: flex; flex-direction: column; gap: 4px; padding: 0 20px;">
     <p style="font-weight: 600; font-size: 24px; line-height: 30px; color: var(--featured-icon-with-text-section-headings-color)" class="fira-sans-semibold">{{ section.settings.heading }}</p>
     <p style="font-weight: 500; font-size: 14px; line-height: 21px; color: var(--featured-icon-with-text-section-headings-color)" class="inter-medium">{{ section.settings.subheading }}</p>
@@ -111,16 +109,10 @@
       "default": "Prioritize your well-being"
     },
     {
-      "type": "color",
-      "label": "Section Headings Color",
-      "id": "sectionHeadingsColor",
-      "default": "#000000"
-    },
-    {
-      "type": "color",
-      "label": "Section Background Color",
+      "type": "color_scheme",
+      "label": "Section Color",
       "id": "sectionColor",
-      "default": "#F5F5F5"
+      "default": "scheme_1"
     },
     {
       "type": "color",

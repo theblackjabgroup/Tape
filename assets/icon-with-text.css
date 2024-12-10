@@ -2,9 +2,7 @@
   margin: 0;
   padding: 0;
 }
-.featured-icon-with-text-section {
-  background-color: var(--featured-icon-with-text-section-color);
-}
+
 .icon-with-text-container {
   display: flex;
   overflow-x: scroll;
