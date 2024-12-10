@@ -7,11 +7,10 @@
       background-color: var(--background_product_card);
       color:var(--color_text);
   }
-  .btn{
-    background-color:var(--secondary_product_button_color);
+  .slideshow_btn{
+    background-color:rgb(var(--color-button-text));
+    color:rgb(var(--color-secondary-button-text));
   }
-  .
-  
 </style>
 <div class="slideshow-section color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
   <div class="interactive-slideshow">
@@ -40,7 +39,7 @@
             </div>
             <div class="des-button">
                {% if block.settings.show_button %}
-              <a href="{{ block.settings.button_link }}" class="btn">{{ block.settings.button_text }}</a>
+              <a href="{{ block.settings.button_link }}" class="slideshow_btn">{{ block.settings.button_text }}</a>
               {% endif %}
                  </div>
         </div>

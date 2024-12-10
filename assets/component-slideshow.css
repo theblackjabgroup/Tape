@@ -18,7 +18,7 @@
   font-size: 28px;
   margin: 5px 0;
 }
-.btn {
+.slideshow_btn {
   font-family: 'Inter', sans-serif;
   font-weight: 400;
   font-style: normal;
@@ -322,7 +322,7 @@
 }
 
   
-.btn {
+.slideshow_btn {
     align-self: start;
 }
   
