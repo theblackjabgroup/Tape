@@ -142,7 +142,7 @@ font-family: 'Fira Sans', sans-serif;
 font-weight: 600; 
 font-size: 39px; 
 line-height:auto;
-margin-bottom: 29px;
+margin-bottom: 0px;
 }
 .gift-card-theme {
 font-family: 'Fira Sans', sans-serif;
@@ -200,6 +200,9 @@ cursor: pointer;
 padding: 0 5px;
 }
 .separator {
+      font-family: Inter, sans-serif;
+    font-weight: 400;
+    font-size: 15px;
   display: flex;
   align-items: center;
    width: 40%; 
@@ -348,7 +351,6 @@ text-align: center;
 }
 
 .gift-card-title {
-font-size: 1.5rem;
 font-weight: bold;
 }
 .gift-card-theme {
