@@ -21,7 +21,7 @@
   padding-top: var(--padding-top);
   padding-bottom: var(--padding-bottom);
   height: calc(100% + var(--header-height-auto));
-  background-color: var(--header-section-color-scheme);
+  background: rgb(var(--color-background));
 }
 
 .logo-container {
@@ -38,6 +38,7 @@
   font-family: Arial, sans-serif;
   font-size: 14px;
   display: inline-block !important;
+  word-break: break-all;
 }
 
 .logo-container img {
@@ -54,13 +55,13 @@
   cursor: pointer;
   display: inline-block !important;
   border-radius: 5px;
-  background-color:rgb(var(--color-background))
+  background-color: var(--background_product_card);
 }
 
 .hamburger-line {
   width: calc(var(--hamburger-size) * 0.38);
   height: 1px;
-  background-color: rgb(var(--color-foreground));
+  background-color: rgb(var(--color-secondary-button-text));
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
@@ -94,6 +95,7 @@
   transition: all 0.3s ease;
   box-sizing: border-box;
   border-radius: 4px 0 0 4px;
+  background-color: var(--background_product_card);
   }
 
 .header.show {
@@ -128,6 +130,8 @@
   padding: 8px 12px;
   border-radius: 4px;
   font-size: var(--font-size);
+  color: rgb(var(--color-text));
+  background: none;
   font-weight: 500;
   line-height: 1.25rem;
   text-align: center;
@@ -313,7 +317,7 @@
   transition: right 0.3s ease-in-out;
   z-index: 1000;
   overflow-y: auto;
-  background-color: rgb(var(--color-background));
+  background-color: var(--background_product_card);
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -435,7 +439,7 @@ body.drawer-open {
   align-items: center;
   text-decoration: none;
   cursor: pointer;
-  color: rgb(var(--color-foreground));
+  color: rgb(var(--color-text));
 }
 
 .mobile-dropdown {
@@ -567,14 +571,14 @@ body.drawer-open {
   border: none;
   outline: none;
   width: 100%;
-  padding: 5px;
-  font-size: 12pz;
+  font-size: 12px;
   box-shadow: none !important;
 }
 
 .mobile-search-form .svg-wrapper {
-  width: 16px;
-  height: 16px;
+  width: 12px;
+  height: 12px;
+  color: gray;
 }
 
 .mobile-search-form input[type="search"]::placeholder {
