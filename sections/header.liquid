@@ -1,12 +1,8 @@
 <link rel="stylesheet" href="{{ 'header.css' | asset_url }}">
 <script src="{{ 'header.js' | asset_url }}" defer></script>
 <link rel="stylesheet" href="{{'scroll-tracker.css' |  asset_url}}" media="print" onload="this.media='all'">
-{% style %}
-  :root{
-    --header-section-color-scheme: {{ section.settings.header_section_color_scheme }};
-  }
-{% endstyle %}
-<{% if section.settings.sticky_header_type != 'none' %}sticky-header data-sticky-type="{{ section.settings.sticky_header_type }}"{% else %}div{% endif %} class="header-wrapper color-{{ section.settings.header_section_color_scheme }}" style="--padding-top: {{ section.settings.padding_top }}px; --padding-bottom: {{ section.settings.padding_bottom }}px;">
+
+<{% if section.settings.sticky_header_type != 'none' %}sticky-header data-sticky-type="{{ section.settings.sticky_header_type }}"{% else %}div{% endif %} class="header-wrapper color-{{ section.settings.color_scheme }}" style="--padding-top: {{ section.settings.padding_top }}px; --padding-bottom: {{ section.settings.padding_bottom }}px;">
   <div class="flex-container">
     <a href="{{ routes.root_url }}" class="logo-container">
       {% if section.settings.logo or settings.logo != blank %}
@@ -88,7 +84,7 @@
       </div>
     </header>
 
-    <div class="mobile-header-drawer color-{{ section.settings.mobile_menu_color_scheme }}">
+    <div class="mobile-header-drawer color-{{ section.settings.color_scheme }}">
       <div class="mobile-header-drawer-close">
         <div class="close-icon">
           <span class="svg-wrapper" style="width: 12px; height: 12px;">
@@ -170,12 +166,12 @@
         <div class="mobile-nav-icons">
           <div class="nav-icon">
             <a href="{{ routes.cart_url }}" class="js-drawer-open-cart">
-            <span class="svg-wrapper" style="height: 12px; width: 12px;">{{ 'icon-cart.svg' | inline_asset_content }}</span>
+            <span class="svg-wrapper" style="height: 16px; width: 16px;">{{ 'icon-cart.svg' | inline_asset_content }}</span>
             </a>
           </div>
           <div class="nav-icon">
             <a href="{{ routes.account_url }}" class="">
-            <span class="svg-wrapper" style="height: 12px; width: 12px;">{{ 'icon-account.svg' | inline_asset_content }}</span>
+            <span class="svg-wrapper" style="height: 16px; width: 16px;">{{ 'icon-account.svg' | inline_asset_content }}</span>
             </a>
           </div>
         </div>
@@ -202,21 +198,9 @@
       "default": "main-menu"
     },
     {
-      "type": "color",
-      "id": "header_section_color_scheme",
-      "label": "Section Color Scheme",
-      "default": "#ffffff"
-    },
-    {
       "type": "color_scheme",
       "id": "color_scheme",
       "label": "Header Color Scheme",
-      "default": "scheme-1"
-    },
-    {
-      "type": "color_scheme",
-      "id": "mobile_menu_color_scheme",
-      "label": "Mobile Menu Color Scheme",
       "default": "scheme-1"
     },
     {
