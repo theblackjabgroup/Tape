@@ -48,10 +48,10 @@
       height:146px;
   }
   .gift-card-card{
+      border-radius:5px;
       {% if section.settings.card_image %}
           background-image: url('{{ section.settings.card_image | img_url: 'master' }}');
           background-size: cover;
-          background-position: center;
           background-repeat: no-repeat;
        {% endif %}
   }
@@ -60,7 +60,6 @@
         {% if section.settings.card_image %}
           background-image: url('{{ section.settings.card_image | img_url: 'master' }}');
           background-size: cover;
-          background-position: center;
           background-repeat: no-repeat;
        {% endif %}
     }
@@ -125,7 +124,7 @@
         {%- endif %}
       </div>
       <div class="gift-card__text-wrapper">
-        <p class="gift-card__text">Use this code to redeem you gift</p>
+        <p class="gift-card__text">Use this code to redeem your gift</p>
         <div class="separator">
           <span>OR</span>
         </div>
