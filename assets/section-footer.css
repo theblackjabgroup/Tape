@@ -263,7 +263,7 @@ body {
   }
 
   .footer-column form button {
-    margin-right: 10px;
+    margin-left: -18px;
   }
 
   .footer-column:not(#newsletter-section1) h4 {
@@ -305,7 +305,7 @@ body {
 
   .footer-column form input {
     padding: 10px 10px 10px 50px;
-    margin-right: 10px;
+    margin-left: -17px;
     border: 1px solid #ccc;
     margin-bottom: 14px;
     font-family: 'Inter', sans-serif;
@@ -317,6 +317,7 @@ body {
   .footer-envelope-icon1{
     font-size:15px;
                 margin-top: 3px;
+    margin-left: 7px;
   }
   .footer-column:not(#newsletter-section1) h4.active::after {
     transform: rotate(-135deg);
