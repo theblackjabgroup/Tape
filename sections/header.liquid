@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="{{'scroll-tracker.css' |  asset_url}}" media="print" onload="this.media='all'">
 
 <{% if section.settings.sticky_header_type != 'none' %}sticky-header data-sticky-type="{{ section.settings.sticky_header_type }}"{% else %}div{% endif %} class="header-wrapper color-{{ section.settings.color_scheme }}" style="--padding-top: {{ section.settings.padding_top }}px; --padding-bottom: {{ section.settings.padding_bottom }}px;">
-  <div class="flex-container">
+  <div class="flex-container" style="--margin-right: {{ section.settings.margin_right }}px; --margin-left: {{ section.settings.margin_left }}px">
     <a href="{{ routes.root_url }}" class="logo-container">
       {% if section.settings.logo or settings.logo != blank %}
       <img src="{% if section.settings.logo != blank %}{{ section.settings.logo | image_url }}{% else %}{{ settings.logo | image_url }}{% endif %}" alt="{{ shop.name }}" loading="lazy" width="500" height="500">
@@ -54,7 +54,7 @@
                       </li>
                     {% endfor %}
                   </ul>
-                  <div class="dropdown-overlay"></div>
+                  <div class="dropdown-overlay" style="z-index: 999;"></div>
                 </div>
               {% endif %}
             </li>
@@ -62,7 +62,7 @@
         </ul>
       </nav>
       {%- if section.settings.enable_scroll_tracking -%}
-        <div class="scroll-tracker"><p><span id="scrollDistance"></span>Km</p> <span class="svg-wrapper" style="height: 12px; width: 12px;">{{ 'icon-arrow.svg' | inline_asset_content }}</span></div>
+        <div class="scroll-tracker"><p><span class="scroll-distance"></span>Km</p> <span class="svg-wrapper" style="height: 12px; width: 12px;">{{ 'icon-arrow.svg' | inline_asset_content }}</span></div>
       {%- endif -%}
       <div class="nav-icons">
         <div class="nav-icon">
@@ -162,6 +162,11 @@
               </localization-form>
             {% endif %}
           </div>
+        </div>
+        <div style="display: flex;align-items: center;">
+          {%- if section.settings.enable_scroll_tracking -%}
+            <div class="scroll-tracker"><p><span class="scroll-distance"></span>Km</p></div>
+          {%- endif -%}
         </div>
         <div class="mobile-nav-icons">
           <div class="nav-icon">
@@ -309,7 +314,25 @@
       "step": 1,
       "min": 0,
       "max": 100
-    }
+    },
+    {
+      "type": "range",
+      "id": "margin_left",
+      "label": "Margin Left",
+      "default": 71,
+      "step": 1,
+      "max": 100,
+      "min": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_right",
+      "label": "Margin Right",
+      "default": 71,
+      "step": 1,
+      "max": 100,
+      "min": 0
+    },
   ],
   "blocks": [
     {

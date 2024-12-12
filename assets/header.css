@@ -166,8 +166,9 @@
 }
 
 .dropdown-container {
+  background-color: var(--background_product_card);
   position: absolute;
-  top: calc(100% + 26px);
+  top: 100%;
   left: 0%;
   opacity: 0;
   visibility: hidden;
@@ -175,6 +176,7 @@
   padding: 16px;
   white-space: nowrap;
   border-radius: 4px;
+  z-index: 9999;
 }
 
 .dropdown-container.show {
@@ -185,6 +187,7 @@
 
 .dropdown,
 .nested-dropdown {
+  background-color: var(--background_product_card);
   z-index: 1;
   min-height: var(--dropdown-min-height);
   display: flex !important;
@@ -212,6 +215,7 @@
 }
 
 .dropdown-item {
+  background-color: var(--background_product_card);
   padding:12px 24px;
   border-radius: 4px;
   text-decoration: none;
@@ -228,7 +232,7 @@
 }
 
 .dropdown-item:hover {
-  background-color: rgba(var(--color-foreground), 0.2);
+  background-color: rgba(0,0,0,0.2);
 }
 
 .flex-container {
@@ -238,7 +242,7 @@
   padding: 8px 0;
   position: relative;
   overflow-x: clip;
-  margin: 0 71px 0 71px;
+  margin: 0 var(--margin-right) 0 var(--margin-left);
 }
 
 .nav-icons {
@@ -279,7 +283,7 @@
 .nested-dropdown-overlay {
   position: absolute;
   top: 0;
-  left: -5%;
+  left: -2%;
   width: 100%;
   height: 100%;
   display: flex;
@@ -315,7 +319,7 @@
   width: 80%;
   height: 100%;
   transition: right 0.3s ease-in-out;
-  z-index: 1000;
+  z-index: 9999;
   overflow-y: auto;
   background-color: var(--background_product_card);
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
@@ -559,6 +563,7 @@ body.drawer-open {
 }
 
 .mobile-search-form {
+  border-radius: 4px;
   display: flex;
   align-items: center;
   gap: 8px;

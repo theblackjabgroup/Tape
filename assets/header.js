@@ -170,10 +170,15 @@ document.addEventListener('DOMContentLoaded', function () {
   let prevScrollY = window.scrollY;
 
   // Update scroll distance display on page load
-  const scrollDistanceEl = document.getElementById('scrollDistance');
-  if (scrollDistanceEl) {
-    scrollDistanceEl.textContent = scrollDistance.toFixed(2);
-  }
+  const scrollDistanceElements = document.querySelectorAll('.scroll-distance');
+  const updateScrollDisplays = () => {
+    scrollDistanceElements.forEach(el => {
+      el.textContent = scrollDistance.toFixed(2);
+    });
+  };
+
+  // Update displays on initial load
+  updateScrollDisplays();
 
   // Throttle scroll handler for better performance
   let ticking = false;
@@ -190,11 +195,9 @@ document.addEventListener('DOMContentLoaded', function () {
       // Convert pixels to kilometers
       scrollDistance += deltaY / 1000000;
 
-      // Update display and save to localStorage
-      if (scrollDistanceEl) {
-        scrollDistanceEl.textContent = scrollDistance.toFixed(2);
-        localStorage.setItem('scrollDistance', scrollDistance);
-      }
+      // Update displays and save to localStorage
+      updateScrollDisplays();
+      localStorage.setItem('scrollDistance', scrollDistance);
 
       prevScrollY = currentScrollY;
       ticking = false;
