@@ -195,7 +195,7 @@
   transform: var(--info__banner__transform);
   padding: var(--info__banner__padding);
   display: var(--info__banner__visibillity);
-  z-index: 1000;
+  z-index: 1;
 }
 
 .info__banner__contents {
