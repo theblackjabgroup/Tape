@@ -272,15 +272,36 @@ if (!customElements.get('cart-note')) {
     class CartNote extends HTMLElement {
       constructor() {
         super();
+        this.noteTextarea = null;
+      }
 
-        this.addEventListener(
-          'input',
-          debounce((event) => {
-            const body = JSON.stringify({ note: event.target.value });
-            fetch(`${routes.cart_update_url}`, { ...fetchConfig(), ...{ body } });
-          }, ON_CHANGE_DEBOUNCE_TIMER)
-        );
+      connectedCallback() {
+        this.noteTextarea = this.querySelector('textarea');
+        if (this.noteTextarea) {
+          this.noteTextarea.addEventListener(
+            'input',
+            debounce((event) => {
+              const body = JSON.stringify({ note: event.target.value });
+              fetch(`${routes.cart_update_url}`, { ...fetchConfig(), ...{ body } });
+            }, ON_CHANGE_DEBOUNCE_TIMER)
+          );
+        }
       }
     }
   );
 }
+document.addEventListener('DOMContentLoaded', () => {
+  const noteToggle = document.querySelector('.js-toggle-cart-note');
+  const cartNote = document.querySelector('cart-note');
+
+  if (noteToggle && cartNote) {
+    noteToggle.addEventListener('click', () => {
+      cartNote.classList.toggle('hidden');
+      
+      const textarea = cartNote.querySelector('textarea');
+      if (!cartNote.classList.contains('hidden')) {
+        textarea.focus();
+      }
+    });
+  }
+});
