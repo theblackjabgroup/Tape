@@ -5,6 +5,8 @@
 {{ 'component-discounts.css' | asset_url | stylesheet_tag }}
 {{ 'quantity-popover.css' | asset_url | stylesheet_tag }}
 
+
+
 {%- style -%}
   .section-{{ section.id }}-padding {
     padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
@@ -19,9 +21,46 @@
   }
 {%- endstyle -%}
 
+{% liquid
+  assign upsell_product_source = settings.upsell_product_source
+  assign show_upsells = true
+  assign product_metafield_active = false
+  for item in cart.items
+    assign complementary_products = item.product.metafields['shopify--discovery--product_recommendation'].complementary_products
+    if complementary_products
+      assign product_metafield_active = item.product.id
+      break
+    endif
+  endfor
+
+  if upsell_product_source == 'complementary-products' and product_metafield_active == false
+    assign show_upsells = false
+  endif
+
+  assign lite_items = cart.items
+  assign product_upsells_list = settings.product_upsells_list
+  assign active_products = product_upsells_list.count
+  for product_upsell in product_upsells_list
+    assign product_upsell_id = product_upsell.id
+    assign product_added = lite_items | where: 'product_id', product_upsell_id
+    if product_added.size > 0
+      assign active_products = active_products | minus: 1
+    endif
+  endfor
+
+ 
+%}
+
+
+
+
+
 {%- unless settings.cart_type == 'drawer' -%}
   <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
 {%- endunless -%}
+
+
+
 
 <script src="{{ 'quantity-popover.js' | asset_url }}" defer="defer"></script>
 
@@ -449,7 +488,11 @@
       </p>
     </form>
   </div>
+
+  <!-- product recommendation  -->
+ 
 </cart-items>
+
 
 {% schema %}
 {
@@ -484,7 +527,16 @@
       "unit": "px",
       "label": "t:sections.all.padding.padding_bottom",
       "default": 36
-    }
-  ]
+    },
+       {
+          "type": "checkbox",
+          "id": "make_collapsible_row",
+          "default": false,
+          "label": "t:sections.main-product.blocks.complementary_products.settings.make_collapsible_row.label"
+        },
+  ],
+   
+  
 }
+
 {% endschema %}
