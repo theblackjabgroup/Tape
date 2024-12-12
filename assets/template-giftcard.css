@@ -15,7 +15,8 @@ align-items:center;
 justify-content:center;
 }
 .gift_card-logo{
-margin-bottom:24px;
+   margin-top:16px;
+margin-bottom:11px;
 }
 .gift_card-logo img{
   width:100%;
