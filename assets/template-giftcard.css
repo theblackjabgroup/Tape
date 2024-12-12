@@ -1,3 +1,4 @@
+
 .main {
   height: auto;
   width: 100%;
@@ -43,17 +44,15 @@ transform: translateY(-50%);
 
 
 .triangle-top{
-  position: absolute;
+position: absolute;
 top: 0;
 right: 0;
 width: 28px;
 height: 17px;
 border-style: solid;
 border-width: 0 0 66px 118px;
-border-color:#FDF4D7 ;
 z-index: 1;
 clip-path: polygon(57% 0%, 64% 69%, 350% 63%);
- background-color: #FDF4D7;
 }
 .gift-card-triangle {
 position: absolute;
@@ -63,10 +62,8 @@ width: 28px;
 height: 48px;
 border-style: solid;
 border-width: 0 0 69px 112px;
-border-color:#FDF4D7 ;
 z-index: 1;
 clip-path: polygon(95% 48%, 1% 100%, 100% 77%);
- background-color: #FDF4D7;
 }
 
 .gift-container-design {
@@ -145,8 +142,7 @@ font-family: 'Fira Sans', sans-serif;
 font-weight: 600; 
 font-size: 39px; 
 line-height:auto;
-margin-bottom: 29px;
-color: #FDF4D7;
+margin-bottom: 0px;
 }
 .gift-card-theme {
 font-family: 'Fira Sans', sans-serif;
@@ -154,7 +150,6 @@ font-weight: 400;
 font-size: 15px;
 line-height: auto;
 letter-spacing: 3%;
-color: #FDF4D7;
 text-align:center;
 margin-bottom: 20px;
 }
@@ -176,8 +171,6 @@ font-weight: 600;
 font-size: 26px;
 line-height: auto;
 letter-spacing: 0%;
-
-color: #444;
 }
 .gift-card-code{
 background: rgba(255, 255, 255, 0.25);
@@ -193,7 +186,6 @@ border-radius:4px;
 font-family: 'Inter', sans-serif;
 font-weight: 500; /* Medium */
 font-size: 17px;
-color: #000000;
 }
 .copy-button {
 font-family: 'Inter', sans-serif;
@@ -203,15 +195,14 @@ line-height: auto;
 letter-spacing: 0%;
 background: none;
 border: none;
-color: black;
 text-decoration: underline;
 cursor: pointer;
 padding: 0 5px;
 }
-.copy-button:hover {
-color: #333;
-}
 .separator {
+      font-family: Inter, sans-serif;
+    font-weight: 400;
+    font-size: 15px;
   display: flex;
   align-items: center;
    width: 40%; 
@@ -221,19 +212,16 @@ color: #333;
 .separator::after {
 content: '';
 flex: 1;
-border-bottom: 1px solid #e0e0e0;
 }
 .scan_qr_code{
 display:flex;
 justify-content:center;
-color: #FDF4D7;
 margin-bottom:22px;
 }
 .gift-card__text-wrapper{
 display:flex;
 flex-direction:column;
 align-items:center;
-color: #FDF4D7;
 }
 .separator span {
 padding: 0 16px;
@@ -244,14 +232,11 @@ font-weight: 400;
 font-size: 15px;
 line-height: auto;
 letter-spacing: 0%;
-color:#FFFFFF;
 }
 .button {
 background-color:transparent;
-color: #FDF4D7;
 height:42px;
 width:135px;
-border: 2px solid #FDF4D7;
 border-radius: 5px;
 text-align: center;
 font-size: 1rem;
@@ -261,27 +246,21 @@ cursor: pointer;
 display: flex;
 justify-content:space-around;
 }
-.button:hover {
-background-color: #0056b3;
-}
+
 .button--secondary {
 display:flex;
-background-color: #FDF4D7 ;
-color:black;
 text-decoration:none;
 align-items:center;
 justify-content:center;
+  border:none;
 }
 .button--secondary span{
 font-family: 'Fira Sans', sans-serif;
 font-weight: 500; 
 font-size: 16px;
-line-height: auto;
-letter-spacing: 0%;
+
 }
-.button--secondary:hover {
-background-color: #333;
-}
+
 .gift-card__image-wrapper {
 display: flex;
 justify-content: center;
@@ -301,12 +280,8 @@ font-weight: 500;
 font-size: 16px;
 line-height: auto;
 letter-spacing: 0%;
-color:#FDF4D7;
 }
-.gift-card__copy-button:hover{
- background-color: #FDF4D7;
-  color:black;
-}
+
 .gift-card__buttons{
 margin-bottom:21px;
 }
@@ -353,7 +328,7 @@ margin-bottom:0px;
 .gift-card-amount span{
 font-size: 2rem;
 font-weight: bold;
-color: #FDF4D7;
+
 }
 
 .gift-card-main{
@@ -376,7 +351,6 @@ text-align: center;
 }
 
 .gift-card-title {
-font-size: 1.5rem;
 font-weight: bold;
 }
 .gift-card-theme {
@@ -414,11 +388,9 @@ padding:7px 22px;
 .gift-card-code span {
 font-family: monospace;
 letter-spacing: 1px;
-color: #FDF4D7;
 font-size: 14px;
 }
 .copy-button {
-color: #fff;
 cursor: pointer;
 font-size: 0.9rem;
 margin-top: 25px;

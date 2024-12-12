@@ -2,35 +2,35 @@
 {%- assign formatted_initial_value = gift_card.initial_value | money_without_trailing_zeros | strip_html -%}
  <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@600&display=swap" rel="stylesheet">
 <style>
-.triangle-top,
-  gift-card-triangle,
+  .triangle-top,
+   .gift-card-triangle
   {
-   background-color: #FDF4D7;
-     background-color: #FDF4D7;
-}
+    border-color:{{section.settings.text_color}};
+  }
   .button--secondary {
-    background-color:text-coloe;
+    background-color:{{section.settings.text_color}};
+    color:{{section.settings.card_text_color}};
   }
-.gift-card-title{
-  color: #FDF4D7;
+.scan_qr,
+.separator,
+.gift-card-theme,
+.gift-card-title,
+.gift-card__text,
+.gift-card__copy-button {
+  color:{{section.settings.text_color}};
 }
-  .gift-card-theme,
-  .scan_qr_code,
-  .gift-card__text-wrapper,
-  .gift-card__text,
-  .button{
-    color:ljoije
-  }
-  .gift-card-amount span{
-color:ooseioj
-  }
+.gift-card__copy-button{
+ border: 2px solid {{section.settings.text_color}};
+}
+  .copy-button,
+  .gift-card-amount,
   .gift-card-code span{
-    color;joijwe
+       color:{{section.settings.card_text_color}};
   }
   .separator::before,
-.separator::after {
-  border-bottom: 1px solid #e0e0e0;
-}
+  .separator::after {
+    border-bottom: 1px solid {{section.settings.text_color}};
+  }
   
   .main ,
   .gift-container-design,
@@ -48,10 +48,10 @@ color:ooseioj
       height:146px;
   }
   .gift-card-card{
+      border-radius:5px;
       {% if section.settings.card_image %}
           background-image: url('{{ section.settings.card_image | img_url: 'master' }}');
           background-size: cover;
-          background-position: center;
           background-repeat: no-repeat;
        {% endif %}
   }
@@ -60,7 +60,6 @@ color:ooseioj
         {% if section.settings.card_image %}
           background-image: url('{{ section.settings.card_image | img_url: 'master' }}');
           background-size: cover;
-          background-position: center;
           background-repeat: no-repeat;
        {% endif %}
     }
@@ -125,7 +124,7 @@ color:ooseioj
         {%- endif %}
       </div>
       <div class="gift-card__text-wrapper">
-        <p class="gift-card__text">Use this code to redeem you gift</p>
+        <p class="gift-card__text">Use this code to redeem your gift</p>
         <div class="separator">
           <span>OR</span>
         </div>
@@ -235,12 +234,12 @@ color:ooseioj
       "type": "color",
       "id": "text_color",
       "label": "Text Color",
-      "default": "#000000"
+      "default": "#FDF4D7"
     },
     {
       "type": "color",
-      "id": "btn_color",
-      "label": "Button Color",
+      "id": "card_text_color",
+      "label": "Card Text Color",
       "default": "#000000"
     },
   ]
