@@ -705,6 +705,7 @@ summary::-webkit-details-marker {
 .placeholder-svg {
   height: 100%;
   width: 100%;
+  border-radius: 8px;
 }
 
 /* base-focus */
