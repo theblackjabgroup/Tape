@@ -1,61 +1,67 @@
-.popup-base {
-    position: fixed;
-    bottom: 20px; 
-    left: 20px;
-    transform: none; 
-    width: 312px;
-    height: 272px;
-    clip-path: polygon(2% 15%, 0 15%, 2% 0, 100% 0, 100% 80%, 80% 100%, 2% 100%);
-    background-color: var(--base-bg);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1;
-    border-radius: 8px;
-}
+  @import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400&display=swap');
 
-.popup-content {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    clip-path: polygon(0 0, 100% 0, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0 100%, 0% 20%);
-    background-color: var(--content-bg);
-    box-shadow: 0px 4px 10px rgba(254, 254, 254, 0.2);
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.popup-overlay{
+  position: fixed;
+    bottom: 30px; 
+    left: 25px;
+     display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  border-radius: 8px
+}
+.popup {
+   background: url('data:image/svg+xml;utf8,<svg width="441" height="425" viewBox="0 0 518 425" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M44.0315 21.8066C34.249 21.8223 26.3076 13.8555 26.2942 4.00977C26.2935 3.44531 26.3188 2.88672 26.3691 2.33398C26.4329 1.63672 26.5364 0.951172 26.6775 0.279297H0.212402V31.0078C0.986084 30.8926 1.7771 30.834 2.5813 30.834C11.739 30.834 19.1626 38.5293 19.1626 48.0234C19.1626 57.5156 11.739 65.2109 2.5813 65.2109C2.22534 65.2109 1.87183 65.1992 1.52124 65.1758C1.08008 65.1484 0.643555 65.1016 0.212402 65.0371V98.4883C0.986084 98.373 1.7771 98.3145 2.5813 98.3145C11.739 98.3145 19.1626 106.01 19.1626 115.504C19.1626 124.996 11.739 132.691 2.5813 132.691C1.7771 132.691 0.986084 132.633 0.212402 132.518V167.242C0.986084 167.127 1.7771 167.068 2.5813 167.068C11.739 167.068 19.1626 174.764 19.1626 184.256C19.1626 193.75 11.739 201.445 2.5813 201.445C1.7771 201.445 0.986084 201.387 0.212402 201.271V235.996C0.526123 235.949 0.842773 235.912 1.16187 235.885C1.45801 235.859 1.75635 235.842 2.05664 235.83C2.23096 235.824 2.40576 235.822 2.5813 235.822C11.739 235.822 19.1626 243.52 19.1626 253.012C19.1626 262.504 11.739 270.199 2.5813 270.199C1.7771 270.199 0.986084 270.141 0.212402 270.025V304.75C0.986084 304.635 1.7771 304.576 2.5813 304.576C11.739 304.576 19.1626 312.271 19.1626 321.766C19.1626 331.258 11.739 338.953 2.5813 338.953C1.7771 338.953 0.986084 338.895 0.212402 338.779V373.506C0.986084 373.391 1.7771 373.332 2.5813 373.332C11.739 373.332 19.1626 381.027 19.1626 390.52C19.1626 400.014 11.739 407.709 2.5813 407.709C2.26465 407.709 1.94995 407.699 1.63745 407.682C1.15674 407.654 0.681396 407.605 0.212402 407.535V424.262H29.8474C29.8474 424.232 29.8472 424.203 29.8472 424.174C29.8335 414.33 37.7529 406.336 47.5354 406.32C57.3179 406.305 65.2593 414.273 65.2727 424.117C65.2727 424.166 65.2722 424.213 65.2722 424.262H100.923C100.915 424.045 100.91 423.824 100.91 423.605C100.897 413.762 108.816 405.77 118.599 405.754C128.381 405.738 136.323 413.705 136.336 423.551C136.336 423.789 136.332 424.025 136.323 424.262H171.779L171.765 423.834L171.761 423.494C171.748 413.648 179.667 405.656 189.45 405.641C199.232 405.625 207.174 413.594 207.187 423.438L207.183 423.854L207.17 424.262H242.635C242.621 423.969 242.613 423.676 242.613 423.379C242.599 413.535 250.519 405.543 260.301 405.527C270.083 405.512 278.025 413.479 278.038 423.324C278.039 423.506 278.036 423.686 278.031 423.865L278.016 424.262H313.493C313.484 424.1 313.477 423.938 313.472 423.773C313.467 423.605 313.464 423.438 313.464 423.268C313.45 413.422 321.37 405.43 331.152 405.414C340.935 405.398 348.876 413.367 348.89 423.211C348.89 423.564 348.88 423.914 348.861 424.262H384.35C384.327 423.896 384.316 423.527 384.315 423.156C384.302 413.312 392.221 405.318 402.003 405.303C411.786 405.287 419.727 413.256 419.741 423.1C419.741 423.303 419.738 423.504 419.732 423.705C419.726 423.891 419.717 424.076 419.705 424.262H453.897C453.869 423.859 453.855 423.453 453.854 423.043C453.841 413.199 461.76 405.205 471.542 405.189C481.325 405.176 489.266 413.143 489.28 422.986C489.281 423.416 489.266 423.84 489.237 424.262H517.787V407.83C517.6 407.844 517.412 407.855 517.224 407.863L516.89 407.873L516.581 407.875C507.424 407.875 500 400.18 500 390.688C500 381.193 507.424 373.498 516.581 373.498C516.89 373.498 517.197 373.508 517.501 373.523L517.787 373.543V339.074C517.389 339.104 516.987 339.119 516.581 339.119C507.424 339.119 500 331.424 500 321.932C500 312.438 507.424 304.742 516.581 304.742L517.052 304.748L517.443 304.766L517.787 304.787V270.322C517.389 270.352 516.987 270.367 516.581 270.367C507.424 270.367 500 262.672 500 253.18C500 243.686 507.424 235.99 516.581 235.99L516.972 235.996C517.246 236.002 517.517 236.016 517.787 236.035V201.566C517.389 201.596 516.987 201.611 516.581 201.611C507.424 201.611 500 193.916 500 184.424C500 174.93 507.424 167.234 516.581 167.234C516.987 167.234 517.389 167.25 517.787 167.279V132.812C517.389 132.842 516.987 132.857 516.581 132.857C507.424 132.857 500 125.162 500 115.67C500 106.176 507.424 98.4805 516.581 98.4805L516.999 98.4863L517.434 98.5039L517.787 98.5254V65.332C517.389 65.3613 516.987 65.377 516.581 65.377C507.424 65.377 500 57.6816 500 48.1895C500 38.6953 507.424 31 516.581 31C516.987 31 517.389 31.0156 517.787 31.0449V0.279297H485.546C485.613 0.744141 485.662 1.21289 485.692 1.6875C485.716 2.06445 485.729 2.44336 485.729 2.82422C485.744 12.6699 477.826 20.6621 468.043 20.6758C458.261 20.6895 450.319 12.7207 450.304 2.87695C450.303 2.69922 450.306 2.52148 450.311 2.34375C450.316 2.14258 450.325 1.94141 450.337 1.74219C450.367 1.25 450.417 0.761719 450.486 0.279297H415.989C416.119 1.14648 416.187 2.0332 416.188 2.9375C416.201 12.7812 408.282 20.7754 398.5 20.791C388.717 20.8066 380.776 12.8379 380.762 2.99414C380.761 2.07031 380.83 1.16406 380.963 0.279297H345.12C345.184 0.689453 345.235 1.10547 345.271 1.52539L345.302 1.96289L345.322 2.32812C345.331 2.56641 345.336 2.80664 345.337 3.04883C345.35 12.8926 337.431 20.8867 327.648 20.9023C317.866 20.918 309.925 12.9492 309.911 3.10547C309.911 2.86133 309.915 2.61914 309.925 2.37695L309.946 1.95898C309.961 1.70117 309.983 1.44531 310.009 1.19141C310.027 1.02344 310.047 0.855469 310.069 0.6875L310.128 0.279297H274.251C274.404 1.2168 274.484 2.17969 274.485 3.16211C274.499 13.0059 266.58 20.998 256.797 21.0137C247.014 21.0293 239.073 13.0625 239.06 3.2168C239.059 2.49414 239.1 1.78125 239.182 1.08203C239.214 0.8125 239.251 0.544922 239.295 0.279297H203.381C203.458 0.732422 203.517 1.18945 203.56 1.65234C203.585 1.93555 203.605 2.2207 203.617 2.50781C203.628 2.76172 203.634 3.01758 203.634 3.27539C203.648 13.1191 195.729 21.1133 185.946 21.1289C176.163 21.1445 168.222 13.1758 168.208 3.33203C168.207 2.29102 168.294 1.27148 168.463 0.279297H132.51C132.579 0.669922 132.635 1.06445 132.678 1.46289C132.747 2.0957 132.782 2.73828 132.783 3.38867C132.797 13.2324 124.877 21.2246 115.095 21.2402C105.312 21.2559 97.3708 13.2891 97.3574 3.44336C97.356 2.36328 97.4497 1.30664 97.6311 0.279297H61.3379C61.4653 0.886719 61.5623 1.50781 61.6265 2.13672C61.6873 2.73438 61.719 3.33984 61.7197 3.95312C61.7334 13.7988 53.814 21.791 44.0315 21.8066Z" fill="%23D9D9D9"/></svg>') no-repeat center center;
+    background-size: cover; 
+    padding: 20px; 
+    text-align: center; 
+    position: relative; 
+  width: 441px;
+    height: 369px
+    border-radius: 8px;
     padding: 20px;
-    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+  .test{
+    background-color:white;   
+    height: 311px;
+    border-radius: 5px;
+    margin: 10px;
+  }
+
+ .popup-header-background {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 8px 8px 0 0;
+  padding: 10px 20px;
+   
 }
 
-
-.popup-header {
-    width: 100%;
-    height: 40px;
+.popup-header-background h2 {
+  margin: 0;
+  font-family: 'Fira Sans';
+    font-weight: 600;
 }
 
-.popup-header-background {
-    display: flex;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    height: 165px;
-    clip-path: polygon(0 0, 100% 0, 97% 18%, 0 25%);
-    background-color: var(--header-bg);
-    z-index: 1;
-    padding: 10px;
-    border-radius:8px;
+#closePopup {
+  background: transparent;
+  border: none;
+  color: {{ settings.popup_header_text_color }};
+  cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
-.popup-header h2 {
-    font-size: 2.1rem;
-    margin: -5px 10px;
-    color: var(--header-text);
-    position: relative;
-    z-index: 1;
+#closePopup:hover {
+  transform: scale(1.1);
 }
+
+#closePopup svg {
+  width: 20px;
+  height: 20px;
+}
+
 .popup-message a {
     color: #1a73e8; /* Vibrant link color */
     text-decoration: none; /* Remove underline by default */
@@ -70,188 +76,122 @@
     border-bottom-color: #0c47b8; /* Change underline color on hover */
     text-decoration: none; /* Ensure no default underline */
 }
-
-
-.popup-close-btn {
-    display: flex;
-    font-size: 20px;
-    color: var(--header-text);
-    cursor: pointer;
-    background: none;
-    border: none;
-    position: absolute;
-    z-index: 1;
-    padding: 0 20px 10px 10px;
-    right: -6px;
-    top:-2px;
-}
-
-.popup-message {
-    padding-top: 26px;
-    font-size: 12px;
-    color: var(--popup-text);
+  .popup-message {
+    color: black;
+    margin-top: 8px;
     text-align: justify;
-    margin-top: 6px;
-}
+    padding: 0 20px;
+    font-family: 'Fira Sans';
+    font-weight: 400;
+  }
 
 .popup-input-wrapper {
+    display: flex;
+    align-items: center;
     position: relative;
-    width: 100%;
-    margin-top:12px;
-}
+   
+  margin: 15px 20px 0 20px;
+  }
 
-.popup-email-input {
-    width: 100%;
-    padding: 5px 0 5px 30px;
-    border: 1px solid #ccc;
+
+ .popup-email-input {
+    flex-grow: 1;
+    padding: 8px 12px 8px 36px;
+    border: 1px solid {{ settings.popup_input_border_color }};
     border-radius: 4px;
+    font-size: 14px;
+   font-family: 'Fira Sans';
+    font-weight: 400;
+    width: 100%;
     box-sizing: border-box;
-}
+  }
 
-.email-icon {
+.popup-email-icon {
     position: absolute;
     left: 10px;
     top: 50%;
     transform: translateY(-50%);
-    color: #C9CDD3;
-    font-size: 14px;
+    width: 20px;
+    height: 20px;
+    pointer-events: none; /* Ensures the icon doesn't interfere with input */
+    color: gray;
 }
 
-.popup-subscribe-btn {
-    width: 50%;
-    padding: 5px;
-    margin: 10px 0;
-    background-color: var(--button-bg);
-    color: var(--button-text);
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    align-self: flex-start;
-    text-align: center;
-}
 
-.subscribe-btn:hover {
-    background-color: #555;
-    color: white;
+  .popup-subscribe-btn {
+  background-color:black;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 10px;
+  display: block;
+  margin-left: 20px;
+  margin-right: auto;
+    margin-bottom: 50px;
+    font-family: 'Fira Sans';
+    font-weight: 400;
 }
-.popup-triangle{
-    display: flex;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 65px;
-    height: 45px;
-    clip-path: polygon(100% 81%, 81% 100%, 100% 100%)
-    z-index: 1;
-    padding: 28px;
-    background-color: var(--header-bg);
-}
-/* For Desktop Screens */
-@media screen and (min-width: 768px) {
-    .popup-base {
-        bottom: 20px; 
-        left: 20px;
-        width: 312px;
-        height: 272px;
-        transform: none; 
-    }
-}
-/* For Mobile Screens */
-@media screen and (max-width: 768px) {
-    .popup-base {
-        position: fixed;
+   @media screen and (max-width: 600px) {
+          .popup-overlay{
+     position: fixed;
         top: 50%;
         left: 50%; 
         transform: translate(-50%, -50%); 
-        width: 80%;
-        min-height: 300px;
-        margin: 0;
-        border-radius: 8px;
-    }
-
-    .popup-content {
-        padding: 20px;
-    }
-
-    .popup-header h2 {
-        font-size: 1.8rem;
-    }
-
-    .popup-header-background {
-        height: 180px;
-    }
-
-    .popup-message {
-        font-size: 11px;
-    }
-
-    .popup-email-input {
-        margin: 15px 0 8px 0;
-    }
-
-    .popup-triangle {
-        width: 75px;
-        height: 60px;
-    }
-
-    .popup-subscribe-btn {
-        width: 50%;
-    }
+     }
+   .popup { 
+          width: 327px;
+        height: 274px;
 }
+.test{
+  height: 218px;
+        margin: 10px;
+}
+    .popup input[type="email"] {
+      width: 90%;
+    }
+     .popup-header-background h2{
+       font-size: 16px;
+     }
+     .popup-message{
+       font-size: 10px;
+       margin-top:0;
+     }
+          .popup-subscribe-btn{
 
-@media screen and (max-width: 480px) {
-    .popup-base {
+    padding: 7px 7px;
+    font-size: 12px;
+    margin-top: 7px;
+       }
+  }
+
+  @media screen and (max-width: 400px) {
+     .popup-overlay{
+     position: fixed;
         top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 90%;
-        min-height: 250px;
-    }
-
-    .popup-content {
-        padding: 25px;
-    }
-
-    .email-icon {
-        top: 65%;
-        transform: translateY(-80%);
-    }
-
-    .popup-header h2 {
-        font-size: 1.7rem;
-        margin: -4px 10px;
-    }
-
-    .popup-header-background {
-        height: 160px;
-    }
-
-    .popup-message {
-        font-size: 13px;
-    }
-
-    .popup-input-wrapper {
-        margin-top: -10px;
-    }
-
-    .popup-close-btn {
-        padding: 0 15px 8px 8px;
-    }
-
-    .popup-triangle {
-        width: 67px;
-        height: 54px;
-        padding: 22px;
-    }
-
-    .popup-subscribe-btn {
-        width: 50%;
-        height: 35px;
-        font-size: 12px;
-    }
-
-    .popup-email-input {
-        width: 90%;
-    }
+        left: 50%; 
+        transform: translate(-50%, -50%); 
+     }
+   .popup { 
+           width: 327px;
+        height: 274px;
 }
+     .popup-header-background h2{
+       font-size: 16px;
+     }
+.test{
+   height: 218px;
+        margin: 10px;
+}
+    .popup input {
+      width: 100%;
+    }
+     .popup-subscribe-btn{
+
+    padding: 7px 7px;
+    font-size: 12px;
+    margin-top: 7px;
+       }
+  }
