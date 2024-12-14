@@ -1,17 +1,19 @@
-.bb-template-404 {
-    background-color: #E5E5EA;
-    display: block;
-    padding: 10rem 5rem;
-    max-width: none;
-    margin: 2rem 2rem;
-    position: relative;
-}
-
-.bb-upper-template-404 {
-    background-color: #C7C7CC;
+.bb-upper-template-signup {
+    background-color: #c7c7cc;
     margin: 7rem 20rem;
     display: block;
     padding: 2rem;
+    position: relative;
+    width: auto;
+}
+
+.bb-template-signup {
+    background-color: #e5e5ea;
+    display: block;
+    padding: 10rem 5rem !important;
+    width: auto !important;
+    max-width: none;
+    margin: 2rem;
     position: relative;
 }
 
@@ -63,29 +65,37 @@
     display: block !important;
 }
 
-.bb-404-subtext {
-    font-family: 'Fira Sans';
-    font-weight: 600;
-    font-size: 96px;
-    line-height: 34px;
-    color: black;
-}
-
-.bb-404-title {
+.bb-mail-signup-banner__heading {
     font-family: 'Fira Sans';
     font-weight: 500;
-    font-size: 48px;
+    font-size: 36px;
     line-height: 34px;
-    color: black;    
 }
 
-.bb-404-para {
+.bb-newsletter__subheading {
     font-family: 'Inter';
-    font-weight: 300;
-    font-size: 24px;
-    line-height: 36px;
-    margin-bottom: 2rem;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 34px;
 }
+
+.bb-newsletter-form__field-wrapper {
+    max-width: none !important;
+}
+
+.newsletter-form__field-wrapper  .bb-field__input {
+/*    padding-left: 80rem; */
+}
+
+.bb-newsletter-form {
+    align-items: center !important;
+    max-width: none !important;
+}
+
+.bb-newsletter-wrapper {
+    width: 80%;
+}
+
 .bb-404-h-button:hover, .bb-404-c-button:hover {
     color: white;
 }
@@ -112,36 +122,6 @@ margin-top: 2rem;
       display: none !important;
     }
 
-    .bb-upper-template-404 {
-        background-color: #C7C6C6;
-        display: block;
-        position: relative;
-        margin: 0rem;
-        padding: 0rem;
-    }
-    .bb-template-404 {
-        background-color: unset;
-        padding: 10rem 0rem;
-    }
-
-    .bb-404-subtext {
-        font-weight: 500;
-        font-size: 32px;
-        line-height: 34px;
-    }
-    
-    .bb-404-title {
-        font-weight: 400;
-        font-size: 24px;
-        line-height: 34px;
-    }
-    
-    .bb-404-para {
-        font-weight: 300;
-        font-size: 12px;
-        line-height: 21px;
-        margin-bottom: 2rem;
-    }
     .vertical-bar-circle-404 {
         width: 13px;
         height: 13px;
@@ -155,4 +135,34 @@ margin-top: 2rem;
         left: 1.5rem;
     }
 
-}
+    .bb-upper-template-signup {
+        background-color: #C7C6C6;
+        display: block;
+        position: relative;
+        margin: 0rem;
+        padding: 0rem;
+    }
+
+    .bb-template-signup {
+        background-color: unset;
+        padding: 10rem 0rem !important;
+    }
+
+    .bb-mail-signup-banner__heading {
+        font-family: 'Fira Sans';
+        font-weight: 500;
+        font-size: 32px;
+        line-height: 34px;
+    }
+    
+    .bb-newsletter__subheading {
+        font-family: 'Inter';
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px;
+    }
+
+    .bb-newsletter-wrapper {
+        width: 100%;
+    }
+  }

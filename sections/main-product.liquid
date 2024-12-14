@@ -85,7 +85,7 @@
 
 
   <div class="page-width">
-    <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-show grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
+    <div class="product product--large product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-show grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
     <div class="grid__item product__media-wrapper {% if thumbnail == true %} bb_background {% endif %}">
       {%- if product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
         <div class="sold-out-tag-mobile">
@@ -94,7 +94,7 @@
       {% endif %}
         {% render 'product-media-gallery', variant_images: variant_images %}
       </div>
-      <div class="product__info-wrapper grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+      <div class="product__info-wrapper grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
         <section
           id="ProductInfo-{{ section.id }}"
           class="product__info-container{% if section.settings.enable_sticky_info %} product__column-sticky{% endif %}"
@@ -2117,27 +2117,6 @@
       "type": "header",
       "content": "t:sections.main-product.settings.header.content",
       "info": "t:sections.main-product.settings.header.info"
-    },
-    {
-      "type": "select",
-      "id": "media_size",
-      "options": [
-        {
-          "value": "small",
-          "label": "t:sections.main-product.settings.media_size.options__1.label"
-        },
-        {
-          "value": "medium",
-          "label": "t:sections.main-product.settings.media_size.options__2.label"
-        },
-        {
-          "value": "large",
-          "label": "t:sections.main-product.settings.media_size.options__3.label"
-        }
-      ],
-      "default": "large",
-      "label": "t:sections.main-product.settings.media_size.label",
-      "info": "t:sections.main-product.settings.media_size.info"
     },
     {
       "type": "checkbox",

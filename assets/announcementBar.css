@@ -1,20 +1,20 @@
 .bb-announcement-bar-background {
-    background-color: var(--announcement-bar-color);
+    background-color: var(--background_product_card);
     border-radius: 5px;
 }
 
 .announcement-bar-arrow-svg {
-    color: var(--announcement-bar-text) !important;
+    color: var(--text) !important;
 }
 
 .bb-announcement-bar-wrapper {
-    background-color: var(--announcement-bar-background-color);
+    background-color: rgb(var(--color-background))
 }
 
 .bb-localization {
-    color: var(--announcement-bar-text) !important;
+    color: var(--text) !important;
     padding-left: 0.5rem !important;
 }
 .bb-localization .link{
-    color: var(--announcement-bar-text) !important;
+    color: var(--text) !important;
 }
