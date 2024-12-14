@@ -1,154 +1,117 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link rel="stylesheet" href="{{ 'popup.css' | asset_url }}">
-<style>
-  .popup-base{
-    z-index: 9999;
-  }
-.popup-content {
-  background-color: rgb(var(--color-background));
-}
-.popup-triangle {
-  background-color: rgb(var(--color-button));  
-}
-
-.popup-header-background {
-  background-color: rgb(var(--color-button));  
-}
-
-.popup-subscribe-btn {
-  background-color: rgb(var(--color-button));
-}
-</style>
-{% if template == 'index' and section.settings.enable_popup %}
-<div class="popup-base color-{{ section.settings.color_scheme }}" id="emailPopup">
-    <div class="popup-content ">
-        <div class="popup-header ">
-            <div class="popup-header-background">
-              <h2>{{ section.settings.popup_title }}</h2>
-              <button class="popup-close-btn" onclick="closePopup()">&times;</button>
-            </div>
-        </div>
-   <p class="popup-message">
-  {{section.settings.popup_message | richtext  }}
-</p>
-
-
-
-        <div class="popup-input-wrapper">
-            <i class="fa fa-envelope email-icon"></i>
-            <input type="email" id="emailInput" class="popup-email-input" placeholder="{{ section.settings.email_placeholder }}">
-        </div>
-        <button class="popup-subscribe-btn " onclick="handleSubscribe()">{{ section.settings.button_text }}</button>
-        <div class="popup-triangle "><h2></h2></div>
+<div class="popup-overlay" id="popupOverlay" >
+  <div class="popup"> 
+<div class="test" >
+  <div class="popup-header" >
+      <div class="popup-header-background">
+        <h2>{{ section.settings.popup_title }}</h2>
+         <button id="closePopup" >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="20" height="20">
+            <path fill-rule="evenodd" d="M10 9.293l4.646-4.646a1 1 0 011.414 1.414L11.414 10l4.646 4.646a1 1 0 01-1.414 1.414L10 11.414l-4.646 4.646a1 1 0 01-1.414-1.414L8.586 10 3.94 5.354A1 1 0 015.354 3.94L10 9.293z" clip-rule="evenodd"/>
+        </svg>
+    </button>
+      </div>
     </div>
+     <div class="popup-message">
+  {{section.settings.popup_message | richtext  }}
+</div>
+    <div class="popup-input-wrapper">
+      <img src="{{ 'mail.png' | asset_url }}" alt="Icon Description" class="popup-email-icon" />
+  <input type="email" id="emailInput" class="popup-email-input" placeholder="{{ section.settings.email_placeholder }}">
+</div>
+
+    <button class="popup-subscribe-btn" onclick="handleSubscribe()">{{ section.settings.button_text }}</button>
+  </div>
+</div>
 </div>
 
 <script>
-    function closePopup() {
-        document.getElementById("emailPopup").style.display = "none";
-    }
+// Close popup when the close button is clicked
+document.getElementById('closePopup').addEventListener('click', function() {
+  document.getElementById('popupOverlay').style.display = 'none';
+});
 
-    function handleSubscribe() {
-        const emailInput = document.getElementById("emailInput");
-        const email = emailInput.value;
+// Close popup when clicking outside
+document.getElementById('popupOverlay').addEventListener('click', function(event) {
+  if (event.target === document.getElementById('popupOverlay')) {
+    document.getElementById('popupOverlay').style.display = 'none';
+  }
+});
 
-        // Simple email validation regex
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+// Validate email and handle subscribe button click
+document.querySelector('.popup-subscribe-btn').addEventListener('click', function() {
+  const emailInput = document.getElementById('emailInput').value.trim();
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Email validation regex
 
-        if (!email) {
-            // Display the "empty email" message
-            alert("{{ section.settings.empty_email_message }}");
-        } else if (!emailRegex.test(email)) {
-            // Display the "invalid email" message
-            alert("{{ section.settings.invalid_email_message }}");
-        } else {
-            // Display the success message and clear the email input
-            alert("{{ section.settings.success_message }}");
-            emailInput.value = ""; 
-            closePopup(); // Close the popup after subscribing
-        }
-    }
+  if (!emailInput) {
+    alert("{{ section.settings.empty_email_message }}");
+    return;
+  }
 
-    document.addEventListener("DOMContentLoaded", function() {
-        // Show the popup after the specified delay
-        setTimeout(function() {
-            document.getElementById("emailPopup").style.display = "flex";
-        }, {{ section.settings.popup_delay }});
-    });
+  if (!emailRegex.test(emailInput)) {
+    alert("{{ section.settings.invalid_email_message }}");
+    return;
+  }
+
+  alert("{{ section.settings.success_message }}"); // Show success message
+  document.getElementById('popupOverlay').style.display = 'none'; // Close the popup
+});
 </script>
-{% endif %}
 
+        
 {% schema %}
 {
-    "name": "Newsletter Popup",
-    "settings": [
-      {
-      "type": "color_scheme",
-      "id": "color_scheme",
-      "label": "t:sections.all.colors.label",
-      "default": "scheme-1"
+  "name": "Popup",
+  "settings": [
+    {
+      "type": "text",
+      "id": "popup_title",
+      "label": "Popup Title",
+      "default": "Subscribe to our Newsletter"
     },
-        {
-            "type": "checkbox",
-            "id": "enable_popup",
-            "label": "Enable Popup",
-            "default": true
-        },
-        {
-            "type": "text",
-            "id": "popup_title",
-            "label": "Popup Title",
-            "default": "Join Our Community!"
-        },
-        {
-            "type": "richtext",
-            "id": "popup_message",
-            "label": "Popup Message",
-            "default": "<p>Stay updated with the latest news, exclusive offers, and expert tips. Sign up for our newsletter and get 10% off your first order!</p>"
-        },
-        {
-            "type": "text",
-            "id": "email_placeholder",
-            "label": "Email Placeholder",
-            "default": "Enter your email"
-        },
-        {
-            "type": "text",
-            "id": "button_text",
-            "label": "Button Text",
-            "default": "Subscribe Now"
-        },
-        {
-            "type": "text",
-            "id": "success_message",
-            "label": "Success Message",
-            "default": "Thanks for subscribing!"
-        },
-        {
-            "type": "text",
-            "id": "empty_email_message",
-            "label": "Empty Email Message",
-            "default": "Please enter your email address!"
-        },
-        {
-            "type": "text",
-            "id": "invalid_email_message",
-            "label": "Invalid Email Message",
-            "default": "Please enter a valid email address!"
-        },
-        {
-            "type": "number",
-            "id": "popup_delay",
-            "label": "Popup Delay (milliseconds)",
-            "default": 1000
-        },
-
-    ],
-    "presets": [
-        {
-            "name": "Newsletter Popup",
-            "category": "Promotional"
-        }
-    ]
+    {
+      "type": "richtext",
+      "id": "popup_message",
+      "label": "Popup Message",
+      "default": "<p>Stay updated with the latest news, exclusive offers, and expert tips. Sign up for our newsletter and get 10% off your first order!</p>"
+    },
+    {
+      "type": "text",
+      "id": "email_placeholder",
+      "label": "Email Placeholder Text",
+      "default": "Enter your email address"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Subscribe"
+    },
+    {
+      "type": "text",
+      "id": "empty_email_message",
+      "label": "Empty Email Error Message",
+      "default": "Please enter an email address."
+    },
+    {
+      "type": "text",
+      "id": "invalid_email_message",
+      "label": "Invalid Email Error Message",
+      "default": "Please enter a valid email address."
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Success Message",
+      "default": "Thank you for subscribing!"
+    }
+  ],
+  "blocks": [],
+  "presets": [
+    {
+      "name": "Email Validation Popup",
+      "category": "Popups"
+    }
+  ]
 }
 {% endschema %}
