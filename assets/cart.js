@@ -6,9 +6,11 @@ class CartRemoveButton extends HTMLElement {
       event.preventDefault();
       const cartItems = this.closest('cart-items') || this.closest('cart-drawer-items');
       cartItems.updateQuantity(this.dataset.index, 0);
+
     });
   }
 }
+
 
 customElements.define('cart-remove-button', CartRemoveButton);
 
@@ -26,7 +28,7 @@ class CartItems extends HTMLElement {
   }
 
   cartUpdateUnsubscriber = undefined;
-
+       
   connectedCallback() {
     this.cartUpdateUnsubscriber = subscribe(PUB_SUB_EVENTS.cartUpdate, (event) => {
       if (event.source === 'cart-items') {
@@ -41,7 +43,6 @@ class CartItems extends HTMLElement {
       this.cartUpdateUnsubscriber();
     }
   }
-
   resetQuantityInput(id) {
     const input = this.querySelector(`#Quantity-${id}`);
     input.value = input.getAttribute('value');
@@ -85,6 +86,8 @@ class CartItems extends HTMLElement {
   onChange(event) {
     this.validateQuantity(event);
   }
+
+
 
   onCartUpdate() {
     if (this.tagName === 'CART-DRAWER-ITEMS') {
@@ -144,41 +147,113 @@ class CartItems extends HTMLElement {
   }
 
   updateQuantity(line, quantity, name, variantId) {
-  this.enableLoading(line);
+    this.enableLoading(line);
 
-  const body = JSON.stringify({
-    line,
-    quantity,
-    sections: this.getSectionsToRender().map((section) => section.section),
-    sections_url: window.location.pathname,
-  });
-
-  fetch(`${routes.cart_change_url}`, { ...fetchConfig(), ...{ body } })
-    .then((response) => response.json())
-    .then((parsedState) => {
-
-      const totalPriceElement = document.querySelector('.totals__total-value');
-      if (totalPriceElement) {
-        totalPriceElement.textContent = parsedState.total_price ? parsedState.total_price : 'N/A';
-      }
-
-      this.getSectionsToRender().forEach((section) => {
-        const elementToReplace =
-          document.getElementById(section.id).querySelector(section.selector) || document.getElementById(section.id);
-        elementToReplace.innerHTML = this.getSectionInnerHTML(
-          parsedState.sections[section.section],
-          section.selector
-        );
-      });
-    })
-    .catch((error) => {
-      console.error('Error updating cart:', error);
-    })
-    .finally(() => {
-      this.disableLoading(line);
+    const body = JSON.stringify({
+      line,
+      quantity,
+      sections: this.getSectionsToRender().map((section) => section.section),
+      sections_url: window.location.pathname,
     });
-}
 
+    fetch(`${routes.cart_change_url}`, { ...fetchConfig(), ...{ body } })
+      .then((response) => {
+        return response.text();
+      })
+      .then((state) => {
+        const parsedState = JSON.parse(state);
+        const quantityElement =
+          document.getElementById(`Quantity-${line}`) || document.getElementById(`Drawer-quantity-${line}`);
+        const items = document.querySelectorAll('.cart-item');
+       
+        const cartCountElement = document.querySelector('[data-cart-count]');
+        if (cartCountElement) {
+          // Create a smooth counting animation
+          this.animateCartCountChange(
+            parseInt(cartCountElement.textContent), 
+            parsedState.item_count
+          );
+        }
+
+        if (parsedState.errors) {
+          quantityElement.value = quantityElement.getAttribute('value');
+          this.updateLiveRegions(line, parsedState.errors);
+          return;
+        }
+
+        this.classList.toggle('is-empty', parsedState.item_count === 0);
+        const cartDrawerWrapper = document.querySelector('cart-drawer');
+        const cartFooter = document.getElementById('main-cart-footer');
+
+        if (cartFooter) cartFooter.classList.toggle('is-empty', parsedState.item_count === 0);
+        if (cartDrawerWrapper) cartDrawerWrapper.classList.toggle('is-empty', parsedState.item_count === 0);
+
+        this.getSectionsToRender().forEach((section) => {
+          const elementToReplace =
+            document.getElementById(section.id).querySelector(section.selector) || document.getElementById(section.id);
+          elementToReplace.innerHTML = this.getSectionInnerHTML(
+            parsedState.sections[section.section],
+            section.selector
+          );
+        });
+        const updatedValue = parsedState.items[line - 1] ? parsedState.items[line - 1].quantity : undefined;
+        let message = '';
+        if (items.length === parsedState.items.length && updatedValue !== parseInt(quantityElement.value)) {
+          if (typeof updatedValue === 'undefined') {
+            message = window.cartStrings.error;
+          } else {
+            message = window.cartStrings.quantityError.replace('[quantity]', updatedValue);
+          }
+        }
+        this.updateLiveRegions(line, message);
+
+        const lineItem =
+          document.getElementById(`CartItem-${line}`) || document.getElementById(`CartDrawer-Item-${line}`);
+        if (lineItem && lineItem.querySelector(`[name="${name}"]`)) {
+          cartDrawerWrapper
+            ? trapFocus(cartDrawerWrapper, lineItem.querySelector(`[name="${name}"]`))
+            : lineItem.querySelector(`[name="${name}"]`).focus();
+        } else if (parsedState.item_count === 0 && cartDrawerWrapper) {
+          trapFocus(cartDrawerWrapper.querySelector('.drawer__inner-empty'), cartDrawerWrapper.querySelector('a'));
+        } else if (document.querySelector('.cart-item') && cartDrawerWrapper) {
+          trapFocus(cartDrawerWrapper, document.querySelector('.cart-item__name'));
+        }
+
+        publish(PUB_SUB_EVENTS.cartUpdate, { source: 'cart-items', cartData: parsedState, variantId: variantId });
+      })
+      .catch(() => {
+        this.querySelectorAll('.loading__spinner').forEach((overlay) => overlay.classList.add('hidden'));
+        const errors = document.getElementById('cart-errors') || document.getElementById('CartDrawer-CartErrors');
+        errors.textContent = window.cartStrings.error;
+      })
+      .finally(() => {
+        this.disableLoading(line);
+      });
+  }
+   animateCartCountChange(start, end) {
+    const cartCountElement = document.querySelector('[data-cart-count]');
+    if (!cartCountElement) return;
+
+    let startTimestamp = null;
+    const duration = 500; // Animation duration in ms
+
+    const step = (timestamp) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      
+      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+      const currentValue = Math.floor(start + (end - start) * progress);
+      
+      cartCountElement.textContent = `${currentValue} items`;
+      
+      if (progress < 1) {
+        window.requestAnimationFrame(step);
+      } else {
+        cartCountElement.textContent = `${end} items`;
+      }
+    };
+    
+    window.requestAnimationFrame(step);
+  }
 
   updateLiveRegions(line, message) {
     const lineItemError =
@@ -238,6 +313,8 @@ if (!customElements.get('cart-note')) {
 
       connectedCallback() {
         this.noteTextarea = this.querySelector('textarea');
+
+        // Add input event listener with debounce
         if (this.noteTextarea) {
           this.noteTextarea.addEventListener(
             'input',
@@ -251,6 +328,8 @@ if (!customElements.get('cart-note')) {
     }
   );
 }
+
+// Add event listener for toggling cart note
 document.addEventListener('DOMContentLoaded', () => {
   const noteToggle = document.querySelector('.js-toggle-cart-note');
   const cartNote = document.querySelector('cart-note');
@@ -259,6 +338,7 @@ document.addEventListener('DOMContentLoaded', () => {
     noteToggle.addEventListener('click', () => {
       cartNote.classList.toggle('hidden');
       
+      // Focus on textarea when opened
       const textarea = cartNote.querySelector('textarea');
       if (!cartNote.classList.contains('hidden')) {
         textarea.focus();

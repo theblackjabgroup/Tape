@@ -21,36 +21,6 @@
   }
 {%- endstyle -%}
 
-{% liquid
-  assign upsell_product_source = settings.upsell_product_source
-  assign show_upsells = true
-  assign product_metafield_active = false
-  for item in cart.items
-    assign complementary_products = item.product.metafields['shopify--discovery--product_recommendation'].complementary_products
-    if complementary_products
-      assign product_metafield_active = item.product.id
-      break
-    endif
-  endfor
-
-  if upsell_product_source == 'complementary-products' and product_metafield_active == false
-    assign show_upsells = false
-  endif
-
-  assign lite_items = cart.items
-  assign product_upsells_list = settings.product_upsells_list
-  assign active_products = product_upsells_list.count
-  for product_upsell in product_upsells_list
-    assign product_upsell_id = product_upsell.id
-    assign product_added = lite_items | where: 'product_id', product_upsell_id
-    if product_added.size > 0
-      assign active_products = active_products | minus: 1
-    endif
-  endfor
-
- 
-%}
-
 
 
 
@@ -67,7 +37,12 @@
 <cart-items class="gradient color-{{ section.settings.color_scheme }} isolate{% if cart == empty %} is-empty{% else %} section-{{ section.id }}-padding{% endif %}">
   <div class="page-width">
     <div class="title-wrapper-with-link">
+      <div class="cart-heading">
       <h1 class="title title--primary">{{ 'sections.cart.title' | t }}</h1>
+          <div class="cart_total_count">
+            <span data-cart-count>{{ cart.item_count }} items</span>
+          </div>
+       </div>
       <a href="{{ routes.all_products_collection_url }}" class="underlined-link">
         {{- 'general.continue_shopping' | t -}}
       </a>
@@ -488,10 +463,76 @@
       </p>
     </form>
   </div>
-
+<!-- <div class="cart-related-products">
+{%- for item in cart.items -%}
+  <div class="product-recommendations-wrapper">
+    <h3 class="related-products__heading h3">
+      Recommended for: {{ item.product.title }}
+      && {{ item.product_id }}
+    </h3>
+<div
+  class="product-recommendations"
+  data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit=4&intent=related"
+>
+  <h1>Not found any Products in it</h1>
+ {%- if recommendations.performed? and recommendations.products_count > 0 -%}
+    {% if recommendations.intent == 'related' %}
+      <h2>You may also like</h2>
+    {% elsif recommendations.intent == 'complementary' %}
+      <h2>Pair it with</h2>
+    {% endif %}
+  <ul>
+      {%- for product in recommendations.products -%}
+        <li class="product">
+          <a href="{{ product.url }}">
+            <img
+              class="product__img"
+              src="{{ product.featured_image | image_url: width: 300, height: 300 }}"
+              alt="{{ product.featured_image.alt }}"
+            />
+            <p class="product__title">{{ product.title }}</p>
+            <p class="product__price">{{ product.price | money}}</p>
+          </a>
+        </li>
+      {%- endfor -%}
+    </ul>
+  {%- endif -%}
+</div>
+</div>
+{%- endfor -%}
+</div> -->
   <!-- product recommendation  -->
  
 </cart-items>
+{% javascript %}
+  const handleIntersection = (entries, observer) => {
+    if (!entries[0].isIntersecting) return;
+
+    observer.unobserve(productRecommendationsSection);
+
+    const url = productRecommendationsSection.dataset.url;
+
+    fetch(url)
+      .then(response => response.text())
+      .then(text => {
+        const html = document.createElement('div');
+        html.innerHTML = text;
+        const recommendations = html.querySelector('.product-recommendations');
+
+        if (recommendations && recommendations.innerHTML.trim().length) {
+          productRecommendationsSection.innerHTML = recommendations.innerHTML;
+        }
+      })
+      .catch(e => {
+        console.error(e);
+      });
+  };
+
+  const productRecommendationsSection = document.querySelector('.product-recommendations');
+  const observer = new IntersectionObserver(handleIntersection, {rootMargin: '0px 0px 200px 0px'});
+
+  observer.observe(productRecommendationsSection);
+{% endjavascript %}
 
 
 {% schema %}
