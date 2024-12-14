@@ -35,6 +35,12 @@
       "default": false
     },
     {
+  "type": "checkbox",
+  "id": "show_tags",
+  "label": "Show Tags",
+  "default": true
+},
+    {
       "type": "checkbox",
       "id": "show_view_all",
       "label": "Show 'View All' Link",
@@ -64,6 +70,9 @@
 {% endschema %}
 
 <style>
+  /* .blog-read-more-btn {
+       background: rgb(var(--color-background));
+  } */
 .blog-slider-container{
   background-color: rgb(var(--color-background));
 }
@@ -77,6 +86,9 @@
   .arrow{
    color: rgb(var(--color-foreground)); 
   }
+  .blog-tag{
+  background-color: rgb(var(--color-background));
+}
 </style>
 
 <link rel="stylesheet" href="{{ 'blog-slider.css' | asset_url }}">
@@ -104,6 +116,14 @@
                 <!-- Semicircle divs -->
                 <div class="semicircle semicircle-left" ><h6></h6></div>
                 <div class="semicircle semicircle-right" ><h6></h6></div>
+                <!-- Tags overlay -->
+    {% if section.settings.show_tags and article.tags.size > 0 %}
+        <div class="blog-tags-overlay">
+            {% for tag in article.tags %}
+                <span class="blog-tag">{{ tag }}</span>
+            {% endfor %}
+        </div>
+    {% endif %}
 
                 {% if article.image %}
                     <img src="{{ article.image | img_url: '309x309', crop: 'center' }}" alt="{{ article.title }}">
@@ -126,7 +146,6 @@
                             {% endif %}
                         </div>
                     {% endif %}
-
                     {% if section.settings.show_excerpt %}
                         <p class="blog-excerpt" >{{ article.excerpt | strip_html | truncate: 200 }}</p>
                     {% endif %}
@@ -186,7 +205,7 @@
     </div>
 
     {% if section.settings.show_view_all %}
-        <div class="blog-view-all-link">
+        <div class="blog-view-all-link  color-{{ section.settings.color_scheme }}">
             <a href="{{ blogs[blog_handle].url }}" class="blog-view-all">
                 View All Posts
             </a>
