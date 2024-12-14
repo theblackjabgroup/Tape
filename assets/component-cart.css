@@ -13,8 +13,11 @@ cart-items .title-wrapper-with-link {
     margin-top: 6px;
 }
 .cart_total_count{
-  background-color:white;
-  padding:10px;
+  background-image:url('cart-count-bg.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+     padding: 14px;
 }
 .cart_total_count span{
   color:black;
