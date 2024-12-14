@@ -444,7 +444,7 @@ border-radius: 50%;
 }
 .push-btn__surface {
   width: 100%;
-  background-color: var(--secondary_product_button_color);
+  background-color: var(--button_label);
   display: block;
   padding: 1.45rem 3rem;
   /* box-shadow: inset 0 0 0 2px black; */
@@ -500,7 +500,7 @@ border-radius: 50%;
   top: 4px;
 }
 .shopify-payment-button__button--unbranded.shopify-payment-button__button--unbranded:hover:before {
-  background: rgba(var(--color-button),var(--alpha-button-background));
+  background: var(--secondary_product_button_color);
 /*  box-shadow: inset 0 0 0 2px black;  */
 }
 
@@ -517,7 +517,7 @@ border-radius: 50%;
   content: "";
   position: absolute;
   display: block;
-  background-color: #000 !important;
+  background-color: var(--secondary_button_label) !important;
   border-width: 2px !important;
   z-index: -2 !important;
   left: 4px !important;

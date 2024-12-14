@@ -1,7 +1,7 @@
 /* Style the collapse-tab with the tabs */
 .collapse-tab {
     display: flex;
-    background-color: var(--collapse_header_background_color);
+    background-color: var(--card_background);
     padding: 4rem 4rem;
     justify-content: space-around;
     border-top-left-radius: 10px;
@@ -24,8 +24,8 @@
 
 /* Style the active tab */
 .collapse-tab button.active {
-    background-color: var(--collapse_header_secondary_background_color);
-    color: var(--collapse_header_text_color);
+    background-color: var(--card_foreground);
+    color: var(--text);
     font-weight: 600;
     border-radius: 10px;
 }
@@ -65,13 +65,13 @@
     display: block !important;
     width: 28px;
     height: 28px;
-    background-color: var(--collapse_body_background_color);
+    background-color: rgb(var(--color-background));
     border-radius: 50%;
 }
 
 .product-description-wrapper{
     padding: 20px;
-    background-color: var(--collapse_body_background_color);
+    background-color: rgb(var(--color-background));
 }
 
 .product-description-grid-container{
@@ -97,7 +97,7 @@
     margin-top: 26px;
     width: 8px;
     height: 16px;
-    background-color: var(--collapse_header_background_color);
+    background-color: var(--background_product_card);
     border-radius: 50%;
     border-top-left-radius: 50px;
     border-bottom-left-radius: 50px;
@@ -115,7 +115,6 @@
 .product-description-subclass {
     margin-top: 20px !important;
     font-family: 'Inter';
-    color: var(--collapse_body_text_color);
 }
 
 .mobile-collapsible-tabs {
@@ -133,10 +132,10 @@
         margin: 0;
     }
     .accordion-button.collapsed {
-        background-color: var(--collapse_header_background_color) !important;
+        background-color: var(--card_background) !important;
     }
     .accordion-body {
-        background-color: var(--collapse_body_background_color) !important;
+        background-color: var(--background) !important;
     }
     .product-description-grid-container{
         display: flex !important;
@@ -151,9 +150,8 @@
         font-family: 'Fira Sans';
         font-weight: 500;
         line-height: 24px;
-        color: var(--collapse_header_text_color) !important;
-        background-color: var(--collapse_header_secondary_background_color) !important;
-
+        background-color: var(--card_foreground)!important;
+        color: var(--text);
     }
     .product-description-subclass{
         margin-top: 5px !important;
@@ -174,7 +172,7 @@
     }
     .accordion-below {
         height: 30px;
-        background-color: var(--collapse_header_background_color);
+        background-color: var(--card_background)!important;
     }
 
     .accordion-button:not(.collapsed)::after {
