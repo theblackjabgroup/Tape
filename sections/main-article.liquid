@@ -2,16 +2,17 @@
 {
   "name": "Default Blog Posts",
   "settings": [
-    {
-      "type": "color",
-      "id": "background_color",
-      "label": "Background Color",
-      "default": "#ffffff"
-    },
+
     {
       "type": "checkbox",
       "id": "show_social_sharing",
       "label": "Show Social Sharing Buttons",
+      "default": true
+    },
+      {
+      "type": "checkbox",
+      "id": "show_tags",
+      "label": "Show Tags",
       "default": true
     },
     {
@@ -43,24 +44,6 @@
           "label": "Select Article"
         },
         {
-          "type": "color",
-          "id": "slider_background_color",
-          "label": "Slider Background Color",
-          "default": "#ffffff"
-        },
-        {
-          "type": "color",
-          "id": "slider_text_color",
-          "label": "Slider Text Color",
-          "default": "#333333"
-        },
-        {
-          "type": "color",
-          "id": "slider_button_text_color",
-          "label": "Button Text Color",
-          "default": "#ffffff"
-        },
-        {
           "type": "checkbox",
           "id": "slider_show_author",
           "label": "Show Author",
@@ -86,11 +69,11 @@
 {% endschema %}
 
 <link rel="stylesheet" href="{{ 'main-article.css' | asset_url }}">
-<div class="blog-article-container {% unless article.image %}no-image{% endunless %}">
-  <div class="blog-article-content {% unless article.image %}centered-content{% endunless %}">
-    <div class="blog-article-header">
-      <h1 class="blog-article-title">{{ article.title }}</h1>
-      <div class="blog-article-meta">
+<div class="blog-article-container color-{{ section.settings.color_scheme }} {% unless article.image %}no-image{% endunless %}">
+  <div class="blog-article-content {% unless article.image %}centered-content{% endunless %}" style="color: rgb(var(--color-text));">
+    <div class="blog-article-header" style="color: rgb(var(--color-text));">
+      <h1 class="blog-article-title"style="color: rgb(var(--color-text));">{{ article.title }}</h1>
+      <div class="blog-article-meta" style="color: rgb(var(--color-text));">
         {% if section.settings.show_date %}
           {{ article.published_at | date: "%m/%d/%Y" }} &nbsp;&nbsp; 
           {{ article.published_at | date: "%I:%M %p" }} &nbsp;&nbsp; • &nbsp;&nbsp;
@@ -104,11 +87,21 @@
         {% endif %}
       </div>
     </div>
-    <div class="blog-article-section">
+      {% if section.settings.show_tags and article.tags.size > 0 %}
+  <div class="blog-article-tags">
+    <span>Tags:</span>
+    {% for tag in article.tags %}
+      <a href="{{ blog.url }}/tagged/{{ tag | handle }}" class="blog-tag">{{ tag }}</a>
+    {% endfor %}
+  </div>
+{% endif %}
+    <div class="blog-article-section color-{{ section.settings.color_scheme }}" style="color: rgb(var(--color-text));">
       {{ article.content }}
     </div>
+
+
     {% if blog.next_article or blog.previous_article %}
-      <div class="blog-article-section">
+      <div class="blog-article-section" style="color: rgb(var(--color-secondary-button-text));">
         {% if blog.previous_article %}
           <a href="{{ blog.previous_article.url }}" class="link">← Previous Article</a>
         {% endif %}
@@ -152,10 +145,10 @@
       <div class="blog-image-content">
         <img src="{{ article.image | img_url: '546x521', crop: 'center' }}" alt="{{ article.image.alt | escape }}" class="blog-main-image">
           <div class="blog-image-dots">
-            {% for i in (1..25) %}
-              <span class="blog-dot"></span>
-              <div class="blog-semicircle blog-semicircle-left" style="background-color: {{ section.settings.background_color }};"><h6></h6></div>
-              <div class="blog-semicircle blog-semicircle-right" style="background-color: {{ section.settings.background_color }};"><h6></h6></div>
+            {% for i in (1..20) %}
+              <span class="blog-dot color-{{ section.settings.color_scheme }}"></span>
+              <div class="blog-semicircle blog-semicircle-left" style="background-color: rgb(var(--color-background));"><h6></h6></div>
+              <div class="blog-semicircle blog-semicircle-right" style="background-color: rgb(var(--color-background));"><h6></h6></div>
             {% endfor %}
           </div>
       </div>
@@ -198,10 +191,10 @@
 </div>
  
 {%- if blog.comments_enabled? -%}
-    <div class="article-template__comment-wrapper ">
+    <div class="article-template__comment-wrapper color-{{ section.settings.color_scheme }} " style="background-color: rgb(var(--color-background)); color: rgb(var(--color-text));">
       <div
         id="comments"
-        class="page-width page-width--narrow{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+        class="page-width page-width--narrow{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}" style="color: rgb(var(--color-text));"
       >
         {%- if article.comments_count > 0 -%}
           {%- assign anchorId = '#Comments-' | append: article.id -%}
@@ -215,17 +208,17 @@
                 <article id="{{ comment.id }}" class="article-template__comments-comment">
                   {{ comment.content }}
                   <footer class="right">
-                    <span class="circle-divider caption">{{ comment.author }}</span>
+                    <span class="circle-divider caption" style="color:rgb(var(--color-secondary-button-text));">{{ comment.author }}</span>
                   </footer>
                 </article>
               {%- endif -%}
 
               {%- for comment in article.comments -%}
-                <article id="{{ comment.id }}" class="article-template__comments-comment">
+                <article id="{{ comment.id }}" class="article-template__comments-comment" >
                   {{ comment.content }}
                   <footer class="right">
-                    <span class="circle-divider">{{ comment.author }}</span
-                    ><span class="caption">
+                    <span class="circle-divider" style="color:rgb(var(--color-secondary-button-text));">{{ comment.author }}</span
+                    ><span class="caption" style="color:rgb(var(--color-secondary-button-text));">
                       {{- comment.created_at | time_tag: format: 'date' -}}
                     </span>
                   </footer>
@@ -244,7 +237,7 @@
           -%}
           <h2>{{ 'blogs.article.comment_form_title' | t }}</h2>
           {%- if form.errors -%}
-            <div class="form__message" role="alert">
+            <div class="form__message" role="alert" style="color: rgb(var(--color-text));">
               <h3 class="form-status caption-large text-body" tabindex="-1" autofocus>
                 <span class="svg-wrapper">
                   {{- 'icon-error.svg' | inline_asset_content -}}
@@ -386,7 +379,7 @@
           {%- if blog.moderated? -%}
             <p class="article-template__comment-warning caption">{{ 'blogs.article.moderated' | t }}</p>
           {%- endif -%}
-          <input type="submit" class="blog-button" value="{{ 'blogs.article.post' | t }}">
+          <input type="submit" class="blog-button" value="{{ 'blogs.article.post' | t }} " style="color:rgb(var(--color-secondary-button-text)); background-color:rgb(var(--color-button-text));">
         {% endform %}
       </div>
     </div>
@@ -404,7 +397,7 @@
   <span class="blog-semicircle3 blog-semicircle3-r"></span>
 </div>
 
-<div class="custom-blog-slider-section" style="background-color: {{ section.settings.background_color }};">
+<div class="custom-blog-slider-section color-{{ section.settings.color_scheme }}">
     <!-- Title Section -->
     <div class="custom-blog-slider-title" style="{{ section.settings.slider_section_title }};">
         <h2>Suggested Blogs</h2>
@@ -421,10 +414,10 @@
             {% if count < 7 %}
                 {% assign article = blogs[block.settings.selected_blog].articles | where: "handle", block.settings.selected_article | first %}
                 {% if article %}
-                    <div class="custom-blog-card" style="background-color: {{ block.settings.slider_card_bg_color }}; flex: 0 0 auto;">
+                    <div class="custom-blog-card" style="background-color: rgb(var(--color-background)); flex: 0 0 auto;">
                         <!-- Semicircles -->
-                        <div class="blog-semicircle custom-blog-semicircle-left" style="background-color: {{ block.settings.slider_background_color }};"><h2></h2></div>
-                        <div class="blog-semicircle custom-blog-semicircle-right" style="background-color: {{ block.settings.slider_background_color }};"><h2></h2></div>
+                        <div class="blog-semicircle custom-blog-semicircle-left" style="background-color: rgb(var(--color-background));"><h2></h2></div>
+                        <div class="blog-semicircle custom-blog-semicircle-right" style="background-color: rgb(var(--color-background));"><h2></h2></div>
 
                         <!-- Blog Image -->
                         {% if article.image %}
@@ -434,13 +427,13 @@
                         {% endif %}
 
                         <!-- Blog Content -->
-                        <div class="custom-blog-card-content">
-                            <h3 class="custom-blog-card-title" style="color: {{ block.settings.slider_text_color }};">
+                        <div class="custom-blog-card-content color-{{ section.settings.color_scheme }}" style="background-color: rgb(var(--color-button))";>
+                            <h3 class="custom-blog-card-title" style="color: rgb(var(--color-text));">
                                 {{ article.title | escape }}
                             </h3>
 
                             {% if block.settings.slider_show_author or block.settings.slider_show_date %}
-                                <div class="custom-blog-meta">
+                                <div class="custom-blog-meta" style="color: rgb(var(--color-text));">
                                     {% if block.settings.slider_show_author %}
                                         <span class="custom-blog-author" style="color: {{ block.settings.slider_text_color }}">{{ article.author }}</span>
                                     {% endif %}
@@ -451,7 +444,7 @@
                             {% endif %}
 
                             {% if block.settings.slider_show_excerpt %}
-                                <p class="custom-blog-excerpt" style="color: {{ block.settings.slider_text_color }};">
+                                <p class="custom-blog-excerpt" style="color: rgb(var(--color-text));">
                                     {{ article.excerpt | strip_html | truncate: 200 }}
                                 </p>
                             {% endif %}
