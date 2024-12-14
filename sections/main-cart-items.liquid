@@ -21,36 +21,6 @@
   }
 {%- endstyle -%}
 
-{% liquid
-  assign upsell_product_source = settings.upsell_product_source
-  assign show_upsells = true
-  assign product_metafield_active = false
-  for item in cart.items
-    assign complementary_products = item.product.metafields['shopify--discovery--product_recommendation'].complementary_products
-    if complementary_products
-      assign product_metafield_active = item.product.id
-      break
-    endif
-  endfor
-
-  if upsell_product_source == 'complementary-products' and product_metafield_active == false
-    assign show_upsells = false
-  endif
-
-  assign lite_items = cart.items
-  assign product_upsells_list = settings.product_upsells_list
-  assign active_products = product_upsells_list.count
-  for product_upsell in product_upsells_list
-    assign product_upsell_id = product_upsell.id
-    assign product_added = lite_items | where: 'product_id', product_upsell_id
-    if product_added.size > 0
-      assign active_products = active_products | minus: 1
-    endif
-  endfor
-
- 
-%}
-
 
 
 
@@ -67,7 +37,12 @@
 <cart-items class="gradient color-{{ section.settings.color_scheme }} isolate{% if cart == empty %} is-empty{% else %} section-{{ section.id }}-padding{% endif %}">
   <div class="page-width">
     <div class="title-wrapper-with-link">
+      <div class="cart-heading">
       <h1 class="title title--primary">{{ 'sections.cart.title' | t }}</h1>
+          <div class="cart_total_count">
+            <span data-cart-count>{{ cart.item_count }} items</span>
+          </div>
+       </div>
       <a href="{{ routes.all_products_collection_url }}" class="underlined-link">
         {{- 'general.continue_shopping' | t -}}
       </a>
@@ -489,7 +464,6 @@
     </form>
   </div>
 
-  <!-- product recommendation  -->
  
 </cart-items>
 

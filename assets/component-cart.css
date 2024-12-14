@@ -2,7 +2,25 @@
   position: relative;
   display: block;
 }
-
+.cart-heading{
+    display: flex;
+    gap: 30px;
+    align-items: flex-end;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+cart-items .title-wrapper-with-link {
+    margin-top: 6px;
+}
+.cart_total_count{
+  background-color:white;
+  padding:10px;
+}
+.cart_total_count span{
+  color:black;
+ font-weight: bold;
+padding: 0 12px;
+}
 .cart__empty-text,
 .is-empty .cart__contents,
 cart-items.is-empty .title-wrapper-with-link,
