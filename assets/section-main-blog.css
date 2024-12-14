@@ -1,19 +1,82 @@
 .blog-articles {
   display: grid;
   grid-gap: 1rem;
-  column-gap: var(--grid-mobile-horizontal-spacing);
-  row-gap: var(--grid-mobile-vertical-spacing);
+  column-gap: 50px;
+  row-gap: 20px;
 }
 
 .blog-articles .card-wrapper {
   width: 100%;
 }
 
+.blog-articles__article {
+  position: relative; /* Ensure the semicircles are positioned relative to the article container */
+  z-index: 0; /* Base layer */
+  border-radius: 10px;
+}
+
+.semi {
+  position: absolute;
+  width: 5%; /* Responsive size */
+  height: 5%; /* Responsive size */
+  border-radius: 50%;
+  z-index: 10; /* Place above other content */
+  background-color: rgb(var(--color-background)); /* Background color */
+}
+
+.semi-left {
+  left: -2%; /* Adjusted for responsive alignment */
+  top: 90%; /* Responsive vertical placement */
+  transform: translateY(-50%);
+}
+
+.semi-right {
+  right: -2%; /* Adjusted for responsive alignment */
+  top: 90%; /* Match the vertical placement of the left semicircle */
+  transform: translateY(-50%);
+}
+
+/* Responsive adjustments for larger screens */
+@media screen and (min-width: 750px) {
+  .semi {
+    width: 20px;
+    height: 20px;
+  }
+
+  .semi-left {
+    left: -10px;
+    top: 95%; /* Adjust placement for larger screens */
+  }
+
+  .semi-right {
+    right: -10px;
+    top: 95%; /* Match the placement of the left semicircle */
+  }
+}
+
+/* Responsive adjustments for extra-large screens */
+@media screen and (min-width: 990px) {
+  .semi {
+    width: 30px;
+    height: 30px;
+  }
+
+  .semi-left {
+    left: -15px;
+    top: 58%; /* Align slightly lower */
+  }
+
+  .semi-right {
+    right: -15px;
+    top: 58%; /* Align slightly lower */
+  }
+}
+
 @media screen and (min-width: 750px) {
   .blog-articles {
-    grid-template-columns: 1fr 1fr;
-    column-gap: var(--grid-desktop-horizontal-spacing);
-    row-gap: var(--grid-desktop-vertical-spacing);
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 20px;
+    row-gap: 50px;
   }
 
   .blog-articles--collage > *:nth-child(3n + 1),
