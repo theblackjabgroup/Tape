@@ -318,8 +318,23 @@ color:#FFFFFF;
   .semicircle-border-down > * {
       max-width: 100%; 
   }
+
+.gift-container-design::before {
+left: -38px;
+transform: translateY(-50%);
+}
+
+.gift-container-design::after {
+right: -38px; 
+transform: translateY(-50%);
+}
+  
 .gift_card-logo{
 margin-bottom:24px;
+}
+.gift-container{
+   padding:30px 8px;
+  margin:30px 15px;
 }
 .gift-card-amount{
 background-color:transparent;
