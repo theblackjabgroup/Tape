@@ -308,8 +308,8 @@ color:#FFFFFF;
 @media (max-width: 768px) {
 .semicircle-border, 
   .semicircle-border-down {
-      width: 177%; 
-      left: 50%;
+      width: 242%; 
+      left: 41%;
       transform: translateX(-50%);
       overflow: hidden; 
   }
@@ -320,12 +320,12 @@ color:#FFFFFF;
   }
 
 .gift-container-design::before {
-left: -38px;
+left: -32px;
 transform: translateY(-50%);
 }
 
 .gift-container-design::after {
-right: -38px; 
+right: -32px; 
 transform: translateY(-50%);
 }
   
@@ -333,8 +333,8 @@ transform: translateY(-50%);
 margin-bottom:24px;
 }
 .gift-container{
-   padding:30px 8px;
-  margin:30px 15px;
+   padding:30px 3px;
+  margin:30px 29px;
 }
 .gift-card-amount{
 background-color:transparent;
