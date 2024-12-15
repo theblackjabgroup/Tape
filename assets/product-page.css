@@ -80,6 +80,8 @@
 .bb-thumbnail-width {
   width: 90%;
   height: 90%;
+  width: calc(33% - 2rem) !important;
+  margin-bottom: 10px;
 }
 
 .bb-product-thumbnail-corner {

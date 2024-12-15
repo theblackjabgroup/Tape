@@ -974,6 +974,7 @@ a.product__text {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
+    padding-bottom: 20px;
   }
 
   .thumbnail-slider .thumbnail-list.slider {
