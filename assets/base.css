@@ -1879,7 +1879,7 @@ input[type='checkbox'] {
 .quantity {
   color: rgba(var(--color-foreground));
   position: relative;
-  width: calc(14rem / var(--font-body-scale) + var(--inputs-border-width) * 2);
+  width: calc(13rem / var(--font-body-scale) + var(--inputs-border-width) * 2);
   display: flex;
   border-radius: 7px;
   min-height: calc((var(--inputs-border-width) * 2) + 4rem);
@@ -2500,7 +2500,7 @@ input[type='checkbox'] {
 
 /* section-header */
 .section-header.shopify-section-group-header-group {
-  z-index: 300;
+  z-index: 99;
 }
 
 .shopify-section-header-sticky {
@@ -3141,7 +3141,7 @@ details-disclosure > details {
 }
 
 .announcement-bar-section {
-  background-color: var(--announcement-bar-background-color);
+  background-color: rgb(var(--color-background));
 }
 
 @media screen and (min-width: 749px) {
@@ -3284,7 +3284,7 @@ details-disclosure > details {
     width: 6px;
     color: black;
     border-radius: 50%;
-    background-color: var(--announcement-bar-background-color);
+    background-color: rgb(var(--color-background));
 }
 
 .vertical-bar-first-mobile {
@@ -3295,7 +3295,7 @@ details-disclosure > details {
   width: 6px;
   color: #000;
   border-radius: 50%;
-  background-color: var(--announcement-bar-background-color);
+  background-color: rgb(var(--color-background));
 }
 
 .vertical-bar-second-mobile {
@@ -3306,7 +3306,7 @@ details-disclosure > details {
   width: 6px;
   color: #000;
   border-radius: 50%;
-  background-color: var(--announcement-bar-background-color);
+  background-color: rgb(var(--color-background));
 }
 
 .vertical-bar-first-first {
@@ -3317,7 +3317,7 @@ details-disclosure > details {
   right: 0;
   color: black;
   border-radius: 50%;
-  background-color: var(--announcement-bar-background-color);
+  background-color: rgb(var(--color-background));
 }
 
 .vertical-bar-second {
