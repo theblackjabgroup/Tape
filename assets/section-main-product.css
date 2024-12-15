@@ -992,6 +992,7 @@ a.product__text {
   .product--thumbnail_slider .thumbnail-slider {
     display: flex;
     align-items: center;
+    padding-bottom: 20px;
   }
 
   .thumbnail-slider .thumbnail-list.slider--tablet-up {

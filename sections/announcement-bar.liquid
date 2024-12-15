@@ -176,7 +176,6 @@
                           <div class="vertical-bar-first-mobile index-{{i}}"></div>
                         {% endfor %}
                       </div>
-                      {%- if block.settings.text != blank -%}
                         {%- if block.settings.link != blank -%}
                           <a href="{{ block.settings.link }}" class=" announcement-bar__link link link--text focus-inset animate-arrow">
                         {%- endif -%}
@@ -190,6 +189,7 @@
                             </div>
                           </div>
                             {% endif %}
+                            {%- if block.settings.text != blank -%}
                           <scrolling-items>
                           <div class="scrolling-text-container">
                             <div class="scrolling-text">
@@ -199,11 +199,12 @@
                             </div>
                           </div>
                           </scrolling-items>
+                        {%- endif -%}
+
                         </div>
                         {%- if block.settings.link != blank -%}
                           </a>
                         {%- endif -%}
-                      {%- endif -%}
                       <div class="vertical-bar-second-top">
                         {% for i in (0..4) %}
                           <div class="vertical-bar-second-mobile index-{{i}}"></div>

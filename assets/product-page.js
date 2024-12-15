@@ -1,4 +1,6 @@
 
+
+/* 
 window.addEventListener('DOMContentLoaded', () => {
     if(!document.getElementById("bb_product__media_first"))
     {
@@ -9,3 +11,4 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     }
   });
+  */
