@@ -44,21 +44,45 @@
          {
             "type": "color",
             "id": "text",
-            "label": "t:settings_schema.colors.settings.text.label",
+            "label": "Primary Text Color",
             "default": "#121212"
           },
           { 
             "type": "color",
+            "id": "product_price_card",
+            "label": "Secondary Text Color",
+            "default": "#225647"           
+          },
+          {
+        "type": "header",
+        "content": "Buttons"
+      },
+          { 
+            "type": "color",
             "id": "button_label",
-            "label": "Button Color",
+            "label": " Primary Button Color",
             "default": "#FFFFFF"
           },
           {
             "type": "color",
+            "id": "secondary_product_button_color",
+            "label": "Secondary Button Color",
+            "default": "#C7E1BF"
+          },
+           {
+            "type": "color",
             "id": "secondary_button_label",
-            "label": "Button Text Color",
+            "label": " Primary Button Text Color",
             "default": "#121212"
           },
+          {
+            "type": "color",
+            "id": "product_price_font",
+            "label": "Secondary Button Text Color",
+            "default": "#FFFFFF"           
+          },
+         
+         
            {
         "type": "header",
         "content": "Cards"
@@ -80,24 +104,6 @@
             "id": "background_gradient",
             "label": "t:settings_schema.colors.settings.background_gradient.label",
             "info": "t:settings_schema.colors.settings.background_gradient.info"
-          },
-          {
-            "type": "color",
-            "id": "secondary_product_button_color",
-            "label": "t:settings_schema.colors.settings.secondary_product_button_color.label",
-            "default": "#C7E1BF"
-          },
-          {
-            "type": "color",
-            "id": "product_price_card",
-            "label": "t:settings_schema.colors.settings.product_price_card.label",
-            "default": "#225647"           
-          },
-          {
-            "type": "color",
-            "id": "product_price_font",
-            "label": "t:settings_schema.colors.settings.product_price_font.label",
-            "default": "#FFFFFF"           
           },
           {
             "type": "color",
