@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="{{ 'popup.css' | asset_url }}">
 <div class="popup-overlay" id="popupOverlay" >
-  <div class="popup"> 
-<div class="test" >
+  <div class="popup color-{{ section.settings.color_scheme }}"> 
+<div class="popup-fill" >
   <div class="popup-header" >
       <div class="popup-header-background">
         <h2>{{ section.settings.popup_title }}</h2>
@@ -63,11 +63,18 @@ document.querySelector('.popup-subscribe-btn').addEventListener('click', functio
 {
   "name": "Popup",
   "settings": [
+   
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
     {
       "type": "text",
       "id": "popup_title",
       "label": "Popup Title",
-      "default": "Subscribe to our Newsletter"
+      "default": "Join Our Community!"
     },
     {
       "type": "richtext",
@@ -85,7 +92,7 @@ document.querySelector('.popup-subscribe-btn').addEventListener('click', functio
       "type": "text",
       "id": "button_text",
       "label": "Button Text",
-      "default": "Subscribe"
+      "default": "Subscribe Now"
     },
     {
       "type": "text",
@@ -109,7 +116,7 @@ document.querySelector('.popup-subscribe-btn').addEventListener('click', functio
   "blocks": [],
   "presets": [
     {
-      "name": "Email Validation Popup",
+      "name": "Newsletter Popup",
       "category": "Popups"
     }
   ]
