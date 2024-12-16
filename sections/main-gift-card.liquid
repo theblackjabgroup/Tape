@@ -66,6 +66,9 @@
     .gift_card-logo{
     height:105px;
     }
+    .copy-button{
+        color:{{section.settings.text_color}};
+    }
     .gift-card-card{
        background-image:none;
     }
@@ -75,14 +78,11 @@
  <div class="main " >
   <div class="gift-container-design" >
       <div class="semicircle-border">
-        <div class="semicircle"></div>
-        <div class="semicircle"></div>
-        <div class="semicircle"></div>
-        <div class="semicircle"></div>
-        <div class="semicircle"></div>
-        <div class="semicircle"></div>
-        <div class="semicircle"></div>
-        <div class="semicircle"></div>
+        
+      {% for i in (1..13) %}
+  <div class="semicircle"></div>
+{% endfor %}
+
       </div>
     <div class="gift-container" >
        <header>
@@ -172,14 +172,9 @@
     </div>
     </div>
       <div class="semicircle-border-down">
-        <div class="semicircle-down"></div>
-        <div class="semicircle-down"></div>
-        <div class="semicircle-down"></div>
-        <div class="semicircle-down"></div>
-        <div class="semicircle-down"></div>
-        <div class="semicircle-down"></div>
-        <div class="semicircle-down"></div>
-        <div class="semicircle-down"></div>
+         {% for i in (1..13) %}
+  <div class="semicircle-down"></div>
+{% endfor %}
       </div>
   </div>
 </div>
