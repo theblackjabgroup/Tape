@@ -21,7 +21,7 @@ clip-path: polygon(100% 81%, 84% 81%, 84% 100%);
 }
 
 .text-area {
-  background-color: #F4EDED;
+    background-color: var(--background_product_card);
   color: black;
   width: 100%; 
   height: 100%; 
@@ -99,6 +99,8 @@ margin-top: .5rem;
 }
 
 .totals__total-value {
+    background-color: var(--product_price_card);
+  color: var(--product_price_font);
        width: auto; 
       max-width: 100%;
        white-space: nowrap;
@@ -109,9 +111,9 @@ margin-top: .5rem;
       padding: 16px 26px;
       border-radius: 4px;
       font-weight: bold; 
-      color: #333;
+     
       display: inline-flex;
-      background: #FFFFFF;
+    
       margin:0 10px;
 }
 
