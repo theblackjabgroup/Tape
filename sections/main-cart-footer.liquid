@@ -82,18 +82,9 @@
                  
                   <p class="notelink js-toggle-cart-note">Add Order Note</p>
 
-      {%- if settings.show_cart_note -%}
-        <cart-note class="cart__note field hidden">
-          <label for="Cart-note">{{ 'sections.cart.note' | t }}</label>
-          <textarea
-            class="text-area field__input"
-            name="note"
-            form="cart"
-            id="Cart-note"
-            placeholder="{{ 'sections.cart.note' | t }}"
-          >{{ cart.note }}</textarea>
-        </cart-note>
-      {%- endif -%}
+     
+      
+     
 
 
 
@@ -120,7 +111,20 @@
                 </div>
               </div>
             {%- else -%}
-              <div class="cart__ctas" {{ block.shopify_attributes }}>
+            <div class="footer-checkout">
+                  <cart-note class="cart__note">
+          <textarea
+            class="text-area field__input"
+            name="note"
+            form="cart"
+            id="Cart-note"
+            placeholder="{{ 'sections.cart.note' | t }}"
+          >{{ cart.note }}</textarea>
+
+              <div class="triangle-shortnote"><h2></h2></div>  
+        </cart-note>
+
+                       <div class="cart__ctas" {{ block.shopify_attributes }}>
                 <button
                   type="submit"
                   id="checkout"
@@ -135,6 +139,7 @@
                 </button>
                
               </div>
+            </div>
               {%- if additional_checkout_buttons -%}
                 <div class="cart__dynamic-checkout-buttons additional-checkout-buttons">
                   {{ content_for_additional_checkout_buttons }}
