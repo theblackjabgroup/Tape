@@ -154,7 +154,7 @@
   --info__banner__left: 15%;
   --info__banner__transform: translate(0, -50%);
   --info__banner__padding: 16px;
-  --info__banner__color: rgba(var(--color-background), 0.8);
+  --info__banner__color: rgba(var(--color-background_product_card), 0.8);
 }
 
 .info__banner__contents {
@@ -186,7 +186,8 @@
 }
 
 .info__banner {
-  background: var(--info__banner__color);
+  color:  rgb(var(--color-text));
+  background-color: rgba(var(--color-background_product_card), 0.8);
   height: var(--info__banner__height);
   width: var(--info__banner__width);
   position: var(--info__banner__position);
@@ -247,7 +248,7 @@
 info__banner__contents > .svg-wrapper {
   --svg-wrapper__visibillity: none;
   display: var(--svg-wrapper__visibillity);
-  color: rgb(var(--color-foreground));
+  color: rgb(var(--color-secondary-button-text));
 }
 
 @media (min-width: 1068px) {
