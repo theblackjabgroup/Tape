@@ -15,13 +15,16 @@ cart-items .title-wrapper-with-link {
 .cart_total_count {
     position: relative; 
      text-align:center;
+      width: 118px;
+    height: 38px;
 }
 .cart_total_count span {
     position: relative;
   z-index: 1; 
    margin:18px; 
-  font-size: 25px;
+  font-size: 17px;
    color: rgb(var(--color-button-text));
+      top: 4px;
   }
 .svg-path{
      fill: rgb(var(--color-button));
