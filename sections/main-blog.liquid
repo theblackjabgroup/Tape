@@ -32,12 +32,11 @@
           {% endif %}
         >
           <div class="semi semi-left"><h6></h6></div>
-          <div class="semi semi-right" ><h6></h6></div>
+          <div class="semi semi-right"><h6></h6></div>
         
           {%- render 'article-card',
             article: article,
-            
-            show_image: section.settings.show_image,
+            show_image: true, /* Always show the image */
             show_date: section.settings.show_date,
             show_author: section.settings.show_author,
             show_excerpt: true,
@@ -52,6 +51,8 @@
   </div>
 {%- endpaginate -%}
 
+
+
 {% schema %}
 {
   "name": "t:sections.main-blog.name",
@@ -62,30 +63,6 @@
       "type": "header",
       "content": "t:sections.main-blog.settings.header.content"
     },
-    {
-      "type": "select",
-      "id": "layout",
-      "options": [
-        {
-          "value": "grid",
-          "label": "t:sections.main-blog.settings.layout.options__1.label"
-        },
-        {
-          "value": "collage",
-          "label": "t:sections.main-blog.settings.layout.options__2.label"
-        }
-      ],
-      "default": "collage",
-      "label": "t:sections.main-blog.settings.layout.label",
-      "info": "t:sections.main-blog.settings.layout.info"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_image",
-      "default": true,
-      "label": "t:sections.main-blog.settings.show_image.label"
-    },
-    
     {
       "type": "checkbox",
       "id": "show_date",
