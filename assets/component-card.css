@@ -8,6 +8,7 @@
 .card {
   text-decoration: none;
   text-align: var(--text-alignment);
+  border:none;
 }
 
 .card:not(.ratio) {
@@ -132,6 +133,7 @@
   width: 100%;
   flex-grow: 1;
   border-radius:10px;
+  height:400px;
 }
 
 .card__content--auto-margins {
@@ -141,6 +143,8 @@
 .card__information {
   grid-row-start: 2;
   padding: 1.3rem 1rem;
+  height:400px;
+  margin: 0 10px;
 }
 
 .card:not(.ratio) > .card__content {
@@ -281,6 +285,7 @@
   .card__information {
     padding-bottom: 1.7rem;
     padding-top: 1.7rem;
+    height:400px;
   }
 }
 
