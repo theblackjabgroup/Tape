@@ -1,7 +1,6 @@
 {{ 'collapsible-content.css' | asset_url | stylesheet_tag }}
 <style>
 .faq-item{
-  color:var(--product_price_card);
   background-color: rgb(var(--color-button));  
 }
 .faq-main{
@@ -25,7 +24,7 @@
 }
 </style>
 
-<div class="faq-section gradient">
+<div class="faq-section gradient" >
   <div class='faq-main color-{{ section.settings.color_scheme }}' >
     <!-- Left side -->
     <div class="faq-header">
@@ -40,11 +39,11 @@
     <span class="faq-number " >{{ block.settings.serialno}}</span>
           {% if section.settings.layout_style == 'layout1' %}
     <div class="dots-line" >
-        <span class="collapse_dot"></span>
+        <!-- <span class="collapse_dot"></span>
       <span class="collapse_dot"></span>
       <span class="collapse_dot"></span>
        <span class="collapse_dot"></span>
-      <span class="collapse_dot"></span>
+      <span class="collapse_dot"></span> -->
      
     </div>
       {% else %}
@@ -71,23 +70,39 @@
   </div>
     </div>
 </div>
-
-<script>
+            <script>
 document.addEventListener('DOMContentLoaded', function() {
-
-  const createDots = (dotsLine) => {
+  const createDots = (dotsLine, isExpanding = false) => {
     const containerHeight = dotsLine.offsetHeight;
     const dotHeight = 9;
     const dotMargin = 8;
     const dotSpacing = dotHeight + dotMargin;
     const numberOfDots = Math.floor(containerHeight / dotSpacing);
+    const currentDots = dotsLine.querySelectorAll('.collapse_dot').length;
     
-    dotsLine.innerHTML = '';
-    for (let i = 0; i < numberOfDots; i++) {
-      const dot = document.createElement('span');
-      dot.className = 'collapse_dot ';
-      dotsLine.appendChild(dot);
+    if (isExpanding && currentDots < numberOfDots) {
+      for (let i = currentDots; i < numberOfDots; i++) {
+        const dot = document.createElement('span');
+        dot.className = 'collapse_dot new-dot';
+        dotsLine.appendChild(dot);
+      }
+    } else if (!isExpanding) {
+      dotsLine.innerHTML = '';
+      for (let i = 0; i < numberOfDots; i++) {
+        const dot = document.createElement('span');
+        dot.className = 'collapse_dot';
+        dotsLine.appendChild(dot);
+      }
     }
+  };
+
+  const animateNewDots = (dotsLine) => {
+    const newDots = dotsLine.querySelectorAll('.collapse_dot.new-dot');
+    newDots.forEach((dot, index) => {
+      setTimeout(() => {
+        dot.classList.add('animated');
+      }, index * 200);
+    });
   };
 
   const handleFAQClick = (item) => {
@@ -95,43 +110,51 @@ document.addEventListener('DOMContentLoaded', function() {
     const arrow = item.querySelector('.icon-arrow');
     
     if (answer && arrow) {
+      const isExpanding = !answer.classList.contains('visible');
       answer.classList.toggle('visible');
       arrow.classList.toggle('rotated');
+      
       const dotsLine = item.querySelector('.dots-line');
-      if (dotsLine) {
-        setTimeout(() => createDots(dotsLine), 200);
+      if (dotsLine && isExpanding) {
+        setTimeout(() => {
+          createDots(dotsLine, true);
+          animateNewDots(dotsLine);
+        }, 200);
+      } else if (dotsLine) {
+        const dots = dotsLine.querySelectorAll('.collapse_dot');
+        dots.forEach((dot, index) => {
+          if (dot.classList.contains('new-dot')) {
+            dot.remove();
+          }
+        });
       }
     }
   };
-
+  document.querySelectorAll('.dots-line').forEach(dotsLine => {
+    createDots(dotsLine, false);
+  });
 
   document.querySelectorAll('.faq-item').forEach(item => {
-
     const arrow = item.querySelector('.icon-arrow');
     if (arrow) {
       arrow.addEventListener('click', (e) => {
-        e.stopPropagation(); 
+        e.stopPropagation();
         handleFAQClick(item);
       });
     }
-
-    const dotsLine = item.querySelector('.dots-line');
-    if (dotsLine) {
-      createDots(dotsLine);
-    }
   });
-
- 
   let resizeTimer;
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => {
-      document.querySelectorAll('.dots-line').forEach(createDots);
+      document.querySelectorAll('.dots-line').forEach(dotsLine => {
+        createDots(dotsLine, false);
+      });
     }, 250);
   });
 });
-</script>
-
+    </script>
+            
 {% schema %}
 {
   "name": "t:sections.collapsible_content.name",
