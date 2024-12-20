@@ -18,7 +18,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: white;
+    background-color: rgb(var(--color-background));
     font-family: 'Inter', sans-serif;
 }
 
@@ -27,8 +27,8 @@ body {
     position: absolute; 
     width: 114%; 
     height: 60px;
-    background-color: white; 
-    color: black; 
+background-color: var(--background_product_card);
+    color: rgb(var(--color-foreground)); 
     font-size: 23px;
     display: flex;
     align-items: center;
@@ -45,12 +45,8 @@ body {
     position: absolute; 
     width: 114%; 
     height: 60px;
-    background-color: rgb(
-      221,
-      23,
-      23
-    ); 
-    color: white; 
+background-color: var(--background_product_card);
+    color:rgb(var(--color-foreground)); 
     font-size: 23px;
     display: flex;
     align-items: center;
@@ -64,14 +60,14 @@ body {
   }
 
   .strip-right {
-    background-color: white;
+background-color: var(--background_product_card);
     top: 45%; 
     left: 45%; 
     transform: translate(-51%, -40%) rotate(6deg); 
 }
 
 .strip-left {
-    background-color: white;
+background-color: var(--background_product_card);
     top: 62%; 
     left: 53%; 
     transform: translate(-47%, -103%) rotate(-6deg); 
@@ -266,6 +262,20 @@ body {
     margin-left: -18px;
   }
 
+
+.footer__localization {
+
+  margin-right: 210px;
+
+}
+
+  .footer__localization .caption-large {
+          margin: 1rem 1rem .5rem;
+        margin-left: -15px;
+        margin-bottom: 10px;
+        margin-top: -3px;
+}
+  
   .footer-column:not(#newsletter-section1) h4 {
     position: relative;
     padding: 15px 20px;
@@ -309,7 +319,7 @@ body {
     border: 1px solid #ccc;
     margin-bottom: 14px;
     font-family: 'Inter', sans-serif;
-    width: 70%;
+    width: 100%;
     font-size: 15px;
   }
 
@@ -369,24 +379,32 @@ body {
   
 }
 
-#LocalizationDropdown {
-    margin-top: 15px; /* Adjust spacing from the newsletter button */
+.footer__localization {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+    padding: 1rem 1rem 0;
+  margin-right: 200px;
 }
 
-.language-currency-dropdown {
-    font-family: inherit;
-    font-size: 14px;
-    border-radius: 5px;
+.footer__localization .localization-form {
+    width: 100%;
+}
+
+.footer__localization .disclosure__button {
+    border: 1px solid currentColor;
+    padding: 0.5rem 1rem;
+    width: 100%;
+    text-align: left;
+    background: none;
     cursor: pointer;
-    border: none;
-    outline: none; /* Removes default focus border */
-    box-shadow: none; /* Ensures no shadow appears */
-    transition: none; /* Disables any transition effects */
 }
 
-.language-currency-dropdown option {
-    background-color: #fff; /* Dropdown background */
-    color: #333; /* Option text color */
-  
-  
+.footer__localization .caption-large {
+          margin: 1rem 1rem .5rem;
+        margin-left: -15px;
+        margin-bottom: 10px;
+        margin-top: -3px;
 }
