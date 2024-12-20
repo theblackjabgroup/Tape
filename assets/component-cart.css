@@ -1,3 +1,19 @@
+.title{
+  font-family: 'Fira Sans', sans-serif;
+  font-weight: 500;
+  line-height: 34px;
+}
+.cart_total_count{
+  font-family: 'Fira Sans', sans-serif;
+  font-weight: 500;
+  line-height: 34px;
+}
+.underlined-link{
+   font-family: 'Fira Sans', sans-serif;
+  font-weight: 500;
+  line-height: 34px;
+}
+
 .cart {
   position: relative;
   display: block;
