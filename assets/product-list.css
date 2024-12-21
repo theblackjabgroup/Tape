@@ -153,7 +153,7 @@ summary .icon-caret2 {
 }
 
 .bb-card-content {
-    background-color: var(--background_product_card);
+    background-color: rgb(var(--color-button));
     grid-template-rows: minmax(0, 1fr) max-content max-content auto !important;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
@@ -196,18 +196,18 @@ summary .icon-caret2 {
    .bb-price2::after {
      content: '';
      position: absolute;
-     width: 8px;
-     height: 8px;
-     background-color: var(--background_product_card);
+     width: 9px;
+     height: 13px;
+     background-color: rgb(var(--color-button));
      border-radius: 50%;
    }
    
    .bb-price2::before {
-     transform: translate(-2.3rem,0.8rem);
+     transform: translate(-2.3rem,0.6rem);
    }
    
    .bb-price2:after {
-     transform: translate(1.5rem,0.8rem);
+     transform: translate(1.5rem,0.6rem);
    }
 
 
@@ -260,11 +260,15 @@ summary .icon-caret2 {
 
   .bb-card-media {
     background: rgb(var(--color-background));
+    border-top-left-radius: 1rem !important;
+    border-top-right-radius: 1rem !important;
   }
 
   .bb-card-image-media {
+    /*
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
+    */
   }
 
   .bb-card-media-wrapper {

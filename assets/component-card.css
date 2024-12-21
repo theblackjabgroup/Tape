@@ -81,7 +81,9 @@
   overflow: hidden;
   /* Fix for Safari border bug on hover */
   z-index: 0;
-  border-radius:10px;
+  border-radius: calc(
+    var(--border-radius) - var(--border-width) - var(--image-padding)
+  );
 }
 
 .card--card .card__inner .card__media {
@@ -132,7 +134,6 @@
   padding: 1rem;
   width: 100%;
   flex-grow: 1;
-  border-radius:10px;
   height:400px;
 }
 
@@ -149,7 +150,6 @@
 
 .card:not(.ratio) > .card__content {
   grid-template-rows: max-content minmax(0, 1fr) max-content auto;
-   background-color:  rgb(var(--color-button));
 }
 
 .card-information .card__information-volume-pricing-note {
