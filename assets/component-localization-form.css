@@ -173,7 +173,7 @@
   position: sticky;
   top: -0.02rem;
   background-color: rgb(var(--color-background));
-  z-index: 6;
+  z-index: 101;
 }
 
 .country-filter__input {
@@ -263,7 +263,7 @@
     max-height: 85%;
     min-width: 100%;
     margin-bottom: 0;
-    z-index: 5;
+    z-index: 101;
   }
 
   .country-selector__close-button.link {
@@ -437,6 +437,7 @@
   top: 100%;
   right: 0;
   transform: translateY(0);
+  z-index: 101;
 }
 
 /* Menu drawer */

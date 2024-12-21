@@ -9,10 +9,11 @@
 
 .bb-upper-template-404 {
     background-color: #C7C7CC;
-    margin: 7rem 20rem;
+    margin: 7rem auto;
     display: block;
     padding: 2rem;
     position: relative;
+    max-width: var(--page-width);
 }
 
 .vertical-bar-top-404 {
@@ -57,11 +58,20 @@
 
 .vertical-bar-circle-404 {
     width: 30px;
-    height: 30px;
-    background-color: rgb(var(--color-background));
+    height: 32px;
+    background-color: rgb(var(--color-background)); 
     border-radius: 50%;
     display: block !important;
 }
+
+.vertical-bar-circle-h-404 {
+    width: 32.75px;
+    height: 30px;
+    background-color: rgb(var(--color-background)); 
+    border-radius: 50%;
+    display: block !important;
+}
+
 
 .bb-404-subtext {
     font-family: 'Fira Sans';
@@ -85,16 +95,40 @@
     font-size: 24px;
     line-height: 36px;
     margin-bottom: 2rem;
+    color: black;
 }
-.bb-404-h-button:hover, .bb-404-c-button:hover {
-    color: white;
+.bb-404-h-button:hover {
+    color: black;
+    background: #e5e5ea;
+    border: none;
 }
 
+.bb-404-h-button::after:hover {
+    color: black;
+    background: #e5e5ea;
+    border: none;
+    box-shadow: none;
+}
+
+.bb-404-c-button:hover {
+    background-color: black;
+    color: #e5e5ea;
+    border: none;
+}
 .bb-404-h-button , .bb-404-c-button {
 font-family: 'Fira Sans';
 margin-top: 2rem;
 }
 
+.bb-404-h-button {
+    background-color: black;
+    color: #e5e5ea;
+}
+.bb-404-c-button {
+    color: black;
+  /*  color: rgba(var(--color-button)); */
+    background: #e5e5ea;
+}
 .desktop-view {
     display: block;
   }
@@ -141,6 +175,7 @@ margin-top: 2rem;
         font-size: 12px;
         line-height: 21px;
         margin-bottom: 2rem;
+        color: black;
     }
     .vertical-bar-circle-404 {
         width: 13px;
