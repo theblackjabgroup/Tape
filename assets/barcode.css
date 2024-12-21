@@ -15,7 +15,7 @@ text-align: center;
     position: absolute;
     font-size: 13px;
     padding: 10px;
-    margin-top: 130px;
+    margin-top: 150px;
 }
 
 /* Remove scrollbar hiding styles since we don't need them anymore */
@@ -91,6 +91,39 @@ text-align: center;
   border: 0;
 }
 
+.payments-icons {
+  display: flex; 
+    justify-content: flex-end;
+    margin-top: 10px; 
+    padding-right: 10px; 
+    flex-wrap: nowrap;
+    position: absolute; 
+    bottom: -33px; 
+
+}
+
+.footer__payment {
+display: flex;
+    flex-direction: row;
+    gap: 10px;
+    padding: 0;
+    /* margin-bottom: 31%; */
+    margin: 0;
+    list-style-type: none;
+  margin-right:-150%;
+   
+}
+
+.footer__payment li {
+  display: flex;
+  align-items: center;
+}
+
+.payment-icon {
+  width: 40px; /* Adjust icon size as needed */
+  height: auto;
+}
+
 
 
 /* Tablet/Medium screen breakpoint */
@@ -127,7 +160,16 @@ text-align: center;
     
   }
 
-  /* Center section bars */
+   .payments-icons {
+    bottom: -30px; 
+
+}
+
+.footer__payment {
+  margin-right:-70%;
+   
+}
+
 }
 
 
@@ -142,9 +184,18 @@ text-align: center;
      margin-left:0px;
 
   }
+   .payments-icons {
+    bottom: -45px; 
+
+}
+
+.footer__payment {
+  margin-right:65%;
+   
+}
   
   .barcode-footer {
-    margin-top: 70px;
+    margin-top: 80px;
     font-size: 12px;
     padding: 8px;
    
@@ -309,3 +360,5 @@ text-align: center;
     margin-left: 10px;
   }
 }
+
+

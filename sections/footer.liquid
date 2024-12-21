@@ -9,14 +9,11 @@
     height: {{ section.settings.footer_button_height | default: 40 }}px;
     padding: {{ section.settings.footer_button_padding | default: '5px 10px' }};
     
-    /* Use section settings for button colors */
-    background: linear-gradient(to right, 
-        {{ section.settings.subscribe_button_background_color | default: 'black' }} 50%, 
-        {{ section.settings.subscribe_button_hover_background_color | default: '#333333' }} 50%);
+     background: linear-gradient(to right, gray 50%, rgb(var(--color-button-text)) 50%);
     
     background-size: 200% 100%;
     background-position: 100% 0;
-    color: {{ section.settings.footer_button_text_color | default: 'white' }};
+   color:rgb(var(--color-secondary-button-text));
     border: {{ section.settings.footer_button_border | default: 'none' }};
     
     cursor: pointer;
@@ -39,11 +36,11 @@
 
 
 
-<footer style="background-color: {{ section.settings.footer_background_color }}; font-family: 'Inter', sans-serif;">
+<footer class=" color-{{ section.settings.color_scheme }}" style="background-color: {{ section.settings.footer_background_color }}; font-family: 'Inter', sans-serif;">
     {% for block in section.blocks %}
         {% if block.type == 'strip' %}
-        <div class="container1" style="background-color: {{ block.settings.background_color }};">
-            <div class="strip-right" style="background-color: {{ block.settings.strip_bg_color }};">
+        <div class="container1 color-{{ section.settings.color_scheme }}" style="background-color: {{ block.settings.background_color }};">
+            <div class="strip-right color-{{ section.settings.color_scheme }}" style="background-color: {{ block.settings.strip_bg_color }};">
                 <div class="strip-1">
                     <div class="offer-text" style="color: {{ block.settings.text_color }};">{{ block.settings.offer_text_1 }} &rarr;</div>
                     <div class="offer-text" style="color: {{ block.settings.text_color }};">{{ block.settings.offer_text_1 }} &rarr;</div>
@@ -76,29 +73,26 @@
                     <button type="submit">{{ section.settings.subscribe_button_text }}</button>
                 </div>
             </form>
-<div id="LocalizationDropdown" style="margin-top: 15px;">
-    <form method="get" action="{{ localization.current_country.url }}">
-        <select 
-            class="language-currency-dropdown" 
-            name="locale" 
-            style="color: {{ section.settings.menu_item_color }}; background-color: transparent; border: none {{ section.settings.menu_item_color }}; padding: 5px; width: 100%; max-width: 280px;">
-            {% for country in localization.available_countries %}
-            <option 
-                value="{{ country.url }}" 
-                {% if country.iso_code == localization.current_country.iso_code %}selected{% endif %}>
-                {{ country.name }} ({{ country.currency.iso_code }})
-            </option>
-            {% endfor %}
-        </select>
-        <button type="submit" style="display: none;"></button> <!-- Hidden button for form submission -->
-    </form>
-</div>
+          
+ <div class="footer__column footer__localization isolate">
+        {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
+          <localization-form>
+            {%- form 'localization', id: 'FooterCountryForm', class: 'localization-form' -%}
+              <div>
+                <h2 class="caption-large text-body" id="FooterCountryLabel">{{ 'localization.country_label' | t }}</h2>
+                {%- render 'country-localization', localPosition: 'FooterCountry' -%}
+              </div>
+            {%- endform -%}
+          </localization-form>
+        {%- endif -%}
+
+      </div>
 
 
  </div>
 
 
-<p id="thank-you-message" class="thank-you-message" style="display: none; color: {{ section.settings.thank_you_message_color }}; text-align: center;">
+<p id="thank-you-message" class="thank-you-message" style="display: none; text-align: center;">
     {{ section.settings.thank_you_message_text | default: "Thank you for subscribing!" }}
 </p>
 
@@ -216,9 +210,10 @@
   
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-    // Newsletter Form Handling (keep existing code)
+    // Newsletter Form Handling
     const form = document.getElementById("newsletter-form");
-    const newsletterSection = document.getElementById("newsletter-section1");
+    const formContainer = document.getElementById("form-container");
+    const stayConnectedTitle = document.getElementById("stay-connected-title");
     const thankYouMessage = document.getElementById("thank-you-message");
 
     form.addEventListener("submit", function (event) {
@@ -231,7 +226,9 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
         
-        newsletterSection.style.display = "none";
+        // Only hide the form and title, keep the country selector visible
+        formContainer.style.display = "none";
+        stayConnectedTitle.style.display = "none";
         thankYouMessage.style.display = "block";
     });
 
@@ -431,12 +428,7 @@ document.addEventListener("DOMContentLoaded", function () {
       "default": true,
       "info": "Toggle the font weight of the Stay Connected title"
     },
-    {
-      "type": "color",
-      "id": "thank_you_message_color",
-      "label": "Thank You Message Color",
-      "default": "#333333"
-    },
+    
     {
       "type": "text",
       "id": "thank_you_message_text",
@@ -453,42 +445,25 @@ document.addEventListener("DOMContentLoaded", function () {
       "label": "Button Text",
       "default": "Subscribe"
     },
-    {
-  "type": "color",
-  "id": "subscribe_button_background_color",
-  "label": "Subscribe Button hover Background Color",
-  "default": "#000000"
-},
-{
-  "type": "color",
-  "id": "subscribe_button_hover_background_color",
-  "label": "Subscribe Button Background Color",
-  "default": "#333333"
-},
+      {
+      "type": "checkbox",
+      "id": "enable_language_selector",
+      "default": true,
+      "label": "t:sections.footer.settings.enable_language_selector.label"
+    },
+      {
+      "type": "checkbox",
+      "id": "enable_country_selector",
+      "default": true,
+      "label": "t:sections.footer.settings.enable_country_selector.label"
+    },
+
   ],
   "blocks": [
     {
       "type": "strip",
       "name": "Cross-Strips",
       "settings": [
-        {
-          "type": "color",
-          "id": "background_color",
-          "label": "Container Background Color",
-          "default": "#f0f4f8"
-        },
-        {
-          "type": "color",
-          "id": "strip_bg_color",
-          "label": "Strip Background Color",
-          "default": "#ffffff"
-        },
-        {
-          "type": "color",
-          "id": "text_color",
-          "label": "Text Color",
-          "default": "#333333"
-        },
         {
           "type": "text",
           "id": "offer_text_1",
