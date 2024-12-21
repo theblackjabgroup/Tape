@@ -1,4 +1,6 @@
 .price {
+  font-family: 'Fira Sans', sans-serif;
+  font-weight: 400;
   font-size: 1.6rem;
   letter-spacing: 0.1rem;
   line-height: calc(1 + 0.5 / var(--font-body-scale));
