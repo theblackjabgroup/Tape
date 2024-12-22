@@ -14,18 +14,26 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+  .card{
+     background: rgb(var(--color-button)) !important;
+    border-radius:10px !important;
+  }
+  .main-blog-test{
+     background: rgb(var(--color-button)) !important;
+  }
+
 {%- endstyle -%}
 
 {%- paginate blog.articles by 9 -%}
-  <div class="main-blog page-width section-{{ section.id }}-padding">
-    <h1 class="title--primary{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
+  <div class="main-blog color-{{ section.settings.color_scheme }} page-width section-{{ section.id }}-padding">
+    <h1 class=" title--primary{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
       {{ blog.title | escape }}
     </h1>
 
-    <div class="blog-articles {% if section.settings.layout == 'collage' %}blog-articles--collage{% endif %}">
+    <div class="blog-articles  {% if section.settings.layout == 'collage' %}blog-articles--collage{% endif %}">
       {%- for article in blog.articles -%}
         <div
-          class="blog-articles__article article{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+          class="blog-articles__article  main-blog-test  article{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %} "
           {% if settings.animations_reveal_on_scroll %}
             data-cascade
             style="--animation-order: {{ forloop.index }};"
@@ -59,6 +67,12 @@
   "tag": "section",
   "class": "section",
   "settings": [
+        {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
     {
       "type": "header",
       "content": "t:sections.main-blog.settings.header.content"
