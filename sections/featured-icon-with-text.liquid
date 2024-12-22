@@ -4,19 +4,19 @@
 {% style %}
   :root {
     --featured-icon-with-text-card-color: {{ section.settings.cardColor }};
-    --featured-icon-with-text-inner-card-color: {{ section.settings.innerCardColor }};
+    --featured-icon-with-text-inner-card-color: #fff;
     --featured-icon-with-text-title-color: {{ section.settings.titleColor }};
     --featured-icon-with-text-description-color: {{ section.settings.descriptionColor }};
     --featured-icon-with-text-icon-color: {{ section.settings.iconColor }};
 }
 {% endstyle %}
 
-<div style="display: flex; flex-direction: column; gap: 6rem; padding: 20px 0;" class="color-{{ section.settings.sectionColor }}" data-section-id="{{ section.id }}">
-  <div style="display: flex; flex-direction: column; gap: 4px; padding: 0 20px;">
+<div style="display: flex; flex-direction: column; gap: 32px; padding: 20px 0;" class="color-{{ section.settings.sectionColor }}" data-section-id="{{ section.id }}">
+  <div style="display: flex; flex-direction: column; gap: 4px; padding: 0 40px;">
     <p style="font-weight: 600; font-size: 24px; line-height: 30px; color: var(--featured-icon-with-text-section-headings-color)" class="fira-sans-semibold">{{ section.settings.heading }}</p>
     <p style="font-weight: 500; font-size: 14px; line-height: 21px; color: var(--featured-icon-with-text-section-headings-color)" class="inter-medium">{{ section.settings.subheading }}</p>
   </div>
-  <div class="icon-with-text-container">
+  <div class="icon-with-text-container color-{{ section.settings.sectionColor }}">
     {% for item in section.blocks %}
       <div class="card__outer__container">
         <div class="card__container">
@@ -113,37 +113,7 @@
       "label": "Section Color",
       "id": "sectionColor",
       "default": "scheme_1"
-    },
-    {
-      "type": "color",
-      "label": "Card Color",
-      "id": "cardColor",
-      "default": "#d1d1d1"
-    },
-    {
-      "type": "color",
-      "label": "Inner Card Color",
-      "id": "innerCardColor",
-      "default": "#FFFFFF"
-    },
-    {
-      "type": "color",
-      "label": "Title Color",
-      "id": "titleColor",
-      "default": "#000000"
-    },
-    {
-      "type": "color",
-      "label": "Description Color",
-      "id": "descriptionColor",
-      "default": "#000000"
-    },
-    {
-      "type": "color",
-      "label": "Icon Color",
-      "id": "iconColor",
-      "default": "#000000"
-    },
+    }
   ],
   "blocks": [
     {

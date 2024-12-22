@@ -32,12 +32,9 @@
               <div
                 style="display: block !important; position: absolute; height: 100%; width: 1px; background-color: rgb(var(--color-foreground)); rotate: -45deg; left: 50%;"
               ></div> {% endcomment %}
-              <div style="width: 100%; height: 100%;">{{ 'hero-apparel-2' | placeholder_svg_tag: 'placeholder-svg' }}</div>
+              <div style="width: 100%; height: 100%;">{{ 'hero-apparel-3' | placeholder_svg_tag: 'placeholder-svg' }}</div>
             {% endif %}
           </div>
-        </li>
-        <li class="image__with__text__card min__card__height card__set card">
-          <h2 class="heading-card ">{{ item.settings.heading }}</h2>
         </li>
       {% endfor %}
       <div class="info__banner color-{{ section.settings.sectionColor }}">
@@ -206,47 +203,6 @@ infoBannerExpandButton.addEventListener('click', () => {
           "id": "captionColor",
           "label": "Text Color",
           "default": "#000000"
-        }
-      ]
-    },
-    {
-      "type": "heading",
-      "name": "t:sections.image-banner.blocks.heading.name",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "inline_richtext",
-          "id": "heading",
-          "default": "t:sections.image-banner.blocks.heading.settings.heading.default",
-          "label": "t:sections.image-banner.blocks.heading.settings.heading.label"
-        },
-        {
-          "type": "select",
-          "id": "heading_size",
-          "options": [
-            {
-              "value": "h2",
-              "label": "t:sections.all.heading_size.options__1.label"
-            },
-            {
-              "value": "h1",
-              "label": "t:sections.all.heading_size.options__2.label"
-            },
-            {
-              "value": "h0",
-              "label": "t:sections.all.heading_size.options__3.label"
-            },
-            {
-              "value": "hxl",
-              "label": "t:sections.all.heading_size.options__4.label"
-            },
-            {
-              "value": "hxxl",
-              "label": "t:sections.all.heading_size.options__5.label"
-            }
-          ],
-          "default": "h1",
-          "label": "t:sections.all.heading_size.label"
         }
       ]
     }
