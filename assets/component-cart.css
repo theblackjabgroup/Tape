@@ -1,3 +1,33 @@
+.cart__empty-text{
+  font-family: Fira Sans;
+font-size: 48px;
+font-weight: 600;
+line-height: 65px;
+text-align: center;
+text-underline-position: from-font;
+text-decoration-skip-ink: none;
+}
+.favouritestart{
+  font-family: Fira Sans;
+font-size: 32px;
+font-weight: 400;
+line-height: 34px;
+text-align: center;
+text-underline-position: from-font;
+text-decoration-skip-ink: none;
+
+}
+button{
+  font-family: Fira Sans;
+font-size: 32px;
+font-weight: 400;
+line-height: 34px;
+text-align: center;
+text-decoration-line: underline;
+text-decoration-style: solid;
+text-underline-position: from-font;
+text-decoration-skip-ink: auto;
+}
 .svgemptycard{
   width:50%;
   height:345px;
