@@ -59,6 +59,14 @@
 
 .vertical-bar-circle-404 {
     width: 30px;
+    height: 32px;
+    background-color: rgb(var(--color-background));
+    border-radius: 50%;
+    display: block !important;
+}
+
+.vertical-bar-circle-h-404 {
+    width: 32.75px;
     height: 30px;
     background-color: rgb(var(--color-background));
     border-radius: 50%;
