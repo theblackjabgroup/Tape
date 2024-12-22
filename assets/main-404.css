@@ -9,6 +9,7 @@
 
 .bb-upper-template-404 {
     background-color: #C7C7CC;
+    border-radius: 5px;
     margin: 7rem auto;
     display: block;
     padding: 2rem;
@@ -98,14 +99,16 @@
     color: black;
 }
 .bb-404-h-button:hover {
+    /*
     color: black;
-    background: #e5e5ea;
+    background: #e5e5ea; */
     border: none;
 }
 
 .bb-404-h-button::after:hover {
+    /*
     color: black;
-    background: #e5e5ea;
+    background: #e5e5ea; */
     border: none;
     box-shadow: none;
 }
@@ -148,6 +151,7 @@ margin-top: 2rem;
 
     .bb-upper-template-404 {
         background-color: #C7C6C6;
+        border-radius: 5px;
         display: block;
         position: relative;
         margin: 0rem;
