@@ -1,25 +1,63 @@
 {% comment %}theme-check-disable UndefinedObject{% endcomment %}
 {{ 'section-footer.css' | asset_url | stylesheet_tag }}
 
-{% if section.settings.enable_strip %}
-<div class="container1" style="background-color: {{ section.settings.strip_container_bg_color }};">
-    <div class="strip-right" style="background-color: {{ section.settings.strip_bg_color }};">
-        <div class="strip-1">
-            <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text_1 }} &rarr;</div>
-            <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text_1 }} &rarr;</div>
-            <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text_1 }} &rarr;</div>
-        </div>
-    </div>
-    <div class="strip-left" style="background-color: {{ section.settings.strip_bg_color }};">
-        <div class="strip-2">
-            <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text_2 }} &rarr;</div>
-            <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text_2 }} &rarr;</div>
-            <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text_2 }} &rarr;</div>
-        </div>
-    </div>
-</div>
-{% endif %}
+<style>
+.footer-column form button {
+    border-radius: {{ section.settings.footer_button_border_radius | default: 5 }}px;
+    font-size: {{ section.settings.footer_button_font_size | default: 15 }}px;
+    width: {{ section.settings.footer_button_width | default: 120 }}px;
+    height: {{ section.settings.footer_button_height | default: 40 }}px;
+    padding: {{ section.settings.footer_button_padding | default: '5px 10px' }};
+    
+     background: linear-gradient(to right, gray 50%, rgb(var(--color-button-text)) 50%);
+    
+    background-size: 200% 100%;
+    background-position: 100% 0;
+   color:rgb(var(--color-secondary-button-text));
+    border: {{ section.settings.footer_button_border | default: 'none' }};
+    
+    cursor: pointer;
+    transition: background-position 1.5s ease-in-out, transform 0.3s ease;
+}
 
+.footer-column form button:hover {
+    background-position: 0 0;
+    transform: {{ section.settings.footer_button_hover_transform | default: 'scale(1.05)' }};
+}
+
+.footer-column form button::after {
+    content: '{{ section.settings.footer_button_arrow_text | default: "→" }}';
+    position: relative;
+    margin-left: 5px;
+    font-size: {{ section.settings.footer_button_arrow_size | default: 14 }}px;
+}
+</style>
+
+
+
+
+<footer class=" color-{{ section.settings.color_scheme }}" style="background-color: {{ section.settings.footer_background_color }}; font-family: 'Inter', sans-serif;">
+    {% for block in section.blocks %}
+        {% if block.type == 'strip' %}
+        <div class="container1 color-{{ section.settings.color_scheme }}" style="background-color: {{ block.settings.background_color }};">
+            <div class="strip-right color-{{ section.settings.color_scheme }}" style="background-color: {{ block.settings.strip_bg_color }};">
+                <div class="strip-1">
+                    <div class="offer-text" style="color: {{ block.settings.text_color }};">{{ block.settings.offer_text_1 }} &rarr;</div>
+                    <div class="offer-text" style="color: {{ block.settings.text_color }};">{{ block.settings.offer_text_1 }} &rarr;</div>
+                    <div class="offer-text" style="color: {{ block.settings.text_color }};">{{ block.settings.offer_text_1 }} &rarr;</div>
+                </div>
+            </div>
+            <div class="strip-left" style="background-color: {{ block.settings.strip_bg_color }};">
+                <div class="strip-2">
+                    <div class="offer-text" style="color: {{ block.settings.text_color }};">{{ block.settings.offer_text_2 }} &rarr;</div>
+                    <div class="offer-text" style="color: {{ block.settings.text_color }};">{{ block.settings.offer_text_2 }} &rarr;</div>
+                    <div class="offer-text" style="color: {{ block.settings.text_color }};">{{ block.settings.offer_text_2 }} &rarr;</div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    {% endfor %}
+  
 <footer style="background-color: {{ section.settings.footer_background_color }}; font-family: 'Inter', sans-serif;">
     <div class="footer-content" style="color: {{ section.settings.footer_text_color }};">
         <!-- Email Newsletter Column -->
@@ -30,35 +68,50 @@
             <form id="newsletter-form">
                 <div id="form-container" class="form-container">
                     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-                    <i class="fa-regular fa-envelope footer-envelope-icon"></i>
+                    <i class="fa-regular fa-envelope footer-envelope-icon1"></i>
                     <input type="email" id="email-input" name="email" class="email-input" placeholder="Enter your email" required>
                     <button type="submit">{{ section.settings.subscribe_button_text }}</button>
                 </div>
             </form>
-        </div>
+          
+ <div class="footer__column footer__localization isolate">
+        {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
+          <localization-form>
+            {%- form 'localization', id: 'FooterCountryForm', class: 'localization-form' -%}
+              <div>
+                <h2 class="caption-large text-body" id="FooterCountryLabel">{{ 'localization.country_label' | t }}</h2>
+                {%- render 'country-localization', localPosition: 'FooterCountry' -%}
+              </div>
+            {%- endform -%}
+          </localization-form>
+        {%- endif -%}
+
+      </div>
 
 
-<p id="thank-you-message" class="thank-you-message" style="display: none; color: {{ section.settings.thank_you_message_color }}; text-align: center;">
+ </div>
+
+
+<p id="thank-you-message" class="thank-you-message" style="display: none; text-align: center;">
     {{ section.settings.thank_you_message_text | default: "Thank you for subscribing!" }}
 </p>
 
-     
-        <!-- Menu 1 -->
-        <div class="footer-column">
-            <h4 style="color: {{ section.settings.menu_title_color }};">{{ section.settings.menu_1_title }}</h4>
-            <ul>
-                {% for link in linklists[section.settings.menu_1_links].links %}
-                <li>
-                    <a href="{{ link.url }}" style="color: {{ section.settings.menu_item_color }};">
-                        {{ link.title }}
-                    </a>
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
 
+
+    <div class="footer-column">
+    <h4 style="color: {{ section.settings.menu_title_color }};" >{{ section.settings.menu_1_title }}</h4>
+    <ul>
+        {% for link in linklists[section.settings.menu_1_links].links %}
+        <li>
+            <a href="{{ link.url }}" style="color: {{ section.settings.menu_item_color }};">
+                {{ link.title }}
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
         <!-- Menu 2 -->
-        <div class="footer-column">
+        <div class="footer-column" >
             <h4 style="color: {{ section.settings.menu_title_color }};">{{ section.settings.menu_2_title }}</h4>
             <ul>
                 {% for link in linklists[section.settings.menu_2_links].links %}
@@ -101,70 +154,71 @@
 
   <div class="footer-column">
             <h4 style="color: {{ section.settings.menu_title_color }};">{{ section.settings.menu_5_title }}</h4>
-            {%- if section.settings.show_social_icons -%}
-                <div class="social-icons">
-                    {%- if settings.social_facebook_link != blank -%}
-                        <a href="{{ settings.social_facebook_link }}" class="social-icon" style="color: {{ section.settings.menu_item_color }};">
-                            {{- 'icon-facebook.svg' | inline_asset_content -}}
-                        </a>
-                    {%- endif -%}
-      {%- if settings.social_instagram_link != blank -%}
-        <a href="{{ settings.social_instagram_link }}" class="social-icon" aria-label="{{ 'general.social.links.instagram' | t }}" style="color: {{ section.settings.menu_item_color }};">
-          {{- 'icon-instagram.svg' | inline_asset_content -}}
-        </a>
-      {%- endif -%}
-      {%- if settings.social_youtube_link != blank -%}
-        <a href="{{ settings.social_youtube_link }}" class="social-icon" aria-label="{{ 'general.social.links.youtube' | t }}" style="color: {{ section.settings.menu_item_color }};">
-          {{- 'icon-youtube.svg' | inline_asset_content -}}
-        </a>
-      {%- endif -%}
-      {%- if settings.social_tiktok_link != blank -%}
-        <a href="{{ settings.social_tiktok_link }}" class="social-icon" aria-label="{{ 'general.social.links.tiktok' | t }}" style="color: {{ section.settings.menu_item_color }};">
-          {{- 'icon-tiktok.svg' | inline_asset_content -}}
-        </a>
-      {%- endif -%}
-      {%- if settings.social_twitter_link != blank -%}
-        <a href="{{ settings.social_twitter_link }}" class="social-icon" aria-label="{{ 'general.social.links.twitter' | t }}" style="color: {{ section.settings.menu_item_color }};">
-          {{- 'icon-twitter.svg' | inline_asset_content -}}
-        </a>
-      {%- endif -%}
-      {%- if settings.social_pinterest_link != blank -%}
-        <a href="{{ settings.social_pinterest_link }}" class="social-icon" aria-label="{{ 'general.social.links.pinterest' | t }}" style="color: {{ section.settings.menu_item_color }};">
-          {{- 'icon-pinterest.svg' | inline_asset_content -}}
-        </a>
-      {%- endif -%}
-      {%- if settings.social_snapchat_link != blank -%}
-        <a href="{{ settings.social_snapchat_link }}" class="social-icon" aria-label="{{ 'general.social.links.snapchat' | t }}" style="color: {{ section.settings.menu_item_color }};">
-          {{- 'icon-snapchat.svg' | inline_asset_content -}}
-        </a>
-      {%- endif -%}
-      {%- if settings.social_tumblr_link != blank -%}
-        <a href="{{ settings.social_tumblr_link }}" class="social-icon" aria-label="{{ 'general.social.links.tumblr' | t }}" style="color: {{ section.settings.menu_item_color }};">
-          {{- 'icon-tumblr.svg' | inline_asset_content -}}
-        </a>
-      {%- endif -%}
-      {%- if settings.social_vimeo_link != blank -%}
-        <a href="{{ settings.social_vimeo_link }}" class="social-icon" aria-label="{{ 'general.social.links.vimeo' | t }}" style="color: {{ section.settings.menu_item_color }};">
-          {{- 'icon-vimeo.svg' | inline_asset_content -}}
-        </a>
-      {%- endif -%}
+{%- if section.settings.show_social_icons -%}
+    <div class="social-icons">
+        {%- if settings.social_facebook_link != blank -%}
+            <a href="{{ settings.social_facebook_link }}" class="social-icon" style="color: {{ section.settings.menu_item_color }};">
+                {{ 'icon-facebook.svg' | inline_asset_content | replace: '<svg', '<svg style="height: 25px; fill: ' | append: settings.social_icon_color | remove: "_" }}
+            </a>
+        {%- endif -%}
+        {%- if settings.social_instagram_link != blank -%}
+            <a href="{{ settings.social_instagram_link }}" class="social-icon" aria-label="{{ 'general.social.links.instagram' | t }}" style="color: {{ section.settings.menu_item_color }};">
+                {{ 'icon-instagram.svg' | inline_asset_content | replace: '<svg', '<svg style="height: 25px; fill: ' | append: settings.social_icon_color | remove: "_" }}
+            </a>
+        {%- endif -%}
+        {%- if settings.social_youtube_link != blank -%}
+            <a href="{{ settings.social_youtube_link }}" class="social-icon" aria-label="{{ 'general.social.links.youtube' | t }}" style="color: {{ section.settings.menu_item_color }};">
+                {{ 'icon-youtube.svg' | inline_asset_content | replace: '<svg', '<svg style="height: 25px; fill: ' | append: settings.social_icon_color | remove: "_" }}
+            </a>
+        {%- endif -%}
+        {%- if settings.social_tiktok_link != blank -%}
+            <a href="{{ settings.social_tiktok_link }}" class="social-icon" aria-label="{{ 'general.social.links.tiktok' | t }}" style="color: {{ section.settings.menu_item_color }};">
+                {{ 'icon-tiktok.svg' | inline_asset_content | replace: '<svg', '<svg style="height: 25px; fill: ' | append: settings.social_icon_color | remove: "'" }}
+            </a>
+        {%- endif -%}
+        {%- if settings.social_twitter_link != blank -%}
+            <a href="{{ settings.social_twitter_link }}" class="social-icon" aria-label="{{ 'general.social.links.twitter' | t }}" style="color: {{ section.settings.menu_item_color }};">
+                {{ 'icon-twitter.svg' | inline_asset_content | replace: '<svg', '<svg style="height: 25px; fill: ' | append: settings.social_icon_color | remove: "'" }}
+            </a>
+        {%- endif -%}
+        {%- if settings.social_pinterest_link != blank -%}
+            <a href="{{ settings.social_pinterest_link }}" class="social-icon" aria-label="{{ 'general.social.links.pinterest' | t }}" style="color: {{ section.settings.menu_item_color }};">
+                {{ 'icon-pinterest.svg' | inline_asset_content | replace: '<svg', '<svg style="height: 25px; fill: ' | append: settings.social_icon_color | remove: "'" }}
+            </a>
+        {%- endif -%}
+        {%- if settings.social_snapchat_link != blank -%}
+            <a href="{{ settings.social_snapchat_link }}" class="social-icon" aria-label="{{ 'general.social.links.snapchat' | t }}" style="color: {{ section.settings.menu_item_color }};">
+                {{ 'icon-snapchat.svg' | inline_asset_content | replace: '<svg', '<svg style="height: 25px; fill: ' | append: settings.social_icon_color | remove: "'" }}
+            </a>
+        {%- endif -%}
+        {%- if settings.social_tumblr_link != blank -%}
+            <a href="{{ settings.social_tumblr_link }}" class="social-icon" aria-label="{{ 'general.social.links.tumblr' | t }}" style="color: {{ section.settings.menu_item_color }};">
+                {{ 'icon-tumblr.svg' | inline_asset_content | replace: '<svg', '<svg style="height: 25px; fill: ' | append: settings.social_icon_color | remove: "'" }}
+            </a>
+        {%- endif -%}
+        {%- if settings.social_vimeo_link != blank -%}
+            <a href="{{ settings.social_vimeo_link }}" class="social-icon" aria-label="{{ 'general.social.links.vimeo' | t }}" style="color: {{ section.settings.menu_item_color }};">
+                {{ 'icon-vimeo.svg' | inline_asset_content | replace: '<svg', '<svg style="height: 25px; fill: ' | append: settings.social_icon_color | remove: "'" }}
+            </a>
+        {%- endif -%}
     </div>
-  {%- endif -%}
+{%- endif -%}
 </div>
+
       
     </div>
   
 <script>
- document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () {
     // Newsletter Form Handling
     const form = document.getElementById("newsletter-form");
-    const newsletterSection = document.getElementById("newsletter-section1");
+    const formContainer = document.getElementById("form-container");
+    const stayConnectedTitle = document.getElementById("stay-connected-title");
     const thankYouMessage = document.getElementById("thank-you-message");
 
     form.addEventListener("submit", function (event) {
-        event.preventDefault(); // Prevent form submission
+        event.preventDefault();
         
-        // Perform email validation
         const emailInput = document.getElementById("email-input");
         const email = emailInput.value;
         if (!validateEmail(email)) {
@@ -172,10 +226,9 @@
             return;
         }
         
-        // Hide the entire newsletter section (title, input, button)
-        newsletterSection.style.display = "none";
-        
-        // Show thank-you message
+        // Only hide the form and title, keep the country selector visible
+        formContainer.style.display = "none";
+        stayConnectedTitle.style.display = "none";
         thankYouMessage.style.display = "block";
     });
 
@@ -195,24 +248,27 @@
                 title.removeEventListener('click', handleTitleClick);
                 // Add new event listener
                 title.addEventListener('click', handleTitleClick);
-                // Add the dropdown arrow element
-                if (!title.querySelector('.dropdown-arrow')) {
-                    const arrow = document.createElement('span');
-                    arrow.className = 'dropdown-arrow';
-                    title.appendChild(arrow);
-                }
             });
         }
     }
 
-    function handleTitleClick() {
+    function handleTitleClick(event) {
+        // Prevent default behavior
+        event.preventDefault();
+        
         // Toggle active class on title
         this.classList.toggle('active');
         
-        // Get the next sibling (ul element)
+        // Get the next sibling (ul or div element)
         const content = this.nextElementSibling;
-        if (content && content.tagName === 'UL') {
-            content.classList.toggle('show');
+        
+        if (content) {
+            // Special handling for social media section
+            if (content.classList.contains('social-icons')) {
+                content.classList.toggle('show');
+            } else if (content.tagName === 'UL') {
+                content.classList.toggle('show');
+            }
             
             // Close other open menus
             const footerTitles = document.querySelectorAll('.footer-column:not(#newsletter-section1) h4');
@@ -220,8 +276,12 @@
                 if (otherTitle !== this) {
                     otherTitle.classList.remove('active');
                     const otherContent = otherTitle.nextElementSibling;
-                    if (otherContent && otherContent.tagName === 'UL') {
-                        otherContent.classList.remove('show');
+                    if (otherContent) {
+                        if (otherContent.classList.contains('social-icons')) {
+                            otherContent.classList.remove('show');
+                        } else if (otherContent.tagName === 'UL') {
+                            otherContent.classList.remove('show');
+                        }
                     }
                 }
             });
@@ -243,8 +303,9 @@
 
 
 {% schema %}
- {
-  "name": "Footer",
+{
+  "name": "t:sections.footer.name",
+  "class": "section-footer",
   "settings": [
     {
       "id": "color_scheme",
@@ -252,138 +313,90 @@
       "label": "t:sections.all.colors.label",
       "default": "scheme-1"
     },
-    
- {
+    {
       "type": "color",
       "id": "menu_item_color",
       "label": "Menu Item Color",
       "default": "#333333"
     },
-    
- {
-      "type": "checkbox",
-      "id": "enable_strip",
-      "label": "Enable Strip",
-      "default": true
-    },
-    
-  {
-      "type": "header",
-      "content": "Strip Settings"
-    },
-    {
-      "id": "strip_container_bg_color",
-      "type": "color",
-      "label": "Strip Container Background Color",
-      "default": "#ffffff"
-    },
-    {
-      "id": "strip_bg_color",
-      "type": "color",
-      "label": "Strip Background Color",
-      "default": "#f0f4f8"
-    },
-    {
-      "id": "strip_text_color",
-      "type": "color",
-      "label": "Strip Text Color",
-      "default": "#333333"
-    },
-    
     {
       "type": "header",
-      "content": "Strip Text Settings"
+      "content": "Menu 1"
+    },
+    
+    {
+      "type": "text",
+      "id": "menu_1_title",
+      "label": "Menu Title 1",
+      "default": "ABOUT US"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_1_links",
+      "label": "Menu 1 Links"
+    },
+    {
+      "type": "header",
+      "content": "Menu 2"
     },
     {
       "type": "text",
-      "id": "offer_text_1",
-      "label": "First Strip Text",
-      "default": "Subscribe for exclusive offers!"
+      "id": "menu_2_title",
+      "label": "Menu Title 2",
+      "default": "PRODUCTS"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_2_links",
+      "label": "Menu 2 Links"
+    },
+    {
+      "type": "header",
+      "content": "Menu 3"
     },
     {
       "type": "text",
-      "id": "offer_text_2",
-      "label": "Second Strip Text",
-      "default": "Free shipping on orders over $50!"
+      "id": "menu_3_title",
+      "label": "Menu Title 3",
+      "default": "CUSTOMER SERVICES"
     },
-   
-   {
-            "type": "header",
-            "content": "Menu 1"
-        },
-        {
-            "type": "text",
-            "id": "menu_1_title",
-            "label": "Menu Title 1",
-            "default": "ABOUT US"
-        },
-        {
-            "type": "link_list",
-            "id": "menu_1_links",
-            "label": "Menu 1 Links"
-        },
-        {
-            "type": "header",
-            "content": "Menu 2"
-        },
-        {
-            "type": "text",
-            "id": "menu_2_title",
-            "label": "Menu Title 2",
-            "default": "PRODUCTS"
-        },
-        {
-            "type": "link_list",
-            "id": "menu_2_links",
-            "label": "Menu 2 Links"
-        },
-        {
-            "type": "header",
-            "content": "Menu 3"
-        },
-        {
-            "type": "text",
-            "id": "menu_3_title",
-            "label": "Menu Title 3",
-            "default": "CUSTOMER SERVICES"
-        },
-        {
-            "type": "link_list",
-            "id": "menu_3_links",
-            "label": "Menu 3 Links"
-        },
-        {
-            "type": "header",
-            "content": "Menu 4"
-        },
-        {
-            "type": "text",
-            "id": "menu_4_title",
-            "label": "Menu Title 4",
-            "default": "RESOURCES"
-        },
-        {
-            "type": "link_list",
-            "id": "menu_4_links",
-            "label": "Menu 4 Links"
-        },
-        {
-            "type": "header",
-            "content": "Menu 5"
-        },
-        {
-            "type": "text",
-            "id": "menu_5_title",
-            "label": "Menu Title 5",
-            "default": "SOCIAL MEDIA"
-        },
-   {
+    {
+      "type": "link_list",
+      "id": "menu_3_links",
+      "label": "Menu 3 Links"
+    },
+    {
+      "type": "header",
+      "content": "Menu 4"
+    },
+    {
+      "type": "text",
+      "id": "menu_4_title",
+      "label": "Menu Title 4",
+      "default": "RESOURCES"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_4_links",
+      "label": "Menu 4 Links"
+    },
+    {
+      "type": "header",
+      "content": "Menu 5"
+    },
+    {
+      "type": "text",
+      "id": "menu_5_title",
+      "label": "Menu Title 5",
+      "default": "SOCIAL MEDIA"
+    },
+    {
       "type": "header",
       "content": "Social media icons"
     },
     {
       "type": "paragraph",
-      "content": "To display your social media accounts, link them in your [theme settings](/admin/themes/current/editor?context=settings)."
+      "content": "To display your social media accounts, link them in your theme settings."
     },
     {
       "type": "checkbox",
@@ -415,21 +428,14 @@
       "default": true,
       "info": "Toggle the font weight of the Stay Connected title"
     },
-    {
-      "type": "color",
-      "id": "thank_you_message_color",
-      "label": "Thank You Message Color",
-      "default": "#333333"
-    },
+    
     {
       "type": "text",
       "id": "thank_you_message_text",
       "label": "Thank You Message Text",
       "default": "Thank you for subscribing!"
     },
-
-    
-     {
+    {
       "type": "header",
       "content": "Footer button"
     },
@@ -438,893 +444,46 @@
       "id": "subscribe_button_text",
       "label": "Button Text",
       "default": "Subscribe"
-    }
-  ]
-}
-  {% endschema %}{% comment %}theme-check-disable UndefinedObject{% endcomment %}
-{{ 'section-footer.css' | asset_url | stylesheet_tag }}
-
-{% if section.settings.enable_strip %}
-<div class="container1" style="background-color: {{ section.settings.strip_container_bg_color }};">
-    <div class="strip-right" style="background-color: {{ section.settings.strip_bg_color }};">
-        <div class="strip-1">
-            <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text_1 }} &rarr;</div>
-            <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text_1 }} &rarr;</div>
-            <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text_1 }} &rarr;</div>
-        </div>
-    </div>
-    <div class="strip-left" style="background-color: {{ section.settings.strip_bg_color }};">
-        <div class="strip-2">
-            <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text_2 }} &rarr;</div>
-            <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text_2 }} &rarr;</div>
-            <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text_2 }} &rarr;</div>
-        </div>
-    </div>
-</div>
-{% endif %}
-
-<footer style="background-color: {{ section.settings.footer_background_color }}; font-family: 'Inter', sans-serif;">
-    <div class="footer-content" style="color: {{ section.settings.footer_text_color }};">
-        <!-- Email Newsletter Column -->
-        <div id="newsletter-section1" class="footer-column" {% if section.settings.bold_newsletter_section %}style="font-weight: bold;"{% endif %}>
-            <h4 id="stay-connected-title" style="color: {{ section.settings.menu_title_color }};">
-                {{ section.settings.STAY_CONNECTED_TITLE }}
-            </h4>
-            <form id="newsletter-form">
-                <div id="form-container" class="form-container">
-                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-                    <i class="fa-regular fa-envelope footer-envelope-icon"></i>
-                    <input type="email" id="email-input" name="email" class="email-input" placeholder="Enter your email" required>
-                    <button type="submit">{{ section.settings.subscribe_button_text }}</button>
-                </div>
-            </form>
-        </div>
-
-
-<p id="thank-you-message" class="thank-you-message" style="display: none; color: {{ section.settings.thank_you_message_color }}; text-align: center;">
-    {{ section.settings.thank_you_message_text | default: "Thank you for subscribing!" }}
-</p>
-
-     
-        <!-- Menu 1 -->
-        <div class="footer-column">
-            <h4 style="color: {{ section.settings.menu_title_color }};">{{ section.settings.menu_1_title }}</h4>
-            <ul>
-                {% for link in linklists[section.settings.menu_1_links].links %}
-                <li>
-                    <a href="{{ link.url }}" style="color: {{ section.settings.menu_item_color }};">
-                        {{ link.title }}
-                    </a>
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
-
-        <!-- Menu 2 -->
-        <div class="footer-column">
-            <h4 style="color: {{ section.settings.menu_title_color }};">{{ section.settings.menu_2_title }}</h4>
-            <ul>
-                {% for link in linklists[section.settings.menu_2_links].links %}
-                <li>
-                    <a href="{{ link.url }}" style="color: {{ section.settings.menu_item_color }};">
-                        {{ link.title }}
-                    </a>
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
-
-        <!-- Menu 3 -->
-        <div class="footer-column">
-            <h4 style="color: {{ section.settings.menu_title_color }};">{{ section.settings.menu_3_title }}</h4>
-            <ul>
-                {% for link in linklists[section.settings.menu_3_links].links %}
-                <li>
-                    <a href="{{ link.url }}" style="color: {{ section.settings.menu_item_color }};">
-                        {{ link.title }}
-                    </a>
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
-
-        <!-- Menu 4 -->
-        <div class="footer-column">
-            <h4 style="color: {{ section.settings.menu_title_color }};">{{ section.settings.menu_4_title }}</h4>
-            <ul>
-                {% for link in linklists[section.settings.menu_4_links].links %}
-                <li>
-                    <a href="{{ link.url }}" style="color: {{ section.settings.menu_item_color }};">
-                        {{ link.title }}
-                    </a>
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
-
-  <div class="footer-column">
-            <h4 style="color: {{ section.settings.menu_title_color }};">{{ section.settings.menu_5_title }}</h4>
-            {%- if section.settings.show_social_icons -%}
-                <div class="social-icons">
-                    {%- if settings.social_facebook_link != blank -%}
-                        <a href="{{ settings.social_facebook_link }}" class="social-icon" style="color: {{ section.settings.menu_item_color }};">
-                            {{- 'icon-facebook.svg' | inline_asset_content -}}
-                        </a>
-                    {%- endif -%}
-      {%- if settings.social_instagram_link != blank -%}
-        <a href="{{ settings.social_instagram_link }}" class="social-icon" aria-label="{{ 'general.social.links.instagram' | t }}" style="color: {{ section.settings.menu_item_color }};">
-          {{- 'icon-instagram.svg' | inline_asset_content -}}
-        </a>
-      {%- endif -%}
-      {%- if settings.social_youtube_link != blank -%}
-        <a href="{{ settings.social_youtube_link }}" class="social-icon" aria-label="{{ 'general.social.links.youtube' | t }}" style="color: {{ section.settings.menu_item_color }};">
-          {{- 'icon-youtube.svg' | inline_asset_content -}}
-        </a>
-      {%- endif -%}
-      {%- if settings.social_tiktok_link != blank -%}
-        <a href="{{ settings.social_tiktok_link }}" class="social-icon" aria-label="{{ 'general.social.links.tiktok' | t }}" style="color: {{ section.settings.menu_item_color }};">
-          {{- 'icon-tiktok.svg' | inline_asset_content -}}
-        </a>
-      {%- endif -%}
-      {%- if settings.social_twitter_link != blank -%}
-        <a href="{{ settings.social_twitter_link }}" class="social-icon" aria-label="{{ 'general.social.links.twitter' | t }}" style="color: {{ section.settings.menu_item_color }};">
-          {{- 'icon-twitter.svg' | inline_asset_content -}}
-        </a>
-      {%- endif -%}
-      {%- if settings.social_pinterest_link != blank -%}
-        <a href="{{ settings.social_pinterest_link }}" class="social-icon" aria-label="{{ 'general.social.links.pinterest' | t }}" style="color: {{ section.settings.menu_item_color }};">
-          {{- 'icon-pinterest.svg' | inline_asset_content -}}
-        </a>
-      {%- endif -%}
-      {%- if settings.social_snapchat_link != blank -%}
-        <a href="{{ settings.social_snapchat_link }}" class="social-icon" aria-label="{{ 'general.social.links.snapchat' | t }}" style="color: {{ section.settings.menu_item_color }};">
-          {{- 'icon-snapchat.svg' | inline_asset_content -}}
-        </a>
-      {%- endif -%}
-      {%- if settings.social_tumblr_link != blank -%}
-        <a href="{{ settings.social_tumblr_link }}" class="social-icon" aria-label="{{ 'general.social.links.tumblr' | t }}" style="color: {{ section.settings.menu_item_color }};">
-          {{- 'icon-tumblr.svg' | inline_asset_content -}}
-        </a>
-      {%- endif -%}
-      {%- if settings.social_vimeo_link != blank -%}
-        <a href="{{ settings.social_vimeo_link }}" class="social-icon" aria-label="{{ 'general.social.links.vimeo' | t }}" style="color: {{ section.settings.menu_item_color }};">
-          {{- 'icon-vimeo.svg' | inline_asset_content -}}
-        </a>
-      {%- endif -%}
-    </div>
-  {%- endif -%}
-</div>
-      
-    </div>
-  
-<script>
- document.addEventListener("DOMContentLoaded", function () {
-    // Newsletter Form Handling
-    const form = document.getElementById("newsletter-form");
-    const newsletterSection = document.getElementById("newsletter-section1");
-    const thankYouMessage = document.getElementById("thank-you-message");
-
-    form.addEventListener("submit", function (event) {
-        event.preventDefault(); // Prevent form submission
-        
-        // Perform email validation
-        const emailInput = document.getElementById("email-input");
-        const email = emailInput.value;
-        if (!validateEmail(email)) {
-            alert("Please enter a valid email address.");
-            return;
-        }
-        
-        // Hide the entire newsletter section (title, input, button)
-        newsletterSection.style.display = "none";
-        
-        // Show thank-you message
-        thankYouMessage.style.display = "block";
-    });
-
-    function validateEmail(email) {
-        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return re.test(email);
-    }
-
-    // Mobile Menu Dropdown Functionality
-    function initializeMobileMenu() {
-        if (window.innerWidth <= 480) {
-            // Select all footer column h4s EXCEPT those in the newsletter section
-            const footerTitles = document.querySelectorAll('.footer-column:not(#newsletter-section1) h4');
-            
-            footerTitles.forEach(title => {
-                // Remove existing event listeners if any
-                title.removeEventListener('click', handleTitleClick);
-                // Add new event listener
-                title.addEventListener('click', handleTitleClick);
-                // Add the dropdown arrow element
-                if (!title.querySelector('.dropdown-arrow')) {
-                    const arrow = document.createElement('span');
-                    arrow.className = 'dropdown-arrow';
-                    title.appendChild(arrow);
-                }
-            });
-        }
-    }
-
-    function handleTitleClick() {
-        // Toggle active class on title
-        this.classList.toggle('active');
-        
-        // Get the next sibling (ul element)
-        const content = this.nextElementSibling;
-        if (content && content.tagName === 'UL') {
-            content.classList.toggle('show');
-            
-            // Close other open menus
-            const footerTitles = document.querySelectorAll('.footer-column:not(#newsletter-section1) h4');
-            footerTitles.forEach(otherTitle => {
-                if (otherTitle !== this) {
-                    otherTitle.classList.remove('active');
-                    const otherContent = otherTitle.nextElementSibling;
-                    if (otherContent && otherContent.tagName === 'UL') {
-                        otherContent.classList.remove('show');
-                    }
-                }
-            });
-        }
-    }
-
-    // Initialize mobile menu on load
-    initializeMobileMenu();
-
-    // Handle window resize
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(initializeMobileMenu, 250);
-    });
-});
-</script>
-</footer>
-
-
-{% schema %}
- {
-  "name": "Footer",
-  "settings": [
-    {
-      "id": "color_scheme",
-      "type": "color_scheme",
-      "label": "t:sections.all.colors.label",
-      "default": "scheme-1"
     },
-    
- {
-      "type": "color",
-      "id": "menu_item_color",
-      "label": "Menu Item Color",
-      "default": "#333333"
-    },
-    
- {
+      {
       "type": "checkbox",
-      "id": "enable_strip",
-      "label": "Enable Strip",
-      "default": true
-    },
-    
-  {
-      "type": "header",
-      "content": "Strip Settings"
-    },
-    {
-      "id": "strip_container_bg_color",
-      "type": "color",
-      "label": "Strip Container Background Color",
-      "default": "#ffffff"
-    },
-    {
-      "id": "strip_bg_color",
-      "type": "color",
-      "label": "Strip Background Color",
-      "default": "#f0f4f8"
-    },
-    {
-      "id": "strip_text_color",
-      "type": "color",
-      "label": "Strip Text Color",
-      "default": "#333333"
-    },
-    
-    {
-      "type": "header",
-      "content": "Strip Text Settings"
-    },
-    {
-      "type": "text",
-      "id": "offer_text_1",
-      "label": "First Strip Text",
-      "default": "Subscribe for exclusive offers!"
-    },
-    {
-      "type": "text",
-      "id": "offer_text_2",
-      "label": "Second Strip Text",
-      "default": "Free shipping on orders over $50!"
-    },
-   
-   {
-            "type": "header",
-            "content": "Menu 1"
-        },
-        {
-            "type": "text",
-            "id": "menu_1_title",
-            "label": "Menu Title 1",
-            "default": "ABOUT US"
-        },
-        {
-            "type": "link_list",
-            "id": "menu_1_links",
-            "label": "Menu 1 Links"
-        },
-        {
-            "type": "header",
-            "content": "Menu 2"
-        },
-        {
-            "type": "text",
-            "id": "menu_2_title",
-            "label": "Menu Title 2",
-            "default": "PRODUCTS"
-        },
-        {
-            "type": "link_list",
-            "id": "menu_2_links",
-            "label": "Menu 2 Links"
-        },
-        {
-            "type": "header",
-            "content": "Menu 3"
-        },
-        {
-            "type": "text",
-            "id": "menu_3_title",
-            "label": "Menu Title 3",
-            "default": "CUSTOMER SERVICES"
-        },
-        {
-            "type": "link_list",
-            "id": "menu_3_links",
-            "label": "Menu 3 Links"
-        },
-        {
-            "type": "header",
-            "content": "Menu 4"
-        },
-        {
-            "type": "text",
-            "id": "menu_4_title",
-            "label": "Menu Title 4",
-            "default": "RESOURCES"
-        },
-        {
-            "type": "link_list",
-            "id": "menu_4_links",
-            "label": "Menu 4 Links"
-        },
-        {
-            "type": "header",
-            "content": "Menu 5"
-        },
-        {
-            "type": "text",
-            "id": "menu_5_title",
-            "label": "Menu Title 5",
-            "default": "SOCIAL MEDIA"
-        },
-   {
-      "type": "header",
-      "content": "Social media icons"
-    },
-    {
-      "type": "paragraph",
-      "content": "To display your social media accounts, link them in your [theme settings](/admin/themes/current/editor?context=settings)."
-    },
-    {
-      "type": "checkbox",
-      "id": "show_social_icons",
-      "label": "Show social media icons",
-      "default": true
-    },
-    {
-      "type": "header",
-      "content": "Newsletter Settings"
-    },
-    {
-      "type": "checkbox",
-      "id": "bold_newsletter_section",
-      "label": "Make newsletter section bold",
-      "default": false,
-      "info": "Apply bold font weight to the entire newsletter section"
-    },
-    {
-      "type": "text",
-      "id": "STAY_CONNECTED_TITLE",
-      "label": "Footer Title",
-      "default": "STAY CONNECTED WITH US"
-    },
-    {
-      "type": "checkbox",
-      "id": "bold_stay_connected_title",
-      "label": "Make title bold",
+      "id": "enable_language_selector",
       "default": true,
-      "info": "Toggle the font weight of the Stay Connected title"
+      "label": "t:sections.footer.settings.enable_language_selector.label"
     },
-    {
-      "type": "color",
-      "id": "thank_you_message_color",
-      "label": "Thank You Message Color",
-      "default": "#333333"
-    },
-    {
-      "type": "text",
-      "id": "thank_you_message_text",
-      "label": "Thank You Message Text",
-      "default": "Thank you for subscribing!"
-    },
-
-    
-     {
-      "type": "header",
-      "content": "Footer button"
-    },
-    {
-      "type": "text",
-      "id": "subscribe_button_text",
-      "label": "Button Text",
-      "default": "Subscribe"
-    }
-  ]
-}
-  {% endschema %}{% comment %}theme-check-disable UndefinedObject{% endcomment %}
-{{ 'section-footer.css' | asset_url | stylesheet_tag }}
-
-{% if section.settings.enable_strip %}
-<div class="container1" style="background-color: {{ section.settings.strip_container_bg_color }};">
-    <div class="strip-right" style="background-color: {{ section.settings.strip_bg_color }};">
-        <div class="strip-1">
-            <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text_1 }} &rarr;</div>
-            <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text_1 }} &rarr;</div>
-            <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text_1 }} &rarr;</div>
-        </div>
-    </div>
-    <div class="strip-left" style="background-color: {{ section.settings.strip_bg_color }};">
-        <div class="strip-2">
-            <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text_2 }} &rarr;</div>
-            <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text_2 }} &rarr;</div>
-            <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text_2 }} &rarr;</div>
-        </div>
-    </div>
-</div>
-{% endif %}
-
-<footer style="background-color: {{ section.settings.footer_background_color }}; font-family: 'Inter', sans-serif;">
-    <div class="footer-content" style="color: {{ section.settings.footer_text_color }};">
-        <!-- Email Newsletter Column -->
-        <div id="newsletter-section1" class="footer-column" {% if section.settings.bold_newsletter_section %}style="font-weight: bold;"{% endif %}>
-            <h4 id="stay-connected-title" style="color: {{ section.settings.menu_title_color }};">
-                {{ section.settings.STAY_CONNECTED_TITLE }}
-            </h4>
-            <form id="newsletter-form">
-                <div id="form-container" class="form-container">
-                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-                    <i class="fa-regular fa-envelope footer-envelope-icon"></i>
-                    <input type="email" id="email-input" name="email" class="email-input" placeholder="Enter your email" required>
-                    <button type="submit">{{ section.settings.subscribe_button_text }}</button>
-                </div>
-            </form>
-        </div>
-
-
-<p id="thank-you-message" class="thank-you-message" style="display: none; color: {{ section.settings.thank_you_message_color }}; text-align: center;">
-    {{ section.settings.thank_you_message_text | default: "Thank you for subscribing!" }}
-</p>
-
-     
-        <!-- Menu 1 -->
-        <div class="footer-column">
-            <h4 style="color: {{ section.settings.menu_title_color }};">{{ section.settings.menu_1_title }}</h4>
-            <ul>
-                {% for link in linklists[section.settings.menu_1_links].links %}
-                <li>
-                    <a href="{{ link.url }}" style="color: {{ section.settings.menu_item_color }};">
-                        {{ link.title }}
-                    </a>
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
-
-        <!-- Menu 2 -->
-        <div class="footer-column">
-            <h4 style="color: {{ section.settings.menu_title_color }};">{{ section.settings.menu_2_title }}</h4>
-            <ul>
-                {% for link in linklists[section.settings.menu_2_links].links %}
-                <li>
-                    <a href="{{ link.url }}" style="color: {{ section.settings.menu_item_color }};">
-                        {{ link.title }}
-                    </a>
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
-
-        <!-- Menu 3 -->
-        <div class="footer-column">
-            <h4 style="color: {{ section.settings.menu_title_color }};">{{ section.settings.menu_3_title }}</h4>
-            <ul>
-                {% for link in linklists[section.settings.menu_3_links].links %}
-                <li>
-                    <a href="{{ link.url }}" style="color: {{ section.settings.menu_item_color }};">
-                        {{ link.title }}
-                    </a>
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
-
-        <!-- Menu 4 -->
-        <div class="footer-column">
-            <h4 style="color: {{ section.settings.menu_title_color }};">{{ section.settings.menu_4_title }}</h4>
-            <ul>
-                {% for link in linklists[section.settings.menu_4_links].links %}
-                <li>
-                    <a href="{{ link.url }}" style="color: {{ section.settings.menu_item_color }};">
-                        {{ link.title }}
-                    </a>
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
-
-  <div class="footer-column">
-            <h4 style="color: {{ section.settings.menu_title_color }};">{{ section.settings.menu_5_title }}</h4>
-            {%- if section.settings.show_social_icons -%}
-                <div class="social-icons">
-                    {%- if settings.social_facebook_link != blank -%}
-                        <a href="{{ settings.social_facebook_link }}" class="social-icon" style="color: {{ section.settings.menu_item_color }};">
-                            {{- 'icon-facebook.svg' | inline_asset_content -}}
-                        </a>
-                    {%- endif -%}
-      {%- if settings.social_instagram_link != blank -%}
-        <a href="{{ settings.social_instagram_link }}" class="social-icon" aria-label="{{ 'general.social.links.instagram' | t }}" style="color: {{ section.settings.menu_item_color }};">
-          {{- 'icon-instagram.svg' | inline_asset_content -}}
-        </a>
-      {%- endif -%}
-      {%- if settings.social_youtube_link != blank -%}
-        <a href="{{ settings.social_youtube_link }}" class="social-icon" aria-label="{{ 'general.social.links.youtube' | t }}" style="color: {{ section.settings.menu_item_color }};">
-          {{- 'icon-youtube.svg' | inline_asset_content -}}
-        </a>
-      {%- endif -%}
-      {%- if settings.social_tiktok_link != blank -%}
-        <a href="{{ settings.social_tiktok_link }}" class="social-icon" aria-label="{{ 'general.social.links.tiktok' | t }}" style="color: {{ section.settings.menu_item_color }};">
-          {{- 'icon-tiktok.svg' | inline_asset_content -}}
-        </a>
-      {%- endif -%}
-      {%- if settings.social_twitter_link != blank -%}
-        <a href="{{ settings.social_twitter_link }}" class="social-icon" aria-label="{{ 'general.social.links.twitter' | t }}" style="color: {{ section.settings.menu_item_color }};">
-          {{- 'icon-twitter.svg' | inline_asset_content -}}
-        </a>
-      {%- endif -%}
-      {%- if settings.social_pinterest_link != blank -%}
-        <a href="{{ settings.social_pinterest_link }}" class="social-icon" aria-label="{{ 'general.social.links.pinterest' | t }}" style="color: {{ section.settings.menu_item_color }};">
-          {{- 'icon-pinterest.svg' | inline_asset_content -}}
-        </a>
-      {%- endif -%}
-      {%- if settings.social_snapchat_link != blank -%}
-        <a href="{{ settings.social_snapchat_link }}" class="social-icon" aria-label="{{ 'general.social.links.snapchat' | t }}" style="color: {{ section.settings.menu_item_color }};">
-          {{- 'icon-snapchat.svg' | inline_asset_content -}}
-        </a>
-      {%- endif -%}
-      {%- if settings.social_tumblr_link != blank -%}
-        <a href="{{ settings.social_tumblr_link }}" class="social-icon" aria-label="{{ 'general.social.links.tumblr' | t }}" style="color: {{ section.settings.menu_item_color }};">
-          {{- 'icon-tumblr.svg' | inline_asset_content -}}
-        </a>
-      {%- endif -%}
-      {%- if settings.social_vimeo_link != blank -%}
-        <a href="{{ settings.social_vimeo_link }}" class="social-icon" aria-label="{{ 'general.social.links.vimeo' | t }}" style="color: {{ section.settings.menu_item_color }};">
-          {{- 'icon-vimeo.svg' | inline_asset_content -}}
-        </a>
-      {%- endif -%}
-    </div>
-  {%- endif -%}
-</div>
-      
-    </div>
-  
-<script>
- document.addEventListener("DOMContentLoaded", function () {
-    // Newsletter Form Handling
-    const form = document.getElementById("newsletter-form");
-    const newsletterSection = document.getElementById("newsletter-section1");
-    const thankYouMessage = document.getElementById("thank-you-message");
-
-    form.addEventListener("submit", function (event) {
-        event.preventDefault(); // Prevent form submission
-        
-        // Perform email validation
-        const emailInput = document.getElementById("email-input");
-        const email = emailInput.value;
-        if (!validateEmail(email)) {
-            alert("Please enter a valid email address.");
-            return;
-        }
-        
-        // Hide the entire newsletter section (title, input, button)
-        newsletterSection.style.display = "none";
-        
-        // Show thank-you message
-        thankYouMessage.style.display = "block";
-    });
-
-    function validateEmail(email) {
-        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return re.test(email);
-    }
-
-    // Mobile Menu Dropdown Functionality
-    function initializeMobileMenu() {
-        if (window.innerWidth <= 480) {
-            // Select all footer column h4s EXCEPT those in the newsletter section
-            const footerTitles = document.querySelectorAll('.footer-column:not(#newsletter-section1) h4');
-            
-            footerTitles.forEach(title => {
-                // Remove existing event listeners if any
-                title.removeEventListener('click', handleTitleClick);
-                // Add new event listener
-                title.addEventListener('click', handleTitleClick);
-                // Add the dropdown arrow element
-                if (!title.querySelector('.dropdown-arrow')) {
-                    const arrow = document.createElement('span');
-                    arrow.className = 'dropdown-arrow';
-                    title.appendChild(arrow);
-                }
-            });
-        }
-    }
-
-    function handleTitleClick() {
-        // Toggle active class on title
-        this.classList.toggle('active');
-        
-        // Get the next sibling (ul element)
-        const content = this.nextElementSibling;
-        if (content && content.tagName === 'UL') {
-            content.classList.toggle('show');
-            
-            // Close other open menus
-            const footerTitles = document.querySelectorAll('.footer-column:not(#newsletter-section1) h4');
-            footerTitles.forEach(otherTitle => {
-                if (otherTitle !== this) {
-                    otherTitle.classList.remove('active');
-                    const otherContent = otherTitle.nextElementSibling;
-                    if (otherContent && otherContent.tagName === 'UL') {
-                        otherContent.classList.remove('show');
-                    }
-                }
-            });
-        }
-    }
-
-    // Initialize mobile menu on load
-    initializeMobileMenu();
-
-    // Handle window resize
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(initializeMobileMenu, 250);
-    });
-});
-</script>
-</footer>
-
-
-{% schema %}
- {
-  "name": "Footer",
-  "settings": [
-    {
-      "id": "color_scheme",
-      "type": "color_scheme",
-      "label": "t:sections.all.colors.label",
-      "default": "scheme-1"
-    },
-    
- {
-      "type": "color",
-      "id": "menu_item_color",
-      "label": "Menu Item Color",
-      "default": "#333333"
-    },
-    
- {
+      {
       "type": "checkbox",
-      "id": "enable_strip",
-      "label": "Enable Strip",
-      "default": true
-    },
-    
-  {
-      "type": "header",
-      "content": "Strip Settings"
-    },
-    {
-      "id": "strip_container_bg_color",
-      "type": "color",
-      "label": "Strip Container Background Color",
-      "default": "#ffffff"
-    },
-    {
-      "id": "strip_bg_color",
-      "type": "color",
-      "label": "Strip Background Color",
-      "default": "#f0f4f8"
-    },
-    {
-      "id": "strip_text_color",
-      "type": "color",
-      "label": "Strip Text Color",
-      "default": "#333333"
-    },
-    
-    {
-      "type": "header",
-      "content": "Strip Text Settings"
-    },
-    {
-      "type": "text",
-      "id": "offer_text_1",
-      "label": "First Strip Text",
-      "default": "Subscribe for exclusive offers!"
-    },
-    {
-      "type": "text",
-      "id": "offer_text_2",
-      "label": "Second Strip Text",
-      "default": "Free shipping on orders over $50!"
-    },
-   
-   {
-            "type": "header",
-            "content": "Menu 1"
-        },
-        {
-            "type": "text",
-            "id": "menu_1_title",
-            "label": "Menu Title 1",
-            "default": "ABOUT US"
-        },
-        {
-            "type": "link_list",
-            "id": "menu_1_links",
-            "label": "Menu 1 Links"
-        },
-        {
-            "type": "header",
-            "content": "Menu 2"
-        },
-        {
-            "type": "text",
-            "id": "menu_2_title",
-            "label": "Menu Title 2",
-            "default": "PRODUCTS"
-        },
-        {
-            "type": "link_list",
-            "id": "menu_2_links",
-            "label": "Menu 2 Links"
-        },
-        {
-            "type": "header",
-            "content": "Menu 3"
-        },
-        {
-            "type": "text",
-            "id": "menu_3_title",
-            "label": "Menu Title 3",
-            "default": "CUSTOMER SERVICES"
-        },
-        {
-            "type": "link_list",
-            "id": "menu_3_links",
-            "label": "Menu 3 Links"
-        },
-        {
-            "type": "header",
-            "content": "Menu 4"
-        },
-        {
-            "type": "text",
-            "id": "menu_4_title",
-            "label": "Menu Title 4",
-            "default": "RESOURCES"
-        },
-        {
-            "type": "link_list",
-            "id": "menu_4_links",
-            "label": "Menu 4 Links"
-        },
-        {
-            "type": "header",
-            "content": "Menu 5"
-        },
-        {
-            "type": "text",
-            "id": "menu_5_title",
-            "label": "Menu Title 5",
-            "default": "SOCIAL MEDIA"
-        },
-   {
-      "type": "header",
-      "content": "Social media icons"
-    },
-    {
-      "type": "paragraph",
-      "content": "To display your social media accounts, link them in your [theme settings](/admin/themes/current/editor?context=settings)."
-    },
-    {
-      "type": "checkbox",
-      "id": "show_social_icons",
-      "label": "Show social media icons",
-      "default": true
-    },
-    {
-      "type": "header",
-      "content": "Newsletter Settings"
-    },
-    {
-      "type": "checkbox",
-      "id": "bold_newsletter_section",
-      "label": "Make newsletter section bold",
-      "default": false,
-      "info": "Apply bold font weight to the entire newsletter section"
-    },
-    {
-      "type": "text",
-      "id": "STAY_CONNECTED_TITLE",
-      "label": "Footer Title",
-      "default": "STAY CONNECTED WITH US"
-    },
-    {
-      "type": "checkbox",
-      "id": "bold_stay_connected_title",
-      "label": "Make title bold",
+      "id": "enable_country_selector",
       "default": true,
-      "info": "Toggle the font weight of the Stay Connected title"
-    },
-    {
-      "type": "color",
-      "id": "thank_you_message_color",
-      "label": "Thank You Message Color",
-      "default": "#333333"
-    },
-    {
-      "type": "text",
-      "id": "thank_you_message_text",
-      "label": "Thank You Message Text",
-      "default": "Thank you for subscribing!"
+      "label": "t:sections.footer.settings.enable_country_selector.label"
     },
 
-    
-     {
-      "type": "header",
-      "content": "Footer button"
-    },
+  ],
+  "blocks": [
     {
-      "type": "text",
-      "id": "subscribe_button_text",
-      "label": "Button Text",
-      "default": "Subscribe"
+      "type": "strip",
+      "name": "Cross-Strips",
+      "settings": [
+        {
+          "type": "text",
+          "id": "offer_text_1",
+          "label": "First Strip Text",
+          "default": "Subscribe for exclusive offers!"
+        },
+        {
+          "type": "text",
+          "id": "offer_text_2",
+          "label": "Second Strip Text",
+          "default": "Free shipping on orders over $50!"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Footer",
+      "settings": {}
     }
   ]
 }
-  {% endschema %}
+{% endschema %}

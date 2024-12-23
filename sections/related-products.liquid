@@ -1,259 +1,270 @@
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
-{{ 'section-related-products.css' | asset_url | stylesheet_tag }}
+{{ 'related-products.css' | asset_url | stylesheet_tag }}
 
-{% if section.settings.image_shape == 'blob' %}
-  {{ 'mask-blobs.css' | asset_url | stylesheet_tag }}
-{%- endif -%}
 
-{%- style -%}
-  .section-{{ section.id }}-padding {
-    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
-    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
-  }
+<link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
 
-  @media screen and (min-width: 750px) {
-    .section-{{ section.id }}-padding {
-      padding-top: {{ section.settings.padding_top }}px;
-      padding-bottom: {{ section.settings.padding_bottom }}px;
-    }
-  }
-{%- endstyle -%}
+<h1 class="heading" style="font-size: {{ section.settings.title_font_size }}px;">
+  {{ section.settings.title }}
+</h1>
 
-<div class="color-{{ section.settings.color_scheme }} gradient">
-  <product-recommendations
-    class="related-products page-width section-{{ section.id }}-padding isolate{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-    data-url="{{ routes.product_recommendations_url }}?limit={{ section.settings.products_to_show }}"
-    data-section-id="{{ section.id }}"
-    data-product-id="{{ product.id }}"
-  >
-    {% if recommendations.performed and recommendations.products_count > 0 %}
-      <h2 class="related-products__heading inline-richtext {{ section.settings.heading_size }}">
-        {{ section.settings.heading }}
-      </h2>
-      <ul
-        class="grid product-grid grid--{{ section.settings.columns_desktop }}-col-desktop grid--{{ section.settings.columns_mobile }}-col-tablet-down"
-        role="list"
-      >
-        {% assign skip_card_product_styles = false %}
-        {% for recommendation in recommendations.products %}
-          <li class="grid__item">
-            {% render 'card-product',
-              card_product: recommendation,
-              media_aspect_ratio: section.settings.image_ratio,
-              image_shape: section.settings.image_shape,
-              show_secondary_image: section.settings.show_secondary_image,
-              show_vendor: section.settings.show_vendor,
-              show_rating: section.settings.show_rating,
-              skip_styles: skip_card_product_styles
-            %}
-          </li>
-          {%- assign skip_card_product_styles = true -%}
-        {% endfor %}
-      </ul>
+<button class="slider-arrow1 left" onclick="scrollCards(-1)" aria-label="Previous Slide"></button>
+<button class="slider-arrow1 right" onclick="scrollCards(1)" aria-label="Next Slide"></button>
+
+<div class="product-container">
+{% paginate collections.all.products by section.settings.products_to_show %}
+  {% for product in collections.all.products %}
+    {% assign product_offer = product.metafields.custom.offer %}
+    <div class="product-card" 
+         style="--pseudo-bg-color: {{ section.settings.product_card_background_color }}; 
+                background-color: {{ section.settings.product_card_background_color }};">
+     
+<div class="product-image1">
+    {% if section.settings.show_sale_badge and product.compare_at_price > product.price %}
+      <div class="sale-badge" 
+           style="background-color: {{ section.settings.sale_badge_background_color }}; 
+                  color: {{ section.settings.sale_badge_text_color }};">
+        {% assign price_difference = product.compare_at_price | minus: product.price %}
+        {% assign discount_percentage = price_difference | divided_by: product.compare_at_price | times: 100 | round: 0 %}
+        <span>Save {{ discount_percentage }}%</span>
+      </div>
     {% endif %}
-  </product-recommendations>
-  {% if section.settings.image_shape == 'arch' %}
-    {{ 'mask-arch.svg' | inline_asset_content }}
-  {%- endif -%}
+          
+          <a href="{{ product.url }}">
+            {% if product.featured_image %}
+              <picture>
+                <source
+                  type="image/webp"
+                  srcset="
+                    {{ product.featured_image | image_url: width: 300, format: 'webp' }} 300w,
+                    {{ product.featured_image | image_url: width: 600, format: 'webp' }} 600w,
+                    {{ product.featured_image | image_url: width: 800, format: 'webp' }} 800w,
+                    {{ product.featured_image | image_url: width: 1200, format: 'webp' }} 1200w"
+                  sizes="(max-width: 600px) 300px,
+                         (max-width: 1000px) 600px,
+                         800px">
+                <img
+                  srcset="
+                    {{ product.featured_image | image_url: width: 300 }} 300w,
+                    {{ product.featured_image | image_url: width: 600 }} 600w,
+                    {{ product.featured_image | image_url: width: 800 }} 800w,
+                    {{ product.featured_image | image_url: width: 1200 }} 1200w"
+                  sizes="(max-width: 600px) 300px,
+                         (max-width: 1000px) 600px,
+                         800px"
+                  src="{{ product.featured_image | image_url: width: 800 }}"
+                  alt="{{ product.title | escape }}"
+                  loading="lazy"
+                  width="100"
+                  height="100"
+                  decoding="async">
+              </picture>
+            {% endif %}
+          </a>
+        </div>
+
+      <div class="product-info">
+        <h7 style="color: {{ section.settings.text_color }};">{{ product.title }}</h7>
+        {% if section.settings.show_vendor %}
+          <p class="vendor" style="color: {{ section.settings.vendor_text_color }};">{{ product.vendor }}</p>
+        {% endif %}
+        <p class="model-number" style="color: {{ section.settings.text_color }};">Model no. #{{ product.sku }}</p>
+      </div>
+
+      <div class="price-reviews-icons">
+        <p class="price-tag" 
+           style="background-color: {{ section.settings.price_background_color }};
+                  --pseudo-bg-color: {{ section.settings.product_card_background_color }};
+                  color: {{ section.settings.price_text_color }};">
+          {% if product.compare_at_price > product.price %}
+            <span class="original-price" style="color: {{ section.settings.price_text_color }}; text-decoration: line-through; margin-right: 5px; opacity: 0.7;">
+              ₹{{ product.compare_at_price | money_without_currency }}
+            </span>
+          {% endif %}
+          <span class="current-price">₹{{ product.price | money_without_currency }}</span>
+        </p>
+
+        <div class="dotted-line-wrapper" style="border-top-color: {{ section.settings.dotted_line_color }};">
+          <div class="dotted-line"></div>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+{% endpaginate %}
 </div>
+
+<div class="view-all-wrapper">
+  <a href="/collections/all" class="view-all-link">
+    View all Products →
+  </a>
+</div>
+
+<script>
+function scrollCards(direction) {
+  const container = document.querySelector('.product-container');
+  const cards = container.querySelectorAll('.product-card');
+  if (!cards.length) return;
+  
+  const cardStyle = window.getComputedStyle(cards[0]);
+  const cardWidth = cards[0].offsetWidth + 
+                   parseInt(cardStyle.marginLeft) + 
+                   parseInt(cardStyle.marginRight) + 
+                   20;
+  
+  const currentScroll = container.scrollLeft;
+  const newScroll = currentScroll + (direction * cardWidth);
+  
+  container.scrollTo({
+    left: newScroll,
+    behavior: 'smooth'
+  });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  const container = document.querySelector('.product-container');
+  
+  function updateArrowVisibility() {
+    const leftArrow = document.querySelector('.slider-arrow.left');
+    const rightArrow = document.querySelector('.slider-arrow.right');
+    
+    leftArrow.style.opacity = container.scrollLeft <= 0 ? '0.5' : '1';
+    leftArrow.disabled = container.scrollLeft <= 0;
+    
+    const canScrollRight = container.scrollWidth > (container.scrollLeft + container.clientWidth + 1);
+    rightArrow.style.opacity = canScrollRight ? '1' : '0.5';
+    rightArrow.disabled = !canScrollRight;
+  }
+  
+  container.addEventListener('scroll', updateArrowVisibility);
+  updateArrowVisibility();
+  
+  let touchStartX = 0;
+  let touchEndX = 0;
+  
+  container.addEventListener('touchstart', e => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, false);
+  
+  container.addEventListener('touchend', e => {
+    touchEndX = e.changedTouches[0].screenX;
+    if (touchStartX - touchEndX > 50) {
+      scrollCards(1);
+    } else if (touchEndX - touchStartX > 50) {
+      scrollCards(-1);
+    }
+  }, false);
+});
+</script>
 
 {% schema %}
 {
-  "name": "t:sections.related-products.name",
-  "tag": "section",
-  "class": "section",
+  "name": "Related Products",
   "settings": [
     {
-      "type": "paragraph",
-      "content": "t:sections.related-products.settings.paragraph__1.content"
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Our Products"
     },
     {
-      "type": "inline_richtext",
-      "id": "heading",
-      "default": "t:sections.related-products.settings.paragraph__1.default",
-      "label": "t:sections.related-products.settings.heading.label"
-    },
-    {
-      "type": "select",
-      "id": "heading_size",
-      "options": [
-        {
-          "value": "h2",
-          "label": "t:sections.all.heading_size.options__1.label"
-        },
-        {
-          "value": "h1",
-          "label": "t:sections.all.heading_size.options__2.label"
-        },
-        {
-          "value": "h0",
-          "label": "t:sections.all.heading_size.options__3.label"
-        },
-        {
-          "value": "hxl",
-          "label": "t:sections.all.heading_size.options__4.label"
-        },
-        {
-          "value": "hxxl",
-          "label": "t:sections.all.heading_size.options__5.label"
-        }
-      ],
-      "default": "h1",
-      "label": "t:sections.all.heading_size.label"
+      "type": "range",
+      "id": "title_font_size",
+      "label": "Title Font Size",
+      "min": 20,
+      "max": 80,
+      "step": 1,
+      "default": 36
     },
     {
       "type": "range",
       "id": "products_to_show",
       "min": 2,
-      "max": 10,
+      "max": 25,
       "step": 1,
       "default": 4,
-      "label": "t:sections.related-products.settings.products_to_show.label"
-    },
-    {
-      "type": "range",
-      "id": "columns_desktop",
-      "min": 1,
-      "max": 6,
-      "step": 1,
-      "default": 4,
-      "label": "t:sections.related-products.settings.columns_desktop.label"
-    },
-    {
-      "type": "color_scheme",
-      "id": "color_scheme",
-      "label": "t:sections.all.colors.label",
-      "info": "t:sections.all.colors.has_cards_info",
-      "default": "scheme-1"
+      "label": "Number of products to show"
     },
     {
       "type": "header",
-      "content": "t:sections.related-products.settings.header__2.content"
-    },
-    {
-      "type": "select",
-      "id": "image_ratio",
-      "options": [
-        {
-          "value": "adapt",
-          "label": "t:sections.related-products.settings.image_ratio.options__1.label"
-        },
-        {
-          "value": "portrait",
-          "label": "t:sections.related-products.settings.image_ratio.options__2.label"
-        },
-        {
-          "value": "square",
-          "label": "t:sections.related-products.settings.image_ratio.options__3.label"
-        }
-      ],
-      "default": "adapt",
-      "label": "t:sections.related-products.settings.image_ratio.label"
-    },
-    {
-      "type": "select",
-      "id": "image_shape",
-      "options": [
-        {
-          "value": "default",
-          "label": "t:sections.all.image_shape.options__1.label"
-        },
-        {
-          "value": "arch",
-          "label": "t:sections.all.image_shape.options__2.label"
-        },
-        {
-          "value": "blob",
-          "label": "t:sections.all.image_shape.options__3.label"
-        },
-        {
-          "value": "chevronleft",
-          "label": "t:sections.all.image_shape.options__4.label"
-        },
-        {
-          "value": "chevronright",
-          "label": "t:sections.all.image_shape.options__5.label"
-        },
-        {
-          "value": "diamond",
-          "label": "t:sections.all.image_shape.options__6.label"
-        },
-        {
-          "value": "parallelogram",
-          "label": "t:sections.all.image_shape.options__7.label"
-        },
-        {
-          "value": "round",
-          "label": "t:sections.all.image_shape.options__8.label"
-        }
-      ],
-      "default": "default",
-      "label": "t:sections.all.image_shape.label",
-      "info": "t:sections.all.image_shape.info"
+      "content": "Sale Badge Settings"
     },
     {
       "type": "checkbox",
-      "id": "show_secondary_image",
-      "default": false,
-      "label": "t:sections.related-products.settings.show_secondary_image.label"
+      "id": "show_sale_badge",
+      "label": "Show sale badge",
+      "default": true,
+      "info": "Display sale badge on products with reduced price"
+    },
+    {
+      "type": "color",
+      "id": "sale_badge_background_color",
+      "label": "Sale Badge Background Color",
+      "default": "#FF4C4C"
+    },
+    {
+      "type": "color",
+      "id": "sale_badge_text_color",
+      "label": "Sale Badge Text Color",
+      "default": "#FFFFFF"
+    },
+   
+    {
+      "type": "header",
+      "content": "Vendor Settings"
     },
     {
       "type": "checkbox",
       "id": "show_vendor",
+      "label": "Show vendor",
       "default": false,
-      "label": "t:sections.related-products.settings.show_vendor.label"
+      "info": "Display product vendor name"
     },
     {
-      "type": "checkbox",
-      "id": "show_rating",
-      "default": false,
-      "label": "t:sections.related-products.settings.show_rating.label",
-      "info": "t:sections.related-products.settings.show_rating.info"
+      "type": "color",
+      "id": "vendor_text_color",
+      "label": "Vendor Text Color",
+      "default": "#666666"
     },
     {
       "type": "header",
-      "content": "t:sections.related-products.settings.header_mobile.content"
+      "content": "Color Settings"
     },
     {
-      "type": "select",
-      "id": "columns_mobile",
-      "default": "2",
-      "label": "t:sections.related-products.settings.columns_mobile.label",
-      "options": [
-        {
-          "value": "1",
-          "label": "t:sections.related-products.settings.columns_mobile.options__1.label"
-        },
-        {
-          "value": "2",
-          "label": "t:sections.related-products.settings.columns_mobile.options__2.label"
-        }
-      ]
+      "type": "color",
+      "id": "product_card_background_color",
+      "label": "Product Card Background Color",
+      "default": "#F7F7F7"
     },
     {
-      "type": "header",
-      "content": "t:sections.all.padding.section_padding_heading"
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#333333"
     },
     {
-      "type": "range",
-      "id": "padding_top",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "t:sections.all.padding.padding_top",
-      "default": 36
+      "type": "color",
+      "id": "price_background_color",
+      "label": "Price Tag Background Color",
+      "default": "#FFFFFF"
     },
     {
-      "type": "range",
-      "id": "padding_bottom",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "t:sections.all.padding.padding_bottom",
-      "default": 36
+      "type": "color",
+      "id": "price_text_color",
+      "label": "Price Tag Text Color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "dotted_line_color",
+      "label": "Dotted Line Color",
+      "default": "#FFFFFF"
+    }
+  ],
+  "presets": [
+    {
+      "name": "All Products",
+      "category": "Products"
     }
   ]
 }

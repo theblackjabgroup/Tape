@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@500&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap');
 
 .blog-slider-title,
 .blog-card-title,
@@ -8,6 +7,12 @@
 .blog-excerpt {
     font-family: 'Fira Sans';
     font-weight: 500;
+}
+.custom-placeholder .placeholder-svg{
+     width: 100%; /* Desired width */
+    height: 309px; /* Desired height */
+    display: block; /* Ensures it behaves like a block-level element */
+    object-fit: contain; /* Adjusts how the content fits inside */
 }
 
 .blog-slider-section {
@@ -22,7 +27,6 @@
     left: 25px;
     font-size: 2rem;
     font-weight: bold;
-    color: #333;
 }
 
 .blog-arrow-buttons {
@@ -30,7 +34,6 @@
 }
 
 .arrow {
-    color: black;
     border: none;
     padding: 0px 5px;
     cursor: pointer;
@@ -58,11 +61,9 @@
     will-change: transform; 
     justify-content: flex-start;
 }
-
 .blog-card {
     flex: 0 0 auto;
     border-radius: 5px;
-    background-color: #ffffff;
     overflow: hidden;
     text-align: left;
     display: flex;
@@ -76,7 +77,6 @@
             position: absolute;
             width: 25px;
             height: 30px;
-            background-color: #ffffff;
             border-radius: 50%;
             z-index: 1;
         }
@@ -101,7 +101,6 @@
 
 .blog-card-content {
     padding: 15px;
-    background-color: #f0f0f8;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
@@ -110,7 +109,6 @@
 }
 
 .blog-card-title {
-    color: #333;
     margin: 10px 0;
     line-height: 1.4;
     font-weight: bold;
@@ -125,7 +123,6 @@
 
 .blog-meta {
     font-size: 1rem;
-    color: #777;
     margin: 5px 0 10px 0;
     display: flex;
     gap: 10px;
@@ -136,13 +133,11 @@
 .blog-author,
 .blog-date {
     font-size: 1rem;
-    color: #777;
 }
 
 .blog-excerpt {
     margin: 10px 0;
     font-size: 0.9rem;
-    color: #555;
     line-height: 1.4;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -151,19 +146,48 @@
     -webkit-box-orient: vertical;
     height: 35px;
 }
+.blog-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.blog-tags-overlay {
+    position: absolute;
+    top: 10px; /* Distance from the top of the card */
+    left: 10px; /* Distance from the left of the card */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px; /* Space between tags */
+    z-index: 2;
+}
+
+.blog-tag {
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: bold;
+    white-space: normal; /* Allows text to wrap */
+    word-break: break-word; /* Breaks long words */
+    overflow-wrap: break-word; /* Ensures consistent breaking */
+    max-width: 240px; /* Optional: Restricts tag width */
+    text-align: center; /* Optional: Centers text in the tag */
+}
+
+
 
 .blog-read-more-btn {
     font-family: 'Inter', sans-serif;
     font-weight: 500;
-    background: linear-gradient(to right, gray 50%, black 50%);
+    background: linear-gradient(to right, gray 50%, rgb(var(--color-button-text)) 50%);
     background-size: 200% 100%;
+  color:rgb(var(--color-secondary-button-text));
     background-position: 100% 0;
-    color: white;
     border: none;
     padding: 8px 16px;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 0.9rem;
+    font-size: 1.2rem;
     text-decoration: none;
     margin-top: auto;
     display: flex;
@@ -175,6 +199,7 @@
 }
 .blog-read-more-btn:hover{
    background-position: 0 0;
+  color:rgb(var(--color-text));
 }
 
 
@@ -196,10 +221,10 @@
 
 .blog-view-all {
     font-size: 0.9rem;
-    color: #0066cc;
+    color: rgb(var(--color-text));
     text-decoration: none;
     padding: 8px 16px;
-    border: 1px solid #0066cc;
+    border: 1px solid rgb(var(--color-button));
     border-radius: 5px;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
@@ -207,6 +232,8 @@
 .blog-view-all:focus {
   box-shadow: inset 6.5em 0 0 0 var(--hover);
   cursor: pointer;
+  color: rgb(var(--color-button));
+  border: 1px solid rgb(var(--color-button));
 }
 
 

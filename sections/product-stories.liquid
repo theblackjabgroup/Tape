@@ -1,0 +1,309 @@
+{{ 'product-stories.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+<style>
+  .product-stories-heading-background{
+  background-color: rgb(var(--color-button));
+}
+</style>
+
+{% assign animation_delay = 0.00 %}
+<div class="section-{{ section.id }}-padding color-{{ section.settings.color_scheme }}">
+  <div
+    class="product-stories-section-video-column {{ section.settings.background }}"
+    style="--font-section-scale: {{ section.settings.font_size | divided_by: 100.0 }};"
+  >
+    <div class="product-stories-page-width product-stories-page-width--without-padding">
+      {%- if section.settings.title != blank -%}
+        <h2 class="product-stories-h1 product-stories-scroll-animate product-stories-fade-in">{{ section.settings.title }}</h2>
+      {%- endif -%}
+      {%- if section.settings.description != blank -%}
+        <p class="product-stories-scroll-animate product-stories-fade-in">{{ section.settings.description }}</p>
+      {%- endif -%}
+      
+      <video-column
+        {% if section.settings.play_onload %}
+          data-play-on-load="true"
+        {% endif %}
+      >   
+        <div class="product-stories-video-column__content" id="Slider-{{ section.id }}">
+          {%- for block in section.blocks -%}
+            {%- assign animation_delay = animation_delay | plus: 0.08 -%}
+            <!-- Wrapper for individual content items -->
+            <div class="product-stories-video-column__content-item-wrap">
+              <!-- Box above the video column -->
+              <span class="product-stories-heading-background">
+                <h2 class="product-stories-heading">{{ block.settings.video_title }} </h2>
+              </span>
+              
+              <!-- Video column content -->
+              <div
+                class="product-stories-video-column__content-item product-stories-scroll-animate product-stories-fade-in-up"
+                style="animation-delay: {{ animation_delay }}s;"
+              >
+                {%- if block.settings.youtube_url != blank or block.settings.video != blank or block.settings.video_embed != blank or block.settings.image != blank -%}
+                  <!-- Display YouTube video -->
+                  {%- if block.settings.youtube_url != blank -%}
+                    {% assign youtube_video_id = block.settings.youtube_url 
+                      | replace: 'https://www.youtube.com/watch?v=', '' 
+                      | replace: 'https://youtu.be/', '' 
+                      | split: '&' | first 
+                    %}
+                    <div class="product-stories-video-column__youtube-embed">
+                      <iframe 
+                        width="560" 
+                        height="315" 
+                        src="https://www.youtube.com/embed/{{ youtube_video_id }}" 
+                        frameborder="0" 
+                        allowfullscreen
+                      ></iframe>
+                    </div>
+                  <!-- Display image -->
+                  {%- elsif block.settings.image != blank -%}
+                    {% if block.settings.video_link != blank %}
+                      <a href="{{ block.settings.video_link }}">
+                    {%- endif -%}
+                    {%- assign image_height = 570 -%} 
+                    {%- assign image_width = 600 -%} 
+
+                      <div class="product-stories-media media--transparent">
+                        {{
+                          block.settings.image
+                          | image_url: width: image_width, height: image_height, crop: 'center'
+                          | image_tag:
+                              alt: block.settings.image.alt | escape
+                        }}
+                      </div>
+                    {% if block.settings.video_link != blank %}
+                      </a>
+                    {%- endif -%}
+                  <!-- Display custom embed -->
+                  {%- elsif block.settings.video_embed != blank -%}
+                    <div class="product-stories-video-column__custom-embed">
+                      {{ block.settings.video_embed }}
+                    </div>
+                  <!-- Display uploaded video -->
+                  {%- elsif block.settings.video != blank -%}
+                    {% if block.settings.video_link != blank %}
+                      <a href="{{ block.settings.video_link }}">
+                    {%- endif -%}
+                         {%- liquid
+  if section.settings.play_onload
+    assign autoplay = true
+    assign loop = true
+    assign muted = true
+    assign playsinline = true
+  else
+    assign autoplay = false
+    assign loop = false
+    assign muted = true
+    assign playsinline = false
+  endif
+-%}
+
+<div class="product-stories-video-column__custom-video">
+  {%- capture video_classes -%}
+    feature-row_image{% if autoplay %} feature-rowvideo--autoplay{% else %} feature-row_video{% endif %}
+  {%- endcapture -%}
+  {{
+    block.settings.video
+    | video_tag:
+      image_size: '694x',
+      class: video_classes,
+      autoplay: autoplay,
+      playsinline: playsinline,
+      loop: loop,
+      muted: muted,
+      controls: true
+  }}
+</div>
+                    {% if block.settings.video_link != blank %}
+                      </a>
+                    {%- endif -%}
+                  {%- endif -%}
+                {%- else -%}
+                  {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
+                {%- endif -%}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </video-column>
+      
+      {%- if section.settings.social_handle != blank -%}
+        <h3 class="product-stories-h3 product-stories-scroll-animate product-stories-fade-in">
+          {% assign social_link = settings[section.settings.social_link] %}
+          {% if social_link != blank %}
+            <a href="{{ social_link }}">
+          {%- endif -%}
+          {{ section.settings.social_handle }}
+          {% if social_link != blank %}
+            </a>
+          {%- endif -%}
+        </h3>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+
+
+
+{% schema %}
+{
+  "name": "Product Stories",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Shop With Us"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "label": "Description",
+      "default": "Join us on TikTok for exclusive releases, unboxing and try-on videos, reviews, and more from our top brands and stylists."
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "label": "Font Size",
+      "default": 100,
+      "min": 50,
+      "max": 100,
+      "unit": "%",
+      "step": 1
+    },
+    {
+      "type": "checkbox",
+      "id": "play_onload",
+      "default": false,
+      "label": "Autoplay video"
+    },
+    {
+      "type": "text",
+      "id": "social_handle",
+      "label": "Social Media Handle",
+      "default": "@yourtiktok"
+    },
+    {
+      "type": "select",
+      "id": "social_link",
+      "label": "Social Media Platform",
+      "default": "social_instagram_link",
+      "info": "Select the platform to link your social media handle.",
+      "options": [
+        { "value": "social_twitter_link", "label": "Twitter" },
+        { "value": "social_facebook_link", "label": "Facebook" },
+        { "value": "social_pinterest_link", "label": "Pinterest" },
+        { "value": "social_instagram_link", "label": "Instagram" },
+        { "value": "social_tiktok_link", "label": "TikTok" },
+        { "value": "social_tumblr_link", "label": "Tumblr" },
+        { "value": "social_snapchat_link", "label": "Snapchat" },
+        { "value": "social_youtube_link", "label": "YouTube" },
+        { "value": "social_vimeo_link", "label": "Vimeo" }
+      ]
+    },
+      {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Spacing Settings"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 44
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 44
+    }
+  ],
+  "blocks": [
+    {
+      "type": "column",
+      "name": "Video Column",
+      "limit": 3,
+      "settings": [
+            {
+            "type": "text",
+            "id": "video_title",
+            "label": "Video Heading",
+            "default": "Mattress Soft Ergonomic!"
+        },
+        {
+          "type": "text",
+          "id": "youtube_url",
+          "label": "YouTube Video URL",
+          "info": "Paste the full YouTube video URL here"
+        },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Video File"
+        },
+        {
+          "type": "html",
+          "id": "video_embed",
+          "label": "Embed Code",
+          "info": "Embed custom HTML for the video."
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Thumbnail Image",
+          "info": "Upload a placeholder image for the video."
+        },
+        {
+          "type": "url",
+          "id": "video_link",
+          "label": "Video Link",
+          "info": "Optional link to open when image/video is clicked"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Stories",
+      "blocks": [
+        { "type": "column" },
+        { "type": "column" },
+        { "type": "column" }
+      ]
+    }
+  ]
+}
+{% endschema %}

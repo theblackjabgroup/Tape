@@ -65,7 +65,6 @@
     --dot-size: var(--section-dot-size, 10px);
 
     padding: var(--video-padding);
-    background-color: var(--background-color);
     display: flex !important;
     flex-direction: column;
     justify-content: center;
@@ -95,7 +94,7 @@
     margin: 0 auto;
     scroll-snap-align: center;
     flex-shrink: 0;
-    opacity: 0;
+    opacity: 1;
     pointer-events: none;
 }
 
@@ -114,14 +113,14 @@
     width: var(--dot-size);
     height: var(--dot-size);
     cursor: pointer;
-    background-color: var(--indicator-color);
+    background-color: rgb(var(--color-foreground));
     border-radius: 20px;
     transition: width 0.3s ease;
 }
 
 .video-container-wrapper[data-section-id] .progress-indicator.active {
     position: relative;
-    background-color: var(--indicator-color);
+    background-color: rgb(var(--color-foreground));
     width: calc(var(--dot-size) * 10);
     overflow: hidden;
 }
@@ -193,7 +192,7 @@
 .video-container-wrapper[data-section-id] .overlay {
     display: block !important;
     position: absolute;
-    background-color: var(--background-color);
+    background-color: rgb(var(--color-background));
     width: var(--overlay-size);
     height: var(--overlay-size);
     border-radius: 50%;

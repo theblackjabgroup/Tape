@@ -29,6 +29,7 @@
       }
     },
     "continue_shopping": "Continue shopping",
+    "go_to_home_page": "Back ot the home page",
     "pagination": {
       "label": "Pagination",
       "page": "Page {{ number }}",
@@ -261,7 +262,8 @@
     },
     "404": {
       "title": "Page not found",
-      "subtext": "404"
+      "subtext": "404",
+      "para": "The page you were looking for doesn’t exist. You may have mistyped the address or the page may have moved."
     }
   },
   "sections": {

@@ -35,6 +35,12 @@
       "default": false
     },
     {
+  "type": "checkbox",
+  "id": "show_tags",
+  "label": "Show Tags",
+  "default": true
+},
+    {
       "type": "checkbox",
       "id": "show_view_all",
       "label": "Show 'View All' Link",
@@ -48,41 +54,11 @@
       "info": "This title will be displayed on the top left of the blog slider."
     },
     {
-      "type": "color",
-      "id": "section_title_color",
-      "label": "Section Title Color",
-      "default": "#333333"
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
     },
-    {
-      "type": "color",
-      "id": "background_color",
-      "label": "Background Color",
-      "default": "#ffffff"
-    },
-    {
-      "type": "color",
-      "id": "text_color",
-      "label": "Text Color",
-      "default": "#333333"
-    },
-    {
-      "type": "color",
-      "id": "card_bg_color",
-      "label": "Card Background Color",
-      "default": "#f0f0f8"
-    },
-    {
-      "type": "color",
-      "id": "button_background_color",
-      "label": "Button Color",
-      "default": "#333333"
-    },
-    {
-      "type": "color",
-      "id": "button_text_color",
-      "label": "Button Text Color",
-      "default": "#ffffff"
-    }
   ],
   "presets": [
     {
@@ -93,56 +69,88 @@
 }
 {% endschema %}
 
+<style>
+  /* .blog-read-more-btn {
+       background: rgb(var(--color-background));
+  } */
+.blog-slider-container{
+  background-color: rgb(var(--color-background));
+}
+.blog-card-content {
+  background-color: rgb(var(--color-button));
+  color: rgb(var(--color-text));
+}
+  .semicircle{
+   background-color: rgb(var(--color-background)); 
+  }
+  .arrow{
+   color: rgb(var(--color-foreground)); 
+  }
+  .blog-tag{
+  background-color: rgb(var(--color-background));
+}
+</style>
+
 <link rel="stylesheet" href="{{ 'blog-slider.css' | asset_url }}">
 
-<div class="blog-slider-section" style="background-color: {{ section.settings.background_color }};">
+<div class="blog-slider-section color-{{ section.settings.color_scheme }}"  >
     <!-- Title Section -->
     <div class="blog-slider-title" >
-       <h2 style="color: {{ section.settings.section_title_color }};">{{ section.settings.section_title }}</h2>
+       <h2>{{ section.settings.section_title }}</h2>
     </div>
 
     <!-- Arrow Buttons -->
-    <div class="blog-arrow-buttons" style="color: {{ section.settings.section_title_color }};">
-        <button class="arrow arrow-left" style="color: {{ section.settings.section_title_color }};" onclick="moveSlide(-1)">‹</button>
-        <button class="arrow arrow-right" style="color: {{ section.settings.section_title_color }};" onclick="moveSlide(1)">›</button>
+    <div class="blog-arrow-buttons" >
+        <button class="arrow arrow-left"  onclick="moveSlide(-1)">‹</button>
+        <button class="arrow arrow-right"  onclick="moveSlide(1)">›</button>
     </div>
     
     <!-- Slider Container -->
-    <div class="blog-slider-container">
+    <div class="blog-slider-container color-{{ section.settings.color_scheme }} ">
         <div class="blog-slider-wrapper" id="sliderWrapper">
             {% assign blog_handle = section.settings.blog %}
             {% assign post_limit = section.settings.post_limit %}
           {% if blog_handle != blank and blogs[blog_handle].articles.size > 0 %}
             {% for article in blogs[blog_handle].articles limit: post_limit %}
-            <div class="blog-card" style="background-color: {{ section.settings.card_bg_color }};">
+            <div class="blog-card" >
                 <!-- Semicircle divs -->
-                <div class="semicircle semicircle-left" style="background-color: {{ section.settings.background_color }};"><h6></h6></div>
-                <div class="semicircle semicircle-right" style="background-color: {{ section.settings.background_color }};"><h6></h6></div>
+                <div class="semicircle semicircle-left" ><h6></h6></div>
+                <div class="semicircle semicircle-right" ><h6></h6></div>
+                <!-- Tags overlay -->
+    {% if section.settings.show_tags and article.tags.size > 0 %}
+        <div class="blog-tags-overlay">
+            {% for tag in article.tags %}
+                <span class="blog-tag">{{ tag }}</span>
+            {% endfor %}
+        </div>
+    {% endif %}
 
                 {% if article.image %}
                     <img src="{{ article.image | img_url: '309x309', crop: 'center' }}" alt="{{ article.title }}">
                 {% else %}
-                    <img src="{{ 'blog.jpg' | asset_url }}" alt="Default Image">
+                  <div class="custom-placeholder" >
+  {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
+</div>
+
                 {% endif %}
-                <div class="blog-card-content" style="background-color: {{ section.settings.card_bg_color }};">
-                    <h3 class="blog-card-title" style="color: {{ section.settings.text_color }};">{{ article.title | escape }}</h3>
+                <div class="blog-card-content color-{{ section.settings.color_scheme }}" >
+                    <h3 class="blog-card-title" >{{ article.title | escape }}</h3>
 
                     {% if section.settings.show_author or section.settings.show_date %}
                         <div class="blog-meta">
                             {% if section.settings.show_author %}
-                                <span class="blog-author" style="color: {{ section.settings.text_color }}">{{ article.author }}</span>
+                                <span class="blog-author" >{{ article.author }}</span>
                             {% endif %}
                             {% if section.settings.show_date %}
-                                <span class="blog-date" style="color: {{ section.settings.text_color }}">{{ article.published_at | date: "%B %d, %Y" }}</span>
+                                <span class="blog-date" >{{ article.published_at | date: "%B %d, %Y" }}</span>
                             {% endif %}
                         </div>
                     {% endif %}
-
                     {% if section.settings.show_excerpt %}
-                        <p class="blog-excerpt" style="color: {{ section.settings.text_color }};">{{ article.excerpt | strip_html | truncate: 200 }}</p>
+                        <p class="blog-excerpt" >{{ article.excerpt | strip_html | truncate: 200 }}</p>
                     {% endif %}
 
-                    <a href="{{ article.url }}" class="blog-read-more-btn" style="background-color: {{ section.settings.button_background_color }}; color: {{ section.settings.button_text_color }};">
+                    <a href="{{ article.url }}" class="blog-read-more-btn" >
                         Read more
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -155,33 +163,33 @@
           {% else %}
                 <!-- Placeholder Blog Cards for Preview with Default Image -->
                 {% for i in (1..4) %}
-                    <div class="blog-card" style="background-color: {{ section.settings.card_bg_color }};">
+                    <div class="blog-card color-{{ section.settings.color_scheme }}" >
                         <!-- Semicircle divs -->
-                        <div class="semicircle semicircle-left" style="background-color: {{ section.settings.background_color }};"><h6></h6></div>
-                        <div class="semicircle semicircle-right" style="background-color: {{ section.settings.background_color }};"><h6></h6></div>
+                        <div class="semicircle semicircle-left" style="position: absolute; width: 20px; height: 20px; border-radius: 50%; z-index: 2; left: -8px; top: 48%; transform: translateY(-50%);" ><h6></h6></div>
+                        <div class="semicircle semicircle-right" style="position: absolute; width: 20px; height: 20px; border-radius: 50%; z-index: 2; right: -8px; top: 48%; transform: translateY(-50%);" ><h6></h6></div>
 
                         <!-- Default Placeholder Image -->
-                        <img src="{{ 'blog.jpg' | asset_url }}" alt="Default Image" style="width: 100%; height: 309px; object-fit: cover;">
+                        {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg placeholder'}}
 
                         <div class="blog-card-content">
-                            <h3 class="blog-card-title" style="color: {{ section.settings.text_color }};">Sample Blog Post {{ i }}</h3>
+                            <h3 class="blog-card-title" >Sample Blog Post {{ i }}</h3>
 
                             {% if section.settings.show_author or section.settings.show_date %}
                                 <div class="blog-meta">
                                     {% if section.settings.show_author %}
-                                        <span class="blog-author" style="color: {{ section.settings.text_color }}">John Doe</span>
+                                        <span class="blog-author" >John Doe</span>
                                     {% endif %}
                                     {% if section.settings.show_date %}
-                                        <span class="blog-date" style="color: {{ section.settings.text_color }}">January {{ i }}, 2024</span>
+                                        <span class="blog-date" >January {{ i }}, 2024</span>
                                     {% endif %}
                                 </div>
                             {% endif %}
 
                             {% if section.settings.show_excerpt %}
-                                <p class="blog-excerpt" style="color: {{ section.settings.text_color }};">This is a preview of how your blog post will look. Select a blog to display your actual content.</p>
+                                <p class="blog-excerpt" >This is a preview of how your blog post will look. Select a blog to display your actual content.</p>
                             {% endif %}
 
-                            <a href="#" class="blog-read-more-btn" style="background-color: {{ section.settings.button_background_color }}; color: {{ section.settings.button_text_color }};">
+                            <a href="#" class="blog-read-more-btn" >
                                 Read more
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -197,8 +205,8 @@
     </div>
 
     {% if section.settings.show_view_all %}
-        <div class="blog-view-all-link">
-            <a href="{{ blogs[blog_handle].url }}" class="blog-view-all" style="color:{{ section.settings.button_background_color }}; border-color: {{ section.settings.button_background_color }};">
+        <div class="blog-view-all-link  color-{{ section.settings.color_scheme }}">
+            <a href="{{ blogs[blog_handle].url }}" class="blog-view-all">
                 View All Posts
             </a>
         </div>

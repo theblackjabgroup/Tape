@@ -1,5 +1,5 @@
- // Wrap the VideoPlayer class in an IIFE to avoid global namespace pollution
- (() => {
+  // Wrap the VideoPlayer class in an IIFE to avoid global namespace pollution
+  (() => {
     // Check if the class is already defined
     if (window.VideoPlayer) return;
 
@@ -11,13 +11,11 @@
                 this.videoWrappers = this.container.querySelectorAll(".video-wrapper");
                 this.progressIndicators = this.container.querySelectorAll(".progress-indicator");
                 this.videoContainer = this.container.querySelector(".video-container");
-                this.playButton = this.container.querySelector(".play-button-icon");
-                this.pauseButton = this.container.querySelector(".pause-button-icon");
                 this.videos = this.container.querySelectorAll("video");
                 this.playButtons = this.container.querySelectorAll(".deferred-media__poster-button");
 
                 // Validate required elements exist
-                if (!this.videoContainer || !this.playButton || !this.pauseButton) {
+                if (!this.videoContainer) {
                     throw new Error("Required DOM elements not found");
                 }
 
@@ -162,38 +160,6 @@
             }
         }
 
-        // Toggle play/pause state with error handling
-        togglePlayPause() {
-            try {
-                const activeWrapper = this.container.querySelector(".video-wrapper.active");
-                const activeVideo = activeWrapper.querySelector("video");
-                const playButton = activeWrapper.querySelector(".deferred-media__poster-button");
-                
-                if (!activeVideo) throw new Error("No active video found");
-
-                if (activeVideo.paused) {
-                    // Attempt to play video with error handling
-                    activeVideo.play().catch((error) => {
-                        console.error("Error playing video:", error);
-                    });
-                    this.playButton.classList.add("hidden");
-                    this.pauseButton.classList.add("visible");
-                    if(playButton) {
-                        playButton.style.display = 'none';
-                    }
-                } else {
-                    activeVideo.pause();
-                    this.playButton.classList.remove("hidden");
-                    this.pauseButton.classList.remove("visible");
-                    if(playButton) {
-                        playButton.style.display = 'block';
-                    }
-                }
-            } catch (error) {
-                console.error("Error toggling play/pause:", error);
-            }
-        }
-
         // Update progress bar with error handling
         updateProgressBar() {
             try {
@@ -209,32 +175,6 @@
             } catch (error) {
                 // Silently handle errors for non-video elements
                 console.debug("Skipping progress update for non-video element");
-            }
-        }
-
-        // Update play/pause button states with error handling
-        updatePlayPauseButton(video) {
-            try {
-                if (!video) throw new Error("Invalid video element");
-                
-                const wrapper = video.closest('.video-wrapper');
-                const playButton = wrapper.querySelector(".deferred-media__poster-button");
-
-                if (video.paused) {
-                    this.playButton.classList.remove("hidden");
-                    this.pauseButton.classList.remove("visible");
-                    if(playButton) {
-                        playButton.style.display = 'block';
-                    }
-                } else {
-                    this.playButton.classList.add("hidden");
-                    this.pauseButton.classList.add("visible");
-                    if(playButton) {
-                        playButton.style.display = 'none';
-                    }
-                }
-            } catch (error) {
-                console.error("Error updating play/pause button:", error);
             }
         }
 
@@ -269,10 +209,6 @@
         // Initialize event listeners with error handling
         initializeEventListeners() {
             try {
-                // Play/Pause button events
-                this.playButton.addEventListener("click", () => this.togglePlayPause());
-                this.pauseButton.addEventListener("click", () => this.togglePlayPause());
-
                 // Add click handlers for individual video play buttons
                 this.playButtons.forEach(button => {
                     button.addEventListener("click", () => {
@@ -290,14 +226,8 @@
                 // Video-specific events
                 this.videos.forEach((video) => {
                     video.addEventListener("timeupdate", () => this.updateProgressBar());
-                    video.addEventListener("play", () => this.updatePlayPauseButton(video));
-                    video.addEventListener("pause", () =>
-                        this.updatePlayPauseButton(video)
-                    );
                     video.addEventListener("ended", () => {
                         try {
-                            this.playButton.classList.remove("hidden");
-                            this.pauseButton.classList.remove("visible");
                             const activeIndicator = this.container.querySelector(
                                 ".progress-indicator.active"
                             );
@@ -389,10 +319,6 @@
                             this.progressIndicators.forEach((ind) =>
                                 this.resetProgressBar(ind)
                             );
-
-                            // Update play/pause button states
-                            this.playButton.classList.remove("hidden");
-                            this.pauseButton.classList.remove("visible");
                         } catch (error) {
                             console.error("Error handling indicator click:", error);
                         }

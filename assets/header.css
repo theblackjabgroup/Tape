@@ -52,12 +52,31 @@
   cursor: pointer;
   border-radius: 5px;
   background-color: var(--background_product_card);
+
   display: flex;
   flex-direction: column;
   gap:6px;
   align-items: center; 
   padding: 27px 15px;
   justify-content: space-between;
+}
+
+.hamburger-line {
+  width: calc(var(--hamburger-size) * 0.38);
+  height: 1px;
+  background-color: rgb(var(--color-secondary-button-text));
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: block !important;
+}
+
+.hamburger-line:nth-child(1) {
+  top: calc(var(--hamburger-size) * 0.36);
+}
+.hamburger-line:nth-child(2) {
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 .hamburger .line {
   width: 29px;

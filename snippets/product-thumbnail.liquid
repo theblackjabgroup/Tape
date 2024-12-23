@@ -90,7 +90,7 @@
                     --->
 
     {%- render 'loading-spinner' -%}
-    <div class="bb_product__media_first product__media media media--transparent">
+    <div id="bb_product__media_first" class="product__media media media--transparent">
       {{
         media.preview_image
         | image_url: width: 1946
@@ -101,7 +101,7 @@
           alt: media.preview_image.alt,
           widths: '246, 493, 600, 713, 823, 990, 1100, 1206, 1346, 1426, 1646, 1946'
       }}
-      {% if media_count > 1 and desktop_layout == 'thumbnail'%}
+      {% if media_count > 1 %}
       {{
         media.preview_image
         | image_url: width: 1946

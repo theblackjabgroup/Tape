@@ -5,22 +5,21 @@
   "name": "Barcode",
   "settings": [
     {
-      "type": "color",
-      "id": "footer_text_color",
-      "label": "Footer Text Color",
-      "default": "#ffffff"
-    },
-    {
       "type": "text",
-      "id": "footer_text",
-      "label": "Footer Text",
-      "default": "All items are reserved ©2024"
+      "id": "powered_by",
+      "label": "CopyRight"
+    },
+     {
+      "id": "color_scheme",
+      "type": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
     },
     {
-      "type": "color",
-      "id": "barcode_color",
-      "label": "Barcode Color",
-      "default": "#000000"
+      "type": "checkbox",
+      "id": "footer_payment_enable",
+      "label": "Show payment types",
+      "default": true
     }
   ],
   "presets": [
@@ -30,44 +29,32 @@
   ]
 }
 {% endschema %}
+
 <style>
   .bar{
-    background-color: {{ section.settings.barcode_color }};
-      /* width: {{ 8 | times: section.settings.barcode_scale }}px;
-    height: {{ 100 | times: section.settings.barcode_scale }}px;
-    margin: {{ 0 | times: section.settings.barcode_scale }}px {{ 4 | times: section.settings.barcode_scale }}px;
-  
-  }
-   .bar-2 {
-    width: {{ 5 | times: section.settings.barcode_scale }}px;
-    height: {{ 100 | times: section.settings.barcode_scale }}px;
-    margin: {{ 0 | times: section.settings.barcode_scale }}px {{ 3 | times: section.settings.barcode_scale }}px;
+   background-color: var(--background_product_card);
   }
 
-  .bar-3 {
-    width: {{ 10 | times: section.settings.barcode_scale }}px;
-    height: {{ 100 | times: section.settings.barcode_scale }}px;
-    margin: {{ 0 | times: section.settings.barcode_scale }}px {{ 5 | times: section.settings.barcode_scale }}px;
-  }
-
-  .bar-4 {
-    width: {{ 20 | times: section.settings.barcode_scale }}px;
-    height: {{ 100 | times: section.settings.barcode_scale }}px;
-    margin: {{ 0 | times: section.settings.barcode_scale }}px {{ 7 | times: section.settings.barcode_scale }}px;
-  }
-
-  .bar-5 {
-    width: {{ 7 | times: section.settings.barcode_scale }}px;
-    height: {{ 80 | times: section.settings.barcode_scale }}px;
-    margin: {{ -20 | times: section.settings.barcode_scale }}px {{ 1 | times: section.settings.barcode_scale }}px {{ 0 | times: section.settings.barcode_scale }}px;
-  } */
-   .barcode-footer {
-    color: {{ section.settings.footer_text_color }};
+  .barcode-footer {
+    color:rgb(var(--color-foreground)); 
     background-color: {{ section.settings.footer_bg_color }};
+  }
+
+  .barcode-footer p,
+  .barcode-footer .copyright__content {
+     color:rgb(var(--color-foreground)); 
+  }
+
+  .barcode-footer .powered-by {
+    color:rgb(var(--color-foreground)); 
+  }
+
+  .barcode-footer .copyright__content {
+    color:rgb(var(--color-foreground)); 
   }
 </style>
 
-   <div class="barcode">
+  <div class="barcode color-{{ section.settings.color_scheme }}">
   <!-- Left section -->
   <div class="bar bar-1"><h2>i</h2></div>
   <div class="bar bar-2"><h2>i</h2></div>
@@ -152,11 +139,26 @@
         <div class="bar bar-1"><h2>i</h2></div>
   <div class="bar bar-2"><h2>i</h2></div>
       <div class="bar bar-3"><h2>i</h2></div>
-                                     
-  
-
-
-<div class="barcode-footer">
-  {{ section.settings.footer_text }}
+    
+<div class="barcode-footer color-{{ section.settings.color_scheme }}"">
+    {%- assign powered_by = shop.name -%}
+    {%- if section.settings.powered_by != blank -%}
+      {%- assign powered_by = section.settings.powered_by -%}
+    {%- endif -%}
+    <p class="powered-by">&copy; {{ 'now' | date: "%Y" }} {{ powered_by }}. <small class="copyright__content">Powered by Shopify</small>.</p>
 </div>
 
+
+  <div class="payments-icons">
+  {% if section.settings.footer_payment_enable %}
+        {% unless shop.enabled_payment_types == empty %}
+          <ul class="footer__payment payment-icons grid__item inline-list grid__item medium-up--one-third">
+            {% for type in shop.enabled_payment_types %}
+              <li>{{ type | payment_type_svg_tag: class:'payment-icon' }}</li>
+            {% endfor %}
+          </ul>
+        {% endunless %}
+      {% endif %}
+</div>
+
+</div>
