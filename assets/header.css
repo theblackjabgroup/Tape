@@ -69,30 +69,25 @@
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
-
 #hamburger-3.is-active .line:nth-child(1),
 #hamburger-3.is-active .line:nth-child(3){
   width: 23px;
 }
-
 #hamburger-3.is-active .line:nth-child(2){
   width: 38px;
 }
-
 #hamburger-3.is-active .line:nth-child(1){
   -webkit-transform: translateX(-10px) rotate(-45deg);
   -ms-transform: translateX(-10px) rotate(-45deg);
   -o-transform: translateX(-10px) rotate(-45deg);
   transform: translateX(-10px) rotate(-45deg);
 }
-
 #hamburger-3.is-active .line:nth-child(3){
   -webkit-transform: translateX(-10px) rotate(45deg);
   -ms-transform: translateX(-10px) rotate(45deg);
   -o-transform: translateX(-10px) rotate(45deg);
   transform: translateX(-10px) rotate(45deg);
 }
-
 .header {
   width: var(--header-width);
   --header-height-auto: auto;
