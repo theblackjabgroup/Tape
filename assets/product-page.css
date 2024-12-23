@@ -209,12 +209,12 @@
 }
 
 .bb-special-offer-text {
-  color: var(--utilities);
+  color: rgb(var(--color-foreground));
   margin: auto;
   font-family: 'Inter';
-  font-weight: 500;
-  font-size: 18px;
-    line-height: 20px;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
 }
 
 .bb-product[aria-click="1"] {
