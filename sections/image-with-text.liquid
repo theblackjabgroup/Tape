@@ -3,12 +3,11 @@
 
 {% style %}
   :root {
-    --card-color-scheme: {{ section.settings.card_color_scheme }};
-    --section-color: {{ section.settings.sectionColor }};
+    --section-color: {{ section.settings.sectionBackground }};
   }
 {% endstyle %}
 
-<div class="image__with__text__section color-{{ section.settings.sectionColor }}" data-section-id="{{ section.id }}">
+<div class="image__with__text__section " data-section-id="{{ section.id }}">
   <div class="image__with__text__outer__container">
     <ul class="image__with__text__inner__container">
       {% for item in section.blocks %}
@@ -37,7 +36,7 @@
           </div>
         </li>
       {% endfor %}
-      <div class="info__banner color-{{ section.settings.sectionColor }}">
+      <div class="info__banner color-{{ section.settings.bannerColor }}">
         <div class="info__banner__contents">
           <p class="info__banner__title inter-medium">NEW ARRIVAL</p>
           <h1 class="info__banner__heading fira-sans-bold">Thanksgiving big billion sale!</h1>
@@ -46,13 +45,13 @@
               Enhance patient care with our premium medical product, featuring advanced technology for precision and
               reliability. Ideal for seamless integration into any practice!
             </p>
-            <a href="" style="color: rgb(var(--color-secondary-button-text)); background: rgb(var(--color-button-text));" class="info__banner__shopnow__button link color-{{ section.settings.sectionColor }}">Shop Now</a>
+            <a href="" style="color: rgb(var(--color-secondary-button-text)); background: rgb(var(--color-button-text));" class="info__banner__shopnow__button link color-{{ section.settings.bannerColor }}">Shop Now</a>
           </div>
           <span id="info__banner__expand__button" class="svg-wrapper">
             {{- 'icon-arrow.svg' | inline_asset_content -}}
           </span>
         </div>
-        <ul class="dot-items color-{{ section.settings.sectionColor }}">
+        <ul class="dot-items color-{{ section.settings.bannerColor }}">
           {% for item in section.blocks %}
             <li class="dot-item">
               <a id="gallery-item-{{ forloop.index0 }}-trigger" href="#gallery-item-{{ forloop.index0 }}"> </a>
@@ -160,15 +159,16 @@ infoBannerExpandButton.addEventListener('click', () => {
   "name": "Image With Text",
   "settings": [
     {
-      "type": "color_scheme",
-      "id": "sectionColor",
+      "type": "color",
+      "id": "sectionBackground",
       "label": "Section Color"
     },
     {
-      "type": "color",
-      "id": "card_color_scheme",
-      "label": "Card Color"
-    },
+      "type": "color_scheme",
+      "label": "Banner Color",
+      "id": "bannerColor",
+      "default": "#000000"
+    }
   ],
   "blocks": [
     {

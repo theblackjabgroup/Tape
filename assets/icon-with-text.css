@@ -20,13 +20,13 @@
   width: 309px;
   height: 309px;
   border-radius: 8px;
-  background-color: var(--background_product_card);
+  background-color: var(--card_background);
 }
 .card__inner_container {
   position: relative;
   width: 261px;
   height: 261px;
-  background: var(--featured-icon-with-text-inner-card-color);
+  background: var(--card_foreground);
   border-radius: inherit;
 }
 
@@ -73,7 +73,7 @@
   transition: all 0.45s ease-in-out;
   border-radius: 50%;
   position: absolute;
-  background-color: var(--featured-icon-with-text-card-color);
+  background-color: var(--card_background);
 }
 
 .description__container > p {
@@ -99,7 +99,7 @@
   width: 69px;
   height: 69px;
   border-radius: 0 50% 0 0;
-  background-color: var(--background_product_card);
+  background-color: var(--card_background);
 }
 
 .description__button__container::before {
@@ -111,7 +111,7 @@
   height: 15px;
   width: 30px;
   border-radius: 0 0 0 50%;
-  box-shadow: -18px 0 0 0 var( --background_product_card);
+  box-shadow: -18px 0 0 0 var(--card_background);
 }
 .description__button__container::after {
   content: "";
@@ -122,7 +122,7 @@
   height: 30px;
   width: 15px;
   border-radius: 0 0 0 50%;
-  box-shadow: 0 18px 0 0 var( --background_product_card);
+  box-shadow: 0 18px 0 0 var(--card_background);
 }
 .description__button__inner_container {
   display: flex;
