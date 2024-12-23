@@ -5,6 +5,7 @@
     max-width: none;
     margin: 2rem 2rem;
     position: relative;
+    border-radius: 5px;
 }
 
 .bb-upper-template-404 {
@@ -23,7 +24,7 @@
     display: flex;
     flex-direction: row;
     position: absolute;
-    gap: 22.5px;
+    gap: 36.5px;
     z-index: 1;
 }
 
@@ -33,7 +34,7 @@
     display: flex;
     flex-direction: row;
     position: absolute;
-    gap: 22.5px;
+    gap: 36.5px;
     z-index: 1;
 }
 
@@ -43,7 +44,7 @@
     display: flex;
     flex-direction: column;
     position: absolute;
-    gap: 22px;
+    gap: 38px;
     z-index: 1;
 }
 
@@ -53,7 +54,7 @@
     display: flex;
     flex-direction: column;
     position: absolute;
-    gap: 22px;
+    gap: 38px;
     z-index: 1;
 }
 
@@ -114,8 +115,10 @@
 }
 
 .bb-404-c-button:hover {
+    /*
     background-color: black;
     color: #e5e5ea;
+    */
     border: none;
 }
 .bb-404-h-button , .bb-404-c-button {
@@ -129,8 +132,12 @@ margin-top: 2rem;
 }
 .bb-404-c-button {
     color: black;
-  /*  color: rgba(var(--color-button)); */
-    background: #e5e5ea;
+    text-decoration: underline;
+    background-color: transparent;
+}
+
+.button:not([disabled]):hover:after {
+    box-shadow: none;
 }
 .desktop-view {
     display: block;
@@ -144,7 +151,9 @@ margin-top: 2rem;
     .mobile-view {
       display: block;
     }
-  
+    .bb-404-c-button {
+        background: #c7c6c6;
+    }
     .desktop-view {
       display: none !important;
     }
