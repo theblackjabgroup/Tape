@@ -75,20 +75,17 @@
                     {% if block.settings.video_link != blank %}
                       <a href="{{ block.settings.video_link }}">
                     {%- endif -%}
-                    <div class="product-stories-media media--transparent">
-                      {%- assign image_height = block.settings.image.width | divided_by: block.settings.image.aspect_ratio -%}
-                      {%- capture sizes -%}(min-width: 1520px) calc(1520px / 3), (min-width: 1176px) calc(100vw / 2), (min-width: 717px) 325px, 347px{%- endcapture -%}
-                      {{
-                        block.settings.image
-                        | image_url: width: 940
-                        | image_tag:
-                          width: block.settings.image.width,
-                          height: image_height,
-                          sizes: sizes,
-                          widths: '165, 360, 533, 720, 940',
-                          alt: block.settings.image.alt | escape
-                      }}
-                    </div>
+                    {%- assign image_height = 570 -%} 
+                    {%- assign image_width = 600 -%} 
+
+                      <div class="product-stories-media media--transparent">
+                        {{
+                          block.settings.image
+                          | image_url: width: image_width, height: image_height, crop: 'center'
+                          | image_tag:
+                              alt: block.settings.image.alt | escape
+                        }}
+                      </div>
                     {% if block.settings.video_link != blank %}
                       </a>
                     {%- endif -%}
