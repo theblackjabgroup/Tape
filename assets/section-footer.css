@@ -314,7 +314,7 @@ background-color: var(--background_product_card);
   }
   
   .disclosure {
-  margin-right: 11px;
+  margin-right: -40px;
 }
 
 .footer__country-selector .footer-country-form .disclosure__button {
