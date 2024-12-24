@@ -211,6 +211,65 @@ background-color: var(--background_product_card);
         height: 40px;
     }
 
+
+/* Footer Country Selector Container */
+.footer__country-selector {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  margin-right: 200px; /* Adjust for alignment */
+}
+
+/* Localization Form */
+.footer__country-selector .footer-country-form {
+  width: 100%;
+}
+
+/* Wrapper for Form Content */
+.footer__country-selector .footer-country-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+/* Country Label */
+.footer__country-selector .footer-country-label {
+  font-size: 1rem;
+  margin: 0.5rem 0;
+  text-align: left;
+  font-weight: bold;
+}
+
+/* Disclosure Button Styling */
+.footer__country-selector .footer-country-form .disclosure__button {
+  border: 1px solid currentColor;
+  padding: 0.5rem 1rem;
+  width: 100%;
+  padding-left: 17px;
+    padding-right: 38px;
+  text-align: left;
+  background: none;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 12px;
+  margin-top: 0.5rem;
+}
+
+/* Optional Adjustments for Margins and Layout */
+.footer__country-selector .footer-country-label {
+  margin-left: -1px;
+    margin-bottom: 4px;
+    margin-top: 8px;
+    font-size: 12px
+}
+.disclosure {
+  margin-right: 85px;
+}
+
+
 @media (max-width: 768px) {
     .footer-content {
         flex-direction: column;
@@ -253,7 +312,16 @@ background-color: var(--background_product_card);
   .footer-column {
     margin-bottom: 0;
   }
+  
+  .disclosure {
+  margin-right: 11px;
+}
 
+.footer__country-selector .footer-country-form .disclosure__button {
+  padding-right: 53px;
+            white-space: nowrap;
+}
+  
   .footer-envelope-icon {
     margin-left: 10px;
   }
@@ -261,8 +329,10 @@ background-color: var(--background_product_card);
   .footer-column form button {
     margin-left: -18px;
   }
-
-
+.footer__country-selector .footer-country-label {
+    margin-left: -18px;
+}
+  
 .footer__localization {
 
   margin-right: 210px;
@@ -379,32 +449,4 @@ background-color: var(--background_product_card);
   
 }
 
-.footer__localization {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-content: center;
-    flex-wrap: wrap;
-    padding: 1rem 1rem 0;
-  margin-right: 200px;
-}
 
-.footer__localization .localization-form {
-    width: 100%;
-}
-
-.footer__localization .disclosure__button {
-    border: 1px solid currentColor;
-    padding: 0.5rem 1rem;
-    width: 100%;
-    text-align: left;
-    background: none;
-    cursor: pointer;
-}
-
-.footer__localization .caption-large {
-          margin: 1rem 1rem .5rem;
-        margin-left: -15px;
-        margin-bottom: 10px;
-        margin-top: -3px;
-}
