@@ -1,10 +1,15 @@
 <link rel="stylesheet" href="{{ 'header.css' | asset_url }}">
 <script src="{{ 'header.js' | asset_url }}" defer></script>
 <link rel="stylesheet" href="{{'scroll-tracker.css' |  asset_url}}" media="print" onload="this.media='all'">
+
  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
 
 
  <div {% if section.settings.sticky_header_type != 'none'%} sticky-header data-sticky-type="{{ section.settings.sticky_header_type }}"{% else %}div{% endif %} class="header-wrapper color-{{ section.settings.color_scheme }}" style="--padding-top: {{ section.settings.padding_top }}px; --padding-bottom: {{ section.settings.padding_bottom }}px;">
+
+
+<{% if section.settings.sticky_header_type != 'none' %}sticky-header data-sticky-type="{{ section.settings.sticky_header_type }}"{% else %}div{% endif %} class="header-wrapper color-{{ section.settings.color_scheme }}" style="--padding-top: {{ section.settings.padding_top }}px; --padding-bottom: {{ section.settings.padding_bottom }}px;">
+
   <div class="flex-container" style="--margin-right: {{ section.settings.margin_right }}px; --margin-left: {{ section.settings.margin_left }}px">
     <a href="{{ routes.root_url }}" class="logo-container">
       
@@ -66,6 +71,7 @@
           {% endfor %}
         </ul>
       </nav>
+
       
            <div class="localization header-localization">
             {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
@@ -84,6 +90,11 @@
 
      
       
+
+      {%- if section.settings.enable_scroll_tracking -%}
+        <div class="scroll-tracker"><p><span class="scroll-distance"></span>Km</p> <span class="svg-wrapper" style="height: 12px; width: 12px;">{{ 'icon-arrow.svg' | inline_asset_content }}</span></div>
+      {%- endif -%}
+
       <div class="nav-icons">
         <div class="nav-icon">
           <a href="{{ routes.search_url }}" class="search-toggle">
@@ -210,7 +221,11 @@
     </div>
     
   </div>
+
  </div {% if section.settings.sticky_header_type != 'none' %}sticky-header{% else %}div{% endif %}>
+
+</{% if section.settings.sticky_header_type != 'none' %}sticky-header{% else %}div{% endif %}>
+
 
   {% comment %} 
   THIS IS TEST COMMENT TO RESET THE HEADER SECTION
@@ -228,6 +243,7 @@
   THIS IS TEST COMMENT TO RESET THE HEADER SECTION
   THIS IS TEST COMMENT TO RESET THE HEADER SECTION
   {% endcomment %}
+
     <script>
 document.addEventListener('DOMContentLoaded', function() {
     const container = document.getElementById('menuIcon');
@@ -259,6 +275,8 @@ document.addEventListener('DOMContentLoaded', function() {
         .catch(error => console.error('Error loading menu animation:', error));
 });
     </script>
+
+
 
 
 {% schema %}

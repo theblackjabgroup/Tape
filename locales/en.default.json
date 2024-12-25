@@ -29,6 +29,7 @@
       }
     },
     "continue_shopping": "Continue shopping",
+    "go_to_home_page": "Back ot the home page",
     "pagination": {
       "label": "Pagination",
       "page": "Page {{ number }}",
@@ -261,7 +262,8 @@
     },
     "404": {
       "title": "Page not found",
-      "subtext": "404"
+      "subtext": "404",
+      "para": "The page you were looking for doesn’t exist. You may have mistyped the address or the page may have moved."
     }
   },
   "sections": {
@@ -289,7 +291,7 @@
       "new_estimated_total": "New estimated total",
       "note": "Order special instructions",
       "checkout": "Check out",
-      "empty": "Your cart is empty",
+      "empty": "Oops, It Looks Like You Forget To Shop!",
       "cart_error": "There was an error while updating your cart. Please try again.",
       "cart_quantity_error_html": "You can only add {{ quantity }} of this item to your cart.",
       "duties_and_taxes_included_shipping_at_checkout_with_policy_html": "Duties and taxes included. Discounts and <a href=\"{{ link }}\">shipping</a> calculated at checkout.",

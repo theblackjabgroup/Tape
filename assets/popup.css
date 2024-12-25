@@ -1,242 +1,268 @@
-.popup-base {
-    position: fixed;
-    bottom: 20px; 
-    left: 20px;
-    transform: none; 
-    width: 312px;
-    height: 272px;
-    clip-path: polygon(2% 15%, 0 15%, 2% 0, 100% 0, 100% 80%, 80% 100%, 2% 100%);
-    background-color: var(--base-bg);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1;
-    border-radius: 5%;
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@600&display=swap');
+.popup-overlay {
+  position: fixed;
+  bottom: 30px;
+  left: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  border-radius: 8px;
+}
+          .popup-message p, 
+.popup-message span, 
+.popup-message h1, 
+.popup-message h2, 
+.popup-message h3, 
+.popup-message h4, 
+.popup-message a, 
+.popup-message li, 
+.popup-message ul, 
+.popup-message ol {
+    font-size: 16px; /* Base font size for all rich text elements */
+     line-height: 1.5; /* Optional: improve readability */
+   padding:10px 20px 0 10px;
 }
 
-.popup-content {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    clip-path: polygon(0 0, 100% 0, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0 100%, 0% 20%);
-    background-color: var(--content-bg);
-    box-shadow: 0px 4px 10px rgba(254, 254, 254, 0.2);
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 30px;
-    border-radius: 6px;
+.popup {
+  z-index: 10;
+  background-size: cover;
+background-color:transparent;
+  text-align: center;
+  position: relative;
+  width: 441px;
+  height: 369px;
+  border-radius: 8px;
+  overflow: hidden; /* Ensure child elements stay within bounds */
+}
+
+.test {
+ /* Establish stacking context */
+  padding: 20px;
+  overflow: hidden;
+}
+
+.pop_svg {
+  position: absolute;
+  color: var(--background_product_card);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Push the SVG behind other content */
+  border-radius: inherit; /* Ensure SVG follows the popup's border radius */
 }
 
 
-.popup-header {
-    width: 100%;
-    height: 40px;
+.popup_heading{
+   font-size:24px;
+  padding: 12px 0 0 0;
+  color: var(--foreground);
+  font-family: 'Fira Sans';
+    font-weight: 600;
 }
 
-.popup-header-background {
-    display: flex;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    height: 165px;
-    clip-path: polygon(0 0, 100% 0, 97% 18%, 0 25%);
-    background-color: var(--header-bg);
-    z-index: 1;
-    padding: 10px;
-    border-radius:6px;
+ .popup-header-background {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 8px 8px 0 0;
+      padding: 10px 40px 0 30px;
+   z-index:2;
 }
 
-.popup-header h2 {
-    font-size: 2.1rem;
-    margin: -5px 10px;
-    color: var(--header-text);
-    position: relative;
-    z-index: 1;
+#closePopup {
+  background: transparent;
+  border: none;
+  color: var(--foreground);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  z-index: 2;
 }
 
-.popup-close-btn {
-    display: flex;
-    font-size: 20px;
-    color: var(--header-text);
-    cursor: pointer;
-    background: none;
-    border: none;
-    position: absolute;
-    z-index: 1;
-    padding: 0 20px 10px 10px;
-    right: -6px;
-    top:-2px;
+#closePopup:hover {
+  transform: scale(1.1);
+}
+
+#closePopup svg {
+  width: 20px;
+  height: 20px;
+  z-index: 2;
+  margin: 10px 0 0 0;
 }
 
 .popup-message {
-    padding-top: 26px;
-    font-size: 12px;
-    color: var(--popup-text);
-    text-align: justify;
-    margin-top: 6px;
+  color: var(--foreground);
+  margin-top: 8px;
+  text-align: justify;
+  padding: 0 20px;
+  font-family: 'Fira Sans';
+  font-weight: 400;
+  z-index: 2;
 }
 
 .popup-input-wrapper {
-    position: relative;
-    width: 100%;
-    margin-top:12px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  margin: 15px 20px 0 20px;
 }
 
 .popup-email-input {
-    width: 100%;
-    padding: 5px 0 5px 30px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
+  flex-grow: 0.8;
+  padding: 8px 12px 8px 36px;
+  border: 1px solid black;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: 'Fira Sans';
+  font-weight: 400;
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 10;
+  margin: 0 20px 0 10px;
+} 
 
-.email-icon {
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #C9CDD3;
-    font-size: 14px;
+.popup-email-icon {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+  color: gray;
+  z-index: 30;
 }
 
 .popup-subscribe-btn {
-    width: 50%;
-    padding: 5px;
-    margin: 10px 0;
-    background-color: var(--button-bg);
-    color: var(--button-text);
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    align-self: flex-start;
-    text-align: center;
+  background-color:rgb(var(--color-button-text));
+  color:rgb(var(--color-secondary-button-text));
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  display: block;
+  font-family: 'Fira Sans';
+  font-weight: 400;
+  z-index: 2;
+  margin: 6px 0 0 30px;
 }
 
-.subscribe-btn:hover {
-    background-color: #555;
-    color: white;
-}
-.popup-triangle{
-    display: flex;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 65px;
-    height: 45px;
-    clip-path: polygon(100% 81%, 81% 100%, 100% 100%)
-    z-index: 1;
-    padding: 28px;
-    background-color: var(--header-bg);
-}
-/* For Desktop Screens */
-@media screen and (min-width: 768px) {
-    .popup-base {
-        bottom: 20px; 
-        left: 20px;
-        width: 312px;
-        height: 272px;
-        transform: none; 
-    }
-}
-/* For Mobile Screens */
-@media screen and (max-width: 768px) {
-    .popup-base {
-        position: fixed;
-        top: 40%;
-        left: 50%; 
-        transform: translate(-50%, -50%); 
-        width: 80%;
-        min-height: 300px;
-        margin: 0;
-        border-radius: 5%;
-    }
+@media screen and (max-width: 600px) {
+  .pop_svg{
+      width: 325px;
+    height: 275px;
+  }
+  .popup-overlay {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 
-    .popup-content {
-        padding: 20px;
-    }
+  .popup {
+    width: 327px;
+    height: 274px;
+  }
 
-    .popup-header h2 {
-        font-size: 1.8rem;
-    }
+  .test {
+    height: 235px;
+    margin:10px;
+    padding: 0;
+  }
 
-    .popup-header-background {
-        height: 180px;
-    }
-
-    .popup-message {
-        font-size: 11px;
-    }
-
-    .popup-email-input {
-        margin: 15px 0 8px 0;
-    }
-
-    .popup-triangle {
-        width: 75px;
-        height: 60px;
-    }
-
-    .popup-subscribe-btn {
-        width: 50%;
-    }
+ .popup-email-input {
+    flex-grow: 0.6;
+         margin: 0 20px 0 10px;
 }
 
-@media screen and (max-width: 480px) {
-    .popup-base {
-        top: 40%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 90%;
-        min-height: 250px;
-    }
+  .popup_heading {
+    font-size: 16px;
+  }
 
-    .popup-content {
-        padding: 25px;
-    }
+  .popup-message {
+    font-size: 10px;
+    margin-top: 0;
+  }
+  .popup-email-icon {
+    left:18px;
+  }
 
-    .email-icon {
-        top: 65%;
-        transform: translateY(-80%);
-    }
+  .popup-subscribe-btn {
+    padding: 7px 7px;
+    font-size: 12px;
+   margin: 6px 0 0 30px;
+  }
+          .popup-message p, 
+.popup-message span, 
+.popup-message h1, 
+.popup-message h2, 
+.popup-message h3, 
+.popup-message h4, 
+.popup-message a, 
+.popup-message li, 
+.popup-message ul, 
+.popup-message ol {
+    font-size: 12px; /* Base font size for all rich text elements */
+    line-height: 1.5; /* Optional: improve readability */
+   padding:10px 20px 0 10px;
+}
+}
 
-    .popup-header h2 {
-        font-size: 1.7rem;
-        margin: -4px 10px;
-    }
+@media screen and (max-width: 400px) {
+  .popup-overlay {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+ .pop_svg{
+      width: 325px;
+    height: 275px;
+  }
+  .popup {
+    width: 327px;
+    height: 274px;
+  }
 
-    .popup-header-background {
-        height: 160px;
-    }
+  .popup_heading {
+    font-size: 16px;
+  }
 
-    .popup-message {
-        font-size: 13px;
-    }
+  .test {
+    height: 235px;
+    margin:10px;
+    padding:0;
+  }
 
-    .popup-input-wrapper {
-        margin-top: -10px;
-    }
+ .popup-email-input{
+    flex-grow: 0.6;
+          margin: 0 20px 0 10px;
+  }
+          .popup-message p, 
+.popup-message span, 
+.popup-message h1, 
+.popup-message h2, 
+.popup-message h3, 
+.popup-message h4, 
+.popup-message a, 
+.popup-message li, 
+.popup-message ul, 
+.popup-message ol {
+    font-size: 12px; /* Base font size for all rich text elements */
+    line-height: 1.5; /* Optional: improve readability */
+  padding:10px 20px 0 10px;
+}
+   .popup-email-icon {
+    left:18px;
+  }
 
-    .popup-close-btn {
-        padding: 0 15px 8px 8px;
-    }
-
-    .popup-triangle {
-        width: 67px;
-        height: 54px;
-        padding: 22px;
-    }
-
-    .popup-subscribe-btn {
-        width: 50%;
-        height: 35px;
-        font-size: 12px;
-    }
-
-    .popup-email-input {
-        width: 90%;
-    }
+  .popup-subscribe-btn {
+    padding: 7px 7px;
+    font-size: 12px;
+   margin: 6px 0 0 30px;
+  }
 }

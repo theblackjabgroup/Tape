@@ -35,6 +35,12 @@
       "default": false
     },
     {
+  "type": "checkbox",
+  "id": "show_tags",
+  "label": "Show Tags",
+  "default": true
+},
+    {
       "type": "checkbox",
       "id": "show_view_all",
       "label": "Show 'View All' Link",
@@ -53,7 +59,6 @@
       "label": "t:sections.all.colors.label",
       "default": "scheme-1"
     },
-
   ],
   "presets": [
     {
@@ -63,7 +68,11 @@
   ]
 }
 {% endschema %}
+
 <style>
+  /* .blog-read-more-btn {
+       background: rgb(var(--color-background));
+  } */
 .blog-slider-container{
   background-color: rgb(var(--color-background));
 }
@@ -77,6 +86,9 @@
   .arrow{
    color: rgb(var(--color-foreground)); 
   }
+  .blog-tag{
+  background-color: rgb(var(--color-background));
+}
 </style>
 
 <link rel="stylesheet" href="{{ 'blog-slider.css' | asset_url }}">
@@ -104,11 +116,22 @@
                 <!-- Semicircle divs -->
                 <div class="semicircle semicircle-left" ><h6></h6></div>
                 <div class="semicircle semicircle-right" ><h6></h6></div>
+                <!-- Tags overlay -->
+    {% if section.settings.show_tags and article.tags.size > 0 %}
+        <div class="blog-tags-overlay">
+            {% for tag in article.tags %}
+                <span class="blog-tag">{{ tag }}</span>
+            {% endfor %}
+        </div>
+    {% endif %}
 
                 {% if article.image %}
                     <img src="{{ article.image | img_url: '309x309', crop: 'center' }}" alt="{{ article.title }}">
                 {% else %}
-                    <img src="{{ 'blog.jpg' | asset_url }}" alt="Default Image">
+                  <div class="custom-placeholder" >
+  {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
+</div>
+
                 {% endif %}
                 <div class="blog-card-content color-{{ section.settings.color_scheme }}" >
                     <h3 class="blog-card-title" >{{ article.title | escape }}</h3>
@@ -123,7 +146,6 @@
                             {% endif %}
                         </div>
                     {% endif %}
-
                     {% if section.settings.show_excerpt %}
                         <p class="blog-excerpt" >{{ article.excerpt | strip_html | truncate: 200 }}</p>
                     {% endif %}
@@ -143,11 +165,11 @@
                 {% for i in (1..4) %}
                     <div class="blog-card color-{{ section.settings.color_scheme }}" >
                         <!-- Semicircle divs -->
-                        <div class="semicircle semicircle-left" ><h6></h6></div>
-                        <div class="semicircle semicircle-right" ><h6></h6></div>
+                        <div class="semicircle semicircle-left" style="position: absolute; width: 20px; height: 20px; border-radius: 50%; z-index: 2; left: -8px; top: 48%; transform: translateY(-50%);" ><h6></h6></div>
+                        <div class="semicircle semicircle-right" style="position: absolute; width: 20px; height: 20px; border-radius: 50%; z-index: 2; right: -8px; top: 48%; transform: translateY(-50%);" ><h6></h6></div>
 
                         <!-- Default Placeholder Image -->
-                        <img src="{{ 'blog.jpg' | asset_url }}" alt="Default Image" style="width: 100%; height: 309px; object-fit: cover;">
+                        {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg placeholder'}}
 
                         <div class="blog-card-content">
                             <h3 class="blog-card-title" >Sample Blog Post {{ i }}</h3>
@@ -183,7 +205,7 @@
     </div>
 
     {% if section.settings.show_view_all %}
-        <div class="blog-view-all-link">
+        <div class="blog-view-all-link  color-{{ section.settings.color_scheme }}">
             <a href="{{ blogs[blog_handle].url }}" class="blog-view-all">
                 View All Posts
             </a>

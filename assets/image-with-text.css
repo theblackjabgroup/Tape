@@ -11,6 +11,7 @@
   --image__with__text__section__block__padding: 4rem;
   padding: var(--image__with__text__section__block__padding) 0;
   position: relative;
+  background: var(--section-color);
 }
 
 .card {
@@ -69,7 +70,6 @@
   width: var(--media-gallery-width);
   min-height: var(--media-gallery-height);
   scroll-snap-align: center;
-  background: var(--card-color-scheme)
 }
 
 .media__container {
@@ -112,6 +112,7 @@
   --dot-items__visibillity: flex;
 }
 .dot-items {
+  background: none;
   display: var(--dot-items__visibillity);
   justify-content: center;
   position: absolute;
@@ -194,7 +195,7 @@
   transform: var(--info__banner__transform);
   padding: var(--info__banner__padding);
   display: var(--info__banner__visibillity);
-  z-index: 1000;
+  z-index: 1;
 }
 
 .info__banner__contents {

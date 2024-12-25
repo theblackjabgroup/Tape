@@ -3,13 +3,11 @@
 
 {% style %}
 #shopify-section-{{ section.id }} .video-container-wrapper {
---background-color: {{ section.settings.background_color }};
---indicator-color: {{ section.settings.indicator_color }};
 --progress-color: rgba(255, 255, 255, 0.75);
 }
 {% endstyle %}
 
-<div class="video-container-wrapper" data-section-id="{{ section.id }}">
+<div class="video-container-wrapper color-{{ section.settings.background_color }}" data-section-id="{{ section.id }}">
     <div class="video-container">
         {%- for block in section.blocks -%}
         {%- liquid
@@ -55,7 +53,7 @@
                     {%- elsif block.type == 'vimeo' -%}
                         <iframe
                             style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
-                            src="https://player.vimeo.com/video/{{ video_id }}?controls=0"
+                            src="https://player.vimeo.com/video/{{ video_id }}?autoplay=1"
                             allow="autoplay; encrypted-media"
                             allowfullscreen
                         ></iframe>
@@ -65,8 +63,10 @@
                 <button
                     class="video-section__poster media deferred-media__poster media--landscape"
                     type="button" 
-                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; cursor: pointer;"
-                    onclick="this.style.display='none'; this.nextElementSibling.style.display='block'; "
+                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; {% if block.settings.video_library != blank %}cursor: pointer;{% else %}cursor: default;{% endif %}"
+                    {% if block.settings.video_library != blank %}
+                    onclick="this.style.display='none'; this.nextElementSibling.style.display='block';"
+                    {% endif %}
                 >
                     {%- if block.settings.placeholder_image != blank -%}
                         {{ block.settings.placeholder_image | image_url: width: 1920 | image_tag }}
@@ -74,12 +74,14 @@
                         {{ 'hero-apparel-3' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
                     {%- endif -%}
                     
+                    {% if block.settings.video_library != blank %}
                     <span class="deferred-media__poster-button motion-reduce" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
                         <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <circle cx="12" cy="12" r="12" fill="rgba(0, 0, 0, 0.6)"/>
                             <path d="M9 7.5L17 12L9 16.5V7.5Z" fill="white"/>
                         </svg>
                     </span>
+                    {% endif %}
                 </button>
 
                 <div style="display: none;">
@@ -115,16 +117,9 @@
 "content": "Video Settings"
 },
 {
-"type": "color",
+"type": "color_scheme",
 "id": "background_color",
-"label": "Background Color",
-"default": "#FFFFFF"
-},
-{
-"type": "color",
-"id": "indicator_color",
-"label": "Bottom Indicator Color",
-"default": "#000000"
+"label": "Color Schema"
 }
 ],
 "blocks": [
