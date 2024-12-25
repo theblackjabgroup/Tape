@@ -44,7 +44,6 @@
   font-family: Arial, sans-serif;
   font-size: 14px;
   display: inline-block !important;
-  /* word-break: break-all; */
 }
 
 .logo-container img {
@@ -106,7 +105,67 @@
         height: 3vw;
     }
 }
+    margin-right: 2%;
+    margin-left: 92%;
+    margin-top: -90px;
+    border-radius: 5px;
+    background-color: var(--background_product_card);
+    display: flex;
+    align-items: center;
+    padding: 20px 2px;
+    justify-content: center;
+}
+.menu-icon {
+    width: 4vw; 
+    height: 4vw; 
+    min-width: 24px;
+    max-width: 60px;
+    cursor: pointer;
+    display: block;
+    position: relative;
+}
+@media screen and (max-width: 480px) {
+    .menu-icon {
+        width: 32px;
+        height: 32px;
+    }
+}
 
+/* For medium screens (tablets) */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    .menu-icon {
+        width: 5vw;
+        height: 5vw;
+    }
+}
+
+/* For large screens (desktops) */
+@media screen and (min-width: 769px) and (max-width: 1200px) {
+    .menu-icon {
+        width: 4vw;
+        height: 4vw;
+    }
+}
+
+/* For extra large screens */
+@media screen and (min-width: 1201px) {
+    .menu-icon {
+        width: 3vw;
+        height: 3vw;
+    }
+}
+
+
+
+.hamburger-line {
+  width: calc(var(--hamburger-size) * 0.38);
+  height: 1px;
+  background-color: rgb(var(--color-secondary-button-text));
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: block !important;
+}
 
 
 .header {
@@ -121,6 +180,7 @@
   gap: 16px;
   position: absolute;
   top: 62%;
+  top: 46%;
   transform: translateY(-50%);
   right: calc(-1 * var(--header-width));
   transition: all 0.3s ease;
@@ -351,11 +411,15 @@
 .mobile-header-drawer {
   position: fixed;
   top: 0;
+  top: 79;
   right: -266px;
   width: 266px;
   height: flit content;
   transition: right 0.3s ease-in-out;
   z-index: 100;
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 9999;
   overflow-y: auto;
   overflow-x: hidden;
   background-color: var(--background_product_card);
@@ -521,6 +585,7 @@ body.drawer-open {
    padding: 8px 1px;
     margin-left: 82%;
     margin-top:-40px;
+    margin-top:-60px;
   }
   
   .menu-icon {
@@ -536,6 +601,11 @@ body.drawer-open {
 @media screen and (min-width: 990px) {
   .mobile-header-drawer {
     display: none !important;
+  }
+
+
+  .hamburger{
+margin-top: -87px
   }
 }
 

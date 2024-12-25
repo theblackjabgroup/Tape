@@ -161,45 +161,87 @@
             </div>
             {% endfor %}
           {% else %}
-                <!-- Placeholder Blog Cards for Preview with Default Image -->
-                {% for i in (1..4) %}
-                    <div class="blog-card color-{{ section.settings.color_scheme }}" >
-                        <!-- Semicircle divs -->
-                        <div class="semicircle semicircle-left" style="position: absolute; width: 20px; height: 20px; border-radius: 50%; z-index: 2; left: -8px; top: 48%; transform: translateY(-50%);" ><h6></h6></div>
-                        <div class="semicircle semicircle-right" style="position: absolute; width: 20px; height: 20px; border-radius: 50%; z-index: 2; right: -8px; top: 48%; transform: translateY(-50%);" ><h6></h6></div>
+               {% for i in (1..4) %}
+    <div class="blog-card overrideblog color-{{ section.settings.color_scheme }}">
+        <!-- Semicircle divs -->
+        <div class="semicircle semicircle-left overridecircle" 
+             style="position: absolute; width: 20px; height: 20px; border-radius: 50%; z-index: 2; left: -8px; 
+                     top: 
+                 {% if section.settings.show_excerpt %}
+                    {% if section.settings.show_author or section.settings.show_date %}
+                        65%
+                    {% else %}
+                        67%
+                    {% endif %}
+                {% else %}
+                    {% if section.settings.show_author or section.settings.show_date %}
+                        67%
+                    {% else %}
+                        70%
+                    {% endif %}
+                {% endif %};
+                    transform: translateY(-50%);">
+        </div>
+        <div class="semicircle semicircle-right overridecircle" 
+             style="position: absolute; width: 20px; height: 20px; border-radius: 50%; z-index: 2; right: -8px; 
+                     top: 
+                {% if section.settings.show_excerpt %}
+                    {% if section.settings.show_author or section.settings.show_date %}
+                        65%
+                    {% else %}
+                        67%
+                    {% endif %}
+                {% else %}
+                    {% if section.settings.show_author or section.settings.show_date %}
+                        67%
+                    {% else %}
+                        70%
+                    {% endif %}
+                {% endif %};
+                    transform: translateY(-50%);">
+        </div>
 
-                        <!-- Default Placeholder Image -->
-                        {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg placeholder'}}
+        <!-- Blog Image -->
+        <div class="blog-img">
+            {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
+        </div>
 
-                        <div class="blog-card-content">
-                            <h3 class="blog-card-title" >Sample Blog Post {{ i }}</h3>
+        <!-- Blog Content -->
+        <div class="blog-card-content overridecard">
+            <h3 style="font-family='Fira Sans'; font-weight=500;" class="blog-card-title overridetitle">
+                Sample Blog Post {{ i }}
+            </h3>
 
-                            {% if section.settings.show_author or section.settings.show_date %}
-                                <div class="blog-meta">
-                                    {% if section.settings.show_author %}
-                                        <span class="blog-author" >John Doe</span>
-                                    {% endif %}
-                                    {% if section.settings.show_date %}
-                                        <span class="blog-date" >January {{ i }}, 2024</span>
-                                    {% endif %}
-                                </div>
-                            {% endif %}
-
-                            {% if section.settings.show_excerpt %}
-                                <p class="blog-excerpt" >This is a preview of how your blog post will look. Select a blog to display your actual content.</p>
-                            {% endif %}
-
-                            <a href="#" class="blog-read-more-btn" >
-                                Read more
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                                    <polyline points="12 5 19 12 12 19"></polyline>
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                {% endfor %}
+            {% if section.settings.show_author or section.settings.show_date %}
+                <div class="blog-meta">
+                    {% if section.settings.show_author %}
+                        <span class="blog-author">John Doe</span>
+                    {% endif %}
+                    {% if section.settings.show_date %}
+                        <span class="blog-date">January {{ i }}, 2024</span>
+                    {% endif %}
+                </div>
             {% endif %}
+
+            {% if section.settings.show_excerpt %}
+                <!-- Content when excerpt is enabled -->
+                <p class="blog-excerpt" style="min-height:30px;">
+                    This is a preview of how your blog post will look. Select a blog to display your actual content.
+                </p>
+            {% endif %}
+
+            <a href="#" class="blog-read-more-btn override">
+                Read more
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+            </a>
+        </div>
+    </div>
+{% endfor %}
+
+{% endif %}
 
         </div>
     </div>

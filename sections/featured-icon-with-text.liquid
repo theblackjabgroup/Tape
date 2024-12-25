@@ -11,7 +11,9 @@
 }
 {% endstyle %}
 
-<div style="display: flex; flex-direction: column; gap: 32px; padding: 20px 0;" class="color-{{ section.settings.sectionColor }}" data-section-id="{{ section.id }}">
+<div style="display: flex; flex-direction: column; gap: 32px; padding: 20px 0;" 
+     class="color-{{ section.settings.sectionColor }} featured-icon-with-text-section" 
+     data-section-id="{{ section.id }}">
   <div style="display: flex; flex-direction: column; gap: 4px; padding: 0 40px;">
     <p style="font-weight: 600; font-size: 24px; line-height: 30px; color: var(--featured-icon-with-text-section-headings-color)" class="fira-sans-semibold">{{ section.settings.heading }}</p>
     <p style="font-weight: 500; font-size: 14px; line-height: 21px; color: var(--featured-icon-with-text-section-headings-color)" class="inter-medium">{{ section.settings.subheading }}</p>
