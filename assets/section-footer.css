@@ -258,6 +258,20 @@ background-color: var(--background_product_card);
   margin-top: 0.5rem;
 }
 
+/* Disable hover effects */
+.footer__country-selector .footer-country-form .disclosure__button:hover,
+.footer__country-selector .footer-country-form .disclosure__button:focus {
+  background: transparent;
+  color: #fff;
+  outline: none;
+}
+
+/* Remove Hover Effects */
+.footer__country-selector .footer-country-form .disclosurebutton:hover {
+  color: white; /* Ensure the color stays white even when hovering */
+  background-color: transparent; /* Ensure no background change on hover */
+}
+
 /* Optional Adjustments for Margins and Layout */
 .footer__country-selector .footer-country-label {
   margin-left: -1px;
