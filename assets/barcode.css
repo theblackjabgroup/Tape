@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
 .barcode {
   display: flex;
   justify-content: center; 
@@ -7,15 +8,15 @@
   width: 100%;
   overflow-x: visible;
   position: relative;
-  margin-left:4px;
 }
 
 .barcode-footer {
 text-align: center;
     position: absolute;
     font-size: 13px;
+  width: 100%;
     padding: 10px;
-    margin-top: 150px;
+    margin-top: 145px;
 }
 
 /* Remove scrollbar hiding styles since we don't need them anymore */
@@ -94,7 +95,7 @@ text-align: center;
 .payments-icons {
   display: flex; 
     justify-content: flex-end;
-    margin-top: 10px; 
+    padding-top: 10px; 
     padding-right: 10px; 
     flex-wrap: nowrap;
     position: absolute; 
@@ -110,7 +111,7 @@ display: flex;
     /* margin-bottom: 31%; */
     margin: 0;
     list-style-type: none;
-  margin-right:-150%;
+  margin-right:-93%;
    
 }
 
@@ -123,7 +124,11 @@ display: flex;
   width: 40px; /* Adjust icon size as needed */
   height: auto;
 }
-
+.copyright__content{
+  font-size:14px;
+  font-family: 'Inter';
+  font-weight: '600';
+}
 
 
 /* Tablet/Medium screen breakpoint */
@@ -185,22 +190,23 @@ display: flex;
 
   }
    .payments-icons {
-    bottom: -45px; 
+    bottom: -60px; 
 
 }
 
 .footer__payment {
-  margin-right:65%;
+  margin-right:60%;
    
 }
   
   .barcode-footer {
-    margin-top: 80px;
-    font-size: 12px;
-    padding: 8px;
-   
-    text-align: center;
-    white-space: nowrap;
+   margin-top: 122px;
+        font-size: 12px;
+        height: 120%;
+        padding: 4px;
+        
+        text-align: center;
+        white-space: nowrap;
   }
 
   /* Show 3 bars on the left side */
@@ -274,7 +280,6 @@ display: flex;
 @media screen and (max-width: 320px) {
   .barcode {
     min-height: 30px;
-    padding: 3px;
     justify-content: center;
   }
 
@@ -299,9 +304,10 @@ display: flex;
 @media screen and (min-width: 1440px) {
   .barcode {
     height: 100px;
-    padding: 6px;
+
     justify-content: center;
-    gap: 3px;
+    gap: 8px;
+    width:100%
   }
 
  
@@ -334,7 +340,9 @@ display: flex;
   }
 
   /* Center section bars */
- 
+ .footer__payment{
+   margin-right:-150%;
+ }
 
   /* Additional bars for 1440px screens */
   .bar-1::before,
