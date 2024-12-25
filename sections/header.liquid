@@ -1,18 +1,18 @@
 <link rel="stylesheet" href="{{ 'header.css' | asset_url }}">
 <script src="{{ 'header.js' | asset_url }}" defer></script>
-<script defer src="{{'scroll-tracker.js' |  asset_url}}"></script>
 <link rel="stylesheet" href="{{'scroll-tracker.css' |  asset_url}}" media="print" onload="this.media='all'">
-{% style %}
-  :root{
-    --header-section-color-scheme: {{ section.settings.header_section_color_scheme }};
-  }
-{% endstyle %}
-<{% if section.settings.sticky_header_type != 'none' %}sticky-header data-sticky-type="{{ section.settings.sticky_header_type }}"{% else %}div{% endif %} class="header-wrapper color-{{ section.settings.header_section_color_scheme }}" style="--padding-top: {{ section.settings.padding_top }}px; --padding-bottom: {{ section.settings.padding_bottom }}px;">
-  <div class="flex-container">
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+
+
+ <div {% if section.settings.sticky_header_type != 'none'%} sticky-header data-sticky-type="{{ section.settings.sticky_header_type }}"{% else %}div{% endif %} class="header-wrapper color-{{ section.settings.color_scheme }}" style="--padding-top: {{ section.settings.padding_top }}px; --padding-bottom: {{ section.settings.padding_bottom }}px;">
+  <div class="flex-container" style="--margin-right: {{ section.settings.margin_right }}px; --margin-left: {{ section.settings.margin_left }}px">
     <a href="{{ routes.root_url }}" class="logo-container">
+      
       {% if section.settings.logo or settings.logo != blank %}
+        <div class="logo-containerimage">
       <img src="{% if section.settings.logo != blank %}{{ section.settings.logo | image_url }}{% else %}{{ settings.logo | image_url }}{% endif %}" alt="{{ shop.name }}" loading="lazy" width="500" height="500">
-      {% else %}
+     </div>
+        {% else %}
         <span>{{ shop.name }}</span>
       {% endif %}
     </a>
@@ -59,16 +59,31 @@
                       </li>
                     {% endfor %}
                   </ul>
-                  <div class="dropdown-overlay"></div>
+                  <div class="dropdown-overlay" style="z-index: 999;"></div>
                 </div>
               {% endif %}
             </li>
           {% endfor %}
         </ul>
       </nav>
-      {%- if section.settings.enable_scroll_tracking -%}
-        <div class="scroll-tracker"><p><span id="scrollDistance"></span>Km</p> <span class="svg-wrapper" style="height: 12px; width: 12px;">{{ 'icon-arrow.svg' | inline_asset_content }}</span></div>
-      {%- endif -%}
+      
+           <div class="localization header-localization">
+            {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
+              <localization-form>
+                {%- form 'localization', id: 'HeaderCountryMobileForm', class: 'localization-form' -%}
+                  <div>
+                    <h2 class="visually-hidden" id="HeaderCountryMobileLabel">
+                      {{ 'localization.country_label' | t }}
+                    </h2>
+                    {%- render 'country-localization', localPosition: 'HeaderCountryMobile' -%}
+                  </div>
+                {%- endform -%}
+              </localization-form>
+            {% endif %}
+          </div>
+
+     
+      
       <div class="nav-icons">
         <div class="nav-icon">
           <a href="{{ routes.search_url }}" class="search-toggle">
@@ -87,9 +102,10 @@
           </a>
         </div>
       </div>
+      </div>
     </header>
 
-    <div class="mobile-header-drawer color-{{ section.settings.mobile_menu_color_scheme }}">
+    <div class="mobile-header-drawer color-{{ section.settings.color_scheme }}">
       <div class="mobile-header-drawer-close">
         <div class="close-icon">
           <span class="svg-wrapper" style="width: 12px; height: 12px;">
@@ -153,7 +169,7 @@
         <div class="mobile-nav-indicators">
           <div class="mobile-nav-green-dot"></div>
 
-          <div class="menu-drawer__localization header-localization">
+      <div class="menu-drawer__localization header-localization">
             {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
               <localization-form>
                 {%- form 'localization', id: 'HeaderCountryMobileForm', class: 'localization-form' -%}
@@ -168,95 +184,87 @@
             {% endif %}
           </div>
         </div>
+        <div style="display: flex;align-items: center;">
+          {%- if section.settings.enable_scroll_tracking -%}
+            <div class="scroll-tracker"><p><span class="scroll-distance"></span>Km</p></div>
+          {%- endif -%}
+        </div>
         <div class="mobile-nav-icons">
           <div class="nav-icon">
             <a href="{{ routes.cart_url }}" class="js-drawer-open-cart">
-            <span class="svg-wrapper" style="height: 12px; width: 12px;">{{ 'icon-cart.svg' | inline_asset_content }}</span>
+            <span class="svg-wrapper" style="height: 16px; width: 16px;">{{ 'icon-cart.svg' | inline_asset_content }}</span>
             </a>
           </div>
           <div class="nav-icon">
             <a href="{{ routes.account_url }}" class="">
-            <span class="svg-wrapper" style="height: 12px; width: 12px;">{{ 'icon-account.svg' | inline_asset_content }}</span>
+            <span class="svg-wrapper" style="height: 16px; width: 16px;">{{ 'icon-account.svg' | inline_asset_content }}</span>
             </a>
           </div>
         </div>
       </div>
     </div>
-
-    <div class="hamburger color-{{ section.settings.color_scheme }}">
-      <div class="hamburger-line"></div>
-      <div class="hamburger-line"></div>
-      <div class="hamburger-line"></div>
+<div class="hamburger">
+   <div id="menuIcon" class="menu-icon"></div>
+</div>
+           
     </div>
+    
   </div>
-</{% if section.settings.sticky_header_type != 'none' %}sticky-header{% else %}div{% endif %}>
+ </div {% if section.settings.sticky_header_type != 'none' %}sticky-header{% else %}div{% endif %}>
 
-{% javascript %}
-  class StickyHeader extends HTMLElement {
-    constructor() {
-      super();
-    }
+  {% comment %} 
+  THIS IS TEST COMMENT TO RESET THE HEADER SECTION
+  THIS IS TEST COMMENT TO RESET THE HEADER SECTION
+  THIS IS TEST COMMENT TO RESET THE HEADER SECTION
+  THIS IS TEST COMMENT TO RESET THE HEADER SECTION
+  THIS IS TEST COMMENT TO RESET THE HEADER SECTION
+  THIS IS TEST COMMENT TO RESET THE HEADER SECTION
+  THIS IS TEST COMMENT TO RESET THE HEADER SECTION
+  THIS IS TEST COMMENT TO RESET THE HEADER SECTION
+  THIS IS TEST COMMENT TO RESET THE HEADER SECTION
+  THIS IS TEST COMMENT TO RESET THE HEADER SECTION
+  THIS IS TEST COMMENT TO RESET THE HEADER SECTION
+  THIS IS TEST COMMENT TO RESET THE HEADER SECTION
+  THIS IS TEST COMMENT TO RESET THE HEADER SECTION
+  THIS IS TEST COMMENT TO RESET THE HEADER SECTION
+  {% endcomment %}
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const container = document.getElementById('menuIcon');
+    fetch('{{ "menuicon.json" | asset_url }}')
+        .then(response => {
+            return response.json();
+        })
+        .then(data => {
+            const anim = lottie.loadAnimation({
+                container: container,
+                renderer: 'svg',
+                loop: false,
+                autoplay: false,
+                animationData: data
+            });
 
-    connectedCallback() {
-      this.header = document.querySelector('.section-header');
-      this.headerIsAlwaysSticky = this.getAttribute('data-sticky-type') === 'always' || this.getAttribute('data-sticky-type') === 'reduce-logo-size';
-      this.headerBounds = {};
+            let isOpen = false;
+            container.addEventListener('click', () => {
+                if(isOpen) {
+                    anim.setDirection(-1);
+                    anim.play();
+                } else {
+                    anim.setDirection(1);
+                    anim.play();
+                }
+                isOpen = !isOpen;
+            });
+        })
+        .catch(error => console.error('Error loading menu animation:', error));
+});
+    </script>
 
-      this.setHeaderHeight();
-
-      window.matchMedia('(max-width: 990px)').addEventListener('change', this.setHeaderHeight.bind(this));
-
-      if (this.headerIsAlwaysSticky) {
-        this.header.classList.add('shopify-section-header-sticky');
-      };
-
-      this.currentScrollTop = 0;
-      this.preventReveal = false;
-
-      this.onScrollHandler = this.onScroll.bind(this);
-      window.addEventListener('scroll', this.onScrollHandler, false);
-    }
-
-    setHeaderHeight() {
-      document.documentElement.style.setProperty('--header-height', `${this.header.offsetHeight}px`);
-    }
-
-    disconnectedCallback() {
-      window.removeEventListener('scroll', this.onScrollHandler);
-    }
-
-    onScroll() {
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-      if (scrollTop > this.currentScrollTop && scrollTop > this.header.offsetHeight) {
-        requestAnimationFrame(this.hide.bind(this));
-      } else if (scrollTop < this.currentScrollTop) {
-        requestAnimationFrame(this.reveal.bind(this));
-      }
-
-      this.currentScrollTop = scrollTop;
-    }
-
-    hide() {
-      if (this.headerIsAlwaysSticky) return;
-      this.header.classList.add('shopify-section-header-hidden', 'shopify-section-header-sticky');
-    }
-
-    reveal() {
-      if (this.headerIsAlwaysSticky) return;
-      this.header.classList.add('shopify-section-header-sticky', 'animate');
-      this.header.classList.remove('shopify-section-header-hidden');
-    }
-  }
-
-  customElements.define('sticky-header', StickyHeader);
-{% endjavascript %}
 
 {% schema %}
 {
   "name": "t:sections.header.name",
   "class": "section-header",
-  "max_blocks": 3,
   "settings": [
     {
       "type": "link_list",
@@ -265,21 +273,9 @@
       "default": "main-menu"
     },
     {
-      "type": "color",
-      "id": "header_section_color_scheme",
-      "label": "Section Color Scheme",
-      "default": "#ffffff"
-    },
-    {
       "type": "color_scheme",
       "id": "color_scheme",
       "label": "Header Color Scheme",
-      "default": "scheme-1"
-    },
-    {
-      "type": "color_scheme",
-      "id": "mobile_menu_color_scheme",
-      "label": "Mobile Menu Color Scheme",
       "default": "scheme-1"
     },
     {
@@ -365,12 +361,7 @@
       "default": true,
       "label": "t:sections.header.settings.enable_country_selector.label"
     },
-    {
-      "type": "checkbox",
-      "id": "enable_scroll_tracking",
-      "label": "Enable Scroll Tracking",
-      "default": true
-    },
+
     {
       "type": "range",
       "id": "padding_top",
@@ -388,7 +379,25 @@
       "step": 1,
       "min": 0,
       "max": 100
-    }
+    },
+    {
+      "type": "range",
+      "id": "margin_left",
+      "label": "Margin Left",
+      "default": 71,
+      "step": 1,
+      "max": 100,
+      "min": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_right",
+      "label": "Margin Right",
+      "default": 71,
+      "step": 1,
+      "max": 100,
+      "min": 0
+    },
   ],
   "blocks": [
     {
@@ -397,3 +406,4 @@
   ]
 }
 {% endschema %}
+
