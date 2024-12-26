@@ -2,17 +2,14 @@
 .faq-section {
   max-width: 1600px;
   margin: 0 auto;
-  padding: 2rem 1rem;
 }
 .faq-container {
   width: 100%;
-  margin-left: 2rem;
   box-sizing: border-box;
-  padding-right: 2rem;
 }
   .faq-main {
   display: grid;
-  padding: 10px;
+  padding: 20px;
   grid-template-columns: 350px 1fr;
   gap: 8rem;
   align-items: start;
@@ -141,7 +138,8 @@
   overflow: hidden;
   max-height: 0;
   opacity: 0;
-  transition: all 0.3s ease;
+   transition: all 0.3s ease;
+
 }
 .faq-answer.visible {
   max-height: 500px;
