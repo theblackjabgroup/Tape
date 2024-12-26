@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', function () {
   const navItems = document.querySelectorAll('.nav-item');
   const hamburger = document.querySelector('.hamburger');
   const header = document.querySelector('.header');
-  
   const mobileHeaderDrawer = document.querySelector('.mobile-header-drawer');
   const mobileNavItems = document.querySelectorAll('.mobile-nav-item');
   const closeIcon = document.querySelector('.close-icon');
@@ -108,7 +107,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
   hamburger.addEventListener('click', function () {
     header.classList.toggle('show');
-    hamburger.classList.toggle("is-active");
     mobileHeaderDrawer.classList.toggle('open');
   });
 
@@ -165,7 +163,6 @@ document.addEventListener('DOMContentLoaded', function () {
   // Close mobile drawer when clicking the close icon
   closeIcon.addEventListener('click', function() {
     mobileHeaderDrawer.classList.remove('open');
-    hamburger.classList.remove("is-active");
   });
 
   // Initialize scroll tracking variables
