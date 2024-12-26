@@ -24,6 +24,7 @@
   height: calc(100% + var(--header-height-auto));
   background: rgb(var(--color-background));
 }
+
 .logo-containerimage{
    width: var(--logo-width);
   display: flex !important;
@@ -32,6 +33,7 @@
   text-decoration: none;
    min-height: var(--logo-height);
 }
+
 .logo-container {
   display: flex !important;
   justify-content: center;
@@ -44,6 +46,7 @@
   font-family: Arial, sans-serif;
   font-size: 14px;
   display: inline-block !important;
+
 }
 
 .logo-container img {
@@ -55,56 +58,6 @@
 
 .hamburger {
   position: relative;
-  margin-left: 91%;
-  margin-right:3%;
-  margin-top: -71px;
-  cursor: pointer;
-  border-radius: 5px;
-  background-color: var(--background_product_card);
-  display: flex;
-  justify-content:center;
-  padding:20px 0px;
-}
-
-.menu-icon {
-    width: 4vw; 
-    height: 4vw; 
-    min-width: 24px;
-    max-width: 60px; 
-    
-    display: block;
-    position: relative;
-}
-@media screen and (max-width: 480px) {
-    .menu-icon {
-        width: 32px;
-        height: 32px;
-    }
-}
-
-/* For medium screens (tablets) */
-@media screen and (min-width: 481px) and (max-width: 768px) {
-    .menu-icon {
-        width: 5vw;
-        height: 5vw;
-    }
-}
-
-/* For large screens (desktops) */
-@media screen and (min-width: 769px) and (max-width: 1200px) {
-    .menu-icon {
-        width: 4vw;
-        height: 4vw;
-    }
-}
-
-/* For extra large screens */
-@media screen and (min-width: 1201px) {
-    .menu-icon {
-        width: 3vw;
-        height: 3vw;
-    }
-}
     margin-right: 2%;
     margin-left: 92%;
     margin-top: -90px;
@@ -168,6 +121,7 @@
 }
 
 
+
 .header {
   width: var(--header-width);
   --header-height-auto: auto;
@@ -179,7 +133,6 @@
   align-items: center;
   gap: 16px;
   position: absolute;
-  top: 62%;
   top: 46%;
   transform: translateY(-50%);
   right: calc(-1 * var(--header-width));
@@ -410,8 +363,7 @@
 /* Mobile Header Drawer */
 .mobile-header-drawer {
   position: fixed;
-  top: 0;
-  top: 79;
+  top: 79px;
   right: -266px;
   width: 266px;
   height: flit content;
@@ -421,7 +373,6 @@
   overflow-x: hidden;
   z-index: 9999;
   overflow-y: auto;
-  overflow-x: hidden;
   background-color: var(--background_product_card);
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -584,7 +535,6 @@ body.drawer-open {
   .hamburger {
    padding: 8px 1px;
     margin-left: 82%;
-    margin-top:-40px;
     margin-top:-60px;
   }
   
@@ -602,8 +552,6 @@ body.drawer-open {
   .mobile-header-drawer {
     display: none !important;
   }
-
-
   .hamburger{
 margin-top: -87px
   }
