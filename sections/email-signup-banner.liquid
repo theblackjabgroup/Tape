@@ -34,12 +34,12 @@
 -->
   <div id="Banner-{{ section.id }}" class="desktop-view banner__content banner__content--{{ section.settings.desktop_content_position }} bb-upper-template-signup">
     <div class="vertical-bar-top-404">
-      {% for i in (0..20) %}
-        <div class="vertical-bar-circle-404 index-404-{{i}}"></div>
+      {% for i in (0..16) %}
+        <div class="vertical-bar-circle-h-404 index-404-{{i}}"></div>
       {% endfor %}
     </div>
     <div class="vertical-bar-left-404">
-      {% for i in (0..9) %}
+      {% for i in (0..7) %}
         <div class="vertical-bar-circle-404 index-404-{{i}}"></div>
       {% endfor %}
       </div> 
@@ -125,7 +125,7 @@
                 id="Subscribe"
                 aria-label="{{ 'newsletter.button_label' | t }}"
               >
-                SUBMIT
+                SIGN UP
               </button>
               {% endform %}
             </div>
@@ -134,13 +134,13 @@
     </div>
 
     <div class="vertical-bar-right-404">
-      {% for i in (0..9) %}
+      {% for i in (0..7) %}
         <div class="vertical-bar-circle-404 index-404-{{i}}"></div>
       {% endfor %}
     </div>
     <div class="vertical-bar-bottom-404">
-      {% for i in (0..20) %}
-        <div class="vertical-bar-circle-404 index-404-{{i}}"></div>
+      {% for i in (0..16) %}
+        <div class="vertical-bar-circle-h-404 index-404-{{i}}"></div>
       {% endfor %}
     </div>
   </div>

@@ -53,7 +53,8 @@
   role="region"
   class="{{ class_name }}"
   aria-label="{{ 'products.product.media.gallery_viewer' | t }}"
-  data-desktop-layout="{{ section.settings.gallery_layout }}"
+  data-desktop-layout="thumbnail_slider"
+  data-num="{{media_count}}"
 >
 <div id="product-upper-bg">
   <div id="GalleryStatus-{{ section.id }}" class="visually-hidden" role="status"></div>
@@ -78,8 +79,8 @@
             media: featured_media,
             media_count: media_count,
             position: media_position,
-            desktop_layout: section.settings.gallery_layout,
-            mobile_layout: section.settings.mobile_thumbnails,
+            desktop_layout: "thumbnail_slider",
+            mobile_layout: "show",
             loop: section.settings.enable_video_looping,
             modal_id: section.id,
             xr_button: true,
@@ -116,8 +117,8 @@
               media: media,
               media_count: media_count,
               position: media_position,
-              desktop_layout: section.settings.gallery_layout,
-              mobile_layout: section.settings.mobile_thumbnails,
+              desktop_layout: "thumbnail_slider",
+              mobile_layout: "show",
               loop: section.settings.enable_video_looping,
               modal_id: section.id,
               xr_button: true,
@@ -184,12 +185,10 @@
     {% render 'ticket-line' %}
   {%- if is_not_limited_to_single_item
     and media_count > 1
-    and section.settings.gallery_layout contains 'thumbnail'
-    or section.settings.mobile_thumbnails == 'show'
   -%}
     <slider-component
       id="GalleryThumbnails-{{ section.id }}"
-      class="thumbnail-slider slider-mobile-gutter quick-add-hidden{% unless section.settings.gallery_layout contains 'thumbnail' %} medium-hide large-up-hide{% endunless %}{% if section.settings.mobile_thumbnails != 'show' %} small-hide{% endif %}{% if media_count <= 3 %} thumbnail-slider--no-slide{% endif %}"
+      class="thumbnail-slider slider-mobile-gutter quick-add-hidden{% if media_count <= 3 %} thumbnail-slider--no-slide{% endif %}"
     >
       <button
         type="button"
@@ -205,7 +204,7 @@
       </button>
       <ul
         id="Slider-Thumbnails-{{ section.id }}"
-        class="thumbnail-list list-unstyled slider slider--mobile{% if section.settings.gallery_layout == 'thumbnail_slider' %} slider--tablet-up{% endif %} bb-upper-thumbnail"
+        class="thumbnail-list list-unstyled slider slider--mobile slider--tablet-up bb-upper-thumbnail"
       >
         {%- capture sizes -%}
           (min-width: {{ settings.page_width }}px) calc(({{ settings.page_width | minus: 100 | times: media_width | round }} - 4rem) / 4),

@@ -24,7 +24,7 @@
     display: flex;
     flex-direction: row;
     position: absolute;
-    gap: 36.5px;
+    gap: 52.5px;
     z-index: 1;
 }
 
@@ -34,7 +34,7 @@
     display: flex;
     flex-direction: row;
     position: absolute;
-    gap: 36.5px;
+    gap: 52.5px;
     z-index: 1;
 }
 
@@ -44,7 +44,7 @@
     display: flex;
     flex-direction: column;
     position: absolute;
-    gap: 38px;
+    gap: 50px;
     z-index: 1;
 }
 
@@ -54,7 +54,7 @@
     display: flex;
     flex-direction: column;
     position: absolute;
-    gap: 38px;
+    gap: 50px;
     z-index: 1;
 }
 
