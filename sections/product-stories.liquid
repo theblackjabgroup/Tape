@@ -6,10 +6,20 @@
     padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
   }
 
+  .section-{{ section.id }} .product-stories-heading {
+    font-size: calc(1.8rem * {{ section.settings.video_title_font_size | divided_by: 100.0 }});
+  }
+
   @media screen and (min-width: 750px) {
     .section-{{ section.id }}-padding {
       padding-top: {{ section.settings.padding_top }}px;
       padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .section-{{ section.id }} .product-stories-heading {
+      font-size: calc(1.5rem * {{ section.settings.video_title_font_size | divided_by: 100.0 }});
     }
   }
 {%- endstyle -%}
@@ -20,7 +30,7 @@
 </style>
 
 {% assign animation_delay = 0.00 %}
-<div class="section-{{ section.id }}-padding color-{{ section.settings.color_scheme }}">
+<div class="section-{{ section.id }}-padding section-{{ section.id }} color-{{ section.settings.color_scheme }}">
   <div
     class="product-stories-section-video-column {{ section.settings.background }}"
     style="--font-section-scale: {{ section.settings.font_size | divided_by: 100.0 }};"
@@ -55,23 +65,9 @@
               >
                 {%- if block.settings.youtube_url != blank or block.settings.video != blank or block.settings.video_embed != blank or block.settings.image != blank -%}
                   <!-- Display YouTube video -->
-                  {%- if block.settings.youtube_url != blank -%}
-                    {% assign youtube_video_id = block.settings.youtube_url 
-                      | replace: 'https://www.youtube.com/watch?v=', '' 
-                      | replace: 'https://youtu.be/', '' 
-                      | split: '&' | first 
-                    %}
-                    <div class="product-stories-video-column__youtube-embed">
-                      <iframe 
-                        width="560" 
-                        height="315" 
-                        src="https://www.youtube.com/embed/{{ youtube_video_id }}" 
-                        frameborder="0" 
-                        allowfullscreen
-                      ></iframe>
-                    </div>
+
                   <!-- Display image -->
-                  {%- elsif block.settings.image != blank -%}
+                  {%- if block.settings.image != blank -%}
                     {% if block.settings.video_link != blank %}
                       <a href="{{ block.settings.video_link }}">
                     {%- endif -%}
@@ -86,6 +82,21 @@
                               alt: block.settings.image.alt | escape
                         }}
                       </div>
+                                          {%- elsif block.settings.youtube_url != blank -%}
+                    {% assign youtube_video_id = block.settings.youtube_url 
+                      | replace: 'https://www.youtube.com/watch?v=', '' 
+                      | replace: 'https://youtu.be/', '' 
+                      | split: '&' | first 
+                    %}
+                    <div class="product-stories-video-column__youtube-embed">
+                      <iframe 
+                        width="560" 
+                        height="315" 
+                        src="https://www.youtube.com/embed/{{ youtube_video_id }}" 
+                        frameborder="0" 
+                        allowfullscreen
+                      ></iframe>
+                    </div>
                     {% if block.settings.video_link != blank %}
                       </a>
                     {%- endif -%}
@@ -191,6 +202,16 @@
       "step": 1
     },
     {
+      "type": "range",
+      "id": "video_title_font_size",
+      "label": "Video Title Font Size",
+      "default": 100,
+      "min": 50,
+      "max": 100,
+      "unit": "%",
+      "step": 5
+    },
+    {
       "type": "checkbox",
       "id": "play_onload",
       "default": false,
@@ -283,8 +304,8 @@
         {
           "type": "image_picker",
           "id": "image",
-          "label": "Thumbnail Image",
-          "info": "Upload a placeholder image for the video."
+          "label": "Image",
+          "info": "Add if you want to show an image instead of a video."
         },
         {
           "type": "url",
