@@ -57,9 +57,10 @@
 }
 .product-stories-heading{
   z-index:1;
+  margin-bottom:0 !important;
 }
 
-video-column {
+.video-column {
   display: block;
 }
 
