@@ -8,8 +8,29 @@
     font-family: 'Fira Sans';
     font-weight: 500;
 }
-.override{
-  margin-top: 0 !important;
+.custom-placeholder .placeholder-svg{
+     width: 100%; /* Desired width */
+    height: 309px; /* Desired height */
+    display: block; /* Ensures it behaves like a block-level element */
+    object-fit: contain; /* Adjusts how the content fits inside */
+}
+.overrideblog{
+  height: 100% !important;
+  overflow: hidden !important;
+}
+                       
+.overrideimg{
+  flex-shrink: 0 !important;
+  height: 309px !important;
+}
+.overridecontent{
+  flex-grow:1 !important;
+  overflow-y: auto !important;
+  display: flex !important;
+  flex-direction: column-reverse !important;
+}
+.overridetitle{
+   height: min-content !important;
 }
 .blog-slider-section {
     position: relative;
@@ -71,25 +92,25 @@
 .semicircle {
             content: '';
             position: absolute;
-            width: 20px;
-            height: 20px;
+            width: 25px;
+            height: 30px;
             border-radius: 50%;
-            z-index: 2;
+            z-index: 1;
         }
 
         .semicircle-left {
-            top: 297px;
-            left: -8px;
+            top: 295px;
+            left: -10px;
         }
 
         .semicircle-right {
-            top: 297px;
-            right: -8px;
+            top: 295px;
+            right: -10px;
         }
 
 .blog-card img {
     width: 100%;
-    height: 309px ;
+    height: 309px;
     object-fit: cover;
     object-position: center;
     flex-shrink: 0;
@@ -101,7 +122,7 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    /* height: 100%; */
+    height: 100%;
 }
 
 .blog-card-title {
@@ -195,22 +216,10 @@
 }
 .blog-read-more-btn:hover{
    background-position: 0 0;
-  color:rgb(var(--color-secondary-button-text));
+  color:rgb(var(--color-text));
 }
-.overridetitle{
- height: 100px !important;
-    margin-top: 0;
-}
-.overridecard{
-  min-height: 40px !important;
-}
-.overrideblog{
-  min-height: 450px;
-}
-.blog-img{
-  height:100% !important; 
-   object-fit: cover !important;
-}
+
+
 .blog-read-more-btn svg {
     width: 18px;
     height: 18px;
@@ -261,10 +270,6 @@
   .blog-read-more-btn{
     width:50%;
   }
-  .overridecircle{
-    top:70% !important;
-  }
-  
 }
 
 @media (min-width: 768px) {
@@ -290,8 +295,5 @@
     }
   .blog-read-more-btn{
     width:50%;
-  }
-   .overridecircle{
-    top:72% !important;
   }
 }
