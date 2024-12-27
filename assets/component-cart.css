@@ -29,8 +29,9 @@ text-underline-position: from-font;
 text-decoration-skip-ink: auto;
 }
 .svgemptycard{
-  width:50%;
-  height:345px;
+  width:30vw;
+  height:30vh;
+  margin-bottom: 28px;
 }
 .emptysvg{
   width:100%;
@@ -114,7 +115,7 @@ cart-items.is-empty .title-wrapper-with-link,
   justify-items:center;
   display: none;
   text-align: center;
-  padding: 3rem 0 1rem;
+  padding: 1rem 0 1rem;
 }
 
 .total-section {
