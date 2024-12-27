@@ -26,7 +26,6 @@
 }
 
 .footer-column form button::after {
-    content: '{{ section.settings.footer_button_arrow_text | default: "→" }}';
     position: relative;
     margin-left: 5px;
     font-size: {{ section.settings.footer_button_arrow_size | default: 14 }}px;
@@ -70,7 +69,11 @@
                     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
                     <i class="fa-regular fa-envelope footer-envelope-icon1"></i>
                     <input type="email" id="email-input" name="email" class="email-input" placeholder="Enter your email" required>
-                    <button type="submit">{{ section.settings.subscribe_button_text }}</button>
+                    <button type="submit">{{ section.settings.subscribe_button_text }}
+                     <svg class="footer-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                    <polyline points="12 5 19 12 12 19"></polyline>
+                                </svg></button>
                 </div>
             </form>
           
@@ -79,7 +82,7 @@
     <localization-form>
       {% form 'localization', id: 'FooterCountryForm', class: 'footer-country-form' %}
         <div class="footer-country-wrapper">
-          <h2 class="footer-country-label" id="FooterCountryLabel">
+          <h2 class="footer-country-label"; id="FooterCountryLabel">
             {{ 'localization.country_label' | t }}
           </h2>
           {% render 'country-localization', localPosition: 'FooterCountry' %}
