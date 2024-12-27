@@ -533,6 +533,9 @@ body.drawer-open {
   .mobile-header-drawer {
     display: none !important;
   }
+  .header{
+    top:70px;
+  }
 }
 
 /* Laptop (990px to 1280px) */
@@ -638,23 +641,29 @@ body.drawer-open {
 .localization.header-localization .localization-form button,
 .localization.header-localization .localization-form .disclosure__button {
   background-color: transparent;
-  border: none;
-  padding: 0.5rem 1rem;
+  border: none  !important;
   cursor: pointer;
   font-size: 12px;
+ padding:0.5rem 2rem -1rem;
   margin-top: 12px;
   white-space: nowrap;
   position: relative;
   margin-left: -5px;
 }
 
+.localization.header-localization .localization-form button:focus,
+.localization.header-localization .localization-form .disclosure__button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
 .localization.header-localization .localization-form__select .icon-caret {
   position: absolute;
   height: 0.6rem;
-  right: calc(var(--inputs-border-width) + 1.5rem);
+ right: calc(var(--inputs-border-width) + 1.5rem);
   top: calc(50% - 0.2rem);
-  margin-right: -29px;
-  margin-top: -2px;
+  margin-right: -18px;
+  margin-top: -1px;
 }
 
 /* Search Form Styles */
