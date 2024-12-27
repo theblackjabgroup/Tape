@@ -60,7 +60,7 @@
   position: relative;
     margin-right: 2%;
     margin-left: 92%;
-    margin-top: -90px;
+    margin-top: -113px;
     border-radius: 5px;
     background-color: var(--background_product_card);
     display: flex;
@@ -124,16 +124,16 @@
 
 .header {
   width: var(--header-width);
-  --header-height-auto: auto;
+  header-height-auto: auto;
   height: var(--header-height-auto); 
-  padding:6px 16px;
+  padding:3px 16px;
   margin-right: -50px;
   display: flex !important;
   justify-content: space-between;
   align-items: center;
   gap: 16px;
   position: absolute;
-  top: 46%;
+  top: 58%;
   transform: translateY(-50%);
   right: calc(-1 * var(--header-width));
   transition: all 0.3s ease;
@@ -295,9 +295,9 @@
     align-items: center;
     gap: 24px;
     height: 100%;
-    margin-right: 17px;
+    margin-right: 5%;
     margin-top: -9px;
-    margin-left: -80px;
+    margin-left: -5%;
 }
 
 .nav-icon {
@@ -309,8 +309,8 @@
 }
 
 .nav-icon .svg-wrapper {
-  width: calc(var(--font-size) + 6px);
-  height: calc(var(--font-size) + 6px);
+  width: calc(var(--font-size) + 8px);
+  height: calc(var(--font-size) + 8px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -362,22 +362,20 @@
 
 /* Mobile Header Drawer */
 .mobile-header-drawer {
+    display: none; /* Hide by default */
   position: fixed;
   top: 79px;
   right: -266px;
   width: 266px;
-  height: flit content;
+  height: fit-content;
   transition: right 0.3s ease-in-out;
-  z-index: 100;
-  overflow-y: auto;
-  overflow-x: hidden;
   z-index: 9999;
   overflow-y: auto;
+  overflow-x: hidden;
   background-color: var(--background_product_card);
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
-  display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 30px
 }
 
 .mobile-header-drawer.open {
@@ -489,8 +487,59 @@ body.drawer-open {
   width: 100%;
 }
 
-/* Responsive Breakpoints */
-@media screen and (max-width: 1280px) {
+/* Large Desktop/4K Screens (1921px and up) */
+@media screen and (min-width: 1921px) {
+  :root {
+    --logo-height: 96px;
+    --logo-width: 170px;
+    --hamburger-size: 96px;
+    --header-height: 72px;
+    --nav-icon-size: 42px;
+    --dropdown-min-height: 190px;
+  }
+  
+  .mobile-header-drawer {
+    display: none !important;
+  }
+}
+
+/* Desktop (1441px to 1920px) */
+@media screen and (min-width: 1441px) and (max-width: 1920px) {
+  :root {
+    --logo-height: 84px;
+    --logo-width: 149px;
+    --hamburger-size: 84px;
+    --header-height: 62px;
+    --nav-icon-size: 36px;
+    --dropdown-min-height: 170px;
+  }
+  
+  .mobile-header-drawer {
+    display: none !important;
+  }
+}
+
+/* Small Desktop/Laptop (1281px to 1440px) */
+@media screen and (min-width: 1281px) and (max-width: 1440px) {
+  :root {
+    --logo-height: 72px;
+    --logo-width: 128px;
+    --hamburger-size: 72px;
+    --header-height: 56px;
+    --nav-icon-size: 32px;
+    --dropdown-min-height: 150px;
+  }
+  
+  .mobile-header-drawer {
+    display: none !important;
+  }
+  .header{
+    top:70px;
+  }
+}
+
+/* Laptop (990px to 1280px) */
+@media screen and (min-width: 990px) and (max-width: 1280px) {
   :root {
     --hamburger-width: 67px;
     --logo-height: 60px;
@@ -500,13 +549,18 @@ body.drawer-open {
     --nav-icon-size: 28px;
     --dropdown-min-height: 130px;
   }
-}
-
-@media screen and (max-width: 989px) {
-  .header {
-    display: none !important;
+  
+  .hamburger {
+    margin-top: -96px;
   }
   
+  .mobile-header-drawer {
+    display: none !important;
+  }
+}
+
+/* Tablet (769px to 989px) */
+@media screen and (min-width: 769px) and (max-width: 989px) {
   :root {
     --logo-height: 48px;
     --hamburger-width: 47px;
@@ -515,56 +569,58 @@ body.drawer-open {
     --dropdown-min-height: 110px;
   }
   
+  .header {
+    display: none !important;
+  }
+  
   .flex-container {
     margin: 0;
     padding: 0 20px;
   }
-}
-
-@media screen and (max-width: 768px) {
-  .header {
-    display: none !important;
+  
+  .mobile-header-drawer {
+    display: flex;
   }
 }
 
+/* Large Mobile (481px to 768px) */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  .header {
+    display: none !important;
+  }
+  
+  .mobile-nav-icons {
+    margin-top: 11px;
+  }
+  
+  .mobile-header-drawer {
+    display: flex;
+  }
+}
+
+/* Small Mobile (480px and below) */
 @media screen and (max-width: 480px) {
   .header {
     display: none !important;
   }
   
   .hamburger {
-   padding: 8px 1px;
+    padding: 8px 1px;
     margin-left: 82%;
-    margin-top:-60px;
+    margin-top: -100px;
   }
   
   .menu-icon {
     width: 32px;
     height: 32px;
   }
-
+  
   .mobile-nav-icons {
-  margin-top: 11px;
-}
-}
-
-@media screen and (min-width: 990px) {
+    margin-top: 11px;
+  }
+  
   .mobile-header-drawer {
-    display: none !important;
-  }
-  .hamburger{
-margin-top: -87px
-  }
-}
-
-@media screen and (min-width: 1441px) {
-  :root {
-    --logo-height: 84px;
-    --logo-width: 149px;
-    --hamburger-size: 84px;
-    --header-height: 62px;
-    --nav-icon-size: 36px;
-    --dropdown-min-height: 170px;
+    display: flex;
   }
 }
 
@@ -585,23 +641,29 @@ margin-top: -87px
 .localization.header-localization .localization-form button,
 .localization.header-localization .localization-form .disclosure__button {
   background-color: transparent;
-  border: none;
-  padding: 0.5rem 1rem;
+  border: none  !important;
   cursor: pointer;
   font-size: 12px;
+ padding:0.5rem 2rem -1rem;
   margin-top: 12px;
   white-space: nowrap;
   position: relative;
   margin-left: -5px;
 }
 
+.localization.header-localization .localization-form button:focus,
+.localization.header-localization .localization-form .disclosure__button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
 .localization.header-localization .localization-form__select .icon-caret {
   position: absolute;
   height: 0.6rem;
-  right: calc(var(--inputs-border-width) + 1.5rem);
+ right: calc(var(--inputs-border-width) + 1.5rem);
   top: calc(50% - 0.2rem);
-  margin-right: -29px;
-  margin-top: -2px;
+  margin-right: -18px;
+  margin-top: -1px;
 }
 
 /* Search Form Styles */
