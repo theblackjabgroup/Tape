@@ -1,54 +1,98 @@
 .contact-form-design {
-  position: relative;
-  padding: 20px;
-  margin: 29px;
+  position:relative;
+  background-color:red;
+    margin: 92px 125px;
+}
+.border-top{
+    position: absolute;
+    display: flex;
+    gap: 30px;
+    top: 0px;
+    width: 95%;
+    justify-content: center;
+    pointer-events: none;
+  overflow: hidden;
+}
+.border-bottom{
+    bottom:0px;
+    position: absolute;
+    display: flex;
+    gap:30px;
+    width: 95%;
+    pointer-events: none;
+   justify-content: center;
+  overflow: hidden;
+}
+.border-left{
+   position:absolute;
+    left:0;
+    display:flex;
+    flex-direction:column;
+    
+     justify-content: space-evenly;
+    height: 100%;
+    pointer-events: none;
+  overflow: hidden;
+}
+.border-right{
+  position: absolute;
+    right: 0;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+}
+.semicircle-t{
+ background-color:rgb(var(--color-background));
+  width: 31px;
+  height: 17px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border-top: none;
+  flex-shrink: 0;
+}
+
+.semicircle-b {
+   background-color:rgb(var(--color-background));
+   width: 31px;
+  height: 17px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  border-bottom: none;
+  flex-shrink: 0;
+}
+.semicircle-l {
+   background-color:rgb(var(--color-background));
+   width: 20px;
+  height: 42px;
+   border-top-right-radius: 20px;
+   border-bottom-right-radius: 20px;
+  border-bottom: none;
+  flex-shrink: 0;
+}
+.semicircle-r {
+   background-color:rgb(var(--color-background));
+   width: 20px;
+  height: 42px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+ 
+  border-bottom: none;
+  flex-shrink: 0;
 }
 .contact-form-heading{
   display:flex;
   flex-direction:column;
   align-items:center;
- margin-bottom:5px;
 }
-.contact-form-heading h2{
-   font-family: Fira Sans;
-font-size: 48px;
-font-weight: 600;
-line-height: 34px;
-text-align: center;
-text-underline-position: from-font;
-text-decoration-skip-ink: none;
-}
-.contact-form-heading p{
-font-family: Inter;
-font-size: 24px;
-font-weight: 500;
-line-height: 34px;
-text-align: center;
-text-underline-position: from-font;
-text-decoration-skip-ink: none;
-}
-
 #contact-form-button{
   padding:0 50px;
   border-radius:11px;  
 }
-.svgcolor{
-     fill: var(--background_product_card);
-}
 
-.contact-form-design svg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-}
-
-.contact-form-design > *:not(svg) {
-  position: relative;
-  z-index: 2;
-}
 .contact-form-data{
   padding:33px;
 }
