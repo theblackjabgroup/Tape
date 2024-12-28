@@ -1,7 +1,8 @@
+
 .contact-form-design {
   position:relative;
-  background-color:red;
-    margin: 92px 125px;
+  background-color:var(--background_product_card);
+    margin: 3vh 8vw;
 }
 .border-top{
     position: absolute;
@@ -12,6 +13,7 @@
     justify-content: center;
     pointer-events: none;
   overflow: hidden;
+  border-top:none !important;
 }
 .border-bottom{
     bottom:0px;
@@ -22,6 +24,7 @@
     pointer-events: none;
    justify-content: center;
   overflow: hidden;
+   border-bottom:none !important;
 }
 .border-left{
    position:absolute;
@@ -138,3 +141,5 @@
     grid-column-gap: 2rem;
   }
 }
+
+
