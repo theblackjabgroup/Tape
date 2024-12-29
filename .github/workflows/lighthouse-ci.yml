@@ -12,6 +12,7 @@ jobs:
           access_token: "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"
           store: "theme-blackbytt-poc.myshopify.com"
           lhci_min_score_accessibility: 0.9
+          lhci_min_score_performance: 0.7
           password: "saylyo"
 
           # ------------------------To be implemented with Outh2.0-----------------------------
