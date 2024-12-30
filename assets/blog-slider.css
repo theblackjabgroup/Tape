@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@500&display=swap');
 
-.blog-slider-title,
+.blog-slider-title h2,
 .blog-card-title,
 .blog-author,
 .blog-date,
@@ -237,14 +237,16 @@
 }
 
 .blog-view-all {
-    width: 20%;
+  text-decoration: none;
+    width: 182px;
+  font-size:15px;
     background-color: rgb(var(--color-button-text));
     display: block;
-    padding: 1.45rem 3rem;
-    border-radius: 7px;
+    padding: 10px;
+    border-radius: 4px;
     transition: transform .1s cubic-bezier(.215,.61,.355,1);
     color: rgb(var(--color-secondary-button-text));
-   margin: 0 auto;
+   margin: 50px auto 20px auto;
     text-align: center;
 }
 .blog-view-all:hover,
@@ -263,7 +265,7 @@
     }
 
     .blog-card-title {
-        font-size: 1.2rem;
+        font-size: 1.5rem;
     }
 
     .blog-meta,
@@ -283,7 +285,8 @@
     width:50%;
   }
   .blog-view-all {
-    width: 80%;
+            width: 150px;
+        font-size: 14px;
 }
 }
 
