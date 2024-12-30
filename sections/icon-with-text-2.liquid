@@ -1,5 +1,6 @@
 
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
         :root {
             --primary-card-top-padding: 40px;
         }
@@ -7,7 +8,7 @@
         .primary-card-container {
             min-height: calc(332px - var(--primary-card-top-padding));
             width: 264px;
-            background: #d1d1d1;
+            background: var(--card_background);
             border-radius: 8px;
             display: flex;
             flex-direction: column;
@@ -17,12 +18,15 @@
             scroll-snap-align: start; /* Align each card to the start of the container */
             position: relative;
             flex-shrink: 0;
+            overflow: hidden;
         }
 
         .card-feature-image {
             height: 104px;
             width: 104px;
-            background: #c1c1c1;
+            background: rgba(0,0,0, 0.15);
+            border-radius: 2px;
+            z-index: 1;
         }
 
         .card-main-heading {
@@ -31,11 +35,13 @@
             font-size: 24px;
             line-height: 32.68px;
             text-align: center;
+            color: rgb(var(--color-foreground));
+            z-index: 1;
         }
 
         .card-action-button {
             position: absolute;
-            background: #fff;
+            background: rgb(var(--color-button-text));
             bottom: 12px;
             right: 12px;
             width: 48px;
@@ -45,6 +51,13 @@
             align-items: center;
             justify-content: center;
             font-size: xx-large;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            z-index: 1;
+        }
+
+        .card-action-button.active {
+            transform: rotate(45deg);
         }
 
         .scroll-container {
@@ -54,6 +67,7 @@
             align-items: center;
             overflow-x: hidden;
             scrollbar-width: none;
+            background-color: var(--color-background);
         }
 
         .card-container {
@@ -71,7 +85,7 @@
         .side-decoration {
             width: 33px;
             height: 40px;
-            background: #fff;
+            background: var(--color-background);
             position: absolute;
             top: 125px;
             display: block !important;
@@ -86,8 +100,11 @@
         }
 
         .scroll-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             background: none;
-            border: 1px solid #000;
+            border: 2px solid rgb(var(--color-secondary-button-text));
             border-radius: 50%;
             height: 40px;
             width: 40px;
@@ -102,53 +119,103 @@
         }
 
         .card-description-text {
-            /* transform: translateY(100%); */
+            transform: translateY(100%);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .card-description-text.show {
+            transform: translateY(0);
+        }
+        .background-decoration {
+            display: block !important;
+            position: absolute;
+            top: 100%;
+            left: 100%;
+            border-radius: 100%;
+            height: 100%;
+            width: 100%;
+            background: var(--card_foreground);
+            transition: all 0.5s ease;
+            z-index: 0;
+        }
+        .background-decoration.show {
+          border-radius: 0;
+          top: 0;
+          left: 0;
         }
     </style>
-
-<div class="scroll-container" id="section-{{ section.id }}">
-<div class="card-container" id="cardContainer">
+<div class="scroll-container color-{{ section.settings.sectionColor }}" id="section-{{ section.id }}">
+  <div class="card-container" id="cardContainer">
     {% for item in section.blocks %}
       <div class="primary-card-container">
         <div class="card-feature-image">
           {% if item.settings.icon-with-text-icon %}
-            <img src="{{ item.settings.icon-with-text-icon |  image_url  }}" width="100" height="100" alt="icon">
-            {% else %}
-            <div style="width: 100%; height: 100%;">{{ 'image' | placeholder_svg_tag: 'placeholder-svg' | replace: 'svg', 'svg style="width: 100%; height: 100%; scale: 2"' }}</div>
+            <img src="{{ item.settings.icon-with-text-icon | image_url }}" width="500" height="500" alt="icon" style="width:100%; height:100%; object-fit:cover;">
+          {% else %}
+            <div style="width:100%; height:100%;">{{ 'image' | placeholder_svg_tag: 'placeholder-svg' | replace: 'svg', 'svg style="width:100%; height:100%; scale:2"' }}</div>
           {% endif %}
         </div>
         <div class="card-main-heading">{{ item.settings.icon-with-text-title }}</div>
-        <div class="card-description-text">{{ item.settings.description }}</div>
-        <div class="card-action-button " ><span style="width: 24px; height: 24px;" class="svg-wrapper"> {{- 'icon-plus.svg' | inline_asset_content -}} </span></div>
+        <div class="card-description-text">{{ item.settings.icon-with-text-description }}</div>
+        <div class="card-action-button">
+          <span style="width:12px; height:12px; color:rgb(var(--color-secondary-button-text));" class="svg-wrapper">{{- 'icon-plus.svg' | inline_asset_content -}}</span>
+        </div>
         <div class="side-decoration side-decoration-left"></div>
         <div class="side-decoration side-decoration-right"></div>
-    </div>
+        <div class="background-decoration"></div>
+      </div>
     {% endfor %}
-    <button onclick="scrollCards()" class="scroll-button next">&gt;</button>
+    <button class="scroll-button next">
+      <span style="width:24px; height:24px; color:rgb(var(--color-secondary-button-text)); rotate:-90deg;" class="svg-wrapper">{{- 'icon-caret.svg' | inline_asset_content -}}</span>
+    </button>
+  </div>
 </div>
-</div>
 
-{% javascript %}
-   let currentCard = 0;
-        const container = document.getElementById('cardContainer');
-        const cardWidth = 284; // 264px card width + 20px gap
-        const cards = container.children.length;
+<script>
+class CardSlider {
+  constructor(sectionId) {
+    this.container = document.querySelector(`#section-${sectionId} .card-container`);
+    this.currentCard = 0;
+    if (!this.container) return;
+    this.init();
+  }
 
-        // Function to scroll cards via button
-        function scrollCards() {
-            currentCard = (currentCard + 1) % cards;
-            container.scrollTo({
-                left: currentCard * cardWidth,
-                behavior: 'smooth',
-            });
-        }
+  init() {
+    const scrollButton = this.container.querySelector('.scroll-button');
+    scrollButton?.addEventListener('click', () => this.scrollCards());
 
-        // Adjust currentCard on scroll
-        container.addEventListener('scroll', () => {
-            const scrollLeft = container.scrollLeft;
-            currentCard = Math.round(scrollLeft / cardWidth);
-        });
-{% endjavascript %}
+    this.container.querySelectorAll('.card-action-button')
+      .forEach(button => button.addEventListener('click', () => this.toggleDescription(button)));
+
+    this.container.addEventListener('scroll', () => {
+      const cardWidth = this.container.querySelector('.primary-card-container').offsetWidth + 20;
+      this.currentCard = Math.round(this.container.scrollLeft / cardWidth);
+    });
+  }
+
+  toggleDescription(button) {
+    const card = button.closest('.primary-card-container');
+    button.classList.toggle('active');
+    card.querySelector('.card-description-text').classList.toggle('show');
+    card.querySelector('.background-decoration').classList.toggle('show');
+  }
+
+  scrollCards() {
+    const cardWidth = this.container.querySelector('.primary-card-container').offsetWidth + 20;
+    const totalCards = this.container.querySelectorAll('.primary-card-container').length;
+    this.currentCard = (this.currentCard + 1) % totalCards;
+    this.container.scrollTo({
+      left: this.currentCard * cardWidth,
+      behavior: 'smooth'
+    });
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('[id^="section-"]')
+    .forEach(section => new CardSlider(section.id.replace('section-', '')));
+});
+</script>
 
 {% schema %}
 {
@@ -184,7 +251,8 @@
         {
           "type": "text",
           "id": "icon-with-text-description",
-          "label": "Enter Description"
+          "label": "Enter Description",
+          "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
         }
       ]
     }
