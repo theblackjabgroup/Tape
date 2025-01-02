@@ -175,7 +175,7 @@ background-color: var(--background_product_card);
 .footer-column form input {
     padding: 10px 10px 10px 50px;
     margin-right: 10px;
-    /* border: 1px solid #ccc; */
+    border: 1px solid #ccc;
     margin-bottom: 11px;
     font-family: 'Inter', sans-serif;
     width: 70%;
@@ -428,9 +428,5 @@ background-color: var(--background_product_card);
 
     .social-icons.show {
         display: flex;  /* Show when class 'show' is applied */
-    }
-
-  
+    }  
 }
-
-
