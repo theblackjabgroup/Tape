@@ -1,6 +1,11 @@
+
 * {
   margin: 0;
   padding: 0;
+}
+
+:root {
+  --heading-padding: 0 40px;
 }
 
 .icon-with-text-container {
@@ -9,7 +14,7 @@
   overflow-x: scroll;
   gap: 5rem;
   scrollbar-width: none;
-  padding: 0 40px;
+  padding: var(--heading-padding);
   scroll-snap-type: x mandatory;
 }
 
@@ -147,6 +152,10 @@
   color: rgb(var(--color-secondary-button-text));
 }
 @media only screen and (max-width: 990px) {
+  :root {
+    --heading-padding: 0 26px;
+  }
+
   .icon-with-text-container {
     scroll-snap-type: x mandatory;
     justify-content: normal;
@@ -163,7 +172,6 @@
     display: none;
   }
 }
-
 .card__count__container {
   gap: 1rem;
   justify-content: center;
@@ -182,3 +190,4 @@
   width: 23px;
   border-radius: 13px;
 }
+

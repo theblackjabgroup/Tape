@@ -2,6 +2,12 @@
 {
   "name": "Default Blog Posts",
   "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
 
     {
       "type": "checkbox",
@@ -182,7 +188,7 @@
   {% endif %}
 </div>
 
-<div class="blog-dotted-line">
+<div class="blog-dotted-line color-{{ section.settings.color_scheme }}">
   <span class="blog-semicircle2 blog-semicircle2-l"></span>
   {% for i in (1..34) %}
     <span class="blog-circle"></span>
@@ -384,7 +390,7 @@
       </div>
     </div>
   {%- endif -%}
-  <div class="blog-dotted-line2">
+  <div class="blog-dotted-line2 color-{{ section.settings.color_scheme }}">
   <!-- Left semicircle -->
   <span class="blog-semicircle3 blog-semicircle3-l" ></span>
   

@@ -1,10 +1,12 @@
 .bb-upper-template-signup {
     background-color: #c7c7cc;
-    margin: 7rem 20rem;
+    margin: 7rem auto;
     display: block;
     padding: 2rem;
     position: relative;
     width: auto;
+    max-width: var(--page-width);
+    border-radius: 5px;
 }
 
 .bb-template-signup {
@@ -15,6 +17,7 @@
     max-width: none;
     margin: 2rem;
     position: relative;
+    border-radius: 5px;
 }
 
 .vertical-bar-top-404 {
@@ -23,7 +26,7 @@
     display: flex;
     flex-direction: row;
     position: absolute;
-    gap: 36 .5px;
+    gap: 52.5px;
     z-index: 1;
 }
 
@@ -33,7 +36,7 @@
     display: flex;
     flex-direction: row;
     position: absolute;
-    gap: 36.5px;
+    gap: 52.5px;
     z-index: 1;
 }
 
@@ -43,7 +46,7 @@
     display: flex;
     flex-direction: column;
     position: absolute;
-    gap: 38px;
+    gap: 50px;
     z-index: 1;
 }
 
@@ -53,7 +56,7 @@
     display: flex;
     flex-direction: column;
     position: absolute;
-    gap: 38px;
+    gap: 50px;
     z-index: 1;
 }
 
