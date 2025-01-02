@@ -2,11 +2,10 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
 
-<div class="featured-collection-section">
+<div class="featured-collection-section color-{{ section.settings.color_scheme }}">
   <h1 class="heading" style="font-size: {{ section.settings.title_font_size }}px;">
     {{ section.settings.title }}
   </h1>
-
   {% assign selected_collection = collections[section.settings.collection] %}
   
   {% if selected_collection.handle == blank %}
@@ -221,6 +220,12 @@ document.addEventListener('DOMContentLoaded', function() {
       "default": "Featured Collection"
     },
     {
+      "id": "color_scheme",
+      "type": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
       "type": "range",
       "id": "title_font_size",
       "label": "Title Font Size",
@@ -264,52 +269,7 @@ document.addEventListener('DOMContentLoaded', function() {
       "label": "Offer Tag Text",
       "default": "SPECIAL OFFER - 20% DISCOUNT"
     },
-    {
-      "type": "header",
-      "content": "Color Settings"
-    },
-    {
-      "type": "color",
-      "id": "product_card_background_color",
-      "label": "Product Card Background Color",
-      "default": "#F7F7F7"
-    },
-    {
-      "type": "color",
-      "id": "special_offer_background_color",
-      "label": "Special Offer Banner Background Color",
-      "default": "#FFD700"
-    },
-    {
-      "type": "color",
-      "id": "special_offer_text_color",
-      "label": "Special Offer Banner Text Color",
-      "default": "#000000"
-    },
-    {
-      "type": "color",
-      "id": "text_color",
-      "label": "Text Color",
-      "default": "#333333"
-    },
-    {
-      "type": "color",
-      "id": "price_background_color",
-      "label": "Price Tag Background Color",
-      "default": "#FFFFFF"
-    },
-    {
-      "type": "color",
-      "id": "price_text_color",
-      "label": "Price Tag Text Color",
-      "default": "#333333"
-    },
-    {
-      "type": "color",
-      "id": "dotted_line_color",
-      "label": "Dotted Line Color",
-      "default": "#FFFFFF"
-    },
+   
     {
       "type": "header",
       "content": "Icon Settings"
