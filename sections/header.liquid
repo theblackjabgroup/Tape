@@ -1,23 +1,12 @@
 <link rel="stylesheet" href="{{ 'header.css' | asset_url }}">
 <script src="{{ 'header.js' | asset_url }}" defer></script>
-<link rel="stylesheet" href="{{'scroll-tracker.css' |  asset_url}}" media="print" onload="this.media='all'">
-
- <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
-
-
- <div {% if section.settings.sticky_header_type != 'none'%} sticky-header data-sticky-type="{{ section.settings.sticky_header_type }}"{% else %}div{% endif %} class="header-wrapper color-{{ section.settings.color_scheme }}" style="--padding-top: {{ section.settings.padding_top }}px; --padding-bottom: {{ section.settings.padding_bottom }}px;">
-
 
 <{% if section.settings.sticky_header_type != 'none' %}sticky-header data-sticky-type="{{ section.settings.sticky_header_type }}"{% else %}div{% endif %} class="header-wrapper color-{{ section.settings.color_scheme }}" style="--padding-top: {{ section.settings.padding_top }}px; --padding-bottom: {{ section.settings.padding_bottom }}px;">
-
   <div class="flex-container" style="--margin-right: {{ section.settings.margin_right }}px; --margin-left: {{ section.settings.margin_left }}px">
     <a href="{{ routes.root_url }}" class="logo-container">
-      
       {% if section.settings.logo or settings.logo != blank %}
-        <div class="logo-containerimage">
       <img src="{% if section.settings.logo != blank %}{{ section.settings.logo | image_url }}{% else %}{{ settings.logo | image_url }}{% endif %}" alt="{{ shop.name }}" loading="lazy" width="500" height="500">
-     </div>
-        {% else %}
+      {% else %}
         <span>{{ shop.name }}</span>
       {% endif %}
     </a>
@@ -88,14 +77,8 @@
             {% endif %}
           </div>
 
-     
-      
 
-      {%- if section.settings.enable_scroll_tracking -%}
-        <div class="scroll-tracker"><p><span class="scroll-distance"></span>Km</p> <span class="svg-wrapper" style="height: 12px; width: 12px;">{{ 'icon-arrow.svg' | inline_asset_content }}</span></div>
-      {%- endif -%}
-
-      <div class="nav-icons">
+       <div class="nav-icons">
         <div class="nav-icon">
           <a href="{{ routes.search_url }}" class="search-toggle">
             <span class="svg-wrapper">{{ 'icon-search.svg' | inline_asset_content }}</span>
@@ -112,7 +95,6 @@
             <span class="svg-wrapper">{{ 'icon-account.svg' | inline_asset_content }}</span>
           </a>
         </div>
-      </div>
       </div>
     </header>
 
@@ -180,20 +162,20 @@
         <div class="mobile-nav-indicators">
           <div class="mobile-nav-green-dot"></div>
 
-      <div class="menu-drawer__localization header-localization">
-            {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
-              <localization-form>
-                {%- form 'localization', id: 'HeaderCountryMobileForm', class: 'localization-form' -%}
-                  <div>
+        <div class="country-selector-header-2">
+    {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
+        <localization-form>
+            {%- form 'localization', id: 'HeaderCountryMobileForm', class: 'localization-form' -%}
+                <div>
                     <h2 class="visually-hidden" id="HeaderCountryMobileLabel">
-                      {{ 'localization.country_label' | t }}
+                        {{ 'localization.country_label' | t }}
                     </h2>
                     {%- render 'country-localization', localPosition: 'HeaderCountryMobile' -%}
-                  </div>
-                {%- endform -%}
-              </localization-form>
-            {% endif %}
-          </div>
+                </div>
+            {%- endform -%}
+        </localization-form>
+    {% endif %}
+</div>
         </div>
         <div style="display: flex;align-items: center;">
           {%- if section.settings.enable_scroll_tracking -%}
@@ -214,18 +196,22 @@
         </div>
       </div>
     </div>
-<div class="hamburger">
-   <div id="menuIcon" class="menu-icon"></div>
-</div>
-           
+
+    <div class="hamburger color-{{ section.settings.color_scheme }}">
+    <svg class="ham ham2" viewBox="0 0 100 100" width="80" onclick="this.classList.toggle('active')">
+  <path
+        class="line top"
+        d="m 70,33 h -40 c -6.5909,0 -7.763966,-4.501509 -7.763966,-7.511428 0,-4.721448 3.376452,-9.583771 13.876919,-9.583771 14.786182,0 11.409257,14.896182 9.596449,21.970818 -1.812808,7.074636 -15.709402,12.124381 -15.709402,12.124381" />
+  <path
+        class="line middle"
+        d="m 30,50 h 40" />
+  <path
+        class="line bottom"
+        d="m 70,67 h -40 c -6.5909,0 -7.763966,4.501509 -7.763966,7.511428 0,4.721448 3.376452,9.583771 13.876919,9.583771 14.786182,0 11.409257,-14.896182 9.596449,-21.970818 -1.812808,-7.074636 -15.709402,-12.124381 -15.709402,-12.124381" />
+</svg>
     </div>
-    
   </div>
-
- </div {% if section.settings.sticky_header_type != 'none' %}sticky-header{% else %}div{% endif %}>
-
 </{% if section.settings.sticky_header_type != 'none' %}sticky-header{% else %}div{% endif %}>
-
 
   {% comment %} 
   THIS IS TEST COMMENT TO RESET THE HEADER SECTION
@@ -244,39 +230,8 @@
   THIS IS TEST COMMENT TO RESET THE HEADER SECTION
   {% endcomment %}
 
-    <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const container = document.getElementById('menuIcon');
-    fetch('{{ "menuicon.json" | asset_url }}')
-        .then(response => {
-            return response.json();
-        })
-        .then(data => {
-            const anim = lottie.loadAnimation({
-                container: container,
-                renderer: 'svg',
-                loop: false,
-                autoplay: false,
-                animationData: data
-            });
 
-            let isOpen = false;
-            container.addEventListener('click', () => {
-                if(isOpen) {
-                    anim.setDirection(-1);
-                    anim.play();
-                } else {
-                    anim.setDirection(1);
-                    anim.play();
-                }
-                isOpen = !isOpen;
-            });
-        })
-        .catch(error => console.error('Error loading menu animation:', error));
-});
-    </script>
-
-
+  
 
 
 {% schema %}
