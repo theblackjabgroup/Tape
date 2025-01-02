@@ -59,6 +59,7 @@
     background: transparent;
     transition: opacity 0.3s ease;
     opacity: 1;
+  color: rgb(var(--color-foreground));
 }
 
 .arrow:disabled {
@@ -128,7 +129,6 @@
 .blog-card-title {
     margin: 10px 0;
     line-height: 1.4;
-    font-weight: bold;
     font-size: clamp(1.5rem, 2vw, 1.5rem);
     display: -webkit-box;
     -webkit-line-clamp: 3;
