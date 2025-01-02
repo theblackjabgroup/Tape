@@ -1,3 +1,4 @@
+
 * {
   margin: 0;
   padding: 0;
@@ -171,7 +172,6 @@
     display: none;
   }
 }
-
 .card__count__container {
   gap: 1rem;
   justify-content: center;
@@ -190,3 +190,4 @@
   width: 23px;
   border-radius: 13px;
 }
+
