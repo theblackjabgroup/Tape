@@ -69,27 +69,6 @@
 }
 {% endschema %}
 
-<style>
-  /* .blog-read-more-btn {
-       background: rgb(var(--color-background));
-  } */
-.blog-slider-container{
-  background-color: rgb(var(--color-background));
-}
-.blog-card-content {
-  background-color: rgb(var(--color-button));
-  color: rgb(var(--color-text));
-}
-  .semicircle{
-   background-color: rgb(var(--color-background)); 
-  }
-  .arrow{
-   color: rgb(var(--color-foreground)); 
-  }
-  .blog-tag{
-  background-color: rgb(var(--color-background));
-}
-</style>
 
 <link rel="stylesheet" href="{{ 'blog-slider.css' | asset_url }}">
 
@@ -213,100 +192,94 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    let currentSlide = 0;
-    const sliderWrapper = document.getElementById('sliderWrapper');
-    const leftArrow = document.querySelector('.arrow-left');
-    const rightArrow = document.querySelector('.arrow-right');
-    const gap = 20;  // Gap between cards
+    const blogSections = document.querySelectorAll('.blog-slider-section');
 
-    function updateCards() {
-        // Get all current cards and update total slides
-        const cards = sliderWrapper.querySelectorAll('.blog-card');
-        const totalSlides = cards.length;
+    blogSections.forEach((section, sectionIndex) => {
+        let currentSlide = 0;
+        const sliderWrapper = section.querySelector('.blog-slider-wrapper');
+        const leftArrow = section.querySelector('.arrow-left');
+        const rightArrow = section.querySelector('.arrow-right');
+        const gap = 20; // Gap between cards
 
-        // Function to calculate the width of a single card, including the gap
-        function getSlideWidth() {
-            const cardWidth = cards[0]?.offsetWidth || 0;
-            return cardWidth + gap;  // Include the gap in the card width
-        }
+        function updateCards() {
+            const cards = sliderWrapper.querySelectorAll('.blog-card');
+            const totalSlides = cards.length;
 
-        // Function to update the state of the arrows (disabled or not)
-        function updateArrowState() {
-            const visibleSlides = getVisibleSlides();
-            leftArrow.disabled = currentSlide === 0;
-            rightArrow.disabled = currentSlide >= totalSlides - visibleSlides;
-        }
-
-        // Function to calculate how many slides are visible based on screen width
-        function getVisibleSlides() {
-            let visibleSlides = 0;
-            if (window.innerWidth < 768) {
-                visibleSlides = totalSlides <= 1 ? totalSlides : 1;  // Small screens show 1 card
-            } else if (window.innerWidth < 1024) {
-                visibleSlides = totalSlides <= 3 ? totalSlides : 3;  // Medium screens show 3 cards
-            } else {
-                visibleSlides = totalSlides <= 4 ? totalSlides : 4;  // Large screens show 4 cards
+            function getSlideWidth() {
+                const cardWidth = cards[0]?.offsetWidth || 0;
+                return cardWidth + gap; // Include the gap in the card width
             }
-            return visibleSlides;
-        }
 
-        // Resize the cards to fit exactly the visible number of cards
-        function resizeCards() {
-            const visibleSlides = getVisibleSlides();
-            const cardWidthPercentage = (95 / visibleSlides);  // Percentage of screen for each card
-            // Update the flex basis for each card dynamically
-            cards.forEach(card => {
-                card.style.flex = `0 0 ${cardWidthPercentage}%`;
-            });
-        }
+            function updateArrowState() {
+                const visibleSlides = getVisibleSlides();
+                leftArrow.disabled = currentSlide === 0;
+                rightArrow.disabled = currentSlide >= totalSlides - visibleSlides;
+            }
 
-        // Function to move the slider based on direction (left or right)
-        window.moveSlide = function(direction) {
-            const visibleSlides = getVisibleSlides();
-            const maxSlides = totalSlides - visibleSlides;
+            function getVisibleSlides() {
+                let visibleSlides = 0;
+                if (window.innerWidth < 768) {
+                    visibleSlides = totalSlides <= 1 ? totalSlides : 1; // Small screens show 1 card
+                } else if (window.innerWidth < 1024) {
+                    visibleSlides = totalSlides <= 3 ? totalSlides : 3; // Medium screens show 3 cards
+                } else {
+                    visibleSlides = totalSlides <= 4 ? totalSlides : 4; // Large screens show 4 cards
+                }
+                return visibleSlides;
+            }
 
-            // Update the currentSlide index with bounds checking
-            currentSlide = Math.min(Math.max(currentSlide + direction, 0), maxSlides);
+            function resizeCards() {
+                const visibleSlides = getVisibleSlides();
+                const cardWidthPercentage = (95 / visibleSlides); // Percentage of screen for each card
+                cards.forEach(card => {
+                    card.style.flex = `0 0 ${cardWidthPercentage}%`;
+                });
+            }
 
-            // Calculate the slide width (including the gap) and the offset
-            const slideWidth = getSlideWidth();
-            const offset = -currentSlide * slideWidth;
-
-            // Apply the translation to the slider wrapper
-            sliderWrapper.style.transform = `translateX(${offset}px)`;
-            updateArrowState();
-        };
-
-        // Initialize card size and layout on page load
-        resizeCards();
-        updateArrowState();
-
-        // Resize the cards when the window is resized
-        let resizeTimer;
-        window.addEventListener('resize', function() {
-            clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(function() {
-                resizeCards();  // Resize cards on window resize
+            function moveSlide(direction) {
                 const visibleSlides = getVisibleSlides();
                 const maxSlides = totalSlides - visibleSlides;
-                currentSlide = Math.min(currentSlide, maxSlides);
 
-                // Recalculate the offset based on the new window size and card width
+                currentSlide = Math.min(Math.max(currentSlide + direction, 0), maxSlides);
+
                 const slideWidth = getSlideWidth();
                 const offset = -currentSlide * slideWidth;
 
-                // Apply the calculated translation to the slider wrapper
                 sliderWrapper.style.transform = `translateX(${offset}px)`;
                 updateArrowState();
-            }, 250);
-        });
-    }
+            }
 
-    // Initialize the slider on page load
-    updateCards();
+            resizeCards();
+            updateArrowState();
 
-    // Monitor for changes in the number of cards (e.g., if blogs are added or removed)
-    const observer = new MutationObserver(updateCards);
-    observer.observe(sliderWrapper, { childList: true });
+            leftArrow.addEventListener('click', () => moveSlide(-1));
+            rightArrow.addEventListener('click', () => moveSlide(1));
+
+            let resizeTimer;
+            window.addEventListener('resize', function() {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(function() {
+                    resizeCards();
+                    const visibleSlides = getVisibleSlides();
+                    const maxSlides = totalSlides - visibleSlides;
+                    currentSlide = Math.min(currentSlide, maxSlides);
+
+                    const slideWidth = getSlideWidth();
+                    const offset = -currentSlide * slideWidth;
+
+                    sliderWrapper.style.transform = `translateX(${offset}px)`;
+                    updateArrowState();
+                }, 250);
+            });
+        }
+
+        updateCards();
+
+        const observer = new MutationObserver(updateCards);
+        observer.observe(sliderWrapper, { childList: true });
+    });
 });
-</script>
+  
+  </script>
+
+
