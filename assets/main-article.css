@@ -1,11 +1,46 @@
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font: inter;
   overflow-x: hidden;
-    border: 10px solid #D9D9D9;
 }
+.main-article-dots{
+   width:100%;
+  height:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:18px;
+  overflow:hidden;
+}
+
+.main-article-circles{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background-color:rgb(var(--color-button));
+  flex-shrink: 0;
+}
+.main-article-dots2{
+   width:100%;
+  height:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:18px;
+  overflow:hidden;
+}
+
+.main-article-circles2{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background-color:rgb(var(--color-button));
+  flex-shrink: 0;
+}
+
 .blog-article-container {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -28,6 +63,7 @@
   font-weight: bold;
   margin-right: 8px;
 }
+
 
 .blog-tag {
   display: inline-block;
@@ -67,7 +103,7 @@
 }
 
 .blog-article-content.centered-content {
-  max-width: 680px; /* adjust this value based on your needs */
+  max-width: 680px; 
   margin: 0 auto;
   padding: 0 20px;
   width: 100%;
@@ -75,7 +111,7 @@
 
 .blog-social-container.centered-social {
   width: 100%;
-  max-width: 650px; /* should match the content width */
+  max-width: 650px; 
   margin: 2rem auto 0;
   padding: 0 20px;
 }
@@ -288,20 +324,13 @@ top: 561px;
 }
 
 .blog-dotted-line {
+  width:100%;
   display: flex;
   align-items: center;
-  gap: 30px;
+  overflow: hidden;
 }
-
-.blog-circle {
-  width: 12px;
-  height: 12px;
-  background-color: rgb(var(--color-button));
-  border-radius: 50%;
-}
-
 .blog-semicircle2 {
-  width: 23px;
+  width: 24px;
   height: 24px;
   background-color: rgb(var(--color-button));
   position: relative;
@@ -311,19 +340,20 @@ top: 561px;
 .blog-semicircle2-l {
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
-  left: -10px;
+  left: -11px;
 }
 
 .blog-semicircle2-r {
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
-  right: -10px;
+  right: -11px;
 }
 
 .blog-dotted-line2 {
+  width:100%;
   display: flex;
   align-items: center;
-  gap: 30px;
+  overflow: hidden;
 }
 
 .blog-circle3 {
@@ -334,7 +364,7 @@ top: 561px;
 }
 
 .blog-semicircle3 {
-  width: 23px;
+  width: 24px;
   height: 24px;
   background-color: rgb(var(--color-button));
   position: relative;
@@ -344,13 +374,13 @@ top: 561px;
 .blog-semicircle3-l {
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
-  left: -10px;
+  left: -11px;
 }
 
 .blog-semicircle3-r {
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
-  right: -10px;
+  right: -11px;
 }
 
 /* Mobile Responsive Styles */
@@ -533,25 +563,22 @@ top: 561px;
   .blog-thumbnail-grid{
     margin: 30px 10px 30px 0;
   }
-  .blog-dotted-line {
-    gap: 21px;
-  }
-  .blog-semicircle2-r{
+  /* .blog-semicircle2-r{
     right:-6px;
   }
   .blog-semicircle2-l{
     left: -6px;
-}
-  .blog-dotted-line2 {
+} */
+  /* .blog-dotted-line2 {
     gap: 21px;
-  }
+  } */
 
-  .blog-semicircle3-r{
+  /* .blog-semicircle3-r{
     right:-6px;
   }
   .blog-semicircle3-l{
     left: -6px;
-}
+} */
 }
 
 
@@ -651,14 +678,11 @@ top: 561px;
   .link, .customer a {
     font-size:0.9rem;
   }
-  .blog-dotted-line{
-    gap:16px;
-  }
   .blog-circle {
     height:7px;
     width:14px;
   }
-  .blog-semicircle2{
+  /* .blog-semicircle2{
     width:49px;
   }
   .blog-semicircle2-l{
@@ -666,10 +690,10 @@ top: 561px;
   }
   .blog-semicircle2-r{
     right:-9px;
-  }
-  .blog-dotted-line2{
+  } */
+  /* .blog-dotted-line2{
     gap: 16px;
-  }
+  } */
   .blog-circle3:nth-child(n+14) {
     display: none; 
   }
@@ -685,43 +709,41 @@ top: 561px;
     top: 300px;
     right:-10px;
   }
-  .blog-semicircle3 {
+  /* .blog-semicircle3 {
     width:40px;
-  }
+  } */
 }
 
 
 @media (max-width: 990px){
-   .blog-dotted-line2 {
+   /* .blog-dotted-line2 {
     gap: 18px; /* Increase gap for wider screens */
   
-  }
- .blog-dotted-line{
-    gap: 18px; /* Increase gap for wider screens */
-  }
+  } */
+
 }
 
 @media screen and (min-width: 1900px) and (max-width: 2880px) {
-  .blog-dotted-line2,
-  .blog-dotted-line {
+  /* .blog-dotted-line2,
+ {
     gap: 44px; 
-  }
+  } */
 }
 
 /* Styles for screens at exactly 2880px */
 @media screen and (width: 2880px) {
-  .blog-dotted-line2,
-  .blog-dotted-line {
+  /* .blog-dotted-line2,
+   {
     gap: 69px; 
-  }
+  } */
 }
 
 /* Styles for screens larger than 2880px */
 @media screen and (min-width: 2881px) {
-  .blog-dotted-line2,
-  .blog-dotted-line {
+  /* .blog-dotted-line2,
+  {
     gap: 69px; 
-  }
+  } */
 }
 
 
