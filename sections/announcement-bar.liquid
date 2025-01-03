@@ -250,7 +250,10 @@
         {% endfor %}
       </div>
       {%- if section.settings.enable_scroll_tracking -%}
-        <div class="scroll-tracker"><p><span class="scroll-distance"></span>Km</p> <span class="svg-wrapper" style="height: 12px; width: 12px;">{{ 'icon-arrow.svg' | inline_asset_content }}</span></div>
+       <div class="scroll-tracker">
+    <p><span class="scroll-distance"></span>Km<span class="scroll-tracker-icon">{{ 'icon-arrow.svg' | inline_asset_content }}</span></p>
+</div>
+
       {%- endif -%}
     </div>
 
