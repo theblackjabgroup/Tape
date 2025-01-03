@@ -292,20 +292,25 @@
 }
 
 .nav-icon {
-  display: flex !important;
+   display: flex !important;
   justify-content: center;
   align-items: flex-start;
   padding-top: 4px;
   cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+.nav-icon:hover {
+  transform: scale(1.5); 
 }
 
 .nav-icon .svg-wrapper {
-  width: calc(var(--font-size) + 6px);
-  height: calc(var(--font-size) + 6px);
+  /* width: calc(var(--font-size) + 6px);
+  height: calc(var(--font-size) + 6px); */
   display: flex;
   justify-content: center;
   align-items: center;
   color: rgb(var(--color-foreground));
+  transition: color 0.2s ease; 
 }
 
 .nav-icon .svg-wrapper svg {
