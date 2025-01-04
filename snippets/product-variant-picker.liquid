@@ -14,6 +14,7 @@
     data-section="{{ section.id }}"
     {{ block.shopify_attributes }}
   >
+
     {%- for option in product.options_with_values -%}
       {%- liquid
         assign picker_type = block.settings.picker_type
@@ -21,15 +22,45 @@
       {%- if picker_type == 'button' -%}
         <fieldset class="js product-form__input product-form__input--pill">
           <legend class="form__label bb-product-variant-label">{{ option.name }}</legend>
-      <!--    <div class=" {% if option.name == "Color" %} bb-color-variant {% endif  %}">   -->
           {% render 'product-variant-options',
             product: product,
             option: option,
             block: block,
             picker_type: picker_type
           %}
-      <!--    </div>  -->
         </fieldset>
+        {%- else -%}
+        <div class="bb-product-form__input--dropdown product-form__input product-form__input--dropdown">
+          <label class="bb-form__label form__label" for="Option-{{ section.id }}-{{ forloop.index0 }}">
+            {{ option.name }}
+          </label>
+          <div class="bb-dropdown-pro-select select">
+            {%- if picker_type == 'swatch_dropdown' -%}
+              <span
+                data-selected-value
+                class="dropdown-swatch"
+              >
+                {% render 'swatch', swatch: option.selected_value.swatch, shape: block.settings.swatch_shape %}
+              </span>
+            {%- endif -%}
+            <select
+              id="Option-{{ section.id }}-{{ forloop.index0 }}"
+              class="bb_select__select select__select"
+              name="options[{{ option.name | escape }}]"
+              form="{{ product_form_id }}"
+            >
+              {% render 'product-variant-options',
+                product: product,
+                option: option,
+                block: block,
+                picker_type: picker_type
+              %}
+            </select>
+            <span class="bb-pro-drop-svg-wrapper svg-wrapper">
+              {{- 'icon-caret.svg' | inline_asset_content -}}
+            </span>
+          </div>
+        </div>
       {%- endif -%}
     {%- endfor -%}
 

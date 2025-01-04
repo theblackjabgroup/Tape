@@ -2155,6 +2155,7 @@ input[type='checkbox'] {
   display: none;
 }
 */
+
 @media screen and (min-width: 890px) {
   .utility-bar__grid--3-col {
     grid-template-columns: 1fr 0.1fr 5fr 0.1fr 1fr;

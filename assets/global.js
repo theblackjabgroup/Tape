@@ -740,7 +740,7 @@ constructor() {
     setTimeout(() => {
     this.x = document.querySelector('.bb-max-width');
     this.height = this.x.offsetHeight;
-    document.documentElement.style.setProperty('--announcement-bar-height', `${this.height / 5}px`); 
+    document.documentElement.style.setProperty('--announcement-bar-height', `${(this.height / 5) + 1}px`); 
   }, 100); // 2000 ms = 2 seconds
   }
 }

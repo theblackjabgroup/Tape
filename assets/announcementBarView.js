@@ -15,6 +15,6 @@ document.addEventListener("DOMContentLoaded", function() {
     
           const height = div.offsetHeight;
           
-          document.documentElement.style.setProperty('--announcement-bar-height', `${height / 5}px`);
+          document.documentElement.style.setProperty('--announcement-bar-height', `${(height / 5) + 1}px`);
           });
       

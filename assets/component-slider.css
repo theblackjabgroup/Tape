@@ -45,6 +45,9 @@ slider-component.slider-component-full-width {
     gap: 2rem;
   }
 
+  .bb-slider--mobile{
+    gap: 3rem !important;
+  }
   /* Fix to show some space at the end of our sliders in all browsers */
   .slider--mobile:after {
     content: '';
