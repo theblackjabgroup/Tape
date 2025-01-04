@@ -1,0 +1,73 @@
+{{ 'subfooter.css' | asset_url | stylesheet_tag }}
+
+{% schema %}
+{
+    "name": "Subfooter",
+  "settings": [
+    {
+      "type": "text",
+      "id": "powered_by",
+      "label": "CopyRight"
+    },
+     {
+      "id": "color_scheme",
+      "type": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "checkbox",
+      "id": "footer_payment_enable",
+      "label": "Show payment types",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Subfooter"
+    }
+  ]
+}
+{% endschema %}
+
+
+<style>
+  .barcode-footer {
+    color:rgb(var(--color-foreground)); 
+    background-color: {{ section.settings.footer_bg_color }};
+  }
+
+  .barcode-footer p,
+  .barcode-footer .copyright__content {
+     color:rgb(var(--color-foreground)); 
+  }
+
+  .barcode-footer .powered-by {
+    color:rgb(var(--color-foreground)); 
+  }
+
+  .barcode-footer .copyright__content {
+    color:rgb(var(--color-foreground)); 
+  }
+</style>
+
+<div class="barcode-footer color-{{ section.settings.color_scheme }}">
+    {%- assign powered_by = shop.name -%}
+    {%- if section.settings.powered_by != blank -%}
+      {%- assign powered_by = section.settings.powered_by -%}
+    {%- endif -%}
+    <p class="powered-by">&copy; {{ 'now' | date: "%Y" }} {{ powered_by }}. <small class="copyright__content">Powered by Shopify</small></p>
+
+
+   <div class="payments-icons">
+  {% if section.settings.footer_payment_enable %}
+        {% unless shop.enabled_payment_types == empty %}
+          <ul class="footer__payment payment-icons grid__item inline-list grid__item medium-up--one-third">
+            {% for type in shop.enabled_payment_types %}
+              <li>{{ type | payment_type_svg_tag: class:'payment-icon' }}</li>
+            {% endfor %}
+          </ul>
+        {% endunless %}
+      {% endif %}
+</div>
+</div>
