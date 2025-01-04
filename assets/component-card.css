@@ -8,7 +8,6 @@
 .card {
   text-decoration: none;
   text-align: var(--text-alignment);
-  border:none;
 }
 
 .card:not(.ratio) {
@@ -46,8 +45,6 @@
   position: relative;
   box-sizing: border-box;
   border-radius: var(--border-radius);
-  border-top-left-radius: var(--border-top-left-radius);
-  border-top-right-radius: var(--border-top-right-radius);
   border: var(--border-width) solid
     rgba(var(--color-foreground), var(--border-opacity));
 }
@@ -133,7 +130,6 @@
   width: 100%;
   flex-grow: 1;
   border-radius:10px;
-  height:400px;
 }
 
 .card__content--auto-margins {
@@ -143,8 +139,6 @@
 .card__information {
   grid-row-start: 2;
   padding: 1.3rem 1rem;
-  height:400px;
-  margin: 0 10px;
 }
 
 .card:not(.ratio) > .card__content {
@@ -285,7 +279,6 @@
   .card__information {
     padding-bottom: 1.7rem;
     padding-top: 1.7rem;
-    height:400px;
   }
 }
 
