@@ -1,103 +1,154 @@
 {{ 'featured.collection.css' | asset_url | stylesheet_tag }}
 
+<link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
 
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
-
+<div class="featured-collection-section color-{{ section.settings.color_scheme }}">
   <h1 class="heading" style="font-size: {{ section.settings.title_font_size }}px;">
     {{ section.settings.title }}
   </h1>
-
-  {% if section.settings.show_subheading %}
-    <h2 class="subheading" style="font-size: {{ section.settings.subheading_font_size }}px;">
-      {{ collections[section.settings.collection].title }}
-    </h2>
+  {% assign selected_collection = collections[section.settings.collection] %}
+  
+  {% if selected_collection.handle == blank %}
+    {% assign selected_collection = collections['all'] %}
   {% endif %}
 
-  {% if section.settings.show_description %}
-    <p class="{{ section.settings.description_style }}">{{ section.settings.description }}</p>
+  {% if selected_collection.handle == blank %}
+    {% assign selected_collection = collections.frontpage %}
   {% endif %}
 
-  <button class="slider-arrow1 left" onclick="scrollCards(-1)" aria-label="Previous Slide"></button>
-  <button class="slider-arrow1 right" onclick="scrollCards(1)" aria-label="Next Slide"></button>
-  
- <div class="product-container">
-  {% for product in collections[section.settings.collection].products limit: section.settings.products_to_show %}
-    <div class="product-card" 
-         style="--pseudo-bg-color: {{ section.settings.product_card_background_color }}; 
-                background-color: {{ section.settings.product_card_background_color }};">
-      <div class="offer-banner" 
-           style="--banner-bg-color: {{ section.settings.special_offer_background_color }}; 
-                  background-color: {{ section.settings.special_offer_background_color }}; 
-                  color: {{ section.settings.special_offer_text_color }};">
-        {{ section.settings.offer_tag_text }}
-      </div>
-      
-        <div class="product-image">
-          <a href="{{ product.url }}">
-            <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}" loading="lazy">
-          </a>
-        </div>
+  {% if selected_collection.handle == blank %}
+    {% assign selected_collection = collections.default %}
+  {% endif %}
 
-        <div class="product-info">
-          <h7 style="color: {{ section.settings.text_color }};">{{ product.title }}</h7>
-          <p class="model-number" style="color: {{ section.settings.text_color }};">Model no. #{{ product.sku }}</p>
-        </div>
+  {% if selected_collection.handle == blank or selected_collection.products.size == 0 %}
+    <div class="no-products-message">
+      <p>No products available. Please add products to a collection.</p>
+    </div>
+  {% else %}
+    {% if section.settings.show_subheading %}
+      <h2 class="subheading" style="font-size: {{ section.settings.subheading_font_size }}px;">
+        {{ selected_collection.title }}
+      </h2>
+    {% endif %}
 
-        <div class="price-reviews-icons">
-          <p class="price-tag" 
-             style="background-color: {{ section.settings.price_background_color }};
-                    --pseudo-bg-color: {{ section.settings.product_card_background_color }};
-                    color: {{ section.settings.price_text_color }};">
-            {% if product.compare_at_price > product.price %}
-              <span class="original-price" style="color: {{ section.settings.price_text_color }}; text-decoration: line-through; margin-right: 5px; opacity: 0.7;">
-                ₹{{ product.compare_at_price | money_without_currency }}
-              </span>
-            {% endif %}
-            <span class="current-price">₹{{ product.price | money_without_currency }}</span>
-          </p>
+    {% if section.settings.show_description %}
+      <p class="{{ section.settings.description_style }}">{{ section.settings.description }}</p>
+    {% endif %}
 
-          <div class="dotted-line-wrapper" style="border-top-color: {{ section.settings.dotted_line_color }};">
-            <div class="dotted-line"></div>
+    <button class="slider-arrow1 left" onclick="scrollCards(-1)" aria-label="Previous Slide"></button>
+    <button class="slider-arrow1 right" onclick="scrollCards(1)" aria-label="Next Slide"></button>
+    
+    <div class="product-container">
+      {% for product in selected_collection.products limit: section.settings.products_to_show %}
+        <div class="product-card" 
+             style="--pseudo-bg-color: {{ section.settings.product_card_background_color }}; 
+                    background-color: {{ section.settings.product_card_background_color }};">
+          
+          {% if section.settings.offer_tag_text != blank %}
+            <div class="offer-banner" 
+                 style="--banner-bg-color: {{ section.settings.special_offer_background_color }}; 
+                        background-color: {{ section.settings.special_offer_background_color }}; 
+                        color: {{ section.settings.special_offer_text_color }};">
+              {{ section.settings.offer_tag_text }}
+            </div>
+          {% endif %}
+          
+          <div class="product-image{% unless section.settings.offer_tag_text != blank %} no-banner{% endunless %}">
+            <a href="{{ product.url }}">
+              {% if product.featured_image %}
+                <picture>
+                  <source
+                    type="image/webp"
+                    srcset="
+                      {{ product.featured_image | image_url: width: 300, format: 'webp' }} 300w,
+                      {{ product.featured_image | image_url: width: 600, format: 'webp' }} 600w,
+                      {{ product.featured_image | image_url: width: 800, format: 'webp' }} 800w,
+                      {{ product.featured_image | image_url: width: 1200, format: 'webp' }} 1200w"
+                    sizes="(max-width: 600px) 300px,
+                           (max-width: 1000px) 600px,
+                           800px">
+                    <img
+                      srcset="
+                        {{ product.featured_image | image_url: width: 300 }} 300w,
+                        {{ product.featured_image | image_url: width: 600 }} 600w,
+                        {{ product.featured_image | image_url: width: 800 }} 800w,
+                        {{ product.featured_image | image_url: width: 1200 }} 1200w"
+                      sizes="(max-width: 600px) 300px,
+                             (max-width: 1000px) 600px,
+                             800px"
+                      src="{{ product.featured_image | image_url: width: 800 }}"
+                      alt="{{ product.title | escape }}"
+                      loading="lazy"
+                      width="100"
+                      height="100"
+                      decoding="async">
+                </picture>
+              {% endif %}
+            </a>
           </div>
 
-          <div class="icons">
-            <div class="icon-wrapper">
-              {% if section.settings.icon_1_image %}
-                <img src="{{ section.settings.icon_1_image | img_url: '50x' }}" alt="{{ section.settings.icon_1_name }}">
-              {% else %}
-                <span class="icon-placeholder"></span>
+          <div class="product-info">
+            <h7 style="color: {{ section.settings.text_color }};">{{ product.title }}</h7>
+            <p class="model-number" style="color: {{ section.settings.text_color }};">Model no. #{{ product.sku }}</p>
+          </div>
+
+          <div class="price-reviews-icons">
+            <p class="price-tag" 
+               style="background-color: {{ section.settings.price_background_color }};
+                      --pseudo-bg-color: {{ section.settings.product_card_background_color }};
+                      color: {{ section.settings.price_text_color }};">
+              {% if product.compare_at_price > product.price %}
+                <span class="original-price" style="color: {{ section.settings.price_text_color }}; text-decoration: line-through; margin-right: 5px; opacity: 0.7;">
+                  ₹{{ product.compare_at_price | money_without_currency }}
+                </span>
               {% endif %}
-              <span class="icon-name">{{ section.settings.icon_1_name }}</span>
+              <span class="current-price">₹{{ product.price | money_without_currency }}</span>
+            </p>
+
+            <div class="dotted-line-wrapper" style="border-top-color: {{ section.settings.dotted_line_color }};">
+              <div class="dotted-line"></div>
             </div>
-            <div class="icon-wrapper">
-              {% if section.settings.icon_2_image %}
-                <img src="{{ section.settings.icon_2_image | img_url: '50x' }}" alt="{{ section.settings.icon_2_name }}">
-              {% else %}
-                <span class="icon-placeholder"></span>
-              {% endif %}
-              <span class="icon-name">{{ section.settings.icon_2_name }}</span>
-            </div>
-            <div class="icon-wrapper">
-              {% if section.settings.icon_3_image %}
-                <img src="{{ section.settings.icon_3_image | img_url: '50x' }}" alt="{{ section.settings.icon_3_name }}">
-              {% else %}
-                <span class="icon-placeholder"></span>
-              {% endif %}
-              <span class="icon-name">{{ section.settings.icon_3_name }}</span>
+
+            <div class="icons">
+              {% for i in (1..3) %}
+                {% assign icon_key = 'icon_' | append: i | append: '_image' %}
+                {% assign icon_image = section.settings[icon_key] %}
+                {% if icon_image != blank %}
+                  <div class="icon-wrapper">
+                    <picture>
+                      <source
+                        type="image/webp"
+                        srcset="
+                          {{ icon_image | img_url: '100x100', format: 'webp', scale: 2 }} 1x,
+                          {{ icon_image | img_url: '200x200', format: 'webp', scale: 2 }} 2x,
+                          {{ icon_image | img_url: '300x300', format: 'webp', scale: 2 }} 3x">
+                      <img
+                        srcset="
+                          {{ icon_image | img_url: '100x100', scale: 2 }} 1x,
+                          {{ icon_image | img_url: '200x200', scale: 2 }} 2x,
+                          {{ icon_image | img_url: '300x300', scale: 2 }} 3x"
+                        src="{{ icon_image | img_url: '200x200', scale: 2 }}"
+                        loading="lazy"
+                        decoding="async"
+                        width="30"
+                        height="30">
+                    </picture>
+                  </div>
+                {% endif %}
+              {% endfor %}
             </div>
           </div>
         </div>
-      </div>
-    {% endfor %}
-  </div>
-  
-  <div class="view-all-wrapper">
-    <a href="{{ collections[section.settings.collection].url }}" class="view-all-link">
-      View all Products →
-    </a>
-  </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+</div>
 
-
+<div class="view-all-wrapper">
+  <a href="/collections/all" class="view-all-link">
+    View all Products →
+  </a>
+</div>
 
 <script>
 function scrollCards(direction) {
@@ -124,15 +175,17 @@ document.addEventListener('DOMContentLoaded', function() {
   const container = document.querySelector('.product-container');
   
   function updateArrowVisibility() {
-    const leftArrow = document.querySelector('.slider-arrow.left');
-    const rightArrow = document.querySelector('.slider-arrow.right');
+    const leftArrow = document.querySelector('.slider-arrow1.left');
+    const rightArrow = document.querySelector('.slider-arrow1.right');
     
-    leftArrow.style.opacity = container.scrollLeft <= 0 ? '0.5' : '1';
-    leftArrow.disabled = container.scrollLeft <= 0;
-    
-    const canScrollRight = container.scrollWidth > (container.scrollLeft + container.clientWidth + 1);
-    rightArrow.style.opacity = canScrollRight ? '1' : '0.5';
-    rightArrow.disabled = !canScrollRight;
+    if (leftArrow && rightArrow) {
+      leftArrow.style.opacity = container.scrollLeft <= 0 ? '0.5' : '1';
+      leftArrow.disabled = container.scrollLeft <= 0;
+      
+      const canScrollRight = container.scrollWidth > (container.scrollLeft + container.clientWidth + 1);
+      rightArrow.style.opacity = canScrollRight ? '1' : '0.5';
+      rightArrow.disabled = !canScrollRight;
+    }
   }
   
   container.addEventListener('scroll', updateArrowVisibility);
@@ -158,7 +211,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 {% schema %}
 {
- 
   "name": "Featured Collection",
   "settings": [
     {
@@ -166,6 +218,12 @@ document.addEventListener('DOMContentLoaded', function() {
       "id": "title",
       "label": "Title",
       "default": "Featured Collection"
+    },
+    {
+      "id": "color_scheme",
+      "type": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
     },
     {
       "type": "range",
@@ -191,7 +249,6 @@ document.addEventListener('DOMContentLoaded', function() {
       "step": 1,
       "default": 20
     },
-    
     {
       "type": "collection",
       "id": "collection",
@@ -212,52 +269,7 @@ document.addEventListener('DOMContentLoaded', function() {
       "label": "Offer Tag Text",
       "default": "SPECIAL OFFER - 20% DISCOUNT"
     },
-    {
-      "type": "header",
-      "content": "Color Settings"
-    },
-    {
-      "type": "color",
-      "id": "product_card_background_color",
-      "label": "Product Card Background Color",
-      "default": "#F7F7F7"
-    },
-    {
-      "type": "color",
-      "id": "special_offer_background_color",
-      "label": "Special Offer Banner Background Color",
-      "default": "#FFD700"
-    },
-    {
-      "type": "color",
-      "id": "special_offer_text_color",
-      "label": "Special Offer Banner Text Color",
-      "default": "#000000"
-    },
-    {
-      "type": "color",
-      "id": "text_color",
-      "label": "Text Color",
-      "default": "#333333"
-    },
-    {
-      "type": "color",
-      "id": "price_background_color",
-      "label": "Price Tag Background Color",
-      "default": "#FFFFFF"
-    },
-    {
-      "type": "color",
-      "id": "price_text_color",
-      "label": "Price Tag Text Color",
-      "default": "#333333"
-    },
-    {
-      "type": "color",
-      "id": "dotted_line_color",
-      "label": "Dotted Line Color",
-      "default": "#FFFFFF"
-    },
+   
     {
       "type": "header",
       "content": "Icon Settings"
@@ -267,26 +279,23 @@ document.addEventListener('DOMContentLoaded', function() {
       "id": "icon_1_image",
       "label": "Icon 1 Image"
     },
-   
     {
       "type": "image_picker",
       "id": "icon_2_image",
       "label": "Icon 2 Image"
     },
-  
     {
       "type": "image_picker",
       "id": "icon_3_image",
       "label": "Icon 3 Image"
     }
-   
   ],
   "presets": [
     {
       "name": "Featured Collection",
       "category": "Collection",
       "settings": {
-        "collection": "all",
+        "collection": "default",
         "products_to_show": 5
       }
     }

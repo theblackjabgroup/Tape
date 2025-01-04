@@ -2,14 +2,22 @@ name: Shopify Lighthouse CI
 on: [push]
 jobs:
   lhci:
-    name: Lighthouse
+    name: Lighthouse (PF_TESTING)
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Lighthouse
-      uses: shopify/lighthouse-ci-action@v1
-      with:
-        access_token: "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"
-        store: "theme-blackbytt-poc.myshopify.com"
-        lhci_min_score_accessibility: 0.85
-        password: "saylyo"
+      - uses: actions/checkout@v2
+      - name: Lighthouse
+        uses: shopify/lighthouse-ci-action@v1
+        with:
+          access_token: "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"
+          store: "theme-blackbytt-poc.myshopify.com"
+          lhci_min_score_accessibility: 0.9
+          lhci_min_score_performance: 0.7
+          password: "saylyo"
+
+          # ------------------------To be implemented with Outh2.0-----------------------------
+          # access_token: ${{ secrets.SHOP_ACCESS_TOKEN }}
+          # store: ${{ secrets.SHOP_STORE }}
+          # password: ${{ secrets.SHOP_PASSWORD }}
+          # lhci_min_score_accessibility: .9
+          # lhci_github_app_token: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}

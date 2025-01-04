@@ -1,18 +1,30 @@
 cart-items .title-wrapper-with-link {
   margin-top: 0;
 }
+.quantity__input{
+   font-family: 'Fira Sans', sans-serif;
+  font-weight: 400;
+}
 
 .cart-items td,
 .cart-items th {
   padding: 0;
   border: none;
+  font-family: Fira Sans;
+
+font-weight: 500;
+line-height: 34px;
+
+text-underline-position: from-font;
+text-decoration-skip-ink: none;
+
 }
 
 .cart-items th {
   text-align: left;
   padding-bottom: 1.8rem;
   opacity: 0.85;
-  font-weight: normal;
+  
 }
 
 .cart-item__quantity-wrapper {
@@ -24,6 +36,9 @@ cart-items .title-wrapper-with-link {
 }
 
 .cart-items *.right {
+   font-family: 'Fira Sans', sans-serif;
+  font-weight: 500;
+  line-height: 34px;
   text-align: right;
 }
 
@@ -79,6 +94,9 @@ cart-items .title-wrapper-with-link {
 .cart-item__name {
   text-decoration: none;
   display: block;
+   font-family: 'Fira Sans', sans-serif;
+  font-weight: 700;
+  line-height: 26px;
 }
 
 .cart-item__name:hover {
@@ -110,9 +128,17 @@ cart-items .title-wrapper-with-link {
 }
 
 .product-option {
+  font-family: Inter;
+
+font-weight: 400;
+text-align: left;
+text-underline-position: from-font;
+text-decoration-skip-ink: none;
+
   font-size: 1.4rem;
   word-break: break-word;
   line-height: calc(1 + 0.5 / var(--font-body-scale));
+  
 }
 
 .cart-item cart-remove-button {
@@ -209,6 +235,7 @@ cart-remove-button .icon-remove {
 .product-option * {
   display: inline;
   margin: 0;
+  font-weight:400
 }
 
 .cart-items thead th {

@@ -15,14 +15,49 @@
 {%- endstyle -%}
 
 <div class="color-{{ section.settings.color_scheme }} gradient">
-  <div class="contact page-width page-width--narrow section-{{ section.id }}-padding">
+  <div class="contact  section-{{ section.id }}-padding">
+    <div class="contact-form-design">
+    
+    <div class="border-top">
+      {% for i in (1..18) %}
+        <div class="semicircle-t"><h1></h1></div>
+      {% endfor %}
+    </div>
+    
+   <div class="border-bottom">
+      {% for i in (1..18) %}
+        <div class="semicircle-b"><h1></h1></div>
+      {% endfor %}
+    </div>
+
+ <div class="border-left">
+      {% for i in (1..6) %}
+        <div class="semicircle-l"><h1></h1></div>
+      {% endfor %}
+    </div>
+       <div class="border-right">
+      {% for i in (1..6) %}
+        <div class="semicircle-r"><h1></h1></div>
+      {% endfor %}
+    </div>
+
+
+
+      
+<div class="contact-form-data">
+   <div class="contact-form-heading">
+
     {%- if section.settings.heading != blank -%}
       <h2 class="title title-wrapper--no-top-margin inline-richtext {{ section.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
         {{ section.settings.heading }}
       </h2>
+       <p>Do You Have Any Questions?</p>
     {%- else -%}
       <h2 class="visually-hidden">{{ 'templates.contact.form.title' | t }}</h2>
+       <p>Do You Have Any Questions?</p>
     {%- endif -%}
+        </div>
+    
     {%- liquid
       assign contact_form_class = 'isolate'
       if settings.animations_reveal_on_scroll
@@ -97,21 +132,10 @@
               </span>
             </small>
           {%- endif -%}
+           
         </div>
       </div>
-      <div class="field">
-        <input
-          type="tel"
-          id="ContactForm-phone"
-          class="field__input"
-          autocomplete="tel"
-          name="contact[{{ 'templates.contact.form.phone' | t }}]"
-          pattern="[0-9\-]*"
-          value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}"
-          placeholder="{{ 'templates.contact.form.phone' | t }}"
-        >
-        <label class="field__label" for="ContactForm-phone">{{ 'templates.contact.form.phone' | t }}</label>
-      </div>
+    
       <div class="field">
         <textarea
           rows="10"
@@ -127,11 +151,17 @@
         </label>
       </div>
       <div class="contact__button">
-        <button type="submit" class="button">
+        <button type="submit" class="button" id="contact-form-button" style="
+    --border-offset: none;
+">
           {{ 'templates.contact.form.send' | t }}
         </button>
       </div>
     {%- endform -%}
+
+</div>
+ 
+       </div>
   </div>
 </div>
 

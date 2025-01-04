@@ -11,6 +11,7 @@
   --image__with__text__section__block__padding: 4rem;
   padding: var(--image__with__text__section__block__padding) 0;
   position: relative;
+  background: var(--section-color);
 }
 
 .card {
@@ -69,7 +70,6 @@
   width: var(--media-gallery-width);
   min-height: var(--media-gallery-height);
   scroll-snap-align: center;
-  background: var(--card-color-scheme)
 }
 
 .media__container {
@@ -112,10 +112,11 @@
   --dot-items__visibillity: flex;
 }
 .dot-items {
+  background: none;
   display: var(--dot-items__visibillity);
   justify-content: center;
   position: absolute;
-  bottom: 4rem;
+  bottom: 6rem;
   left: 50%;
   transform: translate(-50%, 0);
   gap: 8px;
@@ -177,7 +178,7 @@
   --info__banner__shopnow__button__visibillity: block;
 }
 
-#info__banner__expand__button{
+#info__banner__expand__button {
   --info__banner__expand__button__visibillity: none;
   display: var(--info__banner__expand__button__visibillity);
   align-items: center;
@@ -194,7 +195,7 @@
   transform: var(--info__banner__transform);
   padding: var(--info__banner__padding);
   display: var(--info__banner__visibillity);
-  z-index: 1000;
+  z-index: 1;
 }
 
 .info__banner__contents {
@@ -205,7 +206,7 @@
   justify-content: center;
   height: 100%;
   width: 100%;
-  z-index:1;
+  z-index: 1;
   padding: var(--info__banner__contents__padding);
 }
 
@@ -217,7 +218,6 @@
 .info__banner__heading {
   font-size: var(--info__banner__heading__font-size);
 }
-
 
 .info__banner__description {
   display: var(--info__banner__description__visibillity);
@@ -399,10 +399,10 @@ info__banner__contents > .svg-wrapper {
     rotate: 90deg;
     transition: all 0.3s ease;
   }
-  .info__banner__contents > .svg-wrapper.show{
+  .info__banner__contents > .svg-wrapper.show {
     rotate: -90deg;
   }
-  #info__banner__expand__button{
+  #info__banner__expand__button {
     --info__banner__expand__button__visibillity: flex;
   }
 }

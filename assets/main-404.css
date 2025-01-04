@@ -1,0 +1,206 @@
+.bb-template-404 {
+    background-color: #E5E5EA;
+    display: block;
+    padding: 10rem 5rem;
+    max-width: none;
+    margin: 2rem 2rem;
+    position: relative;
+    border-radius: 5px;
+}
+
+.bb-upper-template-404 {
+    background-color: #C7C7CC;
+    border-radius: 5px;
+    margin: 7rem auto;
+    display: block;
+    padding: 2rem;
+    position: relative;
+    max-width: var(--page-width);
+}
+
+.vertical-bar-top-404 {
+    top: -1.5rem;
+    left: 3rem;
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    gap: 52.5px;
+    z-index: 1;
+}
+
+.vertical-bar-bottom-404 {
+    bottom: -1.5rem;
+    left: 3rem;
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    gap: 52.5px;
+    z-index: 1;
+}
+
+.vertical-bar-left-404 {
+    left: -1.5rem;
+    top: 3rem;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    gap: 50px;
+    z-index: 1;
+}
+
+.vertical-bar-right-404 {
+    right: -1.5rem;
+    top: 3rem;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    gap: 50px;
+    z-index: 1;
+}
+
+.vertical-bar-circle-404 {
+    width: 30px;
+    height: 32px;
+    background-color: rgb(var(--color-background)); 
+    border-radius: 50%;
+    display: block !important;
+}
+
+.vertical-bar-circle-h-404 {
+    width: 32.75px;
+    height: 30px;
+    background-color: rgb(var(--color-background)); 
+    border-radius: 50%;
+    display: block !important;
+}
+
+
+.bb-404-subtext {
+    font-family: 'Fira Sans';
+    font-weight: 600;
+    font-size: 96px;
+    line-height: 34px;
+    color: black;
+}
+
+.bb-404-title {
+    font-family: 'Fira Sans';
+    font-weight: 500;
+    font-size: 48px;
+    line-height: 34px;
+    color: black;    
+}
+
+.bb-404-para {
+    font-family: 'Inter';
+    font-weight: 300;
+    font-size: 24px;
+    line-height: 36px;
+    margin-bottom: 2rem;
+    color: black;
+}
+.bb-404-h-button:hover {
+    /*
+    color: black;
+    background: #e5e5ea; */
+    border: none;
+}
+
+.bb-404-h-button::after:hover {
+    /*
+    color: black;
+    background: #e5e5ea; */
+    border: none;
+    box-shadow: none;
+}
+
+.bb-404-c-button:hover {
+    /*
+    background-color: black;
+    color: #e5e5ea;
+    */
+    border: none;
+}
+.bb-404-h-button , .bb-404-c-button {
+font-family: 'Fira Sans';
+margin-top: 2rem;
+}
+
+.bb-404-h-button {
+    background-color: black;
+    color: #e5e5ea;
+}
+.bb-404-c-button {
+    color: black;
+    text-decoration: underline;
+    background-color: transparent;
+}
+
+.button:not([disabled]):hover:after {
+    box-shadow: none;
+}
+.desktop-view {
+    display: block;
+  }
+  
+  .mobile-view {
+    display: none;
+  }
+
+  @media screen and (max-width: 749px) {
+    .mobile-view {
+      display: block;
+    }
+    .bb-404-c-button {
+        background: #c7c6c6;
+    }
+    .desktop-view {
+      display: none !important;
+    }
+
+    .bb-upper-template-404 {
+        background-color: #C7C6C6;
+        border-radius: 5px;
+        display: block;
+        position: relative;
+        margin: 0rem;
+        padding: 0rem;
+    }
+    .bb-template-404 {
+        background-color: unset;
+        padding: 10rem 0rem;
+    }
+
+    .bb-404-subtext {
+        font-weight: 500;
+        font-size: 32px;
+        line-height: 34px;
+    }
+    
+    .bb-404-title {
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 34px;
+    }
+    
+    .bb-404-para {
+        font-weight: 300;
+        font-size: 12px;
+        line-height: 21px;
+        margin-bottom: 2rem;
+        color: black;
+    }
+    .vertical-bar-circle-404 {
+        width: 13px;
+        height: 13px;
+    }
+    .vertical-bar-top-404 {
+        top: -0.5rem;
+        left: 1.5rem;
+    }
+    .vertical-bar-bottom-404 {
+        bottom: -0.5rem;
+        left: 1.5rem;
+    }
+
+}

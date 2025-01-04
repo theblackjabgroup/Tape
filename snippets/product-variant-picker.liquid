@@ -21,14 +21,14 @@
       {%- if picker_type == 'button' -%}
         <fieldset class="js product-form__input product-form__input--pill">
           <legend class="form__label bb-product-variant-label">{{ option.name }}</legend>
-          <div class=" {% if option.name == "Color" %} bb-color-variant {% endif  %}">  
+      <!--    <div class=" {% if option.name == "Color" %} bb-color-variant {% endif  %}">   -->
           {% render 'product-variant-options',
             product: product,
             option: option,
             block: block,
             picker_type: picker_type
           %}
-          </div>  
+      <!--    </div>  -->
         </fieldset>
       {%- endif -%}
     {%- endfor -%}

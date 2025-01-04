@@ -65,7 +65,7 @@
       name="{{ input_name | escape }}"
       value="{{ value | escape }}"
       form="{{ product_form_id }}"
-      aria-label="{% if option.name == 'Color' %} {{ 'Color: ' }}{{ value }} {% else %} {{ value }} {% endif %}"
+      aria-label="{{ value }}"
       {% if value.selected %}
         checked
       {% endif %}
@@ -74,13 +74,10 @@
       {% endif %}
       {{ input_dataset }}
     >
-    {% if option.name == "Color" %}
-    <label for="{{ input_id }}" class="bb-color-box" tabindex="0" style=" background-color: {{ value -}}; " role="radio" aria-checked="{{ value.selected | default: false }}" aria-label="Select color: {{ value }}"></label>
-      {%- else -%}
-    <label for="{{ input_id }}" aria-label="Select option: {{ value }}">
+
+    <label for="{{ input_id }}" aria-label="Select option: {{ value }}" {% if option.name == "Color" %} style="background-color: {{ value }};" {% endif %}>
       {{ value }}  
       {{ label_unavailable }}
     </label>
-   {% endif %} 
   {%- endif -%}
 {%- endfor -%}

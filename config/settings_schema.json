@@ -47,7 +47,7 @@
             "label": "Primary Text Color",
             "default": "#121212"
           },
-          {
+          { 
             "type": "color",
             "id": "product_price_card",
             "label": "Secondary Text Color",

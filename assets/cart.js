@@ -6,9 +6,11 @@ class CartRemoveButton extends HTMLElement {
       event.preventDefault();
       const cartItems = this.closest('cart-items') || this.closest('cart-drawer-items');
       cartItems.updateQuantity(this.dataset.index, 0);
+
     });
   }
 }
+
 
 customElements.define('cart-remove-button', CartRemoveButton);
 
@@ -26,7 +28,7 @@ class CartItems extends HTMLElement {
   }
 
   cartUpdateUnsubscriber = undefined;
-
+       
   connectedCallback() {
     this.cartUpdateUnsubscriber = subscribe(PUB_SUB_EVENTS.cartUpdate, (event) => {
       if (event.source === 'cart-items') {
@@ -41,7 +43,6 @@ class CartItems extends HTMLElement {
       this.cartUpdateUnsubscriber();
     }
   }
-
   resetQuantityInput(id) {
     const input = this.querySelector(`#Quantity-${id}`);
     input.value = input.getAttribute('value');
@@ -86,6 +87,8 @@ class CartItems extends HTMLElement {
     this.validateQuantity(event);
   }
 
+
+
   onCartUpdate() {
     if (this.tagName === 'CART-DRAWER-ITEMS') {
       fetch(`${routes.cart_url}?section_id=cart-drawer`)
@@ -126,11 +129,6 @@ class CartItems extends HTMLElement {
         selector: '.js-contents',
       },
       {
-        id: 'cart-icon-bubble',
-        section: 'cart-icon-bubble',
-        selector: '.shopify-section',
-      },
-      {
         id: 'cart-live-region-text',
         section: 'cart-live-region-text',
         selector: '.shopify-section',
@@ -162,6 +160,15 @@ class CartItems extends HTMLElement {
         const quantityElement =
           document.getElementById(`Quantity-${line}`) || document.getElementById(`Drawer-quantity-${line}`);
         const items = document.querySelectorAll('.cart-item');
+       
+        const cartCountElement = document.querySelector('[data-cart-count]');
+        if (cartCountElement) {
+          // Create a smooth counting animation
+          this.animateCartCountChange(
+            parseInt(cartCountElement.textContent), 
+            parsedState.item_count
+          );
+        }
 
         if (parsedState.errors) {
           quantityElement.value = quantityElement.getAttribute('value');
@@ -176,14 +183,14 @@ class CartItems extends HTMLElement {
         if (cartFooter) cartFooter.classList.toggle('is-empty', parsedState.item_count === 0);
         if (cartDrawerWrapper) cartDrawerWrapper.classList.toggle('is-empty', parsedState.item_count === 0);
 
-        this.getSectionsToRender().forEach((section) => {
-          const elementToReplace =
-            document.getElementById(section.id).querySelector(section.selector) || document.getElementById(section.id);
-          elementToReplace.innerHTML = this.getSectionInnerHTML(
-            parsedState.sections[section.section],
-            section.selector
-          );
-        });
+       this.getSectionsToRender().forEach((section) => {
+          const sectionElement = document.getElementById(section.id);
+           const elementToReplace = sectionElement.querySelector(section.selector) || sectionElement;
+    elementToReplace.innerHTML = this.getSectionInnerHTML(
+      parsedState.sections[section.section],
+      section.selector
+    );
+});
         const updatedValue = parsedState.items[line - 1] ? parsedState.items[line - 1].quantity : undefined;
         let message = '';
         if (items.length === parsedState.items.length && updatedValue !== parseInt(quantityElement.value)) {
@@ -209,14 +216,39 @@ class CartItems extends HTMLElement {
 
         publish(PUB_SUB_EVENTS.cartUpdate, { source: 'cart-items', cartData: parsedState, variantId: variantId });
       })
-      .catch(() => {
-        this.querySelectorAll('.loading__spinner').forEach((overlay) => overlay.classList.add('hidden'));
-        const errors = document.getElementById('cart-errors') || document.getElementById('CartDrawer-CartErrors');
-        errors.textContent = window.cartStrings.error;
-      })
+     .catch((error) => {
+  console.error('Cart update error:', error);
+  this.querySelectorAll('.loading__spinner').forEach((overlay) => overlay.classList.add('hidden'));
+  const errors = document.getElementById('cart-errors') || document.getElementById('CartDrawer-CartErrors');
+  errors.textContent = window.cartStrings.error;
+})
       .finally(() => {
         this.disableLoading(line);
       });
+  }
+   animateCartCountChange(start, end) {
+    const cartCountElement = document.querySelector('[data-cart-count]');
+    if (!cartCountElement) return;
+
+    let startTimestamp = null;
+    const duration = 500; 
+
+    const step = (timestamp) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      
+      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+      const currentValue = Math.floor(start + (end - start) * progress);
+      
+      cartCountElement.textContent = `${currentValue} items`;
+      
+      if (progress < 1) {
+        window.requestAnimationFrame(step);
+      } else {
+        cartCountElement.textContent = `${end} items`;
+      }
+    };
+    
+    window.requestAnimationFrame(step);
   }
 
   updateLiveRegions(line, message) {
@@ -264,6 +296,7 @@ class CartItems extends HTMLElement {
   }
 }
 
+
 customElements.define('cart-items', CartItems);
 
 if (!customElements.get('cart-note')) {
@@ -272,15 +305,23 @@ if (!customElements.get('cart-note')) {
     class CartNote extends HTMLElement {
       constructor() {
         super();
-
-        this.addEventListener(
-          'input',
-          debounce((event) => {
-            const body = JSON.stringify({ note: event.target.value });
-            fetch(`${routes.cart_update_url}`, { ...fetchConfig(), ...{ body } });
-          }, ON_CHANGE_DEBOUNCE_TIMER)
-        );
+      }
+      
+      connectedCallback() {
+        const noteTextarea = this.querySelector('textarea');
+        
+        // Always add event listener to the textarea
+        if (noteTextarea) {
+          noteTextarea.addEventListener(
+            'input',
+            debounce((event) => {
+              const body = JSON.stringify({ note: event.target.value });
+              fetch(`${routes.cart_update_url}`, { ...fetchConfig(), ...{ body } });
+            }, ON_CHANGE_DEBOUNCE_TIMER)
+          );
+        }
       }
     }
   );
 }
+

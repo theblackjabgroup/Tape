@@ -2,17 +2,14 @@
 .faq-section {
   max-width: 1600px;
   margin: 0 auto;
-  padding: 2rem 1rem;
 }
 .faq-container {
   width: 100%;
-  margin-left: 2rem;
   box-sizing: border-box;
-  padding-right: 2rem;
 }
   .faq-main {
   display: grid;
-  padding: 10px;
+  padding: 20px;
   grid-template-columns: 350px 1fr;
   gap: 8rem;
   align-items: start;
@@ -57,23 +54,53 @@
 .faq-item::after {
   bottom: -25px; 
 }
+
+
 .dots-line {
   position: absolute;
   left: calc(3rem + 27px);
-  top: 0;
-  bottom: 0;
   width: 8px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  align-items:stretch;
+  gap: 11px;
+  align-items: stretch;
   height: 100%;
 }
+
 .collapse_dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
   flex-shrink: 0;
+  opacity: 1; 
+  background-color: #e0e0e0;
+  transform: scale(1); 
+}
+
+.collapse_dot.new-dot {
+  opacity: 0;
+  transform: scale(0);
+}
+
+.collapse_dot.new-dot.animated {
+  opacity: 1;
+  transform: scale(1);
+  animation: dotAppear 0.3s ease forwards;
+}
+
+@keyframes dotAppear {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.2);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
   /* layout2  */
 .striaght-line {
@@ -111,7 +138,8 @@
   overflow: hidden;
   max-height: 0;
   opacity: 0;
-  transition: all 0.3s ease;
+   transition: all 0.3s ease;
+
 }
 .faq-answer.visible {
   max-height: 500px;

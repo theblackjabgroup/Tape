@@ -6,6 +6,8 @@
 -%}
 
 <product-info
+id="MainProduct-{{ section.id }}"
+class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}"
   data-section="{{ section.id }}"
   data-product-id="{{ product.id }}"
   data-update-url="false"
@@ -14,18 +16,20 @@
     data-zoom-on-hover
   {% endif %}
 >
-  {{ 'section-main-product.css' | asset_url | stylesheet_tag }}
-  {{ 'section-featured-product.css' | asset_url | stylesheet_tag }}
-  {{ 'component-accordion.css' | asset_url | stylesheet_tag }}
-  {{ 'component-price.css' | asset_url | stylesheet_tag }}
-  {{ 'component-deferred-media.css' | asset_url | stylesheet_tag }}
-  {{ 'component-rating.css' | asset_url | stylesheet_tag }}
-  {{ 'component-volume-pricing.css' | asset_url | stylesheet_tag }}
+{{ 'section-main-product.css' | asset_url | stylesheet_tag }}
+{{ 'component-accordion.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'component-slider.css' | asset_url | stylesheet_tag }}
+{{ 'component-rating.css' | asset_url | stylesheet_tag }}
+{{ 'component-deferred-media.css' | asset_url | stylesheet_tag }}
+{{ 'product-page.css' | asset_url | stylesheet_tag }}
+  
   {% unless section.settings.product.has_only_default_variant %}
     {{ 'component-product-variant-picker.css' | asset_url | stylesheet_tag }}
     {{ 'component-swatch.css' | asset_url | stylesheet_tag }}
     {{ 'component-swatch-input.css' | asset_url | stylesheet_tag }}
   {% endunless %}
+  {{ 'product-page.css' | asset_url | stylesheet_tag }}
 
   {%- style -%}
     .section-{{ section.id }}-padding {
@@ -42,8 +46,10 @@
   {%- endstyle -%}
 
   <script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'product-page.js' | asset_url }}" defer="defer"></script>
   <script src="{{ 'show-more.js' | asset_url }}" defer="defer"></script>
   <script src="{{ 'price-per-item.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'media-gallery.js' | asset_url }}" defer="defer"></script>
 
   {% comment %} TODO: assign `product.selected_or_first_available_variant` to variable and replace usage to reduce verbosity {% endcomment %}
 
@@ -70,12 +76,12 @@
 
   <section class="color-{{ section.settings.color_scheme }} {% if section.settings.secondary_background %}background-secondary{% else %}gradient{% endif %}">
     <div class="page-width section-{{ section.id }}-padding{% if section.settings.secondary_background %} isolate{% endif %}">
-      <div class="featured-product product product--{{ section.settings.media_size }} grid grid--1-col gradient color-{{ section.settings.color_scheme }} product--{{ section.settings.media_position }}{% if section.settings.secondary_background == false %} isolate{% endif %} {% if product.media.size > 0 or section.settings.product == blank %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
-        <div class="grid__item product__media-wrapper">
+      <div class="featured-product product--thumbnail_slider product product--{{ section.settings.media_size }} grid grid--1-col gradient color-{{ section.settings.color_scheme }} product--{{ section.settings.media_position }}{% if section.settings.secondary_background == false %} isolate{% endif %} {% if product.media.size > 0 or section.settings.product == blank %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
+        <div class="grid__item product__media-wrapper bb_background">
           {%- unless placeholder -%}
-            {% render 'product-media-gallery', product: product, variant_images: variant_images, limit: 1 %}
+            {% render 'product-media-gallery', product: product, variant_images: variant_images %}
           {%- else -%}
-            <div class="product__media-item">
+            <div id="bb_product__media_first" class="bb-fp__media product__media-item">
               <div
                 class="product-media-container global-media-settings gradient{% if section.settings.constrain_to_viewport %} constrain-height{% endif %}"
                 style="--ratio: 1.0; --preview-ratio: 1.0;"
@@ -106,7 +112,7 @@
                     {{- block.settings.text -}}
                   </p>
                 {%- when 'title' -%}
-                  <h2 class="product__title {{ block.settings.heading_size }}" {{ block.shopify_attributes }}>
+                  <h2 class="bb-product__title product__title {{ block.settings.heading_size }}" {{ block.shopify_attributes }}>
                     {%- unless placeholder -%}
                       {{ product.title | escape }}
                     {%- else -%}
@@ -120,6 +126,7 @@
                       placeholder: placeholder,
                       use_variant: true,
                       show_badges: true,
+                      main: true,
                       price_class: 'price--large'
                     -%}
                   </div>
@@ -163,7 +170,7 @@
                 {%- when 'quantity_selector' -%}
                   <div
                     id="Quantity-Form-{{ section.id }}"
-                    class="product-form__input product-form__quantity{% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_vertical_offset < 0 %} product-form__quantity-top{% endif %}"
+                    class="product-form__input product-form__quantity bb-quantity {% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_vertical_offset < 0 %} product-form__quantity-top{% endif %}"
                     {{ block.shopify_attributes }}
                   >
                     {% comment %} TODO: enable theme-check once `item_count_for_variant` is accepted as valid filter {% endcomment %}
@@ -172,7 +179,7 @@
                       | item_count_for_variant: product.selected_or_first_available_variant.id
                     -%}
                     {% # theme-check-enable %}
-                    <label class="quantity__label form__label" for="Quantity-{{ section.id }}">
+                    <label class="quantity__label form__label bb-quantity-label" for="Quantity-{{ section.id }}">
                       {{ 'products.product.quantity.label' | t }}
                       <span class="quantity__rules-cart{% if cart_qty == 0 %} hidden{% endif %}">
                         {%- render 'loading-spinner' -%}
@@ -184,7 +191,7 @@
                       </span>
                     </label>
                     <div class="price-per-item__container">
-                      <quantity-input class="quantity">
+                      <quantity-input class="quantity bb-quantity2">
                         <button class="quantity__button" name="minus" type="button">
                           <span class="visually-hidden">
                             {{- 'products.product.quantity.decrease' | t: product: product.title | escape -}}
