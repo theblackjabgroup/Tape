@@ -8,14 +8,13 @@
       "label": "t:sections.all.colors.label",
       "default": "scheme-1"
     },
-
     {
       "type": "checkbox",
       "id": "show_social_sharing",
       "label": "Show Social Sharing Buttons",
       "default": true
     },
-      {
+    {
       "type": "checkbox",
       "id": "show_tags",
       "label": "Show Tags",
@@ -32,6 +31,30 @@
       "id": "show_read_time",
       "label": "Show Read Time",
       "default": true
+    },
+    {
+      "type": "header",
+      "content": "Icon Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_like_image",
+      "label": "Like Icon Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_share_image",
+      "label": "Share Icon Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_comment_image",
+      "label": "Comment Icon Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_bookmark_image",
+      "label": "Bookmark Icon Image"
     }
   ],
   "blocks": [
@@ -70,9 +93,15 @@
       ]
     }
   ],
- 
+  "presets": [
+    {
+      "name": "Default",
+      "category": "Blog"
+    }
+  ]
 }
 {% endschema %}
+
 
 <link rel="stylesheet" href="{{ 'main-article.css' | asset_url }}">
 <div class="blog-article-container color-{{ section.settings.color_scheme }} {% unless article.image %}no-image{% endunless %}">
@@ -122,11 +151,12 @@
         <div class="blog-social-container centered-social">
           <div class="blog-social-bar">
             <div class="blog-interaction-buttons">
-              <i class="far fa-thumbs-up"></i>
-              <i class="far fa-paper-plane" data-url="{{ shop.url }}{{ article.url }}"></i>
-              <i class="fa-regular fa-comment"></i>
-              <i class="far fa-bookmark"></i>
-            </div>
+  <span class="icon like-icon"></span>
+  <span class="icon share-icon" data-url="{{ shop.url }}{{ article.url }}"></span>
+  <span class="icon comment-icon"></span>
+  <span class="icon bookmark-icon"></span>
+</div>
+
             <div class="blog-social-links">
               Follow us on:
               <div class="blog-divider"></div>
@@ -162,13 +192,13 @@
       {% if section.settings.show_social_sharing %}
         <div class="blog-social-container">
           <div class="blog-social-bar">
-            <div class="blog-interaction-buttons">
-              <i class="far fa-thumbs-up"></i>
-              <i class="far fa-paper-plane" data-url="{{ shop.url }}{{ article.url }}"></i>
-              <i class="fa-regular fa-comment"></i>
-              <i class="far fa-bookmark"></i>
-            </div>
-            <div class="blog-social-links">
+             <div class="blog-interaction-buttons">
+  <img src="{{ section.settings.icon_like_image | img_url: '50x50' }}" alt="Like Icon" class="icon like-icon">
+  <img src="{{ section.settings.icon_share_image | img_url: '50x50' }}" alt="Share Icon" class="icon share-icon" data-url="{{ shop.url }}{{ article.url }}">
+  <img src="{{ section.settings.icon_comment_image | img_url: '50x50' }}" alt="Comment Icon" class="icon comment-icon">
+  <img src="{{ section.settings.icon_bookmark_image | img_url: '50x50' }}" alt="Bookmark Icon" class="icon bookmark-icon">
+</div>
+     <div class="blog-social-links">
               Follow us on:
               <div class="blog-divider"></div>
               <a href="{{ settings.social_facebook_link }}" class="blog-social-icon" target="_blank">
