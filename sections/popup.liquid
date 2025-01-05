@@ -60,13 +60,17 @@
     <div class="popup-message-layout2">
       {{ section.settings.popup_message | richtext }}
     </div>
+
     <form id="popupForm" class="popup-form">
+      <div class='emailkadabba'> 
+      <img src="{{ 'mail.png' | asset_url }}" alt="Icon Description" class="emailkaicon">
       <input
         type="email"
         id="emailInputLayout2"
         class="popup-email-input-layout2"
         placeholder="{{ section.settings.email_placeholder }}"
       >
+      </div> 
       <button class="popup-subscribe-btn" onclick="handleSubscribe()">{{ section.settings.button_text }}</button>
     </form>
   </div>
@@ -146,7 +150,7 @@
           "label": "Layout 2"
         }
       ],
-      "default": "layout1"
+      "default": "layout2"
     },
     {
       "type": "text",
