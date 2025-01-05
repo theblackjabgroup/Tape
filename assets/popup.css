@@ -152,6 +152,128 @@
   z-index: 2;
 }
 
+/* -------------------------------------------------------------------------------------------------------*/
+/* -------------------------------------------------------------------------------------------------------*/
+/* -------------------------------------------------------------------------------------------------------*/
+
+/* Layout 2 CSS */
+
+/* Typography and Spacing */
+.popup-message-layout2 p,
+.popup-message-layout2 span,
+.popup-message-layout2 h1,
+.popup-message-layout2 h2,
+.popup-message-layout2 h3,
+.popup-message-layout2 h4,
+.popup-message-layout2 a,
+.popup-message-layout2 li,
+.popup-message-layout2 ul,
+.popup-message-layout2 ol {
+  font-size: 16px; /* Base font size */
+  line-height: 1.5;
+  padding: 10px 20px 0 10px;
+}
+
+/* Popup box styles */
+.popup-box {
+  max-width: 620px;
+  height: fit-content;
+  background-color: var(--background_product_card);
+  border-radius: 10px;
+  border: 1px solid rgb(206, 206, 206);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 20px;
+  gap: 15px;
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.066);
+  position: fixed;
+  bottom: 30px;
+  left: 25px;
+  z-index: 1000;
+}
+
+.popup-box:hover {
+  background-color: #b6cbbd;
+}
+
+.popup-heading-container-layout2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.popup-heading-layout2 {
+  font-size: 24px;
+  padding: 10px 0 0 10px;
+  color: var(--foreground);
+  font-family: "Fira Sans";
+  font-weight: 600;
+}
+
+.popup-heading-layout2:hover {
+  color: #754e1a;
+}
+
+/* Form styles */
+.popup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 90%;
+}
+
+/* Input field styles */
+
+.emailkadabba {
+  display: flex;
+  max-width: 345px;
+  background-color: white;
+}
+
+.emailkaicon {
+  padding: 5px;
+  border-radius: 4px;
+}
+
+.popup-email-input-layout2 {
+  border: none;
+  border-radius: 4px;
+  max-width: 345px;
+  padding: 5px;
+}
+
+#popup-close-btn {
+  border: none;
+  background-color: inherit;
+  background: transparent;
+  transition: transform 0.3s ease;
+  align-items: center;
+}
+
+.popup-close-btn:hover {
+  transform: scale(1.2);
+}
+
+.popup-subscribe-btn {
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 10px;
+  font-size: 14px;
+  cursor: pointer;
+  display: block;
+  font-family: "Fira Sans";
+  font-weight: 400;
+  z-index: 2;
+  width: 50%;
+}
+
+/* Media Querries  */
+
 @media screen and (max-width: 600px) {
   .pop_svg {
     width: 325px;
@@ -192,11 +314,6 @@
     left: 18px;
   }
 
-  .popup-subscribe-btn {
-    padding: 7px 7px;
-    font-size: 12px;
-    margin: 6px 0 0 30px;
-  }
   .popup-message p,
   .popup-message span,
   .popup-message h1,
@@ -210,6 +327,51 @@
     font-size: 12px;
     line-height: 1.5;
     padding: 10px 20px 0 10px;
+  }
+
+  /* Layout 2 responsive css  */
+  .popup-box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 300px;
+  }
+  .popup-heading-layout2 {
+    font-size: 20px;
+    font-weight: 400;
+  }
+
+  .popup-heading-layout2:hover {
+    color: #754e1a;
+  }
+
+  .popup-message-layout2 {
+    font-weight: 300;
+    font-size: 10px;
+    max-width: 300px;
+    width: fit-content;
+    text-align: justify;
+  }
+
+  .emailkadabba,
+  .popup-email-input-layout2 {
+    max-width: 90%;
+  }
+
+  .popup-subscribe-btn {
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    display: block;
+    font-family: "Fira Sans";
+    font-weight: 400;
+    z-index: 2;
+    width: 50%;
   }
 }
 
@@ -261,147 +423,18 @@
     left: 18px;
   }
 
-  .popup-subscribe-btn {
-    padding: 7px 7px;
-    font-size: 12px;
-    margin: 6px 0 0 30px;
-  }
-}
+  /* Layout 2 responsive css  */
 
-/* -------------------------------------------------------------------------------------------------------*/
-/* -------------------------------------------------------------------------------------------------------*/
-/* -------------------------------------------------------------------------------------------------------*/
-
-/* Layout 2 CSS */
-
-/* Typography and Spacing */
-.popup-message-layout2 p,
-.popup-message-layout2 span,
-.popup-message-layout2 h1,
-.popup-message-layout2 h2,
-.popup-message-layout2 h3,
-.popup-message-layout2 h4,
-.popup-message-layout2 a,
-.popup-message-layout2 li,
-.popup-message-layout2 ul,
-.popup-message-layout2 ol {
-  font-size: 16px; /* Base font size */
-  line-height: 1.5;
-  padding: 10px 20px 0 10px;
-}
-
-/* Popup box styles */
-.popup-box {
-  max-width: 650px;
-  height: fit-content;
-  background-color: var(--background_product_card);
-  border-radius: 10px;
-  border: 1px solid rgb(206, 206, 206);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-between;
-  padding: 20px;
-  gap: 15px;
-  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.066);
-  position: fixed;
-  bottom: 30px;
-  left: 25px;
-  z-index: 1000;
-}
-
-.popup-box:hover {
-  background-color: #b6cbbd;
-}
-
-.popup-heading-container-layout2 {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-}
-
-.popup-heading-layout2 {
-  font-size: 24px;
-  padding: 10px 0 0 10px;
-  color: var(--foreground);
-  font-family: "Fira Sans";
-  font-weight: 600;
-}
-
-.popup-heading-layout2:hover {
-  color: #754e1a;
-}
-
-.popup-message-layout2 {
-  color: var(--foreground);
-  margin-top: 8px;
-  font-family: "Fira Sans";
-  font-weight: 400;
-  z-index: 2;
-  max-width: 600px;
-  width: fit-content;
-  text-align: justify;
-  padding: 0 0 20px 0;
-}
-
-/* Form styles */
-.popup-form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  width: 90%;
-}
-
-/* Input field styles */
-
-.popup-email-input-layout2 {
-  border: none;
-  border-radius: 4px;
-  width: 70%;
-  padding: 10px;
-}
-
-#popup-close-btn {
-  border: none;
-  background-color: inherit;
-  background: transparent;
-  transition: transform 0.3s ease;
-  align-items: center;
-}
-
-.popup-close-btn:hover {
-  transform: scale(1.2);
-}
-
-.popup-subscribe-btn {
-  background-color: black;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  padding: 10px 10px;
-  font-size: 14px;
-  cursor: pointer;
-  display: block;
-  font-family: "Fira Sans";
-  font-weight: 400;
-  z-index: 2;
-  width: 50%;
-}
-/
-
-/* Responsive design */
-@media screen and (max-width: 600px) {
   .popup-box {
     position: fixed;
     top: 50%;
-    left: 50%;
-    z-index: 1000;
     transform: translate(-50%, -50%);
+    max-width: 300px;
   }
   .popup-heading-layout2 {
     font-size: 20px;
-    font-weight: 400;
+    font-weight: 500;
+    padding: 10px 0;
   }
 
   .popup-heading-layout2:hover {
@@ -411,8 +444,19 @@
   .popup-message-layout2 {
     font-weight: 300;
     font-size: 10px;
-    max-width: 500px;
+    max-width: 300px;
     width: fit-content;
     text-align: justify;
+  }
+
+  .emailkadabba,
+  .popup-email-input-layout2 {
+    max-width: 90%;
+  }
+
+  .popup-subscribe-btn {
+    padding: 7px 7px;
+    font-size: 12px;
+    margin: 6px 0 0 0px;
   }
 }
