@@ -71,9 +71,9 @@
 }
 
 .ticket-line-first {
-  height: 8px;
+  height: 16px;
   display: block !important;
-  width: 8px;
+  width: 16px;
   border-radius: 50%;
   background-color: rgb(var(--color-background));
 }
@@ -81,7 +81,7 @@
 .bb-thumbnail-width {
   width: 90%;
   height: 90%;
-  width: calc(33% - 2rem) !important;
+  width: calc(33% - 8rem) !important;
 }
 
 .bb-product-thumbnail-corner {
@@ -448,6 +448,55 @@ border-radius: 50%;
   color: var(--utilities);
 }
 
+.bb-product-form__input--dropdown {
+  display: flex;
+    gap: 1rem;
+}
+
+.bb-form__label {
+  margin: auto;
+  margin-left: 0px;
+  font-size: 20px;
+  font-family: 'Fira Sans';
+  font-weight: 500;
+  line-height: 30px;
+}
+
+.bb-dropdown-pro-select {
+  width: 70%;
+  background-color: var(--background_product_card);
+  border-radius: 5px;
+}
+
+
+.select:after {
+  border: none !important;
+}
+
+.bb-pro-drop-option {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 30px;
+}
+.bb-dropdown-pro-select:before {
+  position: absolute;
+  top: 50%;
+  width: 13px;
+  height: 16px;
+  background-color:rgb(var(--color-background));
+  border-radius: 50%;
+  transform: translate(-40%, -50%);
+  z-index: 0;
+}
+.bb-dropdown-pro-select:after {
+  position: absolute;
+  width: 13px;
+  height: 16px;
+  background-color:rgb(var(--color-background));
+  top: 33%;
+  left: 96.5%;
+    border-radius: 50%;
+}
 .shopify-payment-button {
   font-family: 'Inter';
   font-weight: 500;
@@ -570,6 +619,14 @@ border-radius: 50%;
 }
 
 @media screen and (max-width: 749px) {
+  .bb-thumbnail-width {
+    width: calc(33% - 2rem) !important;
+  }
+  
+  .ticket-line-first {
+    height: 8px;
+    width: 8px;
+  }
   .bb-test {
     position: relative;
     flex-wrap: inherit;
@@ -600,6 +657,26 @@ border-radius: 50%;
   font-size: 28px;
 }
 
+.bb_select__select {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 30px;
+  font-family: 'Fira Sans';
+}
+.select:hover.select:after {
+  border-radius: inherit !important;
+}
+
+*:focus-visible {
+  outline: none;
+  outline-offset: var(--focused-base-outline-offset);
+  box-shadow: none;
+}
+
+.bb-pro-drop-svg-wrapper {
+  height: 12px !important;
+    width: 24px !important;
+}
 @media screen and (max-width: 749px) {
 
   .product-media-container.constrain-height.media-fit-contain {

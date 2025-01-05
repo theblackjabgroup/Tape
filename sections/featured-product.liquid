@@ -81,7 +81,7 @@ class="section-{{ section.id }}-padding gradient color-{{ section.settings.color
           {%- unless placeholder -%}
             {% render 'product-media-gallery', product: product, variant_images: variant_images %}
           {%- else -%}
-            <div id="bb_product__media_first" class="bb-fp__media product__media-item">
+            <div id="bb_product__media_first" class="bb-fp__media product__media-item" style="display: block;">
               <div
                 class="product-media-container global-media-settings gradient{% if section.settings.constrain_to_viewport %} constrain-height{% endif %}"
                 style="--ratio: 1.0; --preview-ratio: 1.0;"
@@ -1387,22 +1387,6 @@ class="section-{{ section.id }}-padding gradient color-{{ section.settings.color
     },
     {
       "type": "select",
-      "id": "media_fit",
-      "options": [
-        {
-          "value": "contain",
-          "label": "t:sections.main-product.settings.media_fit.options__1.label"
-        },
-        {
-          "value": "cover",
-          "label": "t:sections.main-product.settings.media_fit.options__2.label"
-        }
-      ],
-      "default": "contain",
-      "label": "t:sections.main-product.settings.media_fit.label"
-    },
-    {
-      "type": "select",
       "id": "media_position",
       "options": [
         {
@@ -1417,27 +1401,6 @@ class="section-{{ section.id }}-padding gradient color-{{ section.settings.color
       "default": "left",
       "label": "t:sections.featured-product.settings.media_position.label",
       "info": "t:sections.featured-product.settings.media_position.info"
-    },
-    {
-      "type": "select",
-      "id": "image_zoom",
-      "options": [
-        {
-          "value": "lightbox",
-          "label": "t:sections.main-product.settings.image_zoom.options__1.label"
-        },
-        {
-          "value": "hover",
-          "label": "t:sections.main-product.settings.image_zoom.options__2.label"
-        },
-        {
-          "value": "none",
-          "label": "t:sections.main-product.settings.image_zoom.options__3.label"
-        }
-      ],
-      "default": "lightbox",
-      "label": "t:sections.main-product.settings.image_zoom.label",
-      "info": "t:sections.main-product.settings.image_zoom.info"
     },
     {
       "type": "checkbox",
