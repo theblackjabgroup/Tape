@@ -227,13 +227,13 @@
 
 /* Input field styles */
 
-.emailkadabba {
+.popup-email-container {
   display: flex;
   max-width: 345px;
   background-color: white;
 }
 
-.emailkaicon {
+.popup-email-Icon {
   padding: 5px;
   border-radius: 4px;
 }
@@ -354,7 +354,7 @@
     text-align: justify;
   }
 
-  .emailkadabba,
+  .popup-email-container,
   .popup-email-input-layout2 {
     max-width: 90%;
   }
@@ -449,7 +449,7 @@
     text-align: justify;
   }
 
-  .emailkadabba,
+  .popup-email-container,
   .popup-email-input-layout2 {
     max-width: 90%;
   }
