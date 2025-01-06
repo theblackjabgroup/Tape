@@ -15,7 +15,7 @@ h2, .model-number {
   max-width: 1400px;
   margin: 50px auto;
   padding: 20px;
-  background-color: rgb(255, 255, 255);
+  background-color:  rgb(var(--color-background));
   position: relative;
   overflow: hidden;
 }
@@ -24,8 +24,8 @@ h2, .model-number {
   position: absolute;
   top: 10px;
   left: 10px;
-  background-color: #ff0000;
-  color: white;
+  background-color: var(--product_special_offer);
+  color: rgb(var(--color-foreground));
   padding: 8px 12px;
   border-radius: 16px;
   font-size: 14px;
@@ -75,7 +75,7 @@ h1, p {
   flex-direction: column;
   overflow: visible;
   border-radius: 4px;
-  background-color: #F7F7F7;
+  background-color: var(--background_product_card);
 }
 
 .product-image1 {
@@ -106,6 +106,7 @@ h7 {
   margin: 10px 0 5px 14px;
   font-weight: bold;
   line-height: 1.4;
+    color: rgb(var(--color-foreground));
 }
 
 .product-info {
@@ -115,12 +116,14 @@ h7 {
   flex-direction: column;
   flex: 1;
   min-height: auto;
+    color: rgb(var(--color-foreground));
 }
 
 
 .vendor{
     font-size: 17px;
  margin-left:15px
+    color: rgb(var(--color-foreground));
 }
 
 .model-number {
@@ -129,23 +132,25 @@ h7 {
   padding: 0 15px;
   font-size: 14px;
   flex-shrink: 0;
+    color: rgb(var(--color-foreground));
 }
 
 .price-reviews-icons {
   margin-top: auto;
   padding: 15px;
   flex-shrink: 0;
+    color: rgb(var(--color-foreground));
 }
 .price-tag {
   padding: 8px 11px;
   border-radius: 3px;
   font-size: 14px;
   font-weight: bold;
-  color: #333;
+  color: var(--product_price_font);
   display: inline-block;
   position: absolute;
   left: 30px; /* Fixed left position */
-  background: #FFFFFF;
+  background:  var(--product_price_card);
   text-align: left;
   max-width: 100%; /* Limit the width to prevent overflow */
 }
@@ -157,7 +162,7 @@ h7 {
     top: 50%;
     width: 10px;
     height: 13px;
-    background-color: var(--pseudo-bg-color, #F7F7F7);
+    background-color: var(--background_product_card);
     transform: translateY(-50%);
     border-radius: 50%;
   }
@@ -274,6 +279,7 @@ h7 {
     margin-bottom: 20px;
   position: relative;
   border-top: 6px dotted;
+      color: rgb(var(--color-background));
 }
 
 .view-all-wrapper {
