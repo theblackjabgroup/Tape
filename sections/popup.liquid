@@ -37,7 +37,10 @@
           >
         </div>
 
-        <button class="popup-subscribe-btn" onclick="handleSubscribe()">{{ section.settings.button_text }}</button>
+        <button class="popup-subscribe-btn click-btn" onclick="handleSubscribe()">
+          {{ section.settings.button_text }}
+          <span class="wave"></span>
+        </button>
       </div>
     </div>
   </div>
@@ -62,15 +65,15 @@
     </div>
 
     <form id="popupForm" class="popup-form">
-      <div class='popup-email-container'> 
-      <img src="{{ 'mail.png' | asset_url }}" alt="Icon Description" class="popup-email-Icon">
-      <input
-        type="email"
-        id="emailInputLayout2"
-        class="popup-email-input-layout2"
-        placeholder="{{ section.settings.email_placeholder }}"
-      >
-      </div> 
+      <div class="popup-email-container">
+        <img src="{{ 'mail.png' | asset_url }}" alt="Icon Description" class="popup-email-Icon">
+        <input
+          type="email"
+          id="emailInputLayout2"
+          class="popup-email-input-layout2"
+          placeholder="{{ section.settings.email_placeholder }}"
+        >
+      </div>
       <button class="popup-subscribe-btn" onclick="handleSubscribe()">{{ section.settings.button_text }}</button>
     </form>
   </div>
