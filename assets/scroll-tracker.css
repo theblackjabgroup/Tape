@@ -1,70 +1,76 @@
+:root {
+    --arrow-container-size: 20px;  /* Controls the dark background size */
+    --arrow-size: 10px;            /* Controls the white arrow size */
+    --arrow-thickness: 3px;       /* Controls the arrow line thickness */
+}
+
+
+
 * {
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
 }
-
 .scroll-tracker {
     padding: 0 11px;
-    border-radius: 3px;
+    border-radius: 7px;
     font-size: 15px;
     font-weight: 500;
     height: 45px;
-    color: rgb(var(--color-foreground));
+    color: var(--product_price_font);
     display: inline-block;
     position: relative;
     margin-left: 40px;
-    background: #676251;
+    background: var(--product_price_card);
     text-align: left;
     width: 60%;
     line-height: normal;
 }
 
-.scroll-tracker::before,
-.scroll-tracker::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    width: 13px;
-    height: 16px;
-    background-color: var(--background_product_card);
-    transform: translateY(-50%);
-    border-radius: 50%;
-}
-
-.scroll-tracker::before {
-    left: -5px;
-}
-
-.scroll-tracker::after {
-    right: -5px;
-}
-
 .scroll-tracker p {
     font-size: 15px;
-    margin-left: 3px;
+    margin-left: 5px;
     margin-top: 13px;
     display: flex;
     align-items: center;
     gap: 3px;
+    color: var(--product_price_font);
+}
+.scroll-distance {
+    font-weight: 500
+  font-size: 15px;
 }
 
-.scroll-tracker-icon {
-   height: 12px;
-    width: 12px;
-      margin-left: 2px;
-    margin-top: -30px;
+
+/* Modified arrow styling */
+.arrow-down {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--arrow-container-size);
+    height: var(--arrow-container-size);
+    border-radius: 4px;
+    margin-left: 2px;
+    position: relative;
+    margin-top: 1px;
 }
 
+.arrow-down::after {
+    content: '';
+    width: var(--arrow-size);
+    height: var(--arrow-size);
+     border-right: var(--arrow-thickness) solid var(--product_price_font);
+   border-bottom: var(--arrow-thickness) solid var(--product_price_font);
+    transform: rotate(45deg) translateY(calc(var(--arrow-thickness) * -1));
+}
 @media screen and (max-width: 480px) {
     .scroll-tracker {
         display: none;
     }
 }
-
-@media screen and (min-width: 1440px){
-.scroll-tracker {
+@media screen and (min-width: 1440px) {
+    .scroll-tracker {
         width: 42%;
         margin-left: 120px;
-  }
+    }
 }
-
