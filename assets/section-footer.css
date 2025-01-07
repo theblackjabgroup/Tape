@@ -202,7 +202,7 @@ background-color: var(--background_product_card);
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-right: 200px; /* Adjust for alignment */
+  margin-right: 320px; /* Adjust for alignment */
 }
 
 /* Localization Form */
@@ -228,29 +228,36 @@ background-color: var(--background_product_card);
 
 /* Disclosure Button Styling */
 .footer__country-selector .footer-country-form .disclosure__button {
-  border: 1px solid currentColor;
-  padding: 0.5rem 1rem;
-  width: 100%;
-  padding-left: 17px;
+padding: 0.5rem 1rem;
+    width: 100%;
+    white-space: nowrap;
+    padding-left: 15px;
+    margin-left: -1px;
     padding-right: 38px;
-  text-align: left;
-  background: none;
-  cursor: pointer;
-  border-radius: 4px;
-  font-size: 12px;
-  margin-top: 0.5rem;
+    text-align: left;
+    color:rgb(var(--color-secondary-button-text));
+    background: rgb(var(--color-button-text));
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 12px;
+    margin-top: 0.5rem;
 }
 
 
 /* Optional Adjustments for Margins and Layout */
 .footer__country-selector .footer-country-label {
-  margin-left: -1px;
-    margin-bottom: 4px;
-    margin-top: 8px;
-    font-size: 12px
+margin-left: -1px;
+margin-bottom: 1px;
+margin-top: 15px;
+font-size: 13px;
+font-family: 'Inter', sans-serif; /* Set font to Inter */
+
 }
-.disclosure {
+/* .disclosure {
   margin-right: 85px;
+} */
+.footer-country-label::first-letter {
+  text-transform: uppercase;
 }
 
 
@@ -297,12 +304,14 @@ background-color: var(--background_product_card);
     margin-bottom: 0;
   }
   
-  .disclosure {
-  margin-right: -40px;
+  .footer__country-selector .footer-country-form {
+    margin-left: 163px;
+  }
 }
 
 .footer__country-selector .footer-country-form .disclosure__button {
-  padding-right: 53px;
+padding-right: 70px;
+            margin-left: -28px;
             white-space: nowrap;
 }
   
@@ -314,7 +323,7 @@ background-color: var(--background_product_card);
     margin-left: -18px;
   }
 .footer__country-selector .footer-country-label {
-    margin-left: -18px;
+    margin-left: -26px;
 }
   
 .footer__localization {

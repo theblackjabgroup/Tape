@@ -244,8 +244,11 @@
         {% endfor %}
       </div>
       {%- if section.settings.enable_scroll_tracking -%}
-       <div class="scroll-tracker">
-    <p><span class="scroll-distance"></span>Km<span class="scroll-tracker-icon">{{ 'icon-arrow.svg' | inline_asset_content }}</span></p>
+      <div class="scroll-tracker">
+    <p>
+        <span class="scroll-distance"></span>Km
+        <span class="arrow-down"></span>
+    </p>
 </div>
 
       {%- endif -%}
