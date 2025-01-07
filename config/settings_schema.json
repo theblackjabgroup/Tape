@@ -33,25 +33,31 @@
             "type": "color",
             "id": "background",
             "label": "Background",
-            "default": "#FFFFFF"
+            "default": "#282828"
           },
           {
             "type": "color",
             "id": "background_product_card",
             "label": "Foreground",
-            "default": "#FDF4D7"
+            "default": "#FF5500"
           },
          {
             "type": "color",
             "id": "text",
             "label": "Primary Text Color",
-            "default": "#121212"
+            "default": "#FDF4D7"
           },
           { 
             "type": "color",
             "id": "product_price_card",
             "label": "Secondary Text Color",
-            "default": "#225647"           
+            "default": "#282828"           
+          },
+          {
+            "type": "color_background",
+            "id": "background_gradient",
+            "label": "t:settings_schema.colors.settings.background_gradient.label",
+            "info": "t:settings_schema.colors.settings.background_gradient.info"
           },
           {
         "type": "header",
@@ -61,19 +67,19 @@
             "type": "color",
             "id": "button_label",
             "label": " Primary Button Color",
-            "default": "#FFFFFF"
+            "default": "#FDF4D7"
           },
           {
             "type": "color",
             "id": "secondary_product_button_color",
             "label": "Secondary Button Color",
-            "default": "#C7E1BF"
+            "default": "#FF5500"
           },
            {
             "type": "color",
             "id": "secondary_button_label",
             "label": " Primary Button Text Color",
-            "default": "#121212"
+            "default": "#282828"
           },
           {
             "type": "color",
@@ -81,8 +87,6 @@
             "label": "Secondary Button Text Color",
             "default": "#FFFFFF"           
           },
-         
-         
            {
         "type": "header",
         "content": "Cards"
@@ -91,39 +95,32 @@
             "type": "color",
             "id": "button",
             "label": "Card Background",
-            "default": "#121212"
+            "default": "#FF5500"
           },
           {
             "type": "color",
             "id": "card_foreground",
             "label": "Card Foreground",
-            "default": "#18332E"           
-          },
-          {
-            "type": "color_background",
-            "id": "background_gradient",
-            "label": "t:settings_schema.colors.settings.background_gradient.label",
-            "info": "t:settings_schema.colors.settings.background_gradient.info"
+            "default": "#FDF4D7"           
           },
           {
             "type": "color",
             "id": "product_price_secondary_font",
             "label": "t:settings_schema.colors.settings.product_price_secondary_font.label",
-            "default": "#225647"           
+            "default": "#FDF4D7"           
           },
           {
             "type": "color",
             "id": "quatity_selector_background",
             "label": "t:settings_schema.colors.settings.quatity_selector_background.label",
-            "default": "#9DB792"           
+            "default": "#FF5A10"           
           },
           {
             "type": "color",
             "id": "product_special_offer",
             "label": "t:settings_schema.colors.settings.product_special_offer.label",
-            "default": "#9BBAE0"           
-          },
-          
+            "default": "#FF0505"           
+          }, 
         ],
         "role": {
           "text": "text",
