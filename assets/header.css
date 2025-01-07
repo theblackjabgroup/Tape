@@ -156,10 +156,12 @@
   flex-direction: row;
   justify-content: var(--nav-items-justify-content);
   align-items: center;
+ /* for testign */
+   position: static;
 }
 
 .nav-item {
-  position: relative;
+  position: static;
   display: inline-block !important;
 }
 
@@ -204,10 +206,11 @@
 }
 
 .dropdown-container {
+  margin-top:8px;
   background-color: var(--background_product_card);
   position: absolute;
-  top: 100%;
-  left: 0%;
+   top: 100%; 
+  left: var(--dropdown-offset, 0);
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
@@ -215,7 +218,9 @@
   white-space: nowrap;
   border-radius: 4px;
   z-index: 9999;
+   min-width: max-content; 
 }
+
 
 .dropdown-container.show {
   opacity: 1;
@@ -268,7 +273,9 @@
   white-space: nowrap;
   transition: background-color 0.3s ease;
 }
-
+.dropdown-item.active {
+  background-color:var(--product_price_font);
+}
 .dropdown-item:hover {
   background-color: rgba(0,0,0,0.2);
 }
@@ -317,6 +324,9 @@
   width: 100%;
   height: 100%;
   color: rgb(var(--color-foreground));
+}
+.nav-link:hover{
+  color:var(--product_price_card)
 }
 
 .nested-dropdown-item {
@@ -690,10 +700,10 @@ body.drawer-open {
   cursor: pointer;
   font-size: 12px;
   padding: 0.5rem 2rem -1rem;
-  margin-top: 12px;
+  margin-top: 5px;
   white-space: nowrap;
   position: relative;
-  margin-left: -5px;
+  margin-left: -28px;
 }
 
 .country-selector-header-2 .localization-form button:focus,
@@ -707,6 +717,6 @@ body.drawer-open {
   height: 0.6rem;
   right: calc(var(--inputs-border-width) + 1.5rem);
   top: calc(50% - 0.2rem);
-  margin-right: -18px;
-  margin-top: -1px;
+  margin-right: -9px;
+  margin-top: -2px;
 }

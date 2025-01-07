@@ -230,7 +230,80 @@
   THIS IS TEST COMMENT TO RESET THE HEADER SECTION
   {% endcomment %}
 
+<script>
+ document.addEventListener('DOMContentLoaded', calculateOffsets);
 
+// Debounce function to limit how often the resize calculations occur
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
+// Main function to calculate offsets
+function calculateOffsets() {
+  // Small delay to ensure all styles are fully applied
+  setTimeout(() => {
+    const navItems = document.querySelectorAll('.nav-item');
+    const header = document.querySelector('.header');
+    
+    if (!header || !navItems.length) return;
+    
+    navItems.forEach(item => {
+      // Force a reflow to get accurate measurements
+      void header.offsetHeight;
+      
+      const headerLeft = header.getBoundingClientRect().left;
+      const itemLeft = item.getBoundingClientRect().left;
+      const offset = itemLeft - headerLeft;
+      
+      // Only update if the offset has actually changed
+      const currentOffset = parseFloat(getComputedStyle(item).getPropertyValue('--dropdown-offset'));
+      if (currentOffset !== offset) {
+        item.style.setProperty('--dropdown-offset', `${offset}px`);
+      }
+    });
+  }, 50);
+}
+
+// Debounced resize handler
+const debouncedCalculate = debounce(() => {
+  calculateOffsets();
+}, 150);
+
+// Handle various events that might require recalculation
+window.addEventListener('resize', debouncedCalculate);
+window.addEventListener('orientationchange', calculateOffsets);
+
+// If you're using a CSS framework or have dynamic content loading, 
+// you might want to trigger recalculation after transitions:
+document.addEventListener('transitionend', (e) => {
+  // Only recalculate if the transition was on a relevant property
+  if (e.target.classList.contains('header') || 
+      e.target.classList.contains('nav-item') ||
+      e.target.closest('.header')) {
+    calculateOffsets();
+  }
+});
+
+// Optional: Recalculate when images load (if they affect layout)
+window.addEventListener('load', calculateOffsets);
+
+// Optional: Mutation Observer to watch for DOM changes
+const observer = new MutationObserver(debouncedCalculate);
+observer.observe(document.querySelector('.header'), {
+  childList: true,
+  subtree: true,
+  attributes: true,
+  attributeFilter: ['class', 'style']
+});
+</script>
   
 
 
