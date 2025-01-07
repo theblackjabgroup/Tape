@@ -191,10 +191,11 @@
   bottom: 30px;
   left: 25px;
   z-index: 1000;
+  transition: background 0.8s ease-in-out;
 }
 
 .popup-box:hover {
-  background-color: #b6cbbd;
+  background: #b6cbbd;
 }
 
 .popup-heading-container-layout2 {
@@ -502,7 +503,6 @@
     font-weight: 300;
     font-size: 10px;
     max-width: 236px;
-    /* padding: 10px; */
     width: fit-content;
     text-align: justify;
   }
