@@ -1,6 +1,7 @@
 {{ 'component-slideshow.css' | asset_url | stylesheet_tag }}
 {{ 'component-slider.css' | asset_url | stylesheet_tag }}
-{{ 'announcementBar.css' | asset_url | stylesheet_tag }}
+<link rel="stylesheet" href="{{ 'announcementBar.css' | asset_url }}" media="print" onload="this.media='all'">
+
 <link rel="stylesheet" href="{{'scroll-tracker.css' |  asset_url}}" media="print" onload="this.media='all'">
 
 <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
@@ -17,14 +18,7 @@
   endif
 -%}
 
-{%- style -%}
-  :root {
-  --announcement-bar-background-color: {{ section.settings.announcement_bar_background_color }};
-  --announcement-bar-color: {{ section.settings.announcement_bar_color }};
-  --announcement-bar-text: {{ section.settings.announcement_bar_text }};
-  --announcement-bar-mobile-margin: {{ section.settings.mobile_bar_margin }}px;
-  }
-{% endstyle %}
+
 {% if social_icons %}
   {{ 'component-list-social.css' | asset_url | stylesheet_tag }}
 {% endif %}
@@ -51,8 +45,8 @@
 </style>
 
 <{% if section.settings.enable_sticky_bar %}sticky-bar data-sticky-type = "{{ section.settings.enable_sticky_bar }}"{% else %}div{% endif %} >
-  <div class="bb-announcement-bar-wrapper config-tb-margin">
-  <div class="utility-bar vertical-bar color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator and section.blocks.size > 0 %} utility-bar--bottom-border{% elsif section.settings.show_line_separator and section.settings.show_social and social_icons%} utility-bar--bottom-border-social-only{% endif %}{% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header-localization{% endif %} config-margin config-margin-mobile config-tb-margin config-tb-margin-mobile bb-announcement-bar-background" {{ block.shopify_attributes }} >
+  <div class="bb-announcement-bar-wrapper config-tb-margin color-{{ section.settings.color_scheme }}">
+  <div class="utility-bar vertical-bar  gradient{% if section.settings.show_line_separator and section.blocks.size > 0 %} utility-bar--bottom-border{% elsif section.settings.show_line_separator and section.settings.show_social and social_icons%} utility-bar--bottom-border-social-only{% endif %}{% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header-localization{% endif %} config-margin config-margin-mobile config-tb-margin config-tb-margin-mobile bb-announcement-bar-background" {{ block.shopify_attributes }} >
     <div class="page-width announcement-width bb-max-width utility-bar__grid{% if announcement_bar and language_country_selector or section.settings.show_social and social_icons %} utility-bar__grid--3-col{% elsif language_country_selector or section.settings.show_social and social_icons %} utility-bar__grid--2-col{% endif %}">
       {%- if section.settings.show_social and social_icons -%}
         {%- render 'social-icons' -%}
@@ -250,8 +244,11 @@
         {% endfor %}
       </div>
       {%- if section.settings.enable_scroll_tracking -%}
-       <div class="scroll-tracker">
-    <p><span class="scroll-distance"></span>Km<span class="scroll-tracker-icon">{{ 'icon-arrow.svg' | inline_asset_content }}</span></p>
+      <div class="scroll-tracker">
+    <p>
+        <span class="scroll-distance"></span>Km
+        <span class="arrow-down"></span>
+    </p>
 </div>
 
       {%- endif -%}
@@ -264,66 +261,6 @@
   </div>
   </div>
 
-  <!--
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // Select the node that will be observed for mutations
-
-        function updateData() {
-          const screenWidth = window.innerWidth;
-    
-          console.log("in update data")
-          if (screenWidth >= 749) { 
-          const div = document.querySelector('.bb-max-width');      
-          const height = div.offsetHeight;
-          console.log("Height of the div:", height, "px");
-          document.documentElement.style.setProperty('--announcement-bar-height', `${height / 5}px`);
-          const div2 = document.querySelectorAll('.vertical-bar-second-top-desktop');
-          div2.forEach((element) => {
-            element.style.height = `${height + 10}px`;
-          });          
-          }
-          else {
-          const div = document.querySelector('.bb-max-width');      
-          const height = div.offsetHeight;
-          console.log("Height of the div:", height, "px");
-          document.documentElement.style.setProperty('--announcement-bar-height', `${height / 5}px`);
-
-          const div3 = document.querySelectorAll('.vertical-bar-second-top');
-          div3.forEach((element) => {
-            element.style.height = `${height-2}px`
-          });    
-          }
-        }
-
-        const spans = document.querySelectorAll(".scrollable-text");
-
-const resizeObserver = new ResizeObserver((entries) => {
-  // Call updateData for each entry, which represents a resized element
-  entries.forEach(() => {
-    requestAnimationFrame(updateData);
-  });
-});
-
-// Observe each span with the class "scrollable-text"
-spans.forEach((span) => {
-  resizeObserver.observe(span);
-});
-
-// Initial update for all elements
-spans.forEach(() => {
-  updateData();
-});
-
-// Also trigger updateData on window resize
-window.addEventListener('resize', () => {
-  requestAnimationFrame(updateData);
-});
-      });
-      
-    </script>
-
-    -->
 </{% if section.settings.enable_sticky_bar %}sticky-bar{% else %}div{% endif %}>
 
 {% javascript %}
