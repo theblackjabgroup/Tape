@@ -149,6 +149,7 @@
 
     .card-description-text.show {
       transform: translateY(0);
+      padding: 10px;
     }
 
     .background-decoration {
@@ -250,6 +251,10 @@
     </div>
   {% else %}
     <div class="icon-with-text-2 color-{{ section.settings.sectionColor }}">
+      <div style="display: flex; flex-direction: column; gap: 4px; padding: 20px; ">
+        <p style="font-weight: 600; font-size: 24px; line-height: 30px; color: var(--featured-icon-with-text-section-headings-color)" class="fira-sans-semibold">{{ section.settings.heading }}</p>
+        <p style="font-weight: 500; font-size: 14px; line-height: 21px; color: var(--featured-icon-with-text-section-headings-color)" class="inter-medium">{{ section.settings.subheading }}</p>
+      </div>
       <div class="scroll-container" id="section-{{ section.id }}">
         <div class="card-container" id="cardContainer">
           {% for item in section.blocks %}
