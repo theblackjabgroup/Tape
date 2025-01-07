@@ -273,7 +273,9 @@
   white-space: nowrap;
   transition: background-color 0.3s ease;
 }
-
+.dropdown-item.active {
+  background-color:var(--product_price_font);
+}
 .dropdown-item:hover {
   background-color: rgba(0,0,0,0.2);
 }
