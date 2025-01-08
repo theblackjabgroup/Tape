@@ -193,9 +193,9 @@
   z-index: 1000;
 }
 
-.popup-box:hover {
+/* .popup-box:hover {
   background-color: #b6cbbd;
-}
+} */
 
 .popup-heading-container-layout2 {
   display: flex;
@@ -235,7 +235,7 @@
 }
 
 .popup-email-Icon {
-  padding: 5px;
+  padding: 7px;
   border-radius: 4px;
 }
 
@@ -244,6 +244,7 @@
   border-radius: 4px;
   max-width: 345px;
   padding: 5px;
+  flex: 1;
 }
 
 #popup-close-btn {
@@ -373,15 +374,7 @@
   }
 
   .popup-subscribe-btn {
-    background-color: black;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 10px 10px;
     font-size: 14px;
-    cursor: pointer;
-    display: block;
-    font-family: "Fira Sans";
     font-weight: 400;
     z-index: 2;
     width: 50%;
@@ -468,9 +461,9 @@
   }
 
   .popup-subscribe-btn {
-    padding: 12px 24px;
-    font-size: 12px;
+    padding: 1px 24px;
     width: 150px;
     height: 44px;
+    text-align: center;
   }
 }
