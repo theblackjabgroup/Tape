@@ -151,15 +151,36 @@
 
 .nav-items {
   display: flex !important;
-  flex-wrap: wrap;
   gap: 1rem;
   flex-direction: row;
   justify-content: var(--nav-items-justify-content);
   align-items: center;
- /* for testign */
+   overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none; 
+  -ms-overflow-style: none;
    position: static;
+  padding-left:1rem;
+  padding-right:1rem;
+   -webkit-overflow-scrolling: touch;
 }
-
+nav-items::-webkit-scrollbar {
+  display: none;
+}
+.header-dots{
+  display:flex;
+  flex-direction:column;
+  height:95%;
+  width:7px;
+  gap:5px;
+     align-items: center;
+}
+.h-dots{
+  background-color: rgb(var(--color-background));
+  width:5px;
+  height:5px;
+  border-radius:50%;
+}
 .nav-item {
   position: static;
   display: inline-block !important;
