@@ -12,7 +12,7 @@
     </a>
 
     <header class="header color-{{ section.settings.color_scheme }}">
-      <nav style="width: 100%;">
+      <nav style="width: 60%;">
         <ul class="nav-items" style="--nav-items-justify-content: {{ section.settings.nav_items_justify_content }};">
           {% for link in section.settings.menu.links %}
             {% assign has_dropdown = false %}
@@ -60,7 +60,12 @@
           {% endfor %}
         </ul>
       </nav>
-
+<div class="header-dots">
+  <div class="h-dots"><h1></h1></div>
+   <div class="h-dots"><h1></h1></div>
+   <div class="h-dots"><h1></h1></div>
+   <div class="h-dots"><h1></h1></div>
+</div>
       
            <div class="localization header-localization">
             {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
@@ -261,7 +266,7 @@ function calculateOffsets() {
       
       const headerLeft = header.getBoundingClientRect().left;
       const itemLeft = item.getBoundingClientRect().left;
-      const offset = itemLeft - headerLeft;
+      const offset = itemLeft - headerLeft-12;
       
       // Only update if the offset has actually changed
       const currentOffset = parseFloat(getComputedStyle(item).getPropertyValue('--dropdown-offset'));
