@@ -138,18 +138,23 @@
   z-index: 30;
 }
 
-.popup-subscribe-btn {
+.popup-subscribe-btn-layout1 {
   background-color: rgb(var(--color-button-text));
   color: rgb(var(--color-secondary-button-text));
   border: none;
   border-radius: 6px;
-  padding: 10px 10px;
+  margin: 10px 30px;
+  padding: 10px;
   font-size: 14px;
   cursor: pointer;
   display: block;
   font-family: "Fira Sans";
   font-weight: 400;
   z-index: 2;
+}
+
+.popup-subscribe-btn-layout1:hover {
+  transform: translateX(5px);
 }
 
 /* -------------------------------------------------------------------------------------------------------*/
@@ -172,13 +177,14 @@
   font-size: 16px; /* Base font size */
   line-height: 1.5;
   padding: 10px 20px 0 10px;
+  color: var(--product_price_font);
 }
 
 /* Popup box styles */
 .popup-box {
   max-width: 409.51px;
   height: fit-content;
-  background-color: var(--background_product_card);
+  background-color: var(--card_foreground);
   border-radius: 4px;
   display: flex;
   flex-direction: column;
@@ -190,63 +196,54 @@
   position: fixed;
   bottom: 30px;
   left: 25px;
-  z-index: 1000;
-}
-
-.popup-box:hover {
-  background-color: #b6cbbd;
+  z-index: 15;
 }
 
 .popup-heading-container-layout2 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 345px;
+  width: 100%;
 }
 
 .popup-heading-layout2 {
   font-size: 24px;
-  padding: 10px 0 0 10px;
-  color: var(--foreground);
+  padding: 10px 0 5px 10px;
+  color: var(--product_price_font);
   font-family: "Fira Sans";
   font-weight: 600;
 }
 
-.popup-heading-layout2:hover {
-  color: #754e1a;
-}
-
-/* Form styles */
 .popup-form {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  width: 345px;
+  width: 90%;
   padding: 10px 20px 0 10px;
+  overflow: hidden;
 }
-
-/* Input field styles */
 
 .popup-email-container {
   display: flex;
-  max-width: 345px;
+  width: 90%;
   background-color: white;
   border-radius: 4px;
 }
 
 .popup-email-Icon {
-  padding: 5px;
+  padding: 7px;
   border-radius: 4px;
 }
 
 .popup-email-input-layout2 {
   border: none;
   border-radius: 4px;
-  max-width: 345px;
+  width: 345px;
   padding: 5px;
+  flex: 1;
 }
 
-#popup-close-btn {
+.popup-close-btn {
   border: none;
   background-color: inherit;
   background: transparent;
@@ -258,84 +255,35 @@
   transform: scale(1.2);
 }
 
+.popup-close-btn svg {
+  fill: var(--product_price_font);
+}
+
 .popup-subscribe-btn {
-  background-color: black;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  padding: 10px 10px;
-  font-size: 14px;
-  cursor: pointer;
-  display: block;
-  font-family: "Inter";
+  font-family: "Inter", sans-serif;
   font-weight: 500;
-  z-index: 2;
+  background: linear-gradient(
+    to right,
+    gray 50%,
+    rgb(var(--color-button-text)) 50%
+  );
+  background-size: 200% 100%;
+  color: rgb(var(--color-secondary-button-text));
+  background-position: 100% 0;
+  border: none;
+  padding: 10px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  display: block;
   width: 164px;
   height: 48px;
+  transition: background-position 1.5s ease-in-out, transform 0.3s ease;
   position: relative;
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
-/* Hover Effects */
 .popup-subscribe-btn:hover {
-  transform: scale(1.05); /* Slight zoom on hover */
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4); /* Add a shadow effect */
-}
-
-/* Glowing Border Animation */
-.popup-subscribe-btn::before {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(
-    circle,
-    rgba(255, 255, 255, 0.15),
-    transparent 70%
-  );
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: 0;
-}
-
-.popup-subscribe-btn:hover::before {
-  opacity: 1; /* Make glow effect visible */
-}
-
-/* Wave Animation */
-.popup-subscribe-btn::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 200%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0.3),
-    transparent 50%,
-    rgba(255, 255, 255, 0.3)
-  );
-  transform: skewX(-30deg);
-  transition: none;
-  z-index: 1;
-}
-
-.popup-subscribe-btn:hover::after {
-  animation: wave-slide 0.8s ease-in-out forwards;
-}
-
-/* Keyframes for Wave Animation */
-@keyframes wave-slide {
-  0% {
-    left: -100%;
-  }
-  100% {
-    left: 100%;
-  }
+  background-position: 0 0;
+  color: rgb(var(--color-secondary-button-text));
 }
 
 /* Media Querries  */
@@ -408,10 +356,6 @@
     font-weight: 400;
   }
 
-  .popup-heading-layout2:hover {
-    color: #754e1a;
-  }
-
   .popup-message-layout2 {
     font-weight: 300;
     font-size: 10px;
@@ -420,21 +364,16 @@
     text-align: justify;
   }
 
-  .popup-email-container,
+  .popup-email-container {
+    width:100%
+  }
+
   .popup-email-input-layout2 {
-    max-width: 90%;
+    width: 236px;
   }
 
   .popup-subscribe-btn {
-    background-color: black;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 10px 10px;
     font-size: 14px;
-    cursor: pointer;
-    display: block;
-    font-family: "Fira Sans";
     font-weight: 400;
     z-index: 2;
     width: 50%;
@@ -482,11 +421,11 @@
     position: fixed;
     top: 50%;
     transform: translate(-50%, -50%);
-    max-width: 308.5;
+    max-width: 308.5px;
   }
 
   .popup-heading-container-layout2 {
-    max-width: 236px;
+    width: 236px;
   }
   .popup-heading-layout2 {
     font-size: 20px;
@@ -494,16 +433,10 @@
     padding: 10px 0;
   }
 
-  .popup-heading-layout2:hover {
-    color: #754e1a;
-  }
-
   .popup-message-layout2 {
     font-weight: 300;
     font-size: 10px;
-    max-width: 236px;
-    /* padding: 10px; */
-    width: fit-content;
+    width: 236px;
     text-align: justify;
   }
 
@@ -512,19 +445,21 @@
   }
 
   .popup-form {
-    width: 236px;
+    width: 100%;
     padding: 0;
   }
 
-  .popup-email-container,
+  .popup-email-container {
+    width: 100%;
+  }
   .popup-email-input-layout2 {
-    width: 236px;
+    width: 100%;
   }
 
   .popup-subscribe-btn {
-    padding: 12px 24px;
-    font-size: 12px;
+    padding: 1px 24px;
     width: 150px;
     height: 44px;
+    text-align: center;
   }
 }
