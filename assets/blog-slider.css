@@ -70,6 +70,7 @@
 .blog-slider-container {
     width: 100%;
     overflow: hidden;
+  background-color: rgb(var(--color-background));
 }
 
 .blog-slider-wrapper {
@@ -97,6 +98,7 @@
             height: 30px;
             border-radius: 50%;
             z-index: 1;
+  background-color: rgb(var(--color-background)); 
         }
 
         .semicircle-left {
@@ -124,6 +126,8 @@
     flex-direction: column;
     justify-content: flex-start;
     height: 100%;
+   background-color: rgb(var(--color-button));
+  color: rgb(var(--color-text));
 }
 
 .blog-card-title {
@@ -189,6 +193,7 @@
     overflow-wrap: break-word; /* Ensures consistent breaking */
     max-width: 240px; /* Optional: Restricts tag width */
     text-align: center; /* Optional: Centers text in the tag */
+  background-color: rgb(var(--color-background));
 }
 
 
