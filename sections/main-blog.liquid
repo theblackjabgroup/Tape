@@ -21,6 +21,22 @@
   .main-blog-test{
      background: rgb(var(--color-button)) !important;
   }
+  .page-width {
+    max-width: none;
+  }
+  .test2{
+    height: 345px;
+  }
+  .card__content{
+        font-size: 10px;
+    padding: 10px !important;
+  }
+  .card__information{
+    height:300px !important;
+  }
+  .blog-articles__article{
+    overflow: hidden;
+  }
 
 {%- endstyle -%}
 
@@ -30,10 +46,10 @@
       {{ blog.title | escape }}
     </h1>
 
-    <div class="blog-articles  {% if section.settings.layout == 'collage' %}blog-articles--collage{% endif %}">
+    <div class="blog-articles {% if section.settings.layout == 'collage' %}blog-articles--collage{% endif %}">
       {%- for article in blog.articles -%}
         <div
-          class="blog-articles__article  main-blog-test  article{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %} "
+          class="blog-articles__article main-blog-test  article{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %} "
           {% if settings.animations_reveal_on_scroll %}
             data-cascade
             style="--animation-order: {{ forloop.index }};"
@@ -44,7 +60,7 @@
         
           {%- render 'article-card',
             article: article,
-            show_image: true, /* Always show the image */
+            show_image: true, 
             show_date: section.settings.show_date,
             show_author: section.settings.show_author,
             show_excerpt: true,
