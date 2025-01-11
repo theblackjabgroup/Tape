@@ -39,13 +39,13 @@
             "type": "color",
             "id": "background_product_card",
             "label": "Foreground",
-            "default": "#FF5500"
+            "default": "#225647"
           },
          {
             "type": "color",
             "id": "text",
             "label": "Primary Text Color",
-            "default": "#FDF4D7"
+            "default": "#FFFFFF"
           },
           { 
             "type": "color",
