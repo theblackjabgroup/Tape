@@ -191,7 +191,7 @@
 
       if (!container || !leftArrow || !rightArrow) return;
 
-      // Function to handle card scrolling
+      
       function scrollCards(direction) {
         const cards = container.querySelectorAll('.product-card');
         if (!cards.length) return;
@@ -211,7 +211,7 @@
         });
       }
 
-      // Function to update arrow visibility
+    
       function updateArrowVisibility() {
         leftArrow.style.opacity = container.scrollLeft <= 0 ? '0.5' : '1';
         leftArrow.disabled = container.scrollLeft <= 0;
@@ -221,15 +221,15 @@
         rightArrow.disabled = !canScrollRight;
       }
 
-      // Attach event listeners for arrows
+    
       leftArrow.addEventListener('click', () => scrollCards(-1));
       rightArrow.addEventListener('click', () => scrollCards(1));
 
-      // Attach scroll event listener for updating arrow visibility
+     
       container.addEventListener('scroll', updateArrowVisibility);
       updateArrowVisibility();
 
-      // Touch-based scrolling
+     
       let touchStartX = 0;
       let touchEndX = 0;
 
