@@ -630,6 +630,7 @@ mobile-nav-items::-webkit-scrollbar {
   margin: 0;
   transition: max-height 0.3s ease, opacity 0.3s ease;
   opacity: 0;
+  padding:0px 11px;
 }
 
 .mobile-dropdown-item {
@@ -703,7 +704,6 @@ mobile-nav-items::-webkit-scrollbar {
 
 .mobile-dropdown.show {
   background-color: var(--card_foreground);
-  padding: 0px 11px;
   max-height: 1000px;
   opacity: 1;
   font-weight:400;
