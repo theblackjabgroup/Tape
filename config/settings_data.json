@@ -147,8 +147,8 @@
       "scheme-1": {
         "settings": {
           "background": "#282828",
-          "background_product_card": "#FF5500",
-          "text": "#FDF4D7",
+          "background_product_card": "#225647",
+          "text": "#FFFFFF",
           "product_price_card": "#282828",
           "button_label": "#FDF4D7",
           "secondary_product_button_color": "#FF5500",
