@@ -87,7 +87,7 @@
 {% case section.settings.search_icon_style %}
     {% when '1' %}
   <div class="nav-icon">
-    <a href="{{ routes.cart_url }}" class="js-drawer-open-cart">
+    <a href="{{ routes.search_url }}" class="js-drawer-open-cart">
        <img src="{{ 'search-icon.png' | asset_url }}" alt="Cart" class="navpngicon">
        </a>
   </div>
@@ -122,7 +122,7 @@
 {% case section.settings.account_icon_style %}
       {% when '1' %}
   <div class="nav-icon">
-    <a href="{{ routes.cart_url }}" class="js-drawer-open-cart">
+    <a href="{{ routes.account_url }}" class="js-drawer-open-cart">
        <img src="{{ 'profile-icon.png' | asset_url }}" alt="Cart" class="navpngicon">
        </a>
   </div>
@@ -167,8 +167,11 @@
                   </span>
                 {% endif %}
               </a>
+            
               {% if link.links != blank %}
+                 
                 <ul class="mobile-dropdown">
+                   <div class="header-line"><h1></h1></div>
                   {% for childlink in link.links %}
                     <li class="mobile-dropdown-item-container">
                       <a href="{{ childlink.url }}" class="mobile-dropdown-item">
@@ -272,9 +275,8 @@
   {% endcomment %}
 
 <script>
- document.addEventListener('DOMContentLoaded', calculateOffsets);
-
-// Debounce function to limit how often the resize calculations occur
+  
+document.addEventListener('DOMContentLoaded', calculateOffsets);
 function debounce(func, wait) {
   let timeout;
   return function executedFunction(...args) {
@@ -286,10 +288,7 @@ function debounce(func, wait) {
     timeout = setTimeout(later, wait);
   };
 }
-
-// Main function to calculate offsets
 function calculateOffsets() {
-  // Small delay to ensure all styles are fully applied
   setTimeout(() => {
     const navItems = document.querySelectorAll('.nav-item');
     const header = document.querySelector('.header');
@@ -297,46 +296,33 @@ function calculateOffsets() {
     if (!header || !navItems.length) return;
     
     navItems.forEach(item => {
-      // Force a reflow to get accurate measurements
       void header.offsetHeight;
       
       const headerLeft = header.getBoundingClientRect().left;
       const itemLeft = item.getBoundingClientRect().left;
       const offset = itemLeft - headerLeft-12;
-      
-      // Only update if the offset has actually changed
+    
       const currentOffset = parseFloat(getComputedStyle(item).getPropertyValue('--dropdown-offset'));
       if (currentOffset !== offset) {
-        item.style.setProperty('--dropdown-offset', ${offset}px);
+        item.style.setProperty('--dropdown-offset', `${offset}px`);
       }
     });
   }, 50);
 }
-
-// Debounced resize handler
 const debouncedCalculate = debounce(() => {
   calculateOffsets();
 }, 150);
 
-// Handle various events that might require recalculation
 window.addEventListener('resize', debouncedCalculate);
 window.addEventListener('orientationchange', calculateOffsets);
-
-// If you're using a CSS framework or have dynamic content loading, 
-// you might want to trigger recalculation after transitions:
 document.addEventListener('transitionend', (e) => {
-  // Only recalculate if the transition was on a relevant property
   if (e.target.classList.contains('header') || 
       e.target.classList.contains('nav-item') ||
       e.target.closest('.header')) {
     calculateOffsets();
   }
 });
-
-// Optional: Recalculate when images load (if they affect layout)
 window.addEventListener('load', calculateOffsets);
-
-// Optional: Mutation Observer to watch for DOM changes
 const observer = new MutationObserver(debouncedCalculate);
 observer.observe(document.querySelector('.header'), {
   childList: true,
@@ -344,66 +330,9 @@ observer.observe(document.querySelector('.header'), {
   attributes: true,
   attributeFilter: ['class', 'style']
 });
-</script>
   
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-  // Existing offset calculation code remains...
-  
-  // Country selector functionality
-  const countryButton = document.querySelector('.disclosure__button');
-  const countryList = document.querySelector('#HeaderDrawerCountryList');
-  const closeButton = document.querySelector('.btn-close-modal-text');
-  const searchInput = document.querySelector('#localization-search-input');
-
-  if (countryButton && countryList) {
-    countryButton.addEventListener('click', function() {
-      const isExpanded = countryButton.getAttribute('aria-expanded') === 'true';
-      countryButton.setAttribute('aria-expanded', !isExpanded);
-      countryList.hidden = isExpanded;
-      
-      if (!isExpanded) {
-        searchInput?.focus();
-      }
-    });
-
-    // Close dropdown when clicking outside
-    document.addEventListener('click', function(event) {
-      if (!countryButton.contains(event.target) && !countryList.contains(event.target)) {
-        countryButton.setAttribute('aria-expanded', 'false');
-        countryList.hidden = true;
-      }
-    });
-
-    // Close button functionality
-    closeButton?.addEventListener('click', function() {
-      countryButton.setAttribute('aria-expanded', 'false');
-      countryList.hidden = true;
-    });
-
-    // Search functionality
-    searchInput?.addEventListener('input', function(e) {
-      const searchTerm = e.target.value.toLowerCase();
-      const items = countryList.querySelectorAll('.disclosure__item');
-      const noResults = countryList.querySelector('.disclosure__no-results');
-      let hasResults = false;
-
-      items.forEach(item => {
-        const text = item.textContent.toLowerCase();
-        if (text.includes(searchTerm)) {
-          item.classList.remove('hide');
-          hasResults = true;
-        } else {
-          item.classList.add('hide');
-        }
-      });
-
-      noResults.classList.toggle('hide', hasResults);
-    });
-  }
-});
 </script>
-
+    
 {% schema %}
 {
   "name": "t:sections.header.name",
