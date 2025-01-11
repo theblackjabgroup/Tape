@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="{{ 'header.css' | asset_url }}">
+
 <script src="{{ 'header.js' | asset_url }}" defer></script>
 
 <{% if section.settings.sticky_header_type != 'none' %}sticky-header data-sticky-type="{{ section.settings.sticky_header_type }}"{% else %}div{% endif %} class="header-wrapper color-{{ section.settings.color_scheme }}" style="--padding-top: {{ section.settings.padding_top }}px; --padding-bottom: {{ section.settings.padding_bottom }}px;">
@@ -67,7 +68,7 @@
    <div class="h-dots"><h1></h1></div>
 </div>
       
-           <div class="localization header-localization">
+         <div class="localization header-localization">
             {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
               <localization-form>
                 {%- form 'localization', id: 'HeaderCountryMobileForm', class: 'localization-form' -%}
@@ -82,31 +83,66 @@
             {% endif %}
           </div>
 
-
-       <div class="nav-icons">
-        <div class="nav-icon">
+      <div class="nav-icons">
+{% case section.settings.search_icon_style %}
+    {% when '1' %}
+  <div class="nav-icon">
+    <a href="{{ routes.cart_url }}" class="js-drawer-open-cart">
+       <img src="{{ 'search-icon.png' | asset_url }}" alt="Cart" class="navpngicon">
+       </a>
+  </div>
+    {% when '2' %}
+            <div class="nav-icon">
           <a href="{{ routes.search_url }}" class="search-toggle">
             <span class="svg-wrapper">{{ 'icon-search.svg' | inline_asset_content }}</span>
           </a>
         </div>
-        <div class="nav-icon">
+    {% when 'none' %}
+       
+         {%- comment -%}No icon displayed{%- endcomment -%}
+{% endcase %}
+ {% case section.settings.cart_icon_style %}
+      {% when '1' %}
+  <div class="nav-icon">
+    <a href="{{ routes.cart_url }}" class="js-drawer-open-cart">
+       <img src="{{ 'cart-icon.png' | asset_url }}" alt="Cart" class="navpngicon">
+       </a>
+  </div>
+         {% when '2' %}
+         <div class="nav-icon">
           <a href="{{ routes.cart_url }}" class="js-drawer-open-cart">
             <span class="svg-wrapper">{{ 'icon-cart.svg' | inline_asset_content }}</span>
             {% comment %} <span class="cart-count">{{ cart.item_count }}</span> {% endcomment %}
           </a>
         </div>
-        <div class="nav-icon">
+     {% when 'none' %}
+         {%- comment -%}No icon displayed{%- endcomment -%}
+     {% endcase %}
+      
+{% case section.settings.account_icon_style %}
+      {% when '1' %}
+  <div class="nav-icon">
+    <a href="{{ routes.cart_url }}" class="js-drawer-open-cart">
+       <img src="{{ 'profile-icon.png' | asset_url }}" alt="Cart" class="navpngicon">
+       </a>
+  </div>
+         {% when '2' %}
+          <div class="nav-icon">
           <a href="{{ routes.account_url }}" class="">
             <span class="svg-wrapper">{{ 'icon-account.svg' | inline_asset_content }}</span>
           </a>
         </div>
-      </div>
+     {% when 'none' %}
+         {%- comment -%}No icon displayed{%- endcomment -%}
+     {% endcase %}
+
+</div>
     </header>
 
     <div class="mobile-header-drawer color-{{ section.settings.color_scheme }}">
       <div class="mobile-header-drawer-close">
         <div class="close-icon">
-          <span class="svg-wrapper" style="width: 12px; height: 12px;">
+          <span class="svg-wrapper" style="width: 23px; height: 23px;">
             {{- 'icon-close.svg' | inline_asset_content -}}
           </span>
         </div>
@@ -271,7 +307,7 @@ function calculateOffsets() {
       // Only update if the offset has actually changed
       const currentOffset = parseFloat(getComputedStyle(item).getPropertyValue('--dropdown-offset'));
       if (currentOffset !== offset) {
-        item.style.setProperty('--dropdown-offset', `${offset}px`);
+        item.style.setProperty('--dropdown-offset', ${offset}px);
       }
     });
   }, 50);
@@ -310,7 +346,63 @@ observer.observe(document.querySelector('.header'), {
 });
 </script>
   
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+  // Existing offset calculation code remains...
+  
+  // Country selector functionality
+  const countryButton = document.querySelector('.disclosure__button');
+  const countryList = document.querySelector('#HeaderDrawerCountryList');
+  const closeButton = document.querySelector('.btn-close-modal-text');
+  const searchInput = document.querySelector('#localization-search-input');
 
+  if (countryButton && countryList) {
+    countryButton.addEventListener('click', function() {
+      const isExpanded = countryButton.getAttribute('aria-expanded') === 'true';
+      countryButton.setAttribute('aria-expanded', !isExpanded);
+      countryList.hidden = isExpanded;
+      
+      if (!isExpanded) {
+        searchInput?.focus();
+      }
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(event) {
+      if (!countryButton.contains(event.target) && !countryList.contains(event.target)) {
+        countryButton.setAttribute('aria-expanded', 'false');
+        countryList.hidden = true;
+      }
+    });
+
+    // Close button functionality
+    closeButton?.addEventListener('click', function() {
+      countryButton.setAttribute('aria-expanded', 'false');
+      countryList.hidden = true;
+    });
+
+    // Search functionality
+    searchInput?.addEventListener('input', function(e) {
+      const searchTerm = e.target.value.toLowerCase();
+      const items = countryList.querySelectorAll('.disclosure__item');
+      const noResults = countryList.querySelector('.disclosure__no-results');
+      let hasResults = false;
+
+      items.forEach(item => {
+        const text = item.textContent.toLowerCase();
+        if (text.includes(searchTerm)) {
+          item.classList.remove('hide');
+          hasResults = true;
+        } else {
+          item.classList.add('hide');
+        }
+      });
+
+      noResults.classList.toggle('hide', hasResults);
+    });
+  }
+});
+</script>
 
 {% schema %}
 {
@@ -406,6 +498,67 @@ observer.observe(document.querySelector('.header'), {
       "default": "on-scroll-up",
       "label": "t:sections.header.settings.sticky_header_type.label"
     },
+    {
+      "type": "select",
+      "id": "search_icon_style",
+      "label": "Search Icon",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "1",
+          "label": "Icon 1"
+        },
+        {
+          "value": "2",
+          "label": "Icon 2"
+        }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "select",
+      "id": "cart_icon_style",
+      "label": "Cart Icon",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "1",
+          "label": "Icon 1"
+        },
+        {
+          "value": "2",
+          "label": "Icon 2"
+        }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "select",
+      "id": "account_icon_style",
+      "label": "Account Icon",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "1",
+          "label": "Icon 1"
+        },
+        {
+          "value": "2",
+          "label": "Icon 2"
+        }
+      ],
+      "default": "2"
+    },
+  
     {
       "type": "checkbox",
       "id": "enable_country_selector",
