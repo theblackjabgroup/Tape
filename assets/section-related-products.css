@@ -40,7 +40,6 @@ h1, p {
 .heading {
   font-size: 24px;
   margin-bottom: -11px;
-  margin-top: 25px;
   margin-left: 25px;
 }
 
@@ -146,11 +145,11 @@ h7 {
   border-radius: 3px;
   font-size: 14px;
   font-weight: bold;
-  color: var(--product_price_font);
+  color: rgb(var(--color-secondary-button-text));
   display: inline-block;
   position: absolute;
   left: 30px; /* Fixed left position */
-  background:  var(--product_price_card);
+  background: rgb(var(--color-button-text));
   text-align: left;
   max-width: 100%; /* Limit the width to prevent overflow */
 }
