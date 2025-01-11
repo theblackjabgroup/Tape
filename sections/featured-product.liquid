@@ -83,10 +83,10 @@ class="section-{{ section.id }}-padding gradient color-{{ section.settings.color
           {%- else -%}
             <div id="bb_product__media_first" class="bb-fp__media product__media-item" style="display: block;">
               <div
-                class="product-media-container global-media-settings gradient{% if section.settings.constrain_to_viewport %} constrain-height{% endif %}"
+                class="bb-product-media-container product-media-container global-media-settings gradient{% if section.settings.constrain_to_viewport %} constrain-height{% endif %}"
                 style="--ratio: 1.0; --preview-ratio: 1.0;"
               >
-                {{ 'product-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+              {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg placeholder' }}                
               </div>
             </div>
           {%- endunless -%}
@@ -106,13 +106,13 @@ class="section-{{ section.id }}-padding gradient color-{{ section.settings.color
                   {% render block %}
                 {%- when 'text' -%}
                   <p
-                    class="product__text inline-richtext{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}"
+                    class=" product__textinline-richtext{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle bb-product__text{% endif %}"
                     {{ block.shopify_attributes }}
                   >
                     {{- block.settings.text -}}
                   </p>
                 {%- when 'title' -%}
-                  <h2 class="bb-product__title product__title {{ block.settings.heading_size }}" {{ block.shopify_attributes }}>
+                <h2 class="bb-product__title product__title {{ block.settings.heading_size }}" {{ block.shopify_attributes }} {% if block.settings.heading_size =='h1' %} style="font-size: 28px"{% endif %}>
                     {%- unless placeholder -%}
                       {{ product.title | escape }}
                     {%- else -%}
@@ -449,7 +449,7 @@ class="section-{{ section.id }}-padding gradient color-{{ section.settings.color
               {% else %}
                 href="{{ product.url }}"
               {% endif %}
-              class="link product__view-details animate-arrow"
+              class="link bb-product__view-details bb-animate-arrow product__view-details animate-arrow"
             >
               {{ 'products.product.view_full_details' | t }}
               {{- 'icon-arrow.svg' | inline_asset_content -}}
@@ -515,26 +515,6 @@ class="section-{{ section.id }}-padding gradient color-{{ section.settings.color
           "id": "text",
           "default": "t:sections.featured-product.blocks.text.settings.text.default",
           "label": "t:sections.featured-product.blocks.text.settings.text.label"
-        },
-        {
-          "type": "select",
-          "id": "text_style",
-          "options": [
-            {
-              "value": "body",
-              "label": "t:sections.featured-product.blocks.text.settings.text_style.options__1.label"
-            },
-            {
-              "value": "subtitle",
-              "label": "t:sections.featured-product.blocks.text.settings.text_style.options__2.label"
-            },
-            {
-              "value": "uppercase",
-              "label": "t:sections.featured-product.blocks.text.settings.text_style.options__3.label"
-            }
-          ],
-          "default": "body",
-          "label": "t:sections.featured-product.blocks.text.settings.text_style.label"
         }
       ]
     },
@@ -1348,12 +1328,6 @@ class="section-{{ section.id }}-padding gradient color-{{ section.settings.color
       "default": "scheme-1"
     },
     {
-      "type": "checkbox",
-      "id": "secondary_background",
-      "default": false,
-      "label": "t:sections.featured-product.settings.secondary_background.label"
-    },
-    {
       "type": "header",
       "content": "t:sections.featured-product.settings.header.content",
       "info": "t:sections.featured-product.settings.header.info"
@@ -1378,12 +1352,6 @@ class="section-{{ section.id }}-padding gradient color-{{ section.settings.color
       "default": "medium",
       "label": "t:sections.main-product.settings.media_size.label",
       "info": "t:sections.main-product.settings.media_size.info"
-    },
-    {
-      "type": "checkbox",
-      "id": "constrain_to_viewport",
-      "default": true,
-      "label": "t:sections.main-product.settings.constrain_to_viewport.label"
     },
     {
       "type": "select",
@@ -1446,8 +1414,7 @@ class="section-{{ section.id }}-padding gradient color-{{ section.settings.color
         {
           "type": "text",
           "settings": {
-            "text": "{{ section.settings.product.vendor }}",
-            "text_style": "uppercase"
+            "text": "{{ section.settings.product.vendor }}"
           }
         },
         {

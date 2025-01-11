@@ -1,5 +1,5 @@
 .bb-upper-template-signup {
-    background-color: #CECACA;
+    background-color: var(--color-button);
     margin: 7rem auto;
     display: block;
     padding: 2rem;
@@ -11,9 +11,9 @@
 }
 
 .bb-template-signup {
-    background-color: #CECACA;
+    background-color: rgba(var(--color-button));
     display: block;
-    padding: 10rem 5rem !important;
+   padding: 0rem !important; 
     width: auto !important;
     max-width: none;
     margin: 2rem;
@@ -258,7 +258,7 @@ border-radius: 5px;
 
     .bb-template-signup {
         background-color: unset;
-        padding: 10rem 0rem !important;
+      /*  padding: 10rem 0rem !important; */
     }
 
     .bb-mail-signup-banner__heading {

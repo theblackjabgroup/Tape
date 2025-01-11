@@ -76,7 +76,7 @@
   {%- endif -%}
 
   {% assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' %}
-  {%  assign layout_desktop = section.settings.gallery_layout  %}
+  {%  assign layout_desktop = thumbnail_slider %}
 
   {%  assign  thumbnail = false %}
   {% if layout_desktop == "thumbnail" %}
@@ -85,7 +85,7 @@
 
 
   <div class="page-width">
-    <div class="product product--large product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-show grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
+    <div class="product product--large product--{{ section.settings.media_position }} product--thumbnail_slider product--mobile-show grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
     <div class="grid__item product__media-wrapper {% if thumbnail == true %} bb_background {% endif %}">
       {%- if product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
         <div class="sold-out-tag-mobile">
@@ -707,7 +707,7 @@
                 {% render 'icon-with-text', block: block %}
             {%- endcase -%}
           {%- endfor -%}
-          <a href="{{ product.url }}" class="link product__view-details animate-arrow">
+          <a href="{{ product.url }}" class="link product__view-details bb-product__view-details bb-animate-arrow animate-arrow">
             {{ 'products.product.view_full_details' | t }}
             {{- 'icon-arrow.svg' | inline_asset_content -}}
           </a>
@@ -2105,18 +2105,6 @@
     },
     {
       "type": "select",
-      "id": "gallery_layout", 
-      "options": [
-        {
-          "value": "thumbnail_slider",
-          "label": "t:sections.main-product.settings.gallery_layout.options__3.label"
-        }
-      ],
-      "default": "thumbnail_slider",
-      "label": "t:sections.main-product.settings.gallery_layout.label"
-    },
-    {
-      "type": "select",
       "id": "media_position",
       "options": [
         {
@@ -2131,18 +2119,6 @@
       "default": "left",
       "label": "t:sections.main-product.settings.media_position.label",
       "info": "t:sections.main-product.settings.media_position.info"
-    },
-    {
-      "type": "select",
-      "id": "mobile_thumbnails",
-      "options": [
-        {
-          "value": "show",
-          "label": "t:sections.main-product.settings.mobile_thumbnails.options__2.label"
-        }
-      ],
-      "default": "show",
-      "label": "t:sections.main-product.settings.mobile_thumbnails.label"
     },
     {
       "type": "checkbox",
