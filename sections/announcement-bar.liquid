@@ -6,7 +6,7 @@
 
 <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
 
-<!--  <script src="{{ 'announcementBarView.js' | asset_url }}" defer="defer"></script> -->  
+ <script src="{{ 'announcementBarView.js' | asset_url }}" defer="defer"></script> 
 
 {%- liquid
   assign social_icons = true
@@ -45,7 +45,7 @@
 </style>
 
 <{% if section.settings.enable_sticky_bar %}sticky-bar data-sticky-type = "{{ section.settings.enable_sticky_bar }}"{% else %}div{% endif %} >
-  <div class="bb-announcement-bar-wrapper config-tb-margin color-{{ section.settings.color_scheme }}">
+  <div class="bb-announcement-bar-wrapper config-tb-margin " data-color-scheme="{{ section.settings.color_scheme }}">
   <div class="utility-bar vertical-bar  gradient{% if section.settings.show_line_separator and section.blocks.size > 0 %} utility-bar--bottom-border{% elsif section.settings.show_line_separator and section.settings.show_social and social_icons%} utility-bar--bottom-border-social-only{% endif %}{% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header-localization{% endif %} config-margin config-margin-mobile config-tb-margin config-tb-margin-mobile bb-announcement-bar-background" {{ block.shopify_attributes }} >
     <div class="page-width announcement-width bb-max-width utility-bar__grid{% if announcement_bar and language_country_selector or section.settings.show_social and social_icons %} utility-bar__grid--3-col{% elsif language_country_selector or section.settings.show_social and social_icons %} utility-bar__grid--2-col{% endif %}">
       {%- if section.settings.show_social and social_icons -%}
@@ -264,6 +264,7 @@
 </{% if section.settings.enable_sticky_bar %}sticky-bar{% else %}div{% endif %}>
 
 {% javascript %}
+
   class StickyBar extends HTMLElement {
     constructor() {
       super();

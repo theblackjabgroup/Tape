@@ -1396,7 +1396,7 @@ button.shopify-payment-button__button--unbranded {
   font-size: 1.4rem;
   display: flex;
   align-items: center;
-  color: rgb(var(--color-link));
+  color: rgb(var(--color-foreground));
   margin-left: 0;
   padding-left: 0;
   min-height: 4.4rem;

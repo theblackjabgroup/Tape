@@ -62,7 +62,7 @@
 <div class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }} bb-product-list-background">
   {%- paginate collection.products by section.settings.products_per_page -%}
     {% comment %} Sort is the first tabbable element when filter type is vertical {% endcomment %}
-    {%- if section.settings.enable_sorting and section.settings.filter_type == 'vertical' -%}
+    {%- if section.settings.enable_sorting -%}
       <facet-filters-form class="facets facets-vertical-sort page-width2 small-hide bb-facet-sort-form">
         <form class="facets-vertical-form" id="FacetSortForm" onsubmit="saveDropdownSelection()" method="POST">
           <div class="sort-upper-div">
@@ -71,31 +71,6 @@
               <h2 class="facet-filters__label caption-large text-body">
                 <label class="bb-sortby" for="SortBy">{{ 'products.facets.sort_by_label' | t }}</label>
               </h2>
-              <!---
-              <div class="select">
-                {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
-                <select
-                  name="sort_by"
-                  class="bb-sort-options facet-filters__sort select__select caption-large"
-                  id="SortBy"
-                  aria-describedby="a11y-refresh-page-message"
-                >
-                  {%- for option in collection.sort_options -%}
-                    <option
-                      value="{{ option.value | escape }}"
-                      {% if option.value == sort_by %}
-                        selected="selected"
-                      {% endif %}
-                    >
-                      {{ option.name | escape }}
-                    </option>
-                  {%- endfor -%}
-                </select>
-                <span class="bb-sort-svg-wrapper svg-wrapper">
-                  {{- 'icon-caret2.svg' | inline_asset_content -}}
-                </span>
-              </div>
-              --->
         <div class="bb-sort-dropdown">
           <button 
             class="bb-sort-options dropdown-toggle" 
@@ -104,13 +79,12 @@
             data-bs-toggle="dropdown" 
             aria-expanded="false">
             {{ sort_default }}  
+            {{- 'icon-caret5.svg' | inline_asset_content -}}  
           </button>
           <div class="dropdown-menu bb-dropdown-menu" aria-labelledby="dropdownMenuButton1">
             {%- for option in collection.sort_options -%}
-           <!--   id="{{ option.value | escape }}"  --> 
                 <input type="hidden" name="sort_by" id="dropdownValue" value="{{ option.value | escape }}" class="option">
                 <label for="{{ option.value | escape }}" class="bb-dropdown-item dropdown-item select-item">{{ option.name | escape }}</label>
-             <!--   <a class="dropdown-item" href="#" onclick="updateDropdownText( {{ option.value | escape }} )">{{ option.name | escape }}</a>   -->
             {%- endfor -%}  
           </div>
         </div>
@@ -121,7 +95,7 @@
       </facet-filters-form>
     {%- endif -%}
 
-    <div class="{% if section.settings.filter_type == 'vertical' %} facets-vertical page-width2{% endif %}">
+    <div class=" bb-facets-vertical facets-vertical page-width2">
       {{ 'component-facets.css' | asset_url | stylesheet_tag }}
       <script src="{{ 'facets.js' | asset_url }}" defer="defer"></script>
       {%- if section.settings.enable_filtering or section.settings.enable_sorting -%}
@@ -135,7 +109,7 @@
             results: collection,
             enable_filtering: section.settings.enable_filtering,
             enable_sorting: section.settings.enable_sorting,
-            filter_type: section.settings.filter_type,
+            filter_type: 'vertical',
             paginate: paginate
           %}
         </aside>
@@ -328,19 +302,6 @@
       "default": true,
       "label": "t:sections.main-collection-product-grid.settings.enable_filtering.label",
       "info": "t:sections.main-collection-product-grid.settings.enable_filtering.info"
-    },
-    {
-      "type": "select",
-      "id": "filter_type",
-      "options": [
-        {
-          "value": "vertical",
-          "label": "t:sections.main-collection-product-grid.settings.filter_type.options__2.label"
-        }
-      ],
-      "default": "vertical",
-      "label": "t:sections.main-collection-product-grid.settings.filter_type.label",
-      "info": "t:sections.main-collection-product-grid.settings.filter_type.info"
     },
     {
       "type": "checkbox",

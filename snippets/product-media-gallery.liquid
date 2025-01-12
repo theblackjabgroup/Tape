@@ -41,6 +41,7 @@
 {% if section.settings.enable_sticky_info %}
   {% assign class_name = 'product__column-sticky' %}
 {% endif %}
+{% assign image_class = 'bg-image-push' %}
 
 {% if section.settings.gallery_layout == 'thumbnail' %}
   {%  assign  thumbnail = true %}
@@ -315,6 +316,7 @@
                     sizes: sizes,
                     widths: '54, 74, 104, 162, 208, 324, 416',
                     id: thumbnail_id,
+                    class: image_class,
                     alt: media.alt
                   | escape
                 }}

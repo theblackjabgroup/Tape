@@ -84,10 +84,15 @@ class FacetFiltersForm extends HTMLElement {
 
       const button = document.getElementById('dropdownMenuButton1');
       const hiddenInput = document.getElementById('dropdownValue');
+      if(sortText.has(event.target.defaultValue))
+      {
+        console.log("Inside")
       const selectedText = sortText.get(event.srcElement.defaultValue);
-      button.textContent = selectedText; // Update button text
+      button.innerHTML = `${selectedText} <svg class="icon icon-caret icon-caret5" viewBox="0 0 10 6"><path fill="currentColor" fill-rule="evenodd" d="M9.354.646a.5.5 0 0 0-.708 0L5 4.293 1.354.646a.5.5 0 0 0-.708.708l4 4a.5.5 0 0 0 .708 0l4-4a.5.5 0 0 0 0-.708" clip-rule="evenodd"></path></svg>`;
+      // Update button text
       hiddenInput.value = selectedText; // Update hidden input value
-      console.log("selectedText ",event.srcElement)
+      } 
+      console.log("selectedText ",event.srcElement.defaultValue)
       console.log("in updateDropdownText button ", button)
 
         if (typeof initializeScrollAnimationTrigger === 'function') initializeScrollAnimationTrigger(html.innerHTML);

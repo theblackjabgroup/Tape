@@ -102,7 +102,7 @@
     }
   },
   "onboarding": {
-    "product_title": "Example product title",
+    "product_title": "Example Product Title",
     "collection_title": "Your collection's name"
   },
   "products": {
@@ -190,7 +190,7 @@
       "clear_all": "Remove all",
       "from": "From",
       "filter_and_sort": "Filter and sort",
-      "filter_by_label": "Filter By:",
+      "filter_by_label": "Filter By :",
       "filter_button": "Filter",
       "filters_selected": {
         "one": "{{ count }} selected",
@@ -210,7 +210,7 @@
       },
       "reset": "Reset",
       "sort_button": "Sort",
-      "sort_by_label": "Sort by:",
+      "sort_by_label": "Sort by :",
       "to": "To",
       "clear_filter": "Remove filter"
     }
