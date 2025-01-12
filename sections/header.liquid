@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="{{ 'header.css' | asset_url }}">
+
 <script src="{{ 'header.js' | asset_url }}" defer></script>
 
 <{% if section.settings.sticky_header_type != 'none' %}sticky-header data-sticky-type="{{ section.settings.sticky_header_type }}"{% else %}div{% endif %} class="header-wrapper color-{{ section.settings.color_scheme }}" style="--padding-top: {{ section.settings.padding_top }}px; --padding-bottom: {{ section.settings.padding_bottom }}px;">
@@ -67,7 +68,7 @@
    <div class="h-dots"><h1></h1></div>
 </div>
       
-           <div class="localization header-localization">
+         <div class="localization header-localization">
             {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
               <localization-form>
                 {%- form 'localization', id: 'HeaderCountryMobileForm', class: 'localization-form' -%}
@@ -82,31 +83,66 @@
             {% endif %}
           </div>
 
-
-       <div class="nav-icons">
-        <div class="nav-icon">
+      <div class="nav-icons">
+{% case section.settings.search_icon_style %}
+    {% when '1' %}
+  <div class="nav-icon">
+    <a href="{{ routes.search_url }}" class="js-drawer-open-cart">
+       <img src="{{ 'search-icon.png' | asset_url }}" alt="Cart" class="navpngicon">
+       </a>
+  </div>
+    {% when '2' %}
+            <div class="nav-icon">
           <a href="{{ routes.search_url }}" class="search-toggle">
             <span class="svg-wrapper">{{ 'icon-search.svg' | inline_asset_content }}</span>
           </a>
         </div>
-        <div class="nav-icon">
+    {% when 'none' %}
+       
+         {%- comment -%}No icon displayed{%- endcomment -%}
+{% endcase %}
+ {% case section.settings.cart_icon_style %}
+      {% when '1' %}
+  <div class="nav-icon">
+    <a href="{{ routes.cart_url }}" class="js-drawer-open-cart">
+       <img src="{{ 'cart-icon.png' | asset_url }}" alt="Cart" class="navpngicon">
+       </a>
+  </div>
+         {% when '2' %}
+         <div class="nav-icon">
           <a href="{{ routes.cart_url }}" class="js-drawer-open-cart">
             <span class="svg-wrapper">{{ 'icon-cart.svg' | inline_asset_content }}</span>
             {% comment %} <span class="cart-count">{{ cart.item_count }}</span> {% endcomment %}
           </a>
         </div>
-        <div class="nav-icon">
+     {% when 'none' %}
+         {%- comment -%}No icon displayed{%- endcomment -%}
+     {% endcase %}
+      
+{% case section.settings.account_icon_style %}
+      {% when '1' %}
+  <div class="nav-icon">
+    <a href="{{ routes.account_url }}" class="js-drawer-open-cart">
+       <img src="{{ 'profile-icon.png' | asset_url }}" alt="Cart" class="navpngicon">
+       </a>
+  </div>
+         {% when '2' %}
+          <div class="nav-icon">
           <a href="{{ routes.account_url }}" class="">
             <span class="svg-wrapper">{{ 'icon-account.svg' | inline_asset_content }}</span>
           </a>
         </div>
-      </div>
+     {% when 'none' %}
+         {%- comment -%}No icon displayed{%- endcomment -%}
+     {% endcase %}
+
+</div>
     </header>
 
     <div class="mobile-header-drawer color-{{ section.settings.color_scheme }}">
       <div class="mobile-header-drawer-close">
         <div class="close-icon">
-          <span class="svg-wrapper" style="width: 12px; height: 12px;">
+          <span class="svg-wrapper" style="width: 23px; height: 23px;">
             {{- 'icon-close.svg' | inline_asset_content -}}
           </span>
         </div>
@@ -131,8 +167,11 @@
                   </span>
                 {% endif %}
               </a>
+            
               {% if link.links != blank %}
+                 
                 <ul class="mobile-dropdown">
+                   <div class="header-line"><h1></h1></div>
                   {% for childlink in link.links %}
                     <li class="mobile-dropdown-item-container">
                       <a href="{{ childlink.url }}" class="mobile-dropdown-item">
@@ -172,9 +211,9 @@
         <localization-form>
             {%- form 'localization', id: 'HeaderCountryMobileForm', class: 'localization-form' -%}
                 <div>
-                    <h2 class="visually-hidden" id="HeaderCountryMobileLabel">
-                        {{ 'localization.country_label' | t }}
-                    </h2>
+                    <!-- <h2 class="visually-hidden" id="HeaderCountryMobileLabel">
+                        <!-- {{ 'localization.country_label' | t }} -->
+                    </h2> -->
                     {%- render 'country-localization', localPosition: 'HeaderCountryMobile' -%}
                 </div>
             {%- endform -%}
@@ -236,9 +275,8 @@
   {% endcomment %}
 
 <script>
- document.addEventListener('DOMContentLoaded', calculateOffsets);
-
-// Debounce function to limit how often the resize calculations occur
+  
+document.addEventListener('DOMContentLoaded', calculateOffsets);
 function debounce(func, wait) {
   let timeout;
   return function executedFunction(...args) {
@@ -250,10 +288,7 @@ function debounce(func, wait) {
     timeout = setTimeout(later, wait);
   };
 }
-
-// Main function to calculate offsets
 function calculateOffsets() {
-  // Small delay to ensure all styles are fully applied
   setTimeout(() => {
     const navItems = document.querySelectorAll('.nav-item');
     const header = document.querySelector('.header');
@@ -261,14 +296,12 @@ function calculateOffsets() {
     if (!header || !navItems.length) return;
     
     navItems.forEach(item => {
-      // Force a reflow to get accurate measurements
       void header.offsetHeight;
       
       const headerLeft = header.getBoundingClientRect().left;
       const itemLeft = item.getBoundingClientRect().left;
       const offset = itemLeft - headerLeft-12;
-      
-      // Only update if the offset has actually changed
+    
       const currentOffset = parseFloat(getComputedStyle(item).getPropertyValue('--dropdown-offset'));
       if (currentOffset !== offset) {
         item.style.setProperty('--dropdown-offset', `${offset}px`);
@@ -276,31 +309,20 @@ function calculateOffsets() {
     });
   }, 50);
 }
-
-// Debounced resize handler
 const debouncedCalculate = debounce(() => {
   calculateOffsets();
 }, 150);
 
-// Handle various events that might require recalculation
 window.addEventListener('resize', debouncedCalculate);
 window.addEventListener('orientationchange', calculateOffsets);
-
-// If you're using a CSS framework or have dynamic content loading, 
-// you might want to trigger recalculation after transitions:
 document.addEventListener('transitionend', (e) => {
-  // Only recalculate if the transition was on a relevant property
   if (e.target.classList.contains('header') || 
       e.target.classList.contains('nav-item') ||
       e.target.closest('.header')) {
     calculateOffsets();
   }
 });
-
-// Optional: Recalculate when images load (if they affect layout)
 window.addEventListener('load', calculateOffsets);
-
-// Optional: Mutation Observer to watch for DOM changes
 const observer = new MutationObserver(debouncedCalculate);
 observer.observe(document.querySelector('.header'), {
   childList: true,
@@ -308,10 +330,9 @@ observer.observe(document.querySelector('.header'), {
   attributes: true,
   attributeFilter: ['class', 'style']
 });
-</script>
   
-
-
+</script>
+    
 {% schema %}
 {
   "name": "t:sections.header.name",
@@ -406,6 +427,67 @@ observer.observe(document.querySelector('.header'), {
       "default": "on-scroll-up",
       "label": "t:sections.header.settings.sticky_header_type.label"
     },
+    {
+      "type": "select",
+      "id": "search_icon_style",
+      "label": "Search Icon",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "1",
+          "label": "Icon 1"
+        },
+        {
+          "value": "2",
+          "label": "Icon 2"
+        }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "select",
+      "id": "cart_icon_style",
+      "label": "Cart Icon",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "1",
+          "label": "Icon 1"
+        },
+        {
+          "value": "2",
+          "label": "Icon 2"
+        }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "select",
+      "id": "account_icon_style",
+      "label": "Account Icon",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "1",
+          "label": "Icon 1"
+        },
+        {
+          "value": "2",
+          "label": "Icon 2"
+        }
+      ],
+      "default": "2"
+    },
+  
     {
       "type": "checkbox",
       "id": "enable_country_selector",
