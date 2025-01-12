@@ -1049,7 +1049,7 @@ class SlideshowComponent extends SliderComponent {
         {
           const dests = document.getElementsByClassName("announcement-icon-wrapper");
           Array.from(dests).forEach(dest => {
-             if(index != dest.getAttribute("aria-count"))
+             if(index != dest.getAttribute("data-count"))
              {
                dest.setAttribute('aria-hidden', 'true')
              }

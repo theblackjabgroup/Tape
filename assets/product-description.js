@@ -32,8 +32,8 @@ console.log("mediaDivs ", mediaDivs)
 Array.from(mediaDivs).forEach((mediaDiv) => {
     const imgTag = mediaDiv.querySelector('img'); // Find the img tag inside the div
 
-    if (imgTag && !imgTag.hasAttribute('aria-click')) {
-      // Apply CSS to the div if img doesn't have aria-click attribute
+    if (imgTag && !imgTag.hasAttribute('data-click')) {
+      // Apply CSS to the div if img doesn't have data-click attribute
       mediaDiv.style.marginLeft = '0rem';  // Example of custom CSS
     }
 })
