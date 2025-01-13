@@ -15,6 +15,7 @@
 {{ 'component-show-more.css' | asset_url | stylesheet_tag }}
 {{ 'component-swatch-input.css' | asset_url | stylesheet_tag }}
 {{ 'component-swatch.css' | asset_url | stylesheet_tag }}
+{{ 'product-list.css' | asset_url | stylesheet_tag }}
 
 {%- liquid
   assign sort_by = results.sort_by | default: results.default_sort_by
@@ -317,7 +318,7 @@
                     >
                       <div class="{% if filter_type == 'horizontal' %}facets__header{% else %}facets__header-vertical{% endif %}">
                         {%- assign max_price_amount = filter.range_max | money | strip_html | escape -%}
-                        <span class="facets__selected">
+                        <span class="bb2-facets__selected facets__selected">
                           {{- 'products.facets.max_price' | t: price: max_price_amount -}}
                         </span>
                         {%- if filter_type != 'vertical' -%}
@@ -754,7 +755,7 @@
         </form>
       </facet-filters-form>
     </details> 
-    <facet-filters-form class="facets facets-vertical-sort">
+    <facet-filters-form class="facets facets-vertical-sort bb-facets-vertical-sort">
       <form class="facets-vertical-form" id="FacetFiltersFormMobile">
         <div class="bb-select-sorting select sorting">
           <div class="bb-select-group select-group">

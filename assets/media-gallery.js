@@ -100,8 +100,8 @@ if (!customElements.get('media-gallery')) {
         console.log("activeItem" ,activeItem)
         const images = activeItem.querySelectorAll('.product__modal-opener--image img');
         images.forEach((image) => {
-          image.setAttribute('aria-click', 0);
-          image.setAttribute('aria-click', numClick%4);
+          image.setAttribute('data-click', 0);
+          image.setAttribute('data-click', numClick%4);
         })
         const divs = activeItem.querySelectorAll('.product__media');
         divs.forEach((div) => {

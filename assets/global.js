@@ -740,7 +740,7 @@ constructor() {
     setTimeout(() => {
     this.x = document.querySelector('.bb-max-width');
     this.height = this.x.offsetHeight;
-    document.documentElement.style.setProperty('--announcement-bar-height', `${this.height / 5}px`); 
+    document.documentElement.style.setProperty('--announcement-bar-height', `${(this.height / 5) + 1}px`); 
   }, 100); // 2000 ms = 2 seconds
   }
 }
@@ -1049,7 +1049,7 @@ class SlideshowComponent extends SliderComponent {
         {
           const dests = document.getElementsByClassName("announcement-icon-wrapper");
           Array.from(dests).forEach(dest => {
-             if(index != dest.getAttribute("aria-count"))
+             if(index != dest.getAttribute("data-count"))
              {
                dest.setAttribute('aria-hidden', 'true')
              }

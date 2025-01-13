@@ -1,70 +1,82 @@
+:root {
+    --arrow-container-size: 20px;
+    --arrow-size: 10px;
+    --arrow-thickness: 3px;
+}
+
 * {
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
 }
 
 .scroll-tracker {
     padding: 0 11px;
-    border-radius: 3px;
+    border-radius: 7px;
     font-size: 15px;
     font-weight: 500;
     height: 45px;
-    color: rgb(var(--color-foreground));
+    color: rgb(var(--color-secondary-button-text));
     display: inline-block;
     position: relative;
     margin-left: 40px;
-    background: #676251;
+    background: rgb(var(--color-button-text));
     text-align: left;
-    width: 60%;
+    width: 50%;
     line-height: normal;
-}
-
-.scroll-tracker::before,
-.scroll-tracker::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    width: 13px;
-    height: 16px;
-    background-color: var(--background_product_card);
-    transform: translateY(-50%);
-    border-radius: 50%;
-}
-
-.scroll-tracker::before {
-    left: -5px;
-}
-
-.scroll-tracker::after {
-    right: -5px;
 }
 
 .scroll-tracker p {
     font-size: 15px;
-    margin-left: 3px;
+    margin-left: 13px;
     margin-top: 13px;
     display: flex;
     align-items: center;
     gap: 3px;
+    color: rgb(var(--color-secondary-button-text));
 }
 
-.scroll-tracker-icon {
-   height: 12px;
-    width: 12px;
-      margin-left: 2px;
-    margin-top: -30px;
+.scroll-distance {
+    font-weight: 500;
+    font-size: 15px;
 }
 
-@media screen and (max-width: 480px) {
+/* Responsive Design */
+/* Mobile devices */
+@media screen and (max-width: 767px) {
     .scroll-tracker {
         display: none;
     }
 }
 
-@media screen and (min-width: 1440px){
-.scroll-tracker {
-        width: 42%;
-        margin-left: 120px;
-  }
+/* Tablets */
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+    .scroll-tracker {
+        width: 70%;
+        margin-left: 20px;
+    }
 }
 
+/* Small desktops */
+@media screen and (min-width: 1024px) and (max-width: 1439px) {
+    .scroll-tracker {
+        width: 50%;
+        margin-left: 50px;
+    }
+}
+
+/* Large desktops */
+@media screen and (min-width: 1440px) {
+    .scroll-tracker {
+        width: 40%;
+        margin-left: 120px;
+        max-width: 800px; /* Prevents the tracker from becoming too wide */
+    }
+}
+
+/* Extra large screens */
+@media screen and (min-width: 1920px) {
+    .scroll-tracker {
+        margin-left: calc(120px + 5%);
+    }
+}

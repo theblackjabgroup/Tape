@@ -19,6 +19,15 @@
   border-radius: 10px !important;
 }
 
+.bb-product__view-details, .bb-animate-arrow 
+{
+  color: rgb(var(--color-foreground));
+}
+.bb-product__text {
+  font-size: 14px !important;
+  font-family: 'Fira Sans' !important;
+  font-weight: 400 !important;
+}
 .bb-product-third {
   top: 50% !important;
   left: 50% !important;
@@ -28,6 +37,10 @@
   z-index: 2;
   filter: contrast(0) sepia(5%) brightness(1.40);
   border-radius: 10px !important;
+}
+
+.bb-product-media-container {
+  border-radius: 5px;
 }
 
 .bb-product-fourth {
@@ -62,6 +75,7 @@
 
 .ticket-line {
   margin-top: 60px;
+  margin-bottom: 25px; 
   position: relative;
   overflow: hidden;
   display: flex;
@@ -69,11 +83,19 @@
   justify-content: space-between;
   transform: translateY(-150%);
 }
+/*
+.ticket-line {
+  margin-bottom: 60px;
+}
 
+.ticket-line + slider-component {
+  margin-bottom: 25px;
+}
+*/
 .ticket-line-first {
-  height: 8px;
+  height: 16px;
   display: block !important;
-  width: 8px;
+  width: 16px;
   border-radius: 50%;
   background-color: rgb(var(--color-background));
 }
@@ -81,7 +103,7 @@
 .bb-thumbnail-width {
   width: 90%;
   height: 90%;
-  width: calc(33% - 2rem) !important;
+  width: calc(33% - 8rem) !important;
 }
 
 .bb-product-thumbnail-corner {
@@ -90,8 +112,10 @@
 
 .bb-upper-thumbnail {
   padding-right: 4rem !important;
-  padding-left: 4rem;
+  padding-left: 4rem !important;
   padding-bottom: 20px;
+  justify-content: start;
+  gap: 4rem;
 }
 
 .bb-global-media-settings {
@@ -132,14 +156,14 @@
 }
 
 .bb-price {
-  background-color: var(--product_price_card);
+  background-color: var(--color-button);
   padding: 0.5rem 3rem;
   border-radius: 3px;
-  color: var(--product_price_font);
+  color: rgb(var(--color-foreground));
 }
 
 .bb-price-item {
-  color: var(--product_price_secondary_font) !important;
+  color:  rgb(var(--color-foreground)) !important;
 }
 
 .bb-ticket-price {
@@ -218,34 +242,34 @@
   line-height: 20px;
 }
 
-.bb-product[aria-click="1"] {
+.bb-product[data-click="1"] {
   transform: rotate(-7deg) translate(-44%, -56%);
   border-radius: 2%;
 }
 
 
-.bb-product[aria-click="2"] {
+.bb-product[data-click="2"] {
   transform: rotate(7deg) translate(-52%, -36%);
   border-radius: 2%;
 }
 
-.bb-product-second[aria-click="2"] {
+.bb-product-second[data-click="2"] {
   transform: rotate(-7deg) translate(-44%, -56%);
   border-radius: 2%;
 }
 
 
-.bb-product[aria-click="3"] {
+.bb-product[data-click="3"] {
   transform: rotate(-0.5deg) translate(-48%, -48%);
   border-radius: 2%;
 }
 
-.bb-product-second[aria-click="3"] {
+.bb-product-second[data-click="3"] {
   transform: rotate(7deg) translate(-52%, -36%);
   border-radius: 2%;
 }
 
-.bb-product-third[aria-click="3"] {
+.bb-product-third[data-click="3"] {
   transform: rotate(-7deg) translate(-44%, -56%);
   border-radius: 2%;
 }
@@ -340,9 +364,13 @@ border-radius: 50%;
 #product-upper-bg {
   background-color: var(--background_product_card);
   border-bottom-right-radius: 10px;
-  border-bottom-left-radius: 10px
+  border-bottom-left-radius: 10px;
+  padding-bottom: 10px;
 }
 
+#product-upper-bg:not(:has(img)) {
+  background-color: rgb(var(--color-background));
+}
 .bb-variant-circle input[type='radio'] + label {
   /* border: var(--variant-pills-border-width) solid rgba(var(--color-foreground), var(--variant-pills-border-opacity));  */
    background-color: #D9D9D9;
@@ -448,6 +476,55 @@ border-radius: 50%;
   color: var(--utilities);
 }
 
+.bb-product-form__input--dropdown {
+  display: flex;
+    gap: 1rem;
+}
+
+.bb-form__label {
+  margin: auto;
+  margin-left: 0px;
+  font-size: 20px;
+  font-family: 'Fira Sans';
+  font-weight: 500;
+  line-height: 30px;
+}
+
+.bb-dropdown-pro-select {
+  width: 70%;
+  background-color: var(--background_product_card);
+  border-radius: 5px;
+}
+
+
+.select:after {
+  border: none !important;
+}
+
+.bb-pro-drop-option {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 30px;
+}
+.bb-dropdown-pro-select:before {
+  position: absolute;
+  top: 50%;
+  width: 13px;
+  height: 16px;
+  background-color:rgb(var(--color-background));
+  border-radius: 50%;
+  transform: translate(-40%, -50%);
+  z-index: 0;
+}
+.bb-dropdown-pro-select:after {
+  position: absolute;
+  width: 13px;
+  height: 16px;
+  background-color:rgb(var(--color-background));
+  top: 33%;
+  left: 96.5%;
+    border-radius: 50%;
+}
 .shopify-payment-button {
   font-family: 'Inter';
   font-weight: 500;
@@ -490,11 +567,20 @@ border-radius: 50%;
   transition: transform .1s cubic-bezier(.215,.61,.355,1)
 }
 
+/*
+.bb-product-thumbnail-corner:hover 
 .button:not([disabled]):hover:after {
   box-shadow: 0 0 0 0 !important;
   --border-offset: 0px !important;
 }
-
+*/
+.bb-product-thumbnail-corner:hover .bg-image-push {
+  box-shadow: 0 0 0 0 !important;
+  --border-offset: 0px !important;
+  transform: translate(4px, 4px);
+  transition: transform .1s cubic-bezier(.215,.61,.355,1);
+  border-radius: 10px;
+}
 .shopify-payment-button__button--unbranded:before {
   content: "";
     width: 100%;
@@ -570,6 +656,14 @@ border-radius: 50%;
 }
 
 @media screen and (max-width: 749px) {
+  .bb-thumbnail-width {
+    width: calc(33% - 2rem) !important;
+  }
+  
+  .ticket-line-first {
+    height: 8px;
+    width: 8px;
+  }
   .bb-test {
     position: relative;
     flex-wrap: inherit;
@@ -597,9 +691,29 @@ border-radius: 50%;
   margin: 0;
   font-family: Fira Sans;
   font-weight: 700;
-  font-size: 28px;
+/*  font-size: 28px; */
 }
 
+.bb_select__select {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 30px;
+  font-family: 'Fira Sans';
+}
+.select:hover.select:after {
+  border-radius: inherit !important;
+}
+
+*:focus-visible {
+  outline: none;
+  outline-offset: var(--focused-base-outline-offset);
+  box-shadow: none;
+}
+
+.bb-pro-drop-svg-wrapper {
+  height: 12px !important;
+    width: 24px !important;
+}
 @media screen and (max-width: 749px) {
 
   .product-media-container.constrain-height.media-fit-contain {
@@ -624,12 +738,15 @@ border-radius: 50%;
   .bb-upper-thumbnail {
     margin-bottom: 0px !important;
     justify-content: space-evenly;
+    padding-right: 0rem !important;
+    padding-left: 0rem !important;
   }
 
   .slider.slider--mobile {
     scroll-snap-type: none !important;
     scroll-behavior: unset !important;
     scroll-padding-left: 0rem !important;
+    overflow-x: hidden !important;
   }
 
   .bb-price:before {

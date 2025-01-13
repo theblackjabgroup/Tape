@@ -41,6 +41,7 @@
 {% if section.settings.enable_sticky_info %}
   {% assign class_name = 'product__column-sticky' %}
 {% endif %}
+{% assign image_class = 'bg-image-push' %}
 
 {% if section.settings.gallery_layout == 'thumbnail' %}
   {%  assign  thumbnail = true %}
@@ -63,8 +64,8 @@
       {{ 'accessibility.skip_to_product_info' | t }}
     </a>
     <ul
-      id="Slider-Gallery-{{ section.id }}"
-      class="product__media-list contains-media grid grid--peek list-unstyled slider slider--mobile"
+     
+      class="product__media-list contains-media grid grid--peek list-unstyled slider slider--mobile bb-slider--mobile"
       role="list"
     >
       {%- if product.selected_or_first_available_variant.featured_media != null -%}
@@ -102,7 +103,7 @@
 
         {%- unless media.id == product.selected_or_first_available_variant.featured_media.id -%}
           <li
-            id="Slide-{{ section.id }}-{{ media.id }}"
+           
             class="product__media-item grid__item slider__slide{% if single_media_visible %} product__media-item--single{% endif %}{% if product.selected_or_first_available_variant.featured_media == nil and forloop.index == 1 %} is-active{% endif %}{% if media.media_type != 'image' %} product__media-item--full{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
             data-media-id="{{ section.id }}-{{ media.id }}"
           >
@@ -131,6 +132,7 @@
         {%- endunless -%}
       {%- endfor -%}
     </ul>
+    <!--
     <div class="slider-buttons quick-add-hidden{% if hide_mobile_slider %} small-hide{% endif %}">
       <button
         type="button"
@@ -159,6 +161,7 @@
         </span>
       </button>
     </div>
+    -->
   </slider-component>
   {%- if first_3d_model -%}
     <button
@@ -227,7 +230,6 @@
             assign media_index = media_index | plus: 1
           -%}
           <li
-            id="Slide-Thumbnails-{{ section.id }}-0"
             class="thumbnail-list__item slider__slide{% if section.settings.hide_variants and variant_images contains featured_media.src %} thumbnail-list_item--variant{% endif %}"
             data-target="{{ section.id }}-{{ featured_media.id }}"
             data-media-position="{{ media_index }}"
@@ -241,7 +243,7 @@
               aria-current="true"
               aria-controls="GalleryViewer-{{ section.id }}"
               aria-describedby="{{ thumbnail_id }}"
-              aria-click=0
+              data-click=0
             >
               {{
                 featured_media.preview_image
@@ -293,7 +295,7 @@
               {%- capture thumbnail_id -%}
                 Thumbnail-{{ section.id }}-{{ forloop.index }}
               {%- endcapture -%}
-              <button
+            <button
                 class="bb-product-thumbnail-corner thumbnail global-media-settings global-media-settings--no-shadow"
                 aria-label="{%- if media.media_type == 'image' -%}{{ 'products.product.media.load_image' | t: index: media_index }}{%- elsif media.media_type == 'model' -%}{{ 'products.product.media.load_model' | t: index: media_index }}{%- elsif media.media_type == 'video' or media.media_type == 'external_video' -%}{{ 'products.product.media.load_video' | t: index: media_index }}{%- endif -%}"
                 {% if media == product.selected_or_first_available_variant.featured_media
@@ -304,7 +306,7 @@
                 {% endif %}
                 aria-controls="GalleryViewer-{{ section.id }}"
                 aria-describedby="{{ thumbnail_id }}"
-                aria-click=0
+                data-click=0
               >
                 {{
                   media.preview_image
@@ -314,6 +316,7 @@
                     sizes: sizes,
                     widths: '54, 74, 104, 162, 208, 324, 416',
                     id: thumbnail_id,
+                    class: image_class,
                     alt: media.alt
                   | escape
                 }}
