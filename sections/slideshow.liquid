@@ -45,136 +45,250 @@
     {% endfor %}
   </div>
 </div>
-<script>
- document.addEventListener('DOMContentLoaded', function() {
-  const slides = document.querySelectorAll('.slide');
-  const slideshow = document.querySelector('.interactive-slideshow');
-  let activeSlide = null;
-  let isMobile = window.innerWidth <= 900;
-  let startX;
-  let scrollLeft;
-  let isDown = false;
-   function adjustJustifyContent() {
-   
-    if (!isMobile) {
-      if (slideshow.scrollWidth <= slideshow.clientWidth) {
-        slideshow.style.justifyContent = 'center';
-      } else {
-        slideshow.style.justifyContent = 'flex-start';
-      }
-    } else {
 
-      slideshow.style.justifyContent = '';
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  initializeSlideshows();
+});
+
+function initializeSlideshows() {
+  const slideshowSections = document.querySelectorAll('.slideshow-section');
+  
+  slideshowSections.forEach(section => {
+    const slideshow = section.querySelector('.interactive-slideshow');
+    const slides = section.querySelectorAll('.slide');
+    
+    if (!slideshow || !slides.length) return;
+    
+    new InteractiveSlideshow(slideshow, slides);
+  });
+}
+
+class InteractiveSlideshow {
+  constructor(slideshow, slides) {
+    this.slideshow = slideshow;
+    this.slides = Array.from(slides); // Convert NodeList to Array for easier manipulation
+    this.activeSlide = null;
+    this.isMobile = window.innerWidth <= 900;
+    this.startX = 0;
+    this.scrollLeft = 0;
+    this.isDown = false;
+    this.clickHandlers = new Map();
+    this.activeDropdown = null;
+    
+   
+    this.handleResize = this.handleResize.bind(this);
+    this.handleClickOutside = this.handleClickOutside.bind(this);
+    this.handleMouseDown = this.handleMouseDown.bind(this);
+    this.handleMouseLeave = this.handleMouseLeave.bind(this);
+    this.handleMouseUp = this.handleMouseUp.bind(this);
+    this.handleMouseMove = this.handleMouseMove.bind(this);
+    
+    this.init();
+    
+  
+    window.addEventListener('resize', this.debounce(this.handleResize, 250));
+  }
+  
+  init() {
+    this.cleanupListeners(); 
+    this.adjustJustifyContent();
+    this.setupViewMode();
+  }
+  
+  setupViewMode() {
+    if (this.isMobile) {
+      this.setupMobileView();
+    } else {
+      this.setupDesktopView();
     }
   }
-  adjustJustifyContent();
- 
-  const setActiveSlide = (slide) => {
-    if (!isMobile) {
-      if (activeSlide !== slide) {
-        slides.forEach(s => s.classList.remove('active'));
-        slide.classList.add('active');
-        activeSlide = slide;
+  
+  setupMobileView() {
+    this.removeActiveState();
+    this.addMobileListeners();
+    this.slideshow.style.cursor = 'grab';
+  }
+  
+  setupDesktopView() {
+    this.addDesktopListeners();
+    this.setActiveSlide(this.slides[0]);
+    this.slideshow.style.cursor = 'default';
+  }
+  
+  adjustJustifyContent() {
+    if (!this.isMobile) {
+      this.slideshow.style.justifyContent = 
+        this.slideshow.scrollWidth <= this.slideshow.clientWidth ? 'center' : 'flex-start';
+    } else {
+      this.slideshow.style.justifyContent = '';
+    }
+  }
+  
+  setActiveSlide(slide) {
+    if (!this.isMobile && slide !== this.activeSlide) {
+      this.slides.forEach(s => s.classList.remove('active'));
+      slide.classList.add('active');
+      this.activeSlide = slide;
+    }
+  }
+  
+  toggleSlideText(slideText, arrow, event) {
+    if (event) {
+      event.stopPropagation();
+      event.preventDefault();
+    }
+    
+    if (slideText.classList.contains('expanded')) {
+      this.closeDropdown(slideText, arrow);
+    } else {
+      this.openDropdown(slideText, arrow);
+    }
+  }
+  
+  closeDropdown(slideText, arrow) {
+    slideText.classList.remove('expanded');
+    arrow.classList.remove('expanded');
+    this.activeDropdown = null;
+    document.removeEventListener('click', this.handleClickOutside);
+  }
+  
+  openDropdown(slideText, arrow) {
+   
+    if (this.activeDropdown) {
+      const activeArrow = this.activeDropdown.parentElement.querySelector('.headarrow_svg-wrapper');
+      this.closeDropdown(this.activeDropdown, activeArrow);
+    }
+    
+    slideText.classList.add('expanded');
+    arrow.classList.add('expanded');
+    this.activeDropdown = slideText;
+    
+   
+    setTimeout(() => {
+      document.addEventListener('click', this.handleClickOutside);
+    }, 0);
+  }
+  
+  handleClickOutside(event) {
+    if (this.activeDropdown && !this.activeDropdown.contains(event.target)) {
+      const activeArrow = this.activeDropdown.parentElement.querySelector('.headarrow_svg-wrapper');
+      if (!activeArrow.contains(event.target)) {
+        this.closeDropdown(this.activeDropdown, activeArrow);
       }
     }
-  };
-  const toggleSlideText = (slideText, arrow) => {
-    if (slideText.classList.contains('expanded')) {
-      slideText.classList.remove('expanded');
-      arrow.classList.remove('expanded');
-    } else {
-      document.querySelectorAll('.slide-text').forEach(text => text.classList.remove('expanded'));
-      slideText.classList.add('expanded');
-      arrow.classList.add('expanded');
-    }
-  };
-  const addMobileScrollListeners = () => {
-    slideshow.addEventListener('mousedown', (e) => {
-      isDown = true;
-      slideshow.style.cursor = 'grabbing';
-      startX = e.pageX - slideshow.offsetLeft;
-      scrollLeft = slideshow.scrollLeft;
-    });
-    slideshow.addEventListener('mouseleave', () => {
-      isDown = false;
-      slideshow.style.cursor = 'grab';
-    });
-    slideshow.addEventListener('mouseup', () => {
-      isDown = false;
-      slideshow.style.cursor = 'grab';
-    });
-    slideshow.addEventListener('mousemove', (e) => {
-      if (!isDown) return;
-      e.preventDefault();
-      const x = e.pageX - slideshow.offsetLeft;
-      const walk = (x - startX) * 2;
-      slideshow.scrollLeft = scrollLeft - walk;
-    });
-  };
-  const addMobileListeners = () => {
-    slides.forEach(slide => {
+  }
+  
+  handleMouseDown(e) {
+    this.isDown = true;
+    this.slideshow.style.cursor = 'grabbing';
+    this.startX = e.pageX - this.slideshow.offsetLeft;
+    this.scrollLeft = this.slideshow.scrollLeft;
+  }
+  
+  handleMouseLeave() {
+    this.isDown = false;
+    this.slideshow.style.cursor = 'grab';
+  }
+  
+  handleMouseUp() {
+    this.isDown = false;
+    this.slideshow.style.cursor = 'grab';
+  }
+  
+  handleMouseMove(e) {
+    if (!this.isDown) return;
+    e.preventDefault();
+    const x = e.pageX - this.slideshow.offsetLeft;
+    const walk = (x - this.startX) * 2;
+    this.slideshow.scrollLeft = this.scrollLeft - walk;
+  }
+  
+  addMobileListeners() {
+   
+    this.slideshow.addEventListener('mousedown', this.handleMouseDown);
+    this.slideshow.addEventListener('mouseleave', this.handleMouseLeave);
+    this.slideshow.addEventListener('mouseup', this.handleMouseUp);
+    this.slideshow.addEventListener('mousemove', this.handleMouseMove);
+   
+    this.slides.forEach(slide => {
       const arrow = slide.querySelector('.headarrow_svg-wrapper');
       const slideText = slide.querySelector('.slide-text');
       
-      arrow.addEventListener('click', () => toggleSlideText(slideText, arrow));
-    });
-    addMobileScrollListeners();
-  };
-  const removeMobileListeners = () => {
-    slides.forEach(slide => {
-      const heading = slide.querySelector('.headarrow_svg-wrapper');
-      const clone = heading.cloneNode(true);
-      heading.parentNode.replaceChild(clone, heading);
-    });
-    slideshow.removeEventListener('mousedown', () => {});
-    slideshow.removeEventListener('mouseleave', () => {});
-    slideshow.removeEventListener('mouseup', () => {});
-    slideshow.removeEventListener('mousemove', () => {});
-  };
-  const addDesktopListeners = () => {
-    slides.forEach(slide => {
-      slide.addEventListener('mouseenter', () => setActiveSlide(slide));
-    });
-  };
-  const removeDesktopListeners = () => {
-    slides.forEach(slide => {
-      const clone = slide.cloneNode(true);
-      slide.parentNode.replaceChild(clone, slide);
-    });
-  };
-  const handleResize = () => {
-    const newIsMobile = window.innerWidth <= 1100;
-    if (newIsMobile !== isMobile) {
-      isMobile = newIsMobile;
-      removeActiveState();
-      if (isMobile) {
-        removeMobileListeners();
-        addMobileListeners();
-      } else {
-        removeMobileListeners();
-        addDesktopListeners();
-        setActiveSlide(slides[0]);
+      if (arrow && slideText) {
+        const clickHandler = (e) => this.toggleSlideText(slideText, arrow, e);
+        this.clickHandlers.set(arrow, clickHandler);
+        
+        arrow.addEventListener('click', clickHandler);
+        arrow.addEventListener('touchend', clickHandler);
       }
-    }
-  };
-  const removeActiveState = () => {
-    slides.forEach(slide => slide.classList.remove('active'));
-    activeSlide = null;
-  };
-  if (isMobile) {
-    addMobileListeners();
-  } else {
-    addDesktopListeners();
-    setActiveSlide(slides[0]);
+    });
   }
-  let resizeTimer;
-  window.addEventListener('resize', () => {
-      isMobile = window.innerWidth <= 900;
-    adjustJustifyContent();
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(handleResize, 250);
+  
+  addDesktopListeners() {
+    this.slides.forEach(slide => {
+      const mouseEnterHandler = () => this.setActiveSlide(slide);
+      this.clickHandlers.set(slide, mouseEnterHandler);
+      slide.addEventListener('mouseenter', mouseEnterHandler);
+    });
+  }
+  
+  cleanupListeners() {
+
+    this.slideshow.removeEventListener('mousedown', this.handleMouseDown);
+    this.slideshow.removeEventListener('mouseleave', this.handleMouseLeave);
+    this.slideshow.removeEventListener('mouseup', this.handleMouseUp);
+    this.slideshow.removeEventListener('mousemove', this.handleMouseMove);
+  
+    this.clickHandlers.forEach((handler, element) => {
+      element.removeEventListener('click', handler);
+      element.removeEventListener('touchend', handler);
+      element.removeEventListener('mouseenter', handler);
+    });
+    this.clickHandlers.clear();
+    
+    if (this.activeDropdown) {
+      const activeArrow = this.activeDropdown.parentElement.querySelector('.headarrow_svg-wrapper');
+      this.closeDropdown(this.activeDropdown, activeArrow);
+    }
+    
+    document.removeEventListener('click', this.handleClickOutside);
+  }
+  
+  removeActiveState() {
+    this.slides.forEach(slide => slide.classList.remove('active'));
+    this.activeSlide = null;
+  }
+  
+  handleResize() {
+    const newIsMobile = window.innerWidth <= 900;
+    if (newIsMobile !== this.isMobile) {
+      this.isMobile = newIsMobile;
+      this.init(); // Reinitialize everything when view mode changes
+    }
+    this.adjustJustifyContent();
+  }
+  
+  debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func.apply(this, args);
+      };
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
+  }
+}
+
+if (typeof Shopify !== 'undefined' && Shopify.designMode) {
+  document.addEventListener('shopify:section:load', function(event) {
+    if (event.target.classList.contains('slideshow-section')) {
+      initializeSlideshows();
+    }
   });
-});
+}
 </script> 
 
 
