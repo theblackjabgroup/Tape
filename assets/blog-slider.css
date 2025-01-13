@@ -42,6 +42,7 @@
     left: 25px;
     font-size: 2rem;
     font-weight: bold;
+  color: rgb(var(--color-text));
 }
 
 .blog-arrow-buttons {
@@ -57,6 +58,8 @@
     background: transparent;
     transition: opacity 0.3s ease;
     opacity: 1;
+   color: rgb(var(--color-foreground));
+
 }
 
 .arrow:disabled {
@@ -67,6 +70,7 @@
 .blog-slider-container {
     width: 100%;
     overflow: hidden;
+  background-color: rgb(var(--color-background)); 
 }
 
 .blog-slider-wrapper {
@@ -75,6 +79,7 @@
     gap: 20px;
     will-change: transform; 
     justify-content: flex-start;
+  background-color: rgb(var(--color-background)); 
 }
 .blog-card {
     flex: 0 0 auto;
@@ -94,6 +99,7 @@
             height: 30px;
             border-radius: 50%;
             z-index: 1;
+  background-color: rgb(var(--color-background));
         }
 
         .semicircle-left {
@@ -121,6 +127,8 @@
     flex-direction: column;
     justify-content: flex-start;
     height: 100%;
+   background-color: rgb(var(--color-button));
+  color: rgb(var(--color-text));
 }
 
 .blog-card-title {
@@ -186,6 +194,7 @@
     overflow-wrap: break-word; 
     max-width: 240px;
     text-align: center; 
+   background-color: rgb(var(--color-background));
 }
 
 
@@ -208,6 +217,7 @@
     justify-content: center;
     gap: 8px;
     width: 50%;
+  color:rgb(var(--color-secondary-button-text));
   transition: background-position 1.5s ease-in-out, transform 0.3s ease;
 }
 .blog-read-more-btn:hover{
