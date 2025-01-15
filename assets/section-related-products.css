@@ -120,8 +120,8 @@ h7 {
 
 
 .vendor{
-    font-size: 17px;
- margin-left:15px
+    font-size: 15px;
+    margin-left:15px;
     color: rgb(var(--color-foreground));
 }
 
@@ -215,7 +215,7 @@ h7 {
   cursor: pointer;
   z-index: 10;
   transition: all 0.3s ease;
-  opacity: 1;
+ 
   font-size: 0;
 }
 
@@ -258,14 +258,7 @@ h7 {
   top: 70%;
 }
 
-.slider-arrow1:hover::before,
-.slider-arrow1:hover::after {
-  background: #fff;
-  width: 18px;
-}
-
 .slider-arrow1:disabled {
-  opacity: 0.5;
   cursor: not-allowed;
   pointer-events: none;
 }
