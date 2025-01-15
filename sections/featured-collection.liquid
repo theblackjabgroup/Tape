@@ -22,8 +22,12 @@
     <p class="{{ section.settings.description_style }}">{{ section.settings.description }}</p>
   {% endif %}
 
-  <button class="slider-arrow1 left" onclick="scrollCards(-1)" aria-label="Previous Slide"></button>
-  <button class="slider-arrow1 right" onclick="scrollCards(1)" aria-label="Next Slide"></button>
+  <div class="featured-arrow-parent">
+       <div class="featured-collection-arrow-buttons" >
+        <button class="featured-arrow arrow1"  onclick="scrollCards(-1)">‹</button>
+        <button class="featured-arrow arrow2"  onclick="scrollCards(1)">›</button>
+    </div>
+  </div>
   
   <div class="product-container">
     {% if current_collection.products.size > 0 %}
@@ -231,8 +235,9 @@ document.addEventListener('DOMContentLoaded', function() {
   const containers = document.querySelectorAll('.product-container');
   
   containers.forEach(container => {
-    const leftArrow = container.parentElement.querySelector('.slider-arrow.left');
-    const rightArrow = container.parentElement.querySelector('.slider-arrow.right');
+    const leftArrow = container.parentElement.querySelector('.arrow1');
+    const rightArrow = container.parentElement.querySelector('.arrow2');
+
     
     function updateArrowVisibility() {
       if (!leftArrow || !rightArrow) return;
