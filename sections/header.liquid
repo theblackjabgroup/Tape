@@ -67,7 +67,7 @@
    <div class="h-dots"><h1></h1></div>
    <div class="h-dots"><h1></h1></div>
 </div>
-      
+       <div class="mobile-nav-green-dot"></div>
          <div class="localization header-localization">
             {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
               <localization-form>
@@ -211,9 +211,9 @@
         <localization-form>
             {%- form 'localization', id: 'HeaderCountryMobileForm', class: 'localization-form' -%}
                 <div>
-                    <!-- <h2 class="visually-hidden" id="HeaderCountryMobileLabel">
-                        <!-- {{ 'localization.country_label' | t }} -->
-                    </h2> -->
+                     <h2 class="visually-hidden" id="HeaderCountryMobileLabel">
+                         {{ 'localization.country_label' | t }} 
+                    </h2> 
                     {%- render 'country-localization', localPosition: 'HeaderCountryMobile' -%}
                 </div>
             {%- endform -%}
@@ -258,23 +258,6 @@
     </div>
   </div>
 </{% if section.settings.sticky_header_type != 'none' %}sticky-header{% else %}div{% endif %}>
-
-  {% comment %} 
-  THIS IS TEST COMMENT TO RESET THE HEADER SECTION
-  THIS IS TEST COMMENT TO RESET THE HEADER SECTION
-  THIS IS TEST COMMENT TO RESET THE HEADER SECTION
-  THIS IS TEST COMMENT TO RESET THE HEADER SECTION
-  THIS IS TEST COMMENT TO RESET THE HEADER SECTION
-  THIS IS TEST COMMENT TO RESET THE HEADER SECTION
-  THIS IS TEST COMMENT TO RESET THE HEADER SECTION
-  THIS IS TEST COMMENT TO RESET THE HEADER SECTION
-  THIS IS TEST COMMENT TO RESET THE HEADER SECTION
-  THIS IS TEST COMMENT TO RESET THE HEADER SECTION
-  THIS IS TEST COMMENT TO RESET THE HEADER SECTION
-  THIS IS TEST COMMENT TO RESET THE HEADER SECTION
-  THIS IS TEST COMMENT TO RESET THE HEADER SECTION
-  THIS IS TEST COMMENT TO RESET THE HEADER SECTION
-  {% endcomment %}
 
 <script>
   
@@ -541,3 +524,5 @@ observer.observe(document.querySelector('.header'), {
   ]
 }
 {% endschema %}
+
+
