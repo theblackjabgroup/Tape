@@ -3,7 +3,6 @@
 
   Accepts:
     - localPosition: pass in the position in which the form is coming up to create specific IDs
-    - ab: wether this snippet is called from announcement bar or not
 {%- endcomment -%}
 
 {%- liquid
@@ -29,16 +28,15 @@
 <div class="disclosure">
   <button
     type="button"
-    class="disclosure__button localization-form__select localization-selector link link--text caption-large {% if ab %} bb-localization {% endif %}"
+    class="disclosure__button localization-form__select localization-selector link link--text caption-large"
     aria-expanded="false"
     aria-controls="{{ localPosition }}-country-results"
     aria-describedby="{{ localPosition }}Label"
-    
   >
-    <span style="font-weight: bold;">
-      {{ localization.country.currency.symbol }} 
-      {{ localization.country.currency.iso_code }} |
-      {{ localization.language.iso_code | upcase }}
+    <span>
+      {{- localization.country.name }} |
+      {{ localization.country.currency.iso_code }}
+      {{ localization.country.currency.symbol -}}
     </span>
     {{ 'icon-caret.svg' | inline_asset_content }}
   </button>
