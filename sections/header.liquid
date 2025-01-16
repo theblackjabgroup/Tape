@@ -1,3 +1,4 @@
+
 <link rel="stylesheet" href="{{ 'header.css' | asset_url }}">
 
 <script src="{{ 'header.js' | asset_url }}" defer></script>
@@ -67,7 +68,10 @@
    <div class="h-dots"><h1></h1></div>
    <div class="h-dots"><h1></h1></div>
 </div>
-       <div class="mobile-nav-green-dot"></div>
+       {%- if section.settings.enable_green_dot -%}
+  <div class="mobile-nav-green-dot"></div>
+{%- endif -%}
+
          <div class="localization header-localization">
             {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
               <localization-form>
@@ -472,7 +476,12 @@ observer.observe(document.querySelector('.header'), {
       ],
       "default": "2"
     },
-  
+  {
+      "type": "checkbox",
+      "id": "enable_green_dot",
+      "default": true,
+      "label": "Enable Green Dot"
+    },
     {
       "type": "checkbox",
       "id": "enable_country_selector",
@@ -524,5 +533,3 @@ observer.observe(document.querySelector('.header'), {
   ]
 }
 {% endschema %}
-
-

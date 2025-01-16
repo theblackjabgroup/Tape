@@ -228,14 +228,14 @@ background-color: var(--background_product_card);
 
 /* Disclosure Button Styling */
 .footer__country-selector .footer-country-form .disclosure__button {
-padding: 0.5rem 1rem;
-    width: 100%;
-    white-space: nowrap;
+    padding: 1.5rem 1rem;
     padding-left: 15px;
-    margin-left: -1px;
-    padding-right: 38px;
+    white-space: nowrap;
+    margin-left: 0px;
+    margin-right: -10px;
+    padding-right: 40px;
     text-align: left;
-    color:rgb(var(--color-secondary-button-text));
+    color: rgb(var(--color-secondary-button-text));
     background: rgb(var(--color-button-text));
     cursor: pointer;
     border-radius: 4px;
@@ -257,6 +257,71 @@ font-family: 'Inter', sans-serif; /* Set font to Inter */
   margin-right: 85px;
 } */
 .footer-country-label::first-letter {
+  text-transform: uppercase;
+}
+
+
+/* Footer Langauage Selector Container */
+.footer__language-selector {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-right: 320px; /* Adjust for alignment */
+}
+
+/* Localization Form */
+.footer__language-selector .footer-language-form {
+  width: 100%;
+}
+
+/* Wrapper for Form Content */
+.footer__language-selector .footer-language-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-top:-20px;
+}
+
+/* Country Label */
+.footer__language-selector .footer-language-label {
+  font-size: 1rem;
+  margin: 0.5rem 0;
+  text-align: left;
+  font-weight: bold;
+}
+
+/* Disclosure Button Styling */
+.footer__language-selector .footer-language-form .disclosure__button {
+    padding: 0.5rem 1rem;
+    width: 100%;
+    white-space: nowrap;
+    margin-left: 0px;
+    padding-right: 65px;
+    text-align: left;
+    color: rgb(var(--color-secondary-button-text));
+    background: rgb(var(--color-button-text));
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 12px;
+    margin-top: 0.5rem;
+}
+
+
+/* Optional Adjustments for Margins and Layout */
+.footer__language-selector .footer-language-label {
+margin-left: 1px;
+margin-bottom: 1px;
+margin-top: 15px;
+font-size: 13px;
+font-family: 'Inter', sans-serif; /* Set font to Inter */
+
+}
+/* .disclosure {
+  margin-right: 85px;
+} */
+.footer-language-label::first-letter {
   text-transform: uppercase;
 }
 
@@ -303,8 +368,16 @@ font-family: 'Inter', sans-serif; /* Set font to Inter */
   .footer-column {
     margin-bottom: 0;
   }
+
+  .footer__country-selector .footer-country-label {
+    margin-left: -27px;
+  }
   
   .footer__country-selector .footer-country-form {
+    margin-left: 163px;
+  }
+
+    .footer__language-selector .footer-language-form {
     margin-left: 163px;
   }
 }
@@ -312,6 +385,12 @@ font-family: 'Inter', sans-serif; /* Set font to Inter */
 .footer__country-selector .footer-country-form .disclosure__button {
 padding-right: 70px;
             margin-left: -28px;
+            white-space: nowrap;
+}
+
+  .footer__language-selector .footer-language-form .disclosure__button {
+padding-right: 95px;
+            margin-left: -27px;
             white-space: nowrap;
 }
   
@@ -322,7 +401,7 @@ padding-right: 70px;
   .footer-column form button {
     margin-left: -18px;
   }
-.footer__country-selector .footer-country-label {
+.footer__language-selector .footer-language-label {
     margin-left: -26px;
 }
   
@@ -439,3 +518,5 @@ padding-right: 70px;
         display: flex;  /* Show when class 'show' is applied */
     }  
 }
+
+
