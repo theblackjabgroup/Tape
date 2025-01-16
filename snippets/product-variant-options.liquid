@@ -75,8 +75,12 @@
       {{ input_dataset }}
     >
 
-    <label for="{{ input_id }}" aria-label="Select option: {{ value }}" {% if option.name == "Color" %} style="background-color: {{ value }};" {% endif %}>
+    <label for="{{ input_id }}" class="bb-input-label" aria-label="Select option: {{ value }}" {% if option.name == "Color" %} style="background-color: {{ value }} !important; color: {{ value }}" {% endif %}>
+      {% if option.name != "Color" %}
       {{ value }}  
+      {% else  %}
+      xx
+      {% endif %}
       {{ label_unavailable }}
     </label>
   {%- elsif picker_type == 'dropdown' or picker_type == 'swatch_dropdown' -%}

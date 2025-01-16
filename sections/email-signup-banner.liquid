@@ -8,21 +8,13 @@
   @media screen and (min-width: 749px) {
     .bb-upper-template-signup {
       width: {{ section.settings.card_width }}rem;
-      height: {{ section.settings.card_height }}rem;
-    }
-    .config-tb-margin {
-      margin-top: {{ section.settings.top_bar_margin }}px;
-      margin-bottom: {{ section.settings.bottom_bar_margin }}px;
+      height: 50rem;
     }
   }
   @media screen and (max-width: 749px) {
-    .config-margin-mobile{
-      margin: 0px {{ section.settings.mobile_bar_margin }}px;
-    }
-
-    .config-tb-margin-mobile {
-      margin-top: {{ section.settings.mobile_top_bar_margin }}px;
-      margin-bottom: {{ section.settings.mobile_bottom_bar_margin }}px;
+    .bb-upper-template-signup {
+      width: {{ section.settings.card_width_mobile }}rem;
+      height: 40rem;
     }
   }
 
@@ -47,15 +39,11 @@
       }
     {%- endif -%}
 {%- endstyle -%}
-<!--
-  <div
-    id="Banner-{{ section.id }}"
-    class=""
-  >
--->
+
+  <div class="bb-email-uper-banner color-{{ section.settings.color_scheme }}">
 <div
   id="Banner-{{ section.id }}"
-  class="desktop-view banner__content banner__content--{{ section.settings.desktop_content_position }} bb-upper-template-signup"
+  class="desktop-view banner__content banner__content--{{ section.settings.desktop_content_position }} bb-upper-template-signup "
   data-color-scheme="{{ section.settings.color_scheme }}"
 >
   <div class="vertical-bar-top-404">
@@ -286,8 +274,7 @@
     {% endfor %}
   </div>
 </div>
-<!-- </div> -->
-
+</div>
 <script>
   /*
   document.addEventListener('DOMContentLoaded', function () {
@@ -318,7 +305,7 @@
     {
       "type": "range",
       "id": "card_width",
-      "label": "Card Width",
+      "label": "Card Size (Desktop View)",
       "min": 20,
       "max": 120,
       "step": 1,
@@ -326,12 +313,12 @@
     },
     {
       "type": "range",
-      "id": "card_height",
-      "label": "Card Height",
+      "id": "card_width_mobile",
+      "label": "Card Size (Mobile View)",
       "min": 0,
-      "max": 50,
+      "max": 37,
       "step": 1,
-      "default": 50
+      "default": 37
     },
     {
       "type": "color_scheme",
@@ -343,32 +330,6 @@
     {
       "type": "header",
       "content": "t:sections.email-signup-banner.settings.header.content"
-    },
-    {
-      "type": "select",
-      "id": "mobile_content_alignment",
-      "options": [
-        {
-          "value": "left",
-          "label": "t:sections.email-signup-banner.settings.mobile_content_alignment.options__1.label"
-        },
-        {
-          "value": "center",
-          "label": "t:sections.email-signup-banner.settings.mobile_content_alignment.options__2.label"
-        },
-        {
-          "value": "right",
-          "label": "t:sections.email-signup-banner.settings.mobile_content_alignment.options__3.label"
-        }
-      ],
-      "default": "center",
-      "label": "t:sections.email-signup-banner.settings.mobile_content_alignment.label"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_text_below",
-      "default": true,
-      "label": "t:sections.email-signup-banner.settings.show_text_below.label"
     }
   ],
   "blocks": [

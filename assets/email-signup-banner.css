@@ -1,6 +1,6 @@
 .bb-upper-template-signup {
     background-color: var(--color-button);
-    margin: 7rem auto;
+    margin: auto;
     display: block;
     padding: 2rem;
     position: relative;
@@ -10,10 +10,16 @@
     overflow: hidden;
 }
 
+.bb-email-uper-banner {
+    height: 100%;
+    overflow: hidden;
+    padding: 7rem 0rem;
+}
+
 .bb-template-signup {
     background-color: rgba(var(--color-button));
     display: block;
-   padding: 0rem !important; 
+   padding: 13rem !important; 
     width: auto !important;
     max-width: none;
     margin: 2rem;
@@ -22,6 +28,47 @@
 }
 
 .vertical-bar-top-404 {
+    top: 2.5rem;
+    left: 8rem;
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    gap: 51px;
+    z-index: 2;
+}
+
+.vertical-bar-bottom-404 {
+    bottom: -1.5rem;
+    left: 8rem;
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    gap: 51px;
+    z-index: 1;
+}
+
+.vertical-bar-left-404 {
+    left: 2.5rem;
+    top: 8.25rem;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    gap: 54px;
+    z-index: 2;
+}
+
+.vertical-bar-right-404 {
+    right: 2.5rem;
+    top: 8.25rem;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    gap: 54px;
+    z-index: 2;
+}
+
+
+.vertical-bar-top-e-404 {
     top: -1.5rem;
     left: 3rem;
     display: flex;
@@ -31,7 +78,7 @@
     z-index: 1;
 }
 
-.vertical-bar-bottom-404 {
+.vertical-bar-bottom-e-404 {
     bottom: -1.5rem;
     left: 3rem;
     display: flex;
@@ -41,7 +88,7 @@
     z-index: 1;
 }
 
-.vertical-bar-left-404 {
+.vertical-bar-left-e-404 {
     left: -1.5rem;
     top: 3rem;
     display: flex;
@@ -51,7 +98,7 @@
     z-index: 1;
 }
 
-.vertical-bar-right-404 {
+.vertical-bar-right-e-404 {
     right: -1.5rem;
     top: 3rem;
     display: flex;
@@ -60,6 +107,7 @@
     gap: 50px;
     z-index: 1;
 }
+
 
 .vertical-bar-circle-404 {
     width: 30px;
@@ -108,6 +156,7 @@
 
 .bb-newsletter-wrapper {
     width: 80%;
+    margin: 0 auto;
 }
 
 .bb-404-h-button:hover, .bb-404-c-button:hover {
@@ -118,6 +167,8 @@
 font-family: 'Fira Sans';
 margin-top: 2rem;
 border-radius: 5px;
+background-color: rgb(var(--color-button-text));
+color: rgb(var(--color-secondary-button-text));
 }
 
 .bb-modal__toggle-open {
@@ -126,6 +177,7 @@ border-radius: 5px;
     text-decoration: none;
     font-size: 16px;
     border-radius: 5px;
+    color: rgb(var(--color-foreground));
 }
 .desktop-view {
     display: block;
@@ -144,15 +196,15 @@ border-radius: 5px;
   }
 
   .bb-pwd-signup {
-    background-color: #CECACA;
+    background-color: rgba(var(--color-button));
     display: block;
     border-radius: 5px;
   }
 
   .bb-password-modal__content {
-    background-color: #CECACA;
+    background-color: rgba(var(--color-button));
     position: relative;
-    height: 54%;
+    height: 54% !important;
     max-width: var(--page-width);
   }
 
@@ -193,6 +245,16 @@ border-radius: 5px;
   .bb-login-pwd:hover {
     color: white;
   }
+
+  .bb-password__footer-text .bb-login-pwd {
+    font-family: 'Inter' !important;
+    font-size: 20px !important;
+    font-weight: 500 !important;
+    line-height: 34px !important;
+    border-radius: 5px !important;
+    background-color: rgb(var(--color-button-text)) !important;
+    color: rgb(var(--color-secondary-button-text)) !important;
+  }
   @media screen and (max-width: 749px) {
 
     .bb-modal__toggle-open {
@@ -210,10 +272,11 @@ border-radius: 5px;
     }
     .bb-password__footer-text a{
         margin-left: 0rem;
-        margin-top: 3rem;
+        margin-top: 2rem;
     }
     .bb-password-form {
         width: auto;
+        gap: 2rem;
     }
 
     .mobile-view {
@@ -248,17 +311,18 @@ border-radius: 5px;
     }
 
     .bb-upper-template-signup {
-        background-color: #CECACA;
+        background-color: rgba(var(--color-button));
         display: block;
         position: relative;
-        margin: 0rem;
+        margin: auto;
         padding: 0rem;
         border-radius: 0px;
     }
 
     .bb-template-signup {
         background-color: unset;
-      /*  padding: 10rem 0rem !important; */
+        padding: 0rem !important; 
+        margin: 10rem 2rem !important;
     }
 
     .bb-mail-signup-banner__heading {
