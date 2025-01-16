@@ -118,7 +118,7 @@
     </div>
     </div>
       
-      <button class="copy-button" onclick="copyCode()">Copy</button>
+      <button class="copy-button" >Copy</button>
    <div class="gift-card-triangle"><h2></h2></div>
   </div>
         {%- endif %}
@@ -154,7 +154,7 @@
           {{ 'gift_cards.issued.copy_code_success' | t }}
         </template>
         <div class="button-container">
-           <button class="button gift-card__copy-button">Print Gift Card</button>
+           <button class="button gift-card__copy-button" onclick="window.print();">Print Gift Card</button>
         <a
           href="{{ shop.url }}"
           class="button button--secondary"
@@ -178,6 +178,9 @@
       </div>
   </div>
 </div>
+
+
+
 
 {% schema %}
 {
