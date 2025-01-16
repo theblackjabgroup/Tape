@@ -28,9 +28,9 @@ margin-bottom:11px;
 content: "";
 position: absolute;
 top: 50%;
-width: 74px;
+width: 72px;
   height: 68px;
-border-radius: 50%;
+border-radius: 47%;
 }
 
 .gift-container-design::before {
@@ -286,9 +286,12 @@ letter-spacing: 0%;
 .gift-card__buttons{
 margin-bottom:21px;
 }
+.gift-card__qr-code {
+  margin: 30px auto;
+}
 .gift-card__qr-code img {
-margin: 0 auto;
-} 
+  margin: auto;
+}
 .gift_card__apple-wallet {
 line-height: 0;
 display: block;
@@ -424,20 +427,15 @@ font-size: 0.9rem;
 margin-bottom:13px;
 }
 
-.gift-card__qr-code img {
-  width: 100%;
-  margin:0px;
 
-}
-
-
+/* 
 .gift-card__qr-code {
 width: 150px;
 height: 150px;
 margin: 0 auto 20px auto;
 background-color: #e0e0e0;
 border-radius: 10px;
-}
+} */
 .button-container {
 display: flex;
 flex-direction: column;
