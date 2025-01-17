@@ -81,7 +81,7 @@ class="section-{{ section.id }}-padding gradient color-{{ section.settings.color
           {%- unless placeholder -%}
             {% render 'product-media-gallery', product: product, variant_images: variant_images %}
           {%- else -%}
-            <div id="bb_product__media_first" class="bb-fp__media product__media-item" style="display: block;">
+            <div class="bb-fp__media product__media-item" style="display: block;">
               <div
                 class="bb-product-media-container product-media-container global-media-settings gradient{% if section.settings.constrain_to_viewport %} constrain-height{% endif %}"
                 style="--ratio: 1.0; --preview-ratio: 1.0;"
