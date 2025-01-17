@@ -42,7 +42,10 @@
       position: relative;
       flex-shrink: 0;
       overflow: hidden;
+      height:200px ;
+      transition: all 0.5s ease;
     }
+
 
     .card-feature-image {
       height: 104px;
@@ -143,13 +146,14 @@
 
     .card-description-text {
       transform: translateY(100%);
-      transition: transform 0.8s ease-in-out;
+      transition: transform 0.5s ease-in-out;
       z-index: 1;
     }
 
     .card-description-text.show {
       transform: translateY(0);
       padding: 10px;
+      margin-bottom:50px;
     }
 
     .background-decoration {
@@ -161,7 +165,7 @@
       height: 100%;
       width: 100%;
       background: var(--card_foreground);
-      transition: all 0.5s ease;
+      transition: all 0.5s ease-in-out;
       z-index: 0;
     }
 
@@ -196,7 +200,7 @@
 
 <div data-section-id="{{ section.id }}">
   {% if section.settings.layout == 'layout_1' %}
-    <div style="display: flex; flex-direction: column; gap: 32px; padding: 20px 0;" 
+    <div style="display: flex; flex-direction: column; gap: 32px; padding: 20px 0;"
          class="color-{{ section.settings.sectionColor }} featured-icon-with-text-section">
       <div style="display: flex; flex-direction: column; gap: 4px; padding: var(--heading-padding); ">
         <p style="font-weight: 600; font-size: 24px; line-height: 30px; color: var(--featured-icon-with-text-section-headings-color)" class="fira-sans-semibold">{{ section.settings.heading }}</p>
@@ -311,7 +315,7 @@
           "label": "Layout 1 - Grid Style"
         },
         {
-          "value": "layout_2", 
+          "value": "layout_2",
           "label": "Layout 2 - Carousel Style"
         }
       ],
