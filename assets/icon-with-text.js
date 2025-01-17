@@ -145,6 +145,7 @@ document.addEventListener("DOMContentLoaded", () => {
             console.log("Showing navigation elements");
             arrows.forEach(arrow => arrow.style.display = "flex");
             if (pagination) pagination.style.display = "flex";
+            if (mainContainer) mainContainer.style.textAlign = "center";
         }
     }
 
