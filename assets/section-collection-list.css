@@ -2,7 +2,196 @@
   margin-top: 0;
   margin-bottom: 0;
 }
+.collection-list_headingpart{
+    width: 57%;
+    margin-bottom: 40px;
+}
+.clcard__heading{
+  argin: 0;
+    white-space: nowrap;
+    font-size: 22px;
+    color: #333;
+}
+.collectionlist_strip {
+    background-color: #fff;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    height: 60px;
+    margin-bottom: 50px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 10px -1px rgba(0, 0, 0, 0.25), 0 2px 6px -1px rgba(0, 0, 0, 0.2);
+}
 
+.collectionlist_strip-inner {
+    display: flex;
+    gap: 32px;
+    position: absolute;
+    align-items: center;
+    padding: 0 20px;
+    animation: scrollLeftToRight 30s linear infinite; /* Increased duration for slower movement */
+    /* Calculate the starting position to be off-screen to the left */
+    transform: translateX(-100%);
+}
+
+@keyframes scrollLeftToRight {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%); /* Move fully across to create seamless loop */
+    }
+}
+
+/* Rest of the styles remain the same */
+.collectionlist_strip .card__heading {
+    margin: 0;
+    white-space: nowrap;
+    font-size: 14px;
+    color: #333;
+}
+
+.collectionlist_strip .card__heading a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.collectionlist_strip .icon-wrap svg {
+    width: 14px;
+    height: 14px;
+    stroke-width: 1.5;
+}
+
+.collectionlist_strip:hover .collectionlist_strip-inner {
+    animation-play-state: paused;
+}
+.cl-sub_heading{
+  font-family: Inter;
+font-size: 16px;
+font-weight: 500;
+line-height: 24px;
+text-align: left;
+  margin-bottom: 15px;
+text-underline-position: from-font;
+text-decoration-skip-ink: none;
+}
+.cl-description{
+  font-family: Inter;
+font-size: 16px;
+font-weight: 400;
+line-height: 24px;
+text-align: left;
+text-underline-position: from-font;
+text-decoration-skip-ink: none;
+
+}
+.collection-list-design{
+    position: relative;
+    width: 90%;
+    height: 90%;
+    background-color: red;
+}
+.card__information{
+  display:flex;
+  justify-content:center;
+  justify-content:center;
+}
+.card__inner{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.border-ltop{
+    position: absolute;
+    display: flex;
+    gap: 30px;
+    top: 0px;
+    width: 95%;
+    justify-content: center;
+    pointer-events: none;
+  overflow: hidden;
+  border-top:none !important;
+}
+.border-lbottom{
+    /* bottom:0px; */
+  top:96.4%;
+    position: absolute;
+    display: flex;
+    gap:30px;
+    width: 95%;
+    pointer-events: none;
+   justify-content: center;
+  overflow: hidden;
+   border-bottom:none !important;
+}
+.border-lleft{
+   position:absolute;
+    left:0;
+    display:flex;
+    flex-direction:column;
+    
+     justify-content: space-evenly;
+    height: 100%;
+    pointer-events: none;
+  overflow: hidden;
+}
+.border-lright{
+  position: absolute;
+    right: 0;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+}
+.semicircle-lt{
+ /* background-color:rgb(var(--color-background)); */
+  background-color:red;
+  width: 23px;
+  height: 11px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border-top: none;
+  flex-shrink: 0;
+}
+
+.semicircle-lb {
+   /* background-color:rgb(var(--color-background)); */
+  background-color:red;
+    width: 23px;
+  height: 11px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  border-bottom: none;
+  flex-shrink: 0;
+}
+.semicircle-ll {
+   /* background-color:rgb(var(--color-background)); */
+  background-color:red;
+   width: 11px;
+  height: 22px;
+   border-top-right-radius: 20px;
+   border-bottom-right-radius: 20px;
+  border-bottom: none;
+  flex-shrink: 0;
+}
+.semicircle-lr {
+   /* background-color:rgb(var(--color-background)); */
+  background-color:red;
+   width: 11px;
+  height: 22px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+ 
+  border-bottom: none;
+  flex-shrink: 0;
+}
 .collection-list-title {
   margin: 0;
 }
