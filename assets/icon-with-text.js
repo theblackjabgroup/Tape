@@ -124,29 +124,43 @@ class IconWithText {
     });
   });
 
-  document.addEventListener("DOMContentLoaded", () => {
-    const cardContainer = document.querySelector(".scroll-container");
-    const cards = cardContainer?.querySelectorAll(".card-container");
-    const arrows = document.querySelectorAll(".scroll-button.next");
-    const pagination = document.querySelector(".icon-with-text-2-dots");
-    const mainContainer = document.querySelector(".icon-with-text-2");
-    const random = cardContainer?.querySelector("#cardContainer");
+document.addEventListener("DOMContentLoaded", () => {
+    function updateNavigationVisibility() {
+        const cardContainer = document.querySelector(".scroll-container");
+        const cards = cardContainer?.querySelectorAll(".primary-card-container");
+        const arrows = document.querySelectorAll(".scroll-button.next");
+        const pagination = document.querySelector(".icon-with-text-2-dots");
+        const mainContainer = document.querySelector(".icon-with-text-2");
+        const random = cardContainer?.querySelector("#cardContainer");
 
-    if (window.innerWidth > 768) {
-      if (cards && cards.length <= 4) {
-        arrows.forEach(arrow => arrow.style.display = "none");
-        if (pagination) pagination.style.display = "none";
-
-        if (mainContainer) mainContainer.style.textAlign = "center";
-
-        if (random) {
+        if (window.innerWidth > 768 && cards && cards.length < 4) {
+            arrows.forEach(arrow => arrow.style.display = "none");
+            if (pagination) pagination.style.display = "none";
+            if (mainContainer) mainContainer.style.textAlign = "center";
+           if (random) {
           random.style.display = "flex";
           random.style.justifyContent = "center";
         }
-      }
+        } else {
+            console.log("Showing navigation elements");
+            arrows.forEach(arrow => arrow.style.display = "flex");
+            if (pagination) pagination.style.display = "flex";
+            if (mainContainer) mainContainer.style.textAlign = "center";
+        }
     }
-  });
 
+    updateNavigationVisibility();
+    window.addEventListener('resize', updateNavigationVisibility);
+    document.addEventListener('shopify:section:load', () => {
+        requestAnimationFrame(updateNavigationVisibility);
+    });
+    document.addEventListener('shopify:section:select', () => {
+        requestAnimationFrame(updateNavigationVisibility);
+    });
+    document.addEventListener('shopify:section:render', () => {
+        requestAnimationFrame(updateNavigationVisibility);
+    });
+});
   document.addEventListener("DOMContentLoaded", () => {
     const components = document.querySelectorAll(".primary-card-container");
 
