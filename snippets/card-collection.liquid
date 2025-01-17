@@ -47,6 +47,30 @@
       class="card__inner {% if card_style == 'standard' %}color-{{ card_color_scheme }} gradient{% endif %}{% if card_collection.featured_image or card_style == 'standard' %} ratio{% endif %}"
       style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
     >
+         <div class="border-ltop">
+      {% for i in (1..18) %}
+        <div class="semicircle-lt"><h1></h1></div>
+      {% endfor %}
+    </div>
+    
+   <div class="border-lbottom">
+      {% for i in (1..18) %}
+        <div class="semicircle-lb"><h1></h1></div>
+      {% endfor %}
+    </div>
+
+ <div class="border-lleft">
+      {% for i in (1..6) %}
+        <div class="semicircle-ll"><h1></h1></div>
+      {% endfor %}
+    </div>
+       <div class="border-lright">
+      {% for i in (1..6) %}
+        <div class="semicircle-lr"><h1></h1></div>
+      {% endfor %}
+    </div>
+    <div class=collection-list-design>
+
       {%- if card_collection.featured_image -%}
         <div class="card__media">
           <div class="media media--transparent media--hover-effect">
@@ -115,6 +139,8 @@
           </div>
         </div>
       {%- endif -%}
+
+      </div>
     </div>
     {%- if card_collection != blank and card_style == 'card' or card_collection.featured_image -%}
       <div class="card__content">
