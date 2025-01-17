@@ -78,6 +78,7 @@
       </div>
 
       <div class="price-reviews-icons">
+
          <p class="price-tag" 
      style="background-color: {{ section.settings.price_background_color }};
             --pseudo-bg-color: {{ section.settings.product_card_background_color }};
@@ -89,6 +90,19 @@
     {% endif %}
     <span class="current-price">{{ product.price | money }}</span>
   </p>
+
+        <p class="price-tag"
+           style="background-color: {{ section.settings.price_background_color }};
+                  --pseudo-bg-color: {{ section.settings.product_card_background_color }};
+                  color: {{ section.settings.price_text_color }};">
+          {% if product.compare_at_price > product.price %}
+            <span class="original-price" style="color: {{ section.settings.price_text_color }}; text-decoration: line-through; margin-right: 5px; opacity: 0.7;">
+              ₹{{ product.compare_at_price | money_without_currency }}
+            </span>
+          {% endif %}
+          <span class="current-price">₹{{ product.price | money_without_currency }}</span>
+        </p>
+
 
         <div class="dotted-line-wrapper" style="border-top-color: {{ section.settings.dotted_line_color }};">
           <div class="dotted-line"></div>
