@@ -220,8 +220,9 @@ body {
       cursor: pointer;
       margin: 0 5px;
       font-size: 50px;
+      transform:translateY(-30px);
       background: transparent;
-      transition: all 0.3s ease;
+      transition: scale 0.3s ease;
       opacity: 1;
       scale:1;
      color: rgb(var(--color-foreground));

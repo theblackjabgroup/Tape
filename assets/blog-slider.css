@@ -37,18 +37,23 @@
     text-align: right;
 }
 .blog-slider-title {
-    position: absolute;
-    top: 40px;
-    left: 25px;
+   margin-top:15px;
     font-size: 2rem;
     font-weight: bold;
   color: rgb(var(--color-text));
 }
-
-.blog-arrow-buttons {
-    margin-bottom: 10px;
+.related-header{
+  display:flex;
+  justify-content:space-between;
+  align-items: center;
 }
 
+.blog-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  width:100%;
+}
 .arrow {
     border: none;
     padding: 0px 5px;
