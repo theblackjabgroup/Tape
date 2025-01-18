@@ -226,21 +226,49 @@ background-color: var(--background_product_card);
   font-weight: bold;
 }
 
-/* Disclosure Button Styling */
-.footer__country-selector .footer-country-form .disclosure__button {
-    padding: 1.5rem 1rem;
-    padding-left: 15px;
-    white-space: nowrap;
-    margin-left: 0px;
-    margin-right: -10px;
-    padding-right: 40px;
+/* Common button styles for language selector, country selector, and form button */
+.footer__language-selector .footer-language-form .disclosure__button,
+.footer__country-selector .footer-country-form .disclosure__button,
+.footer-column form button {
+    /* Size */
+    width: 120px;
+    height: 40px;
+    
+    /* Padding and Margin */
+    padding: 0.5rem 1rem;
+    margin: 0.5rem 0;
+    
+    /* Text styles */
+    font-size: 12px;
     text-align: left;
+    white-space: nowrap;
+    
+    /* Colors */
     color: rgb(var(--color-secondary-button-text));
     background: rgb(var(--color-button-text));
-    cursor: pointer;
+    
+    /* Common properties */
+    border: none;
     border-radius: 4px;
-    font-size: 12px;
-    margin-top: 0.5rem;
+    cursor: pointer;
+}
+
+/* Specific styles for form button gradient */
+.footer-column form button {
+    background: linear-gradient(to right, gray 50%, rgb(var(--color-button-text)) 50%);
+    background-size: 200% 100%;
+    background-position: 100% 0;
+    text-align: center;  /* Center text for form button */
+    transition: background-position 1.5s ease-in-out, transform 0.3s ease;
+}
+
+/* Additional specific adjustments if needed */
+.footer__language-selector .footer-language-form .disclosure__button {
+    padding-right: 65px;  /* Keep the extra right padding for dropdown arrow */
+}
+
+.footer__country-selector .footer-country-form .disclosure__button {
+    padding-right: 40px;  /* Keep the extra right padding for dropdown arrow */
 }
 
 
@@ -281,7 +309,7 @@ font-family: 'Inter', sans-serif; /* Set font to Inter */
   flex-direction: column;
   align-items: flex-start;
   gap: 0.5rem;
-  margin-top:-20px;
+  margin-top:-5px;
 }
 
 /* Country Label */
@@ -292,21 +320,7 @@ font-family: 'Inter', sans-serif; /* Set font to Inter */
   font-weight: bold;
 }
 
-/* Disclosure Button Styling */
-.footer__language-selector .footer-language-form .disclosure__button {
-    padding: 0.5rem 1rem;
-    width: 100%;
-    white-space: nowrap;
-    margin-left: 0px;
-    padding-right: 65px;
-    text-align: left;
-    color: rgb(var(--color-secondary-button-text));
-    background: rgb(var(--color-button-text));
-    cursor: pointer;
-    border-radius: 4px;
-    font-size: 12px;
-    margin-top: 0.5rem;
-}
+
 
 
 /* Optional Adjustments for Margins and Layout */
