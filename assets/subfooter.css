@@ -9,18 +9,11 @@
     margin-left: 640px;
     bottom: 24px;
 }
-.barcode-footer {
-   position: absolute;
-    width: 100%;
+.footer-block__details-content .list-menu__item--link,
+.copyright__content a {
+  color: rgba(var(--color-foreground));
     font-size: 12px;
-    font-weight: 500;
-    padding: 10px;
-}
-
-.copyright__content {
-  font-size: 12px;
-  font-family: 'Inter', sans-serif;
-  font-weight: 500;
+      text-decoration: none;
 }
 
 .footer__payment {
