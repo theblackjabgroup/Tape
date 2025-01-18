@@ -133,7 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const mainContainer = document.querySelector(".icon-with-text-2");
         const random = cardContainer?.querySelector("#cardContainer");
 
-        if (window.innerWidth > 768 && cards && cards.length < 4) {
+        if (window.innerWidth > 768 && cards && cards.length < 6) {
             arrows.forEach(arrow => arrow.style.display = "none");
             if (pagination) pagination.style.display = "none";
             if (mainContainer) mainContainer.style.textAlign = "center";
