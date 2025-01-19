@@ -1,5 +1,5 @@
 .bb-template-404 {
-    background-color: #E5E5EA;
+    background-color: rgba(var(--color-button));
     display: block;
     padding: 10rem 5rem;
     max-width: none;
@@ -9,15 +9,19 @@
 }
 
 .bb-upper-template-404 {
-    background-color: #C7C7CC;
+    background-color: rgba(var(--color-button));
     border-radius: 5px;
-    margin: 7rem auto;
+    /* margin: 7rem auto; */
+    margin: auto;
     display: block;
     padding: 2rem;
     position: relative;
     max-width: var(--page-width);
 }
 
+.bb-404-uper-banner {
+    padding: 7rem 0rem;
+}
 .vertical-bar-top-404 {
     top: -1.5rem;
     left: 3rem;
@@ -80,7 +84,6 @@
     font-weight: 600;
     font-size: 96px;
     line-height: 34px;
-    color: black;
 }
 
 .bb-404-title {
@@ -88,7 +91,6 @@
     font-weight: 500;
     font-size: 48px;
     line-height: 34px;
-    color: black;    
 }
 
 .bb-404-para {
@@ -97,7 +99,6 @@
     font-size: 24px;
     line-height: 36px;
     margin-bottom: 2rem;
-    color: black;
 }
 .bb-404-h-button:hover {
     /*
@@ -127,11 +128,10 @@ margin-top: 2rem;
 }
 
 .bb-404-h-button {
-    background-color: black;
-    color: #e5e5ea;
+    background-color: rgb(var(--color-button-text));
+    color: rgb(var(--color-secondary-button-text));
 }
 .bb-404-c-button {
-    color: black;
     text-decoration: underline;
     background-color: transparent;
 }
@@ -152,19 +152,20 @@ margin-top: 2rem;
       display: block;
     }
     .bb-404-c-button {
-        background: #c7c6c6;
+        background: rgba(var(--color-button));
     }
     .desktop-view {
       display: none !important;
     }
 
     .bb-upper-template-404 {
-        background-color: #C7C6C6;
+        background-color: rgba(var(--color-button));
         border-radius: 5px;
         display: block;
         position: relative;
         margin: 0rem;
         padding: 0rem;
+        margin: auto;
     }
     .bb-template-404 {
         background-color: unset;
@@ -188,8 +189,8 @@ margin-top: 2rem;
         font-size: 12px;
         line-height: 21px;
         margin-bottom: 2rem;
-        color: black;
     }
+
     .vertical-bar-circle-404 {
         width: 13px;
         height: 13px;
@@ -197,10 +198,14 @@ margin-top: 2rem;
     .vertical-bar-top-404 {
         top: -0.5rem;
         left: 1.5rem;
+        gap: 46px;
     }
     .vertical-bar-bottom-404 {
         bottom: -0.5rem;
         left: 1.5rem;
+        gap: 46px;
     }
-
+    .bb-404-uper-banner {
+        padding: 1rem 0rem;
+    }
 }

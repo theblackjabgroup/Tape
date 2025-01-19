@@ -93,9 +93,9 @@
 }
 */
 .ticket-line-first {
-  height: 16px;
+  height: 12px;
   display: block !important;
-  width: 16px;
+  width: 12px;
   border-radius: 50%;
   background-color: rgb(var(--color-background));
 }
