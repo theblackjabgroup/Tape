@@ -145,6 +145,9 @@
     max-width: none !important;
 }
 
+.bb-newsletter-field:after {
+    border: .1rem solid rgba(var(--color-foreground));
+}
 .newsletter-form__field-wrapper  .bb-field__input {
 /*    padding-left: 80rem; */
 }
@@ -248,7 +251,6 @@ color: rgb(var(--color-secondary-button-text));
 
   .bb-password__footer-text .bb-login-pwd {
     font-family: 'Inter' !important;
-    font-size: 20px !important;
     font-weight: 500 !important;
     line-height: 34px !important;
     border-radius: 5px !important;
@@ -316,7 +318,7 @@ color: rgb(var(--color-secondary-button-text));
         position: relative;
         margin: auto;
         padding: 0rem;
-        border-radius: 0px;
+        border-radius: 5px;
     }
 
     .bb-template-signup {

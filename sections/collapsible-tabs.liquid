@@ -116,6 +116,9 @@
   "name": "t:sections.collapsible_tabs.name",
   "tag": "section",
   "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
   "settings": [
     {
       "type": "inline_richtext",
@@ -160,6 +163,28 @@
           "id": "Point_4",
           "label": "t:sections.collapsible_tabs.blocks.collapsible_row.settings.Point_4.label",
           "info": "t:sections.collapsible_tabs.blocks.collapsible_row.settings.Point_4.info"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collapsible Tabs",
+      "blocks": [
+        {
+          "type": "collapsible_row"
+        },
+        {
+          "type": "collapsible_row"
+        },
+        {
+          "type": "collapsible_row"
+        },
+        {
+          "type": "collapsible_row"
+        },
+        {
+          "type": "collapsible_row"
         }
       ]
     }
