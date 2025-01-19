@@ -15,7 +15,7 @@
 
     <header class="header color-{{ section.settings.color_scheme }}">
       <nav style="width: 60%;">
-        <ul class="nav-items" style="--nav-items-justify-content: {{ section.settings.nav_items_justify_content }};">
+        <ul class="nav-items" style="--nav-items-justify-content: Left;">
           {% for link in section.settings.menu.links %}
             {% assign has_dropdown = false %}
             {% if link.links != blank %}
@@ -364,30 +364,6 @@ observer.observe(document.querySelector('.header'), {
         }
       ],
       "default": "12px"
-    },
-    {
-      "type": "select",
-      "id": "nav_items_justify_content",
-      "label": "Navigation Items Alignment",
-      "options": [
-        {
-          "value": "start",
-          "label": "Left"
-        },
-        {
-          "value": "center",
-          "label": "Center"
-        },
-        {
-          "value": "space-between",
-          "label": "Space Between"
-        },
-        {
-          "value": "end",
-          "label": "Right"
-        }
-      ],
-      "default": "center"
     },
     {
       "type": "select",
