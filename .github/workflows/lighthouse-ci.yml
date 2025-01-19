@@ -18,11 +18,6 @@ jobs:
           lhci_min_score_performance: 0.7
           password: "saylyo"
 
-      - name: Clearing Theme Stack
-        run: |
-          chmod +x ./dev-deletion.sh  
-          ./dev-deletion.sh
-
         # ------------------------To be implemented-----------------------------
         # access_token: ${{ secrets.SHOP_ACCESS_TOKEN }}
         # store: ${{ secrets.SHOP_STORE }}
