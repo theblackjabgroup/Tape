@@ -37,9 +37,9 @@ body {
     margin: 0;
   }
 
-  .heading {
+  .related-collection-section .heading {
     font-size: 24px;
-    margin-left: 25px;
+    margin:0 0 50px 25px;
   }
 
   .product-container {
@@ -201,10 +201,9 @@ body {
   }
 
   .related-products-collection-arrow-buttons {
-      margin-bottom: 10px;
     position:absolute;
     right:15px;
-    top:-50px;
+    top:-80px;
   }
   .related-products-arrow-parent{
   position:relative;}
