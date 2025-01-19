@@ -154,7 +154,7 @@
   --info__banner__left: 15%;
   --info__banner__transform: translate(0, -50%);
   --info__banner__padding: 16px;
-  --info__banner__color: rgba(var(--color-background), 0.8);
+  --info__banner__color: var(--background_product_card);
 }
 
 .info__banner__contents {
@@ -195,6 +195,7 @@
   transform: var(--info__banner__transform);
   padding: var(--info__banner__padding);
   display: var(--info__banner__visibillity);
+  opacity: 0.8;
   z-index: 1;
 }
 
