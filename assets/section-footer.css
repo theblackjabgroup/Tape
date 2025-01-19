@@ -230,45 +230,36 @@ background-color: var(--background_product_card);
 .footer__language-selector .footer-language-form .disclosure__button,
 .footer__country-selector .footer-country-form .disclosure__button,
 .footer-column form button {
-    /* Size */
+    
     width: 120px;
     height: 40px;
-    
-    /* Padding and Margin */
     padding: 0.5rem 1rem;
     margin: 0.5rem 0;
-    
-    /* Text styles */
     font-size: 12px;
     text-align: left;
     white-space: nowrap;
-    
-    /* Colors */
     color: rgb(var(--color-secondary-button-text));
     background: rgb(var(--color-button-text));
-    
-    /* Common properties */
     border: none;
     border-radius: 4px;
     cursor: pointer;
 }
 
-/* Specific styles for form button gradient */
 .footer-column form button {
     background: linear-gradient(to right, gray 50%, rgb(var(--color-button-text)) 50%);
     background-size: 200% 100%;
     background-position: 100% 0;
-    text-align: center;  /* Center text for form button */
+    text-align: center;  
     transition: background-position 1.5s ease-in-out, transform 0.3s ease;
 }
 
-/* Additional specific adjustments if needed */
+
 .footer__language-selector .footer-language-form .disclosure__button {
-    padding-right: 65px;  /* Keep the extra right padding for dropdown arrow */
+    padding-right: 65px;  
 }
 
 .footer__country-selector .footer-country-form .disclosure__button {
-    padding-right: 40px;  /* Keep the extra right padding for dropdown arrow */
+    padding-right: 40px; 
 }
 
 
@@ -388,11 +379,11 @@ font-family: 'Inter', sans-serif; /* Set font to Inter */
   }
   
   .footer__country-selector .footer-country-form {
-    margin-left: 163px;
+    margin-left: 135px;
   }
 
     .footer__language-selector .footer-language-form {
-    margin-left: 163px;
+    margin-left: 135px;
   }
 }
 
@@ -516,7 +507,9 @@ padding-right: 95px;
   }
 
   .footer-column form {
-    padding: 0 20px 20px;
+    padding: 0 20px 20px;@media screen and (max-width: 990px) {
+    @media (max-width: 480px) {
+        .footer__language-selector .footer-language-form 
   }
 
   /* Social icons specific styles */
