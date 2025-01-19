@@ -820,7 +820,6 @@ mobile-nav-items::-webkit-scrollbar {
     margin-top: -1px;;
 }    
  
-
 .localization-form__select:after {
   pointer-events: none;
   content: '';
@@ -835,3 +834,5 @@ mobile-nav-items::-webkit-scrollbar {
   transition: box-shadow var(--duration-short) ease;
   z-index: 1;
 }
+
+
