@@ -7,6 +7,15 @@ jobs:
     name: Lighthouse (PF_TESTING)
     runs-on: ubuntu-latest
     steps:
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+
+      - name: Install Shopify CLI
+        run: |
+          npm install -g @shopify/cli @shopify/theme
+
       - uses: actions/checkout@v2
 
       - name: Lighthouse
