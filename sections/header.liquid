@@ -1,3 +1,4 @@
+
 <link rel="stylesheet" href="{{ 'header.css' | asset_url }}">
 
 <script src="{{ 'header.js' | asset_url }}" defer></script>
@@ -67,7 +68,8 @@
    <div class="h-dots"><h1></h1></div>
    <div class="h-dots"><h1></h1></div>
 </div>
-      
+    
+
          <div class="localization header-localization">
             {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
               <localization-form>
@@ -171,7 +173,7 @@
               {% if link.links != blank %}
                  
                 <ul class="mobile-dropdown">
-                   <div class="header-line"><h1></h1></div>
+                  
                   {% for childlink in link.links %}
                     <li class="mobile-dropdown-item-container">
                       <a href="{{ childlink.url }}" class="mobile-dropdown-item">
@@ -211,9 +213,9 @@
         <localization-form>
             {%- form 'localization', id: 'HeaderCountryMobileForm', class: 'localization-form' -%}
                 <div>
-                    <!-- <h2 class="visually-hidden" id="HeaderCountryMobileLabel">
-                        <!-- {{ 'localization.country_label' | t }} -->
-                    </h2> -->
+                     <h2 class="visually-hidden" id="HeaderCountryMobileLabel">
+                         {{ 'localization.country_label' | t }} 
+                    </h2> 
                     {%- render 'country-localization', localPosition: 'HeaderCountryMobile' -%}
                 </div>
             {%- endform -%}
@@ -242,8 +244,7 @@
         </div>
       </div>
     </div>
-
-    <div class="hamburger color-{{ section.settings.color_scheme }}">
+ <div class="hamburger color-{{ section.settings.color_scheme }}">
     <svg class="ham ham2" viewBox="0 0 100 100" width="80" onclick="this.classList.toggle('active')">
   <path
         class="line top"
@@ -258,23 +259,6 @@
     </div>
   </div>
 </{% if section.settings.sticky_header_type != 'none' %}sticky-header{% else %}div{% endif %}>
-
-  {% comment %} 
-  THIS IS TEST COMMENT TO RESET THE HEADER SECTION
-  THIS IS TEST COMMENT TO RESET THE HEADER SECTION
-  THIS IS TEST COMMENT TO RESET THE HEADER SECTION
-  THIS IS TEST COMMENT TO RESET THE HEADER SECTION
-  THIS IS TEST COMMENT TO RESET THE HEADER SECTION
-  THIS IS TEST COMMENT TO RESET THE HEADER SECTION
-  THIS IS TEST COMMENT TO RESET THE HEADER SECTION
-  THIS IS TEST COMMENT TO RESET THE HEADER SECTION
-  THIS IS TEST COMMENT TO RESET THE HEADER SECTION
-  THIS IS TEST COMMENT TO RESET THE HEADER SECTION
-  THIS IS TEST COMMENT TO RESET THE HEADER SECTION
-  THIS IS TEST COMMENT TO RESET THE HEADER SECTION
-  THIS IS TEST COMMENT TO RESET THE HEADER SECTION
-  THIS IS TEST COMMENT TO RESET THE HEADER SECTION
-  {% endcomment %}
 
 <script>
   
@@ -489,7 +473,6 @@ observer.observe(document.querySelector('.header'), {
       ],
       "default": "2"
     },
-  
     {
       "type": "checkbox",
       "id": "enable_country_selector",

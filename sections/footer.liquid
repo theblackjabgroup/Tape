@@ -82,9 +82,7 @@
     <localization-form>
       {% form 'localization', id: 'FooterCountryForm', class: 'footer-country-form' %}
         <div class="footer-country-wrapper">
-          <h2 class="footer-country-label" id="FooterCountryLabel">
-            {{ 'localization.country_label' | t }}
-          </h2>
+          <h2 class="footer-country-label" id="FooterCountryLabel">{{ 'localization.country_label' | t }} </h2>
           {% render 'country-localization', localPosition: 'FooterCountry' %}
         </div>
       {% endform %}
@@ -93,6 +91,18 @@
 </div>
 
 
+<div class="footer__language-selector">
+   {%- if section.settings.enable_language_selector and localization.available_languages.size > 1 -%}
+          <localization-form>
+            {%- form 'localization', id: 'FooterLanguageForm', class: 'footer-language-form' -%}
+              <div class="footer-language-wrapper">
+                <h2 class="footer-language-label" id="FotterLanguageLabel">{{ 'localization.language_label' | t }}</h2>
+                {%- render 'language-localization', localPosition: 'FooterLanguage' -%}
+              </div>
+            {%- endform -%}
+          </localization-form>
+        {%- endif -%}
+</div>
 
 
  </div>

@@ -81,9 +81,9 @@ class="section-{{ section.id }}-padding gradient color-{{ section.settings.color
           {%- unless placeholder -%}
             {% render 'product-media-gallery', product: product, variant_images: variant_images %}
           {%- else -%}
-            <div id="bb_product__media_first" class="bb-fp__media product__media-item" style="display: block;">
+            <div class="bb-fp__media product__media-item" style="display: block;">
               <div
-                class="bb-product-media-container product-media-container global-media-settings gradient{% if section.settings.constrain_to_viewport %} constrain-height{% endif %}"
+                class="bb-product-media-container product-media-container global-media-settings gradient constrain-height"
                 style="--ratio: 1.0; --preview-ratio: 1.0;"
               >
               {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg placeholder' }}                
@@ -381,11 +381,6 @@ class="section-{{ section.id }}-padding gradient color-{{ section.settings.color
                       </volume-pricing>
                     {%- endif -%}
                   </div>
-                {%- when 'share' -%}
-                  {% liquid
-                    assign share_url = product.selected_variant.url | default: product.url | prepend: request.origin
-                    render 'share-button', block: block, share_link: share_url
-                  %}
                 {%- when 'variant_picker' -%}
                   {% render 'product-variant-picker',
                     product: product,
@@ -451,8 +446,8 @@ class="section-{{ section.id }}-padding gradient color-{{ section.settings.color
               {% endif %}
               class="link bb-product__view-details bb-animate-arrow product__view-details animate-arrow"
             >
-              {{ 'products.product.view_full_details' | t }}
-              {{- 'icon-arrow.svg' | inline_asset_content -}}
+             <!-- {{ 'products.product.view_full_details' | t }}  
+              {{- 'icon-arrow.svg' | inline_asset_content -}}  -->
             </a>
           </section>
         </div>
@@ -652,27 +647,6 @@ class="section-{{ section.id }}-padding gradient color-{{ section.settings.color
             }
           ],
           "default": "circle"
-        }
-      ]
-    },
-    {
-      "type": "share",
-      "name": "t:sections.featured-product.blocks.share.name",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "text",
-          "id": "share_label",
-          "label": "t:sections.featured-product.blocks.share.settings.text.label",
-          "default": "t:sections.featured-product.blocks.share.settings.text.default"
-        },
-        {
-          "type": "paragraph",
-          "content": "t:sections.featured-product.blocks.share.settings.featured_image_info.content"
-        },
-        {
-          "type": "paragraph",
-          "content": "t:sections.featured-product.blocks.share.settings.title_info.content"
         }
       ]
     },
@@ -1431,9 +1405,6 @@ class="section-{{ section.id }}-padding gradient color-{{ section.settings.color
         },
         {
           "type": "buy_buttons"
-        },
-        {
-          "type": "share"
         }
       ]
     }

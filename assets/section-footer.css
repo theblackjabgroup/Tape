@@ -226,21 +226,40 @@ background-color: var(--background_product_card);
   font-weight: bold;
 }
 
-/* Disclosure Button Styling */
-.footer__country-selector .footer-country-form .disclosure__button {
-padding: 0.5rem 1rem;
-    width: 100%;
-    white-space: nowrap;
-    padding-left: 15px;
-    margin-left: -1px;
-    padding-right: 38px;
-    text-align: left;
-    color:rgb(var(--color-secondary-button-text));
-    background: rgb(var(--color-button-text));
-    cursor: pointer;
-    border-radius: 4px;
+/* Common button styles for language selector, country selector, and form button */
+.footer__language-selector .footer-language-form .disclosure__button,
+.footer__country-selector .footer-country-form .disclosure__button,
+.footer-column form button {
+    
+    width: 120px;
+    height: 40px;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem 0;
     font-size: 12px;
-    margin-top: 0.5rem;
+    text-align: left;
+    white-space: nowrap;
+    color: rgb(var(--color-secondary-button-text));
+    background: rgb(var(--color-button-text));
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.footer-column form button {
+    background: linear-gradient(to right, gray 50%, rgb(var(--color-button-text)) 50%);
+    background-size: 200% 100%;
+    background-position: 100% 0;
+    text-align: center;  
+    transition: background-position 1.5s ease-in-out, transform 0.3s ease;
+}
+
+
+.footer__language-selector .footer-language-form .disclosure__button {
+    padding-right: 65px;  
+}
+
+.footer__country-selector .footer-country-form .disclosure__button {
+    padding-right: 40px; 
 }
 
 
@@ -257,6 +276,57 @@ font-family: 'Inter', sans-serif; /* Set font to Inter */
   margin-right: 85px;
 } */
 .footer-country-label::first-letter {
+  text-transform: uppercase;
+}
+
+
+/* Footer Langauage Selector Container */
+.footer__language-selector {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-right: 320px; /* Adjust for alignment */
+}
+
+/* Localization Form */
+.footer__language-selector .footer-language-form {
+  width: 100%;
+}
+
+/* Wrapper for Form Content */
+.footer__language-selector .footer-language-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-top:-5px;
+}
+
+/* Country Label */
+.footer__language-selector .footer-language-label {
+  font-size: 1rem;
+  margin: 0.5rem 0;
+  text-align: left;
+  font-weight: bold;
+}
+
+
+
+
+/* Optional Adjustments for Margins and Layout */
+.footer__language-selector .footer-language-label {
+margin-left: 1px;
+margin-bottom: 1px;
+margin-top: 15px;
+font-size: 13px;
+font-family: 'Inter', sans-serif; /* Set font to Inter */
+
+}
+/* .disclosure {
+  margin-right: 85px;
+} */
+.footer-language-label::first-letter {
   text-transform: uppercase;
 }
 
@@ -303,15 +373,29 @@ font-family: 'Inter', sans-serif; /* Set font to Inter */
   .footer-column {
     margin-bottom: 0;
   }
+
+  .footer__country-selector .footer-country-label {
+    margin-left: -27px;
+  }
   
   .footer__country-selector .footer-country-form {
-    margin-left: 163px;
+    margin-left: 135px;
+  }
+
+    .footer__language-selector .footer-language-form {
+    margin-left: 135px;
   }
 }
 
 .footer__country-selector .footer-country-form .disclosure__button {
 padding-right: 70px;
             margin-left: -28px;
+            white-space: nowrap;
+}
+
+  .footer__language-selector .footer-language-form .disclosure__button {
+padding-right: 95px;
+            margin-left: -27px;
             white-space: nowrap;
 }
   
@@ -322,7 +406,7 @@ padding-right: 70px;
   .footer-column form button {
     margin-left: -18px;
   }
-.footer__country-selector .footer-country-label {
+.footer__language-selector .footer-language-label {
     margin-left: -26px;
 }
   
@@ -423,7 +507,9 @@ padding-right: 70px;
   }
 
   .footer-column form {
-    padding: 0 20px 20px;
+    padding: 0 20px 20px;@media screen and (max-width: 990px) {
+    @media (max-width: 480px) {
+        .footer__language-selector .footer-language-form 
   }
 
   /* Social icons specific styles */
@@ -439,3 +525,5 @@ padding-right: 70px;
         display: flex;  /* Show when class 'show' is applied */
     }  
 }
+
+

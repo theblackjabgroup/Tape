@@ -7,16 +7,16 @@
     font-weight: 500;
 }
 .custom-placeholder .placeholder-svg{
-     width: 100%; 
-    height: 309px; 
-    display: block; 
+     width: 100%;
+    height: 309px;
+    display: block;
     object-fit: contain;
 }
 .overrideblog{
   height: 100% !important;
   overflow: hidden !important;
 }
-                       
+
 .overrideimg{
   flex-shrink: 0 !important;
   height: 309px !important;
@@ -37,30 +37,37 @@
     text-align: right;
 }
 .blog-slider-title {
-    position: absolute;
-    top: 40px;
-    left: 25px;
+   margin-top:15px;
     font-size: 2rem;
     font-weight: bold;
   color: rgb(var(--color-text));
 }
 
-.blog-arrow-buttons {
-    margin-bottom: 10px;
+.blog-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  width:100%;
 }
-
 .arrow {
     border: none;
     padding: 0px 5px;
     cursor: pointer;
     margin: 0 5px;
-    font-size: 32px;
+    font-size: 50px;
     background: transparent;
-    transition: opacity 0.3s ease;
+    transition: all 0.3s ease;
     opacity: 1;
+    scale:1;
    color: rgb(var(--color-foreground));
 
 }
+.arrow.arrow-left,.arrow.arrow-right{
+font-weight:200 !important;}
+.arrow:hover{
+  scale:1.1;
+}
+
 
 .arrow:disabled {
     opacity: 0.5;
@@ -70,16 +77,16 @@
 .blog-slider-container {
     width: 100%;
     overflow: hidden;
-  background-color: rgb(var(--color-background)); 
+  background-color: rgb(var(--color-background));
 }
 
 .blog-slider-wrapper {
     display: flex;
     transition: transform 0.5s ease-in-out;
     gap: 20px;
-    will-change: transform; 
+    will-change: transform;
     justify-content: flex-start;
-  background-color: rgb(var(--color-background)); 
+  background-color: rgb(var(--color-background));
 }
 .blog-card {
     flex: 0 0 auto;
@@ -90,7 +97,7 @@
     flex-direction: column;
     min-height: 450px;
     position: relative;
-    transition: flex 0.3s ease; 
+    transition: flex 0.3s ease;
 }
 .semicircle {
             content: '';
@@ -175,11 +182,11 @@
 
 .blog-tags-overlay {
     position: absolute;
-    top: 10px; 
-    left: 10px; 
+    top: 10px;
+    left: 10px;
     display: flex;
     flex-wrap: wrap;
-    gap: 5px; 
+    gap: 5px;
     z-index: 2;
 }
 
@@ -189,11 +196,11 @@
     font-size: 12px;
     text-transform: uppercase;
     font-weight: bold;
-    white-space: normal; 
-    word-break: break-word; 
-    overflow-wrap: break-word; 
+    white-space: normal;
+    word-break: break-word;
+    overflow-wrap: break-word;
     max-width: 240px;
-    text-align: center; 
+    text-align: center;
    background-color: rgb(var(--color-background));
 }
 

@@ -75,7 +75,7 @@
 
 .ticket-line {
   margin-top: 60px;
-  margin-bottom: 25px; 
+  margin-bottom: 0px; 
   position: relative;
   overflow: hidden;
   display: flex;
@@ -93,9 +93,9 @@
 }
 */
 .ticket-line-first {
-  height: 16px;
+  height: 12px;
   display: block !important;
-  width: 16px;
+  width: 12px;
   border-radius: 50%;
   background-color: rgb(var(--color-background));
 }
@@ -103,7 +103,7 @@
 .bb-thumbnail-width {
   width: 90%;
   height: 90%;
-  width: calc(33% - 8rem) !important;
+  width: 11rem !important;
 }
 
 .bb-product-thumbnail-corner {
@@ -156,7 +156,7 @@
 }
 
 .bb-price {
-  background-color: var(--color-button);
+  background-color: var(--background_product_card);
   padding: 0.5rem 3rem;
   border-radius: 3px;
   color: rgb(var(--color-foreground));
@@ -280,7 +280,7 @@
   width: 32%;
   padding: 6px 2px;
   display: flex;
-  transform: translate(-35px, 25px) rotate(-20deg);
+  transform: translate(-29px,11px) rotate(-20deg);
   justify-content: center;
   border: none;
 }
@@ -551,7 +551,7 @@ border-radius: 50%;
   content: "";
   position: absolute;
   display: block;
-  background-color: #000;
+  background-color: rgb(var(--color-foreground));
   border-width: 2px;
   z-index: -1;
   left: 4px;
@@ -613,17 +613,28 @@ border-radius: 50%;
   background: transparent !important;
 }
 
+.button:not([disabled]):hover:after {
+  box-shadow: none !important;
+}
 .shopify-payment-button__button--unbranded:after {
   content: "";
   position: absolute;
   display: block;
-  background-color: var(--secondary_button_label) !important;
+  background-color:rgb(var(--color-foreground))!important;
   border-width: 2px !important;
   z-index: -2 !important;
   left: 4px !important;
   top: 4px !important;
   height: 100% !important;
   width: 100% !important;
+}
+
+.bb-input-label {
+  background-color: var(--background_product_card) !important;
+}
+
+.product-form__input--pill input[type=radio]:checked+label {
+  background-color: var(--card_foreground) !important;
 }
 .dynamic-payment-buttons.top
   .shopify-payment-button__button--unbranded:hover:not([disabled]) {
@@ -685,6 +696,9 @@ border-radius: 50%;
 
 .bb-fp__media {
   padding: 40px !important;
+  background-color: var(--background_product_card);
+  overflow: visible !important;
+  border-radius: 10px;
 }
 
 .bb-product__title {
@@ -714,6 +728,14 @@ border-radius: 50%;
   height: 12px !important;
     width: 24px !important;
 }
+
+.sold-out-tag-mobile:after {
+  bottom: -5px;
+  right: -10px;
+  background-color: var(--background_product_card);
+}
+
+
 @media screen and (max-width: 749px) {
 
   .product-media-container.constrain-height.media-fit-contain {
@@ -803,12 +825,12 @@ border-radius: 50%;
     left: -10px;
   }
 
+ 
   .sold-out-tag-mobile:after {
     bottom: -5px;
     right: -10px;
-    background-color: var(--background_product_card);
+    background-color: rgb(var(--color-background));
   }
-
   #product-upper-bg {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;

@@ -426,6 +426,7 @@
 
 .header-localization:not(.menu-drawer__localization) localization-form:only-child .localization-form__select > span {
   max-width: 26ch;
+  font-weight:600;
 }
 
 .header-localization:not(.menu-drawer__localization) .localization-form__select .icon-caret {

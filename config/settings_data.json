@@ -164,20 +164,20 @@
       },
       "scheme-2": {
         "settings": {
-          "background": "#FDF4D7",
-          "background_product_card": "#C7E1BF",
-          "text": "#000000",
+          "background": "#000000",
+          "background_product_card": "#FF6214",
+          "text": "#FFFFFF",
           "product_price_card": "#000000",
           "button_label": "#000000",
-          "secondary_product_button_color": "#C7E1BF",
+          "secondary_product_button_color": "#FF6214",
           "secondary_button_label": "#FFFFFF",
-          "product_price_font": "#FFFFFF",
-          "button": "#C7E1BF",
-          "card_foreground": "#FDF4D7",
+          "product_price_font": "#000000",
+          "button": "#FF6214",
+          "card_foreground": "#000000",
           "background_gradient": "",
-          "product_price_secondary_font": "#225647",
-          "quatity_selector_background": "#9DB792",
-          "product_special_offer": "#9BBAE0"
+          "product_price_secondary_font": "#FFFFFF",
+          "quatity_selector_background": "#FF6214",
+          "product_special_offer": "#FA4200"
         }
       },
       "scheme-3": {
@@ -185,16 +185,16 @@
           "background": "#FFE88A",
           "background_product_card": "#225647",
           "text": "#000000",
-          "product_price_card": "#000000",
-          "button_label": "#959E9C",
+          "product_price_card": "#FFFFFF",
+          "button_label": "#225647",
           "secondary_product_button_color": "#225647",
           "secondary_button_label": "#FFFFFF",
           "product_price_font": "#FFFFFF",
           "button": "#225647",
-          "card_foreground": "#FFFAFA",
+          "card_foreground": "#FFE88A",
           "background_gradient": "",
-          "product_price_secondary_font": "#225647",
-          "quatity_selector_background": "#9DB792",
+          "product_price_secondary_font": "#000000",
+          "quatity_selector_background": "#225647",
           "product_special_offer": "#9BBAE0"
         }
       },
