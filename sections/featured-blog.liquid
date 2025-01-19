@@ -74,7 +74,8 @@
 
 <div class="blog-slider-section color-{{ section.settings.color_scheme }}"  >
     <!-- Title Section -->
-    <div class="blog-slider-title" >
+    <div class="blog-header">
+      <div class="blog-slider-title" >
        <h2>{{ section.settings.section_title }}</h2>
     </div>
 
@@ -83,7 +84,7 @@
         <button class="arrow arrow-left"  onclick="moveSlide(-1)">‹</button>
         <button class="arrow arrow-right"  onclick="moveSlide(1)">›</button>
     </div>
-    
+    </div>
     <!-- Slider Container -->
     <div class="blog-slider-container color-{{ section.settings.color_scheme }} ">
         <div class="blog-slider-wrapper" id="sliderWrapper">
@@ -174,7 +175,7 @@
                             <h3 class="blog-card-title overridetitle" style="font-family='Fira Sans'; font-weight=500;" >Sample Blog Post {{ i }}</h3>
 
                         </div>
-                    </div>  
+                    </div>
                 {% endfor %}
             {% endif %}
 
@@ -279,7 +280,5 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(sliderWrapper, { childList: true });
     });
 });
-  
+
   </script>
-
-
