@@ -1,8 +1,7 @@
-<script src="{{ 'image-with-text.js' | asset_url }}" defer></script>
 {{ 'image-with-text.css' | asset_url | stylesheet_tag }}
 
 {% style %}
-  :root {
+  :root  {
     --section-color: {{ section.settings.sectionBackground }};
   }
 {% endstyle %}
@@ -20,12 +19,18 @@
           data-heading="{{ item.settings.heading }}"
           data-description="{{ item.settings.description }}"
           data-link="{{ item.settings.url }}"
-        >
+          btn-text="{{ item.settings.btnText }}"
+          data-heading-tag="{{ item.settings.headingTag }}">
           <div class="media__container">
             {% if item.settings.image %}
-              <img width="1800" height="1600" class="media" src="{{ item.settings.image |  image_url  }}" alt="">
+              <img
+                width="1800"
+                height="1600"
+                class="media"
+                src="{{ item.settings.image |  image_url  }}"
+                alt="">
             {% else %}
-                  <div style="width: 100%; height: 100%;">
+              <div style="width: 100%; height: 100%;">
                 {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
               </div>
             {% endif %}
@@ -38,15 +43,13 @@
           <h1 class="info__banner__heading fira-sans-bold">Thanksgiving big billion sale!</h1>
           <div class="info__banner__details">
             <p class="info__banner__description inter-regular ">
-              Enhance patient care with our premium medical product, featuring advanced technology for precision and
+              Enhance patient care with our premium medical product, featuring advanced technology for precision and 
               reliability. Ideal for seamless integration into any practice!
             </p>
             <a
               href=""
               style="color: rgb(var(--color-secondary-button-text)); background: rgb(var(--color-button-text));"
-              class="info__banner__shopnow__button link color-{{ section.settings.bannerColor }}"
-              >Shop Now</a
-            >
+              class="info__banner__shopnow__button link color-{{ section.settings.bannerColor }}">Shop Now</a>
           </div>
           <span id="info__banner__expand__button" class="svg-wrapper">
             {{- 'icon-arrow.svg' | inline_asset_content -}}
@@ -55,7 +58,7 @@
         <ul class="dot-items color-{{ section.settings.bannerColor }}">
           {% for item in section.blocks %}
             <li class="dot-item">
-              <a id="gallery-item-{{ forloop.index0 }}-trigger" href="#gallery-item-{{ forloop.index0 }}"> </a>
+              <a id="gallery-item-{{ forloop.index0 }}-trigger" href="#gallery-item-{{ forloop.index0 }}"></a>
             </li>
           {% endfor %}
         </ul>
@@ -75,6 +78,7 @@
       const cards = section.querySelectorAll('.image__with__text__card');
 
       // Banner elements specific to this section
+      const bannerHeadingTag = section.querySelector('.info__banner__title');
       const bannerHeading = section.querySelector('.info__banner__heading');
       const bannerDescription = section.querySelector('.info__banner__description');
       const bannerLink = section.querySelector('.info__banner__shopnow__button');
@@ -90,10 +94,17 @@
           const heading = currentCard.getAttribute('data-heading');
           const description = currentCard.getAttribute('data-description');
           const link = currentCard.getAttribute('data-link');
+          const btnText = currentCard.getAttribute('btn-text');
+          const headingTag = currentCard.getAttribute('data-heading-tag');
+          
+
+          
 
           // Update the banner content
+          bannerHeadingTag.textContent = headingTag || "Default Heading Tag";
           bannerHeading.textContent = heading || "Default Heading";
           bannerDescription.textContent = description || "Default Description";
+          bannerLink.textContent = btnText || "Default Button Text"
           if (link) {
             bannerLink.href = link;
           }
@@ -178,80 +189,78 @@
   });
 </script>
 
-
-
-
 {% schema %}
-{
-  "name": "Image With Text",
-  "settings": [
-    {
-      "type": "color",
-      "id": "sectionBackground",
-      "label": "Section Color"
-    },
-    {
-      "type": "color_scheme",
-      "label": "Banner Color",
-      "id": "bannerColor",
-      "default": "#000000"
-    }
-  ],
-  "blocks": [
-    {
-      "type": "card",
-      "name": "Card",
-      "settings": [
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Select Image"
-        },
-        {
-          "type": "text",
-          "id": "heading",
-          "label": "heading",
-          "default": "Thanksgiving big billion sale!"
-        },
-        {
-          "type": "text",
-          "id": "description",
-          "label": "decription",
-          "default":"Enhance patient care with our premium medical product, featuring advanced technology for precision and reliability. Ideal for seamless integration into any practice!"
-        },
-        {
-          "type": "url",
-          "id": "url",
-          "label": "link",
-          "default":"/"
-        },
-        {
-          "type": "color",
-          "id": "captionColor",
-          "label": "Text Color",
-          "default": "#000000"
-        }
-      ]
-    }
-  ],
-  "presets": [
-    {
-      "name": "Image With Text",
-      "blocks": [
-        {
-          "type": "card"
-        },
-        {
-          "type": "card"
-        },
-        {
-          "type": "card"
-        },
-        {
-          "type": "card"
-        }
-      ]
-    }
-  ]
-}
+  {
+    "name": "Image With Text",
+    "settings": [
+      {
+        "type": "color",
+        "id": "sectionBackground",
+        "label": "Section Color"
+      }, {
+        "type": "color_scheme",
+        "label": "Banner Color",
+        "id": "bannerColor",
+        "default": "#000000"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "card",
+        "name": "Card",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Select Image"
+          },
+          {
+            "type": "text",
+            "id": "headingTag",
+            "label": "Heading Tag",
+            "default": "New Arrival"
+          },
+          {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading",
+            "default": "Thanksgiving big billion sale!"
+          },
+          {
+            "type": "text",
+            "id": "description",
+            "label": "Description",
+            "default": "Enhance patient care with our premium medical product, featuring advanced technology for precision and reliability. Ideal for seamless integration into any practice!"
+          }, {
+            "type": "text",
+            "id": "btnText",
+            "label": "Button Text",
+            "default": "Shop Now"
+          }, {
+            "type": "url",
+            "id": "url",
+            "label": "link",
+            "default": "/"
+          }
+
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Image With Text",
+        "blocks": [
+          {
+            "type": "card"
+          }, {
+            "type": "card"
+          }, {
+            "type": "card"
+          }, {
+            "type": "card"
+          }
+        ]
+      }
+    ]
+  }
 {% endschema %}
