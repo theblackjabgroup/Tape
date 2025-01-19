@@ -15,6 +15,7 @@ jobs:
       - name: Install Shopify CLI
         run: |
           npm install -g @shopify/cli @shopify/theme
+          echo "SHOPIFY_FLAG_STORE=theme-blackbytt-poc.myshopify.com" >> $GITHUB_ENV
 
       - uses: actions/checkout@v2
 
