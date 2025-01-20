@@ -1,32 +1,421 @@
 {
   "sections": {
+    "video_banner": {
+      "type": "video-banner",
+      "blocks": {
+        "video": {
+          "type": "video",
+          "settings": {}
+        },
+        "youtube": {
+          "type": "youtube",
+          "settings": {
+            "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc"
+          }
+        },
+        "vimeo": {
+          "type": "vimeo",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "video",
+        "youtube",
+        "vimeo"
+      ],
+      "settings": {
+        "background_color": ""
+      }
+    },
+    "image_with_text": {
+      "type": "image-with-text",
+      "blocks": {
+        "card1": {
+          "type": "card",
+          "settings": {
+            "heading": "Thanksgiving big billion sale!",
+            "description": "Enhance patient care with our premium medical product, featuring advanced technology for precision and reliability. Ideal for seamless integration into any practice!",
+            "url": "/",
+            "captionColor": "#000000"
+          }
+        },
+        "card2": {
+          "type": "card",
+          "settings": {
+            "heading": "Thanksgiving big billion sale!",
+            "description": "Enhance patient care with our premium medical product, featuring advanced technology for precision and reliability. Ideal for seamless integration into any practice!",
+            "url": "/",
+            "captionColor": "#000000"
+          }
+        },
+        "card3": {
+          "type": "card",
+          "settings": {
+            "heading": "Thanksgiving big billion sale!",
+            "description": "Enhance patient care with our premium medical product, featuring advanced technology for precision and reliability. Ideal for seamless integration into any practice!",
+            "url": "/",
+            "captionColor": "#000000"
+          }
+        },
+        "card4": {
+          "type": "card",
+          "settings": {
+            "heading": "Thanksgiving big billion sale!",
+            "description": "Enhance patient care with our premium medical product, featuring advanced technology for precision and reliability. Ideal for seamless integration into any practice!",
+            "url": "/",
+            "captionColor": "#000000"
+          }
+        },
+        "card5": {
+          "type": "card",
+          "settings": {
+            "heading": "Thanksgiving big billion sale!",
+            "description": "Enhance patient care with our premium medical product, featuring advanced technology for precision and reliability. Ideal for seamless integration into any practice!",
+            "url": "/",
+            "captionColor": "#000000"
+          }
+        }
+      },
+      "block_order": [
+        "card1",
+        "card2",
+        "card3",
+        "card4",
+        "card5"
+      ],
+      "settings": {
+        "sectionBackground": "",
+        "bannerColor": ""
+      }
+    },
+    "slideshow": {
+      "type": "slideshow",
+      "blocks": {
+        "slide1": {
+          "type": "slide",
+          "settings": {
+            "feature": "NEW ARRIVAL",
+            "title": "Thanksgiving Big Billion Sale!",
+            "content": "<p>Enhance patient care with our premium medical product,featuring advanced technology for precision and reliability. Ideal for seamless integration into any practical</p>",
+            "show_button": true,
+            "button_text": "Shop Now",
+            "button_link": ""
+          }
+        },
+        "slide2": {
+          "type": "slide",
+          "settings": {
+            "feature": "NEW ARRIVAL",
+            "title": "Thanksgiving Big Billion Sale!",
+            "content": "<p>Enhance patient care with our premium medical product,featuring advanced technology for precision and reliability. Ideal for seamless integration into any practical</p>",
+            "show_button": true,
+            "button_text": "Shop Now",
+            "button_link": ""
+          }
+        },
+        "slide3": {
+          "type": "slide",
+          "settings": {
+            "feature": "NEW ARRIVAL",
+            "title": "Thanksgiving Big Billion Sale!",
+            "content": "<p>Enhance patient care with our premium medical product,featuring advanced technology for precision and reliability. Ideal for seamless integration into any practical</p>",
+            "show_button": true,
+            "button_text": "Shop Now",
+            "button_link": ""
+          }
+        },
+        "slide4": {
+          "type": "slide",
+          "settings": {
+            "feature": "NEW ARRIVAL",
+            "title": "Thanksgiving Big Billion Sale!",
+            "content": "<p>Enhance patient care with our premium medical product,featuring advanced technology for precision and reliability. Ideal for seamless integration into any practical</p>",
+            "show_button": true,
+            "button_text": "Shop Now",
+            "button_link": ""
+          }
+        },
+        "slide4": {
+          "type": "slide",
+          "settings": {
+            "feature": "NEW ARRIVAL",
+            "title": "Thanksgiving Big Billion Sale!",
+            "content": "<p>Enhance patient care with our premium medical product,featuring advanced technology for precision and reliability. Ideal for seamless integration into any practical</p>",
+            "show_button": true,
+            "button_text": "Shop Now",
+            "button_link": ""
+          }
+        },
+        "slide6": {
+          "type": "slide",
+          "settings": {
+            "feature": "NEW ARRIVAL",
+            "title": "Thanksgiving Big Billion Sale!",
+            "content": "<p>Enhance patient care with our premium medical product,featuring advanced technology for precision and reliability. Ideal for seamless integration into any practical</p>",
+            "show_button": true,
+            "button_text": "Shop Now",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide1",
+        "slide2",
+        "slide3",
+        "slide4",
+        "slide5",
+        "slide6"
+      ],
+      "settings": {
+        "color_scheme": ""
+      }
+    },
+    "rich_text": {
+      "type": "rich-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Your Heading"
+          }
+        },
+        "subheading": {
+          "type": "subheading",
+          "settings": {
+            "caption": "Delivering Excellence in Medical Products"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_text": "Learn More",
+            "button_link": "/",
+            "show_button": true
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "subheading",
+        "text",
+        "button"
+      ],
+      "settings": {
+        "layout_style": "layout1",
+        "dots_number1": 10,
+        "dots_number2": 10,
+        "color_scheme": "",
+        "heading_font_size": 22,
+        "text_font_size": 14,
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "product_stories": {
+      "type": "product-stories",
+      "blocks": {
+        "column1": {
+          "type": "column",
+          "settings": {
+            "video_title": "Mattress Soft Ergonomic!",
+            "youtube_url": "",
+            "video_embed": "",
+            "video_link": ""
+          }
+        },
+        "column2": {
+          "type": "column",
+          "settings": {
+            "video_title": "Mattress Soft Ergonomic!",
+            "youtube_url": "",
+            "video_embed": "",
+            "video_link": ""
+          }
+        },
+        "column3": {
+          "type": "column",
+          "settings": {
+            "video_title": "Mattress Soft Ergonomic!",
+            "youtube_url": "",
+            "video_embed": "",
+            "video_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column1",
+        "column2",
+        "column3"
+      ],
+      "settings": {
+        "title": "Shop With Us",
+        "description": "Join us on TikTok for exclusive releases, unboxing and try-on videos, reviews, and more from our top brands and stylists.",
+        "font_size": 100,
+        "video_title_font_size": 100,
+        "play_onload": false,
+        "social_handle": "@yourtiktok",
+        "social_link": "social_instagram_link",
+        "color_scheme": "",
+        "padding_top": 44,
+        "padding_bottom": 44
+      }
+    },
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
         "title": "Featured products",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
+        "color_scheme": "scheme-1",
+        "title_font_size": 36,
+        "show_subheading": true,
+        "subheading_font_size": 20,
         "collection": "all",
         "products_to_show": 8,
-        "columns_desktop": 3,
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "color_scheme": "scheme-1",
-        "image_ratio": "square",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "columns_mobile": "2",
-        "swipe_on_mobile": false,
-        "padding_top": 44,
+        "offer_tag_text": "SPECIAL OFFER - 20% DISCOUNT"
+      }
+    },
+    "featured_icon_with_text": {
+      "type": "featured-icon-with-text",
+      "blocks": {
+        "card_1": {
+          "type": "card",
+          "settings": {
+            "title": "Pay On Delivery",
+            "description": ""
+          }
+        },
+        "card_2": {
+          "type": "card",
+          "settings": {
+            "title": "Pay On Delivery",
+            "description": ""
+          }
+        },
+        "card_3": {
+          "type": "card",
+          "settings": {
+            "title": "Pay On Delivery",
+            "description": ""
+          }
+        },
+        "card_4": {
+          "type": "card",
+          "settings": {
+            "title": "Pay On Delivery",
+            "description": ""
+          }
+        },
+        "card_5": {
+          "type": "card",
+          "settings": {
+            "title": "Pay On Delivery",
+            "description": ""
+          }
+        }
+      },
+      "block_order": [
+        "card_1",
+        "card_2",
+        "card_3",
+        "card_4",
+        "card_5"
+      ],
+      "settings": {
+        "layout": "layout_1",
+        "heading": "Key Features",
+        "subheading": "Prioritize your well-being",
+        "sectionColor": ""
+      }
+    },
+    "featured_blog": {
+      "type": "featured-blog",
+      "settings": {
+        "blog": "",
+        "post_limit": 4,
+        "show_author": true,
+        "show_date": true,
+        "show_excerpt": false,
+        "show_tags": true,
+        "show_view_all": false,
+        "section_title": "Blog Posts",
+        "color_scheme": ""
+      }
+    },
+    "collapsible_content": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_row1": {
+          "type": "collapsible_row",
+          "settings": {
+            "serialno": "01",
+            "questiontext": "What is number of wheels in wheel chair",
+            "solutionans": "At [Your Company Name], we are dedicated to enhancing patient care and clinical efficiency through state-of-the-art medical products. Our commitment to innovation and quality ensures that healthcare providers have the tools they need to deliver the best possible outcomes for their patients."
+          }
+        },
+        "collapsible_row2": {
+          "type": "collapsible_row",
+          "settings": {
+            "serialno": "01",
+            "questiontext": "What is number of wheels in wheel chair",
+            "solutionans": "At [Your Company Name], we are dedicated to enhancing patient care and clinical efficiency through state-of-the-art medical products. Our commitment to innovation and quality ensures that healthcare providers have the tools they need to deliver the best possible outcomes for their patients."
+          }
+        },
+        "collapsible_row3": {
+          "type": "collapsible_row",
+          "settings": {
+            "serialno": "01",
+            "questiontext": "What is number of wheels in wheel chair",
+            "solutionans": "At [Your Company Name], we are dedicated to enhancing patient care and clinical efficiency through state-of-the-art medical products. Our commitment to innovation and quality ensures that healthcare providers have the tools they need to deliver the best possible outcomes for their patients."
+          }
+        },
+        "collapsible_row4": {
+          "type": "collapsible_row",
+          "settings": {
+            "serialno": "01",
+            "questiontext": "What is number of wheels in wheel chair",
+            "solutionans": "At [Your Company Name], we are dedicated to enhancing patient care and clinical efficiency through state-of-the-art medical products. Our commitment to innovation and quality ensures that healthcare providers have the tools they need to deliver the best possible outcomes for their patients."
+          }
+        },
+        "collapsible_row5": {
+          "type": "collapsible_row",
+          "settings": {
+            "serialno": "01",
+            "questiontext": "What is number of wheels in wheel chair",
+            "solutionans": "At [Your Company Name], we are dedicated to enhancing patient care and clinical efficiency through state-of-the-art medical products. Our commitment to innovation and quality ensures that healthcare providers have the tools they need to deliver the best possible outcomes for their patients."
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row1",
+        "collapsible_row2",
+        "collapsible_row3",
+        "collapsible_row4",
+        "collapsible_row5"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "caption": "Help & Support",
+        "description": "We're here to assist you with questions about products, sizing, or orders. Our customer support team is available via phone, email, or live chat.",
+        "layout_style": "layout1",
+        "padding_top": 36,
         "padding_bottom": 36
       }
     }
   },
-  "order": ["featured_collection"]
+  "order": [
+    "video_banner",
+    "image_with_text",
+    "slideshow",
+    "rich_text",
+    "product_stories",
+    "featured_collection",
+    "featured_icon_with_text",
+    "featured_blog",
+    "collapsible_content"
+  ]
 }
