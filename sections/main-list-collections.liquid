@@ -2,9 +2,48 @@
 {{ 'section-collection-list.css' | asset_url | stylesheet_tag }}
 
 <div class="page-width">
-  <h1 class="title title--primary inline-richtext{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
+  <div class="collection-list_headingpart">
+     <h1 class="title title--primary inline-richtext{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
     {{ section.settings.title }}
   </h1>
+    <p class="cl-sub_heading">Top series of products</p>
+    <p class="cl-description">At Theme-{{ shop.name }}, we are dedicated to enhancing patient 
+      care and clinical efficiency through state-of-the-art medical products.
+      Our commitment to innovation and quality ensures that healthcare providers have 
+      the tools they need to deliver the best possible outcomes for their patients.
+    </p>
+  </div>
+  <div class="collectionlist_strip">
+  <div class="marquee-inner">
+    <div class="marquee-content">
+      {% comment %} First set of Hello text {% endcomment %}
+       {% for i in (1..16) %}
+            <h3 class="clcard__heading card__heading--placeholder">
+                <a role="link" aria-disabled="true" class="full-unstyled-link">
+                    New Arrivals
+                    <span class="icon-wrap">
+                        {{- 'icon-arrow.svg' | inline_asset_content -}}
+                    </span>
+                </a>
+            </h3>
+        {% endfor %}
+
+      
+      {% comment %} Second set for continuous loop {% endcomment %}
+      {% for i in (1..16) %}
+            <h3 class="clcard__heading card__heading--placeholder">
+                <a role="link" aria-disabled="true" class="full-unstyled-link">
+                    New Arrivals
+                    <span class="icon-wrap">
+                        {{- 'icon-arrow.svg' | inline_asset_content -}}
+                    </span>
+                </a>
+            </h3>
+        {% endfor %}
+    </div>
+  </div>
+  </div>
+ 
   {%- liquid
     case section.settings.sort
       when 'products_high', 'products_low'
