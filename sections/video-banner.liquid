@@ -2,110 +2,122 @@
 <script src="{{ 'video-banner.js' | asset_url }}" defer></script>
 
 {% style %}
-#shopify-section-{{ section.id }} .video-container-wrapper {
---progress-color: rgba(255, 255, 255, 0.75);
-}
+  #shopify-section-{{ section.id }} .video-container-wrapper {
+  --progress-color: rgba(255, 255, 255, 0.75);
+  }
 {% endstyle %}
 
 <div class="video-container-wrapper color-{{ section.settings.background_color }}" data-section-id="{{ section.id }}">
-    <div class="video-container">
-        {%- for block in section.blocks -%}
-        {%- liquid
+  <div class="video-container">
+    {%- for block in section.blocks -%}
+      {%- liquid
         assign video_id = ''
 
         if block.type == 'youtube' or block.type == 'vimeo'
-        assign video_id = block.settings.video_url.id
+          assign video_id = block.settings.video_url.id
         endif
-        -%}
+      -%}
 
-        <div id="video-{{ section.id }}-{{ forloop.index }}" class="video-wrapper"
-            style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-            {%- if block.type == 'youtube' or block.type == 'vimeo' -%}
-                <button
-                    id="Deferred-Poster-Modal-{{ video_id }}-{{ forloop.index }}"
-                    class="video-section__poster media deferred-media__poster media--landscape"
-                    type="button" 
-                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; cursor: pointer;"
-                    onclick="this.style.display='none'; this.nextElementSibling.style.display='block';"
-                >
-                    {%- if block.settings.placeholder_image != blank -%}
-                        {{ block.settings.placeholder_image | image_url: width: 1920 | image_tag }}
-                    {%- else -%}
-                        {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
-                    {%- endif -%}
-                    
-                    <span class="deferred-media__poster-button motion-reduce" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="12" cy="12" r="12" fill="rgba(0, 0, 0, 0.6)"/>
-                            <path d="M9 7.5L17 12L9 16.5V7.5Z" fill="white"/>
-                        </svg>
-                    </span>
-                </button>
-
-                <div class="video-embed" style="display: none;">
-                    {%- if block.type == 'youtube' -%}
-                        <iframe
-                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
-                            src="https://www.youtube.com/embed/{{ video_id }}?enablejsapi=1&controls=1"
-                            allow="autoplay; encrypted-media"
-                            allowfullscreen
-                        ></iframe>
-                    {%- elsif block.type == 'vimeo' -%}
-                        <iframe
-                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
-                            src="https://player.vimeo.com/video/{{ video_id }}?autoplay=1"
-                            allow="autoplay; encrypted-media"
-                            allowfullscreen
-                        ></iframe>
-                    {%- endif -%}
-                </div>
+      <div
+        id="video-{{ section.id }}-{{ forloop.index }}"
+        class="video-wrapper"
+        style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;"
+      >
+        {%- if block.type == 'youtube' or block.type == 'vimeo' -%}
+          <button
+            id="Deferred-Poster-Modal-{{ video_id }}-{{ forloop.index }}"
+            class="video-section__poster media deferred-media__poster media--landscape"
+            type="button"
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; cursor: pointer;"
+            onclick="this.style.display='none'; this.nextElementSibling.style.display='block';"
+            aria-label="Play the video"
+          >
+            {%- if block.settings.placeholder_image != blank -%}
+              {{ block.settings.placeholder_image | image_url: width: 1920 | image_tag }}
             {%- else -%}
-                <button
-                    class="video-section__poster media deferred-media__poster media--landscape"
-                    type="button" 
-                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; {% if block.settings.video_library != blank %}cursor: pointer;{% else %}cursor: default;{% endif %}"
-                    {% if block.settings.video_library != blank %}
-                    onclick="this.style.display='none'; this.nextElementSibling.style.display='block';"
-                    {% endif %}
-                >
-                    {%- if block.settings.placeholder_image != blank -%}
-                        {{ block.settings.placeholder_image | image_url: width: 1920 | image_tag }}
-                    {%- else -%}
-                        {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
-                    {%- endif -%}
-                    
-                    {% if block.settings.video_library != blank %}
-                    <span class="deferred-media__poster-button motion-reduce" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="12" cy="12" r="12" fill="rgba(0, 0, 0, 0.6)"/>
-                            <path d="M9 7.5L17 12L9 16.5V7.5Z" fill="white"/>
-                        </svg>
-                    </span>
-                    {% endif %}
-                </button>
-
-                <div style="display: none;">
-                    {{
-                    block.settings.video_library
-                    | video_tag: controls: true, style: 'position: absolute; top: 0; left: 0; width: 100%; height: 100%;'
-                    }}
-                </div>
+              {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
             {%- endif -%}
-            <div class="overlay-left overlay"></div>
-            <div class="overlay-right overlay"></div>
-        </div>
-        {%- endfor -%}
-    </div>
-    <div class="video-controls-wrapper">
-        <div class="progress-indicators">
-            {%- for block in section.blocks -%}
-            <div class="progress-indicator{% if forloop.first %} active {% endif %}" data-index="{{ forloop.index0 }}">
-            </div>
-            {%- endfor -%}
-        </div>
-    </div>
-</div>
 
+            <span
+              class="deferred-media__poster-button motion-reduce"
+              style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"
+            >
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="12" fill="rgba(0, 0, 0, 0.6)"/>
+                <path d="M9 7.5L17 12L9 16.5V7.5Z" fill="white"/>
+              </svg>
+            </span>
+          </button>
+
+          <div class="video-embed" style="display: none;">
+            {%- if block.type == 'youtube' -%}
+              <iframe
+                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+                src="https://www.youtube.com/embed/{{ video_id }}?enablejsapi=1&controls=1"
+                allow="autoplay; encrypted-media"
+                allowfullscreen
+              ></iframe>
+            {%- elsif block.type == 'vimeo' -%}
+              <iframe
+                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+                src="https://player.vimeo.com/video/{{ video_id }}?autoplay=1"
+                allow="autoplay; encrypted-media"
+                allowfullscreen
+              ></iframe>
+            {%- endif -%}
+          </div>
+        {%- else -%}
+          <button
+            class="video-section__poster media deferred-media__poster media--landscape"
+            aria-label="Play Video"
+            type="button"
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; {% if block.settings.video_library != blank %}cursor: pointer;{% else %}cursor: default;{% endif %}"
+            {% if block.settings.video_library != blank %}
+              onclick="this.style.display='none'; this.nextElementSibling.style.display='block';"
+            {% endif %}
+          >
+            {%- if block.settings.placeholder_image != blank -%}
+              {{ block.settings.placeholder_image | image_url: width: 1920 | image_tag }}
+            {%- else -%}
+              {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
+            {%- endif -%}
+
+            {% if block.settings.video_library != blank %}
+              <span
+                class="deferred-media__poster-button motion-reduce"
+                style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"
+              >
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="12" cy="12" r="12" fill="rgba(0, 0, 0, 0.6)"/>
+                  <path d="M9 7.5L17 12L9 16.5V7.5Z" fill="white"/>
+                </svg>
+              </span>
+            {% endif %}
+          </button>
+
+          <div style="display: none;">
+            {{
+              block.settings.video_library
+              | video_tag: controls: true, style: 'position: absolute; top: 0; left: 0; width: 100%; height: 100%;'
+            }}
+          </div>
+        {%- endif -%}
+        <div class="overlay-left overlay"></div>
+        <div class="overlay-right overlay"></div>
+      </div>
+    {%- endfor -%}
+  </div>
+  <div class="video-controls-wrapper">
+    <div class="progress-indicators" aria-label="Next">
+      {%- for block in section.blocks -%}
+        <div
+          class="progress-indicator{% if forloop.first %} active {% endif %}"
+          data-index="{{ forloop.index0 }}"
+        ></div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
 
 {% schema %}
 {
