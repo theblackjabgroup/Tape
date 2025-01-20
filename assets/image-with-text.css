@@ -198,7 +198,6 @@
   display: var(--info__banner__visibillity);
   opacity: 0.8;
   z-index: 1;
-  border-radius: 8px;
 }
 
 .info__banner__contents {
