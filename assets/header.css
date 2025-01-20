@@ -368,11 +368,11 @@ nav-items::-webkit-scrollbar {
 }
 
 .nav-icons {
-      display: flex !important;
+          display: flex !important;
     align-items: center;
-    gap: 24px;
+    gap: 20px;
     height: 100%;
-    margin-right: 10px;
+    margin-right: 30px;
 }
 
 .nav-icon {
