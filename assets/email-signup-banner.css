@@ -7,12 +7,12 @@
     width: auto;
     max-width: var(--page-width);
     border-radius: 5px;
-   /* overflow: hidden;  */
+    overflow: hidden;  
 }
  
 .bb-email-uper-banner {
     height: 100%;
-    /*overflow: hidden;*/
+    overflow: hidden;
     padding: 7rem 0rem;
 }
 
