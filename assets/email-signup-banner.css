@@ -7,9 +7,9 @@
     width: auto;
     max-width: var(--page-width);
     border-radius: 5px;
-    overflow: hidden;
+    overflow: hidden;  
 }
-
+ 
 .bb-email-uper-banner {
     height: 100%;
     overflow: hidden;
@@ -209,6 +209,7 @@ color: rgb(var(--color-secondary-button-text));
     position: relative;
     height: 54% !important;
     max-width: var(--page-width);
+    border-radius: 5px;
   }
 
   .bb-password-form {

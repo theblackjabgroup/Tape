@@ -6,8 +6,9 @@
 background-color: currentColor;
 }
 .rich_text_button{
-   border: 1px solid rgb(var(--color-button));  
-  color:rgb(var(--color-button));  
+   border: 1px solid rgb(var(--color-button));
+ background: rgb(var(--color-button-text)) ;
+color: rgb(var(--color-secondary-button-text));
 }
   .section-{{ section.id }}-padding.layout1,
   .section-{{ section.id }}-padding.layout2 {
@@ -40,7 +41,7 @@ background-color: currentColor;
     .section-{{ section.id }}-padding.layout2 h2 {
       font-size: {{ section.settings.heading_font_size | times: 0.8 | round: 0 }}px;
     }
-    
+
     .section-{{ section.id }}-padding.layout1 .rich-text__text,
     .section-{{ section.id }}-padding.layout2 .rich-text__text {
       font-size: {{ section.settings.text_font_size | times: 0.9 | round: 0 }}px;
@@ -49,14 +50,14 @@ background-color: currentColor;
 </style>
 
 <div class="rich-text-section color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding {% if section.settings.layout_style == 'layout1' %}layout1{% else %}layout2{% endif %}">
-  {% if section.settings.layout_style == 'layout1' %} 
+  {% if section.settings.layout_style == 'layout1' %}
     <div class="page-width">
       <h2 class="richtext_heading">
         {% for block in section.blocks %}
           {% if block.type == 'heading' %}
             {{ block.settings.heading }}
           {% endif %}
-        {% endfor %}  
+        {% endfor %}
       </h2>
       <div class="decorative-dots">
         {% for i in (1..section.settings.dots_number1) %}
@@ -79,11 +80,11 @@ background-color: currentColor;
       </div>
       {% for block in section.blocks %}
         {% if block.type == 'button' and block.settings.show_button %}
-          <div class="rich_text_button"> 
+          <button class="rich_text_button " >
             <a href="{{ block.settings.button_link }}" class="rich_text_btn">
               {{ block.settings.button_text }}
             </a>
-          </div>
+          </button>
         {% endif %}
       {% endfor %}
     </div>
@@ -118,7 +119,7 @@ background-color: currentColor;
         </div>
         {% for block in section.blocks %}
           {% if block.type == 'button' and block.settings.show_button %}
-            <div class="rich_text_button"> 
+            <div class="rich_text_button">
               <a href="{{ block.settings.button_link }}" class="rich_text_btn">
                 {{ block.settings.button_text }}
               </a>
@@ -141,7 +142,7 @@ background-color: currentColor;
 {
   "name": "Rich Text",
   "settings": [
-  
+
     {
       "type": "select",
       "id": "layout_style",
@@ -192,8 +193,8 @@ background-color: currentColor;
       "label": "Heading Font Size",
       "default": 22
     },
-   
-  
+
+
     {
       "type": "range",
       "id": "text_font_size",
@@ -204,8 +205,8 @@ background-color: currentColor;
       "label": "Text Font Size",
       "default": 14
     },
-   
-    
+
+
     {
       "type": "range",
       "id": "padding_top",
@@ -257,7 +258,7 @@ background-color: currentColor;
     "type": "text",
     "name": "Text",
     "settings": [{
-        "type": "richtext", 
+        "type": "richtext",
         "id": "text",
         "label": "Text"
     }]
@@ -285,7 +286,7 @@ background-color: currentColor;
         }
       ]
     }
-    
+
 ],
  "presets": [
   {
