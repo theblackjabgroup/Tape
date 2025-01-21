@@ -4,13 +4,12 @@
 {
   "name": "Barcode",
   "settings": [
-     {
+    {
       "id": "color_scheme",
       "type": "color_scheme",
       "label": "t:sections.all.colors.label",
       "default": "scheme-1"
-    },
-   
+    }
   ],
   "presets": [
     {
@@ -21,112 +20,31 @@
 {% endschema %}
 
 <style>
-  .bar{
-   background-color: var(--background_product_card);
+  .bar {
+    height:100px;
+    background-color: var(--background_product_card);
   }
 
-  .barcode-footer {
-    color:rgb(var(--color-foreground)); 
-    background-color: {{ section.settings.footer_bg_color }};
-  }
-
-  .barcode-footer p,
-  .barcode-footer .copyright__content {
-     color:rgb(var(--color-foreground)); 
-  }
-
-  .barcode-footer .powered-by {
-    color:rgb(var(--color-foreground)); 
-  }
-
-  .barcode-footer .copyright__content {
-    color:rgb(var(--color-foreground)); 
+  .barcode-container {
+    background-color: rgb(var(--color-background));
   }
 </style>
 
-  <div class="barcode color-{{ section.settings.color_scheme }}">
-  <!-- Left section -->
-  <div class="bar bar-1"><h2>i</h2></div>
-  <div class="bar bar-2"><h2>i</h2></div>
-  <div class="bar bar-3"><h2>i</h2></div>
-  <div class="bar bar-4"><h2>i</h2></div>
-  <div class="bar bar-1"><h2>i</h2></div>
-  <div class="bar bar-2"><h2>i</h2></div>
-  <div class="bar bar-3"><h2>i</h2></div>
-  <div class="bar bar-1"><h2>i</h2></div>
-  <div class="bar bar-2"><h2>i</h2></div>
-  <div class="bar bar-3"><h2>i</h2></div>
-  <div class="bar bar-4"><h2>i</h2></div>
-       <div class="bar bar-1"><h2>i</h2></div>
-  <div class="bar bar-2"><h2>i</h2></div>
-  <div class="bar bar-3"><h2>i</h2></div>
-  <div class="bar bar-4"><h2>i</h2></div>
-       <div class="bar bar-1"><h2>i</h2></div>
-  <div class="bar bar-2"><h2>i</h2></div>
-  <div class="bar bar-3"><h2>i</h2></div>
-  <div class="bar bar-4"><h2>i</h2></div>
-  <div class="bar bar-1"><h2>i</h2></div>
-  <div class="bar bar-2"><h2>i</h2></div>
-      <div class="bar bar-3"><h2>i</h2></div>
-  <div class="bar bar-4"><h2>i</h2></div>
-     <div class="bar bar-1"><h2>i</h2></div>
-  <div class="bar bar-2"><h2>i</h2></div>
-      <div class="bar bar-3"><h2>i</h2></div>
-  <div class="bar bar-4"><h2>i</h2></div>
-        <div class="bar bar-1"><h2>i</h2></div>
-  <div class="bar bar-2"><h2>i</h2></div>
-      <div class="bar bar-3"><h2>i</h2></div>
-                                     
-  
-
-  
-  <!-- Center section with thicker bars -->
-  <div class="bar bar-5"><h2>i</h2></div>
-  <div class="bar bar-6"><h2>i</h2></div>
-  <div class="bar bar-7"><h2>i</h2></div>
-  <div class="bar bar-8"><h2>i</h2></div>
-  <div class="bar bar-5"><h2>i</h2></div>
-  <div class="bar bar-6"><h2>i</h2></div>
-  <div class="bar bar-7"><h2>i</h2></div>
-  <div class="bar bar-8"><h2>i</h2></div>
-      <div class="bar bar-5"><h2>i</h2></div>
-  <div class="bar bar-6"><h2>i</h2></div>
-      <div class="bar bar-7"><h2>i</h2></div>
-  <div class="bar bar-8"><h2>i</h2></div>
-           <div class="bar bar-5"><h2>i</h2></div>
-  <div class="bar bar-6"><h2>i</h2></div>
-      <div class="bar bar-7"><h2>i</h2></div>
-  <div class="bar bar-8"><h2>i</h2></div>
-  
-  <!-- Right section -->
-   <div class="bar bar-1"><h2>i</h2></div>
-  <div class="bar bar-2"><h2>i</h2></div>
-  <div class="bar bar-3"><h2>i</h2></div>
-  <div class="bar bar-4"><h2>i</h2></div>
-  <div class="bar bar-1"><h2>i</h2></div>
-  <div class="bar bar-2"><h2>i</h2></div>
-  <div class="bar bar-3"><h2>i</h2></div>
-  <div class="bar bar-1"><h2>i</h2></div>
-  <div class="bar bar-2"><h2>i</h2></div>
-  <div class="bar bar-3"><h2>i</h2></div>
-  <div class="bar bar-4"><h2>i</h2></div>
-       <div class="bar bar-1"><h2>i</h2></div>
-  <div class="bar bar-2"><h2>i</h2></div>
-  <div class="bar bar-3"><h2>i</h2></div>
-  <div class="bar bar-4"><h2>i</h2></div>
-       <div class="bar bar-1"><h2>i</h2></div>
-  <div class="bar bar-2"><h2>i</h2></div>
-  <div class="bar bar-3"><h2>i</h2></div>
-  <div class="bar bar-4"><h2>i</h2></div>
-  <div class="bar bar-1"><h2>i</h2></div>
-  <div class="bar bar-2"><h2>i</h2></div>
-      <div class="bar bar-3"><h2>i</h2></div>
-  <div class="bar bar-4"><h2>i</h2></div>
-     <div class="bar bar-1"><h2>i</h2></div>
-  <div class="bar bar-2"><h2>i</h2></div>
-      <div class="bar bar-3"><h2>i</h2></div>
-  <div class="bar bar-4"><h2>i</h2></div>
-        <div class="bar bar-1"><h2>i</h2></div>
-  <div class="bar bar-2"><h2>i</h2></div>
-      <div class="bar bar-3"><h2>i</h2></div>
+<div class="barcode-container color-{{ section.settings.color_scheme }}">
+  <div class="barcode">
+    <div class="barcode-content">
+      {% for i in (1..50) %}
+        <div class="bar bar-1"><span class="visually-hidden">|</span></div>
+        <div class="bar bar-2"><span class="visually-hidden">|</span></div>
+        <div class="bar bar-5"><span class="visually-hidden">|</span></div>
+        <div class="bar bar-3"><span class="visually-hidden">|</span></div>
+        <div class="bar bar-4"><span class="visually-hidden">|</span></div>
+        <div class="bar bar-6"><span class="visually-hidden">|</span></div>
+        <div class="bar bar-7"><span class="visually-hidden">|</span></div>
+        <div class="bar bar-8"><span class="visually-hidden">|</span></div>
+        <div class="bar bar-10"><span class="visually-hidden">|</span></div>
+        <div class="bar bar-9"><span class="visually-hidden">|</span></div>
+      {% endfor %}
+    </div>
+  </div>
 </div>
