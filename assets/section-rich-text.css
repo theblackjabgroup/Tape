@@ -97,22 +97,22 @@
     margin: 8px auto;
     background-color: #303030;
   }
-  .rich_text_button {
-    border-radius: 5px;
-    padding: 10px;
-    width: 20%;
-    margin: 20px auto;
-  }
   .rich_text_btn {
+    margin:20px auto 0 auto;
+    padding:7px 25px;
     font-family: "Inter", sans-serif;
     font-weight: 400;
     font-style: normal;
-    font-size: 16px;
+    font-size: 12px;
     display: inline-block;
     text-decoration: none;
     align-self: end;
     border-radius: 5px;
-    transition: background-color 0.3s ease;
+        background: linear-gradient(to right, gray 50%, rgb(var(--color-button-text)) 50%);
+    background-size: 200% 100%;
+        background-position: 100% 0;
+
+    transition: all 1.5s ease-in-out;
      text-decoration:none;
       color: var(--color-secondary-button-text) !important;
 
@@ -178,3 +178,16 @@
       margin: 0;
     }
   }
+.rich-text-svg{
+  font-size:12.5px;
+  width:18px;
+  margin:0 0 2px 5px;
+  transition:transform 0.3s ease;
+}
+.rich_text_btn:hover{
+   background-position: 0 0;
+  color:rgb(var(--color-secondary-button-text));
+}
+.rich_text_btn:hover .rich-text-svg{
+  transform:translateX(5px);
+}
