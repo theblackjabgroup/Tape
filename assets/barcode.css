@@ -1,292 +1,218 @@
-
-.barcode {
-  display: flex;
-  justify-content: center; 
-  align-items: center;
-  padding:3px;
-  min-height: 70px;
-  width: 100%;
-  overflow-x: visible;
-  position: relative;
-}
-
-
-/* Remove scrollbar hiding styles since we don't need them anymore */
-.barcode::-webkit-scrollbar {
-  display: none;
-}
-
-/* Base styles for all bars */
-.bar-1, .bar-2, .bar-3, .bar-4, .bar-5, .bar-6, .bar-7, .bar-8 {
-  display: inline-block;
-  position: relative;
-}
-
-
-/* Left and right section bars with individual margins */
-.bar-1 { 
-  width: 8px;
-  height: 100px;
-  margin-right: 4px;
-}
-.bar-2 { 
-  width: 5px;
-  height: 100px;
-  margin: 0 3px;
-}
-.bar-3 { 
-  width: 10px;
-  height: 100px;
-  margin: 0 5px;
-}
-.bar-4 { 
-  width: 20px;
-  height: 100px;
-  margin: 0 7px;
-}
-
-/* Center section thicker bars with unique heights and margins */
-.bar-5 { 
-   width: 8px;
-    height: 100px;
-    margin: 0 1px;
-
-  }
-  .bar-6 { 
-    width: 5px;
-    height: 100px;
-    margin: 0 4px;
-  
-  }
-  .bar-7 { 
- width: 10px;
-    height: 100px;
-    margin: 0 3px;
-  
-  }
-  .bar-8 { 
-   width: 20px;
-    height: 100px;
-    margin: 0 5px;
-  
+.barcode-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
   }
 
-
-.bar h2 {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-
-
-
-/* Tablet/Medium screen breakpoint */
-@media screen and (max-width: 990px) {
   .barcode {
-    min-height: 50px;
-    padding: 6px;
-
-    justify-content: center;
-  }
-
-  /* Left and right section bars */
-  .bar-1 { 
-    width: 6px;
-    height: 75px;
-    margin-right: 3px;
-  }
-
-  .bar-2 { 
-    width: 4px;
-    height: 75px;
-    
-  }
-
-  .bar-3 { 
-    width: 8px;
-    height: 75px;
-   
-  }
-
-  .bar-4 { 
-    width: 15px;
-    height: 75px;
-    
-  }
-
-
-
-}
-
-
-@media screen and (max-width: 480px) {
-   .barcode {
-    min-height: 35px;
-    padding: 4px;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 2px;
-     margin-left:0px;
-
+    padding: 3px;
+    min-height: 70px;
+    width: max-content;
+    overflow-x: visible;
+    position: relative;
+    margin:20px 0;
+    animation: marquee 20s linear infinite;
   }
-  
-  
 
-  /* Show 3 bars on the left side */
-  .bar-1, .bar-2, .bar-3, .bar-1, .bar-2, .bar-3  {
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .barcode::-webkit-scrollbar {
+    display: none;
+  }
+
+  .barcode-content {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-right: 0px;
+  }
+
+  .bar {
     display: inline-block;
+    position: relative;
   }
-  .bar-1 { 
-    width: 4px;
-    height: 50px;
-    margin: 0;
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
   }
-  .bar-2 { 
-    width: 3px;
-    height: 50px;
-    margin: 0;
-  }
-  .bar-3 { 
+
+  /* Desktop styles */
+  .bar-1 {
     width: 5px;
-    height: 50px;
-    margin: 0;
+    height: 100px;
+    margin: 0 3px;
   }
 
-  /* Show 1 bar on the right side */
-  .bar-4 {
-    display: inline-block;
-    width: 10px;
-    height: 50px;
-    margin: 0;
-  }
-
-  /* Center and right section bars - adjusted positions */
-  .bar-5{
-    display: inline-block;
+  .bar-2 {
     width: 3px;
-    height: 50px;
-    margin: 0;
-   
-  }
-  .bar-6{
-     display: inline-block;
-    width: 10px;
-    height: 50px;
-    margin: 0;
-  
-  }
-  .bar-7{
-      display: inline-block;
-    width: 4px;
-    height: 50px;
-    margin: 0;
-   
-  }
-  .bar-8{
-       display: inline-block;
-    width: 7px;
-    height: 50px;
-    margin: 0;
- 
-  }
-
-  /* Create spacing between groups */
-  .bar-4 {
-    margin-right: 4px; /* Add space before center group */
-  }
-  
-  .bar-5 {
-    margin-left: 4px; /* Add space after left group */
-  }
-}
-/* Extra small screens */
-@media screen and (max-width: 320px) {
-  .barcode {
-    min-height: 30px;
-    justify-content: center;
-  }
-  /* Reduce sizes further for very small screens */
-  .bar-1, .bar-2, .bar-3, .bar-4 { 
-    height: 40px;
-  }
-  
-  .bar-5, .bar-6, .bar-7, .bar-8 {
-    height: 35px;
-    margin-top: -8px;
-  }
-}
-
-@media screen and (min-width: 1440px) {
-  .barcode {
     height: 100px;
-
-    justify-content: center;
-    gap: 8px;
-    width:100%
+    margin: 0 2px;
   }
 
- 
-
-      
-  
-  /* First group of bars */
-  .bar-1 { 
-    width: 6px;
-    height: 100px;
-    margin-right: 3px;
-  }
-
-  .bar-2 { 
-    width: 17px;
-    height: 100px;
-    margin: 0 0px;
-  }
-
-  .bar-3 { 
+  .bar-3 {
     width: 8px;
     height: 100px;
-   
+    margin: 0 4px;
   }
 
-  .bar-4 { 
-    width: 18px;
+  .bar-4 {
+    width: 10px;
     height: 100px;
-    
+    margin: 0 6px;
   }
 
- 
-
-  /* Additional bars for 1440px screens */
-  .bar-1::before,
-  .bar-2::before,
-  .bar-3::before,
-  .bar-4::before,
- {
-    content: '';
-    position: absolute;
-    left: 20px; /* Position to the left of original bar */
-    display: inline-block;
+  .bar-5 {
+    width: 5px;
     height: 100px;
-    width: 100%;
+    margin: 0 3px;
   }
 
-
-  /* Add spacing between groups of bars */
-  .bar-4::after {
-    margin-right: 10px;
+  .bar-6 {
+    width: 3px;
+    height: 100px;
+    margin: 0 3px;
   }
-  
-  .bar-5::before {
-    margin-left: 10px;
+
+  .bar-7 {
+    width: 8px;
+    height: 100px;
+    margin: 0 2px;
   }
-}
+
+  .bar-8 {
+    width:10px;
+    height: 100px;
+    margin: 0 4px;
+  }
+  .bar-9{
+      width:3px;
+    height: 100px;
+    margin: 0 4px;
+  }
+  .bar-10{
+      width:7px;
+    height: 100px;
+    margin: 0 4px;
+  }
+
+  /* Tablet styles */
+  @media screen and (max-width: 990px) {
+    .barcode {
+      min-height: 50px;
+      padding: 6px;
+    }
+
+    .bar-1, .bar-2, .bar-3, .bar-4,
+    .bar-5, .bar-6, .bar-7, .bar-8 {
+      height: 75px;
+    }
+
+    .bar-1 { width: 6px; margin: 0 3px; }
+    .bar-2 { width: 4px; margin: 0 2px; }
+    .bar-3 { width: 8px; margin: 0 3px; }
+    .bar-4 { width: 10px; margin: 0 4px; }
+    .bar-5 { width: 6px; margin: 0 3px; }
+    .bar-6 { width: 4px; margin: 0 2px; }
+    .bar-7 { width: 8px; margin: 0 3px; }
+    .bar-8 { width: 10px; margin: 0 4px; }
+    .bar-9 { width: 3px; margin: 0 2px; }
+    .bar-10 { width: 7px; margin: 0 3px; }
 
 
+    /* Hide every fourth bar in tablet view */
+    .barcode-content > div:nth-child(4n) {
+      display: none;
+    }
+  }
+
+  /* Mobile styles */
+  @media screen and (max-width: 480px) {
+    .barcode {
+      min-height: 35px;
+      padding: 4px;
+      gap: 3px;
+    }
+
+    .bar-1, .bar-2, .bar-3, .bar-4,
+    .bar-5, .bar-6, .bar-7, .bar-8,.bar-9,.bar-10 {
+      height: 50px;
+    }
+
+    .bar-1 { width: 4px; margin: 0 2px; }
+    .bar-2 { width: 3px; margin: 0 2px; }
+    .bar-3 { width: 5px; margin: 0 2px; }
+    .bar-4 { width: 8px; margin: 0 2px; }
+    .bar-5 { width: 4px; margin: 0 2px; }
+    .bar-6 { width: 3px; margin: 0 2px; }
+    .bar-7 { width: 5px; margin: 0 2px; }
+    .bar-8 { width: 8px; margin: 0 2px; }
+    .bar-9 { width: 2px; margin: 0 2px; }
+    .bar-10 { width: 4px; margin: 0 2px; }
+
+    /* Hide every third bar in mobile view */
+    .barcode-content > div:nth-child(3n) {
+      display: none;
+    }
+
+    /* Keep center section bars visible */
+    .barcode-content > div.bar-5,
+    .barcode-content > div.bar-6,
+    .barcode-content > div.bar-7,
+    .barcode-content > div.bar-8 {
+      display: inline-block;
+    }
+  }
+
+  /* Extra small screen styles */
+  @media screen and (max-width: 320px) {
+    .barcode {
+      min-height: 30px;
+    }
+
+    .bar-1, .bar-2, .bar-3, .bar-4 .bar-5, .bar-6, .bar-7, .bar-8{
+      height: 40px;
+    }
+
+
+    /* Hide more bars for very small screens */
+    .barcode-content > div:nth-child(2n) {
+      display: none;
+    }
+  }
+
+  /* Large screen styles */
+  @media screen and (min-width: 1440px) {
+    .barcode {
+      height: 100px;
+      margin-bottom: 13px;
+    }
+
+    .bar-1 { width: 8px; margin: 0 3px; }
+    .bar-2 { width: 5px; margin: 0 4px; }
+    .bar-3 { width: 3px; margin: 0 3px; }
+    .bar-4 { width: 10px; margin: 0 4px; }
+    .bar-5 { width: 8px; margin: 0 3px; }
+    .bar-6 { width: 5px; margin: 0 4px; }
+    .bar-7 { width: 3px; margin: 0 3px; }
+    .bar-8 { width: 10px; margin: 0 4px; }
+    .bar-9 { width: 3px; margin: 0 3px; }
+    .bar-10 { width: 5px; margin: 0 4px; }
+  }
