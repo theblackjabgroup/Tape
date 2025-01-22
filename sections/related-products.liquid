@@ -25,14 +25,13 @@
          style="--pseudo-bg-color: {{ section.settings.product_card_background_color }};
                 background-color: {{ section.settings.product_card_background_color }};">
 
+
 <div class="product-image1">
     {% if section.settings.show_sale_badge and product.compare_at_price > product.price %}
       <div class="sale-badge"
            style="background-color: {{ section.settings.sale_badge_background_color }};
                   color: {{ section.settings.sale_badge_text_color }};">
-        {% assign price_difference = product.compare_at_price | minus: product.price %}
-        {% assign discount_percentage = price_difference | divided_by: product.compare_at_price | times: 100 | round: 0 %}
-        <span>Save {{ discount_percentage }}%</span>
+        <span>Save</span>
       </div>
     {% endif %}
 
