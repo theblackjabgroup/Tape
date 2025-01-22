@@ -374,5 +374,6 @@ body {
       margin: 20px;
       padding: 20px 0;
       margin-bottom: 10px; /* Add some space above the view all button */
+      margin-right: 2px;
     }
   }
