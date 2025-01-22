@@ -816,7 +816,7 @@ mobile-nav-items::-webkit-scrollbar {
   height: 0.6rem;
   right: calc(var(--inputs-border-width) + 1.5rem);
   top: calc(50% - 0.2rem);
- margin-right: -21px;
+ margin-right: -30px;
     margin-top: -1px;;
 }    
  
