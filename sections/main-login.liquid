@@ -30,7 +30,7 @@
 
     {%- form 'recover_customer_password' -%}
       {% assign recover_success = form.posted_successfully? %}
-      <div class="field border_solid">
+      <div class="field ">
         <input
           type="email"
           value=""
@@ -111,7 +111,7 @@
         </section>
       {%- endif -%}
 
-      <div class="field border_solid">
+      <div class="field ">
         <input
           type="email"
           name="customer[email]"
@@ -129,7 +129,7 @@
       </div>
 
       {%- if form.password_needed -%}
-        <div class="field border_solid">
+        <div class="field ">
           <input
             type="password"
             value=""

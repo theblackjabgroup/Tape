@@ -6,9 +6,8 @@
   text-align: center;
 }
 
-.border_solid {
-  border: 0.1rem solid black;
-  border-radius: 4px;
+.field:after {
+  border-radius: 4px !important;
 }
 
 @media screen and (min-width: 750px) {
