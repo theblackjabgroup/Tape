@@ -1,9 +1,8 @@
 {{ 'barcode.css' | asset_url | stylesheet_tag }}
-
 {% schema %}
 {
   "name": "Barcode",
-"disabled_on": {
+  "disabled_on": {
     "groups": ["header"]
   },
   "settings": [
@@ -12,6 +11,44 @@
       "type": "color_scheme",
       "label": "t:sections.all.colors.label",
       "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Animation Controls"
+    },
+    {
+      "id": "animation_speed",
+      "type": "range",
+      "min": 5,
+      "max":60,
+      "step": 1,
+      "unit": "s",
+      "label": "Animation Speed",
+      "default": 20,
+      "info": "Control the speed of the barcode movement"
+    },
+    {
+      "id": "animation_direction",
+      "type": "select",
+      "label": "Animation Direction",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Left to Right"
+        },
+        {
+          "value": "reverse",
+          "label": "Right to Left"
+        }
+      ],
+      "default": "normal"
+    },
+    {
+      "id": "auto_play",
+      "type": "checkbox",
+      "label": "Auto-play animation",
+      "default": true,
+      "info": "Enable or disable animation"
     }
   ],
   "presets": [
@@ -23,14 +60,46 @@
 {% endschema %}
 
 <style>
+  .barcode-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    background-color: rgb(var(--color-background));
+  }
+
+  .barcode {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3px;
+    width: max-content;
+    overflow-x: hidden;
+    position: relative;
+    margin: 20px 0;
+    animation: marquee {{ section.settings.animation_speed }}s linear infinite;
+    animation-direction: {{ section.settings.animation_direction }};
+    {% unless section.settings.auto_play %}
+      animation-play-state: paused;
+    {% endunless %}
+  }
+
+  .barcode:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
   .bar {
-    height:100px;
     background-color: var(--background_product_card);
   }
 
-  .barcode-container {
-    background-color: rgb(var(--color-background));
-  }
 </style>
 
 <div class="barcode-container color-{{ section.settings.color_scheme }}">
