@@ -1,5 +1,5 @@
-  // Wrap the VideoPlayer class in an IIFE to avoid global namespace pollution
-  (() => {
+// Wrap the VideoPlayer class in an IIFE to avoid global namespace pollution
+(() => {
     // Check if the class is already defined
     if (window.VideoPlayer) return;
 
@@ -22,10 +22,11 @@
                 // Initialize state
                 this.scrollTimeout = null;
 
-                // Set initial active state if elements exist
+                // Set initial active state if elements exist and hide play buttons on image slides
                 if (this.videoWrappers.length > 0 && this.progressIndicators.length > 0) {
                     this.videoWrappers[0].classList.add("active");
                     this.progressIndicators[0].classList.add("active");
+                    this.hidePlayButtonsOnImageSlides();
                 } else {
                     console.warn("No video wrappers or progress indicators found");
                 }
@@ -35,6 +36,22 @@
                 this.initializeStyles();
             } catch (error) {
                 console.error("Error initializing VideoPlayer:", error);
+            }
+        }
+
+        // Hide play buttons on slides that only contain images
+        hidePlayButtonsOnImageSlides() {
+            try {
+                this.videoWrappers.forEach(wrapper => {
+                    const hasVideo = wrapper.querySelector('video, iframe');
+                    const playButton = wrapper.querySelector('.deferred-media__poster-button');
+                    
+                    if (playButton && !hasVideo) {
+                        playButton.style.display = 'none';
+                    }
+                });
+            } catch (error) {
+                console.error("Error hiding play buttons on image slides:", error);
             }
         }
 
@@ -190,10 +207,10 @@
                             video.currentTime = 0;
                             this.resetProgressBar(this.progressIndicators[index]);
                             
-                            // Show play button for stopped videos
+                            // Only show play button if the wrapper has a video
                             const wrapper = video.closest('.video-wrapper');
                             const playButton = wrapper.querySelector(".deferred-media__poster-button");
-                            if(playButton) {
+                            if(playButton && (wrapper.querySelector('video') || wrapper.querySelector('iframe'))) {
                                 playButton.style.display = 'block';
                             }
                         }
@@ -211,16 +228,20 @@
             try {
                 // Add click handlers for individual video play buttons
                 this.playButtons.forEach(button => {
-                    button.addEventListener("click", () => {
-                        const wrapper = button.closest('.video-wrapper');
-                        const video = wrapper.querySelector('video');
-                        if(video) {
-                            video.play().catch(error => {
-                                console.error("Error playing video:", error);
-                            });
-                            button.style.display = 'none';
-                        }
-                    });
+                    const wrapper = button.closest('.video-wrapper');
+                    const hasVideo = wrapper.querySelector('video, iframe');
+                    
+                    if (hasVideo) {
+                        button.addEventListener("click", () => {
+                            const video = wrapper.querySelector('video');
+                            if(video) {
+                                video.play().catch(error => {
+                                    console.error("Error playing video:", error);
+                                });
+                                button.style.display = 'none';
+                            }
+                        });
+                    }
                 });
 
                 // Video-specific events
@@ -233,7 +254,7 @@
                             );
                             const wrapper = video.closest('.video-wrapper');
                             const playButton = wrapper.querySelector(".deferred-media__poster-button");
-                            if(playButton) {
+                            if(playButton && (wrapper.querySelector('video') || wrapper.querySelector('iframe'))) {
                                 playButton.style.display = 'block';
                             }
                             if (!activeIndicator) throw new Error("No active indicator found");
@@ -310,7 +331,7 @@
                                 video.currentTime = 0;
                                 const wrapper = video.closest('.video-wrapper');
                                 const playButton = wrapper.querySelector(".deferred-media__poster-button");
-                                if(playButton) {
+                                if(playButton && (wrapper.querySelector('video') || wrapper.querySelector('iframe'))) {
                                     playButton.style.display = 'block';
                                 }
                             });
@@ -348,7 +369,7 @@
     // Store the class in the window object for potential reuse
     window.VideoPlayer = VideoPlayer;
 
-    // Update initialization code
+    // Initialize function for creating new instances
     const initVideoPlayer = (container) => {
         try {
             new VideoPlayer(container);
