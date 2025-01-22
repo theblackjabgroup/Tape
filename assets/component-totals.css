@@ -135,8 +135,8 @@ margin-top: .5rem;
 }
 
 .totals__total-value {
-    background-color: var(--product_price_card);
-  color: var(--product_price_font);
+    background-color: var(--card_foreground);
+  color: rgb(var(--color-secondary-button-text));
        width: auto; 
       max-width: 100%;
        white-space: nowrap;

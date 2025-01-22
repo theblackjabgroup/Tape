@@ -67,7 +67,7 @@
 </div>
 <div class="mobile-view bb-upper-template-404">
   <div class="vertical-bar-top-404">
-    {% for i in (0..5) %}
+    {% for i in (0..13) %}
       <div class="vertical-bar-circle-404 index-404-{{i}}"></div>
     {% endfor %}
   </div>
@@ -89,7 +89,7 @@
     </a>
   </div>
   <div class="vertical-bar-bottom-404">
-  {% for i in (0..5) %}
+  {% for i in (0..13) %}
     <div class="vertical-bar-circle-404 index-404-{{i}}"></div>
   {% endfor %}
 </div>
@@ -110,7 +110,7 @@
         "type": "text",
         "id": "heading",
         "label": "Heading",
-        "default": "Page not found"
+        "default": "Page Not Found"
       },
       {
         "type": "text",
@@ -147,11 +147,6 @@
       "step": 1,
       "default": 35
     }
-    ],
-    "presets": [
-      {
-        "name": "404"
-      }
     ]
   }
   {% endschema %}
