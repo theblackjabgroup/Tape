@@ -234,13 +234,13 @@ a {
 .footer__country-selector .footer-country-form .disclosure__button,
 .footer-column form button {
     
-    width: 120px;
+    width: 200px;
     height: 40px;
     padding: 0.5rem 1rem;
     margin: 0.5rem 0;
   font-weight:600;
    text-decoration: none !important;
-    font-size: 12px;
+    font-size: 13px;
     text-align: left;
     white-space: nowrap;
     color: rgb(var(--color-secondary-button-text));
@@ -248,6 +248,7 @@ a {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+  
 }
 
 .footer-column form button {
@@ -386,11 +387,11 @@ font-family: 'Inter', sans-serif; /* Set font to Inter */
   }
   
   .footer__country-selector .footer-country-form {
-    margin-left: 135px;
+    margin-left: 210px;
   }
 
     .footer__language-selector .footer-language-form {
-    margin-left: 135px;
+    margin-left: 210px;
   }
 }
 
@@ -533,4 +534,17 @@ padding-right: 95px;
     }  
 }
 
+        .country-selector__close-button.link {
+     background: transparent;
+  }
+
+
+.field:after,
+.select:after,
+.customer .field:after,
+.customer select:after,
+.localization-form__select:after {
+   border: none !important;
+
+}
 
