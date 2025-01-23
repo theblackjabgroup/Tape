@@ -208,7 +208,7 @@
       </div>
       <div class="icon-with-text-container color-{{ section.settings.sectionColor }}">
         {% for item in section.blocks %}
-          <div class="card__outer__container">
+          <div class="card_outer_container">
             <div class="card__container">
               <div class="card__inner_container">
                 <div class="card__contents">
@@ -223,9 +223,9 @@
                     <p>{{ item.settings.title }}</p>
                   </div>
                 </div>
-                <div class="description__button__outer__container">
-                  <button class="description__button__container" aria-label="Open"> 
-                    <span class="description__button__inner_container">
+                <div class="description_buttonouter_container">
+                  <button class="description_button_container" aria-label="Open"> 
+                    <span class="description_button_inner_container">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="icon icon-plus" viewBox="0 0 10 10">
                         <path fill="currentColor" fill-rule="evenodd" d="M1 4.51a.5.5 0 0 0 0 1h3.5l.01 3.5a.5.5 0 0 0 1-.01V5.5l3.5-.01a.5.5 0 0 0-.01-1H5.5L5.49.99a.5.5 0 0 0-1 .01v3.5l-3.5.01z" clip-rule="evenodd"/>
                       </svg>
@@ -233,7 +233,7 @@
                   </button>
                 </div>
                 <div class="description__container">
-                  <span class="description__close__button">
+                  <span class="description_close_button">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="icon icon-plus icon-close" viewBox="0 0 10 10">
                       <path fill="currentColor" fill-rule="evenodd" d="M1 4.51a.5.5 0 0 0 0 1h3.5l.01 3.5a.5.5 0 0 0 1-.01V5.5l3.5-.01a.5.5 0 0 0-.01-1H5.5L5.49.99a.5.5 0 0 0-1 .01v3.5l-3.5.01z" clip-rule="evenodd"/>
                     </svg>
@@ -247,7 +247,7 @@
           </div>
         {% endfor %}
       </div>
-      <div class="card__count__container">
+      <div class="card_count_container">
         {% for item in section.blocks %}
           <div class="dot color-{{ section.settings.cardColor }}"></div>
         {% endfor %}
