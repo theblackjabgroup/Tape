@@ -46,7 +46,7 @@ background-color: var(--background_product_card);
     top: 50%; 
     left: 50%; 
     transform: translate(-50%, -50%) rotate(10deg);
-    box-shadow: 0 15px 8px rgba(0, 0, 0, 0.3); 
+    box-shadow: 0 8px 14px rgba(0, 0, 0, 0.3); 
     font-family: 'Fira Sans', sans-serif; 
   }
   
@@ -64,7 +64,7 @@ background-color: var(--background_product_card);
     top: 50%;
     left: 10%; 
     transform: translate(-50%, -50%) rotate(-10deg);
-    box-shadow: 0 15px 8px rgba(0, 0, 0, 0.3); 
+    box-shadow: 0 8px 14px rgba(0, 0, 0, 0.3); 
     font-family: 'Fira Sans', sans-serif; 
   }
 

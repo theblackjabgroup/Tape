@@ -229,18 +229,43 @@
           {%- endif -%}
         </div>
         <div class="mobile-nav-icons">
-          <div class="nav-icon">
-            <a href="{{ routes.cart_url }}" class="js-drawer-open-cart"
+        
+            {% case section.settings.cart_icon_style %}
+      {% when '1' %}
+  <div class="nav-icon">
+    <a href="{{ routes.cart_url }}" class="js-drawer-open-cart">
+       <img style="height: 16px; width: 16px;" src="{{ 'cart-icon.png' | asset_url }}" alt="Cart" class="navpngicon">
+       </a>
+  </div>
+         {% when '2' %}
+         <div class="nav-icon">
+          <a href="{{ routes.cart_url }}" class="js-drawer-open-cart"
             aria-label="Open your shoping cart">
             <span class="svg-wrapper" style="height: 16px; width: 16px;">{{ 'icon-cart.svg' | inline_asset_content }}</span>
             </a>
-          </div>
+        </div>
+     {% when 'none' %}
+         {%- comment -%}No icon displayed{%- endcomment -%}
+     {% endcase %}
+       
+          {% case section.settings.account_icon_style %}
+      {% when '1' %}
+        <div class="nav-icon">
+          <a href="{{ routes.account_url }}" class="js-drawer-open-cart">
+             <img style="height: 16px; width: 16px;" src="{{ 'profile-icon.png' | asset_url }}" alt="Cart" class="navpngicon">
+           </a>
+        </div>
+         {% when '2' %}
           <div class="nav-icon">
             <a href="{{ routes.account_url }}" class=""
             aria-label="Open your account information">
             <span class="svg-wrapper" style="height: 16px; width: 16px;">{{ 'icon-account.svg' | inline_asset_content }}</span>
             </a>
-          </div>
+        </div>
+     {% when 'none' %}
+         {%- comment -%}No icon displayed{%- endcomment -%}
+     {% endcase %}
+         
         </div>
       </div>
     </div>
