@@ -372,6 +372,8 @@ font-family: 'Inter', sans-serif; /* Set font to Inter */
 
   }
 
+  
+
 /* Mobile Footer Menu Styles */
 @media (max-width: 480px) {
   .footer-content {
@@ -536,6 +538,7 @@ padding-right: 95px;
 
         .country-selector__close-button.link {
      background: transparent;
+          margin-right:10px
   }
 
 
