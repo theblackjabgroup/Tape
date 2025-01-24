@@ -234,7 +234,7 @@ a {
 .footer__country-selector .footer-country-form .disclosure__button,
 .footer-column form button {
     
-    width: 200px;
+    width: 250px;
     height: 40px;
     padding: 0.5rem 1rem;
     margin: 0.5rem 0;
@@ -389,11 +389,11 @@ font-family: 'Inter', sans-serif; /* Set font to Inter */
   }
   
   .footer__country-selector .footer-country-form {
-    margin-left: 210px;
+    margin-left: 260px;
   }
 
     .footer__language-selector .footer-language-form {
-    margin-left: 210px;
+    margin-left: 260px;
   }
 }
 
@@ -550,4 +550,3 @@ padding-right: 95px;
    border: none !important;
 
 }
-
