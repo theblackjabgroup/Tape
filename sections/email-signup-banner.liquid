@@ -47,7 +47,7 @@
   data-color-scheme="{{ section.settings.color_scheme }}"
 >
   <div class="vertical-bar-top-404">
-    {% for i in (0..16) %}
+    {% for i in (0..12) %}
       <div class="vertical-bar-circle-h-404 index-404-{{i}}"></div>
     {% endfor %}
   </div>
@@ -78,7 +78,7 @@
             {% form 'customer', class: 'bb-newsletter-form  newsletter-form' %}
               <input type="hidden" name="contact[tags]" value="newsletter">
               <div class="bb-newsletter-form__field-wrapper newsletter-form__field-wrapper">
-                <div class="field">
+                <div class="bb-newsletter-field field">
                   <input
                     id="NewsletterForm--{{ section.id }}"
                     type="email"
@@ -158,7 +158,7 @@
     {% endfor %}
   </div>
   <div class="vertical-bar-bottom-404">
-    {% for i in (0..16) %}
+    {% for i in (0..12) %}
       <div class="vertical-bar-circle-h-404 index-404-{{i}}"></div>
     {% endfor %}
   </div>
@@ -195,7 +195,7 @@
             {% form 'customer', class: 'bb-newsletter-form  newsletter-form' %}
               <input type="hidden" name="contact[tags]" value="newsletter">
               <div class="bb-newsletter-form__field-wrapper newsletter-form__field-wrapper">
-                <div class="field">
+                <div class="bb-newsletter-field field">
                   <input
                     id="NewsletterForm--{{ section.id }}"
                     type="email"
@@ -306,7 +306,7 @@
       "type": "range",
       "id": "card_width",
       "label": "Card Size (Desktop View)",
-      "min": 20,
+      "min": 90,
       "max": 120,
       "step": 1,
       "default": 120
@@ -343,34 +343,6 @@
           "id": "heading",
           "default": "t:sections.email-signup-banner.blocks.heading.settings.heading.default",
           "label": "t:sections.email-signup-banner.blocks.heading.settings.heading.label"
-        },
-        {
-          "type": "select",
-          "id": "heading_size",
-          "options": [
-            {
-              "value": "h2",
-              "label": "t:sections.all.heading_size.options__1.label"
-            },
-            {
-              "value": "h1",
-              "label": "t:sections.all.heading_size.options__2.label"
-            },
-            {
-              "value": "h0",
-              "label": "t:sections.all.heading_size.options__3.label"
-            },
-            {
-              "value": "hxl",
-              "label": "t:sections.all.heading_size.options__4.label"
-            },
-            {
-              "value": "hxxl",
-              "label": "t:sections.all.heading_size.options__5.label"
-            }
-          ],
-          "default": "h1",
-          "label": "t:sections.all.heading_size.label"
         }
       ]
     },

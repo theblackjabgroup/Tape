@@ -1,62 +1,67 @@
 {{ 'section-rich-text.css' | asset_url | stylesheet_tag }}
 <style>
-
-.color-{{ section.settings.color_scheme }} .dot,
-.color-{{ section.settings.color_scheme }} .dot-l {
-background-color: currentColor;
-}
-.rich_text_button{
-   border: 1px solid rgb(var(--color-button));  
-  color:rgb(var(--color-button));  
-}
-  .section-{{ section.id }}-padding.layout1,
-  .section-{{ section.id }}-padding.layout2 {
-    padding-top: {{section.settings.padding_top}}px;
-    padding-bottom: {{section.settings.padding_bottom}}px;
+  .color-{{ section.settings.color_scheme }} .dot,
+  .color-{{ section.settings.color_scheme }} .dot-l {
+  background-color: currentColor;
   }
-
-  .section-{{ section.id }}-padding.layout1 h2 {
-    font-size: {{ section.settings.heading_font_size }}px;
+  .rich_text_button{
+     border: 1px solid rgb(var(--color-button));
+   background: rgb(var(--color-button-text)) ;
+  color: rgb(var(--color-secondary-button-text));
   }
+    .section-{{ section.id }}-padding.layout1,
+    .section-{{ section.id }}-padding.layout2 {
+      padding-top: {{section.settings.padding_top}}px;
+      padding-bottom: {{section.settings.padding_bottom}}px;
+    }
 
-  .section-{{ section.id }}-padding.layout1 .rich-text__text {
-    font-size: {{ section.settings.text_font_size }}px;
-  }
+    .section-{{ section.id }}-padding.layout1 h2 {
+      font-size: {{ section.settings.heading_font_size }}px;
+    }
 
-  .section-{{ section.id }}-padding.layout2 {
-    background-color: {{ section.settings.background_color }};
-  }
+    .section-{{ section.id }}-padding.layout1 .rich-text__text {
+      font-size: {{ section.settings.text_font_size }}px;
+    }
 
-  .section-{{ section.id }}-padding.layout2 h2 {
-    font-size: {{ section.settings.heading_font_size }}px;
-  }
+    .section-{{ section.id }}-padding.layout2 {
+      background-color: {{ section.settings.background_color }};
+    }
 
-  .section-{{ section.id }}-padding.layout2 .rich-text__text {
-    font-size: {{ section.settings.text_font_size }}px;
-  }
-
-  @media screen and (max-width: 749px) {
-    .section-{{ section.id }}-padding.layout1 h2,
     .section-{{ section.id }}-padding.layout2 h2 {
-      font-size: {{ section.settings.heading_font_size | times: 0.8 | round: 0 }}px;
+      font-size: {{ section.settings.heading_font_size }}px;
     }
-    
-    .section-{{ section.id }}-padding.layout1 .rich-text__text,
+
     .section-{{ section.id }}-padding.layout2 .rich-text__text {
-      font-size: {{ section.settings.text_font_size | times: 0.9 | round: 0 }}px;
+      font-size: {{ section.settings.text_font_size }}px;
     }
-  }
+
+    @media screen and (max-width: 749px) {
+      .section-{{ section.id }}-padding.layout1 h2,
+      .section-{{ section.id }}-padding.layout2 h2 {
+        font-size: {{ section.settings.heading_font_size | times: 0.8 | round: 0 }}px;
+      }
+
+      .section-{{ section.id }}-padding.layout1 .rich-text__text,
+      .section-{{ section.id }}-padding.layout2 .rich-text__text {
+        font-size: {{ section.settings.text_font_size | times: 0.9 | round: 0 }}px;
+      }
+    }
 </style>
 
 <div class="rich-text-section color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding {% if section.settings.layout_style == 'layout1' %}layout1{% else %}layout2{% endif %}">
+
   {% if section.settings.layout_style == 'layout1' %} 
     <div class="rich_text_page-width">
+
+  {% if section.settings.layout_style == 'layout1' %}
+    <div class="page-width">
+
       <h2 class="richtext_heading">
         {% for block in section.blocks %}
           {% if block.type == 'heading' %}
             {{ block.settings.heading }}
           {% endif %}
-        {% endfor %}  
+        {% endfor %}
       </h2>
       <div class="decorative-dots">
         {% for i in (1..section.settings.dots_number1) %}
@@ -79,11 +84,22 @@ background-color: currentColor;
       </div>
       {% for block in section.blocks %}
         {% if block.type == 'button' and block.settings.show_button %}
-          <div class="rich_text_button"> 
             <a href="{{ block.settings.button_link }}" class="rich_text_btn">
               {{ block.settings.button_text }}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="rich-text-svg"
+              >
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
             </a>
-          </div>
         {% endif %}
       {% endfor %}
     </div>
@@ -118,11 +134,22 @@ background-color: currentColor;
         </div>
         {% for block in section.blocks %}
           {% if block.type == 'button' and block.settings.show_button %}
-            <div class="rich_text_button"> 
-              <a href="{{ block.settings.button_link }}" class="rich_text_btn">
-                {{ block.settings.button_text }}
-              </a>
-            </div>
+            <a href="{{ block.settings.button_link }}" class="rich_text_btn">
+              {{ block.settings.button_text }}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="rich-text-svg"
+              >
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
           {% endif %}
         {% endfor %}
       </div>
@@ -135,13 +162,14 @@ background-color: currentColor;
   {% endif %}
 </div>
 
-
-
 {% schema %}
 {
   "name": "Rich Text",
+"disabled_on": {
+    "groups": ["header", "footer"]
+  },
   "settings": [
-  
+
     {
       "type": "select",
       "id": "layout_style",
@@ -192,8 +220,8 @@ background-color: currentColor;
       "label": "Heading Font Size",
       "default": 22
     },
-   
-  
+
+
     {
       "type": "range",
       "id": "text_font_size",
@@ -204,8 +232,8 @@ background-color: currentColor;
       "label": "Text Font Size",
       "default": 14
     },
-   
-    
+
+
     {
       "type": "range",
       "id": "padding_top",
@@ -257,7 +285,7 @@ background-color: currentColor;
     "type": "text",
     "name": "Text",
     "settings": [{
-        "type": "richtext", 
+        "type": "richtext",
         "id": "text",
         "label": "Text"
     }]
@@ -285,7 +313,7 @@ background-color: currentColor;
         }
       ]
     }
-    
+
 ],
  "presets": [
   {

@@ -2,117 +2,102 @@
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
 {{ 'section-related-products.css' | asset_url | stylesheet_tag }}
 
-
 <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
 
-<div class="featured-collection-section color-{{ section.settings.color_scheme }}">
+<div class="related-collection-section color-{{ section.settings.color_scheme }}">
   <h1 class="heading" style="font-size: {{ section.settings.title_font_size }}px;">
-  {{ section.settings.title }}
-</h1>
+    {{ section.settings.title }}
+  </h1>
 
-<div class="related-products-arrow-parent">
-       <div class="related-products-collection-arrow-buttons" >
-        <button class="related-products-arrow left"  onclick="scrollCards(-1)">‹</button>
-        <button class="related-products-arrow right"  onclick="scrollCards(1)">›</button>
+  <div class="related-products-arrow-parent">
+    <div class="related-products-collection-arrow-buttons">
+      <button class="related-products-arrow left" onclick="scrollCards(-1)">‹</button>
+      <button class="related-products-arrow right" onclick="scrollCards(1)">›</button>
     </div>
   </div>
 
-<div class="product-container">
-{% paginate collections.all.products by section.settings.products_to_show %}
-  {% for product in collections.all.products %}
-    {% assign product_offer = product.metafields.custom.offer %}
-    <div class="product-card"
-         style="--pseudo-bg-color: {{ section.settings.product_card_background_color }};
-                background-color: {{ section.settings.product_card_background_color }};">
+  <div class="product-container">
+    {% paginate collections.all.products by section.settings.products_to_show %}
+      {% for product in collections.all.products %}
+        {% assign product_offer = product.metafields.custom.offer %}
+        <div class="product-card"
+             style="--pseudo-bg-color: {{ section.settings.product_card_background_color }};
+                    background-color: {{ section.settings.product_card_background_color }};">
 
-<div class="product-image1">
-    {% if section.settings.show_sale_badge and product.compare_at_price > product.price %}
-      <div class="sale-badge"
-           style="background-color: {{ section.settings.sale_badge_background_color }};
-                  color: {{ section.settings.sale_badge_text_color }};">
-        {% assign price_difference = product.compare_at_price | minus: product.price %}
-        {% assign discount_percentage = price_difference | divided_by: product.compare_at_price | times: 100 | round: 0 %}
-        <span>Save {{ discount_percentage }}%</span>
-      </div>
-    {% endif %}
-
-          <a href="{{ product.url }}">
-            {% if product.featured_image %}
-              <picture>
-                <source
-                  type="image/webp"
-                  srcset="
-                    {{ product.featured_image | image_url: width: 300, format: 'webp' }} 300w,
-                    {{ product.featured_image | image_url: width: 600, format: 'webp' }} 600w,
-                    {{ product.featured_image | image_url: width: 800, format: 'webp' }} 800w,
-                    {{ product.featured_image | image_url: width: 1200, format: 'webp' }} 1200w"
-                  sizes="(max-width: 600px) 300px,
-                         (max-width: 1000px) 600px,
-                         800px">
-                <img
-                  srcset="
-                    {{ product.featured_image | image_url: width: 300 }} 300w,
-                    {{ product.featured_image | image_url: width: 600 }} 600w,
-                    {{ product.featured_image | image_url: width: 800 }} 800w,
-                    {{ product.featured_image | image_url: width: 1200 }} 1200w"
-                  sizes="(max-width: 600px) 300px,
-                         (max-width: 1000px) 600px,
-                         800px"
-                  src="{{ product.featured_image | image_url: width: 800 }}"
-                  alt="{{ product.title | escape }}"
-                  loading="lazy"
-                  width="100"
-                  height="100"
-                  decoding="async">
-              </picture>
+          <div class="product-image1">
+            {% if section.settings.show_sale_badge and product.compare_at_price > product.price %}
+              <div class="sale-badge"
+                   style="background-color: {{ section.settings.sale_badge_background_color }};
+                          color: {{ section.settings.sale_badge_text_color }};">
+                <span>Save</span>
+              </div>
             {% endif %}
-          </a>
+
+            <a href="{{ product.url }}">
+              {% if product.featured_image %}
+                <picture>
+                  <source
+                    type="image/webp"
+                    srcset="
+                      {{ product.featured_image | image_url: width: 300, format: 'webp' }} 300w,
+                      {{ product.featured_image | image_url: width: 600, format: 'webp' }} 600w,
+                      {{ product.featured_image | image_url: width: 800, format: 'webp' }} 800w,
+                      {{ product.featured_image | image_url: width: 1200, format: 'webp' }} 1200w"
+                    sizes="(max-width: 600px) 300px,
+                           (max-width: 1000px) 600px,
+                           800px">
+                  <img
+                    srcset="
+                      {{ product.featured_image | image_url: width: 300 }} 300w,
+                      {{ product.featured_image | image_url: width: 600 }} 600w,
+                      {{ product.featured_image | image_url: width: 800 }} 800w,
+                      {{ product.featured_image | image_url: width: 1200 }} 1200w"
+                    sizes="(max-width: 600px) 300px,
+                           (max-width: 1000px) 600px,
+                           800px"
+                    src="{{ product.featured_image | image_url: width: 800 }}"
+                    alt="{{ product.title | escape }}"
+                    loading="lazy"
+                    width="100"
+                    height="100"
+                    decoding="async">
+                </picture>
+              {% else %}
+                {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
+              {% endif %}
+            </a>
+          </div>
+
+          <div class="product-info">
+            <h7 style="color: {{ section.settings.text_color }};">{{ product.title }}</h7>
+            {% if section.settings.show_vendor %}
+              <p class="vendor" style="color: {{ section.settings.vendor_text_color }};">{{ product.vendor }}</p>
+            {% endif %}
+            <p class="model-number" style="color: {{ section.settings.text_color }};">Model no. #{{ product.sku }}</p>
+          </div>
+
+          <div class="price-reviews-icons">
+            <p class="price-tag" 
+               style="background-color: {{ section.settings.price_background_color }};
+                      --pseudo-bg-color: {{ section.settings.product_card_background_color }};
+                      color: {{ section.settings.price_text_color }};">
+              {% if product.compare_at_price > product.price %}
+                <span class="original-price" style="color: {{ section.settings.price_text_color }}; text-decoration: line-through; margin-right: 5px; opacity: 0.7;">
+                  {{ product.compare_at_price | money }}
+                </span>
+              {% endif %}
+              <span class="current-price">{{ product.price | money }}</span>
+            </p>
+
+            <div class="dotted-line-wrapper" style="border-top-color: {{ section.settings.dotted_line_color }};">
+              <div class="dotted-line"></div>
+            </div>
+          </div>
         </div>
-
-      <div class="product-info">
-        <h7 style="color: {{ section.settings.text_color }};">{{ product.title }}</h7>
-        {% if section.settings.show_vendor %}
-          <p class="vendor" style="color: {{ section.settings.vendor_text_color }};">{{ product.vendor }}</p>
-        {% endif %}
-        <p class="model-number" style="color: {{ section.settings.text_color }};">Model no. #{{ product.sku }}</p>
-      </div>
-
-      <div class="price-reviews-icons">
-
-         <p class="price-tag"
-     style="background-color: {{ section.settings.price_background_color }};
-            --pseudo-bg-color: {{ section.settings.product_card_background_color }};
-            color: {{ section.settings.price_text_color }};">
-    {% if product.compare_at_price > product.price %}
-      <span class="original-price" style="color: {{ section.settings.price_text_color }}; text-decoration: line-through; margin-right: 5px; opacity: 0.7;">
-        {{ product.compare_at_price | money }}
-      </span>
-    {% endif %}
-    <span class="current-price">{{ product.price | money }}</span>
-  </p>
-
-        <p class="price-tag"
-           style="background-color: {{ section.settings.price_background_color }};
-                  --pseudo-bg-color: {{ section.settings.product_card_background_color }};
-                  color: {{ section.settings.price_text_color }};">
-          {% if product.compare_at_price > product.price %}
-            <span class="original-price" style="color: {{ section.settings.price_text_color }}; text-decoration: line-through; margin-right: 5px; opacity: 0.7;">
-              ₹{{ product.compare_at_price | money_without_currency }}
-            </span>
-          {% endif %}
-          <span class="current-price">₹{{ product.price | money_without_currency }}</span>
-        </p>
-
-
-        <div class="dotted-line-wrapper" style="border-top-color: {{ section.settings.dotted_line_color }};">
-          <div class="dotted-line"></div>
-        </div>
-      </div>
-    </div>
-  {% endfor %}
-{% endpaginate %}
-</div>
+      {% endfor %}
+    {% endpaginate %}
   </div>
+</div>
 
 <div class="view-all-wrapper">
   <a href="/collections/all" class="view-all-link">
@@ -121,79 +106,75 @@
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    // Get all featured collection sections on the page
-    const sections = document.querySelectorAll('.featured-collection-section');
-
-    sections.forEach((section) => {
-      const container = section.querySelector('.product-container');
-      const leftArrow = section.querySelector('.related-products-arrow.left');
-      const rightArrow = section.querySelector('.related-products-arrow.right');
-
-      if (!container || !leftArrow || !rightArrow) return;
-
-      // Function to handle card scrolling
-      function scrollCards(direction) {
-        const cards = container.querySelectorAll('.product-card');
-        if (!cards.length) return;
-
-        const cardStyle = window.getComputedStyle(cards[0]);
-        const cardWidth = cards[0].offsetWidth +
-                          parseInt(cardStyle.marginLeft) +
-                          parseInt(cardStyle.marginRight) +
-                          20;
-
-        const currentScroll = container.scrollLeft;
-        const newScroll = currentScroll + (direction * cardWidth);
-
-        container.scrollTo({
-          left: newScroll,
-          behavior: 'smooth'
-        });
-      }
-
-      // Function to update arrow visibility
-      function updateArrowVisibility() {
-        leftArrow.style.opacity = container.scrollLeft <= 0 ? '0.5' : '1';
-        leftArrow.disabled = container.scrollLeft <= 0;
-
-        const canScrollRight = container.scrollWidth > (container.scrollLeft + container.clientWidth + 1);
-        rightArrow.style.opacity = canScrollRight ? '1' : '0.5';
-        rightArrow.disabled = !canScrollRight;
-      }
-
-      // Attach event listeners for arrows
-      leftArrow.addEventListener('click', () => scrollCards(-1));
-      rightArrow.addEventListener('click', () => scrollCards(1));
-
-      // Attach scroll event listener for updating arrow visibility
-      container.addEventListener('scroll', updateArrowVisibility);
-      updateArrowVisibility();
-
-      // Touch-based scrolling
-      let touchStartX = 0;
-      let touchEndX = 0;
-
-      container.addEventListener('touchstart', (e) => {
-        touchStartX = e.changedTouches[0].screenX;
-      }, false);
-
-      container.addEventListener('touchend', (e) => {
-        touchEndX = e.changedTouches[0].screenX;
-        if (touchStartX - touchEndX > 50) {
-          scrollCards(1);
-        } else if (touchEndX - touchStartX > 50) {
-          scrollCards(-1);
-        }
-      }, false);
+function scrollCards(direction) {
+  const containers = document.querySelectorAll('.product-container');
+  containers.forEach(container => {
+    const cards = container.querySelectorAll('.product-card');
+    if (!cards.length) return;
+    
+    const cardStyle = window.getComputedStyle(cards[0]);
+    const cardWidth = cards[0].offsetWidth + 
+                     parseInt(cardStyle.marginLeft) + 
+                     parseInt(cardStyle.marginRight) + 
+                     20;
+    
+    const currentScroll = container.scrollLeft;
+    const newScroll = currentScroll + (direction * cardWidth);
+    
+    container.scrollTo({
+      left: newScroll,
+      behavior: 'smooth'
     });
   });
-</script>
+}
 
+document.addEventListener('DOMContentLoaded', function() {
+  const containers = document.querySelectorAll('.product-container');
+  
+  containers.forEach(container => {
+    const leftArrow = container.parentElement.querySelector('.arrow1');
+    const rightArrow = container.parentElement.querySelector('.arrow2');
+    
+    function updateArrowVisibility() {
+      if (!leftArrow || !rightArrow) return;
+      
+      leftArrow.style.opacity = container.scrollLeft <= 0 ? '0.5' : '1';
+      leftArrow.disabled = container.scrollLeft <= 0;
+      
+      const canScrollRight = container.scrollWidth > (container.scrollLeft + container.clientWidth + 1);
+      rightArrow.style.opacity = canScrollRight ? '1' : '0.5';
+      rightArrow.disabled = !canScrollRight;
+    }
+    
+    container.addEventListener('scroll', updateArrowVisibility);
+    updateArrowVisibility();
+    
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    container.addEventListener('touchstart', e => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, false);
+    
+    container.addEventListener('touchend', e => {
+      touchEndX = e.changedTouches[0].screenX;
+      if (touchStartX - touchEndX > 50) {
+        scrollCards(1);
+      } else if (touchEndX - touchStartX > 50) {
+        scrollCards(-1);
+      }
+    }, false);
+  });
+});
+</script>
 
 {% schema %}
 {
   "name": "Related Products",
+  "disabled_on": {
+    "groups": ["header", "footer"],
+    "templates": ["index", "collection", "blog", "article", "page"]
+  },
   "settings": [
     {
       "type": "text",
@@ -201,7 +182,7 @@
       "label": "Title",
       "default": "Our Products"
     },
-      {
+    {
       "id": "color_scheme",
       "type": "color_scheme",
       "label": "t:sections.all.colors.label",
@@ -250,11 +231,11 @@
     {
       "type": "header",
       "content": "Color Settings"
-    },
+    }
   ],
   "presets": [
     {
-      "name": "All Products",
+      "name": "Related Products",
       "category": "Products"
     }
   ]

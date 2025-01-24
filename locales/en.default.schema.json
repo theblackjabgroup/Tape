@@ -1030,6 +1030,46 @@
         "name": "Featured product"
       }
     },
+    "collapsible_tabs": {
+      "name": "Collapsible Tabs",
+      "settings": {
+        "heading": {
+          "label": "Heading",
+          "default": "Collapsible Tabs"
+        }
+      },
+      "blocks": {
+        "collapsible_row": {
+          "name": "Collapsible tabs",
+          "settings": {
+            "heading": {
+              "default": "Collapsible row",
+              "info": "Include a heading that explains the content.",
+              "label": "Heading"
+            },  
+            "Point_1": {
+              "info": "Include a bullet point 1.",
+              "label": "First Bullet Point"
+            },  
+            "Point_2": {
+              "info": "Include a bullet point 2.",
+              "label": "Second Bullet Point"
+            },  
+            "Point_3": {
+              "info": "Include a bullet point 3.",
+              "label": "Third Bullet Point"
+            },  
+            "Point_4": {
+              "info": "Include a bullet point 4.",
+              "label": "Fourth Bullet Point"
+            },  
+          },
+        }
+      },
+      "presets": {
+        "name": "Collapsible Tabs"
+      }
+    },
     "footer": {
       "name": "Footer",
       "blocks": {
@@ -3473,46 +3513,6 @@
       },
       "presets": {
         "name": "Collapsible content"
-      }
-    },
-    "collapsible_tabs": {
-      "name": "Collapsible Tabs",
-      "settings": {
-        "heading": {
-          "label": "Heading",
-          "default": "Collapsible Tabs"
-        }
-      },
-      "blocks": {
-        "collapsible_row": {
-          "name": "Collapsible tabs",
-          "settings": {
-            "heading": {
-              "default": "Collapsible row",
-              "info": "Include a heading that explains the content.",
-              "label": "Heading"
-            },  
-            "Point_1": {
-              "info": "Include a bullet point 1.",
-              "label": "First Bullet Point"
-            },  
-            "Point_2": {
-              "info": "Include a bullet point 2.",
-              "label": "Second Bullet Point"
-            },  
-            "Point_3": {
-              "info": "Include a bullet point 3.",
-              "label": "Third Bullet Point"
-            },  
-            "Point_4": {
-              "info": "Include a bullet point 4.",
-              "label": "Fourth Bullet Point"
-            },  
-          },
-        }
-      },
-      "presets": {
-        "name": "Collapsible Tabs"
       }
     }
   }

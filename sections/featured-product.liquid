@@ -83,7 +83,7 @@ class="section-{{ section.id }}-padding gradient color-{{ section.settings.color
           {%- else -%}
             <div class="bb-fp__media product__media-item" style="display: block;">
               <div
-                class="bb-product-media-container product-media-container global-media-settings gradient{% if section.settings.constrain_to_viewport %} constrain-height{% endif %}"
+                class="bb-product-media-container product-media-container global-media-settings gradient constrain-height"
                 style="--ratio: 1.0; --preview-ratio: 1.0;"
               >
               {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg placeholder' }}                
@@ -112,6 +112,23 @@ class="section-{{ section.id }}-padding gradient color-{{ section.settings.color
                     {{- block.settings.text -}}
                   </p>
                 {%- when 'title' -%}
+                {% if section.settings.enable_special_offer %}
+                <div class="bb-special-offer-upper">
+                <div class="bb-special-offer">
+                  <div>
+                  {% for i in (0..2) %}
+                    <div class="bb-triangle-offer tri-{{i}}"></div>
+                  {% endfor  %}
+                    </div>
+                  <h2 class="bb-special-offer-text">SPECIAL OFFER</h2>
+                  <div>
+                    {% for i in (0..2) %}
+                  <div class="bb-triangle-offer tri-second-{{i}}"></div>
+                  {% endfor  %}
+                  </div>
+                </div>
+                </div>
+              {% endif %}
                 <h2 class="bb-product__title product__title {{ block.settings.heading_size }}" {{ block.shopify_attributes }} {% if block.settings.heading_size =='h1' %} style="font-size: 28px"{% endif %}>
                     {%- unless placeholder -%}
                       {{ product.title | escape }}
@@ -381,11 +398,6 @@ class="section-{{ section.id }}-padding gradient color-{{ section.settings.color
                       </volume-pricing>
                     {%- endif -%}
                   </div>
-                {%- when 'share' -%}
-                  {% liquid
-                    assign share_url = product.selected_variant.url | default: product.url | prepend: request.origin
-                    render 'share-button', block: block, share_link: share_url
-                  %}
                 {%- when 'variant_picker' -%}
                   {% render 'product-variant-picker',
                     product: product,
@@ -451,8 +463,8 @@ class="section-{{ section.id }}-padding gradient color-{{ section.settings.color
               {% endif %}
               class="link bb-product__view-details bb-animate-arrow product__view-details animate-arrow"
             >
-              {{ 'products.product.view_full_details' | t }}
-              {{- 'icon-arrow.svg' | inline_asset_content -}}
+             <!-- {{ 'products.product.view_full_details' | t }}  
+              {{- 'icon-arrow.svg' | inline_asset_content -}}  -->
             </a>
           </section>
         </div>
@@ -522,7 +534,7 @@ class="section-{{ section.id }}-padding gradient color-{{ section.settings.color
       "type": "title",
       "name": "t:sections.featured-product.blocks.title.name",
       "limit": 1,
-      "settings": [
+      "settings":[
         {
           "type": "select",
           "id": "heading_size",
@@ -652,27 +664,6 @@ class="section-{{ section.id }}-padding gradient color-{{ section.settings.color
             }
           ],
           "default": "circle"
-        }
-      ]
-    },
-    {
-      "type": "share",
-      "name": "t:sections.featured-product.blocks.share.name",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "text",
-          "id": "share_label",
-          "label": "t:sections.featured-product.blocks.share.settings.text.label",
-          "default": "t:sections.featured-product.blocks.share.settings.text.default"
-        },
-        {
-          "type": "paragraph",
-          "content": "t:sections.featured-product.blocks.share.settings.featured_image_info.content"
-        },
-        {
-          "type": "paragraph",
-          "content": "t:sections.featured-product.blocks.share.settings.title_info.content"
         }
       ]
     },
@@ -1321,6 +1312,12 @@ class="section-{{ section.id }}-padding gradient color-{{ section.settings.color
       "id": "product",
       "label": "t:sections.featured-product.settings.product.label"
     },
+       {
+      "type": "checkbox",
+      "id": "enable_special_offer",
+      "default": false,
+      "label": "t:sections.main-product.settings.enable_special_offer.label"   
+    },
     {
       "type": "color_scheme",
       "id": "color_scheme",
@@ -1431,9 +1428,6 @@ class="section-{{ section.id }}-padding gradient color-{{ section.settings.color
         },
         {
           "type": "buy_buttons"
-        },
-        {
-          "type": "share"
         }
       ]
     }

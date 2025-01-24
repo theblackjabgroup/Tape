@@ -1,6 +1,9 @@
 {% schema %}
 {
   "name": "Blog Posts",
+"disabled_on": {
+    "groups": ["header", "footer"]
+  },
   "settings": [
     {
       "type": "blog",
@@ -184,7 +187,7 @@
 
     {% if section.settings.show_view_all %}
         <div class="blog-view-all-link  color-{{ section.settings.color_scheme }}">
-            <a href="{{ blogs[blog_handle].url }}" class="blog-view-all">
+          <a href="{{ blogs[blog_handle].url }}" class="blog-view-all">
                 View More
             </a>
         </div>
@@ -192,7 +195,95 @@
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('shopify:section:load', function() {
+    const blogSections = document.querySelectorAll('.blog-slider-section');
+
+    blogSections.forEach((section, sectionIndex) => {
+        let currentSlide = 0;
+        const sliderWrapper = section.querySelector('.blog-slider-wrapper');
+        const leftArrow = section.querySelector('.arrow-left');
+        const rightArrow = section.querySelector('.arrow-right');
+        const gap = 20; // Gap between cards
+
+        function updateCards() {
+            const cards = sliderWrapper.querySelectorAll('.blog-card');
+            const totalSlides = cards.length;
+
+            function getSlideWidth() {
+                const cardWidth = cards[0]?.offsetWidth || 0;
+                return cardWidth + gap; // Include the gap in the card width
+            }
+
+            function updateArrowState() {
+                const visibleSlides = getVisibleSlides();
+                leftArrow.disabled = currentSlide === 0;
+                rightArrow.disabled = currentSlide >= totalSlides - visibleSlides;
+            }
+
+            function getVisibleSlides() {
+                let visibleSlides = 0;
+                if (window.innerWidth < 768) {
+                    visibleSlides = totalSlides <= 1 ? totalSlides : 1; // Small screens show 1 card
+                } else if (window.innerWidth < 1024) {
+                    visibleSlides = totalSlides <= 3 ? totalSlides : 3; // Medium screens show 3 cards
+                } else {
+                    visibleSlides = totalSlides <= 4 ? totalSlides : 4; // Large screens show 4 cards
+                }
+                return visibleSlides;
+            }
+
+            function resizeCards() {
+                const visibleSlides = getVisibleSlides();
+                const cardWidthPercentage = (95 / visibleSlides); // Percentage of screen for each card
+                cards.forEach(card => {
+                    card.style.flex = `0 0 ${cardWidthPercentage}%`;
+                });
+            }
+
+            function moveSlide(direction) {
+                const visibleSlides = getVisibleSlides();
+                const maxSlides = totalSlides - visibleSlides;
+
+                currentSlide = Math.min(Math.max(currentSlide + direction, 0), maxSlides);
+
+                const slideWidth = getSlideWidth();
+                const offset = -currentSlide * slideWidth;
+
+                sliderWrapper.style.transform = `translateX(${offset}px)`;
+                updateArrowState();
+            }
+
+            resizeCards();
+            updateArrowState();
+
+            leftArrow.addEventListener('click', () => moveSlide(-1));
+            rightArrow.addEventListener('click', () => moveSlide(1));
+
+            let resizeTimer;
+            window.addEventListener('resize', function() {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(function() {
+                    resizeCards();
+                    const visibleSlides = getVisibleSlides();
+                    const maxSlides = totalSlides - visibleSlides;
+                    currentSlide = Math.min(currentSlide, maxSlides);
+
+                    const slideWidth = getSlideWidth();
+                    const offset = -currentSlide * slideWidth;
+
+                    sliderWrapper.style.transform = `translateX(${offset}px)`;
+                    updateArrowState();
+                }, 250);
+            });
+        }
+
+        updateCards();
+
+        const observer = new MutationObserver(updateCards);
+        observer.observe(sliderWrapper, { childList: true });
+    });
+});
+  document.addEventListener( "DOMContentLoaded", function() {
     const blogSections = document.querySelectorAll('.blog-slider-section');
 
     blogSections.forEach((section, sectionIndex) => {

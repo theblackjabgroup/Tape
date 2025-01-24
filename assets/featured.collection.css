@@ -55,13 +55,15 @@ body {
     font-size: 24px;
     margin-bottom: -11px;
     margin-left: 25px;
+    font-weight:600;
+    
   }
 
   .product-container {
     display: flex;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    gap: 20px;
+    gap: 25px;
     scroll-behavior: smooth;
     padding: 20px 0;
     margin: 0 18px;
@@ -112,6 +114,7 @@ body {
     margin-top: 18px;
     margin-bottom: 70px;
     margin-left: 25px;
+    font-weight:600;
   }
 
   h7 {
@@ -153,7 +156,7 @@ body {
     color: rgb(var(--color-secondary-button-text));
     display: inline-block;
     position: absolute;
-    left: 30px; /* Fixed left position */
+    left: 23px; /* Fixed left position */
     background:  rgb(var(--color-button-text));
     text-align: left;
     max-width: 100%; /* Limit the width to prevent overflow */
@@ -374,5 +377,6 @@ body {
       margin: 20px;
       padding: 20px 0;
       margin-bottom: 10px; /* Add some space above the view all button */
+      margin-right: 2px;
     }
   }

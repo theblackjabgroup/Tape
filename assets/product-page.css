@@ -19,7 +19,7 @@
   border-radius: 10px !important;
 }
 
-.bb-product__view-details, .bb-animate-arrow 
+.bb-product__view-details, .bb-animate-arrow
 {
   color: rgb(var(--color-foreground));
 }
@@ -50,7 +50,7 @@
   width: 90% !important;
   transform: translate(-50%, -50%);
   z-index: 1;
-  filter: contrast(0) sepia(5%) brightness(1.20);  
+  filter: contrast(0) sepia(5%) brightness(1.20);
   border-radius: 10px !important;
 }
 
@@ -75,7 +75,7 @@
 
 .ticket-line {
   margin-top: 60px;
-  margin-bottom: 0px; 
+  margin-bottom: 0px;
   position: relative;
   overflow: hidden;
   display: flex;
@@ -93,9 +93,9 @@
 }
 */
 .ticket-line-first {
-  height: 16px;
+  height: 12px;
   display: block !important;
-  width: 16px;
+  width: 12px;
   border-radius: 50%;
   background-color: rgb(var(--color-background));
 }
@@ -221,16 +221,16 @@
 }
 
 .tri-second-0 {
-  transform: rotate(270deg) translate(-0%, 30%)
+  transform: rotate(270deg) translate(-0%, 60%)
 }
 
 .tri-second-1 {
-  transform: rotate(270deg) translate(0%, 30%);
+  transform: rotate(270deg) translate(0%, 60%);
 
 }
 
 .tri-second-2 {
-  transform: rotate(270deg) translate(0%, 40%);
+  transform: rotate(270deg) translate(0%, 60%);
 }
 
 .bb-special-offer-text {
@@ -398,7 +398,7 @@ border-radius: 50%;
  background-color: rgb(var(--color-background));
  border-radius: 50%;
  }
- 
+
  .bb-variant-circle input[type='radio'] + label:before {
    content: '';
    position: absolute;
@@ -411,38 +411,38 @@ border-radius: 50%;
    box-shadow: var(--variant-pills-shadow-horizontal-offset) var(--variant-pills-shadow-vertical-offset)
      var(--variant-pills-shadow-blur-radius) rgba(var(--color-shadow), var(--variant-pills-shadow-opacity));
  }
- 
+
  .bb-variant-circle input[type='radio'] + label:hover {
    border-color: rgb(var(--color-foreground));
  }
- 
+
  .bb-variant-circle input[type='radio']:checked + label {
    background-color: rgb(var(--color-foreground));
    color: rgb(var(--color-background));
  }
- 
+
  @media screen and (forced-colors: active) {
    .bb-variant-circle input[type='radio']:checked + label {
      text-decoration: underline;
    }
- 
+
    .bb-variant-circle input[type='radio']:focus-visible + label {
      outline: transparent solid 1px;
      outline-offset: 2px;
    }
  }
- 
+
  .bb-variant-circle input[type='radio']:checked + label::selection {
    background-color: rgba(var(--color-background), 0.3);
  }
- 
+
  .bb-variant-circle input[type='radio']:disabled + label,
  .bb-variant-circle input[type='radio'].disabled + label {
    border-color: rgba(var(--color-foreground), 0.1);
    color: rgba(var(--color-foreground), 0.6);
    text-decoration: line-through;
  }
- 
+
  .bb-variant-circle input[type='radio'].disabled:checked + label,
  .bb-variant-circle input[type='radio']:disabled:checked + label {
    color: rgba(var(--color-background), 0.6);
@@ -450,12 +450,12 @@ border-radius: 50%;
  .bb-variant-circle input[type='radio']:focus-visible + label {
    box-shadow: 0 0 0 0.3rem rgb(var(--color-background)), 0 0 0 0.5rem rgba(var(--color-foreground), 0.55);
  }
- 
+
  /* Fallback */
  .bb-variant-circle input[type='radio'].focused + label {
    box-shadow: 0 0 0 0.3rem rgb(var(--color-background)), 0 0 0 0.5rem rgba(var(--color-foreground), 0.55);
  }
- 
+
 /*
   @media screen and (max-width: 980px){
     .bb-pmg .slider-button{
@@ -568,7 +568,7 @@ border-radius: 50%;
 }
 
 /*
-.bb-product-thumbnail-corner:hover 
+.bb-product-thumbnail-corner:hover
 .button:not([disabled]):hover:after {
   box-shadow: 0 0 0 0 !important;
   --border-offset: 0px !important;
@@ -670,7 +670,7 @@ border-radius: 50%;
   .bb-thumbnail-width {
     width: calc(33% - 2rem) !important;
   }
-  
+
   .ticket-line-first {
     height: 8px;
     width: 8px;
@@ -739,7 +739,7 @@ border-radius: 50%;
 @media screen and (max-width: 749px) {
 
   .product-media-container.constrain-height.media-fit-contain {
-    --contained-width: calc(var(--constrained-height) * var(--aspect-ratio)); 
+    --contained-width: calc(var(--constrained-height) * var(--aspect-ratio));
   }
 
   #bb_product__media_first {
@@ -770,6 +770,18 @@ border-radius: 50%;
     scroll-padding-left: 0rem !important;
     overflow-x: hidden !important;
   }
+  .tri-second-0 {
+  transform: rotate(270deg) translate(-0%, 30%)
+}
+
+.tri-second-1 {
+  transform: rotate(270deg) translate(0%, 30%);
+
+}
+
+.tri-second-2 {
+  transform: rotate(270deg) translate(0%, 30%);
+}
 
   .bb-price:before {
     transform: translate(-3.3rem, 0.7rem);
@@ -825,7 +837,7 @@ border-radius: 50%;
     left: -10px;
   }
 
- 
+
   .sold-out-tag-mobile:after {
     bottom: -5px;
     right: -10px;
@@ -834,5 +846,16 @@ border-radius: 50%;
   #product-upper-bg {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+  }
+
+  .index-product-0 {
+    height: 12px !important;
+    width: 12px !important;
+    transform: translateX(-50%);
+  }
+
+  .index-product-20 {
+    height: 12px !important;
+    width: 12px !important;
   }
 }

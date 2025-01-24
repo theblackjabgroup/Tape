@@ -1,24 +1,28 @@
 .bb-template-404 {
-    background-color: #E5E5EA;
+    background-color: rgba(var(--color-button));
     display: block;
     padding: 10rem 5rem;
     max-width: none;
     margin: 2rem 2rem;
     position: relative;
     border-radius: 5px;
-}
+  }
 
-.bb-upper-template-404 {
-    background-color: #C7C7CC;
+  .bb-upper-template-404 {
+    background-color: rgba(var(--color-button));
     border-radius: 5px;
-    margin: 7rem auto;
+    /* margin: 7rem auto; */
+    margin: auto;
     display: block;
     padding: 2rem;
     position: relative;
     max-width: var(--page-width);
-}
+  }
 
-.vertical-bar-top-404 {
+  .bb-404-uper-banner {
+    padding: 7rem 0rem;
+  }
+  .vertical-bar-top-404 {
     top: -1.5rem;
     left: 3rem;
     display: flex;
@@ -26,9 +30,9 @@
     position: absolute;
     gap: 52.5px;
     z-index: 1;
-}
+  }
 
-.vertical-bar-bottom-404 {
+  .vertical-bar-bottom-404 {
     bottom: -1.5rem;
     left: 3rem;
     display: flex;
@@ -36,9 +40,9 @@
     position: absolute;
     gap: 52.5px;
     z-index: 1;
-}
+  }
 
-.vertical-bar-left-404 {
+  .vertical-bar-left-404 {
     left: -1.5rem;
     top: 3rem;
     display: flex;
@@ -46,9 +50,9 @@
     position: absolute;
     gap: 50px;
     z-index: 1;
-}
+  }
 
-.vertical-bar-right-404 {
+  .vertical-bar-right-404 {
     right: -1.5rem;
     top: 3rem;
     display: flex;
@@ -56,93 +60,100 @@
     position: absolute;
     gap: 50px;
     z-index: 1;
-}
+  }
 
-.vertical-bar-circle-404 {
+  a.bb-404-h-button {
+    color: rgb(var(--color-secondary-button-text));
+  }
+  .bb-404-h-button::after {
+    display: none;
+  }
+
+  .vertical-bar-circle-404 {
     width: 30px;
     height: 32px;
-    background-color: rgb(var(--color-background)); 
+    background-color: rgb(var(--color-background));
     border-radius: 50%;
     display: block !important;
-}
+  }
 
-.vertical-bar-circle-h-404 {
+  .vertical-bar-circle-h-404 {
     width: 32.75px;
     height: 30px;
-    background-color: rgb(var(--color-background)); 
+    background-color: rgb(var(--color-background));
     border-radius: 50%;
     display: block !important;
-}
+  }
 
-
-.bb-404-subtext {
-    font-family: 'Fira Sans';
+  .bb-404-subtext {
+    font-family: "Fira Sans";
     font-weight: 600;
     font-size: 96px;
     line-height: 34px;
-    color: black;
-}
+    padding-bottom: 30px;
+  }
 
-.bb-404-title {
-    font-family: 'Fira Sans';
-    font-weight: 500;
+  .bb-404-title {
+    font-family: "Fira Sans";
+    font-weight: 600;
     font-size: 48px;
     line-height: 34px;
-    color: black;    
-}
+    padding-bottom: 30px;
+  }
 
-.bb-404-para {
-    font-family: 'Inter';
-    font-weight: 300;
+  .bb-404-para {
+    font-family: "Inter";
+    font-weight: 400;
     font-size: 24px;
     line-height: 36px;
-    margin-bottom: 2rem;
-    color: black;
-}
-.bb-404-h-button:hover {
-    /*
-    color: black;
-    background: #e5e5ea; */
-    border: none;
-}
+    margin-bottom: 50px;
+  }
+  /* .bb-404-h-button:hover {
+          color: black;
+      background: #e5e5ea;
+      border: none;
+  }
 
-.bb-404-h-button::after:hover {
-    /*
-    color: black;
-    background: #e5e5ea; */
-    border: none;
-    box-shadow: none;
-}
+  .bb-404-h-button::after:hover {
+          color: black;
+      background: #e5e5ea;
+      border: none;
+      box-shadow: none;
+  }
 
-.bb-404-c-button:hover {
-    /*
-    background-color: black;
-    color: #e5e5ea;
-    */
-    border: none;
-}
-.bb-404-h-button , .bb-404-c-button {
-font-family: 'Fira Sans';
-margin-top: 2rem;
-}
+  .bb-404-c-button:hover {
+          background-color: black;
+      color: #e5e5ea;
 
-.bb-404-h-button {
-    background-color: black;
-    color: #e5e5ea;
-}
-.bb-404-c-button {
-    color: black;
+      border: none;
+  } */
+  .bb-404-h-button,
+  .bb-404-c-button {
+    font-family: "Fira Sans";
+    margin-top: 2rem;
+    font-size: 2rem;
+  }
+
+  .bb-404-h-button {
+    background-color: transparent;
+    font-weight: bold;
+    border: 1px solid rgb(var(--color-secondary-button-text));
+    color: rgb(var(--color-secondary-button-text));
+    border-radius: 5px;
+    padding: 20px 30px;
+  }
+  .bb-404-c-button {
     text-decoration: underline;
     background-color: transparent;
-}
+  }
 
-.button:not([disabled]):hover:after {
-    box-shadow: none;
-}
-.desktop-view {
+  /* .button:not([disabled]):hover:after {
+      box-shadow: none;
+  } */
+  .desktop-view {
     display: block;
   }
-  
+
   .mobile-view {
     display: none;
   }
@@ -152,55 +163,72 @@ margin-top: 2rem;
       display: block;
     }
     .bb-404-c-button {
-        background: #c7c6c6;
+      background: rgba(var(--color-button));
     }
     .desktop-view {
       display: none !important;
     }
 
     .bb-upper-template-404 {
-        background-color: #C7C6C6;
-        border-radius: 5px;
-        display: block;
-        position: relative;
-        margin: 0rem;
-        padding: 0rem;
+      background-color: rgba(var(--color-button));
+      border-radius: 0px;
+      display: block;
+      position: relative;
+      margin: 0rem;
+      padding: 0rem;
+      margin: auto;
     }
     .bb-template-404 {
-        background-color: unset;
-        padding: 10rem 0rem;
+      background-color: unset;
+      padding: 10rem 0rem 1rem 0rem;
     }
 
     .bb-404-subtext {
-        font-weight: 500;
-        font-size: 32px;
-        line-height: 34px;
-    }
-    
-    .bb-404-title {
-        font-weight: 400;
-        font-size: 24px;
-        line-height: 34px;
-    }
-    
-    .bb-404-para {
-        font-weight: 300;
-        font-size: 12px;
-        line-height: 21px;
-        margin-bottom: 2rem;
-        color: black;
-    }
-    .vertical-bar-circle-404 {
-        width: 13px;
-        height: 13px;
-    }
-    .vertical-bar-top-404 {
-        top: -0.5rem;
-        left: 1.5rem;
-    }
-    .vertical-bar-bottom-404 {
-        bottom: -0.5rem;
-        left: 1.5rem;
+      font-weight: 500;
+      font-size: 32px;
+      line-height: 34px;
+      padding-bottom: 0px;
     }
 
-}
+    .bb-404-title {
+      font-weight: 500;
+      font-size: 24px;
+      line-height: 34px;
+      padding-bottom: 0px;
+    }
+
+    .bb-404-para {
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 21px;
+      margin-bottom: 2rem;
+    }
+
+    .vertical-bar-circle-404 {
+      width: 13px;
+      height: 13px;
+    }
+    .vertical-bar-top-404 {
+      top: -0.5rem;
+      left: 1.5rem;
+      gap: 20px; /* Reduced from 46px to accommodate more circles */
+    }
+
+    .vertical-bar-bottom-404 {
+      bottom: -0.5rem;
+      left: 1.5rem;
+      gap: 20px; /* Reduced from 46px to accommodate more circles */
+    }
+    .bb-404-uper-banner {
+      padding: 1rem 0rem;
+    }
+    .bb-404-h-button,
+    .bb-404-c-button {
+      font-family: "Fira Sans";
+      margin-top: 2rem;
+      font-size: 1.5rem;
+    }
+    .bb-404-h-button {
+      padding: 10px 20px;
+    }
+  }
