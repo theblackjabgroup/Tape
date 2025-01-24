@@ -112,6 +112,23 @@ class="section-{{ section.id }}-padding gradient color-{{ section.settings.color
                     {{- block.settings.text -}}
                   </p>
                 {%- when 'title' -%}
+                {% if section.settings.enable_special_offer %}
+                <div class="bb-special-offer-upper">
+                <div class="bb-special-offer">
+                  <div>
+                  {% for i in (0..2) %}
+                    <div class="bb-triangle-offer tri-{{i}}"></div>
+                  {% endfor  %}
+                    </div>
+                  <h2 class="bb-special-offer-text">SPECIAL OFFER</h2>
+                  <div>
+                    {% for i in (0..2) %}
+                  <div class="bb-triangle-offer tri-second-{{i}}"></div>
+                  {% endfor  %}
+                  </div>
+                </div>
+                </div>
+              {% endif %}
                 <h2 class="bb-product__title product__title {{ block.settings.heading_size }}" {{ block.shopify_attributes }} {% if block.settings.heading_size =='h1' %} style="font-size: 28px"{% endif %}>
                     {%- unless placeholder -%}
                       {{ product.title | escape }}
@@ -517,7 +534,7 @@ class="section-{{ section.id }}-padding gradient color-{{ section.settings.color
       "type": "title",
       "name": "t:sections.featured-product.blocks.title.name",
       "limit": 1,
-      "settings": [
+      "settings":[
         {
           "type": "select",
           "id": "heading_size",
@@ -1294,6 +1311,12 @@ class="section-{{ section.id }}-padding gradient color-{{ section.settings.color
       "type": "product",
       "id": "product",
       "label": "t:sections.featured-product.settings.product.label"
+    },
+       {
+      "type": "checkbox",
+      "id": "enable_special_offer",
+      "default": false,
+      "label": "t:sections.main-product.settings.enable_special_offer.label"   
     },
     {
       "type": "color_scheme",

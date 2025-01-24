@@ -221,16 +221,16 @@
 }
 
 .tri-second-0 {
-  transform: rotate(270deg) translate(-0%, 30%)
+  transform: rotate(270deg) translate(-0%, 60%)
 }
 
 .tri-second-1 {
-  transform: rotate(270deg) translate(0%, 30%);
+  transform: rotate(270deg) translate(0%, 60%);
 
 }
 
 .tri-second-2 {
-  transform: rotate(270deg) translate(0%, 40%);
+  transform: rotate(270deg) translate(0%, 60%);
 }
 
 .bb-special-offer-text {
@@ -770,6 +770,18 @@ border-radius: 50%;
     scroll-padding-left: 0rem !important;
     overflow-x: hidden !important;
   }
+  .tri-second-0 {
+  transform: rotate(270deg) translate(-0%, 30%)
+}
+
+.tri-second-1 {
+  transform: rotate(270deg) translate(0%, 30%);
+
+}
+
+.tri-second-2 {
+  transform: rotate(270deg) translate(0%, 30%);
+}
 
   .bb-price:before {
     transform: translate(-3.3rem, 0.7rem);
