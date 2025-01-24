@@ -13,7 +13,6 @@
     overflow-x: scroll;
     gap: 5rem;
     scrollbar-width: none;
-    padding: var(--heading-padding);
     scroll-snap-type: x mandatory;
   }
 
