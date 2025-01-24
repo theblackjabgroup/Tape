@@ -17,11 +17,10 @@ class IconWithText {
 
       cards.forEach((card) => {
         const box = card.querySelector(".description__container");
-        const openButton = card.querySelector(".description__button__container");
-        const closeButton = card.querySelector(".description__close__button");
-        const icon = card.querySelector(".description__button__inner_container");
+        const openButton = card.querySelector(".description_button_container");
+        const closeButton = card.querySelector(".description_close_button");
+        const icon = card.querySelector(".description_button_inner_container");
 
-        if (openButton && box && closeButton && icon) {
           openButton.addEventListener("click", () => {
             box.classList.add("active");
             icon.classList.add("active");
@@ -30,8 +29,7 @@ class IconWithText {
           closeButton.addEventListener("click", () => {
             box.classList.remove("active");
             icon.classList.remove("active");
-          });
-        }
+        });
       });
 
       // Create an intersection observer for layout 1
@@ -54,8 +52,8 @@ class IconWithText {
 
     initLayout2() {
       const sectionId = this.section.id.replace('section-', '');
-      this.container = document.querySelector(`#section-${sectionId} .card-container`);
-      this.dots = document.querySelectorAll(`#section-${sectionId} ~ .icon-with-text-2-dots .icon-with-text-2-dot`);
+      this.container = document.querySelector(#section-${sectionId} .card-container);
+      this.dots = document.querySelectorAll(#section-${sectionId} ~ .icon-with-text-2-dots .icon-with-text-2-dot);
       this.currentCard = 0;
 
       if (!this.container) return;
@@ -171,7 +169,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const descriptionHeight = descriptionText ? descriptionText.scrollHeight : 0;
 
         if (toggleButton.classList.contains("active")) {
-          component.style.height = `${descriptionHeight + 300}px`;
+          component.style.height = ${descriptionHeight + 300}px;
         } else {
           component.style.height = "200px";
         }
