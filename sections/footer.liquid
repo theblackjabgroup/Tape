@@ -38,8 +38,8 @@
 
 <footer class=" color-{{ section.settings.color_scheme }}" style="background-color: {{ section.settings.footer_background_color }}; font-family: 'Inter', sans-serif;">
     {% for block in section.blocks %}
-        {% if block.type == 'strip' %}
-        <div class="container1 color-{{ section.settings.color_scheme }}" style="background-color: {{ block.settings.background_color }};">
+    {% if block.type == 'strip' %}
+    <div class="container1 color-{{ section.settings.color_scheme }}" style="background-color: {{ block.settings.background_color }}; margin-top: {{ block.settings.margin_top }}px; margin-bottom: {{ block.settings.margin_bottom }}px;">
             <div class="strip-right color-{{ section.settings.color_scheme }}" style="background-color: {{ block.settings.strip_bg_color }};">
                 <div class="strip-1">
                     <div class="offer-text" style="color: {{ block.settings.text_color }};">{{ block.settings.offer_text_1 }} &rarr;</div>
@@ -481,6 +481,26 @@ document.addEventListener("DOMContentLoaded", function () {
       "type": "strip",
       "name": "Cross-Strips",
       "settings": [
+        {
+    "type": "range",
+    "id": "margin_top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "label": "Top Margin",
+    "default": 0
+},
+{
+    "type": "range",
+    "id": "margin_bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "label": "Bottom Margin",
+    "default": 0
+},
         {
           "type": "text",
           "id": "offer_text_1",
