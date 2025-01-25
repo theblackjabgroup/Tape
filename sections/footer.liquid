@@ -36,7 +36,9 @@
 
 
 
-<footer class=" color-{{ section.settings.color_scheme }}" style="background-color: {{ section.settings.footer_background_color }}; font-family: 'Inter', sans-serif;">
+<footer class=" color-{{ section.settings.color_scheme }}" style="background-color: {{ section.settings.footer_background_color }}; font-family: 'Inter', sans-serif;
+   margin-top: {{ section.settings.footer_top_margin }}px;
+               margin-bottom: {{ section.settings.footer_bottom_margin }}px;">
     {% for block in section.blocks %}
     {% if block.type == 'strip' %}
     <div class="container1 color-{{ section.settings.color_scheme }}" style="background-color: {{ block.settings.background_color }}; margin-top: {{ block.settings.margin_top }}px; margin-bottom: {{ block.settings.margin_bottom }}px;">
@@ -451,6 +453,28 @@ document.addEventListener("DOMContentLoaded", function () {
       "id": "thank_you_message_text",
       "label": "Thank You Message Text",
       "default": "Thank you for subscribing!"
+    },
+    {
+      "type": "header",
+      "content": "Footer Layout"
+    },
+    {
+      "type": "range",
+      "id": "footer_top_margin",
+      "label": "Top Margin (px)",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "default": 50
+    },
+    {
+      "type": "range", 
+      "id": "footer_bottom_margin",
+      "label": "Bottom Margin (px)",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "default": 50
     },
     {
       "type": "header",
