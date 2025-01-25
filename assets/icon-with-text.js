@@ -21,7 +21,6 @@ class IconWithText {
         const closeButton = card.querySelector(".description__close__button");
         const icon = card.querySelector(".description__button__inner_container");
 
-        if (openButton && box && closeButton && icon) {
           openButton.addEventListener("click", () => {
             box.classList.add("active");
             icon.classList.add("active");
@@ -30,8 +29,7 @@ class IconWithText {
           closeButton.addEventListener("click", () => {
             box.classList.remove("active");
             icon.classList.remove("active");
-          });
-        }
+        });
       });
 
       // Create an intersection observer for layout 1

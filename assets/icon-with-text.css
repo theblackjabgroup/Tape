@@ -41,8 +41,9 @@
   }
 
   .card__icon {
-    width: 150px ;
-    height: 90px;
+    width: 120px;
+    height: 80px;
+    margin: auto;
     position: relative;
     border-radius: 4px;
   }
@@ -75,6 +76,7 @@
     border-radius: 50%;
     position: absolute;
     background-color: var(--card_background);
+    transition: all 0.3s ease-in-out;
   }
 
   .description__container > p {
