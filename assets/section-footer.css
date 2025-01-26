@@ -223,7 +223,7 @@ a {
 
 /* Country Label */
 .footer__country-selector .footer-country-label {
-  font-size: 1rem;
+  font-size: 15px;
   margin: 0.5rem 0;
   text-align: left;
   font-weight: bold;
@@ -276,7 +276,7 @@ a {
 margin-left: -1px;
 margin-bottom: 1px;
 margin-top: 15px;
-font-size: 13px;
+font-size: 15px;
 font-family: 'Inter', sans-serif; /* Set font to Inter */
 
 }
@@ -313,10 +313,10 @@ font-family: 'Inter', sans-serif; /* Set font to Inter */
 
 /* Country Label */
 .footer__language-selector .footer-language-label {
-  font-size: 1rem;
   margin: 0.5rem 0;
   text-align: left;
   font-weight: bold;
+  font-family: 'Inter', sans-serif; /* Set font to Inter */
 }
 
 
@@ -327,8 +327,7 @@ font-family: 'Inter', sans-serif; /* Set font to Inter */
 margin-left: 1px;
 margin-bottom: 1px;
 margin-top: 15px;
-font-size: 13px;
-font-family: 'Inter', sans-serif; /* Set font to Inter */
+font-size: 15px;
 
 }
 /* .disclosure {
@@ -385,27 +384,20 @@ font-family: 'Inter', sans-serif; /* Set font to Inter */
   }
 
   .footer__country-selector .footer-country-label {
-    margin-left: -27px;
+    margin-left: 235px;
   }
   
-  .footer__country-selector .footer-country-form {
-    margin-left: 260px;
-  }
-
-    .footer__language-selector .footer-language-form {
-    margin-left: 260px;
-  }
-}
+ 
 
 .footer__country-selector .footer-country-form .disclosure__button {
 padding-right: 70px;
-            margin-left: -28px;
+            margin-left: 235px;
             white-space: nowrap;
 }
 
   .footer__language-selector .footer-language-form .disclosure__button {
 padding-right: 95px;
-            margin-left: -27px;
+            margin-left: 235px;
             white-space: nowrap;
 }
   
@@ -417,7 +409,7 @@ padding-right: 95px;
     margin-left: -18px;
   }
 .footer__language-selector .footer-language-label {
-    margin-left: -26px;
+    margin-left: 235px;
 }
   
 .footer__localization {
