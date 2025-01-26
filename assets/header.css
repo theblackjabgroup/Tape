@@ -653,7 +653,7 @@ mobile-nav-items::-webkit-scrollbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 48px;
+ width: 62px;
   height: 16px;
 }
 
