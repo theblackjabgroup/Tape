@@ -1,3 +1,4 @@
+
 * {
     margin: 0;
     padding: 0;
@@ -41,7 +42,7 @@
   }
 
   .card__icon {
-    width: 120px;
+     width: 120px;
     height: 80px;
     margin: auto;
     position: relative;
@@ -76,7 +77,7 @@
     border-radius: 50%;
     position: absolute;
     background-color: var(--card_background);
-    transition: all 0.3s ease-in-out;
+     transition: all 0.3s ease-in-out;
   }
 
   .description__container > p {
@@ -91,11 +92,11 @@
     right: 0;
   }
 
-  .description_buttonouter_container {
+  .description__button__outer__container {
     position: absolute;
     bottom: 0;
   }
-  .description_button_container {
+  .description__button__container {
     cursor: pointer;
     border: none;
     outline: none;
@@ -105,7 +106,7 @@
     background-color: var(--card_background);
   }
 
-  .description_button_container::before {
+  .description__button__container::before {
     content: "";
     position: absolute;
     background-color: transparent;
@@ -116,7 +117,7 @@
     border-radius: 0 0 0 50%;
     box-shadow: -18px 0 0 0 var(--card_background);
   }
-  .description_button_container::after {
+  .description__button__container::after {
     content: "";
     position: absolute;
     background-color: transparent;
@@ -127,7 +128,7 @@
     border-radius: 0 0 0 50%;
     box-shadow: 0 18px 0 0 var(--card_background);
   }
-  .description_button_inner_container {
+  .description__button__inner_container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -135,11 +136,11 @@
     transition: all 0.5s ease-in-out;
   }
 
-  .description_button_inner_container.active {
+  .description__button__inner_container.active {
     transform: rotate(45deg);
   }
 
-  .description_close_button {
+  .description__close__button {
     transform: rotate(45deg);
     cursor: pointer;
   }
@@ -158,23 +159,23 @@
       scroll-snap-type: x mandatory;
       justify-content: normal;
     }
-    .card_outer_container {
+    .card__outer__container {
       scroll-snap-align: center;
     }
-    .card_count_container {
+    .card__count__container {
       display: flex;
     }
   }
   @media only screen and (min-width: 990px) {
-    .card_count_container {
+    .card__count__container {
       display: none;
     }
   }
-  .card_count_container {
+  .card__count__container {
     gap: 1rem;
     justify-content: center;
   }
-  .card_count_container > .dot {
+  .card__count__container > .dot {
     background: black;
     display: block !important;
     width: 6px;
@@ -184,7 +185,7 @@
     margin: 0 !important;
   }
 
-  .card_count_container > .dot.active {
+  .card__count__container > .dot.active {
     width: 23px;
     border-radius: 13px;
   }
