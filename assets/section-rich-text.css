@@ -114,7 +114,7 @@
 
     transition: all 1.5s ease-in-out;
      text-decoration:none;
-      color: var(--color-secondary-button-text) !important;
+      color: rgb(var(--color-secondary-button-text)) !important;
 
   }
 

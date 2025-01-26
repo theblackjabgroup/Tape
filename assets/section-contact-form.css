@@ -9,7 +9,7 @@ color:var(--secondary_button_label);
 .contact-form-design {
   position:relative;
   background-color:var(--background_product_card);
-    margin: 3vh 10vw;
+    margin: 20px 10vw;
   display:flex;
   justify-content:center;
   border-radius:3px;
@@ -103,9 +103,18 @@ color:var(--secondary_button_label);
   gap:10px;
 }
 #contact-form-button{
+    background: linear-gradient(to right, gray 50%, rgb(var(--color-button-text)) 50%);
+    background-size: 200% 100%;
+        background-position: 100% 0;
+    transition: all 1.5s ease-in-out;
+     text-decoration:none;
+      color: rgb(var(--color-secondary-button-text)) !important;
   padding:0 50px;
   border-radius:4px;  
       border: solid 1px black;
+}
+#contact-form-button:hover {
+  background-position: 0 0;
 }
 
 .contact-form-data{
