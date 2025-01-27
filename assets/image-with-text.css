@@ -58,6 +58,10 @@
   align-items: center;
 }
 
+.image__with__text__outer__container.no-snap {
+  scroll-snap-type: none;
+}
+
 .image__with__text__inner__container {
   list-style: none;
   margin: auto auto;
@@ -237,12 +241,25 @@
 
 .info__banner__shopnow__button {
   display: var(--info__banner__shopnow__button__visibillity);
-  background: rgba(var(--color-foreground), 0.5);
   padding: var(--info__banner__shopnow__button__padding);
   width: var(--info__banner__shopnow__button__width);
   margin: var(--info__banner__shopnow__button__margin);
   border-radius: var(--info__banner__shopnow__button__border-radius);
   text-decoration: none;
+  background: linear-gradient(
+    to right,
+    gray 50%,
+    rgb(var(--color-button-text)) 50%
+  ) !important;
+  background-size: 200% 100% !important;
+  color: rgb(var(--color-secondary-button-text)) !important;
+  background-position: 100% 0 !important;
+  transition: background-position 1.5s ease-in-out, transform 0.3s ease !important;
+}
+
+.info__banner__shopnow__button:hover {
+  background-position: 0 0 !important;
+  color: rgb(var(--color-secondary-button-text)) !important;
 }
 
 info__banner__contents > .svg-wrapper {

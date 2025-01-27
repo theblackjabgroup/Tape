@@ -12,7 +12,7 @@
   font-size: 16px; /* Base font size */
   line-height: 1.5;
   padding: 10px 20px 0 10px;
-  color: var(--product_price_font);
+  color: var(--product_price_card);
 }
 
 /* Popup box styles */
@@ -27,7 +27,7 @@
   justify-content: space-between;
   padding: 20px;
   gap: 15px;
-  box-shadow: 10px 10px var(--product_price_font);
+  box-shadow: 10px 10px rgb(var(--color-button));
   position: fixed;
   bottom: 30px;
   left: 25px;
@@ -44,7 +44,7 @@
 .popup-heading-layout2 {
   font-size: 24px;
   padding: 10px 0 5px 10px;
-  color: var(--product_price_font);
+  color: var(--product_price_card);
   font-family: "Fira Sans";
   font-weight: 600;
 }
@@ -92,7 +92,7 @@
 }
 
 .popup-close-btn svg {
-  fill: var(--product_price_font);
+  fill: var(--product_price_card);
 }
 
 .popup-subscribe-btn {

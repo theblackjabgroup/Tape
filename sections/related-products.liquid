@@ -4,7 +4,11 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
 
-<div class="related-collection-section color-{{ section.settings.color_scheme }}">
+<div class="related-collection-section color-{{ section.settings.color_scheme }}"
+     style="margin-top: {{ section.settings.section_top_margin }}px; 
+            margin-bottom: {{ section.settings.section_bottom_margin }}px;
+                 padding-top: {{ section.settings.footer_top_padding }}px;
+               padding-bottom: {{ section.settings.footer_bottom_padding }}px;">
   <h1 class="heading" style="font-size: {{ section.settings.title_font_size }}px;">
     {{ section.settings.title }}
   </h1>
@@ -206,6 +210,48 @@ document.addEventListener('DOMContentLoaded', function() {
       "default": 4,
       "label": "Number of products to show"
     },
+
+     {
+      "type": "header",
+      "content": "Section Layout"
+    },
+    {
+      "type": "range",
+      "id": "section_top_margin",
+      "label": "Top Margin (px)",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "section_bottom_margin",
+      "label": "Bottom Margin (px)",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "footer_top_padding",
+      "label": "Top Padding (px)",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "default": 50
+    },
+    {
+      "type": "range", 
+      "id": "footer_bottom_padding",
+      "label": "Bottom Padding (px)",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "default": 50
+    },
+
     {
       "type": "header",
       "content": "Sale Badge Settings"

@@ -71,7 +71,12 @@
         width: 40%;
         margin-left: 120px;
         max-width: 800px; /* Prevents the tracker from becoming too wide */
+      
     }
+
+  .scroll-tracker p {
+    margin-left: 16px;
+  }
 }
 
 /* Extra large screens */
