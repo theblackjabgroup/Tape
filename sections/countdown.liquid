@@ -1,0 +1,199 @@
+{% schema %}
+{
+  "name": "Countdown",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Hurry! Limited Time Offer!"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Don't miss out on our exclusive discounts and promotions. Only 3 days left to take advantage of our special deals on wheelchairs and accessories!</p>"
+    },
+    {
+      "type": "text",
+      "id": "end_date",
+      "label": "End Date (YYYY-MM-DD)",
+      "default": "2025-01-30"
+    },
+    {
+      "type": "text",
+      "id": "end_time",
+      "label": "End Time (HH:mm:ss)",
+      "default": "23:59:59"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Shop the sale"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+     {
+      "type": "header",
+      "content": "Desktop Font Size Settings"
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size",
+      "label": "Heading Font Size",
+      "min": 15,
+      "max": 30,
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "description_font_size",
+      "label": "Description Font Size",
+      "min": 12,
+      "max": 24,
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "timer_font_size",
+      "label": "Timer Font Size",
+      "min": 14,
+      "max": 30,
+      "default": 18
+    },
+     {
+      "type": "header",
+      "content": "Spacing Settings"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top Padding",
+      "min": 0,
+      "max": 100,
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom Padding",
+      "min": 0,
+      "max": 100,
+      "default": 50
+    }
+  ],
+  "presets": [
+    {
+      "name": "Countdown",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
+{{ 'countdown.css' | asset_url | stylesheet_tag }}
+<div class="countdown-section  color-{{ section.settings.color_scheme }}" style="background-color: rgb(var(--color-button)); padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;">
+ <!-- Top border cutouts -->
+    <div class="countdown-border-cutouts countdown-border-top">
+      {% for i in (1..20) %}
+        <div class="countdown-cutout">&nbsp;</div>
+      {% endfor %}
+    </div>
+    
+    <!-- Left border cutouts -->
+    <div class="countdown-border-cutouts countdown-border-left">
+      {% for i in (1..7) %}
+        <div class="countdown-cutout">&nbsp;</div>
+      {% endfor %}
+    </div>
+    
+    <!-- Right border cutouts -->
+    <div class="countdown-border-cutouts countdown-border-right">
+      {% for i in (1..7) %}
+        <div class="countdown-cutout">&nbsp;</div>
+      {% endfor %}
+    </div>
+    
+    <!-- Bottom border cutouts -->
+    <div class="countdown-border-cutouts countdown-border-bottom">
+      {% for i in (1..20) %}
+        <div class="countdown-cutout">&nbsp;</div>
+      {% endfor %}
+    </div>
+  <div class="countdown-section__container page-width">
+    <div class="countdown-section__image-wrapper">
+      {% if section.settings.image %}
+        <img src="{{ section.settings.image | image_url: width: 500 }}" alt="Countdown Image" class="countdown-section__image">
+      {% else %}
+        <div class="countdown_placeholder">
+        {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
+        </div>
+      {% endif %}
+    </div>
+    <div class="countdown-section__content">
+      <h2 class="countdown-section__heading" style=" font-size: {{ section.settings.heading_font_size }}px;">
+        {{ section.settings.heading }}
+      </h2>
+      <div class="countdown-section__description" style=" font-size: {{ section.settings.description_font_size }}px;">
+        {{ section.settings.description }}
+      </div>
+      <div class="countdown-timer" id="countdown-timer-{{ section.id }}" style="font-size: {{ section.settings.timer_font_size }}px;"></div>
+      <a href="{{ section.settings.button_link }}" class="countdown-section__button" style="background-color: rgb(var(--color-button-text)); color: rgb(var(--color-secondary-button-text));">
+        {{ section.settings.button_label }}
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    function startCountdown(elementId, endDateTime) {
+      const timerElement = document.getElementById(elementId);
+      if (!timerElement) return;
+
+      const interval = setInterval(() => {
+        const now = new Date().getTime();
+        const distance = new Date(endDateTime).getTime() - now;
+
+        if (distance < 0) {
+          clearInterval(interval);
+          timerElement.innerHTML = "<p>Offer has expired!</p>";
+          return;
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        timerElement.innerHTML = `
+          <div class="countdown-timer__item"><span>${days}</span> Days</div>
+          <div class= "countdown_dots"> <span></span> </div>
+          <div class="countdown-timer__item"><span>${hours}</span> Hours</div>
+          <div class= "countdown_dots"> <span></span> </div>
+          <div class="countdown-timer__item"><span>${minutes}</span> Minutes</div>
+          <div class= "countdown_dots"> <span></span> </div>
+          <div class="countdown-timer__item"><span>${seconds}</span> Seconds</div>
+        `;
+      }, 1000);
+    }
+    const countdownTimerId = "countdown-timer-{{ section.id }}";
+    const endDateTime = "{{ section.settings.end_date }}T{{ section.settings.end_time }}";
+    startCountdown(countdownTimerId, endDateTime);
+  })();
+</script>
+

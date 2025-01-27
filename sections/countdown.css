@@ -1,0 +1,157 @@
+  .countdown-border-cutouts {
+  position: absolute;
+  display: flex;
+  gap: 10px;
+  z-index: 100;
+}
+
+.countdown-cutout {
+  background-color: rgb(var(--color-background));
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+}
+  .countdown-border-top {
+  top: -10px !important;
+  left: 20px;
+  right: 0;
+  justify-content: space-evenly;
+}
+
+/* Bottom border */
+.countdown-border-bottom {
+  bottom: -10px !important;
+  left: 20px;
+  right: 0;
+  justify-content: space-evenly;
+}
+
+/* Left border */
+.countdown-border-left {
+  left: -10px !important;
+  top: 0;
+  bottom: 0;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-evenly;
+}
+
+/* Right border */
+.countdown-border-right {
+  right: -10px !important;
+  top: 0;
+  bottom: 0;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-evenly;
+}
+.countdown-section {
+  position: relative;
+  width: 80%;
+  margin: 10px auto;
+}
+  .countdown_placeholder{
+    width: 400px;
+    height: 350px;
+  }
+  .countdown-section__container {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .countdown-section__image-wrapper {
+    flex: 1;
+    text-align: center;
+  }
+  .countdown-section__image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+  .countdown-section__content {
+    flex: 1;
+  }
+  .countdown-section__heading {
+    margin-bottom: 10px;
+  }
+  .countdown-section__description {
+    margin-bottom: 20px;
+  }
+  .countdown-timer {
+    display: flex;
+    gap: 10px;
+    justify-content:left;
+    margin-bottom: 20px;
+  }
+  .countdown-timer__item {
+    text-align: center;
+    font-weight: bold;
+  }
+  .countdown-section__button {
+    display: inline-block;
+    padding: 10px 20px;
+    border: none;
+    text-decoration: none;
+    font-size: 1em;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+.countdown_dots {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.7em; /* Adjust spacing between dots */
+  margin: 0 0.5em;
+}
+
+.countdown_dots::before,
+.countdown_dots::after,
+.countdown_dots span {
+  content: "";
+  width: 8px; /* Adjust size of the dots */
+  height: 8px;
+  background-color: #000; /* Dot color */
+  border-radius: 50%;
+}
+   @media screen and (max-width: 750px) {
+      .countdown_placeholder{
+    width: 330px;
+    height: 200px;
+  }
+    .countdown-border-left, .countdown-border-right{
+      display: none;
+    } 
+     .countdown-section {
+  width: 100%;
+  margin: 10px 0;
+}
+   .countdown-section__heading{
+     font-size: 22px !important;
+   }
+     .countdown-section__description{
+       font-size: 12px !important;
+       text-align: justify;
+     }
+     .countdown-timer{
+       font-size: 14px !important;
+     }
+   
+
+  .countdown-border-left .countdown-cutout,
+  .countdown-border-right .countdown-cutout {
+    display: none;
+  }
+
+
+  .countdown-border-top .countdown-cutout:nth-child(n+11),
+      .countdown-border-bottom .countdown-cutout:nth-child(n+11){
+    display: none;
+  }
+
+    .countdown-border-top, .countdown-border-bottom{
+      left:3px;
+    }
+
+   }
