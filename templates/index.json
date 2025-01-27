@@ -269,14 +269,18 @@
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
-        "title": "Featured products",
-        "color_scheme": "scheme-1",
+        "title": "Featured Collection",
+        "color_scheme": "",
         "title_font_size": 36,
         "show_subheading": true,
         "subheading_font_size": 20,
-        "collection": "all",
-        "products_to_show": 8,
-        "offer_tag_text": "SPECIAL OFFER - 20% DISCOUNT"
+        "collection": "",
+        "products_to_show": 5,
+        "offer_tag_text": "SPECIAL OFFER - 20% DISCOUNT",
+        "section_top_margin": 50,
+        "section_bottom_margin": 50,
+        "footer_top_padding": 50,
+        "footer_bottom_padding": 50
       }
     },
     "featured_icon_with_text": {
