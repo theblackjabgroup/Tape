@@ -42,12 +42,13 @@
                     background-color: {{ section.settings.product_card_background_color }};">
           
           {% if section.settings.offer_tag_text != blank %}
-            <div class="offer-banner" 
-                 style="--banner-bg-color: {{ section.settings.special_offer_background_color }}; 
-                        background-color: {{ section.settings.special_offer_background_color }}; 
-                        color: {{ section.settings.special_offer_text_color }};">
-              {{ section.settings.offer_tag_text }}
-            </div>
+           <div class="offer-banner" 
+     style="--banner-bg-color: {{ section.settings.special_offer_background_color }}; 
+            background-color: {{ section.settings.special_offer_background_color }}; 
+            color: {{ section.settings.special_offer_text_color }};
+            font-size: {{ section.settings.banner_font_size }}px;">
+  {{ section.settings.offer_tag_text }}
+</div>
           {% endif %}
           
           <div class="product-image{% unless section.settings.offer_tag_text != blank %} no-banner{% endunless %}">
@@ -339,6 +340,16 @@ document.addEventListener('DOMContentLoaded', function() {
       "id": "offer_tag_text",
       "label": "Offer Tag Text",
       "default": "SPECIAL OFFER - 20% DISCOUNT"
+    },
+
+        {
+      "type": "range",
+      "id": "banner_font_size",
+      "label": "Banner Text Font Size",
+      "min": 12,
+      "max": 17,
+      "step": 1,
+      "default": 14
     },
    {
       "type": "header",
