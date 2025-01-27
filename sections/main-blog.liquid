@@ -7,6 +7,18 @@
     padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
     padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
   }
+  .card__inner{
+    height: 50%;
+  }
+  .card__content{
+    height: 50%;
+  }
+   @media screen and (max-width: 1250px){
+      .article-card, .card__heading, .h2{
+      font-size: 16px !important;
+      font-weight: bold !important;
+    }
+   }
 
   @media screen and (min-width: 750px) {
     .section-{{ section.id }}-padding {
@@ -36,6 +48,41 @@
   }
   .blog-articles__article{
     overflow: hidden;
+      position: relative;
+  }
+
+
+.article-tags {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  z-index: 10; /* Ensures tags are above the image */
+}
+  .article-tags .tag {
+    background: rgba(255, 255, 255, 0.8);
+    color: var(--color-primary);
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+  }
+  .article-tags .tag:hover {
+    text-decoration: underline;
+  }
+
+  .blog-articles {
+    display: grid;
+    grid-template-columns: repeat({{ section.settings.articles_per_row }}, 1fr);
+    gap: 20px;
+  }
+
+  @media screen and (max-width: 750px) {
+    .blog-articles {
+      grid-template-columns: 1fr;
+    }
   }
 
 {%- endstyle -%}
@@ -55,6 +102,13 @@
             style="--animation-order: {{ forloop.index }};"
           {% endif %}
         >
+           {%- if section.settings.show_tags and article.tags.size > 0 -%}
+            <div class="article-tags">
+              {%- for tag in article.tags -%}
+                <a href="{{ routes.blog_tag_url | append: tag }}" class="tag">{{ tag }}</a>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
           <div class="semi semi-left"><h6></h6></div>
           <div class="semi semi-right"><h6></h6></div>
         
@@ -74,7 +128,6 @@
     {%- endif -%}
   </div>
 {%- endpaginate -%}
-
 
 
 {% schema %}
@@ -104,6 +157,23 @@
       "id": "show_author",
       "default": false,
       "label": "t:sections.main-blog.settings.show_author.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_tags",
+      "default": false,
+      "label": "Show tags"
+    },
+    {
+      "type": "select",
+      "id": "articles_per_row",
+      "label": "Articles per row",
+      "info": "Number of articles to be displayed in desktop view",
+      "options": [
+        { "value": "3", "label": "3 Articles" },
+        { "value": "4", "label": "4 Articles" }
+      ],
+      "default": "3"
     },
     {
       "type": "paragraph",
@@ -136,3 +206,4 @@
   ]
 }
 {% endschema %}
+
