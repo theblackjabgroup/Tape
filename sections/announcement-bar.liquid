@@ -23,6 +23,7 @@
   {{ 'component-list-social.css' | asset_url | stylesheet_tag }}
 {% endif %}
 <style>
+
 @media screen and (min-width: 749px) {
   .config-margin{
     margin: 0px {{ section.settings.bar_margin }}px;
@@ -246,10 +247,13 @@
       </div>
       {%- if section.settings.enable_scroll_tracking -%}
       <div class="scroll-tracker">
-    <p>
+        <div class="scroll-tracker-content">
+          <p>
         <span class="scroll-distance"></span>Km
         <span class="arrow-down"></span>
     </p>
+        </div>
+    
 </div>
 
       {%- endif -%}

@@ -11,77 +11,40 @@
 }
 
 .scroll-tracker {
-    padding: 0 11px;
-    border-radius: 7px;
-    font-size: 15px;
-    font-weight: 500;
-    height: 45px;
-    color: rgb(var(--color-secondary-button-text));
-    display: inline-block;
-    position: relative;
-    margin-left: 40px;
-    background: rgb(var(--color-button-text));
-    text-align: left;
-    width: 50%;
-    line-height: normal;
-}
-
-.scroll-tracker p {
-    font-size: 15px;
-    margin-left: 13px;
-    margin-top: 13px;
-    display: flex;
+       display: flex;
     align-items: center;
-    gap: 3px;
-    color: rgb(var(--color-secondary-button-text));
+    justify-content: center;
 }
-
+  .scroll-tracker-content{
+  display: inline-block;
+  padding: 6px 20px;
+  background-color: rgb(var(--color-button-text));
+  border-radius: 8px; 
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  .scroll-tracker-content p {
+  margin: 0;
+   font-size: 15px;
+  white-space: nowrap; 
+  display: flex;
+  align-items: center; 
+  gap: 4px; 
+     color: rgb(var(--color-secondary-button-text));
+}
 .scroll-distance {
     font-weight: 500;
     font-size: 15px;
 }
 
-/* Responsive Design */
-/* Mobile devices */
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 906px) {
     .scroll-tracker {
         display: none;
     }
 }
 
-/* Tablets */
-@media screen and (min-width: 768px) and (max-width: 1023px) {
-    .scroll-tracker {
-        width: 70%;
-        margin-left: 20px;
-    }
-}
 
-/* Small desktops */
-@media screen and (min-width: 1024px) and (max-width: 1439px) {
-    .scroll-tracker {
-        width: 50%;
-        margin-left: 50px;
-    }
-}
 
-/* Large desktops */
-@media screen and (min-width: 1440px) {
-    .scroll-tracker {
-        width: 40%;
-        margin-left: 120px;
-        max-width: 800px; /* Prevents the tracker from becoming too wide */
-      
-    }
 
-  .scroll-tracker p {
-    margin-left: 16px;
-  }
-}
 
-/* Extra large screens */
-@media screen and (min-width: 1920px) {
-    .scroll-tracker {
-        margin-left: calc(120px + 5%);
-    }
-}
