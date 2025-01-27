@@ -127,12 +127,21 @@ background-color: var(--background_product_card);
     margin-bottom: 15px;
 }
 
+.footer-column{
+  display:flex;
+  flex-direction:column;
+  align-item:centre;
+  justify-content:flex-start;
+  margin-left:14px;
+}
+
 /* Style for other footer column headings */
 .footer-column h4:not(#stay-connected-title) {
     font-weight: bold;
     margin-bottom: 15px;
   font-size:17px;
 }
+
 
 * Specifically target menu columns except newsletter */
 .footer-column:not(#newsletter-section1) {
@@ -143,6 +152,7 @@ background-color: var(--background_product_card);
 .footer-column:not(#newsletter-section1) h4 {
     font-weight: bold;
     margin-bottom: 15px;
+  white-space: nowrap;
 }
 .footer-column ul {
     list-style: none;
@@ -174,7 +184,6 @@ background-color: var(--background_product_card);
 
 .footer-column form input {
     padding: 10px 10px 10px 50px;
-    margin-right: 10px;
     border: 1px solid #ccc;
     margin-bottom: 11px;
     font-family: 'Inter', sans-serif;
@@ -201,11 +210,7 @@ a {
 
 /* Footer Country Selector Container */
 .footer__country-selector {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-right: 320px; /* Adjust for alignment */
+ width:100%;
 }
 
 /* Localization Form */
@@ -290,11 +295,7 @@ font-family: 'Inter', sans-serif; /* Set font to Inter */
 
 /* Footer Langauage Selector Container */
 .footer__language-selector {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-right: 320px; /* Adjust for alignment */
+ width:100%;
 }
 
 /* Localization Form */
@@ -337,94 +338,54 @@ font-size: 15px;
   text-transform: uppercase;
 }
 
-
 @media (max-width: 768px) {
-    .footer-content {
-        flex-direction: column;
-        text-align: left;
-    }
-
+  .footer-content {
+    flex-direction: column;
+    text-align: left;
+  }
 }
 
-
-
-/* For larger screens */
 @media (min-width: 769px) {
-   .footer-envelope-icon {
-        font-size: 16px;
-        left: 49px;
-    }
+  .footer-envelope-icon {
+    font-size: 16px;
+    left: 49px;
+  }
 }
 
-
-@media screen and (max-width: 990px){
+@media screen and (max-width: 990px) {
   .footer-envelope-icon {
     margin-left: -24px;
-    /* margin-top: -2px; */
   }
-
-  @media screen and (min-width: 1400px){
-.fa-regular, .far {
-    font-weight: 400;
-    margin-left: 40px;
 }
 
+@media screen and (min-width: 1400px) {
+  .fa-regular,
+  .far {
+    font-weight: 400;
+    margin-left: 20px;
   }
+}
 
-  
-
-/* Mobile Footer Menu Styles */
 @media (max-width: 480px) {
   .footer-content {
     padding: 0;
   }
-  
+
   .footer-column {
-    margin-bottom: 0;
+    margin-left:0px;
   }
-
-  .footer__country-selector .footer-country-label {
-    margin-left: 235px;
-  }
-  
- 
-
-.footer__country-selector .footer-country-form .disclosure__button {
-padding-right: 70px;
-            margin-left: 235px;
-            white-space: nowrap;
-}
-
-  .footer__language-selector .footer-language-form .disclosure__button {
-padding-right: 95px;
-            margin-left: 235px;
-            white-space: nowrap;
-}
-  
   .footer-envelope-icon {
     margin-left: 10px;
   }
 
-  .footer-column form button {
-    margin-left: -18px;
+  .footer__localization {
+    margin-right: 210px;
   }
-.footer__language-selector .footer-language-label {
-    margin-left: 235px;
-}
-  
-.footer__localization {
-
-  margin-right: 210px;
-
-}
 
   .footer__localization .caption-large {
-          margin: 1rem 1rem .5rem;
-        margin-left: -15px;
-        margin-bottom: 10px;
-        margin-top: -3px;
-}
-  
+    margin: -3px -15px 10px 1rem;
+  }
+
   .footer-column:not(#newsletter-section1) h4 {
     position: relative;
     padding: 15px 20px;
@@ -435,26 +396,24 @@ padding-right: 95px;
     align-items: center;
     font-size: 16px;
   }
-.language-currency-dropdown {
-          margin-left: -18px;
-}
-  /* Newsletter section specific styles */
+
+
+
   #newsletter-section1 {
-   margin-left: 17px;
+    margin-left: 17px;
   }
 
   #newsletter-section1 h4 {
-    margin-bottom: 15px;
+    margin: 20px 0 15px;
     cursor: default;
     margin-top: 20px;
   }
 
-  /* Dropdown arrow for all collapsible sections including social media */
   .footer-column:not(#newsletter-section1) h4::after {
     content: '';
     width: 10px;
     height: 10px;
-    border-right: 2px solid currentColor; 
+    border-right: 2px solid currentColor;
     border-bottom: 2px solid currentColor;
     transform: rotate(45deg);
     transition: transform 0.3s ease;
@@ -464,7 +423,6 @@ padding-right: 95px;
 
   .footer-column form input {
     padding: 10px 10px 10px 50px;
-    margin-left: -17px;
     border: 1px solid #ccc;
     margin-bottom: 14px;
     font-family: 'Inter', sans-serif;
@@ -472,17 +430,16 @@ padding-right: 95px;
     font-size: 15px;
   }
 
-
-  .footer-envelope-icon1{
-    font-size:15px;
-                margin-top: 3px;
+  .footer-envelope-icon1 {
+    font-size: 15px;
+    margin-top: 3px;
     margin-left: 7px;
   }
+
   .footer-column:not(#newsletter-section1) h4.active::after {
     transform: rotate(-135deg);
   }
 
-  /* Menu list styles */
   .footer-column:not(#newsletter-section1) ul {
     max-height: 0;
     overflow: hidden;
@@ -509,30 +466,26 @@ padding-right: 95px;
   }
 
   .footer-column form {
-    padding: 0 20px 20px;@media screen and (max-width: 990px) {
-    @media (max-width: 480px) {
-        .footer__language-selector .footer-language-form 
+    padding-right:20px;
   }
 
-  /* Social icons specific styles */
   .social-icons {
-        display: none;  /* Default to hidden */
-        padding: 15px 20px;
-        gap: 15px;
-        flex-wrap: wrap;
-       justify-content: center; /* Center the icons */
-    }
+    display: none;
+    padding: 15px 20px;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 
-    .social-icons.show {
-        display: flex;  /* Show when class 'show' is applied */
-    }  
+  .social-icons.show {
+    display: flex;
+  }
 }
 
-        .country-selector__close-button.link {
+    .country-selector__close-button.link {
      background: transparent;
           margin-right:10px
   }
-
 
 .field:after,
 .select:after,

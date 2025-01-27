@@ -67,9 +67,11 @@
     <div class="footer-content" style="color: {{ section.settings.footer_text_color }};">
         <!-- Email Newsletter Column -->
         <div id="newsletter-section1" class="footer-column" {% if section.settings.bold_newsletter_section %}style="font-weight: bold;"{% endif %}>
-            <h4 id="stay-connected-title" style="color: {{ section.settings.menu_title_color }};">
-                {{ section.settings.STAY_CONNECTED_TITLE }}
-            </h4>
+          <div id="stay-connected">
+ <h4 id="stay-connected-title" style="color: {{ section.settings.menu_title_color }};">
+   {{ section.settings.STAY_CONNECTED_TITLE }}
+ </h4>
+</div>
             <form id="newsletter-form">
                 <div id="form-container" class="form-container">
                     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
