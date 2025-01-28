@@ -40,7 +40,7 @@
           </div>
         </li>
       {% endfor %}
-      <div class="info__banner color-{{ section.settings.bannerColor }}">
+      <div class="info__banner color-{{ section.settings.bannerColor }}" style="opacity:{{ section.settings.opacity }}">
         <div class="info__banner__contents">
           <p class="info__banner__title inter-medium">NEW ARRIVAL</p>
           <h1 class="info__banner__heading fira-sans-bold">Thanksgiving big billion sale!</h1>
@@ -71,21 +71,17 @@
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
+   document.addEventListener('DOMContentLoaded', () => {
   const AUTOPLAY_INTERVAL = 3000;
 
-  // Find all instances of the section
   const sections = document.querySelectorAll('.image__with__text__section');
 
   sections.forEach((section) => {
     const container = section.querySelector('.image__with__text__outer__container');
     const dotItems = section.querySelectorAll('.dot-item');
     const cards = section.querySelectorAll('.image__with__text__card');
-
-    // Check if autoplay is enabled
     const autoplayEnabled = section.getAttribute('data-autoplay') === 'true';
 
-    // Banner elements specific to this section
     const bannerHeadingTag = section.querySelector('.info__banner__title');
     const bannerHeading = section.querySelector('.info__banner__heading');
     const bannerDescription = section.querySelector('.info__banner__description');
@@ -96,7 +92,6 @@
     let ticking = false;
     let autoplayInterval;
 
-    // Function to update the banner content based on the current slide
     const updateBannerContent = (currentIndex) => {
       const currentCard = cards[currentIndex];
       if (currentCard) {
@@ -106,7 +101,6 @@
         const btnText = currentCard.getAttribute('btn-text');
         const headingTag = currentCard.getAttribute('data-heading-tag');
 
-        // Update the banner content
         bannerHeadingTag.textContent = headingTag || "  ";
         bannerHeading.textContent = heading || "Default Heading";
         bannerDescription.textContent = description || "Default Description";
@@ -117,34 +111,40 @@
       }
     };
 
-    // Function to update dot scaling based on scroll position
     const updateDotScaling = () => {
       const scrollPosition = container.scrollLeft;
       const galleryWidth = cards[0].offsetWidth;
+      
+      // Calculate the exact position between slides
+      const exactIndex = scrollPosition / galleryWidth;
+      const currentIndex = Math.floor(exactIndex);
+      const progress = exactIndex - currentIndex;
 
-      const currentIndex = Math.round(scrollPosition / galleryWidth);
-      const percentageScrolled = (scrollPosition % galleryWidth) / galleryWidth;
-
-      // Reset all dots to the default size
+      // Add smooth transition to all dots
       dotItems.forEach((dot) => {
+        dot.style.transition = 'width 0.2s ease-out, height 0.2s ease-out';
         dot.style.width = '8px';
         dot.style.height = '8px';
       });
 
-      // Scale the current dot and next dot based on scroll position
+      // Update current dot
       if (dotItems[currentIndex]) {
-        dotItems[currentIndex].style.width = `${48 - percentageScrolled * 40}px`;
+        const currentDotWidth = Math.max(8, 48 - (progress * 40));
+        dotItems[currentIndex].style.width = `${currentDotWidth}px`;
       }
 
+      // Update next dot
       if (dotItems[currentIndex + 1]) {
-        dotItems[currentIndex + 1].style.width = `${8 + percentageScrolled * 40}px`;
+        const nextDotWidth = Math.max(8, 8 + (progress * 40));
+        dotItems[currentIndex + 1].style.width = `${nextDotWidth}px`;
       }
 
-      // Update the banner content based on the exact current index
-      updateBannerContent(Math.round(scrollPosition / galleryWidth));
+      // Update banner content only when close to a slide
+      if (progress < 0.1 || progress > 0.9) {
+        updateBannerContent(Math.round(exactIndex));
+      }
     };
 
-    // Throttled scroll handler using requestAnimationFrame
     const onScroll = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
@@ -155,65 +155,48 @@
       }
     };
 
-    // Autoplay function
-  const startAutoplay = () => {
-  container.classList.add('no-snap'); // Disable snapping during autoplay
-  autoplayInterval = setInterval(() => {
-    const cardWidth = cards[0].offsetWidth;
-    const currentScroll = container.scrollLeft;
-    const maxScroll = cardWidth * (cards.length - 1);
+    const startAutoplay = () => {
+      container.classList.add('no-snap');
+      autoplayInterval = setInterval(() => {
+        const cardWidth = cards[0].offsetWidth;
+        const currentScroll = container.scrollLeft;
+        const maxScroll = cardWidth * (cards.length - 1);
 
-    // Determine the next index
-    const currentIndex = Math.round(currentScroll / cardWidth);
-    const nextIndex = currentIndex >= cards.length - 1 ? 0 : currentIndex + 1;
+        const currentIndex = Math.round(currentScroll / cardWidth);
+        const nextIndex = currentIndex >= cards.length - 1 ? 0 : currentIndex + 1;
 
-    // Scroll to the next slide
-    container.scrollTo({
-      left: nextIndex * cardWidth,
-      behavior: 'smooth'
-    });
+        container.scrollTo({
+          left: nextIndex * cardWidth,
+          behavior: 'smooth'
+        });
 
-    // Update banner content
-    updateBannerContent(nextIndex);
+        updateBannerContent(nextIndex);
 
-    // Reset scroll position if at the end
-    if (currentScroll >= maxScroll) {
-      setTimeout(() => {
-        container.scrollLeft = 0;
-      }, 300);
-    }
-  }, AUTOPLAY_INTERVAL);
-  };
+        if (currentScroll >= maxScroll) {
+          setTimeout(() => {
+            container.scrollLeft = 0;
+          }, 300);
+        }
+      }, AUTOPLAY_INTERVAL);
+    };
 
-  const stopAutoplay = () => {
-  container.classList.remove('no-snap'); // Re-enable snapping after autoplay
-  clearInterval(autoplayInterval);
-  };
+    const stopAutoplay = () => {
+      container.classList.remove('no-snap');
+      clearInterval(autoplayInterval);
+    };
 
-    // Listen to scroll events on the container
     container.addEventListener('scroll', onScroll);
 
-    // Add click event listener to the dots
     dotItems.forEach((dot, index) => {
       dot.addEventListener('click', () => {
         const cardWidth = cards[0].offsetWidth;
         container.scrollTo({
           left: index * cardWidth,
-          behavior: 'smooth',
+          behavior: 'smooth'
         });
 
-        // Update the banner content and active dot after the scroll
-        setTimeout(() => {
-          updateBannerContent(index);
-          dotItems.forEach((dot) => {
-            dot.style.width = '8px';
-            dot.style.height = '8px';
-          });
-          dot.style.width = '48px';
-          dot.style.height = '48px';
-        }, 300);
+        updateBannerContent(index);
 
-        // Restart autoplay after manual interaction
         if (autoplayEnabled) {
           stopAutoplay();
           startAutoplay();
@@ -221,7 +204,6 @@
       });
     });
 
-    // Expand button functionality for showing/hiding banner details
     if (infoBannerExpandButton) {
       infoBannerExpandButton.addEventListener('click', () => {
         infoBannerDetails.classList.toggle('show');
@@ -229,22 +211,15 @@
       });
     }
 
-    // Set up initial state
-    dotItems[0].style.width = '48px'; // The first dot starts as the active one
-    updateBannerContent(0); // Initialize banner content with the first card
+    // Initialize first dot
+    dotItems[0].style.width = '48px';
+    updateBannerContent(0);
 
-    // Start autoplay if enabled
     if (autoplayEnabled) {
       startAutoplay();
-
-      // Pause autoplay on hover
       section.addEventListener('mouseenter', stopAutoplay);
       section.addEventListener('mouseleave', startAutoplay);
     }
-
-
-
-
   });
   });
 </script>
@@ -265,6 +240,14 @@
         "label": "Banner Color",
         "id": "bannerColor",
         "default": "#000000"
+      }, {
+        "type": "range",
+        "id": "opacity",
+        "label": "Banner Opacity",
+        "min": 0.0,
+        "max": 1.0,
+        "step": 0.1,
+        "default": 0.8
       }, {
         "type": "checkbox",
         "id": "autoplay",

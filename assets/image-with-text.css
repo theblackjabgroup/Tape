@@ -200,7 +200,6 @@
   transform: var(--info__banner__transform);
   padding: var(--info__banner__padding);
   display: var(--info__banner__visibillity);
-  opacity: 0.8;
   z-index: 1;
 }
 

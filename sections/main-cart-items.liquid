@@ -12,7 +12,7 @@
         width:100%;
         height:100%;
   }
-  .page-width{
+  .page-width1{
     padding-top:{{section.settings.padding_top}}px;
     padding-bottom:{{section.settings.padding_bottom}}px;
     
@@ -22,12 +22,22 @@
     padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
   }
 
+.page-width1 {
+    max-width: 160rem;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
   @media screen and (min-width: 750px) {
     .section-{{ section.id }}-padding {
       padding-top: {{ section.settings.padding_top }}px;
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
+     .page-width1 {
+        padding: 0 5rem;
+    }
   }
+  
 {%- endstyle -%}
 
 
@@ -44,7 +54,7 @@
 <script src="{{ 'quantity-popover.js' | asset_url }}" defer="defer"></script>
 
 <cart-items class="gradient color-{{ section.settings.color_scheme }} isolate{% if cart == empty %} is-empty{% else %} section-{{ section.id }}-padding{% endif %}">
-  <div class="page-width color-{{ section.settings.color_scheme }}">
+  <div class="page-width1 color-{{ section.settings.color_scheme }}">
     <div class="title-wrapper-with-link">
       <div class="cart-heading">
       <h1 class="title title--primary">{{ 'sections.cart.title' | t }}</h1>
