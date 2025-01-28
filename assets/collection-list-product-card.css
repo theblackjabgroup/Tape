@@ -1,3 +1,6 @@
+.card{
+  background-color: unset;
+}
 .card-wrapper {
   color: inherit;
   position: relative;
@@ -161,15 +164,6 @@ text-decoration-skip-ink: none;
 
 .card .media {
   width: 100%;
-}
-
-.card__media {
-  margin: var(--image-padding);
-  width: calc(100% - 2 * var(--image-padding));
-}
-
-.card--standard .card__media {
-  margin: var(--image-padding);
 }
 
 .collection_card_innerr {

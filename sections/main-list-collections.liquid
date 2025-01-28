@@ -1,16 +1,13 @@
 {{ 'collection-list-product-card.css' | asset_url | stylesheet_tag }}
 {{ 'section-collection-list.css' | asset_url | stylesheet_tag }}
 
-<div class="page-width1">
+<div class="page-width1 color-{{ section.settings.color_scheme }} gradient" >
   <div class="collection-list_headingpart">
      <h1 class="title title--primary inline-richtext{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
     {{ section.settings.title }}
   </h1>
-    <p class="cl-sub_heading">Top series of products</p>
-    <p class="cl-description">At Theme-{{ shop.name }}, we are dedicated to enhancing patient 
-      care and clinical efficiency through state-of-the-art medical products.
-      Our commitment to innovation and quality ensures that healthcare providers have 
-      the tools they need to deliver the best possible outcomes for their patients.
+    <p class="cl-sub_heading">{{ section.settings.head_heading }}</p>
+    <p class="cl-description">{{ section.settings.head_description }}
     </p>
   </div>
   <div class="collectionlist_strip">
@@ -19,9 +16,9 @@
       {% comment %} First set of Hello text {% endcomment %}
        {% for i in (1..16) %}
             <h3 class="clcard__heading card__heading--placeholder">
-                <a role="link" aria-disabled="true" class="full-unstyled-link">
+                <a role="link" aria-disabled="true" class="full-unstyled-link" style="color: rgb(var(--color-foreground));">
                     New Arrivals
-                    <span class="icon-wrap">
+                    <span class="icon-wrap" style="color: rgb(var(--color-foreground));">
                         {{- 'icon-arrow.svg' | inline_asset_content -}}
                     </span>
                 </a>
@@ -32,9 +29,9 @@
       {% comment %} Second set for continuous loop {% endcomment %}
       {% for i in (1..16) %}
             <h3 class="clcard__heading card__heading--placeholder">
-                <a role="link" aria-disabled="true" class="full-unstyled-link">
+                <a role="link" aria-disabled="true" class="full-unstyled-link" style="color: rgb(var(--color-foreground));">
                     New Arrivals
-                    <span class="icon-wrap">
+                    <span class="icon-wrap" style="color: rgb(var(--color-foreground));">
                         {{- 'icon-arrow.svg' | inline_asset_content -}}
                     </span>
                 </a>
@@ -97,6 +94,24 @@
       "label": "t:sections.main-list-collections.settings.title.label",
       "default": "t:sections.main-list-collections.settings.title.default"
     },
+     {
+      "type": "text",
+      "id": "head_heading",
+      "label": "Subheading",
+      "default": "Top series of products"
+    },
+    {
+      "type": "text",
+      "id": "head_description",
+      "label": "Caption",
+      "default": "At my store we are dedicated to enhancing patient"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
     {
       "type": "select",
       "id": "sort",
@@ -129,27 +144,7 @@
       "default": "alphabetical",
       "label": "t:sections.main-list-collections.settings.sort.label"
     },
-    {
-      "type": "select",
-      "id": "image_ratio",
-      "options": [
-        {
-          "value": "adapt",
-          "label": "t:sections.main-list-collections.settings.image_ratio.options__1.label"
-        },
-        {
-          "value": "portrait",
-          "label": "t:sections.main-list-collections.settings.image_ratio.options__2.label"
-        },
-        {
-          "value": "square",
-          "label": "t:sections.main-list-collections.settings.image_ratio.options__3.label"
-        }
-      ],
-      "default": "adapt",
-      "label": "t:sections.main-list-collections.settings.image_ratio.label",
-      "info": "t:sections.main-list-collections.settings.image_ratio.info"
-    },
+   
     {
       "type": "range",
       "id": "columns_desktop",
