@@ -1,0 +1,465 @@
+{{ 'scrolling-text.css' | asset_url | stylesheet_tag }}
+
+<div
+  class="marquee-container color-{{ section.settings.color_scheme }}"
+  style="
+    --text-strip-speed: {{ section.settings.scroll_speed }}s;
+             --first-strip-speed: {{ section.settings.scroll_speed }}s;
+             --second-strip-speed: {{ section.settings.scroll_speed }}s;
+             --strip-padding-top: {{ section.settings.strip_padding_top }}px;
+             --strip-padding-bottom: {{ section.settings.strip_padding_bottom }}px;
+             --third-strip-speed: {{ section.settings.scroll_speed }}s;
+  "
+>
+  <div class="marquee-inner">
+    {% for block in section.blocks %}
+      {% if block.settings.show_strip %}
+        {% case block.type %}
+          {% when 'text_strip_1' %}
+            <div
+              class="text-only-marquee-content text-only-strip-content"
+              style="animation-direction: {% if block.settings.direction == 'right' %}normal{% else %}reverse{% endif %};"
+              {{ block.shopify_attributes }}
+            >
+              {% assign text_only_content = block.settings.text_content | strip %}
+              {% for repeat in (1..10) %}
+                <div class="text-only-marquee-item">
+                  <span class="text-only-marquee-text">{{ text_only_content }}</span>
+                </div>
+              {% endfor %}
+            </div>
+
+          {% when 'content_strip_1' %}
+            <div
+              class="marquee-content first-strip-content"
+              style="animation-direction: {% if block.settings.direction == 'right' %}normal{% else %}reverse{% endif %};"
+              {{ block.shopify_attributes }}
+            >
+              {% for repeat in (1..section.settings.word_iterations) %}
+                {% for i in (1..3) %}
+                  {% assign text_key = 'text_' | append: i %}
+                  {% assign image_key = 'image_' | append: i %}
+                  {% if block.settings[text_key] != blank %}
+                    <div class="marquee-item">
+                      <span class="marquee-text">{{ block.settings[text_key] }}</span>
+                      {% if block.settings[image_key] %}
+                        <img
+                          src="{{ block.settings[image_key] | img_url: 'master' }}"
+                          alt="{{ block.settings[text_key] }}"
+                          width="{{ section.settings.image_width }}"
+                          height="{{ section.settings.image_height }}"
+                          class="marquee-image"
+                          loading="lazy"
+                        >
+                      {% endif %}
+                    </div>
+                  {% endif %}
+                {% endfor %}
+              {% endfor %}
+            </div>
+
+          {% when 'content_strip_2' %}
+            <div
+              class="marquee-content second-strip-content"
+              style="animation-direction: {% if block.settings.direction == 'right' %}normal{% else %}reverse{% endif %};"
+              {{ block.shopify_attributes }}
+            >
+              {% for repeat in (1..section.settings.word_iterations) %}
+                {% for i in (1..3) %}
+                  {% assign text_key = 'text_' | append: i %}
+                  {% assign image_key = 'image_' | append: i %}
+                  {% if block.settings[text_key] != blank %}
+                    <div class="marquee-item">
+                      <span class="marquee-text">{{ block.settings[text_key] }}</span>
+                      {% if block.settings[image_key] %}
+                        <img
+                          src="{{ block.settings[image_key] | img_url: 'master' }}"
+                          alt="{{ block.settings[text_key] }}"
+                          width="{{ section.settings.image_width }}"
+                          height="{{ section.settings.image_height }}"
+                          class="marquee-image"
+                          loading="lazy"
+                        >
+                      {% endif %}
+                    </div>
+                  {% endif %}
+                {% endfor %}
+              {% endfor %}
+            </div>
+
+          {% when 'content_strip_3' %}
+            <div
+              class="marquee-content third-strip-content"
+              style="animation-direction: {% if block.settings.direction == 'right' %}normal{% else %}reverse{% endif %};"
+              {{ block.shopify_attributes }}
+            >
+              {% for repeat in (1..section.settings.word_iterations) %}
+                {% for i in (1..3) %}
+                  {% assign text_key = 'text_' | append: i %}
+                  {% assign image_key = 'image_' | append: i %}
+                  {% if block.settings[text_key] != blank %}
+                    <div class="marquee-item">
+                      <span class="marquee-text">{{ block.settings[text_key] }}</span>
+                      {% if block.settings[image_key] %}
+                        <img
+                          src="{{ block.settings[image_key] | img_url: 'master' }}"
+                          alt="{{ block.settings[text_key] }}"
+                          width="{{ section.settings.image_width }}"
+                          height="{{ section.settings.image_height }}"
+                          class="marquee-image"
+                          loading="lazy"
+                        >
+                      {% endif %}
+                    </div>
+                  {% endif %}
+                {% endfor %}
+              {% endfor %}
+            </div>
+        {% endcase %}
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Scrolling Text",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color Scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Global Settings"
+    },
+    {
+      "type": "range",
+      "id": "strip_padding_top",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "strip_padding_bottom",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "image_width",
+      "min": 20,
+      "max": 50,
+      "step": 10,
+      "unit": "px",
+      "label": "Image Width",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "image_height",
+      "min": 20,
+      "max": 50,
+      "step": 10,
+      "unit": "px",
+      "label": "Image Height",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "scroll_speed",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "unit": "s",
+      "label": "Scrolling Speed",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "word_iterations",
+      "min": 1,
+      "max": 50,
+      "step": 1,
+      "label": "Number of Word Iterations",
+      "default": 10
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text_strip_1",
+      "name": "Text Strip 1",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "show_strip",
+          "label": "Show this strip",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "text_content",
+          "label": "Text Content",
+          "default": "Special Offers | Free Shipping | Sale Now On"
+        },
+        {
+          "type": "select",
+          "id": "direction",
+          "label": "Scroll Direction",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left to Right"
+            },
+            {
+              "value": "right",
+              "label": "Right to Left"
+            }
+          ],
+          "default": "right"
+        },
+        {
+          "type": "checkbox",
+          "id": "pause_on_hover",
+          "label": "Pause on Hover",
+          "default": true
+        }
+      ]
+    },
+    {
+      "type": "content_strip_1",
+      "name": "Content Strip 1",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "show_strip",
+          "label": "Show this strip",
+          "default": true
+        },
+        {
+          "type": "select",
+          "id": "direction",
+          "label": "Scroll Direction",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left to Right"
+            },
+            {
+              "value": "right",
+              "label": "Right to Left"
+            }
+          ],
+          "default": "left"
+        },
+        {
+          "type": "checkbox",
+          "id": "pause_on_hover",
+          "label": "Pause on Hover",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "text_1",
+          "label": "Text 1",
+          "default": "New Arrivals"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_1",
+          "label": "Image 1"
+        },
+        {
+          "type": "text",
+          "id": "text_2",
+          "label": "Text 2",
+          "default": "Best Sellers"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_2",
+          "label": "Image 2"
+        },
+        {
+          "type": "text",
+          "id": "text_3",
+          "label": "Text 3",
+          "default": "Limited Edition"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_3",
+          "label": "Image 3"
+        }
+      ]
+    },
+    {
+      "type": "content_strip_2",
+      "name": "Content Strip 2",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "show_strip",
+          "label": "Show this strip",
+          "default": true
+        },
+        {
+          "type": "select",
+          "id": "direction",
+          "label": "Scroll Direction",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left to Right"
+            },
+            {
+              "value": "right",
+              "label": "Right to Left"
+            }
+          ],
+          "default": "right"
+        },
+        {
+          "type": "checkbox",
+          "id": "pause_on_hover",
+          "label": "Pause on Hover",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "text_1",
+          "label": "Text 1",
+          "default": "Featured Products"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_1",
+          "label": "Image 1"
+        },
+        {
+          "type": "text",
+          "id": "text_2",
+          "label": "Text 2",
+          "default": "Special Collection"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_2",
+          "label": "Image 2"
+        },
+        {
+          "type": "text",
+          "id": "text_3",
+          "label": "Text 3",
+          "default": "Trending Now"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_3",
+          "label": "Image 3"
+        }
+      ]
+    },
+    {
+      "type": "content_strip_3",
+      "name": "Content Strip 3",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "show_strip",
+          "label": "Show this strip",
+          "default": true
+        },
+        {
+          "type": "select",
+          "id": "direction",
+          "label": "Scroll Direction",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left to Right"
+            },
+            {
+              "value": "right",
+              "label": "Right to Left"
+            }
+          ],
+          "default": "left"
+        },
+        {
+          "type": "checkbox",
+          "id": "pause_on_hover",
+          "label": "Pause on Hover",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "text_1",
+          "label": "Text 1",
+          "default": "Exclusive Deals"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_1",
+          "label": "Image 1"
+        },
+        {
+          "type": "text",
+          "id": "text_2",
+          "label": "Text 2",
+          "default": "Latest Updates"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_2",
+          "label": "Image 2"
+        },
+        {
+          "type": "text",
+          "id": "text_3",
+          "label": "Text 3",
+          "default": "Shop Now"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_3",
+          "label": "Image 3"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Scrolling Text",
+      "blocks": [
+        {
+          "type": "text_strip_1"
+        },
+        {
+          "type": "content_strip_1"
+        },
+        {
+          "type": "content_strip_2"
+        },
+        {
+          "type": "content_strip_3"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
