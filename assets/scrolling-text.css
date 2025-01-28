@@ -1,0 +1,158 @@
+.marquee-container {
+    width: 100%;
+    height: 30vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    background-color: rgb(var(--color-background));
+  }
+
+  .marquee-inner {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    height: 30vh;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Individual Strip Animations */
+  .text-only-strip-content {
+    display: flex;
+    animation-name: marquee-text-only-strip;
+    animation-duration: var(--text-strip-speed, 20s);
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    transform: rotate(5deg);
+    z-index: 20;
+  }
+
+  .first-strip-content {
+    display: flex;
+    animation-name: marquee-first-strip;
+    animation-duration: var(--first-strip-speed, 20s);
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    transform: rotate(-5deg);
+    z-index: 30;
+  }
+
+  .second-strip-content {
+    display: flex;
+    animation-name: marquee-second-strip;
+    animation-duration: var(--second-strip-speed, 20s);
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    transform: rotate(5deg);
+    z-index: 20;
+  }
+
+  .third-strip-content {
+    display: flex;
+    animation-name: marquee-third-strip;
+    animation-duration: var(--third-strip-speed, 20s);
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    transform: rotate(-5deg);
+    z-index: 30;
+  }
+
+  @keyframes marquee-first-strip {
+    0% { transform: rotate(-5deg) translateX(20%); }
+    100% { transform: rotate(-5deg) translateX(-20%); }
+  }
+
+  @keyframes marquee-second-strip {
+    0% { transform: rotate(5deg) translateX(20%); }
+    100% { transform: rotate(5deg) translateX(-20%); }
+  }
+
+  @keyframes marquee-third-strip {
+    0% { transform: rotate(-5deg) translateX(20%); }
+    100% { transform: rotate(-5deg) translateX(-20%); }
+  }
+
+  @keyframes marquee-text-only-strip {
+    0% { transform: rotate(5deg) translateX(20%); }
+    100% { transform: rotate(5deg) translateX(-20%); }
+  }
+
+  .marquee-item,
+  .text-only-marquee-item {
+    display: flex;
+    align-items: center;
+    padding: var(--strip-padding-top, 10px) 10px var(--strip-padding-bottom, 10px);
+    white-space: nowrap;
+    flex-shrink: 0;
+    background-color: var(--background_product_card);
+    color: var(--color_text);
+  }
+
+  .marquee-text,
+  .text-only-marquee-text {
+    display: inline-block;
+    margin-right: 20px;
+    font-weight: bold;
+  }
+
+  .marquee-image {
+    object-fit: content;
+    border-radius: 3px;
+  }
+
+  /* Pause on hover */
+  .marquee-content:hover,
+  .text-only-strip-content:hover {
+    animation-play-state: paused;
+  }
+
+  @media screen and (min-width: 768px) {
+    .marquee-container {
+      height: 50vh;
+    }
+
+    .marquee-inner {
+      height: 50vh;
+    }
+
+    .text-only-strip-content {
+      transform: rotate(3deg);
+    }
+
+    .first-strip-content {
+      transform: rotate(3deg);
+      margin-top: 30px;
+    }
+
+    .second-strip-content {
+      transform: rotate(3deg);
+      margin-top: 30px;
+    }
+
+    .third-strip-content {
+      transform: rotate(-3deg);
+      margin-top: 30px;
+    }
+
+    @keyframes marquee-text-only-strip {
+      0% { transform: rotate(3deg) translateX(20%); }
+      100% { transform: rotate(3deg) translateX(-20%); }
+    }
+
+    @keyframes marquee-first-strip {
+      0% { transform: rotate(-3deg) translateX(20%); }
+      100% { transform: rotate(-3deg) translateX(-20%); }
+    }
+
+    @keyframes marquee-second-strip {
+      0% { transform: rotate(3deg) translateX(20%); }
+      100% { transform: rotate(3deg) translateX(-20%); }
+    }
+
+    @keyframes marquee-third-strip {
+      0% { transform: rotate(-3deg) translateX(20%); }
+      100% { transform: rotate(-3deg) translateX(-20%); }
+    }
+  }
