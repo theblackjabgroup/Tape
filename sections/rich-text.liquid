@@ -1,13 +1,5 @@
 {{ 'section-rich-text.css' | asset_url | stylesheet_tag }}
 <style>
-  .richtextdes p{
-    font-size:16px;
-    font-weight:500;
-  }
-  .richtextdes1{
-      font-size:16px;
-    font-weight:500;
-  }
   .color-{{ section.settings.color_scheme }} .dot,
   .color-{{ section.settings.color_scheme }} .dot-l {
   background-color: currentColor;
@@ -56,10 +48,7 @@
     }
 </style>
 
-<div class="rich-text-section color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding {% if section.settings.layout_style == 'layout1' %}layout1{% else %}layout2{% endif %}"
-style="
-    color: rgba(var(--color-foreground));
-">
+<div class="rich-text-section color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding {% if section.settings.layout_style == 'layout1' %}layout1{% else %}layout2{% endif %}">
   {% if section.settings.layout_style == 'layout1' %}
     <div class="page-width1">
       <h2 class="richtext_heading">
@@ -82,7 +71,11 @@ style="
         {% endfor %}
       </p>
       <div class="rich-text__text rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-         <p style="font-size:16px ; font-weight:500">{{ section.settings.richdescp }}</p>
+        {% for block in section.blocks %}
+          {% if block.type == 'text' %}
+            {{ block.settings.text }}
+          {% endif %}
+        {% endfor %}
       </div>
       {% for block in section.blocks %}
         {% if block.type == 'button' and block.settings.show_button %}
@@ -127,10 +120,12 @@ style="
             {% endif %}
           {% endfor %}
         </p>
-        <div class="rich-text__text rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}" style="
-    font-weight: 500;
-">
-            <p>{{ section.settings.richdescp }}</p>
+        <div class="rich-text__text rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+          {% for block in section.blocks %}
+            {% if block.type == 'text' %}
+              {{ block.settings.text }}
+            {% endif %}
+          {% endfor %}
         </div>
         {% for block in section.blocks %}
           {% if block.type == 'button' and block.settings.show_button %}
@@ -169,12 +164,7 @@ style="
     "groups": ["header", "footer"]
   },
   "settings": [
-      {
-          "type": "text",
-          "id": "richdescp",
-          "label": "Description",
-          "default": "Transforming Healthcare with Innovative Solutions"
-        },
+
     {
       "type": "select",
       "id": "layout_style",
@@ -258,8 +248,7 @@ style="
       "unit": "px",
       "label": "Padding Bottom",
       "default": 40
-    },
- 
+    }
   ],
   "blocks": [
   {
@@ -293,8 +282,7 @@ style="
     "settings": [{
         "type": "richtext",
         "id": "text",
-        "label": "Text",
-         "default": "<p>Delivering Excellence in Medical Products Delivering Excellence in Medical Products</p>"
+        "label": "Text"
     }]
 },
 {
