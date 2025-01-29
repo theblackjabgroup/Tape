@@ -702,11 +702,12 @@ border-radius: 50%;
 }
 
 .bb-product__title {
-  margin: 0;
-  font-family: Fira Sans;
-  font-weight: 700;
-/*  font-size: 28px; */
-}
+    margin: 0;
+    padding:0px 0 0 0;
+    font-family: Fira Sans;
+    font-weight: 700;
+  /*  font-size: 28px; */
+  }
 
 .bb_select__select {
   font-size: 20px;
@@ -737,7 +738,13 @@ border-radius: 50%;
 
 
 @media screen and (max-width: 749px) {
-
+    .bb-product__title {
+        margin: 0;
+        padding:20px 0 0 0;
+        font-family: Fira Sans;
+        font-weight: 700;
+      /*  font-size: 28px; */
+      }
   .product-media-container.constrain-height.media-fit-contain {
     --contained-width: calc(var(--constrained-height) * var(--aspect-ratio));
   }
