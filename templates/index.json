@@ -18,11 +18,7 @@
           "settings": {}
         }
       },
-      "block_order": [
-        "video",
-        "youtube",
-        "vimeo"
-      ],
+      "block_order": ["video", "youtube", "vimeo"],
       "settings": {
         "background_color": ""
       }
@@ -76,13 +72,7 @@
           }
         }
       },
-      "block_order": [
-        "card1",
-        "card2",
-        "card3",
-        "card4",
-        "card5"
-      ],
+      "block_order": ["card1", "card2", "card3", "card4", "card5"],
       "settings": {
         "sectionBackground": "",
         "bannerColor": ""
@@ -170,53 +160,6 @@
         "color_scheme": ""
       }
     },
-    "rich_text": {
-      "type": "rich-text",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Your Heading"
-          }
-        },
-        "subheading": {
-          "type": "subheading",
-          "settings": {
-            "caption": "Delivering Excellence in Medical Products"
-          }
-        },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>"
-          }
-        },
-        "button": {
-          "type": "button",
-          "settings": {
-            "button_text": "Learn More",
-            "button_link": "/",
-            "show_button": true
-          }
-        }
-      },
-      "block_order": [
-        "heading",
-        "subheading",
-        "text",
-        "button"
-      ],
-      "settings": {
-        "layout_style": "layout1",
-        "dots_number1": 10,
-        "dots_number2": 10,
-        "color_scheme": "",
-        "heading_font_size": 22,
-        "text_font_size": 14,
-        "padding_top": 40,
-        "padding_bottom": 40
-      }
-    },
     "product_stories": {
       "type": "product-stories",
       "blocks": {
@@ -248,11 +191,7 @@
           }
         }
       },
-      "block_order": [
-        "column1",
-        "column2",
-        "column3"
-      ],
+      "block_order": ["column1", "column2", "column3"],
       "settings": {
         "title": "Shop With Us",
         "description": "Join us on TikTok for exclusive releases, unboxing and try-on videos, reviews, and more from our top brands and stylists.",
@@ -322,13 +261,7 @@
           }
         }
       },
-      "block_order": [
-        "card_1",
-        "card_2",
-        "card_3",
-        "card_4",
-        "card_5"
-      ],
+      "block_order": ["card_1", "card_2", "card_3", "card_4", "card_5"],
       "settings": {
         "layout": "layout_1",
         "heading": "Key Features",
@@ -415,7 +348,6 @@
     "video_banner",
     "image_with_text",
     "slideshow",
-    "rich_text",
     "product_stories",
     "featured_collection",
     "featured_icon_with_text",
