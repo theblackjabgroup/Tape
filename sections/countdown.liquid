@@ -109,28 +109,28 @@
 <div class="countdown-section  color-{{ section.settings.color_scheme }}" style="background-color: rgb(var(--color-button)); padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;">
  <!-- Top border cutouts -->
     <div class="countdown-border-cutouts countdown-border-top">
-      {% for i in (1..20) %}
+      {% for i in (1..18) %}
         <div class="countdown-cutout">&nbsp;</div>
       {% endfor %}
     </div>
     
     <!-- Left border cutouts -->
     <div class="countdown-border-cutouts countdown-border-left">
-      {% for i in (1..10) %}
+      {% for i in (1..8) %}
         <div class="countdown-cutout">&nbsp;</div>
       {% endfor %}
     </div>
     
     <!-- Right border cutouts -->
     <div class="countdown-border-cutouts countdown-border-right">
-      {% for i in (1..10) %}
+      {% for i in (1..8) %}
         <div class="countdown-cutout">&nbsp;</div>
       {% endfor %}
     </div>
     
     <!-- Bottom border cutouts -->
     <div class="countdown-border-cutouts countdown-border-bottom">
-      {% for i in (1..20) %}
+      {% for i in (1..18) %}
         <div class="countdown-cutout">&nbsp;</div>
       {% endfor %}
     </div>
@@ -196,4 +196,3 @@
     startCountdown(countdownTimerId, endDateTime);
   })();
 </script>
-
