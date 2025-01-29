@@ -1,5 +1,13 @@
 {{ 'section-rich-text.css' | asset_url | stylesheet_tag }}
 <style>
+  .richtextdes p{
+    font-size:16px;
+    font-weight:500;
+  }
+  .richtextdes1{
+      font-size:16px;
+    font-weight:500;
+  }
   .color-{{ section.settings.color_scheme }} .dot,
   .color-{{ section.settings.color_scheme }} .dot-l {
   background-color: currentColor;
@@ -76,7 +84,10 @@ style="
       <div class="rich-text__text rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
         {% for block in section.blocks %}
           {% if block.type == 'text' %}
-            {{ block.settings.text }}
+               <div  class="richtextdes1"  >
+                   {{ block.settings.text }}
+              </div>
+           
           {% endif %}
         {% endfor %}
       </div>
@@ -123,10 +134,15 @@ style="
             {% endif %}
           {% endfor %}
         </p>
-        <div class="rich-text__text rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+        <div class="rich-text__text rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}" style="
+    font-weight: 500;
+">
           {% for block in section.blocks %}
             {% if block.type == 'text' %}
-              {{ block.settings.text }}
+              <div  class="richtextdes"  >
+                   {{ block.settings.text }}
+              </div>
+           
             {% endif %}
           {% endfor %}
         </div>
