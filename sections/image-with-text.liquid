@@ -13,7 +13,7 @@
   <div class="image__with__text__outer__container">
     <ul class="image__with__text__inner__container">
       {% for item in section.blocks %}
-        <div
+        <li
           class="image__with__text__card min__card__height card__set card"
           aria-labelledby="gallery-item-{{ forloop.index0}}-trigger"
           tabindex="-1"
@@ -26,16 +26,19 @@
           data-heading-tag="{{ item.settings.headingTag }}">
           <div class="media__container">
             {% if item.settings.image %}
-              {{
-                item.settings.image | image_url: width: 1800 | image_tag: width: 1800, height: 1600, class: 'media', alt: item.settings.image.alt | escape
-              }}
+              <img
+                width="1800"
+                height="1600"
+                class="media"
+                src="{{ item.settings.image |  image_url  }}"
+                alt="">
             {% else %}
               <div style="width: 100%; height: 100%;">
                 {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
               </div>
             {% endif %}
           </div>
-        </div>
+        </li>
       {% endfor %}
       <div class="info__banner color-{{ section.settings.bannerColor }}" style="opacity:{{ section.settings.opacity }}">
         <div class="info__banner__contents">
@@ -43,7 +46,7 @@
           <h1 class="info__banner__heading fira-sans-bold">Thanksgiving big billion sale!</h1>
           <div class="info__banner__details">
             <p class="info__banner__description inter-regular ">
-              Enhance patient care with our premium medical product, featuring advanced technology for precision and  
+              Enhance patient care with our premium medical product, featuring advanced technology for precision and 
               reliability. Ideal for seamless integration into any practice!
             </p>
             <a
