@@ -3188,7 +3188,8 @@ details-disclosure > details {
 .content-container:after {
   content: '';
   position: absolute;
-  top: calc(var(--text-boxes-border-width) * -1);
+  top: 50rem;
+ /* top: calc(var(--text-boxes-border-width) * -1); */
   right: calc(var(--text-boxes-border-width) * -1);
   bottom: calc(var(--text-boxes-border-width) * -1);
   left: calc(var(--text-boxes-border-width) * -1);
