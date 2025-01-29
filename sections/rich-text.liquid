@@ -82,14 +82,7 @@ style="
         {% endfor %}
       </p>
       <div class="rich-text__text rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-        {% for block in section.blocks %}
-          {% if block.type == 'text' %}
-               <div  class="richtextdes1"  >
-                   {{ block.settings.text }}
-              </div>
-           
-          {% endif %}
-        {% endfor %}
+         <p>{{ section.settings.richdescp }}</p>
       </div>
       {% for block in section.blocks %}
         {% if block.type == 'button' and block.settings.show_button %}
@@ -137,14 +130,7 @@ style="
         <div class="rich-text__text rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}" style="
     font-weight: 500;
 ">
-          {% for block in section.blocks %}
-            {% if block.type == 'text' %}
-              <div  class="richtextdes"  >
-                   {{ block.settings.text }}
-              </div>
-           
-            {% endif %}
-          {% endfor %}
+            <p>{{ section.settings.richdescp }}</p>
         </div>
         {% for block in section.blocks %}
           {% if block.type == 'button' and block.settings.show_button %}
@@ -183,7 +169,12 @@ style="
     "groups": ["header", "footer"]
   },
   "settings": [
-
+      {
+          "type": "text",
+          "id": "richdescp",
+          "label": "Description",
+          "default": "Transforming Healthcare with Innovative Solutions"
+        },
     {
       "type": "select",
       "id": "layout_style",
@@ -267,7 +258,8 @@ style="
       "unit": "px",
       "label": "Padding Bottom",
       "default": 40
-    }
+    },
+ 
   ],
   "blocks": [
   {
