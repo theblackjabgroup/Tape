@@ -82,7 +82,7 @@ style="
         {% endfor %}
       </p>
       <div class="rich-text__text rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-         <p>{{ section.settings.richdescp }}</p>
+         <p style="font-size:16px ; font-weight:500">{{ section.settings.richdescp }}</p>
       </div>
       {% for block in section.blocks %}
         {% if block.type == 'button' and block.settings.show_button %}
