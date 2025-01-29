@@ -49,7 +49,9 @@
 </style>
 
 <div class="rich-text-section color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding {% if section.settings.layout_style == 'layout1' %}layout1{% else %}layout2{% endif %}"
->
+style="
+    color: rgba(var(--color-foreground));
+">
   {% if section.settings.layout_style == 'layout1' %}
     <div class="page-width1">
       <h2 class="richtext_heading">
