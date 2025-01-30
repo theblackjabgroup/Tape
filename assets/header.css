@@ -835,6 +835,9 @@ mobile-nav-items::-webkit-scrollbar {
   z-index: 1;
 }
 
+.localization-form__select .icon-caret {
+    color: rgb(var(--color-foreground));
+}
 
 @media screen and (max-width: 749px) {
     .country-selector__close-button .icon {
