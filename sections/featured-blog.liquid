@@ -111,11 +111,10 @@
                 {% if article.image %}
                     {{
   article.image
-  | image_url: width: 309
+  | image_url: width: 1800
   | image_tag:
     width: 309,
     height: 309,
-    class: 'media',
     alt: article.title | escape
 }}
                 {% else %}
