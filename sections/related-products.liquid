@@ -29,48 +29,53 @@
                     background-color: {{ section.settings.product_card_background_color }};">
 
           <div class="product-image1">
-            {% if section.settings.show_sale_badge and product.compare_at_price > product.price %}
-              <div class="sale-badge"
-                   style="background-color: {{ section.settings.sale_badge_background_color }};
-                          color: {{ section.settings.sale_badge_text_color }};">
-                <span>Sale</span>
-              </div>
-            {% endif %}
-
-            <a href="{{ product.url }}">
-              {% if product.featured_image %}
-                <picture>
-                  <source
-                    type="image/webp"
-                    srcset="
-                      {{ product.featured_image | image_url: width: 300, format: 'webp' }} 300w,
-                      {{ product.featured_image | image_url: width: 600, format: 'webp' }} 600w,
-                      {{ product.featured_image | image_url: width: 800, format: 'webp' }} 800w,
-                      {{ product.featured_image | image_url: width: 1200, format: 'webp' }} 1200w"
-                    sizes="(max-width: 600px) 300px,
-                           (max-width: 1000px) 600px,
-                           800px">
-                  <img
-                    srcset="
-                      {{ product.featured_image | image_url: width: 300 }} 300w,
-                      {{ product.featured_image | image_url: width: 600 }} 600w,
-                      {{ product.featured_image | image_url: width: 800 }} 800w,
-                      {{ product.featured_image | image_url: width: 1200 }} 1200w"
-                    sizes="(max-width: 600px) 300px,
-                           (max-width: 1000px) 600px,
-                           800px"
-                    src="{{ product.featured_image | image_url: width: 800 }}"
-                    alt="{{ product.title | escape }}"
-                    loading="lazy"
-                    width="100"
-                    height="100"
-                    decoding="async">
-                </picture>
-              {% else %}
-                {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
-              {% endif %}
-            </a>
-          </div>
+  {% if section.settings.show_sale_badge and product.compare_at_price > product.price %}
+    <div class="sale-badge"
+         style="background-color: {{ section.settings.sale_badge_background_color }};
+                color: {{ section.settings.sale_badge_text_color }};">
+      <span>Sale</span>
+    </div>
+  {% endif %}
+  <a href="{{ product.url }}">
+    {% if product.featured_image %}
+      {% assign image = product.featured_image %}
+      {% assign focal_point = image.presentation.focal_point | default: '50-50' %}
+      {% assign focal_x = focal_point | split: '-' | first %}
+      {% assign focal_y = focal_point | split: '-' | last %}
+      
+      <picture>
+        <source
+          type="image/webp"
+          srcset="
+            {{ image | image_url: width: 300, height: 300, crop: 'center', format: 'webp' }} 300w,
+            {{ image | image_url: width: 600, height: 600, crop: 'center', format: 'webp' }} 600w,
+            {{ image | image_url: width: 800, height: 800, crop: 'center', format: 'webp' }} 800w,
+            {{ image | image_url: width: 1200, height: 1200, crop: 'center', format: 'webp' }} 1200w"
+          sizes="(max-width: 600px) 300px,
+                 (max-width: 1000px) 600px,
+                 800px">
+        <img
+          srcset="
+            {{ image | image_url: width: 300, height: 300, crop: 'center' }} 300w,
+            {{ image | image_url: width: 600, height: 600, crop: 'center' }} 600w,
+            {{ image | image_url: width: 800, height: 800, crop: 'center' }} 800w,
+            {{ image | image_url: width: 1200, height: 1200, crop: 'center' }} 1200w"
+          sizes="(max-width: 600px) 300px,
+                 (max-width: 1000px) 600px,
+                 800px"
+          src="{{ image | image_url: width: 800, height: 800, crop: 'center' }}"
+          alt="{{ product.title | escape }}"
+          loading="lazy"
+          width="100%"
+          height="100%"
+          style="object-fit: cover; object-position: {{ focal_x }}% {{ focal_y }}%;"
+          decoding="async">
+      </picture>
+    {% else %}
+      {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
+    {% endif %}
+  </a>
+</div>
 
           <div class="product-info">
             <h7 style="color: {{ section.settings.text_color }};">{{ product.title }}</h7>
