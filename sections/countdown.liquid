@@ -161,7 +161,12 @@
       <div class="countdown-timer" id="countdown-timer-{{ section.id }}" style="font-size: {{ section.settings.timer_font_size }}px;"></div>
       <a href="{{ section.settings.button_link }}" class="countdown-section__button" style="background-color: rgb(var(--color-button-text)); color: rgb(var(--color-secondary-button-text));">
         {{ section.settings.button_label }}
-      </a>
+      
+        <svg class="countdown_svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+        </a>
     </div>
   </div>
 </div>
