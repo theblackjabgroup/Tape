@@ -8,7 +8,7 @@
   @media screen and (min-width: 749px) {
     .bb-upper-template-signup {
       width: {{ section.settings.card_width }}rem;
-      height: 50rem;
+    /*  height: 50rem; */
     }
   }
   @media screen and (max-width: 749px) {
@@ -315,10 +315,10 @@
       "type": "range",
       "id": "card_width_mobile",
       "label": "Card Size (Mobile View)",
-      "min": 0,
-      "max": 37,
+      "min": 20,
+      "max": 36,
       "step": 1,
-      "default": 37
+      "default": 36
     },
     {
       "type": "color_scheme",
@@ -343,7 +343,7 @@
           "id": "heading",
           "default": "t:sections.email-signup-banner.blocks.heading.settings.heading.default",
           "label": "t:sections.email-signup-banner.blocks.heading.settings.heading.label"
-        }
+        } 
       ]
     },
     {
