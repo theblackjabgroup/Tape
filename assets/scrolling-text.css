@@ -1,86 +1,73 @@
 .marquee-container {
     width: 100%;
-    height: 30vh;
+    height: 50vh;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
     position: relative;
     background-color: rgb(var(--color-background));
-  }
-
-  .marquee-inner {
+}
+.marquee-inner {
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    height: 30vh;
+    height: 50vh;
     align-items: center;
     justify-content: center;
-  }
-
-  /* Individual Strip Animations */
-  .text-only-strip-content {
+    gap: 20px;
+    width: 100%;
+}
+/* Base styles for all strip containers */
+.text-only-strip-content,
+.first-strip-content,
+.second-strip-content,
+.third-strip-content {
     display: flex;
+    width: 100%;
+    min-width: 2000px;
+    min-height: 50px;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    position: relative;
+    filter: drop-shadow(0px 4px 4px #00000026);
+
+}
+/* Empty state styles */
+.text-only-strip-content:empty,
+.first-strip-content:empty,
+.second-strip-content:empty,
+.third-strip-content:empty {
+    min-height: 50px;
+    background-color: var(--background_product_card);
+}
+/* Individual Strip Animations - Mobile First */
+.text-only-strip-content {
     animation-name: marquee-text-only-strip;
-    animation-duration: var(--text-strip-speed, 20s);
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
+    animation-duration: calc(var(--text-strip-speed, 20s) );
     transform: rotate(5deg);
-    z-index: 20;
-  }
-
-  .first-strip-content {
-    display: flex;
+    z-index: 30;
+}
+.first-strip-content {
     animation-name: marquee-first-strip;
-    animation-duration: var(--first-strip-speed, 20s);
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
+    animation-duration: calc(var(--first-strip-speed, 20s) );
     transform: rotate(-5deg);
-    z-index: 30;
-  }
-
-  .second-strip-content {
-    display: flex;
-    animation-name: marquee-second-strip;
-    animation-duration: var(--second-strip-speed, 20s);
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
-    transform: rotate(5deg);
     z-index: 20;
-  }
-
-  .third-strip-content {
-    display: flex;
+}
+.second-strip-content {
+    animation-name: marquee-second-strip;
+    animation-duration: calc(var(--second-strip-speed, 20s) );
+    transform: rotate(5deg);
+    z-index: 10;
+}
+.third-strip-content {
     animation-name: marquee-third-strip;
-    animation-duration: var(--third-strip-speed, 20s);
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
+    animation-duration: calc(var(--third-strip-speed, 20s) );
     transform: rotate(-5deg);
-    z-index: 30;
-  }
-
-  @keyframes marquee-first-strip {
-    0% { transform: rotate(-5deg) translateX(20%); }
-    100% { transform: rotate(-5deg) translateX(-20%); }
-  }
-
-  @keyframes marquee-second-strip {
-    0% { transform: rotate(5deg) translateX(20%); }
-    100% { transform: rotate(5deg) translateX(-20%); }
-  }
-
-  @keyframes marquee-third-strip {
-    0% { transform: rotate(-5deg) translateX(20%); }
-    100% { transform: rotate(-5deg) translateX(-20%); }
-  }
-
-  @keyframes marquee-text-only-strip {
-    0% { transform: rotate(5deg) translateX(20%); }
-    100% { transform: rotate(5deg) translateX(-20%); }
-  }
-
-  .marquee-item,
-  .text-only-marquee-item {
+    z-index: 0;
+}
+.marquee-item,
+.text-only-marquee-item {
     display: flex;
     align-items: center;
     padding: var(--strip-padding-top, 10px) 10px var(--strip-padding-bottom, 10px);
@@ -88,71 +75,119 @@
     flex-shrink: 0;
     background-color: var(--background_product_card);
     color: var(--color_text);
-  }
-
-  .marquee-text,
-  .text-only-marquee-text {
+    min-height: 50px;
+    min-width: 200px;
+}
+.marquee-item:only-child,
+.text-only-marquee-item:only-child {
+    width: 100%;
+    justify-content: center;
+}
+.marquee-text,
+.text-only-marquee-text {
     display: inline-block;
     margin-right: 20px;
     font-weight: bold;
-  }
-
-  .marquee-image {
-    object-fit: content;
+}
+.marquee-image {
+    object-fit: cover;
     border-radius: 3px;
-  }
+}
 
-  /* Pause on hover */
-  .marquee-content:hover,
-  .text-only-strip-content:hover {
-    animation-play-state: paused;
-  }
+/* Mobile animations */
+@keyframes marquee-text-only-strip {
+    0% { transform: rotate(5deg) translateX(10%); }
+    100% { transform: rotate(5deg) translateX(-10%); }
+}
+@keyframes marquee-first-strip {
+    0% { transform: rotate(-5deg) translateX(10%); }
+    100% { transform: rotate(-5deg) translateX(-10%); }
+}
+@keyframes marquee-second-strip {
+    0% { transform: rotate(5deg) translateX(10%); }
+    100% { transform: rotate(5deg) translateX(-10%); }
+}
+@keyframes marquee-third-strip {
+    0% { transform: rotate(-5deg) translateX(10%); }
+    100% { transform: rotate(-5deg) translateX(-10%); }
+}
 
-  @media screen and (min-width: 768px) {
+/* Desktop styles */
+@media screen and (min-width: 768px) {
     .marquee-container {
-      height: 50vh;
+        height: 60vh;
     }
-
     .marquee-inner {
-      height: 50vh;
+        height: 60vh;
+        gap: 30px;
     }
-
     .text-only-strip-content {
-      transform: rotate(3deg);
+        transform: rotate(3deg);
+        animation-duration: var(--text-strip-speed, 10s);
+        filter: drop-shadow(0px 4px 4px #00000026);
     }
-
     .first-strip-content {
-      transform: rotate(3deg);
-      margin-top: 30px;
+        transform: rotate(-3deg);
+        animation-duration: var(--first-strip-speed, 10s);
+        filter: drop-shadow(0px 4px 4px #00000026);
     }
-
     .second-strip-content {
-      transform: rotate(3deg);
-      margin-top: 30px;
+        transform: rotate(3deg);
+        animation-duration: var(--second-strip-speed, 10s);
+        filter: drop-shadow(0px 4px 4px #00000026);
     }
-
     .third-strip-content {
-      transform: rotate(-3deg);
-      margin-top: 30px;
+        transform: rotate(-3deg);
+        animation-duration: var(--third-strip-speed, 10s);
+        filter: drop-shadow(0px 4px 4px #00000026);
     }
-
     @keyframes marquee-text-only-strip {
-      0% { transform: rotate(3deg) translateX(20%); }
-      100% { transform: rotate(3deg) translateX(-20%); }
+        0% { transform: rotate(3deg) translateX(10%); }
+        100% { transform: rotate(3deg) translateX(-10%); }
     }
-
     @keyframes marquee-first-strip {
-      0% { transform: rotate(-3deg) translateX(20%); }
-      100% { transform: rotate(-3deg) translateX(-20%); }
+        0% { transform: rotate(-3deg) translateX(10%); }
+        100% { transform: rotate(-3deg) translateX(-10%); }
     }
-
     @keyframes marquee-second-strip {
-      0% { transform: rotate(3deg) translateX(20%); }
-      100% { transform: rotate(3deg) translateX(-20%); }
+        0% { transform: rotate(3deg) translateX(10%); }
+        100% { transform: rotate(3deg) translateX(-10%); }
     }
-
     @keyframes marquee-third-strip {
-      0% { transform: rotate(-3deg) translateX(20%); }
-      100% { transform: rotate(-3deg) translateX(-20%); }
+        0% { transform: rotate(-3deg) translateX(10%); }
+        100% { transform: rotate(-3deg) translateX(-10%); }
     }
-  }
+}
+@media screen and (min-width: 1600px) {
+    @keyframes marquee-text-only-strip {
+        0% { transform: rotate(3deg) translateX(0%); }
+        100% { transform: rotate(3deg) translateX(-20%); }
+    }
+    @keyframes marquee-first-strip {
+        0% { transform: rotate(-3deg) translateX(0%); }
+        100% { transform: rotate(-3deg) translateX(-20%); }
+    }
+    @keyframes marquee-second-strip {
+        0% { transform: rotate(3deg) translateX(0%); }
+        100% { transform: rotate(3deg) translateX(-20%); }
+    }
+    @keyframes marquee-third-strip {
+        0% { transform: rotate(-3deg) translateX(0%); }
+        100% { transform: rotate(-3deg) translateX(-20%); }
+    }
+  .text-only-strip-content,
+.first-strip-content,
+.second-strip-content,
+.third-strip-content {
+    display: flex;
+    width: 100%;
+    min-width: 0px;
+  margin-bottom:20px;
+    min-height: 50px;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    position: relative;
+    filter: drop-shadow(0px 4px 4px #00000026);
+
+}
+}
