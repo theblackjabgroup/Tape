@@ -81,9 +81,9 @@
     <p class="bb-404-para">
       {{ section.settings.description}}
     </p>
-    <a href="{{ section.settings.link1 }}" class="bb-404-h-button button">
+    <button href="{{ section.settings.link1 }}" class="bb-404-h-button button">
       {{ section.settings.button1 }}
-    </a>
+    </button>
     <a href="{{ section.settings.link2 }}" class="bb-404-c-button button">
       {{ section.settings.button2 }}
     </a>
@@ -121,13 +121,13 @@
       {
         "type": "text",
         "id": "button1",
-        "label": "First Button Text",
+        "label": "Button Text",
         "default": "Back to home page"
       },
       {
         "type": "url",
         "id": "link1",
-        "label": "Link of first button"
+        "label": "Link to first button"
       },
       {
       "type": "range",
@@ -142,7 +142,7 @@
       "type": "range",
       "id": "card_width_mobile",
       "label": "Card Size (Mobile View)",
-      "min": 0,
+      "min": 20,
       "max": 35,
       "step": 1,
       "default": 35

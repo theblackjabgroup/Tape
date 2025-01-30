@@ -18,3 +18,13 @@
 .bb-localization .link{
     color: var(--text) !important;
 }
+.vertical-bar-second-top{
+    height:50px;
+}
+.vertical-bar-second-top-desktop{
+    height:50px;
+}
+
+.scrollable-text {
+    padding: 1.2rem 0;
+}

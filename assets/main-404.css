@@ -62,17 +62,28 @@
     z-index: 1;
   }
 
-  a.bb-404-h-button {
-    color: rgb(var(--color-secondary-button-text));
+  .bb-404-h-button {
+    font-size: 1.5rem;
+    color: #000;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background: var(--product_special_offer);
+    box-shadow: 3px 3px #000;
+    cursor: pointer;
+    margin: 35px 0;
   }
-  .bb-404-h-button::after {
-    display: none;
+
+  .bb-404-h-button:hover {
+    box-shadow: none;
+    transform: translate(3px, 3px);
+    color:#000;
   }
 
   .vertical-bar-circle-404 {
     width: 30px;
-    height: 32px;
     background-color: rgb(var(--color-background));
+    height: 32px;
     border-radius: 50%;
     display: block !important;
   }
@@ -109,47 +120,38 @@
     margin-bottom: 50px;
   }
   /* .bb-404-h-button:hover {
-          color: black;
-      background: #e5e5ea;
-      border: none;
-  }
+            color: black;
+        background: #e5e5ea;
+        border: none;
+    } */
 
-  .bb-404-h-button::after:hover {
-          color: black;
-      background: #e5e5ea;
-      border: none;
-      box-shadow: none;
-  }
+  /* .bb-404-h-button:hover {
+            color: black;
+        background: #e5e5ea;
+        border: none;
+        box-shadow: none;
+    } */
 
-  .bb-404-c-button:hover {
-          background-color: black;
-      color: #e5e5ea;
+  /* .bb-404-c-button:hover {
+            background-color: black;
+        color: #e5e5ea;
 
-      border: none;
-  } */
-  .bb-404-h-button,
+        border: none;
+    } */
   .bb-404-c-button {
     font-family: "Fira Sans";
     margin-top: 2rem;
     font-size: 2rem;
   }
 
-  .bb-404-h-button {
-    background-color: transparent;
-    font-weight: bold;
-    border: 1px solid rgb(var(--color-secondary-button-text));
-    color: rgb(var(--color-secondary-button-text));
-    border-radius: 5px;
-    padding: 20px 30px;
-  }
   .bb-404-c-button {
     text-decoration: underline;
     background-color: transparent;
   }
 
   /* .button:not([disabled]):hover:after {
-      box-shadow: none;
-  } */
+        box-shadow: none;
+    } */
   .desktop-view {
     display: block;
   }
@@ -177,6 +179,7 @@
       margin: 0rem;
       padding: 0rem;
       margin: auto;
+      border-radius: 2px;
     }
     .bb-template-404 {
       background-color: unset;
@@ -211,18 +214,17 @@
     .vertical-bar-top-404 {
       top: -0.5rem;
       left: 1.5rem;
-      gap: 20px; /* Reduced from 46px to accommodate more circles */
+      gap: 20px;
     }
 
     .vertical-bar-bottom-404 {
       bottom: -0.5rem;
       left: 1.5rem;
-      gap: 20px; /* Reduced from 46px to accommodate more circles */
+      gap: 20px;
     }
     .bb-404-uper-banner {
       padding: 1rem 0rem;
     }
-    .bb-404-h-button,
     .bb-404-c-button {
       font-family: "Fira Sans";
       margin-top: 2rem;
@@ -230,5 +232,8 @@
     }
     .bb-404-h-button {
       padding: 10px 20px;
+      font-size:1rem;
+      margin:25px 0;
     }
+
   }
