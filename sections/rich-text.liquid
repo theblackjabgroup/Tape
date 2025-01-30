@@ -5,9 +5,16 @@
   background-color: currentColor;
   }
   .rich_text_button{
-     border: 1px solid rgb(var(--color-button));
+    border: 0.1rem solid rgba(var(--color-button), 1);
    background: rgb(var(--color-button-text)) ;
   color: rgb(var(--color-secondary-button-text));
+  }
+   .richtext_heading {
+    color: rgb(var(--color-foreground));
+  }
+
+  .richtext_subheading {
+    color: rgb(var(--color-foreground));
   }
     .section-{{ section.id }}-padding.layout1,
     .section-{{ section.id }}-padding.layout2 {
@@ -23,10 +30,7 @@
       font-size: {{ section.settings.text_font_size }}px;
     }
 
-    .section-{{ section.id }}-padding.layout2 {
-      background-color: {{ section.settings.background_color }};
-    }
-
+  
     .section-{{ section.id }}-padding.layout2 h2 {
       font-size: {{ section.settings.heading_font_size }}px;
     }
@@ -48,38 +52,27 @@
     }
 </style>
 
-<div class="rich-text-section color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding {% if section.settings.layout_style == 'layout1' %}layout1{% else %}layout2{% endif %}"
->
+<div  class="rich-text-section color-{{ section.settings.color_scheme }} section-{{ section.id }}-padding {% if section.settings.layout_style == 'layout1' %}layout1{% else %}layout2{% endif %}">
   {% if section.settings.layout_style == 'layout1' %}
     <div class="page-width1">
+    {%- for block in section.blocks -%}
+        {% case block.type %}
+              {%- when 'heading' -%}
       <h2 class="richtext_heading">
-        {% for block in section.blocks %}
-          {% if block.type == 'heading' %}
             {{ block.settings.heading }}
-          {% endif %}
-        {% endfor %}
       </h2>
       <div class="decorative-dots">
         {% for i in (1..section.settings.dots_number1) %}
           <span class="dot"></span>
         {% endfor %}
       </div>
+      {%- when 'subheading' -%}
       <p class="richtext_subheading">
-        {% for block in section.blocks %}
-          {% if block.type == 'subheading' %}
             {{ block.settings.caption }}
-          {% endif %}
-        {% endfor %}
       </p>
-      <div class="rich-text__text rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-        {% for block in section.blocks %}
-          {% if block.type == 'text' %}
-            {{ block.settings.text }}
-          {% endif %}
-        {% endfor %}
-      </div>
-      {% for block in section.blocks %}
-        {% if block.type == 'button' and block.settings.show_button %}
+         {%- when 'text' -%}
+       {{ block.settings.text }}
+        {%- when 'button' -%}
             <a href="{{ block.settings.button_link }}" class="rich_text_btn">
               {{ block.settings.button_text }}
               <svg
@@ -96,10 +89,10 @@
                 <polyline points="12 5 19 12 12 19"></polyline>
               </svg>
             </a>
-        {% endif %}
-      {% endfor %}
+          {%- endcase -%}
+     {%- endfor -%}
     </div>
-  {% else %}
+   {% else %}   
     <div class="dots-container">
       <div class="side-dots left">
         {% for i in (1..section.settings.dots_number2) %}
@@ -107,29 +100,22 @@
         {% endfor %}
       </div>
       <div class="rich-text__blocks {{ section.settings.content_alignment }}">
+    {%- for block in section.blocks -%}
+         {% case block.type %}
+              {%- when 'heading' -%}
+     
         <h2 class="richtext_heading">
-          {% for block in section.blocks %}
-            {% if block.type == 'heading' %}
               {{ block.settings.heading }}
-            {% endif %}
-          {% endfor %}
         </h2>
+          {%- when 'subheading' -%}
         <p class="richtext_subheading">
-          {% for block in section.blocks %}
-            {% if block.type == 'subheading' %}
               {{ block.settings.caption }}
-            {% endif %}
-          {% endfor %}
         </p>
-        <div class="rich-text__text rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-          {% for block in section.blocks %}
-            {% if block.type == 'text' %}
-              {{ block.settings.text }}
-            {% endif %}
-          {% endfor %}
-        </div>
-        {% for block in section.blocks %}
-          {% if block.type == 'button' and block.settings.show_button %}
+          {%- when 'text' -%}
+           {{ block.settings.text }}
+         {%- when 'button' -%}
+       
+          {% if block.settings.show_button %}
             <a href="{{ block.settings.button_link }}" class="rich_text_btn">
               {{ block.settings.button_text }}
               <svg
@@ -146,8 +132,9 @@
                 <polyline points="12 5 19 12 12 19"></polyline>
               </svg>
             </a>
-          {% endif %}
-        {% endfor %}
+            {%-  endif -%}
+          {%- endcase -%}
+      {%- endfor -%}
       </div>
       <div class="side-dots right">
         {% for i in (1..section.settings.dots_number2) %}
@@ -157,6 +144,8 @@
     </div>
   {% endif %}
 </div>
+
+
 
 {% schema %}
 {
@@ -255,6 +244,7 @@
   {
       "type": "heading",
       "name": "Heading",
+      "limit": 1,
       "settings": [
         {
           "type": "text",
@@ -264,9 +254,10 @@
         }
       ]
     },
- {
+   {
       "type": "subheading",
       "name": "Sub Heading",
+       "limit": 1,
       "settings": [
         {
           "type": "text",
@@ -280,15 +271,20 @@
  {
     "type": "text",
     "name": "Text",
-    "settings": [{
+     "limit": 1,
+    "settings": [
+      {
         "type": "richtext",
         "id": "text",
-        "label": "Text"
-    }]
+        "label": "Text",
+        "default": "<p>Pair large text with an image to give focus to your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>"
+    },
+    ]
 },
 {
       "type": "button",
       "name": "Button",
+      "limit": 1,
       "settings": [
         {
           "type": "text",
@@ -318,29 +314,15 @@
     "blocks": [
       {
         "type": "heading",
-        "settings": {
-          "heading": "Your Heading"
-        }
       },
       {
         "type": "subheading",
-        "settings": {
-          "caption":  "Delivering Excellence in Medical Products"
-        }
       },
       {
         "type": "text",
-        "settings": {
-           "text": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>",
-        }
       },
       {
         "type": "button",
-        "settings": {
-          "button_text": "Learn More",
-          "button_link": "/",
-          "show_button": true
-        }
       }
     ]
   }
