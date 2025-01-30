@@ -109,7 +109,15 @@
     {% endif %}
 
                 {% if article.image %}
-                    <img src="{{ article.image | img_url: '309x309', crop: 'center' }}" alt="{{ article.title }}">
+                    {{
+  article.image
+  | image_url: width: 309
+  | image_tag:
+    width: 309,
+    height: 309,
+    class: 'media',
+    alt: article.title | escape
+}}
                 {% else %}
                   <div class="custom-placeholder" >
   {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
