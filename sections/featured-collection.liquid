@@ -50,34 +50,39 @@
             </div>
           {% endif %}
           
-          <div class="product-image{% unless section.settings.offer_tag_text != blank %} no-banner{% endunless %}">
+           <div class="product-image{% unless section.settings.offer_tag_text != blank %} no-banner{% endunless %}">
             <a href="{{ product.url }}">
               {% if product.featured_image %}
+                {% assign img_url_parts = product.featured_image | img_url: '1x1' | split: '?' %}
+                {% assign focal_point = product.featured_image.presentation.focal_point | default: '50-50' %}
+                {% assign focal_x = focal_point | split: '-' | first %}
+                {% assign focal_y = focal_point | split: '-' | last %}
                 <picture>
                   <source
                     type="image/webp"
                     srcset="
-                      {{ product.featured_image | image_url: width: 300, format: 'webp' }} 300w,
-                      {{ product.featured_image | image_url: width: 600, format: 'webp' }} 600w,
-                      {{ product.featured_image | image_url: width: 800, format: 'webp' }} 800w,
-                      {{ product.featured_image | image_url: width: 1200, format: 'webp' }} 1200w"
+                      {{ product.featured_image | image_url: width: 300, height: 300, crop: 'center', format: 'webp' }} 300w,
+                      {{ product.featured_image | image_url: width: 600, height: 600, crop: 'center', format: 'webp' }} 600w,
+                      {{ product.featured_image | image_url: width: 800, height: 800, crop: 'center', format: 'webp' }} 800w,
+                      {{ product.featured_image | image_url: width: 1200, height: 1200, crop: 'center', format: 'webp' }} 1200w"
                     sizes="(max-width: 600px) 300px,
                            (max-width: 1000px) 600px,
                            800px">
                   <img
                     srcset="
-                      {{ product.featured_image | image_url: width: 300 }} 300w,
-                      {{ product.featured_image | image_url: width: 600 }} 600w,
-                      {{ product.featured_image | image_url: width: 800 }} 800w,
-                      {{ product.featured_image | image_url: width: 1200 }} 1200w"
+                      {{ product.featured_image | image_url: width: 300, height: 300, crop: 'center' }} 300w,
+                      {{ product.featured_image | image_url: width: 600, height: 600, crop: 'center' }} 600w,
+                      {{ product.featured_image | image_url: width: 800, height: 800, crop: 'center' }} 800w,
+                      {{ product.featured_image | image_url: width: 1200, height: 1200, crop: 'center' }} 1200w"
                     sizes="(max-width: 600px) 300px,
                            (max-width: 1000px) 600px,
                            800px"
-                    src="{{ product.featured_image | image_url: width: 800 }}"
+                    src="{{ product.featured_image | image_url: width: 800, height: 800, crop: 'center' }}"
                     alt="{{ product.title | escape }}"
                     loading="lazy"
-                    width="100"
-                    height="100"
+                    width="100%"
+                    height="100%"
+                    style="object-position: {{ focal_x }}% {{ focal_y }}%;"
                     decoding="async">
                 </picture>
               {% else %}
@@ -85,6 +90,7 @@
               {% endif %}
             </a>
           </div>
+          
           <div class="product-info">
             <h7 style="color: {{ section.settings.text_color }};">{{ product.title }}</h7>
             <p class="model-number" style="color: {{ section.settings.text_color }};">Model no. #{{ product.sku }}</p>
