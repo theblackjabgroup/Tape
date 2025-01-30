@@ -11,9 +11,9 @@
   data-section-id="{{ section.id }}"
   data-autoplay="{{ section.settings.autoplay }}">
   <div class="image__with__text__outer__container">
-    <div class="image__with__text__inner__container">
+    <ul class="image__with__text__inner__container">
       {% for item in section.blocks %}
-        <span
+        <li
           class="image__with__text__card min__card__height card__set card"
           aria-labelledby="gallery-item-{{ forloop.index0}}-trigger"
           tabindex="-1"
@@ -35,7 +35,7 @@
               </div>
             {% endif %}
           </div>
-        </span>
+        </li>
       {% endfor %}
       <div class="info__banner color-{{ section.settings.bannerColor }}" style="opacity:{{ section.settings.opacity }}">
         <div class="info__banner__contents">
@@ -63,7 +63,7 @@
           {% endfor %}
         </ul>
       </div>
-    </div>
+    </ul>
   </div>
 </div>
 
