@@ -4,7 +4,9 @@
   gap: 10px;
   z-index: 1;
 }
-
+.countdown-container{
+  padding: 10px;
+}
 .countdown-cutout {
   background-color: rgb(var(--color-background));
   height: 25px;
@@ -67,7 +69,8 @@
   }
   .countdown-section__image {
     max-width: 100%;
-    height: auto;
+    height: 347px;
+    object-fit: cover;
     border-radius: 10px;
   }
   .countdown-section__content {
@@ -158,8 +161,8 @@
     margin-top: 10px;
   }
       .countdown_placeholder, .countdown-section__image,.countdown-section__image-wrapper{
-    width: 330px !important;
-    height: 200px !important;
+    width: 333px !important;
+    height: 188px !important;
   }
     .countdown-border-left, .countdown-border-right{
       display: none;
@@ -172,6 +175,10 @@
   .countdown-border-right .countdown-cutout {
     display: none;
   }
+     .countdown-container{
+       padding: 10px 0 !important;
+       overflow-x: hidden !important;
+     }
   .countdown-border-top .countdown-cutout:nth-child(n+9),
       .countdown-border-bottom .countdown-cutout:nth-child(n+9){
     display: none;
