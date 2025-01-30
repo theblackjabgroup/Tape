@@ -1,89 +1,32 @@
+{{ 'shop-the-look.css' | asset_url | stylesheet_tag }}
+
 <style>
   :root {
     --section-color: {{ section.settings.sectionBackground }};
   }
-
-  .shop__the__look__media__container {
-    width: 80vw;
-    height: 70vh;
-    overflow: hidden;
-    /* position: absolute; */
-    border-radius: inherit;
-    /* box-shadow: 10px 5px lightblue; */
-    margin-bottom: 20px;
-    background: gray;
-  }
-
-  .shop__the__look__media__container .media {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-  }
-
-  .shop__the__look__media__bottom__border {
-    border: 10px solid black;
-    border-radius: 25px;
-    height: 10px;
-  }
-
-  .shop__the__look__text__wrapper {
-    display: flex;
-    background-color: moccasin;
-    width: 100%;
-  }
-
-  .shop__the__look__text__container {
-    margin-left: auto;
-    width: 40%;
-    padding: 20px 0;
-  }
-
-  .shop__the__look__heading {
-    font-weight: 600;
-    font-size: 40px;
-    line-height: 56px;
-  }
-  .shop__the__look__description {
-    font-weight: 400;
-    font-size: 26px;
-    line-height: 36px;
-    margin-top: 10px;
-    max-width: 90%;
-    text-align: justify;
-  }
-  .shop__the__look__button {
-    padding: 10px 25px;
-    font-size: 26px;
-    border-radius: 7px;
-    margin-top: 10px;
-    background-color: burlywood;
-  }
-
-
 </style>
+<div class="shop_the_look__container">
 
-<div class="shop__the__look__media__container">
-  {% if section.settings.image %}
-    <img
-      width="1800"
-      height="1600"
-      class="media"
-      src="{{ section.settings.image |  image_url  }}"
-      alt="">
-  {% else %}
-    <div style="width: 100%; height: 100%;">
-      {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+  <div class="shop__the__look__media__container">
+    {% if section.settings.image %}
+      {{
+        section.settings.image | image_url: width: 1800 | image_tag: width: 1800, height: 1600, class: 'media', alt: section.settings.image.alt | escape
+      }}
+    {% else %}
+      <div style="width: 100%; height: 100%;">
+        {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+      </div>
+    {% endif %}
+    <div class="shop__the__look__media__bottom__border">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, cumque!</div>
+  </div>
+
+  <div class="shop__the__look__text__wrapper ">
+    <div class="shop__the__look__text__container">
+      <h1 class="shop__the__look__heading">This is the heading
+      </h1>
+      <p class="shop__the__look__description">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam quae repellendus fugiat provident nostrum asperiores eum laboriosam eligendi autem, quis consequuntur ab iure tenetur aut quod numquam doloribus! Sit, distinctio officiis.</p>
+      <button class="shop__the__look__button">Add to cart</button>
     </div>
-  {% endif %}
-  <div class="shop__the__look__media__bottom__border">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, cumque!</div>
-</div>
-
-<div class="shop__the__look__text__wrapper ">
-  <div class="shop__the__look__text__container">
-    <h1 class="shop__the__look__heading">This is the heading
-    </h1>
-    <p class="shop__the__look__description">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam quae repellendus fugiat provident nostrum asperiores eum laboriosam eligendi autem, quis consequuntur ab iure tenetur aut quod numquam doloribus! Sit, distinctio officiis.</p>
-    <button class="shop__the__look__button">Add to cart</button>
   </div>
 </div>
 
