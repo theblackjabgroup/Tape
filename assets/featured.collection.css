@@ -90,7 +90,7 @@ body {
     flex-direction: column;
     overflow: visible;
     border-radius: 4px;
-    background-color: var(--background_product_card);
+    background-color:rgb(var(--color-button));
   }
 
   .product-image {
@@ -153,11 +153,11 @@ body {
     border-radius: 3px;
     font-size: 14px;
     font-weight: bold;
-    color: rgb(var(--color-secondary-button-text));
+    color: rgb(var(--color-foreground));
     display: inline-block;
     position: absolute;
     left: 23px; /* Fixed left position */
-    background:  rgb(var(--color-button-text));
+    background:  var(--background_product_card);
     text-align: left;
     max-width: 100%; /* Limit the width to prevent overflow */
   }
@@ -169,7 +169,7 @@ body {
       top: 50%;
       width: 10px;
       height: 13px;
-      background-color:var(--background_product_card);
+      background-color:rgb(var(--color-button));
       transform: translateY(-50%);
       border-radius: 50%;
     }
