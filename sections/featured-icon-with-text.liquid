@@ -27,7 +27,9 @@
       padding: 20px 0;
       background: rgb(var(--color-background));
     }
-
+    .icon-with-text-layout2-image{
+      width:100%; height:100%; object-fit:cover; border-radius: inherit;
+    }
     .primary-card-container {
       min-height: calc(332px - var(--primary-card-top-padding));
       width: 250px;
@@ -214,7 +216,14 @@
                 <div class="card__contents">
                   <div class="card__icon" style="background-color: var(--featured-icon-with-text-card-color);">
                     {% if item.settings.icon %}
-                      <img src="{{ item.settings.icon |  image_url  }}" width="100" height="100" alt="icon">
+                                          {{
+ item.settings.icon
+  | image_url: width: 1800
+  | image_tag:
+    width: 100,
+    height: 100,
+    alt: "icon" | escape
+}}
                     {% else %}
                       <div style="width: 100%; height: 100%;">{{ 'image' | placeholder_svg_tag: 'placeholder-svg' | replace: 'svg', 'svg style="width: 100%; height: 100%; scale: 2"' }}</div>
                     {% endif %}
@@ -265,7 +274,15 @@
             <div class="primary-card-container">
               <div class="card-feature-image">
                 {% if item.settings.icon %}
-                  <img src="{{ item.settings.icon | image_url }}" width="500" height="500" alt="icon" style="width:100%; height:100%; object-fit:cover; border-radius: inherit;">
+                     {{
+ item.settings.icon
+  | image_url: width: 1800
+  | image_tag:
+    width: 500,
+    height: 500,
+    class: "icon-with-text-layout2-image",
+    alt: "icon" | escape
+}}
                 {% else %}
                   <div style="width:100%; height:100%;">{{ 'image' | placeholder_svg_tag: 'placeholder-svg' | replace: 'svg', 'svg style="width:100%; height:100%; scale:2"' }}</div>
                 {% endif %}
