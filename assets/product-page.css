@@ -784,7 +784,7 @@ border-radius: 50%;
   .desktop-view {
     display: none;
   }
-  
+
   .bb-upper-thumbnail {
     margin-bottom: 0px !important;
     justify-content: space-evenly;
@@ -888,3 +888,7 @@ border-radius: 50%;
     transform: translateX(50%);
   }
 }
+.bb-product__title {
+    margin:0 !important;
+    padding:0 !important;
+ }

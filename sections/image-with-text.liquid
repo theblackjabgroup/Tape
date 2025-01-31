@@ -43,7 +43,7 @@
           <h1 class="info__banner__heading fira-sans-bold">Thanksgiving big billion sale!</h1>
           <div class="info__banner__details">
             <p class="info__banner__description inter-regular ">
-              Enhance patient care with our premium medical product, featuring advanced technology for precision and  
+              Enhance patient care with our premium medical product, featuring advanced technology for precision and   
               reliability. Ideal for seamless integration into any practice!
             </p>
             <a
@@ -99,9 +99,9 @@
         const headingTag = currentCard.getAttribute('data-heading-tag');
 
         bannerHeadingTag.textContent = headingTag || "  ";
-        bannerHeading.textContent = heading || "Default Heading";
-        bannerDescription.textContent = description || "Default Description";
-        bannerLink.textContent = btnText || "Default Button Text";
+        bannerHeading.textContent = heading || " ";
+        bannerDescription.textContent = description || " ";
+        bannerLink.textContent = btnText || " ";
         if (link) {
           bannerLink.href = link;
         }
