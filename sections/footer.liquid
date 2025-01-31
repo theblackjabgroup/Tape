@@ -67,23 +67,28 @@
     <div class="footer-content" style="color: {{ section.settings.footer_text_color }};">
         <!-- Email Newsletter Column -->
         <div id="newsletter-section1" class="footer-column" {% if section.settings.bold_newsletter_section %}style="font-weight: bold;"{% endif %}>
-          <div id="stay-connected">
- <h4 id="stay-connected-title" style="color: {{ section.settings.menu_title_color }};">
-   {{ section.settings.STAY_CONNECTED_TITLE }}
- </h4>
+      <div id="stay-connected">
+  <h4 id="stay-connected-title" style="color: {{ section.settings.menu_title_color }};">
+    {{ section.settings.STAY_CONNECTED_TITLE }}
+  </h4>
+  <h4 id="thank-you-message" class="thank-you-message" style="display: none; color: {{ section.settings.menu_title_color }};">
+    {{ section.settings.thank_you_message_text | default: "Thank you for subscribing!" }}
+  </h4>
 </div>
-            <form id="newsletter-form">
-                <div id="form-container" class="form-container">
-                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-                    <i class="fa-regular fa-envelope footer-envelope-icon1"></i>
-                    <input type="email" id="email-input" name="email" class="email-input" placeholder="Enter your email" required>
-                    <button type="submit">{{ section.settings.subscribe_button_text }}
-                     <svg class="footer-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                                    <polyline points="12 5 19 12 12 19"></polyline>
-                                </svg></button>
-                </div>
-            </form>
+
+<!-- Rest of the newsletter form structure -->
+<form id="newsletter-form">
+    <div id="form-container" class="form-container">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <i class="fa-regular fa-envelope footer-envelope-icon1"></i>
+        <input type="email" id="email-input" name="email" class="email-input" placeholder="Enter your email" required>
+        <button type="submit">{{ section.settings.subscribe_button_text }}
+         <svg class="footer-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+        </svg></button>
+    </div>
+</form>
           
 <div class="footer__country-selector">
   {% if section.settings.enable_country_selector and localization.available_countries.size > 1 %}
@@ -116,9 +121,6 @@
  </div>
 
 
-<p id="thank-you-message" class="thank-you-message" style="display: none; text-align: center;">
-    {{ section.settings.thank_you_message_text | default: "Thank you for subscribing!" }}
-</p>
 
 
 
@@ -239,6 +241,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const formContainer = document.getElementById("form-container");
     const stayConnectedTitle = document.getElementById("stay-connected-title");
     const thankYouMessage = document.getElementById("thank-you-message");
+    const stayConnectedDiv = document.getElementById("stay-connected");
 
     form.addEventListener("submit", function (event) {
         event.preventDefault();
@@ -250,10 +253,17 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
         
-        // Only hide the form and title, keep the country selector visible
+        // Hide the form
         formContainer.style.display = "none";
-        stayConnectedTitle.style.display = "none";
+        // Replace the title with thank you message in the same position
+        stayConnectedTitle.style.opacity = "0";
+        stayConnectedTitle.style.position = "absolute";
         thankYouMessage.style.display = "block";
+        thankYouMessage.style.opacity = "1";
+        thankYouMessage.style.position = "relative";
+        thankYouMessage.style.color = stayConnectedTitle.style.color;
+        thankYouMessage.style.fontWeight = stayConnectedTitle.style.fontWeight;
+        thankYouMessage.style.margin = stayConnectedTitle.style.margin;
     });
 
     function validateEmail(email) {
