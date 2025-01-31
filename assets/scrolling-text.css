@@ -32,6 +32,12 @@
     filter: drop-shadow(0px 4px 4px #00000026);
 
 }
+.scrolling-text-only-strip-content[data-pause-on-hover="true"]:hover,
+.scrolling-first-strip-content[data-pause-on-hover="true"]:hover,
+.scrolling-second-strip-content[data-pause-on-hover="true"]:hover,
+.scrolling-third-strip-content[data-pause-on-hover="true"]:hover {
+    animation-play-state: paused;
+}
 .scrolling-text-only-strip-content:empty,
 .scrolling-first-strip-content:empty,
 .scrolling-second-strip-content:empty,
