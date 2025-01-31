@@ -11,28 +11,30 @@
              --third-strip-speed: {{ section.settings.scroll_speed }}s;
   "
 >
-  <div class="marquee-inner">
+  <div class="scrolling-marquee-inner">
     {% for block in section.blocks %}
       {% if block.settings.show_strip %}
         {% case block.type %}
           {% when 'text_strip_1' %}
             <div
-              class="text-only-marquee-content text-only-strip-content"
+              class="scrolling-text-only-marquee-content scrolling-text-only-strip-content"
               style="animation-direction: {% if block.settings.direction == 'right' %}normal{% else %}reverse{% endif %};"
+                data-pause-on-hover="{{ block.settings.pause_on_hover }}"
               {{ block.shopify_attributes }}
             >
               {% assign text_only_content = block.settings.text_content | strip %}
               {% for repeat in (1..10) %}
-                <div class="text-only-marquee-item">
-                  <span class="text-only-marquee-text">{{ text_only_content }}</span>
+                <div class="scrolling-text-only-marquee-item">
+                  <span class="scrolling-text-only-marquee-text">{{ text_only_content }}</span>
                 </div>
               {% endfor %}
             </div>
 
           {% when 'content_strip_1' %}
-            <div
-              class="marquee-content first-strip-content"
+             <div
+              class="scrolling-marquee-content scrolling-first-strip-content"
               style="animation-direction: {% if block.settings.direction == 'right' %}normal{% else %}reverse{% endif %};"
+                 data-pause-on-hover="{{ block.settings.pause_on_hover }}"
               {{ block.shopify_attributes }}
             >
               {% for repeat in (1..section.settings.word_iterations) %}
@@ -40,17 +42,16 @@
                   {% assign text_key = 'text_' | append: i %}
                   {% assign image_key = 'image_' | append: i %}
                   {% if block.settings[text_key] != blank %}
-                    <div class="marquee-item">
-                      <span class="marquee-text">{{ block.settings[text_key] }}</span>
+                    <div class="scrolling-marquee-item">
+                      <span class="scrolling-marquee-text">{{ block.settings[text_key] }}</span>
                       {% if block.settings[image_key] %}
-                        <img
-                          src="{{ block.settings[image_key] | img_url: 'master' }}"
-                          alt="{{ block.settings[text_key] }}"
-                          width="{{ section.settings.image_width }}"
-                          height="{{ section.settings.image_height }}"
-                          class="marquee-image"
-                          loading="lazy"
-                        >
+                        {{ block.settings[image_key] | image_url: width: section.settings.image_width, height: section.settings.image_height | image_tag:
+                          class: 'scrolling-marquee-image',
+                          loading: 'lazy',
+                          alt: block.settings[text_key],
+                          width: section.settings.image_width,
+                          height: section.settings.image_height
+                        }}
                       {% endif %}
                     </div>
                   {% endif %}
@@ -60,8 +61,9 @@
 
           {% when 'content_strip_2' %}
             <div
-              class="marquee-content second-strip-content"
+              class="scrolling-marquee-content scrolling-second-strip-content"
               style="animation-direction: {% if block.settings.direction == 'right' %}normal{% else %}reverse{% endif %};"
+                data-pause-on-hover="{{ block.settings.pause_on_hover }}"
               {{ block.shopify_attributes }}
             >
               {% for repeat in (1..section.settings.word_iterations) %}
@@ -69,17 +71,16 @@
                   {% assign text_key = 'text_' | append: i %}
                   {% assign image_key = 'image_' | append: i %}
                   {% if block.settings[text_key] != blank %}
-                    <div class="marquee-item">
-                      <span class="marquee-text">{{ block.settings[text_key] }}</span>
+                    <div class="scrolling-marquee-item">
+                      <span class="scrolling-marquee-text">{{ block.settings[text_key] }}</span>
                       {% if block.settings[image_key] %}
-                        <img
-                          src="{{ block.settings[image_key] | img_url: 'master' }}"
-                          alt="{{ block.settings[text_key] }}"
-                          width="{{ section.settings.image_width }}"
-                          height="{{ section.settings.image_height }}"
-                          class="marquee-image"
-                          loading="lazy"
-                        >
+                        {{ block.settings[image_key] | image_url: width: section.settings.image_width, height: section.settings.image_height | image_tag:
+                          class: 'scrolling-marquee-image',
+                          loading: 'lazy',
+                          alt: block.settings[text_key],
+                          width: section.settings.image_width,
+                          height: section.settings.image_height
+                        }}
                       {% endif %}
                     </div>
                   {% endif %}
@@ -89,8 +90,9 @@
 
           {% when 'content_strip_3' %}
             <div
-              class="marquee-content third-strip-content"
+              class="scrolling-marquee-content scrolling-third-strip-content"
               style="animation-direction: {% if block.settings.direction == 'right' %}normal{% else %}reverse{% endif %};"
+                data-pause-on-hover="{{ block.settings.pause_on_hover }}"
               {{ block.shopify_attributes }}
             >
               {% for repeat in (1..section.settings.word_iterations) %}
@@ -98,17 +100,16 @@
                   {% assign text_key = 'text_' | append: i %}
                   {% assign image_key = 'image_' | append: i %}
                   {% if block.settings[text_key] != blank %}
-                    <div class="marquee-item">
-                      <span class="marquee-text">{{ block.settings[text_key] }}</span>
+                    <div class="scrolling-marquee-item">
+                      <span class="scrolling-marquee-text">{{ block.settings[text_key] }}</span>
                       {% if block.settings[image_key] %}
-                        <img
-                          src="{{ block.settings[image_key] | img_url: 'master' }}"
-                          alt="{{ block.settings[text_key] }}"
-                          width="{{ section.settings.image_width }}"
-                          height="{{ section.settings.image_height }}"
-                          class="marquee-image"
-                          loading="lazy"
-                        >
+                        {{ block.settings[image_key] | image_url: width: section.settings.image_width, height: section.settings.image_height | image_tag:
+                          class: 'scrolling-marquee-image',
+                          loading: 'lazy',
+                          alt: block.settings[text_key],
+                          width: section.settings.image_width,
+                          height: section.settings.image_height
+                        }}
                       {% endif %}
                     </div>
                   {% endif %}
@@ -120,6 +121,7 @@
     {% endfor %}
   </div>
 </div>
+
 
 {% schema %}
 {
@@ -139,7 +141,7 @@
       "type": "range",
       "id": "strip_padding_top",
       "min": 0,
-      "max": 20,
+      "max": 50,
       "step": 1,
       "unit": "px",
       "label": "Top Padding",
@@ -149,7 +151,7 @@
       "type": "range",
       "id": "strip_padding_bottom",
       "min": 0,
-      "max": 20,
+      "max": 50,
       "step": 1,
       "unit": "px",
       "label": "Bottom Padding",
@@ -188,7 +190,7 @@
     {
       "type": "range",
       "id": "word_iterations",
-      "min": 1,
+      "min": 10,
       "max": 50,
       "step": 1,
       "label": "Number of Word Iterations",
