@@ -1,6 +1,8 @@
+{{ 'product-list.css' | asset_url | stylesheet_tag }}
+
 <span class="bb-field-currency field-currency">{{ cart.currency.symbol }}</span>
 
-<div class="field">
+<div class="field bb-pro-field">
   <input
     class="field__input"
     name="{{ filter.min_value.param_name }}"
@@ -24,7 +26,7 @@
   <span class="field-currency ">{{ cart.currency.symbol }}</span>
 {%- endif -%}
 
-<div class="field">
+<div class="field bb-pro-field">
   <input
     class="field__input"
     name="{{ filter.max_value.param_name }}"

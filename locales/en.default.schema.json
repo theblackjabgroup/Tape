@@ -271,7 +271,7 @@
     "social-media": {
       "name": "Social media",
       "settings": {
-        "header": {
+        "footer": {
           "content": "Social accounts"
         },
         "social_twitter_link": {
@@ -2762,7 +2762,7 @@
       }
     },
     "email-signup-banner": {
-      "name": "Email signup banner",
+      "name": "Password Page",
       "settings": {
         "paragraph": {
           "content": "Each email subscription creates a customer account. [Learn more](https://help.shopify.com/manual/customers)"
@@ -2840,9 +2840,6 @@
           },
           "label": "Desktop content alignment"
         },
-        "header": {
-          "content": "Mobile Layout"
-        },
         "mobile_content_alignment": {
           "options__1": {
             "label": "Left"
@@ -2893,7 +2890,7 @@
         }
       },
       "presets": {
-        "name": "Email signup banner"
+        "name": "Password Page"
       }
     },
     "page": {
