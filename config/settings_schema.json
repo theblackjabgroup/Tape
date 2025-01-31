@@ -1346,7 +1346,7 @@
     "settings": [
       {
         "type": "header",
-        "content": "t:settings_schema.social-media.settings.header.content"
+        "content": "t:settings_schema.social-media.settings.footer.content"
       },
       {
         "type": "text",
