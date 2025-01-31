@@ -1,55 +1,156 @@
 {{ 'shop-the-look.css' | asset_url | stylesheet_tag }}
 
-<style>
-  :root {
+{% style %}
+  :root  {
     --section-color: {{ section.settings.sectionBackground }};
   }
-</style>
-<div class="shop_the_look__container">
+{% endstyle %}
 
-  <div class="shop__the__look__media__container">
-    {% if section.settings.image %}
-      {{
-        section.settings.image | image_url: width: 1800 | image_tag: width: 1800, height: 1600, class: 'media', alt: section.settings.image.alt | escape
-      }}
+<div class="shop_the_look__container ">
+
+  <div class="shop__the__look__media__container color-{{ section.settings.bannerColor }}">
+    {% if section.settings.main_image %}
+      <img
+        width="100%"
+        height="100%"
+        class="media"
+        src="{{ section.settings.main_image |  image_url  }}"
+        alt="">
     {% else %}
       <div style="width: 100%; height: 100%;">
         {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
       </div>
     {% endif %}
-    <div class="shop__the__look__media__bottom__border">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, cumque!</div>
+    <div class="shop__the__look__media__bottom__border">&nbsp;</div>
   </div>
 
-  <div class="shop__the__look__text__wrapper ">
+  <div class="slideshow__container ">
+    <div class="slideshow__media__container">
+      {% for item in section.blocks %}
+        {% if item.settings.image %}
+          <img
+            width="100%"
+            height="700px"
+            class="media"
+            src="{{ item.settings.image |  image_url  }}"
+            alt="">
+        {% else %}
+          <div style="width: 100%; height: 100%;">
+            {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          </div>
+
+        {% endif %}
+      {% endfor %}
+    </div>
+    <div class="dot__container" style="background-color: {{section.settings.sectionBackground}};">
+      {% for item in section.blocks %}
+        <span class="dot" data-dot-index="{{ forloop.index0 }}"></span>
+      {% endfor %}
+    </div>
+  </div>
+
+
+  <div class="shop__the__look__text__wrapper color-{{ section.settings.bannerColor }} ">
     <div class="shop__the__look__text__container">
-      <h1 class="shop__the__look__heading">This is the heading
-      </h1>
-      <p class="shop__the__look__description">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam quae repellendus fugiat provident nostrum asperiores eum laboriosam eligendi autem, quis consequuntur ab iure tenetur aut quod numquam doloribus! Sit, distinctio officiis.</p>
-      <button class="shop__the__look__button">Add to cart</button>
+      <h1 class="shop__the__look__heading">{{ section.settings.section_heading }}</h1>
+      <p class="shop__the__look__description">{{ section.settings.section_description }}</p>
+      <button class="shop__the__look__button color-{{ section.settings.bannerColor }}">{{ section.settings.button_text }}</button>
     </div>
   </div>
 </div>
 
+
+<script>
+
+  document.addEventListener("DOMContentLoaded", function () {
+    let slideIndex = 0;
+    const slides = document.querySelectorAll(".slideshow__media__container .media");
+    const placeholders = document.querySelectorAll(".slideshow__media__container .placeholder-svg");
+    const dots = document.querySelectorAll(".dot");
+
+    function showSlides() {
+        if (slides.length === 0 && placeholders.length === 0) return;
+
+        // Hide all images and placeholders
+        slides.forEach(img => img.style.display = "none");
+        placeholders.forEach(placeholder => placeholder.style.display = "none");
+        dots.forEach(dot => dot.classList.remove("active"));
+
+        // Move to the next slide
+        slideIndex = (slideIndex + 1) % (slides.length || placeholders.length);
+
+        // Show the current image or placeholder
+        if (slides.length > 0) {
+            slides[slideIndex].style.display = "block";
+        } else if (placeholders.length > 0) {
+            placeholders[slideIndex].style.display = "block";
+        }
+
+        // Set the corresponding dot as active
+        if (dots.length > 0) {
+            dots[slideIndex].classList.add("active");
+        }
+
+        setTimeout(showSlides, 5000); // Change image every 3 seconds
+    }
+
+    // Function to handle dot clicks
+    dots.forEach((dot, index) => {
+        dot.addEventListener("click", function () {
+            slideIndex = index - 1; // Adjust to match the showSlides logic
+            showSlides();
+        });
+    });
+
+    showSlides(); // Start the slideshow
+  });
+
+
+
+</script>
 {% schema %}
   {
     "name": "Shop the Look",
+    "disabled_on": {
+      "groups": ["header", "footer"]
+    },
     "settings": [
       {
         "type": "color",
         "id": "sectionBackground",
         "label": "Section Color"
-      }, {
+      },
+      {
+        "type": "color_scheme",
+        "label": "Banner Color",
+        "id": "bannerColor",
+        "default": "#000000"
+      },
+      {
         "type": "image_picker",
         "id": "main_image",
         "label": "Main Look Image"
-      }, {
+      },
+      {
         "type": "text",
         "id": "section_heading",
         "label": "Section Heading",
         "default": "Shop the Look"
+      }, {
+        "type": "text",
+        "id": "section_description",
+        "label": "Section Description",
+        "default": "Experience ultimate comfort with our wheelchair's padded armrests. Designed for support and pressure relief, they feature an ergonomic shape and adjustable height for a personalized fit. Enjoy enhanced stability and comfort during every ride!"
+      }, {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button Text",
+        "default": "Add to cart"
       }
+
     ],
-    "max_blocks": 5,
+
+
     "blocks": [
       {
         "type": "hotspot",
@@ -79,11 +180,33 @@
             "default": 50
           }
         ]
+      }, {
+
+        "type": "slide-img",
+        "name": "Slide Image",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Select Image"
+          }
+        ]
       }
     ],
     "presets": [
       {
-        "name": "Shop the Look"
+        "name": "Shop the Look",
+        "blocks": [
+          {
+            "type": "slide-img"
+          }, {
+            "type": "slide-img"
+          }, {
+            "type": "slide-img"
+          }, {
+            "type": "slide-img"
+          }
+        ]
       }
     ]
   }
