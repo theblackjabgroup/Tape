@@ -129,26 +129,15 @@
     </div>
 
 
-    {% if blog.next_article or blog.previous_article %}
-      <div class="blog-article-section" style="color: rgb(var(--color-secondary-button-text));">
-        {% if blog.previous_article %}
-          <a href="{{ blog.previous_article.url }}" class="link">← Previous Article</a>
-        {% endif %}
-        {% if blog.next_article %}
-          <a href="{{ blog.next_article.url }}" class="link">Next Article →</a>
-        {% endif %}
-      </div>
-    {% endif %}
-
     {% unless article.image %}
       {% if section.settings.show_social_sharing %}
         <div class="blog-social-container centered-social">
           <div class="blog-social-bar">
             <div class="blog-interaction-buttons">
-  <span class="icon like-icon"></span>
-  <span class="icon share-icon" data-url="{{ shop.url }}{{ article.url }}"></span>
-  <span class="icon comment-icon"></span>
-  <span class="icon bookmark-icon"></span>
+  <span class="blog-icon like-icon"></span>
+  <span class="blog-icon share-icon" data-url="{{ shop.url }}{{ article.url }}"></span>
+  <span class="blog-icon comment-icon"></span>
+  <span class="blog-icon bookmark-icon"></span>
 </div>
 
             <div class="blog-social-links">
@@ -173,7 +162,14 @@
   {% if article.image %}
     <div class="blog-image-section">
       <div class="blog-image-content">
-        <img src="{{ article.image | img_url: '546x521', crop: 'center' }}" alt="{{ article.image.alt | escape }}" class="blog-main-image">
+        {{
+  article.image
+  | image_url: width: 1800
+  | image_tag:
+        class: "blog-main-image",
+    alt: article.image.alt | escape
+}}
+       
           <div class="blog-image-dots">
             {% for i in (1..20) %}
               <span class="blog-dot color-{{ section.settings.color_scheme }}"></span>
@@ -457,7 +453,14 @@
 
                         <!-- Blog Image -->
                         {% if article.image %}
-                            <img src="{{ article.image | img_url: '309x309', crop: 'center' }}" alt="{{ article.title }}" class="custom-blog-image">
+                                                {{
+  article.image
+  | image_url: width: 1800
+  | image_tag:
+    width: 309,
+    height: 309,
+    alt: article.title | escape
+}}
                         {% else %}
                              {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg placeholder'| replace: '<svg', '<svg style="width: 100%; height: 309px;"' }}
                         {% endif %}

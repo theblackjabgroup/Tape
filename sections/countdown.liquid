@@ -106,6 +106,7 @@
 }
 {% endschema %}
 {{ 'countdown.css' | asset_url | stylesheet_tag }}
+<div class="countdown-container  color-{{ section.settings.color_scheme }}" style=" width: 100%;">
 <div class="countdown-section  color-{{ section.settings.color_scheme }}" style="background-color: rgb(var(--color-button)); padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;">
  <!-- Top border cutouts -->
     <div class="countdown-border-cutouts countdown-border-top">
@@ -137,7 +138,13 @@
   <div class="countdown-section__container page-width">
     <div class="countdown-section__image-wrapper">
       {% if section.settings.image %}
-        <img src="{{ section.settings.image | image_url: width: 500 }}" alt="Countdown Image" class="countdown-section__image">
+{{
+                      section.settings.image
+                      | image_url: width: 1800
+                      | image_tag:
+                          class: 'countdown-section__image',
+                        alt: "Countdown Image" | escape
+                      }}
       {% else %}
         <div class="countdown_placeholder">
         {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
@@ -154,11 +161,16 @@
       <div class="countdown-timer" id="countdown-timer-{{ section.id }}" style="font-size: {{ section.settings.timer_font_size }}px;"></div>
       <a href="{{ section.settings.button_link }}" class="countdown-section__button" style="background-color: rgb(var(--color-button-text)); color: rgb(var(--color-secondary-button-text));">
         {{ section.settings.button_label }}
-      </a>
+      
+        <svg class="countdown_svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+        </a>
     </div>
   </div>
 </div>
-
+</div>
 <script>
   (function () {
     function startCountdown(elementId, endDateTime) {
