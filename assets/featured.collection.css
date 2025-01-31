@@ -26,7 +26,7 @@ body {
     left: 0;
     right: 0;
     background:var(--product_special_offer);
-    color: rgb(var(--color-foreground));
+    color: rgb(var(--primary_textcolor));
     height: 37px;
     text-align: center;
     font-size: 13px;
@@ -122,7 +122,7 @@ body {
     margin: 10px 0 5px 14px;
     font-weight: bold;
     line-height: 1.4;
-    color: rgb(var(--color-foreground));
+    color: rgb(var(--primary_textcolor));
   }
 
   .product-info {
@@ -140,7 +140,7 @@ body {
     padding: 0 15px;
     font-size: 14px;
     flex-shrink: 0;
-    color:rgb(var(--color-foreground));
+    color:rgb(var(--primary_textcolor));
   }
 
   .price-reviews-icons {
@@ -153,11 +153,11 @@ body {
     border-radius: 3px;
     font-size: 14px;
     font-weight: bold;
-    color: rgb(var(--color-foreground));
+    color: rgb(var(--primary_textcolor));
     display: inline-block;
     position: absolute;
     left: 23px; /* Fixed left position */
-    background:  var(--background_product_card);
+    background: var(--card_foreground);
     text-align: left;
     max-width: 100%; /* Limit the width to prevent overflow */
   }
@@ -228,7 +228,7 @@ body {
       transition: scale 0.3s ease;
       opacity: 1;
       scale:1;
-     color: rgb(var(--color-foreground));
+     color: rgb(var(--primary_textcolor));
 
   }
   .featured-arrow.arrow1,.featured-arrow.arrow2{
@@ -271,7 +271,8 @@ body {
       border-radius: 4px;
       text-align: center;
       color: #333;
-      margin-bottom: 28px;
+     margin-top: -90px;
+    margin-bottom: 60px;
       text-decoration: none;
       font-family: Inter, sans-serif;
       font-size: 14px;

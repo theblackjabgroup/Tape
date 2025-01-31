@@ -104,7 +104,7 @@ body {
     margin: 10px 0 5px 14px;
     font-weight: bold;
     line-height: 1.4;
-      color: rgb(var(--color-foreground));
+      color:rgb(var(--primary_textcolor));
   }
 
   .product-info {
@@ -114,14 +114,14 @@ body {
     flex-direction: column;
     flex: 1;
     min-height: auto;
-      color: rgb(var(--color-foreground));
+      color:rgb(var(--primary_textcolor));
   }
 
 
   .vendor{
       font-size: 15px;
       margin-left:15px;
-      color: rgb(var(--color-foreground));
+      color:rgb(var(--primary_textcolor));
   }
 
   .model-number {
@@ -130,25 +130,25 @@ body {
     padding: 0 15px;
     font-size: 14px;
     flex-shrink: 0;
-      color: rgb(var(--color-foreground));
+      color:rgb(var(--primary_textcolor));
   }
 
   .price-reviews-icons {
     margin-top: auto;
     padding: 15px;
     flex-shrink: 0;
-      color: rgb(var(--color-foreground));
+      color:rgb(var(--primary_textcolor));
   }
   .price-tag {
     padding: 8px 11px;
     border-radius: 3px;
     font-size: 14px;
     font-weight: bold;
-    color: rgb(var(--color-foreground));
+    color:rgb(var(--primary_textcolor));
     display: inline-block;
     position: absolute;
     left: 30px; /* Fixed left position */
-    background: var(--background_product_card);
+    background: var(--card_foreground);
     text-align: left;
     max-width: 100%; /* Limit the width to prevent overflow */
   }
