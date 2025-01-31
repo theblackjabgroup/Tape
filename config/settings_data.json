@@ -146,20 +146,20 @@
     "color_schemes": {
       "scheme-1": {
         "settings": {
-          "background": "#FDF4D7",
-          "background_product_card": "#C7E1BF",
+          "background": "#fdf4d7",
+          "background_product_card": "#c7e1bf",
           "text": "#000000",
           "product_price_card": "#000000",
-          "button_label": "#C7E1BF",
-          "secondary_product_button_color": "#9BBAE0",
-          "secondary_button_label": "#000000",
+          "background_gradient": "",
+          "button_label": "#225647",
+          "secondary_product_button_color": "#9bbae0",
+          "secondary_button_label": "#ffffff",
           "product_price_font": "#000000",
           "button": "#C7E1BF",
-          "card_foreground": "#225647",
-          "background_gradient": "",
+          "card_foreground": "#FDF4D7",
           "product_price_secondary_font": "#000000",
-          "quatity_selector_background": "#9BBAE0",
-          "product_special_offer": "#9BBAE0"
+          "quatity_selector_background": "#9bbae0",
+          "product_special_offer": "#9bbae0"
         }
       },
       "scheme-2": {
