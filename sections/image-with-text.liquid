@@ -43,13 +43,15 @@
           <h1 class="info__banner__heading fira-sans-bold">Thanksgiving big billion sale!</h1>
           <div class="info__banner__details">
             <p class="info__banner__description inter-regular ">
-              Enhance patient care with our premium medical product, featuring advanced technology for precision and   
+              Enhance patient care with our premium medical product, featuring advanced technology for precision and       
               reliability. Ideal for seamless integration into any practice!
             </p>
-            <a
-              href=""
-              style="color: rgb(var(--color-secondary-button-text)); background: rgb(var(--color-button-text));"
-              class="info__banner__shopnow__button link color-{{ section.settings.bannerColor }}">Shop Now</a>
+            {% if section.settings.show_shop_button %}
+              <a
+                href=""
+                style="color: rgb(var(--color-secondary-button-text)); background: rgb(var(--color-button-text));"
+                class="info__banner__shopnow__button link color-{{ section.settings.bannerColor }}">Shop Now</a>
+            {% endif %}
           </div>
           <span id="info__banner__expand__button" class="svg-wrapper">
             {{- 'icon-arrow.svg' | inline_asset_content -}}
@@ -99,9 +101,9 @@
         const headingTag = currentCard.getAttribute('data-heading-tag');
 
         bannerHeadingTag.textContent = headingTag || "  ";
-        bannerHeading.textContent = heading || " ";
+        bannerHeading.textContent = heading || "Deafult Banner Heading";
         bannerDescription.textContent = description || " ";
-        bannerLink.textContent = btnText || " ";
+        bannerLink.textContent = btnText || "Deafult Button text ";
         if (link) {
           bannerLink.href = link;
         }
@@ -232,12 +234,14 @@
         "type": "color",
         "id": "sectionBackground",
         "label": "Section Color"
-      }, {
+      },
+      {
         "type": "color_scheme",
         "label": "Banner Color",
         "id": "bannerColor",
         "default": "#000000"
-      }, {
+      },
+      {
         "type": "range",
         "id": "opacity",
         "label": "Banner Opacity",
@@ -245,10 +249,16 @@
         "max": 1.0,
         "step": 0.1,
         "default": 0.8
-      }, {
+      },
+      {
         "type": "checkbox",
         "id": "autoplay",
         "label": "Enable Autoplay",
+        "default": true
+      }, {
+        "type": "checkbox",
+        "id": "show_shop_button",
+        "label": "Show Button",
         "default": true
       }
     ],
