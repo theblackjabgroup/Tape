@@ -73,6 +73,7 @@
          {%- when 'text' -%}
        {{ block.settings.text }}
         {%- when 'button' -%}
+            {% if block.settings.show_button %}
             <a href="{{ block.settings.button_link }}" class="rich_text_btn">
               {{ block.settings.button_text }}
               <svg
@@ -89,6 +90,7 @@
                 <polyline points="12 5 19 12 12 19"></polyline>
               </svg>
             </a>
+             {%-  endif -%}
           {%- endcase -%}
      {%- endfor -%}
     </div>
