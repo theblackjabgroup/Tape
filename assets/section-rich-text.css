@@ -99,11 +99,11 @@
   }
   .rich_text_btn {
     margin:20px auto 0 auto;
-    padding:7px 25px;
+    padding:10px 25px;
     font-family: "Inter", sans-serif;
     font-weight: 400;
     font-style: normal;
-    font-size: 12px;
+    font-size: 17px;
     display: inline-block;
     text-decoration: none;
     align-self: end;
