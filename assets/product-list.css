@@ -303,6 +303,7 @@ summary .icon-caret2 {
 
   .bb-collection-hero {
     background-color: rgb(var(--color-background));
+    margin-bottom: 3rem;
   }
 
   .bb-collection-hero-para{
@@ -322,6 +323,10 @@ summary .icon-caret2 {
     text-align: center;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
+    height: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .bb_card_badge {
@@ -358,6 +363,14 @@ summary .icon-caret2 {
     border-radius: 5px !important;
   }
 
+  .bb-active-facets__button {
+     margin-left: 3.5rem;
+  }
+
+  .bb-active-facets__button-remove {
+    color: rgb(var(--color-foreground));
+  }
+
   .bb-card-media-wrapper {
    /* --border-radius: 1rem !important; */
     --border-top-left-radius: 10px;
@@ -368,7 +381,7 @@ summary .icon-caret2 {
 
   .sale-pro-text{
     font-family: 'Inter';
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 600;
     line-height: 18px;
     margin-bottom: 0px !important;
@@ -502,6 +515,9 @@ summary .icon-caret2 {
     display: none !important;
   }
 
+  .sale-product-list {
+    height: auto;
+  }
   .bb-price2::before {
     transform: translate(-2.3rem,0.4rem);
   }
@@ -536,7 +552,7 @@ summary .icon-caret2 {
     margin-bottom: 1.5rem;
   }
   .bb-collection-hero__title {
-    margin-bottom: 3.5rem;
+   /* margin-bottom: 3.5rem;*/
   }
 
   .section-template--16106693886029__product-grid-padding {
@@ -779,7 +795,7 @@ summary .icon-caret2 {
 }
 
 .sale-pro-text{
-  font-size: 8px;
+  font-size: 12px;
   padding: .25rem;
   line-height: 16px;
 }
