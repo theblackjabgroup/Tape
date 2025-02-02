@@ -52,21 +52,24 @@
 
 .vertical-bar-left-404 {
     left: 2.5rem;
-    top: 8.25rem;
+    top: 2.75rem;
     display: flex;
     flex-direction: column;
     position: absolute;
-    gap: 54px;
+    /*gap: 54px;*/
+    height: 90%;
+    justify-content: space-evenly;
     z-index: 2;
 }
 
 .vertical-bar-right-404 {
     right: 2.5rem;
-    top: 8.25rem;
+    top: 2.75rem;
     display: flex;
     flex-direction: column;
     position: absolute;
-    gap: 54px;
+    height: 90%;
+    justify-content: space-evenly;
     z-index: 2;
 }
 
@@ -141,6 +144,7 @@
     font-weight: 400;
     font-size: 20px;
     line-height: 34px;
+    margin-bottom: 2rem;
     width: 70%;
 }
 
@@ -316,12 +320,12 @@ color: rgb(var(--color-secondary-button-text));
     .vertical-bar-top-404 {
         top: -0.5rem;
         left: 1.25rem;
-        gap: 24.75px;
+        gap: 26.75px;
     }
     .vertical-bar-bottom-404 {
         bottom: -0.5rem;
         left: 1.25rem;
-        gap: 24.75px;
+        gap: 26.75px;
     }
 
     .bb-upper-template-signup {
@@ -336,7 +340,7 @@ color: rgb(var(--color-secondary-button-text));
     .bb-template-signup {
         background-color: unset;
         padding: 0rem !important; 
-        margin: 10rem 2rem !important;
+        padding: 10rem 2rem !important;
     }
 
     .bb-mail-signup-banner__heading {
@@ -351,6 +355,7 @@ color: rgb(var(--color-secondary-button-text));
         font-weight: 400;
         font-size: 16px;
         line-height: 24px;
+        width: 100%;
     }
 
     .bb-newsletter-wrapper {
