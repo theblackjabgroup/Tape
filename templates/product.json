@@ -62,9 +62,8 @@
         "padding_top": 36,
         "padding_bottom": 28
       }
-    }
-  },
-   "collapsible_tabs": {
+    },
+     "collapsible_tabs": {
       "type": "collapsible-tabs",
       "blocks": {
         "collapsible_row_1": {
@@ -130,7 +129,7 @@
       }
     }
   },
-  "order": [
+   "order": [
     "main",
     "related-products",
     "collapsible_tabs"
