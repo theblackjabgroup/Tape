@@ -20,7 +20,7 @@
   {% if block.type == 'content_strip_1' %}
   <div class="collectionlist_strip">
    <div
-              class="scrolling-marquee-content scrolling-first-strip-content"
+              class="scrolling-marquee-content scrolling-first-strip-content-cl"
               style="animation-direction: {% if block.settings.direction == 'right' %}normal{% else %}reverse{% endif %};"
                  data-pause-on-hover="{{ block.settings.pause_on_hover }}"
               {{ block.shopify_attributes }}
@@ -30,11 +30,11 @@
                   {% assign text_key = 'text_' | append: i %}
                   {% assign image_key = 'image_' | append: i %}
                   {% if block.settings[text_key] != blank %}
-                    <div class="scrolling-marquee-item">
-                      <span class="scrolling-marquee-text">{{ block.settings[text_key] }}</span>
+                    <div class="scrolling-marquee-item-cl">
+                      <span class="scrolling-marquee-text-cl">{{ block.settings[text_key] }}</span>
                       {% if block.settings[image_key] %}
                         {{ block.settings[image_key] | image_url: width: block.settings.image_width, height: block.settings.image_height | image_tag:
-                          class: 'scrolling-marquee-image',
+                          class: 'scrolling-marquee-image-cl',
                           loading: 'lazy',
                           alt: block.settings[text_key],
                           width: block.settings.image_width,
