@@ -1031,16 +1031,16 @@
       }
     },
     "collapsible_tabs": {
-      "name": "Collapsible Tabs",
+      "name": "Product Details",
       "settings": {
         "heading": {
           "label": "Heading",
-          "default": "Collapsible Tabs"
+          "default": "Product Details"
         }
       },
       "blocks": {
         "collapsible_row": {
-          "name": "Collapsible tabs",
+          "name": "Product Details",
           "settings": {
             "heading": {
               "default": "Collapsible row",
@@ -1067,7 +1067,7 @@
         }
       },
       "presets": {
-        "name": "Collapsible Tabs"
+        "name": "Product Details"
       }
     },
     "footer": {
