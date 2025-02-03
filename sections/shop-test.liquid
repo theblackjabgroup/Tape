@@ -1,0 +1,170 @@
+{{ 'shop-test.css' | asset_url | stylesheet_tag }}
+
+{% style %}
+  :root  {
+    --section-color: {{ section.settings.sectionBackground }};
+  }
+{% endstyle %}
+
+<div class="shop_the_look__container ">
+
+  <div class="shop__the__look__media__container color-{{ section.settings.bannerColor }}">
+    <div class="wrapper">
+      {% if section.settings.main_image != blank %}
+        <img
+          width="100%"
+          height="100%"
+          class="media"
+          src="{{ section.settings.main_image |  image_url  }}"
+          alt="">
+
+      {% else %}
+        <div class="shop-look__empty-image media media--placeholder media--16-9">
+          <div class="placeholder">{{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}</div>
+        </div>
+      {% endif %}
+
+      {% if section.blocks.size > 0 %}
+        <div class="shop-look__dots">
+          <div class="shop-look__dots-container">&nbsp;</div>
+          {% for block in section.blocks %}
+            <div
+              class="shop-look__dots-item-wrap"
+              style="top: {{ block.settings.position_top}}%; left: {{ block.settings.position_left}}%;"
+              {{ block.shopify_attributes }}>
+              <button
+                class="shop-look__dots-item {{ section.settings.dot_color }}"
+                type="button"
+                is="toggle-button"
+                aria-expanded="false"
+                data-look-dot="{{ forloop.index }}"
+                data-description="{{ block.settings.insightsText }}">
+
+                <i class="icon {{ icon_style }} fa-plus" style="--fa-secondary-opacity: 1;"></i>
+              </button>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+
+  </div>
+
+  <div class="shop__the__look__text__wrapper color-{{ section.settings.bannerColor }} ">
+    <div class="shop__the__look__text__container">
+      <h1 class="shop__the__look__heading">{{ section.settings.section_heading }}</h1>
+      <p class="shop__the__look__description">{{ section.settings.section_description }}</p>
+      <h2 class="shop__the__look__heading">{{ section.settings.moreInfo_heading }}</h2>
+      <p id="insightsInfo" class="shop__the__look__description">{{ section.settings.moreInfo_description }}</p>
+      <button class="shop__the__look__button color-{{ section.settings.bannerColor }}">{{ section.settings.button_text }}</button>
+    </div>
+  </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+  const dots = document.querySelectorAll(".shop-look__dots-item");
+  const descriptionContainer = document.getElementById("insightsInfo");
+
+  dots.forEach(dot => {
+    dot.addEventListener("click", function () {
+      const newDescription = this.getAttribute("data-description");
+      if (newDescription) {
+        descriptionContainer.textContent = newDescription;
+      }
+    });
+  });
+  });
+
+</script>
+{% schema %}
+  {
+    "name": "Shop Test",
+    "disabled_on": {
+      "groups": ["header", "footer"]
+    },
+    "settings": [
+      {
+        "type": "color",
+        "id": "sectionBackground",
+        "label": "Section Color"
+      },
+      {
+        "type": "color_scheme",
+        "label": "Banner Color",
+        "id": "bannerColor",
+        "default": "#000000"
+      },
+      {
+        "type": "image_picker",
+        "id": "main_image",
+        "label": "Main Look Image"
+      },
+      {
+        "type": "text",
+        "id": "section_heading",
+        "label": "Section Heading",
+        "default": "SHOP THE LOOK"
+      }, {
+        "type": "text",
+        "id": "section_description",
+        "label": "Section Description",
+        "default": "Experience ultimate comfort with our wheelchair's padded armrests. Designed for support and pressure relief, they feature an ergonomic shape and adjustable height for a personalized fit. Enjoy enhanced stability and comfort during every ride!"
+      }, {
+        "type": "text",
+        "id": "moreInfo_heading",
+        "label": "More Info Heading",
+        "default": "Insights"
+      }, {
+        "type": "text",
+        "id": "moreInfo_description",
+        "label": "More Info Description",
+        "default": "Experience ultimate comfort with our wheelchair's padded armrests. Designed for support and pressure relief, they feature an ergonomic shape and adjustable height for a personalized fit. Enjoy enhanced stability and comfort during every ride!"
+      }, {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button Text",
+        "default": "Optional Button"
+      }
+
+    ],
+
+
+    "blocks": [
+      {
+        "type": "hotspot",
+        "name": "Text Hotspot",
+        "settings": [
+          {
+            "type": "range",
+            "id": "position_left",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "label": "Horizontal Position",
+            "default": 50
+          }, {
+            "type": "range",
+            "id": "position_top",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "label": "Vertical Position",
+            "default": 50
+          }, {
+            "type": "text",
+            "id": "insightsText",
+            "label": "Insight Text",
+            "default": "    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam, nobis."
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Shop Test"
+
+      }
+    ]
+  }
+{% endschema %}
