@@ -8,13 +8,11 @@
   @media screen and (min-width: 749px) {
     .bb-upper-template-signup {
       width: {{ section.settings.card_width }}rem;
-    /*  height: 50rem; */
     }
   }
   @media screen and (max-width: 749px) {
     .bb-upper-template-signup {
       width: {{ section.settings.card_width_mobile }}rem;
-      height: 40rem;
     }
   }
 
@@ -52,7 +50,7 @@
     {% endfor %}
   </div>
   <div class="vertical-bar-left-404">
-    {% for i in (0..7) %}
+    {% for i in (0..5) %}
       <div class="vertical-bar-circle-404 index-404-{{i}}"></div>
     {% endfor %}
   </div>
@@ -153,7 +151,7 @@
   </div>
 
   <div class="vertical-bar-right-404">
-    {% for i in (0..7) %}
+    {% for i in (0..5) %}
       <div class="vertical-bar-circle-404 index-404-{{i}}"></div>
     {% endfor %}
   </div>
@@ -169,7 +167,7 @@
   class="mobile-view banner__content banner__content--{{ section.settings.desktop_content_position }} bb-upper-template-signup"
 >
   <div class="vertical-bar-top-404">
-    {% for i in (0..9) %}
+    {% for i in (0..8) %}
       <div class="vertical-bar-circle-404 index-404-{{i}}"></div>
     {% endfor %}
   </div>
@@ -269,7 +267,7 @@
     {%- endfor -%}
   </div>
   <div class="vertical-bar-bottom-404">
-    {% for i in (0..9) %}
+    {% for i in (0..8) %}
       <div class="vertical-bar-circle-404 index-404-{{i}}"></div>
     {% endfor %}
   </div>
@@ -326,10 +324,6 @@
       "label": "t:sections.all.colors.label",
       "info": "t:sections.email-signup-banner.settings.color_scheme.info",
       "default": "scheme-1"
-    },
-    {
-      "type": "header",
-      "content": "t:sections.email-signup-banner.settings.header.content"
     }
   ],
   "blocks": [

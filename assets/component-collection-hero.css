@@ -43,7 +43,7 @@
     font-weight: 600;
 }
 .bb-collection-hero__title {
-  margin-bottom: 6.5rem;
+  /*argin-bottom: 6.5rem;*/
 }
 .collection-hero__title + .collection-hero__description {
   margin-top: 1.5rem;
