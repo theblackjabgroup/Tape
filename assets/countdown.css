@@ -49,9 +49,9 @@
 }
 .countdown-section {
   position: relative;
-  width: 80%;
   margin: 10px auto;
   border-radius: 4px;
+  transition: width 0.3s ease;
 }
   .countdown_placeholder{
     width: 400px;
@@ -116,7 +116,7 @@
     transition: transform 0.3s ease;
 }
 
-.countdown_svg {
+.countdown_svg: hover {
     transform: translateX(4px);
 }
 
@@ -138,33 +138,40 @@
   background-color: rgb(var(--color-background)); 
   border-radius: 50%;
 }
-   @media screen and (max-width: 750px) {
-     .countdown-section__container {
+/* Previous CSS remains the same until mobile media query */
+
+@media screen and (max-width: 750px) {
+  .countdown-section {
+    width: var(--mobile-width) !important;
+    margin: 10px auto;
+  }
+  
+  .countdown-section__container {
     flex-direction: column;
-    align-items: center; 
+    align-items: center;
   }
 
   .countdown-section__image-wrapper {
     order: 1;
-    width: 100%; 
+    width: calc(var(--mobile-width) * 0.95) !important; 
     margin: 0 auto;
   }
 
   .countdown-section__content {
     order: 2; 
     text-align: center; 
-    width: 100%; 
+    width: 100% !important; 
   }
 
   .countdown-section__heading {
     order: 3; 
-    font-size: 20px !important; 
+    font-size: calc(20px * var(--mobile-width) / 100) !important; 
     margin-bottom: 10px;
   }
 
   .countdown-section__description {
     order: 4; 
-    font-size: 12px !important;
+    font-size: calc(12px * var(--mobile-width) / 100) !important;
     text-align: justify;
     margin-bottom: 15px;
   }
@@ -179,39 +186,44 @@
     order: 6; 
     font-size: 14px !important;
     margin-top: 10px;
-    display: flex;
-    align-items: center;
-    width: 150px;
+    align-items: left !important;
+    
   }
-      .countdown_placeholder, .countdown-section__image,.countdown-section__image-wrapper{
-    width: 333px !important;
-    height: 188px !important;
+
+  .countdown_placeholder, 
+  .countdown-section__image,
+  .countdown-section__image-wrapper {
+    width: calc(333px * var(--mobile-width) / 100) !important;
+    height: calc(188px * var(--mobile-width) / 100) !important;
   }
-    .countdown-border-left, .countdown-border-right{
-      display: none;
-    } 
-     .countdown-section {
-  width: 100%;
-  margin: 10px 0;
-}
+  .countdown-border-left, 
+  .countdown-border-right {
+    display: none;
+  } 
+
   .countdown-border-left .countdown-cutout,
   .countdown-border-right .countdown-cutout {
     display: none;
   }
-     .countdown-container{
-       padding: 10px 0 !important;
-       overflow-x: hidden !important;
-     }
+
+  .countdown-container {
+    padding: 10px 0 !important;
+    overflow-x: hidden !important;
+  }
+
   .countdown-border-top .countdown-cutout:nth-child(n+9),
-      .countdown-border-bottom .countdown-cutout:nth-child(n+9){
+  .countdown-border-bottom .countdown-cutout:nth-child(n+9) {
     display: none;
   }
-    .countdown-border-top, .countdown-border-bottom{
-      left:3px;
-    }
-   }
-@media screen and (min-width: 1250px){
-.countdown-timer {
-    font-size: calc(var(--timer-font-size, 21px) * 1.2) !important;
+
+  .countdown-border-top, 
+  .countdown-border-bottom {
+    left: 3px;
+  }
 }
+
+@media screen and (min-width: 1250px) {
+  .countdown-timer {
+    font-size: calc(var(--timer-font-size, 21px) * 1.2) !important;
+  }
 }
