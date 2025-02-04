@@ -1,143 +1,219 @@
-<link rel="stylesheet" href="{{ 'popup.css' | asset_url }}">
+/* Typography and Spacing */
+.popup-message-layout2 p,
+.popup-message-layout2 span,
+.popup-message-layout2 h1,
+.popup-message-layout2 h2,
+.popup-message-layout2 h3,
+.popup-message-layout2 h4,
+.popup-message-layout2 a,
+.popup-message-layout2 li,
+.popup-message-layout2 ul,
+.popup-message-layout2 ol {
+  font-size: 16px; /* Base font size */
+  line-height: 1.5;
+  padding: 10px 20px 0 10px;
+  color: var(--product_price_card);
+}
 
+/* Popup box styles */
+.popup-box {
+  max-width: 409.51px;
+  height: fit-content;
+  background-color: var(--card_foreground);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 20px;
+  gap: 15px;
+  box-shadow: 10px 10px rgb(var(--color-button));
+  position: fixed;
+  bottom: 30px;
+  left: 25px;
+  z-index: 15;
+}
 
-<div class="popup-box color-{{ section.settings.color_scheme }}" id="popup-box">
-  <div class="popup-heading-container-layout2">
-    <div class="popup-heading-layout2">{{ section.settings.popup_title }}</div>
-    <div id="closePopupbox" class="popup-close-btn">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 20 20"
-        fill="currentColor"
-        width="28"
-        height="28">
-        <path
-          fill-rule="evenodd"
-          d="M10 9.293l4.646-4.646a1 1 0 011.414 1.414L11.414 10l4.646 4.646a1 1 0 01-1.414 1.414L10 11.414l-4.646 4.646a1 1 0 01-1.414-1.414L8.586 10 3.94 5.354A1 1 0 015.354 3.94L10 9.293z"
-          clip-rule="evenodd" />
-      </svg>
-    </div>
-  </div>
-  <div class="popup-message-layout2">
-    {{ section.settings.popup_message | richtext }}
-  </div>
+.popup-heading-container-layout2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
 
-  <form id="popupForm" class="popup-form">
-    <div class="popup-email-container">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-      <i class="fa-regular fa-envelope popup-email-Icon" ></i>     
-      <input
-        type="email"
-        id="emailInputLayout2"
-        class="popup-email-input-layout2"
-        placeholder="{{ section.settings.email_placeholder }}">
-    </div>
-    <button class="popup-subscribe-btn" onclick="handleSubscribe()">{{ section.settings.button_text }}</button>
-  </form>
-</div>
+.popup-heading-layout2 {
+  font-size: 24px;
+  padding: 10px 0 5px 10px;
+  color: var(--product_price_card);
+  font-family: "Fira Sans";
+  font-weight: 600;
+}
 
+.popup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 90%;
+  padding: 10px 20px 0 10px;
+  overflow: hidden;
+}
 
-<script>
-  // function to validate email
-  function validateEmail(email) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Email validation regex
-    return emailRegex.test(email);
+.popup-email-container {
+  display: flex;
+  width: 90%;
+  background-color: white;
+  border-radius: 4px;
+}
+
+.popup-email-Icon {
+    font-weight: 400;
+    position: absolute;
+    transform: translateY(93%);
+    color: #888;
+    font-size: 18px;
+    pointer-events: none;
+      margin-left: 20px;
+}
+
+.popup-email-input-layout2 {
+  border: none;
+  border-radius: 4px;
+  width: 345px;
+margin-left: 45px;
+    padding: 11px;
+}
+
+.popup-close-btn {
+  border: none;
+  background-color: inherit;
+  background: transparent;
+  transition: transform 0.3s ease;
+  align-items: center;
+}
+
+.popup-close-btn:hover {
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+.popup-close-btn svg {
+  fill: var(--product_price_card);
+}
+
+.popup-subscribe-btn {
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  background: linear-gradient(
+    to right,
+    gray 50%,
+    rgb(var(--color-button-text)) 50%
+  );
+  background-size: 200% 100%;
+  color: rgb(var(--color-secondary-button-text));
+  background-position: 100% 0;
+  border: none;
+  padding: 10px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  display: block;
+  width: 164px;
+  height: 48px;
+  transition: background-position 1.5s ease-in-out, transform 0.3s ease;
+  position: relative;
+}
+.popup-subscribe-btn:hover {
+  background-position: 0 0;
+  color: rgb(var(--color-secondary-button-text));
+}
+
+/* Media Querries  */
+
+@media screen and (max-width: 600px) {
+  /* Layout 2 responsive css  */
+  .popup-box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 300px;
+  }
+  .popup-heading-layout2 {
+    font-size: 20px;
+    font-weight: 400;
   }
 
-  // subscription logic
-  function handleSubscribe(layout) {
-    const emailInputId = 'emailInputLayout2';
-    const emailInput = document.getElementById(emailInputId).value.trim();
-
-    if (!emailInput) {
-      alert("{{ section.settings.empty_email_message }}");
-      return;
-    }
-
-    if (!validateEmail(emailInput)) {
-      alert("{{ section.settings.invalid_email_message }}");
-      return;
-    }
-
-    alert("{{ section.settings.success_message }}");
-    document.getElementById('popupOverlay').style.display = 'none';
+  .popup-message-layout2 {
+    font-weight: 300;
+    font-size: 10px;
+    max-width: 345px;
+    width: fit-content;
+    text-align: justify;
   }
 
-  // Close popup when the close button is clicked
-  document.querySelectorAll('#closePopupbox').forEach((closeButton) => {
-    closeButton.addEventListener('click', function () {
-      document.getElementById('popup-box').style.display = 'none';
-    });
-  });
-
-  // subscribe buttons event listners
-  document.querySelectorAll('.popup-subscribe-btn').forEach((button) => {
-    button.addEventListener('click', function () {
-      const layout = button.closest('.popup').classList.contains('popup-overlay-layout2') ? 'layout2' : 'layout1';
-      handleSubscribe(layout);
-    });
-  });
-</script>
-
-{% schema %}
-  {
-    "name": "Popup",
-    "enabled_on": {
-      "groups": ["footer"]
-    },
-    "settings": [
-
-      {
-        "type": "color_scheme",
-        "id": "color_scheme",
-        "label": "t:sections.all.colors.label",
-        "default": "scheme-1"
-      },
-      {
-        "type": "text",
-        "id": "popup_title",
-        "label": "Popup Title",
-        "default": "PopUp Heading"
-      },
-      {
-        "type": "richtext",
-        "id": "popup_message",
-        "label": "Popup Message",
-        "default": "<p>Showcase details about your latest offers, sales or meetups. Let them subscribe to your amazing newsletter, we got you covered.</p>"
-      },
-      {
-        "type": "text",
-        "id": "email_placeholder",
-        "label": "Email Placeholder Text",
-        "default": "Enter your email address"
-      }, {
-        "type": "text",
-        "id": "button_text",
-        "label": "Button Text",
-        "default": "Subscribe"
-      }, {
-        "type": "text",
-        "id": "empty_email_message",
-        "label": "Empty Email Error Message",
-        "default": "Please enter an email address."
-      }, {
-        "type": "text",
-        "id": "invalid_email_message",
-        "label": "Invalid Email Error Message",
-        "default": "Please enter a valid email address."
-      }, {
-        "type": "text",
-        "id": "success_message",
-        "label": "Success Message",
-        "default": "Thank you for subscribing!"
-      }
-    ],
-    "blocks": [],
-    "presets": [
-      {
-        "name": "Popup",
-        "category": "Popups"
-      }
-    ]
+  .popup-email-container {
+    width: 100%;
   }
-{% endschema %}
+
+  .popup-email-input-layout2 {
+    width: 236px;
+  }
+
+  .popup-subscribe-btn {
+    font-size: 14px;
+    font-weight: 400;
+    z-index: 2;
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  /* Layout 2 responsive css  */
+
+  .popup-box {
+    position: fixed;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 308.5px;
+  }
+
+  .popup-heading-container-layout2 {
+    width: 236px;
+  }
+  .popup-heading-layout2 {
+    font-size: 20px;
+    font-weight: 500;
+    padding: 10px 0;
+  }
+
+  .popup-message-layout2 {
+    font-weight: 300;
+    font-size: 10px;
+    width: 236px;
+    text-align: justify;
+  }
+
+  .popup-message-layout2 p {
+    padding: 0;
+  }
+
+  .popup-form {
+    width: 100%;
+    padding: 0;
+  }
+
+  .popup-email-container {
+    width: 100%;
+  }
+  .popup-email-input-layout2 {
+    width: 100%;
+    padding-left: 2px;
+  }
+
+  .popup-subscribe-btn {
+    padding: 1px 24px;
+    width: 150px;
+    height: 44px;
+    text-align: center;
+  }
+}
