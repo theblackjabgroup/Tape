@@ -10,8 +10,12 @@
   .card__inner{
     height: 50%;
   }
+  .article-card__excerpt{
+    margin: 5px 0 !important;
+  }
   .card__content{
     height: 50%;
+    font-size: 13px !important;
   }
    @media screen and (max-width: 1250px){
       .article-card, .card__heading, .h2{
@@ -40,7 +44,7 @@
     height: 345px;
   }
   .card__content{
-        font-size: 10px;
+        font-size: 12px;
     padding: 10px !important;
   }
   .card__information{
@@ -59,11 +63,11 @@
   display: flex;
   gap: 5px;
   flex-wrap: wrap;
-  z-index: 10; /* Ensures tags are above the image */
+  z-index: 10; 
 }
   .article-tags .tag {
-    background: rgba(255, 255, 255, 0.8);
-    color: var(--color-primary);
+    background-color: rgb(var(--color-background));
+    color: var(--color-foreground);
     text-decoration: none;
     padding: 5px 10px;
     border-radius: 5px;
