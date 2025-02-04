@@ -223,7 +223,7 @@
         "column1": {
           "type": "column",
           "settings": {
-            "video_title": "Mattress Soft Ergonomic!",
+            "video_title": "Video Title",
             "youtube_url": "",
             "video_embed": "",
             "video_link": ""
@@ -232,7 +232,7 @@
         "column2": {
           "type": "column",
           "settings": {
-            "video_title": "Mattress Soft Ergonomic!",
+            "video_title": "Video Title",
             "youtube_url": "",
             "video_embed": "",
             "video_link": ""
@@ -241,7 +241,7 @@
         "column3": {
           "type": "column",
           "settings": {
-            "video_title": "Mattress Soft Ergonomic!",
+            "video_title": "Video Title",
             "youtube_url": "",
             "video_embed": "",
             "video_link": ""
@@ -289,35 +289,35 @@
         "card_1": {
           "type": "card",
           "settings": {
-            "title": "Pay On Delivery",
+            "title": "Card Heading",
             "description": ""
           }
         },
         "card_2": {
           "type": "card",
           "settings": {
-            "title": "Pay On Delivery",
+            "title": "Card Heading",
             "description": ""
           }
         },
         "card_3": {
           "type": "card",
           "settings": {
-            "title": "Pay On Delivery",
+            "title": "Card Heading",
             "description": ""
           }
         },
         "card_4": {
           "type": "card",
           "settings": {
-            "title": "Pay On Delivery",
+            "title": "Card Heading",
             "description": ""
           }
         },
         "card_5": {
           "type": "card",
           "settings": {
-            "title": "Pay On Delivery",
+            "title": "Card Heading",
             "description": ""
           }
         }
@@ -331,8 +331,8 @@
       ],
       "settings": {
         "layout": "layout_1",
-        "heading": "Key Features",
-        "subheading": "Prioritize your well-being",
+        "heading": "Add heading here!",
+        "subheading": "Add sub-heading here!",
         "sectionColor": ""
       }
     },

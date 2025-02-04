@@ -238,7 +238,7 @@
                 <article id="{{ comment.id }}" class="article-template__comments-comment">
                   {{ comment.content }}
                   <footer class="right">
-                    <span class="circle-divider caption" style="color:rgb(var(--color-secondary-button-text));">{{ comment.author }}</span>
+                    <span class="circle-divider caption" style="color:rgb(var(--color-foreground));">{{ comment.author }}</span>
                   </footer>
                 </article>
               {%- endif -%}
@@ -247,8 +247,8 @@
                 <article id="{{ comment.id }}" class="article-template__comments-comment" >
                   {{ comment.content }}
                   <footer class="right">
-                    <span class="circle-divider" style="color:rgb(var(--color-secondary-button-text));">{{ comment.author }}</span
-                    ><span class="caption" style="color:rgb(var(--color-secondary-button-text));">
+                    <span class="circle-divider" style="color:rgb(var(--color-foreground));">{{ comment.author }}</span
+                    ><span class="caption" style="color:rgb(var(--color-foreground));">
                       {{- comment.created_at | time_tag: format: 'date' -}}
                     </span>
                   </footer>
