@@ -1,27 +1,54 @@
-
 {
   "name": "t:sections.footer.name",
   "type": "footer",
   "sections": {
+    "barcode": {
+      "type": "barcode",
+      "settings": {
+        "color_scheme": "",
+        "animation_speed": 20,
+        "animation_direction": "normal",
+        "auto_play": true
+      }
+    },
+    "subfooter": {
+      "type": "subfooter",
+      "settings": {
+        "color_scheme": "",
+        "footer_payment_enable": true
+      }
+    },
     "footer": {
       "type": "footer",
       "settings": {
         "color_scheme": "scheme-1",
-        "newsletter_enable": true,
-        "newsletter_heading": "Subscribe to our emails",
-        "enable_follow_on_shop": true,
-        "show_social": true,
-        "enable_country_selector": true,
+        "menu_item_color": "#333333",
+        "menu_1_title": "ABOUT US",
+        "menu_1_links": "",
+        "menu_2_title": "PRODUCTS",
+        "menu_2_links": "",
+        "menu_3_title": "CUSTOMER SERVICES",
+        "menu_3_links": "",
+        "menu_4_title": "RESOURCES",
+        "menu_4_links": "",
+        "menu_5_title": "SOCIAL MEDIA",
+        "show_social_icons": true,
+        "STAY_CONNECTED_TITLE": "STAY CONNECTED WITH US",
+        "thank_you_message_text": "Thank you for subscribing!",
+        "footer_top_padding": 50,
+        "footer_bottom_padding": 50,
+        "subscribe_button_text": "Subscribe",
         "enable_language_selector": true,
-        "payment_enable": true,
-        "show_policy": true,
-        "margin_top": 0,
-        "padding_top": 36,
-        "padding_bottom": 36
+        "enable_country_selector": true,
+        "show_announcement_strips": true,
+        "offer_text_1": "Add strip text here →",
+        "offer_text_2": "Add strip text here →"
       }
     }
   },
   "order": [
-    "footer"
+    "footer",
+    "barcode",
+    "subfooter"
   ]
 }
