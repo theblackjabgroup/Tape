@@ -892,3 +892,9 @@ border-radius: 50%;
     margin:0 !important;
     padding:0 !important;
  }
+ .bb-special-offer{
+    margin-bottom:15px;
+  }
+  .product__info-wrapper{
+    margin-top:15px;
+  }
