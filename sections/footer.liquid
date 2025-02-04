@@ -36,9 +36,7 @@
 
 
 
-<footer class=" color-{{ section.settings.color_scheme }}" style="background-color: {{ section.settings.footer_background_color }}; font-family: 'Inter', sans-serif;
-   margin-top: {{ section.settings.footer_top_margin }}px;
-               margin-bottom: {{ section.settings.footer_bottom_margin }}px;
+<footer class=" color-{{ section.settings.color_scheme }}" style="font-family: 'Inter', sans-serif;
                    padding-top: {{ section.settings.footer_top_padding }}px;
                padding-bottom: {{ section.settings.footer_bottom_padding }}px;">
 
@@ -462,24 +460,6 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       "type": "header",
       "content": "Footer Layout"
-    },
-    {
-      "type": "range",
-      "id": "footer_top_margin",
-      "label": "Top Margin (px)",
-      "min": 0,
-      "max": 200,
-      "step": 5,
-      "default": 50
-    },
-    {
-      "type": "range", 
-      "id": "footer_bottom_margin",
-      "label": "Bottom Margin (px)",
-      "min": 0,
-      "max": 200,
-      "step": 5,
-      "default": 50
     },
     {
       "type": "range",
