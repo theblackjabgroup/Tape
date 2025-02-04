@@ -73,6 +73,7 @@
 .scrolling-text-only-marquee-item {
     display: flex;
     align-items: center;
+    justify-content:center;
     padding: var(--strip-padding-top, 10px) 10px var(--strip-padding-bottom, 10px);
     white-space: nowrap;
     flex-shrink: 0;
