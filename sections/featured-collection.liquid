@@ -12,7 +12,7 @@
     {{ section.settings.title }}
   </h1>
 
-  {% assign current_collection = collections[section.settings.collection] %}
+    {% assign current_collection = collections[section.settings.collection] %}
   {% if current_collection == blank %}
     {% assign current_collection = collections[section.settings.default_collection] %}
   {% endif %}
@@ -28,9 +28,9 @@
   {% endif %}
 
   <div class="featured-arrow-parent">
-       <div class="featured-collection-arrow-buttons" >
-        <button class="featured-arrow arrow1"  onclick="scrollCards(-1)">‹</button>
-        <button class="featured-arrow arrow2"  onclick="scrollCards(1)">›</button>
+    <div class="featured-collection-arrow-buttons">
+      <button class="featured-arrow arrow1" onclick="scrollCards(-1)">‹</button>
+      <button class="featured-arrow arrow2" onclick="scrollCards(1)">›</button>
     </div>
   </div>
   
@@ -41,8 +41,8 @@
              style="--pseudo-bg-color: {{ section.settings.product_card_background_color }}; 
                     background-color: {{ section.settings.product_card_background_color }};">
           
-          {% if section.settings.offer_tag_text != blank %}
-        <div class="offer-banner" 
+          {% if section.settings.show_offer_banner and section.settings.offer_tag_text != blank %}
+            <div class="offer-banner" 
                  style="--banner-bg-color: {{ section.settings.special_offer_background_color }}; 
                         background-color: {{ section.settings.special_offer_background_color }}; 
                         color: {{ section.settings.special_offer_text_color }};">
@@ -50,7 +50,7 @@
             </div>
           {% endif %}
           
-           <div class="product-image{% unless section.settings.offer_tag_text != blank %} no-banner{% endunless %}">
+          <div class="product-image{% unless section.settings.show_offer_banner and section.settings.offer_tag_text != blank %} no-banner{% endunless %}">
             <a href="{{ product.url }}">
               {% if product.featured_image %}
                 {% assign img_url_parts = product.featured_image | img_url: '1x1' | split: '?' %}
@@ -143,12 +143,12 @@
         </div>
       {% endfor %}
     {% else %}
-      {% for i in (1..section.settings.products_to_show) %}
+       {% for i in (1..section.settings.products_to_show) %}
         <div class="product-card" 
              style="--pseudo-bg-color: {{ section.settings.product_card_background_color }}; 
                     background-color: {{ section.settings.product_card_background_color }};">
           
-          {% if section.settings.offer_tag_text != blank %}
+          {% if section.settings.show_offer_banner and section.settings.offer_tag_text != blank %}
             <div class="offer-banner" 
                  style="--banner-bg-color: {{ section.settings.special_offer_background_color }}; 
                         background-color: {{ section.settings.special_offer_background_color }}; 
@@ -157,9 +157,10 @@
             </div>
           {% endif %}
           
-          <div class="product-image{% unless section.settings.offer_tag_text != blank %} no-banner{% endunless %}">
+          <div class="product-image{% unless section.settings.show_offer_banner and section.settings.offer_tag_text != blank %} no-banner{% endunless %}">
             {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
           </div>
+
           
           <div class="product-info">
             <h7 style="color: {{ section.settings.text_color }};">Sample Product</h7>
@@ -339,6 +340,13 @@ document.addEventListener('DOMContentLoaded', function() {
       "step": 1,
       "default": 4,
       "label": "Number of products to show"
+    },
+     {
+      "type": "checkbox",
+      "id": "show_offer_banner",
+      "label": "Show Offer Banner",
+      "default": true,
+      "info": "Enable or disable the offer banner on product cards"
     },
     {
       "type": "text",
