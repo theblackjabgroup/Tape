@@ -40,17 +40,16 @@
       <div class="info__banner color-{{ section.settings.bannerColor }}" style="opacity:{{ section.settings.opacity }}">
         <div class="info__banner__contents">
           <p class="info__banner__title inter-medium">NEW ARRIVAL</p>
-          <h1 class="info__banner__heading fira-sans-bold">Thanksgiving big billion sale!</h1>
+          <h1 class="info__banner__heading fira-sans-bold">Image With Text</h1>
           <div class="info__banner__details">
             <p class="info__banner__description inter-regular ">
-              Enhance patient care with our premium medical product, featuring advanced technology for precision and       
-              reliability. Ideal for seamless integration into any practice!
+              Pair large text with an image to give focus to your chosen product. Add details on style, availabilty, share the product description or review.
             </p>
             {% if section.settings.show_shop_button %}
               <a
                 href=""
                 style="color: rgb(var(--color-secondary-button-text)); background: rgb(var(--color-button-text));"
-                class="info__banner__shopnow__button link color-{{ section.settings.bannerColor }}">Shop Now</a>
+                class="info__banner__shopnow__button link color-{{ section.settings.bannerColor }}">Optional Button</a>
             {% endif %}
           </div>
           <span id="info__banner__expand__button" class="svg-wrapper">
@@ -101,9 +100,9 @@
         const headingTag = currentCard.getAttribute('data-heading-tag');
 
         bannerHeadingTag.textContent = headingTag || "  ";
-        bannerHeading.textContent = heading || "Deafult Banner Heading";
+        bannerHeading.textContent = heading || "Image With Text";
         bannerDescription.textContent = description || " ";
-        bannerLink.textContent = btnText || "Deafult Button text ";
+        bannerLink.textContent = btnText || "Optional Button";
         if (link) {
           bannerLink.href = link;
         }
@@ -276,24 +275,24 @@
             "type": "text",
             "id": "headingTag",
             "label": "Heading Tag",
-            "default": "New Arrival"
+            "default": "Optional Heading Tag"
           },
           {
             "type": "text",
             "id": "heading",
             "label": "Heading",
-            "default": "Thanksgiving big billion sale!"
+            "default": "IMAGE WITH TEXT"
           },
           {
             "type": "text",
             "id": "description",
             "label": "Description",
-            "default": "Enhance patient care with our premium medical product, featuring advanced technology for precision and reliability. Ideal for seamless integration into any practice!"
+            "default": "Pair large text with an image to give focus to your chosen product. Add details on style, availabilty, share the product description or review."
           }, {
             "type": "text",
             "id": "btnText",
             "label": "Button Text",
-            "default": "Shop Now"
+            "default": "Optional Button"
           }, {
             "type": "url",
             "id": "url",
@@ -310,9 +309,14 @@
         "blocks": [
           {
             "type": "card"
-          }, {
+          },
+          {
             "type": "card"
-          }, {
+          },
+          {
+            "type": "card"
+          },
+          {
             "type": "card"
           }, {
             "type": "card"

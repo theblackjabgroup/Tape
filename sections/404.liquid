@@ -45,14 +45,11 @@
   <p class="bb-404-para">
     {{ section.settings.description }}
   </p>
-  <a href="{{ section.settings.link1 }}" class="bb-404-h-button button">
-    {{ section.settings.button1 }}
-  </a>
-  <!--
-  <a href="{{ section.settings.link2 }}" class="bb-404-c-button button">
-    {{ section.settings.button2 }}
-  </a>
-  -->
+  {% if section.settings.button1 != blank %}
+    <a href="{{ section.settings.link1 }}" class="bb-404-h-button button">
+      {{ section.settings.button1 }}
+    </a>
+  {% endif %}
 </div>
 <div class="vertical-bar-right-404">
   {% for i in (0..7) %}
@@ -81,12 +78,16 @@
     <p class="bb-404-para">
       {{ section.settings.description}}
     </p>
-    <button href="{{ section.settings.link1 }}" class="bb-404-h-button button">
-      {{ section.settings.button1 }}
-    </button>
-    <a href="{{ section.settings.link2 }}" class="bb-404-c-button button">
-      {{ section.settings.button2 }}
-    </a>
+    {% if section.settings.button1 != blank %}
+      <button href="{{ section.settings.link1 }}" class="bb-404-h-button button">
+        {{ section.settings.button1 }}
+      </button>
+    {% endif %}
+    {% if section.settings.button2 != blank %}
+      <a href="{{ section.settings.link2 }}" class="bb-404-c-button button">
+        {{ section.settings.button2 }}
+      </a>
+    {% endif %}
   </div>
   <div class="vertical-bar-bottom-404">
   {% for i in (0..13) %}
@@ -116,7 +117,7 @@
         "type": "text",
         "id": "description",
         "label": "Description",
-        "default": "The page you were looking for doesn’t exist. You may have mistyped the address or the page may have moved"
+        "default": "The page you were looking for doesn't exist. You may have mistyped the address or the page may have moved"
       },
       {
         "type": "text",
@@ -127,7 +128,7 @@
       {
         "type": "url",
         "id": "link1",
-        "label": "Link to first button"
+        "label": "Link to Button"
       },
       {
       "type": "range",
@@ -149,4 +150,4 @@
     }
     ]
   }
-  {% endschema %}
+{% endschema %}

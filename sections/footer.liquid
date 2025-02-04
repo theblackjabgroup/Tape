@@ -1,3 +1,4 @@
+
 {% comment %}theme-check-disable UndefinedObject{% endcomment %}
 {{ 'section-footer.css' | asset_url | stylesheet_tag }}
 
@@ -36,33 +37,29 @@
 
 
 
-<footer class=" color-{{ section.settings.color_scheme }}" style="background-color: {{ section.settings.footer_background_color }}; font-family: 'Inter', sans-serif;
-   margin-top: {{ section.settings.footer_top_margin }}px;
-               margin-bottom: {{ section.settings.footer_bottom_margin }}px;
+<footer class=" color-{{ section.settings.color_scheme }}" style="font-family: 'Inter', sans-serif;
                    padding-top: {{ section.settings.footer_top_padding }}px;
                padding-bottom: {{ section.settings.footer_bottom_padding }}px;">
 
-    {% for block in section.blocks %}
-    {% if block.type == 'strip' %}
-    <div class="container1 color-{{ section.settings.color_scheme }}" style="background-color: {{ block.settings.background_color }}; margin-top: {{ block.settings.margin_top }}px; margin-bottom: {{ block.settings.margin_bottom }}px;">
-            <div class="strip-right color-{{ section.settings.color_scheme }}" style="background-color: {{ block.settings.strip_bg_color }};">
-                <div class="strip-1">
-                    <div class="offer-text" style="color: {{ block.settings.text_color }};">{{ block.settings.offer_text_1 }} &rarr;</div>
-                    <div class="offer-text" style="color: {{ block.settings.text_color }};">{{ block.settings.offer_text_1 }} &rarr;</div>
-                    <div class="offer-text" style="color: {{ block.settings.text_color }};">{{ block.settings.offer_text_1 }} &rarr;</div>
-                </div>
-            </div>
-            <div class="strip-left" style="background-color: {{ block.settings.strip_bg_color }};">
-                <div class="strip-2">
-                    <div class="offer-text" style="color: {{ block.settings.text_color }};">{{ block.settings.offer_text_2 }} &rarr;</div>
-                    <div class="offer-text" style="color: {{ block.settings.text_color }};">{{ block.settings.offer_text_2 }} &rarr;</div>
-                    <div class="offer-text" style="color: {{ block.settings.text_color }};">{{ block.settings.offer_text_2 }} &rarr;</div>
-                </div>
-            </div>
+{% if section.settings.show_announcement_strips %}
+<div class="container1" style="background-color: {{ section.settings.strip_container_bg_color }};">
+    <div class="strip-right" style="background-color: {{ section.settings.strip_bg_color }};">
+        <div class="strip-1">
+            <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text_1 }}</div>
+            <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text_1 }}</div>
+            <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text_1 }}</div>
         </div>
-        {% endif %}
-    {% endfor %}
-  
+    </div>
+    <div class="strip-left" style="background-color: {{ section.settings.strip_bg_color }};">
+        <div class="strip-2">
+            <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text_2 }}</div>
+            <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text_2 }}</div>
+            <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text_2 }}</div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
 <footer style="background-color: {{ section.settings.footer_background_color }}; font-family: 'Inter', sans-serif;">
     <div class="footer-content" style="color: {{ section.settings.footer_text_color }};">
         <!-- Email Newsletter Column -->
@@ -443,24 +440,10 @@ document.addEventListener("DOMContentLoaded", function () {
       "content": "Newsletter Settings"
     },
     {
-      "type": "checkbox",
-      "id": "bold_newsletter_section",
-      "label": "Make newsletter section bold",
-      "default": false,
-      "info": "Apply bold font weight to the entire newsletter section"
-    },
-    {
       "type": "text",
       "id": "STAY_CONNECTED_TITLE",
       "label": "Footer Title",
       "default": "STAY CONNECTED WITH US"
-    },
-    {
-      "type": "checkbox",
-      "id": "bold_stay_connected_title",
-      "label": "Make title bold",
-      "default": true,
-      "info": "Toggle the font weight of the Stay Connected title"
     },
     
     {
@@ -472,24 +455,6 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       "type": "header",
       "content": "Footer Layout"
-    },
-    {
-      "type": "range",
-      "id": "footer_top_margin",
-      "label": "Top Margin (px)",
-      "min": 0,
-      "max": 200,
-      "step": 5,
-      "default": 50
-    },
-    {
-      "type": "range", 
-      "id": "footer_bottom_margin",
-      "label": "Bottom Margin (px)",
-      "min": 0,
-      "max": 200,
-      "step": 5,
-      "default": 50
     },
     {
       "type": "range",
@@ -519,60 +484,41 @@ document.addEventListener("DOMContentLoaded", function () {
       "label": "Button Text",
       "default": "Subscribe"
     },
-      {
+    {
       "type": "checkbox",
       "id": "enable_language_selector",
       "default": true,
       "label": "t:sections.footer.settings.enable_language_selector.label"
     },
-      {
+    {
       "type": "checkbox",
       "id": "enable_country_selector",
       "default": true,
       "label": "t:sections.footer.settings.enable_country_selector.label"
     },
 
-  ],
-  "blocks": [
     {
-      "type": "strip",
-      "name": "Cross-Strips",
-      "settings": [
-        {
-    "type": "range",
-    "id": "margin_top",
-    "min": 0,
-    "max": 100,
-    "step": 5,
-    "unit": "px",
-    "label": "Top Margin",
-    "default": 0
+  "type": "header",
+  "content": "Announcement Strips"
 },
 {
-    "type": "range",
-    "id": "margin_bottom",
-    "min": 0,
-    "max": 100,
-    "step": 5,
-    "unit": "px",
-    "label": "Bottom Margin",
-    "default": 0
+  "type": "checkbox",
+  "id": "show_announcement_strips",
+  "label": "Show Announcement Strips",
+  "default": true
 },
-        {
-          "type": "text",
-          "id": "offer_text_1",
-          "label": "First Strip Text",
-          "default": "Subscribe for exclusive offers!"
-        },
-        {
-          "type": "text",
-          "id": "offer_text_2",
-          "label": "Second Strip Text",
-          "default": "Free shipping on orders over $50!"
-        }
-      ]
-    }
-  ],
- 
+    {
+      "type": "text",
+      "id": "offer_text_1",
+      "label": "First Strip Text",
+      "default": "Subscribe for exclusive offers →"
+    },
+    {
+      "type": "text",
+      "id": "offer_text_2",
+      "label": "Second Strip Text",
+      "default": "Free shipping on orders over $50 →"
+    },
+  ]
 }
 {% endschema %}
