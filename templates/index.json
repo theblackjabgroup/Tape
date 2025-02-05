@@ -182,7 +182,7 @@
         "subheading": {
           "type": "subheading",
           "settings": {
-            "caption": "Delivering Excellence in Medical Products"
+            "caption": "Add additional Subheading"
           }
         },
         "text": {
@@ -404,7 +404,7 @@
       "settings": {
         "color_scheme": "",
         "caption": "Help & Support",
-        "description": "We're here to assist you with questions about products, sizing, or orders. Our customer support team is available via phone, email, or live chat.",
+        "description": "Use this text to share more information about your store.",
         "layout_style": "layout1",
         "padding_top": 36,
         "padding_bottom": 36
