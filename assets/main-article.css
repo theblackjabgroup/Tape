@@ -3,7 +3,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font: inter;
   overflow-x: hidden;
 }
 .main-article-dots{
@@ -224,7 +223,7 @@ top: 561px;
   height: 59px;
   position: relative;
   background: rgb(var(--color-button));
-  margin: 20px 0;
+  margin: 20px 0 0 0;
   clip-path: polygon(
     0 0, 0 2px, 13px 5px, 0 10px, 0 10px, 13px 15px,
     0 20px, 0 20px, 12px 25px, 0 28px, 0 31px,
@@ -579,7 +578,7 @@ top: 561px;
     border-radius: 20px;
   }
   .blog-image-section{
-    height: 435px;
+    height: 400px;
     width: 300px;
   }
   .blog-image-dots{
@@ -814,7 +813,6 @@ top: 561px;
 }
 
 .custom-blog-read-more-btn {
-    font-family: 'Inter', sans-serif;
     font-weight: 500;
     background: linear-gradient(to right, gray 50%, rgb(var(--color-button-text)) 50%);
     background-size: 200% 100%;
