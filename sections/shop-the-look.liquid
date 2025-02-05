@@ -5,137 +5,86 @@
     --section-color: {{ section.settings.sectionBackground }};
   }
 {% endstyle %}
+<div class="mainWrapper">
+  <div class="shop_the_look__container ">
 
-<div class="shop_the_look__container ">
-
-  <div class="shop__the__look__media__container color-{{ section.settings.bannerColor }}">
-
-    {% if section.settings.image != blank %}
-      <img
-        width="100%"
-        height="100%"
-        class="media"
-        src="{{ section.settings.main_image |  image_url  }}"
-        alt="">
-
-    {% else %}
-      <div class="shop-look__empty-image media media--placeholder media--16-9">
-        <div class="placeholder">{{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}</div>
-      </div>
-    {% endif %}
-
-    {% if section.blocks.size > 0 %}
-      <div class="shop-look__dots">
-        <div class="shop-look__dots-container"></div>
-        {% for block in section.blocks %}
-          <div
-            class="shop-look__dots-item-wrap"
-            style="top: {{ block.settings.vertical_position}}%; left: {{ block.settings.horizontal_position}}%;"
-            {{ block.shopify_attributes }}>
-            <button
-              class="shop-look__dots-item {{ section.settings.dot_color }}"
-              type="button"
-              is="toggle-button"
-              aria-expanded="false"
-              data-look-dot="{{ forloop.index }}">
-              <i class="icon {{ icon_style }} fa-plus" style="--fa-secondary-opacity: 1;"></i>
-            </button>
-          </div>
-        {% endfor %}
-      </div>
-    {% endif %}
-
-  </div>
-
-  {% assign image_ids = "image_1,image_2,image_3,image_4" | split: "," %}
-
-  <div class="slideshow__container">
-    <div class="slideshow__media__container">
-      {% for image_id in image_ids %}
-        {% assign image = section.settings[image_id] %}
-        {% if image != blank %}
+    <div class="shop__the__look__media__container color-{{ section.settings.bannerColor }}">
+      <div class="wrapper">
+        {% if section.settings.main_image != blank %}
           <img
             width="100%"
-            height="700px"
+            height="100%"
             class="media"
-            src="{{ image | image_url }}"
-            alt="">
+            id="shopTheLookImage"
+            src="{{ section.settings.main_image |  image_url  }}"
+            alt="Shop the look image">
+
         {% else %}
-          <div style="width: 100%; height: 100%;">
-            {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          <div class="shop-look__empty-image media media--placeholder media--16-9">
+            <div class="placeholder">{{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}</div>
           </div>
         {% endif %}
-      {% endfor %}
-    </div>
-    <div class="dot__container" style="background-color: {{section.settings.sectionBackground}};">
-      {% for image_id in image_ids %}
-        <span class="dot" data-dot-index="{{ forloop.index0 }}"></span>
-      {% endfor %}
-    </div>
-  </div>
 
+        {% if section.blocks.size > 0 %}
+          <div class="shop-look__dots">
 
-  <div class="shop__the__look__text__wrapper color-{{ section.settings.bannerColor }} ">
-    <div class="shop__the__look__text__container">
-      <h1 class="shop__the__look__heading">{{ section.settings.section_heading }}</h1>
-      <p class="shop__the__look__description">{{ section.settings.section_description }}</p>
-      <button class="shop__the__look__button color-{{ section.settings.bannerColor }}">{{ section.settings.button_text }}</button>
+            {% for block in section.blocks %}
+              <div
+                class="shop-look__dots-item-wrap"
+                style="top: {{ block.settings.position_top}}%; left: {{ block.settings.position_left}}%;"
+                {{ block.shopify_attributes }}>
+                <button
+                  class="shop-look__dots-item {{ section.settings.dot_color }}"
+                  type="button"
+                  is="toggle-button"
+                  aria-expanded="false"
+                  data-look-dot="{{ forloop.index }}"
+                  data-description="{{ block.settings.insightsText }}">
+
+                  <i class="icon {{ icon_style }} fa-plus" style="--fa-secondary-opacity: 1;"></i>
+                </button>
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+
+    </div>
+
+    <div class="shop__the__look__text__wrapper color-{{ section.settings.bannerColor }} ">
+      <div class="shop__the__look__text__container">
+        <h1 class="shop__the__look__heading">{{ section.settings.section_heading }}</h1>
+        <p class="shop__the__look__description">{{ section.settings.section_description }}</p>
+        <h2 id="insightsHeading" class="shop__the__look__heading">{{ section.settings.moreInfo_heading }}</h2>
+        <p
+          id="insightsInfo"
+          class="shop__the__look__description"
+          insightsDescription="{{ section.settings.moreInfo_description }}">{{ section.settings.moreInfo_description }}</p>
+
+      </div>
     </div>
   </div>
 </div>
-
-
 <script>
-
   document.addEventListener("DOMContentLoaded", function () {
-    let slideIndex = 0;
-    const slides = document.querySelectorAll(".slideshow__media__container .media");
-    const placeholders = document.querySelectorAll(".slideshow__media__container .placeholder-svg");
-    const dots = document.querySelectorAll(".dot");
+  const dots = document.querySelectorAll(".shop-look__dots-item");
+  const descriptionContainer = document.getElementById("insightsInfo");
+  const insights = document.getElementById("insightsHeading");
 
-    function showSlides() {
-        if (slides.length === 0 && placeholders.length === 0) return;
-
-        // Hide all images and placeholders
-        slides.forEach(img => img.style.display = "none");
-        placeholders.forEach(placeholder => placeholder.style.display = "none");
-        dots.forEach(dot => dot.classList.remove("active"));
-
-        // Move to the next slide
-        slideIndex = (slideIndex + 1) % (slides.length || placeholders.length);
-
-        // Show the current image or placeholder
-        if (slides.length > 0) {
-            slides[slideIndex].style.display = "block";
-        } else if (placeholders.length > 0) {
-            placeholders[slideIndex].style.display = "block";
-        }
-
-        // Set the corresponding dot as active
-        if (dots.length > 0) {
-            dots[slideIndex].classList.add("active");
-        }
-
-        setTimeout(showSlides, 5000); // Change image every 3 seconds
-    }
-
-    // Function to handle dot clicks
-    dots.forEach((dot, index) => {
-        dot.addEventListener("click", function () {
-            slideIndex = index - 1; // Adjust to match the showSlides logic
-            showSlides();
-        });
+  dots.forEach(dot => {
+    dot.addEventListener("click", function () {
+      const newDescription = this.getAttribute("data-description");
+      if (newDescription) {
+        descriptionContainer.textContent = newDescription;
+      }
     });
-
-    showSlides(); // Start the slideshow
   });
-
-
+  });
 
 </script>
 {% schema %}
   {
-    "name": "Shop the Look",
+    "name": "Shop Test",
     "disabled_on": {
       "groups": ["header", "footer"]
     },
@@ -160,7 +109,7 @@
         "type": "text",
         "id": "section_heading",
         "label": "Section Heading",
-        "default": "Shop the Look"
+        "default": "SHOP THE LOOK"
       }, {
         "type": "text",
         "id": "section_description",
@@ -168,25 +117,19 @@
         "default": "Experience ultimate comfort with our wheelchair's padded armrests. Designed for support and pressure relief, they feature an ergonomic shape and adjustable height for a personalized fit. Enjoy enhanced stability and comfort during every ride!"
       }, {
         "type": "text",
+        "id": "moreInfo_heading",
+        "label": "More Info Heading",
+        "default": "Insights"
+      }, {
+        "type": "text",
+        "id": "moreInfo_description",
+        "label": "More Info Description",
+        "default": "Experience ultimate comfort with our wheelchair's padded armrests. Designed for support and pressure relief, they feature an ergonomic shape and adjustable height for a personalized fit. Enjoy enhanced stability and comfort during every ride!"
+      }, {
+        "type": "text",
         "id": "button_text",
         "label": "Button Text",
-        "default": "Add to cart"
-      }, {
-        "type": "image_picker",
-        "id": "image_1",
-        "label": "Image 1"
-      }, {
-        "type": "image_picker",
-        "id": "image_2",
-        "label": "Image 2"
-      }, {
-        "type": "image_picker",
-        "id": "image_3",
-        "label": "Image 3"
-      }, {
-        "type": "image_picker",
-        "id": "image_4",
-        "label": "Image 4"
+        "default": "Optional Button"
       }
 
     ],
@@ -195,19 +138,14 @@
     "blocks": [
       {
         "type": "hotspot",
-        "name": "Product Hotspot",
+        "name": "Text Hotspot",
         "settings": [
           {
-            "type": "product",
-            "id": "product",
-            "label": "Product"
-          }, {
             "type": "range",
             "id": "position_left",
             "min": 0,
             "max": 100,
             "step": 1,
-            "unit": "%",
             "label": "Horizontal Position",
             "default": 50
           }, {
@@ -216,16 +154,20 @@
             "min": 0,
             "max": 100,
             "step": 1,
-            "unit": "%",
             "label": "Vertical Position",
             "default": 50
+          }, {
+            "type": "text",
+            "id": "insightsText",
+            "label": "Insight Text",
+            "default": "    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam, nobis."
           }
         ]
       }
     ],
     "presets": [
       {
-        "name": "Shop the Look"
+        "name": "Shop Test"
 
       }
     ]
