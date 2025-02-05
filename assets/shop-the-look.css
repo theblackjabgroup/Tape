@@ -37,6 +37,7 @@
   object-fit: cover;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
+  height: 100%;
 }
 
 .shop-look__dots {
@@ -145,7 +146,7 @@
 
 /* Media Querries */
 
-@media (max-width: 800px) {
+@media (max-width: 1000px) {
   .shop_the_look__container {
     flex-direction: column;
     height: auto;
@@ -169,7 +170,6 @@
 
   .shop__the__look__text__wrapper {
     border-radius: 5px;
-    margin-top: 10px;
   }
 
   .shop__the__look__heading {
