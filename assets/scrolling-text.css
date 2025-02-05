@@ -189,3 +189,11 @@
     margin-bottom:20px;
 }
 }
+.scrolling-placeholder-svg {
+    height: 30px;
+    width: 30px;
+    object-fit: contain;
+    background-color: rgba(0, 0, 0, 0.1);
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }

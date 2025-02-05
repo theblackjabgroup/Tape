@@ -4,11 +4,11 @@
   class="marquee-container color-{{ section.settings.color_scheme }}"
   style="
     --text-strip-speed: {{ section.settings.scroll_speed }}s;
-             --first-strip-speed: {{ section.settings.scroll_speed }}s;
-             --second-strip-speed: {{ section.settings.scroll_speed }}s;
-             --strip-padding-top: {{ section.settings.strip_padding_top }}px;
-             --strip-padding-bottom: {{ section.settings.strip_padding_bottom }}px;
-             --third-strip-speed: {{ section.settings.scroll_speed }}s;
+    --first-strip-speed: {{ section.settings.scroll_speed }}s;
+    --second-strip-speed: {{ section.settings.scroll_speed }}s;
+    --strip-padding-top: {{ section.settings.strip_padding_top }}px;
+    --strip-padding-bottom: {{ section.settings.strip_padding_bottom }}px;
+    --third-strip-speed: {{ section.settings.scroll_speed }}s;
   "
 >
   <div class="scrolling-marquee-inner">
@@ -19,7 +19,7 @@
             <div
               class="scrolling-text-only-marquee-content scrolling-text-only-strip-content"
               style="animation-direction: {% if block.settings.direction == 'right' %}normal{% else %}reverse{% endif %};"
-                data-pause-on-hover="{{ block.settings.pause_on_hover }}"
+              data-pause-on-hover="{{ block.settings.pause_on_hover }}"
               {{ block.shopify_attributes }}
             >
               {% assign text_only_content = block.settings.text_content | strip %}
@@ -31,10 +31,10 @@
             </div>
 
           {% when 'content_strip_1' %}
-             <div
+            <div
               class="scrolling-marquee-content scrolling-first-strip-content"
               style="animation-direction: {% if block.settings.direction == 'right' %}normal{% else %}reverse{% endif %};"
-                 data-pause-on-hover="{{ block.settings.pause_on_hover }}"
+              data-pause-on-hover="{{ block.settings.pause_on_hover }}"
               {{ block.shopify_attributes }}
             >
               {% for repeat in (1..section.settings.word_iterations) %}
@@ -52,6 +52,8 @@
                           width: section.settings.image_width,
                           height: section.settings.image_height
                         }}
+                      {% else %}
+                        {{ 'product-2' | placeholder_svg_tag: 'scrolling-marquee-image scrolling-placeholder-svg' }}
                       {% endif %}
                     </div>
                   {% endif %}
@@ -63,7 +65,7 @@
             <div
               class="scrolling-marquee-content scrolling-second-strip-content"
               style="animation-direction: {% if block.settings.direction == 'right' %}normal{% else %}reverse{% endif %};"
-                data-pause-on-hover="{{ block.settings.pause_on_hover }}"
+              data-pause-on-hover="{{ block.settings.pause_on_hover }}"
               {{ block.shopify_attributes }}
             >
               {% for repeat in (1..section.settings.word_iterations) %}
@@ -81,6 +83,8 @@
                           width: section.settings.image_width,
                           height: section.settings.image_height
                         }}
+                      {% else %}
+                        {{ 'product-2' | placeholder_svg_tag: 'scrolling-marquee-image scrolling-placeholder-svg' }}
                       {% endif %}
                     </div>
                   {% endif %}
@@ -92,7 +96,7 @@
             <div
               class="scrolling-marquee-content scrolling-third-strip-content"
               style="animation-direction: {% if block.settings.direction == 'right' %}normal{% else %}reverse{% endif %};"
-                data-pause-on-hover="{{ block.settings.pause_on_hover }}"
+              data-pause-on-hover="{{ block.settings.pause_on_hover }}"
               {{ block.shopify_attributes }}
             >
               {% for repeat in (1..section.settings.word_iterations) %}
@@ -110,6 +114,8 @@
                           width: section.settings.image_width,
                           height: section.settings.image_height
                         }}
+                      {% else %}
+                        {{ 'product-2' | placeholder_svg_tag: 'scrolling-marquee-image scrolling-placeholder-svg' }}
                       {% endif %}
                     </div>
                   {% endif %}
@@ -121,7 +127,6 @@
     {% endfor %}
   </div>
 </div>
-
 
 {% schema %}
 {
@@ -213,7 +218,7 @@
           "type": "text",
           "id": "text_content",
           "label": "Text Content",
-            "default": "Scrolling Text | Add Your | Special Offer | Here"
+          "default": "Scrolling Text | Add Your | Special Offer | Here"
         },
         {
           "type": "select",
