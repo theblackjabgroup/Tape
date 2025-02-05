@@ -11,9 +11,15 @@
     {
       "type": "checkbox",
       "id": "show_social_sharing",
-      "label": "Show Social Sharing Buttons",
+      "label": "Show Social Buttons",
       "default": true
     },
+    {
+  "type": "checkbox",
+  "id": "show_blog_social_links",
+  "label": "Show Social Links ",
+  "default": true
+},
     {
       "type": "checkbox",
       "id": "show_tags",
@@ -133,26 +139,55 @@
       {% if section.settings.show_social_sharing %}
         <div class="blog-social-container centered-social">
           <div class="blog-social-bar">
-            <div class="blog-interaction-buttons">
-  <span class="blog-icon like-icon"></span>
-  <span class="blog-icon share-icon" data-url="{{ shop.url }}{{ article.url }}"></span>
-  <span class="blog-icon comment-icon"></span>
-  <span class="blog-icon bookmark-icon"></span>
+       <div class="blog-interaction-buttons">
+  {% if section.settings.icon_like_image %}
+    {{ section.settings.icon_like_image | image_url: width: 50 | image_tag: class: "icon like-icon", alt: "Like Icon" }}
+  {% else %}
+    <i class="fas fa-thumbs-up blog-like-icon" style="padding: 5px;"></i>
+  {% endif %}
+  
+  {% if section.settings.icon_share_image %}
+    {{ section.settings.icon_share_image | image_url: width: 50 | image_tag: class: "icon share-icon", alt: "Share Icon" }}
+  {% else %}
+    <i class="fa fa-share blog-share-icon" aria-hidden="true" style="padding: 5px;"></i>
+  {% endif %}
+  
+  {% if section.settings.icon_comment_image %}
+    {{ section.settings.icon_comment_image | image_url: width: 50 | image_tag: class: "icon comment-icon", alt: "Comment Icon" }}
+  {% else %}
+    <i class="fa fa-comment blog-comment-icon" aria-hidden="true" style="padding: 5px;"></i>
+  {% endif %}
+  
+  {% if section.settings.icon_bookmark_image %}
+    {{ section.settings.icon_bookmark_image | image_url: width: 50 | image_tag: class: "icon bookmark-icon", alt: "Bookmark Icon" }}
+  {% else %}
+    <i class="fa fa-bookmark blog-bookmark-icon" aria-hidden="true" style="padding: 5px;"></i>
+  {% endif %}
 </div>
 
-            <div class="blog-social-links">
-              Follow us on:
-              <div class="blog-divider"></div>
-              <a href="{{ settings.social_facebook_link }}" class="blog-social-icon" target="_blank">
-                <i class="fab fa-facebook-f"></i>
-              </a>
-              <a href="{{ settings.social_instagram_link }}" class="blog-social-icon" target="_blank">
-                <i class="fab fa-instagram"></i>
-              </a>
-              <a href="{{ settings.social_twitter_link }}" class="blog-social-icon" target="_blank">
-                <i class="fab fa-twitter"></i>
-              </a>
-            </div>
+
+{% if section.settings.show_blog_social_links %}
+  <div class="blog-social-links">
+    Follow us on:
+    <div class="blog-divider"></div>
+
+    <a href="{{ settings.social_facebook_link | default: '#' }}" class="blog-social-icon" target="_blank">
+      <i class="fab fa-facebook-f"></i>
+    </a>
+    
+    <a href="{{ settings.social_instagram_link | default: '#' }}" class="blog-social-icon" target="_blank">
+      <i class="fab fa-instagram"></i>
+    </a>
+    
+    <a href="{{ settings.social_twitter_link | default: '#' }}" class="blog-social-icon" target="_blank">
+      <i class="fab fa-twitter"></i>
+    </a>
+
+  </div>
+{% endif %}
+
+
+
           </div>
         </div>
       {% endif %}
@@ -182,25 +217,57 @@
       {% if section.settings.show_social_sharing %}
         <div class="blog-social-container">
           <div class="blog-social-bar">
-             <div class="blog-interaction-buttons">
-  <img src="{{ section.settings.icon_like_image | img_url: '50x50' }}" alt="Like Icon" class="icon like-icon">
-  <img src="{{ section.settings.icon_share_image | img_url: '50x50' }}" alt="Share Icon" class="icon share-icon" data-url="{{ shop.url }}{{ article.url }}">
-  <img src="{{ section.settings.icon_comment_image | img_url: '50x50' }}" alt="Comment Icon" class="icon comment-icon">
-  <img src="{{ section.settings.icon_bookmark_image | img_url: '50x50' }}" alt="Bookmark Icon" class="icon bookmark-icon">
+    <div class="blog-interaction-buttons">
+  {% if section.settings.icon_like_image %}
+    {{ section.settings.icon_like_image | image_url: width: 50 | image_tag: class: "icon like-icon", alt: "Like Icon" }}
+  {% else %}
+    <i class="fas fa-thumbs-up blog-like-icon" style="padding: 5px;"></i>
+  {% endif %}
+  
+  {% if section.settings.icon_share_image %}
+    {{ section.settings.icon_share_image | image_url: width: 50 | image_tag: class: "icon share-icon", alt: "Share Icon" }}
+  {% else %}
+    <i class="fa fa-share blog-share-icon" aria-hidden="true" style="padding: 5px;"></i>
+  {% endif %}
+  
+  {% if section.settings.icon_comment_image %}
+    {{ section.settings.icon_comment_image | image_url: width: 50 | image_tag: class: "icon comment-icon", alt: "Comment Icon" }}
+  {% else %}
+    <i class="fa fa-comment blog-comment-icon" aria-hidden="true" style="padding: 5px;"></i>
+  {% endif %}
+  
+  {% if section.settings.icon_bookmark_image %}
+    {{ section.settings.icon_bookmark_image | image_url: width: 50 | image_tag: class: "icon bookmark-icon", alt: "Bookmark Icon" }}
+  {% else %}
+    <i class="fa fa-bookmark blog-bookmark-icon" aria-hidden="true" style="padding: 5px;"></i>
+  {% endif %}
 </div>
-     <div class="blog-social-links">
-              Follow us on:
-              <div class="blog-divider"></div>
-              <a href="{{ settings.social_facebook_link }}" class="blog-social-icon" target="_blank">
-                <i class="fab fa-facebook-f"></i>
-              </a>
-              <a href="{{ settings.social_instagram_link }}" class="blog-social-icon" target="_blank">
-                <i class="fab fa-instagram"></i>
-              </a>
-              <a href="{{ settings.social_twitter_link }}" class="blog-social-icon" target="_blank">
-                <i class="fab fa-twitter"></i>
-              </a>
-            </div>
+
+
+
+
+{% if section.settings.show_blog_social_links %}
+  <div class="blog-social-links">
+    Follow us on:
+    <div class="blog-divider"></div>
+
+    <a href="{{ settings.social_facebook_link | default: '#' }}" class="blog-social-icon" target="_blank">
+      <i class="fab fa-facebook-f"></i>
+    </a>
+    
+    <a href="{{ settings.social_instagram_link | default: '#' }}" class="blog-social-icon" target="_blank">
+      <i class="fab fa-instagram"></i>
+    </a>
+    
+    <a href="{{ settings.social_twitter_link | default: '#' }}" class="blog-social-icon" target="_blank">
+      <i class="fab fa-twitter"></i>
+    </a>
+
+  </div>
+{% endif %}
+
+
+
           </div>
         </div>
       {% endif %}
