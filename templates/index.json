@@ -1,39 +1,448 @@
 {
   "sections": {
-    "shop_the_look": {
-      "type": "shop-the-look",
+    "video_banner": {
+      "type": "video-banner",
       "blocks": {
-        "slide_img_1": {
-          "type": "slide-img",
+        "video": {
+          "type": "video",
           "settings": {}
         },
-        "slide_img_2": {
-          "type": "slide-img",
-          "settings": {}
+        "youtube": {
+          "type": "youtube",
+          "settings": {
+            "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc"
+          }
         },
-        "slide_img_3": {
-          "type": "slide-img",
-          "settings": {}
-        },
-        "slide_img_4": {
-          "type": "slide-img",
+        "vimeo": {
+          "type": "vimeo",
           "settings": {}
         }
       },
-      "block_order": [
-        "slide_img_1",
-        "slide_img_2",
-        "slide_img_3",
-        "slide_img_4"
-      ],
+      "block_order": ["video", "youtube", "vimeo"],
+      "settings": {
+        "background_color": ""
+      }
+    },
+    "image_with_text": {
+      "type": "image-with-text",
+      "blocks": {
+        "card_1": {
+          "type": "card",
+          "settings": {
+            "headingTag": "Optional Heading Tag",
+            "heading": "Image With Text",
+            "description": "Pair large text with an image to give focus to your chosen product. Add details on style, availabilty, share the product description or review.",
+            "btnText": "Optional Button",
+            "url": "/"
+          }
+        },
+        "card_2": {
+          "type": "card",
+          "settings": {
+            "headingTag": "Optional Heading Tag",
+            "heading": "Image With Text",
+            "description": "Pair large text with an image to give focus to your chosen product. Add details on style, availabilty, share the product description or review.",
+            "btnText": "Optional Button",
+            "url": "/"
+          }
+        },
+        "card_3": {
+          "type": "card",
+          "settings": {
+            "headingTag": "Optional Heading Tag",
+            "heading": "Image With Text",
+            "description": "Pair large text with an image to give focus to your chosen product. Add details on style, availabilty, share the product description or review.",
+            "btnText": "Optional Button",
+            "url": "/"
+          }
+        },
+        "card_4": {
+          "type": "card",
+          "settings": {
+            "headingTag": "Optional Heading Tag",
+            "heading": "Image With Text",
+            "description": "Pair large text with an image to give focus to your chosen product. Add details on style, availabilty, share the product description or review.",
+            "btnText": "Optional Button",
+            "url": "/"
+          }
+        },
+        "card_5": {
+          "type": "card",
+          "settings": {
+            "headingTag": "Optional Heading Tag",
+            "heading": "Image With Text",
+            "description": "Pair large text with an image to give focus to your chosen product. Add details on style, availabilty, share the product description or review.",
+            "btnText": "Optional Button",
+            "url": "/"
+          }
+        }
+      },
+      "block_order": ["card_1", "card_2", "card_3", "card_4", "card_5"],
       "settings": {
         "sectionBackground": "",
         "bannerColor": "",
-        "section_heading": "Shop the Look",
+        "opacity": 0.8,
+        "autoplay": true,
+        "show_shop_button": true
+      }
+    },
+    "slideshow": {
+      "type": "slideshow",
+      "blocks": {
+        "slide1": {
+          "type": "slide",
+          "settings": {
+            "feature": "NEW ARRIVAL",
+            "title": "Thanksgiving Big Billion Sale!",
+            "content": "<p>Enhance patient care with our premium medical product,featuring advanced technology for precision and reliability. Ideal for seamless integration into any practical</p>",
+            "show_button": true,
+            "button_text": "Shop Now",
+            "button_link": ""
+          }
+        },
+        "slide2": {
+          "type": "slide",
+          "settings": {
+            "feature": "NEW ARRIVAL",
+            "title": "Thanksgiving Big Billion Sale!",
+            "content": "<p>Enhance patient care with our premium medical product,featuring advanced technology for precision and reliability. Ideal for seamless integration into any practical</p>",
+            "show_button": true,
+            "button_text": "Shop Now",
+            "button_link": ""
+          }
+        },
+        "slide3": {
+          "type": "slide",
+          "settings": {
+            "feature": "NEW ARRIVAL",
+            "title": "Thanksgiving Big Billion Sale!",
+            "content": "<p>Enhance patient care with our premium medical product,featuring advanced technology for precision and reliability. Ideal for seamless integration into any practical</p>",
+            "show_button": true,
+            "button_text": "Shop Now",
+            "button_link": ""
+          }
+        },
+        "slide4": {
+          "type": "slide",
+          "settings": {
+            "feature": "NEW ARRIVAL",
+            "title": "Thanksgiving Big Billion Sale!",
+            "content": "<p>Enhance patient care with our premium medical product,featuring advanced technology for precision and reliability. Ideal for seamless integration into any practical</p>",
+            "show_button": true,
+            "button_text": "Shop Now",
+            "button_link": ""
+          }
+        },
+        "slide4": {
+          "type": "slide",
+          "settings": {
+            "feature": "NEW ARRIVAL",
+            "title": "Thanksgiving Big Billion Sale!",
+            "content": "<p>Enhance patient care with our premium medical product,featuring advanced technology for precision and reliability. Ideal for seamless integration into any practical</p>",
+            "show_button": true,
+            "button_text": "Shop Now",
+            "button_link": ""
+          }
+        },
+        "slide6": {
+          "type": "slide",
+          "settings": {
+            "feature": "NEW ARRIVAL",
+            "title": "Thanksgiving Big Billion Sale!",
+            "content": "<p>Enhance patient care with our premium medical product,featuring advanced technology for precision and reliability. Ideal for seamless integration into any practical</p>",
+            "show_button": true,
+            "button_text": "Shop Now",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide1",
+        "slide2",
+        "slide3",
+        "slide4",
+        "slide5",
+        "slide6"
+      ],
+      "settings": {
+        "color_scheme": ""
+      }
+    },
+    "rich_text": {
+      "type": "rich-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Your Heading"
+          }
+        },
+        "subheading": {
+          "type": "subheading",
+          "settings": {
+            "caption": "Add additional Subheading"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_text": "Learn More",
+            "button_link": "/",
+            "show_button": true
+          }
+        }
+      },
+      "block_order": ["heading", "subheading", "text", "button"],
+      "settings": {
+        "layout_style": "layout1",
+        "dots_number1": 10,
+        "dots_number2": 10,
+        "color_scheme": "",
+        "heading_font_size": 22,
+        "text_font_size": 14,
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "product_stories": {
+      "type": "product-stories",
+      "blocks": {
+        "column1": {
+          "type": "column",
+          "settings": {
+            "video_title": "Video Title",
+            "youtube_url": "",
+            "video_embed": "",
+            "video_link": ""
+          }
+        },
+        "column2": {
+          "type": "column",
+          "settings": {
+            "video_title": "Video Title",
+            "youtube_url": "",
+            "video_embed": "",
+            "video_link": ""
+          }
+        },
+        "column3": {
+          "type": "column",
+          "settings": {
+            "video_title": "Video Title",
+            "youtube_url": "",
+            "video_embed": "",
+            "video_link": ""
+          }
+        }
+      },
+      "block_order": ["column1", "column2", "column3"],
+      "settings": {
+        "title": "Shop With Us",
+        "description": "Join us on TikTok for exclusive releases, unboxing and try-on videos, reviews, and more from our top brands and stylists.",
+        "font_size": 100,
+        "video_title_font_size": 100,
+        "play_onload": false,
+        "social_handle": "@yourtiktok",
+        "social_link": "social_instagram_link",
+        "color_scheme": "",
+        "padding_top": 44,
+        "padding_bottom": 44
+      }
+    },
+    "featured_collection": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Featured Collection",
+        "color_scheme": "",
+        "title_font_size": 36,
+        "show_subheading": true,
+        "subheading_font_size": 20,
+        "collection": "",
+        "products_to_show": 5,
+        "offer_tag_text": "SPECIAL OFFER - 20% DISCOUNT",
+        "section_top_margin": 50,
+        "section_bottom_margin": 50,
+        "footer_top_padding": 50,
+        "footer_bottom_padding": 50
+      }
+    },
+    "featured_icon_with_text": {
+      "type": "featured-icon-with-text",
+      "blocks": {
+        "card_1": {
+          "type": "card",
+          "settings": {
+            "title": "Card Heading",
+            "description": ""
+          }
+        },
+        "card_2": {
+          "type": "card",
+          "settings": {
+            "title": "Card Heading",
+            "description": ""
+          }
+        },
+        "card_3": {
+          "type": "card",
+          "settings": {
+            "title": "Card Heading",
+            "description": ""
+          }
+        },
+        "card_4": {
+          "type": "card",
+          "settings": {
+            "title": "Card Heading",
+            "description": ""
+          }
+        },
+        "card_5": {
+          "type": "card",
+          "settings": {
+            "title": "Card Heading",
+            "description": ""
+          }
+        }
+      },
+      "block_order": ["card_1", "card_2", "card_3", "card_4", "card_5"],
+      "settings": {
+        "layout": "layout_1",
+        "heading": "Add heading here!",
+        "subheading": "Add sub-heading here!",
+        "sectionColor": ""
+      }
+    },
+    "featured_blog": {
+      "type": "featured-blog",
+      "settings": {
+        "blog": "",
+        "post_limit": 4,
+        "show_author": true,
+        "show_date": true,
+        "show_excerpt": false,
+        "show_tags": true,
+        "show_view_all": false,
+        "section_title": "Blog Posts",
+        "color_scheme": ""
+      }
+    },
+    "collapsible_content": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_row1": {
+          "type": "collapsible_row",
+          "settings": {
+            "serialno": "01",
+            "questiontext": "What is number of wheels in wheel chair",
+            "solutionans": "At [Your Company Name], we are dedicated to enhancing patient care and clinical efficiency through state-of-the-art medical products. Our commitment to innovation and quality ensures that healthcare providers have the tools they need to deliver the best possible outcomes for their patients."
+          }
+        },
+        "collapsible_row2": {
+          "type": "collapsible_row",
+          "settings": {
+            "serialno": "01",
+            "questiontext": "What is number of wheels in wheel chair",
+            "solutionans": "At [Your Company Name], we are dedicated to enhancing patient care and clinical efficiency through state-of-the-art medical products. Our commitment to innovation and quality ensures that healthcare providers have the tools they need to deliver the best possible outcomes for their patients."
+          }
+        },
+        "collapsible_row3": {
+          "type": "collapsible_row",
+          "settings": {
+            "serialno": "01",
+            "questiontext": "What is number of wheels in wheel chair",
+            "solutionans": "At [Your Company Name], we are dedicated to enhancing patient care and clinical efficiency through state-of-the-art medical products. Our commitment to innovation and quality ensures that healthcare providers have the tools they need to deliver the best possible outcomes for their patients."
+          }
+        },
+        "collapsible_row4": {
+          "type": "collapsible_row",
+          "settings": {
+            "serialno": "01",
+            "questiontext": "What is number of wheels in wheel chair",
+            "solutionans": "At [Your Company Name], we are dedicated to enhancing patient care and clinical efficiency through state-of-the-art medical products. Our commitment to innovation and quality ensures that healthcare providers have the tools they need to deliver the best possible outcomes for their patients."
+          }
+        },
+        "collapsible_row5": {
+          "type": "collapsible_row",
+          "settings": {
+            "serialno": "01",
+            "questiontext": "What is number of wheels in wheel chair",
+            "solutionans": "At [Your Company Name], we are dedicated to enhancing patient care and clinical efficiency through state-of-the-art medical products. Our commitment to innovation and quality ensures that healthcare providers have the tools they need to deliver the best possible outcomes for their patients."
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row1",
+        "collapsible_row2",
+        "collapsible_row3",
+        "collapsible_row4",
+        "collapsible_row5"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "caption": "Help & Support",
+        "description": "Use this text to share more information about your store.",
+        "layout_style": "layout1",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "shop_the_look": {
+      "type": "shop-the-look",
+      "blocks": {
+        "hotspot_1": {
+          "type": "hotspot",
+          "settings": {
+            "position_left": 13,
+            "position_top": 78,
+            "insightsText": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam, nobis."
+          }
+        },
+        "hotspot_2": {
+          "type": "hotspot",
+          "settings": {
+            "position_left": 50,
+            "position_top": 50,
+            "insightsText": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam, nobis."
+          }
+        },
+        "hotspot_3": {
+          "type": "hotspot",
+          "settings": {
+            "position_left": 88,
+            "position_top": 74,
+            "insightsText": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam, nobis."
+          }
+        }
+      },
+      "block_order": ["hotspot_1", "hotspot_2", "hotspot_3"],
+      "settings": {
+        "sectionBackground": "",
+        "bannerColor": "",
+        "main_image": "",
+        "section_heading": "SHOP THE LOOK",
         "section_description": "Experience ultimate comfort with our wheelchair's padded armrests. Designed for support and pressure relief, they feature an ergonomic shape and adjustable height for a personalized fit. Enjoy enhanced stability and comfort during every ride!",
-        "button_text": "Add to cart"
+        "moreInfo_heading": "Insights",
+        "moreInfo_description": "Experience ultimate comfort with our wheelchair's padded armrests. Designed for support and pressure relief, they feature an ergonomic shape and adjustable height for a personalized fit. Enjoy enhanced stability and comfort during every ride!"
       }
     }
   },
-  "order": ["shop_the_look"]
+  "order": [
+    "video_banner",
+    "image_with_text",
+    "slideshow",
+    "rich_text",
+    "product_stories",
+    "featured_collection",
+    "featured_icon_with_text",
+    "featured_blog",
+    "collapsible_content",
+    "shop_the_look"
+  ]
 }
