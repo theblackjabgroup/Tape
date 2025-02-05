@@ -39,7 +39,9 @@
                   is="toggle-button"
                   aria-expanded="false"
                   data-look-dot="{{ forloop.index }}"
-                  data-description="{{ block.settings.insightsText }}">
+                  data-description="{{ block.settings.insightsText }}"
+                  role="button"
+                  aria-label="Click to view insights">
 
                   <i class="icon {{ icon_style }} fa-plus" style="--fa-secondary-opacity: 1;"></i>
                 </button>
