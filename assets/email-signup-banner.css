@@ -132,7 +132,6 @@
 }
 
 .bb-mail-signup-banner__heading {
-    font-family: 'Fira Sans';
     font-weight: 500;
     font-size: 36px;
     line-height: 34px;
@@ -140,7 +139,6 @@
 }
 
 .bb-newsletter__subheading {
-    font-family: 'Inter';
     font-weight: 400;
     font-size: 20px;
     line-height: 34px;
@@ -179,7 +177,6 @@
 }
 
 .bb-404-h-button , .bb-404-c-button {
-font-family: 'Fira Sans';
 margin-top: 2rem;
 border-radius: 5px;
 background-color: rgb(var(--color-button-text));
@@ -230,14 +227,12 @@ color: rgb(var(--color-secondary-button-text));
   }
 
   .pwd-para {
-    font-family: 'Inter';
     font-weight: 400;
     font-size: 20px;
     line-height: 34px;
   }
 
   .bb-password__footer-text a {
-    font-family: 'Inter';
     font-size: 1.5rem;
     font-weight: 400;
     line-height: 40px;
@@ -252,7 +247,6 @@ color: rgb(var(--color-secondary-button-text));
   
   .bb-password__footer-text {
     padding: 0;
-    font-family: 'Inter';
     font-size: 20px;
     font-weight: 400;
     line-height: 34px;
@@ -263,7 +257,6 @@ color: rgb(var(--color-secondary-button-text));
   }
 
   .bb-password__footer-text .bb-login-pwd {
-    font-family: 'Inter' !important;
     font-weight: 500 !important;
     line-height: 34px !important;
     border-radius: 5px !important;
@@ -344,14 +337,12 @@ color: rgb(var(--color-secondary-button-text));
     }
 
     .bb-mail-signup-banner__heading {
-        font-family: 'Fira Sans';
         font-weight: 500;
         font-size: 32px;
         line-height: 34px;
     }
     
     .bb-newsletter__subheading {
-        font-family: 'Inter';
         font-weight: 400;
         font-size: 16px;
         line-height: 24px;
