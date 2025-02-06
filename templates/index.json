@@ -18,11 +18,7 @@
           "settings": {}
         }
       },
-      "block_order": [
-        "video",
-        "youtube",
-        "vimeo"
-      ],
+      "block_order": ["video", "youtube", "vimeo"],
       "settings": {
         "background_color": ""
       }
@@ -30,62 +26,64 @@
     "image_with_text": {
       "type": "image-with-text",
       "blocks": {
-        "card1": {
+        "card_1": {
           "type": "card",
           "settings": {
-            "heading": "Thanksgiving big billion sale!",
-            "description": "Enhance patient care with our premium medical product, featuring advanced technology for precision and reliability. Ideal for seamless integration into any practice!",
-            "url": "/",
-            "captionColor": "#000000"
+            "headingTag": "Optional Heading Tag",
+            "heading": "Image With Text",
+            "description": "Pair large text with an image to give focus to your chosen product. Add details on style, availabilty, share the product description or review.",
+            "btnText": "Optional Button",
+            "url": "/"
           }
         },
-        "card2": {
+        "card_2": {
           "type": "card",
           "settings": {
-            "heading": "Thanksgiving big billion sale!",
-            "description": "Enhance patient care with our premium medical product, featuring advanced technology for precision and reliability. Ideal for seamless integration into any practice!",
-            "url": "/",
-            "captionColor": "#000000"
+            "headingTag": "Optional Heading Tag",
+            "heading": "Image With Text",
+            "description": "Pair large text with an image to give focus to your chosen product. Add details on style, availabilty, share the product description or review.",
+            "btnText": "Optional Button",
+            "url": "/"
           }
         },
-        "card3": {
+        "card_3": {
           "type": "card",
           "settings": {
-            "heading": "Thanksgiving big billion sale!",
-            "description": "Enhance patient care with our premium medical product, featuring advanced technology for precision and reliability. Ideal for seamless integration into any practice!",
-            "url": "/",
-            "captionColor": "#000000"
+            "headingTag": "Optional Heading Tag",
+            "heading": "Image With Text",
+            "description": "Pair large text with an image to give focus to your chosen product. Add details on style, availabilty, share the product description or review.",
+            "btnText": "Optional Button",
+            "url": "/"
           }
         },
-        "card4": {
+        "card_4": {
           "type": "card",
           "settings": {
-            "heading": "Thanksgiving big billion sale!",
-            "description": "Enhance patient care with our premium medical product, featuring advanced technology for precision and reliability. Ideal for seamless integration into any practice!",
-            "url": "/",
-            "captionColor": "#000000"
+            "headingTag": "Optional Heading Tag",
+            "heading": "Image With Text",
+            "description": "Pair large text with an image to give focus to your chosen product. Add details on style, availabilty, share the product description or review.",
+            "btnText": "Optional Button",
+            "url": "/"
           }
         },
-        "card5": {
+        "card_5": {
           "type": "card",
           "settings": {
-            "heading": "Thanksgiving big billion sale!",
-            "description": "Enhance patient care with our premium medical product, featuring advanced technology for precision and reliability. Ideal for seamless integration into any practice!",
-            "url": "/",
-            "captionColor": "#000000"
+            "headingTag": "Optional Heading Tag",
+            "heading": "Image With Text",
+            "description": "Pair large text with an image to give focus to your chosen product. Add details on style, availabilty, share the product description or review.",
+            "btnText": "Optional Button",
+            "url": "/"
           }
         }
       },
-      "block_order": [
-        "card1",
-        "card2",
-        "card3",
-        "card4",
-        "card5"
-      ],
+      "block_order": ["card_1", "card_2", "card_3", "card_4", "card_5"],
       "settings": {
         "sectionBackground": "",
-        "bannerColor": ""
+        "bannerColor": "",
+        "opacity": 0.8,
+        "autoplay": true,
+        "show_shop_button": true
       }
     },
     "slideshow": {
@@ -200,12 +198,7 @@
           }
         }
       },
-      "block_order": [
-        "heading",
-        "subheading",
-        "text",
-        "button"
-      ],
+      "block_order": ["heading", "subheading", "text", "button"],
       "settings": {
         "layout_style": "layout1",
         "dots_number1": 10,
@@ -248,11 +241,7 @@
           }
         }
       },
-      "block_order": [
-        "column1",
-        "column2",
-        "column3"
-      ],
+      "block_order": ["column1", "column2", "column3"],
       "settings": {
         "title": "Shop With Us",
         "description": "Join us on TikTok for exclusive releases, unboxing and try-on videos, reviews, and more from our top brands and stylists.",
@@ -322,13 +311,7 @@
           }
         }
       },
-      "block_order": [
-        "card_1",
-        "card_2",
-        "card_3",
-        "card_4",
-        "card_5"
-      ],
+      "block_order": ["card_1", "card_2", "card_3", "card_4", "card_5"],
       "settings": {
         "layout": "layout_1",
         "heading": "Add heading here!",
@@ -409,6 +392,45 @@
         "padding_top": 36,
         "padding_bottom": 36
       }
+    },
+    "shop_the_look": {
+      "type": "shop-the-look",
+      "blocks": {
+        "hotspot_1": {
+          "type": "hotspot",
+          "settings": {
+            "position_left": 13,
+            "position_top": 78,
+            "insightsText": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam, nobis."
+          }
+        },
+        "hotspot_2": {
+          "type": "hotspot",
+          "settings": {
+            "position_left": 50,
+            "position_top": 50,
+            "insightsText": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam, nobis."
+          }
+        },
+        "hotspot_3": {
+          "type": "hotspot",
+          "settings": {
+            "position_left": 88,
+            "position_top": 74,
+            "insightsText": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam, nobis."
+          }
+        }
+      },
+      "block_order": ["hotspot_1", "hotspot_2", "hotspot_3"],
+      "settings": {
+        "sectionBackground": "",
+        "bannerColor": "",
+        "main_image": "",
+        "section_heading": "SHOP THE LOOK",
+        "section_description": "Experience ultimate comfort with our wheelchair's padded armrests. Designed for support and pressure relief, they feature an ergonomic shape and adjustable height for a personalized fit. Enjoy enhanced stability and comfort during every ride!",
+        "moreInfo_heading": "Insights",
+        "moreInfo_description": "Experience ultimate comfort with our wheelchair's padded armrests. Designed for support and pressure relief, they feature an ergonomic shape and adjustable height for a personalized fit. Enjoy enhanced stability and comfort during every ride!"
+      }
     }
   },
   "order": [
@@ -420,6 +442,7 @@
     "featured_collection",
     "featured_icon_with_text",
     "featured_blog",
-    "collapsible_content"
+    "collapsible_content",
+    "shop_the_look"
   ]
 }
