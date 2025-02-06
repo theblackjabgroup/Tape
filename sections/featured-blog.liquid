@@ -53,7 +53,7 @@
       "type": "text",
       "id": "section_title",
       "label": "Section Title",
-      "default": "Blog Posts",
+      "default": "Section Heading",
       "info": "This title will be displayed on the top left of the blog slider."
     },
     {
@@ -170,19 +170,19 @@
                                 </svg>
                             </a>
                           {% if section.settings.show_excerpt %}
-                                <p class="blog-excerpt" >This is a preview of how your blog post will look. Select a blog to display your actual content.</p>
+                                <p class="blog-excerpt" >This is a preview of how your blog excerpt will look. Select a blog to display your actual content.</p>
                             {% endif %}
                           {% if section.settings.show_author or section.settings.show_date %}
                                 <div class="blog-meta">
                                     {% if section.settings.show_author %}
-                                        <span class="blog-author" >John Doe</span>
+                                        <span class="blog-author" >Author's Name</span>
                                     {% endif %}
                                     {% if section.settings.show_date %}
-                                        <span class="blog-date" >January {{ i }}, 2024</span>
+                                        <span class="blog-date" >Date</span>
                                     {% endif %}
                                 </div>
                             {% endif %}
-                            <h3 class="blog-card-title overridetitle" style="font-family='Fira Sans'; font-weight=500;" >Sample Blog Post {{ i }}</h3>
+                            <h3 class="blog-card-title overridetitle">Blog Title</h3>
 
                         </div>
                     </div>
