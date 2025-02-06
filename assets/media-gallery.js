@@ -20,16 +20,13 @@ if (!customElements.get('media-gallery')) {
             .addEventListener('click', this.setActiveMedia.bind(this, mediaToSwitch.dataset.target, false));
         });
         if (this.dataset.desktopLayout.includes('thumbnail') && this.mql.matches) this.removeListSemantic();
-        console.log("NIKHIL IN CONSTRUCTOR")
         if(!this.mql.matches )
         {
         const x = this.elements.viewer.querySelector(".bb-slider--mobile");
         const h = this.elements.viewer.querySelector("#bb_product__media_first").querySelector("img").offsetHeight;
         const z = this.elements.viewer.getElementsByClassName("bb-product-video");
-        console.log("nikhil img ", z);
         if(!(this.elements.viewer.getElementsByClassName("bb-product-video")))
         {
-          console.log("Inside if check ", z);
           x.style.height = `${h+40}px`;
           x.setAttribute("data-height", this.elements.viewer.querySelector("#bb_product__media_first").querySelector("img").offsetHeight);
         }
@@ -89,7 +86,6 @@ if (!customElements.get('media-gallery')) {
         {
         const x = this.elements.viewer.querySelector(".bb-slider--mobile");
         const h = activeMedia.querySelector("#bb_product__media_first").querySelector("img").offsetHeight;
-        console.log("Nikhil bb-deferred-media ", this.elements.viewer.querySelector("#bb-deferred-media").offsetHeight)
         if(!(this.elements.viewer.getElementsByClassName("bb-product-video")))
         {
         x.style.height = `${h+40}px`;
