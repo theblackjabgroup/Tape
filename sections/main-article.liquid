@@ -11,15 +11,21 @@
     {
       "type": "checkbox",
       "id": "show_social_sharing",
-      "label": "Show Social Buttons",
+      "label": "Show Strip",
       "default": true
     },
     {
-  "type": "checkbox",
-  "id": "show_blog_social_links",
-  "label": "Show Social Media Icons ",
-  "default": true
-},
+      "type": "checkbox",
+      "id": "show_blog_social_links",
+      "label": "Show Social Icons ",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_interaction_buttons",
+      "label": "Show Interaction Icons",
+      "default": true
+    },
     {
       "type": "checkbox",
       "id": "show_tags",
@@ -139,6 +145,7 @@
       {% if section.settings.show_social_sharing %}
         <div class="blog-social-container centered-social">
           <div class="blog-social-bar">
+            {% if section.settings.show_interaction_buttons %}
        <div class="blog-interaction-buttons">
   {% if section.settings.icon_like_image %}
     {{ section.settings.icon_like_image | image_url: width: 50 | image_tag: class: "icon like-icon", alt: "Like Icon" }}
@@ -164,7 +171,7 @@
     <i class="fa fa-bookmark blog-bookmark-icon" aria-hidden="true" style="padding: 5px;"></i>
   {% endif %}
 </div>
-
+{% endif %}
 
 {% if section.settings.show_blog_social_links %}
   <div class="blog-social-links">
@@ -217,6 +224,7 @@
       {% if section.settings.show_social_sharing %}
         <div class="blog-social-container">
           <div class="blog-social-bar">
+            {% if section.settings.show_interaction_buttons %}
     <div class="blog-interaction-buttons">
   {% if section.settings.icon_like_image %}
     {{ section.settings.icon_like_image | image_url: width: 50 | image_tag: class: "icon like-icon", alt: "Like Icon" }}
@@ -242,7 +250,7 @@
     <i class="fa fa-bookmark blog-bookmark-icon" aria-hidden="true" style="padding: 5px;"></i>
   {% endif %}
 </div>
-
+{% endif %}
 
 
 
