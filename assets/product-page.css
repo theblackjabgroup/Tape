@@ -634,7 +634,7 @@ border-radius: 50%;
 }
 
 .product-form__input--pill input[type=radio]:checked+label {
-  background-color: var(--card_foreground) !important;
+  background-color: var(--button_label) !important;
 }
 .dynamic-payment-buttons.top
   .shopify-payment-button__button--unbranded:hover:not([disabled]) {
@@ -892,3 +892,9 @@ border-radius: 50%;
     margin:0 !important;
     padding:0 !important;
  }
+ .bb-special-offer{
+    margin-bottom:15px;
+  }
+  .product__info-wrapper{
+    margin-top:15px;
+  }

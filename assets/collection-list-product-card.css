@@ -6,8 +6,9 @@
   position: relative;
   text-decoration: none;
     display: flex;
+  border-radius: 8px;
+    overflow: hidden;
     flex-direction: column;
-    height: 514px;
 }
 .collection_list-more-btn{
   font-family: "Inter", sans-serif;
@@ -39,12 +40,16 @@
 .collection_list-more-btn .icon-wrap {
   transform: translateX(4px); 
 }
+.semicircle {
+  top: 305px;
+}
 
 .collection_card_inner{
-  height:60%;
+  height:305px;
 }
 .collection_card-content{
-   height:40%;
+    height:auto;
+    min-height:140px;
    background-color: rgb(var(--color-button));
 }
 .collection_list-card__content{
@@ -56,7 +61,7 @@
 .collection-list_card__heading{
 font-family: Fira Sans;
 font-size: 18px;
-font-weight: 700;
+font-weight: 600;
 line-height: 24px;
 text-align: left;
 text-underline-position: from-font;
@@ -275,9 +280,12 @@ text-decoration-skip-ink: none;
 }
 
 @media screen and (max-width: 749px) {
-  .card-wrapper {
-    height: 313px;
-  }
+     .semicircle {
+            top: 173px;
+      }
+    .collection_card_inner{
+          height:173px;
+    }
   .grid--2-col-tablet-down .card__content quick-add-bulk .quantity__button {
     width: calc(3.5rem / var(--font-body-scale));
   }
