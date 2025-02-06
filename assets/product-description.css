@@ -17,7 +17,6 @@
     font-size: 20px;
     letter-spacing: inherit;
     transition: background-color 0.3s ease;
-    font-family: 'Fira Sans';
     font-weight: 500;
     color: var(--utilities);
 }
@@ -114,7 +113,6 @@
 
 .product-description-subclass {
     margin-top: 20px !important;
-    font-family: 'Inter';
 }
 
 .mobile-collapsible-tabs {
@@ -147,7 +145,6 @@
     }
     .accordion-button {
         font-size: 18px;
-        font-family: 'Fira Sans';
         font-weight: 500;
         line-height: 24px;
         background-color: var(--card_foreground)!important;
@@ -155,7 +152,6 @@
     }
     .product-description-subclass{
         margin-top: 5px !important;
-        font-family: Inter;
         font-size: 14px;
     }
 

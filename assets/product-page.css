@@ -25,7 +25,6 @@
 }
 .bb-product__text {
   font-size: 14px !important;
-  font-family: 'Fira Sans' !important;
   font-weight: 400 !important;
 }
 .bb-product-third {
@@ -123,14 +122,14 @@
 }
 
 .index-product-0 {
-  height: 16px;
-  width: 16px;
+  height: 18px;
+  width: 18px;
   transform: translateX(-50%);
 }
 
 .index-product-20 {
-  height: 16px;
-  width: 16px;
+  height: 18px;
+  width: 18px;
   transform: translateX(50%);
 }
 
@@ -236,7 +235,6 @@
 .bb-special-offer-text {
   color: rgb(var(--color-foreground));
   margin: auto;
-  font-family: 'Inter';
   font-weight: 700;
   font-size: 14px;
   line-height: 20px;
@@ -388,7 +386,6 @@ border-radius: 50%;
    cursor: pointer;
    position: relative;
    border-radius: 5px;
-   font-family: 'Inter';
  }
  .bb-variant-circle input[type='radio'] + label::after {
  content: "";
@@ -471,7 +468,6 @@ border-radius: 50%;
 
 .bb-quantity-label,
 .bb-product-variant-label {
-  font-family: 'Fira Sans';
   font-size: 20px;
   color: var(--utilities);
 }
@@ -485,7 +481,6 @@ border-radius: 50%;
   margin: auto;
   margin-left: 0px;
   font-size: 20px;
-  font-family: 'Fira Sans';
   font-weight: 500;
   line-height: 30px;
 }
@@ -526,7 +521,6 @@ border-radius: 50%;
     border-radius: 50%;
 }
 .shopify-payment-button {
-  font-family: 'Inter';
   font-weight: 500;
 }
 
@@ -667,6 +661,20 @@ border-radius: 50%;
 }
 
 @media screen and (max-width: 749px) {
+
+  .bb-global-media-settings {
+    border: none !important;
+  }
+
+  #bb-deferred-media {
+    margin-left: 1.5rem;
+  }
+
+  .bb-product-video {
+    margin-left: 0rem !important;
+    width: calc(100% - 2.43rem - var(--grid-mobile-horizontal-spacing)) !important;
+  }
+
   .bb-thumbnail-width {
     width: calc(33% - 2rem) !important;
   }
@@ -704,7 +712,6 @@ border-radius: 50%;
 .bb-product__title {
     margin: 0;
     padding:0px 0 0 0;
-    font-family: Fira Sans;
     font-weight: 700;
   /*  font-size: 28px; */
   }
@@ -713,7 +720,6 @@ border-radius: 50%;
   font-size: 20px;
   font-weight: 500;
   line-height: 30px;
-  font-family: 'Fira Sans';
 }
 .select:hover.select:after {
   border-radius: inherit !important;
@@ -748,7 +754,6 @@ border-radius: 50%;
     .bb-product__title {
         margin: 0;
         padding:20px 0 0 0;
-        font-family: Fira Sans;
         font-weight: 700;
       /*  font-size: 28px; */
       }

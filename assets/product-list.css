@@ -3,7 +3,6 @@
 }
 
 .bb-pro-list-heading {
-    font-family: 'Fira Sans';
     font-size: 20px;
     font-weight: 600;
     color: var(--product-card-text-color);
@@ -39,7 +38,6 @@
 }
 
 .filter-para{
-    font-family: 'Fira Sans';
     font-weight: 600;
     font-size: 24px;
     margin: 0;
@@ -76,7 +74,6 @@
 }
 
 .facet-checkbox__text-bb {
-  font-family: 'Fira Sans';
   font-size: 14px;
   font-weight: 400;
 }
@@ -110,7 +107,6 @@ summary .icon-caret2 {
 }
 
 .bb-facets__summary-label {
-    font-family: 'Fira Sans';
     font-weight: 500;
     font-size: 20px;
     color: rgb(var(--color-foreground));
@@ -155,14 +151,12 @@ summary .icon-caret2 {
 .bb-sortby {
     font-size: 20px;
     font-weight: 500;
-    font-family: 'Fira Sans';
     color: rgb(var(--color-foreground));
 }
 
 .bb-sort-options {
     font-size: 20px;
     font-weight: 500;
-    font-family: 'Fira Sans';
     color: rgb(var(--color-foreground));
     background-color: var(--card_foreground);
     border: none;
@@ -216,7 +210,6 @@ summary .icon-caret2 {
 }
 
 .bb-dropdown-item {
-  font-family: 'Fira Sans';
   border-top: .1rem solid var(--card_foreground);
   color: rgb(var(--color-foreground)) !important;
   background-color: var(--card_background);
@@ -307,7 +300,6 @@ summary .icon-caret2 {
   }
 
   .bb-collection-hero-para{
-    font-family: 'Inter';
     font-size: 16px;
     font-weight: 400;
   }
@@ -323,7 +315,7 @@ summary .icon-caret2 {
     text-align: center;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-    height: 80%;
+   /* height: 80%; */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -380,7 +372,6 @@ summary .icon-caret2 {
   }
 
   .sale-pro-text{
-    font-family: 'Inter';
     font-size: 14px;
     font-weight: 600;
     line-height: 18px;
@@ -406,7 +397,6 @@ summary .icon-caret2 {
 
   .sold-out-tag-pl-text {
     font-size: 14px;
-    font-family: 'Inter';
     font-weight: 600;
     line-height: 20px;
   }
@@ -497,13 +487,11 @@ summary .icon-caret2 {
 
 .bb2-facets__selected {
   font-size: 14px;
-  font-family: 'Fira Sans';
   font-weight: 400;
 }
 
 .field__label {
   font-size: 14px;
-  font-family: 'Fira Sans';
   font-weight: 400;
 }
 @media screen and (max-width: 749px) {
@@ -638,7 +626,6 @@ summary .icon-caret2 {
     display: block;
     padding: 1rem;
     font-weight: 400;
-    font-family: 'Fira Sans';
     border-top: .1rem solid var(--card_foreground);
     color: rgb(var(--color-foreground));
     background-color: var(--card_background);
@@ -694,7 +681,6 @@ summary .icon-caret2 {
 }
 
 .bb-mobile-facets__open-label {
-  font-family: 'Fira Sans';
   font-weight: 600;
   font-size: 20px;
   line-height: 26px;
@@ -702,7 +688,6 @@ summary .icon-caret2 {
 }
 
 .bb-select-label {
-  font-family: 'Fira Sans';
   font-weight: 600;
   font-size: 20px;
   line-height: 26px;
@@ -747,7 +732,6 @@ summary .icon-caret2 {
 }
 
 .bb-mobile-facets__summary {
-  font-family: 'Fira Sans';
   font-size: 18px;
   font-weight: 500;
   line-height: 24px;
@@ -759,7 +743,6 @@ summary .icon-caret2 {
 }
 
 .bb-facet-checkbox__text, .bb-facets__selected {
-  font-family: 'Fira Sans';
   font-size: 15px;
   color: var(rgb(var(--color-foreground)));
 }
@@ -767,7 +750,6 @@ summary .icon-caret2 {
 
 
 .bb-mobile-facets__clear {
-  font-family: 'Fira Sans';
 }
 
 .bb-pro-list-heading {

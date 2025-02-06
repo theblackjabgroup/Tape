@@ -25,11 +25,16 @@ if (!customElements.get('media-gallery')) {
         {
         const x = this.elements.viewer.querySelector(".bb-slider--mobile");
         const h = this.elements.viewer.querySelector("#bb_product__media_first").querySelector("img").offsetHeight;
-        x.style.height = `${h+40}px`;
-        x.setAttribute("data-height", this.elements.viewer.querySelector("#bb_product__media_first").querySelector("img").offsetHeight);
+        const z = this.elements.viewer.getElementsByClassName("bb-product-video");
+        console.log("nikhil img ", z);
+        if(!(this.elements.viewer.getElementsByClassName("bb-product-video")))
+        {
+          console.log("Inside if check ", z);
+          x.style.height = `${h+40}px`;
+          x.setAttribute("data-height", this.elements.viewer.querySelector("#bb_product__media_first").querySelector("img").offsetHeight);
+        }
         }
       }
-
       onSlideChanged(event) {
         const thumbnail = this.elements.thumbnails.querySelector(
           `[data-target="${event.detail.currentElement.dataset.mediaId}"]`
@@ -84,8 +89,16 @@ if (!customElements.get('media-gallery')) {
         {
         const x = this.elements.viewer.querySelector(".bb-slider--mobile");
         const h = activeMedia.querySelector("#bb_product__media_first").querySelector("img").offsetHeight;
+        console.log("Nikhil bb-deferred-media ", this.elements.viewer.querySelector("#bb-deferred-media").offsetHeight)
+        if(!(this.elements.viewer.getElementsByClassName("bb-product-video")))
+        {
         x.style.height = `${h+40}px`;
         x.setAttribute("data-height", activeMedia.querySelector("#bb_product__media_first").querySelector("img").offsetHeight);
+        }
+        else if(this.elements.viewer.querySelector("#bb-deferred-media"))
+        {
+          console.log("Inside else if", this.elements.viewer.querySelector("#bb-deferred-media").querySelector("video").offsetHeight)
+        }
         }
       }
 
