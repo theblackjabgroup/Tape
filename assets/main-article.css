@@ -278,7 +278,7 @@ top: 561px;
 }
 
 .blog-social-icon {
-  font-family: Arial, sans-serif;
+  /* font-family: Arial, sans-serif; */
   font-size: 16px;
   color:rgb(var(--color-text));
   text-decoration: none;
@@ -656,14 +656,14 @@ top: 561px;
 }
 }
 
-.custom-slider-title,
+/* .custom-slider-title,
 .custom-card-title,
 .custom-author,
 .custom-date,
 .custom-excerpt {
     font-family: 'Fira Sans';
     font-weight: 500;
-}
+} */
 
 .custom-blog-slider-section {
     position: relative;
