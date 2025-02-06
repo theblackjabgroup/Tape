@@ -14,7 +14,6 @@
   }
 
   {% if section.settings.layout == 'layout_2' %}
-    @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap');
 
     :root {
       --primary-card-top-padding: 40px;
@@ -58,8 +57,8 @@
     }
 
     .card-main-heading {
-      font-family: 'Open Sans', sans-serif;
-      font-weight: 600;
+      /* font-family: 'Open Sans', sans-serif;
+      font-weight: 600; */
       font-size: 24px;
       line-height: 32.68px;
       text-align: center;
@@ -205,8 +204,8 @@
     <div style="display: flex; flex-direction: column; gap: 32px; padding: 20px;"
          class="color-{{ section.settings.sectionColor }} featured-icon-with-text-section">
       <div style="display: flex; flex-direction: column; gap: 4px; ">
-        <p style="font-weight: 600; font-size: 24px; line-height: 30px; color: var(--featured-icon-with-text-section-headings-color)" class="fira-sans-semibold">{{ section.settings.heading }}</p>
-        <p style="font-weight: 500; font-size: 14px; line-height: 21px; color: var(--featured-icon-with-text-section-headings-color)" class="inter-medium">{{ section.settings.subheading }}</p>
+        <p style="font-weight: 600; font-size: 24px; line-height: 30px; color: var(--featured-icon-with-text-section-headings-color)" >{{ section.settings.heading }}</p>
+        <p style="font-weight: 500; font-size: 14px; line-height: 21px; color: var(--featured-icon-with-text-section-headings-color)" >{{ section.settings.subheading }}</p>
       </div>
       <div class="icon-with-text-container color-{{ section.settings.sectionColor }}">
         {% for item in section.blocks %}
@@ -265,8 +264,8 @@
   {% else %}
     <div class="icon-with-text-2 color-{{ section.settings.sectionColor }}">
       <div style="display: flex; flex-direction: column; gap: 4px; padding: 20px; ">
-        <p style="font-weight: 600; font-size: 24px; line-height: 30px; color: var(--featured-icon-with-text-section-headings-color)" class="fira-sans-semibold">{{ section.settings.heading }}</p>
-        <p style="font-weight: 500; font-size: 14px; line-height: 21px; color: var(--featured-icon-with-text-section-headings-color)" class="inter-medium">{{ section.settings.subheading }}</p>
+        <p style="font-weight: 600; font-size: 24px; line-height: 30px; color: var(--featured-icon-with-text-section-headings-color)" >{{ section.settings.heading }}</p>
+        <p style="font-weight: 500; font-size: 14px; line-height: 21px; color: var(--featured-icon-with-text-section-headings-color)" >{{ section.settings.subheading }}</p>
       </div>
       <div class="scroll-container" id="section-{{ section.id }}">
         <div class="card-container" id="cardContainer">

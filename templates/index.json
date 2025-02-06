@@ -329,7 +329,7 @@
         "show_excerpt": false,
         "show_tags": true,
         "show_view_all": false,
-        "section_title": "Blog Posts",
+        "section_title": "Section Heading",
         "color_scheme": ""
       }
     },
