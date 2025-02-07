@@ -7,7 +7,7 @@
     overflow: hidden;
     position: relative;
     background-color: rgb(var(--color-background));
-    font-family:var(--font-body-family);
+    font-family:var(--font-heading-family);
 }
 .scrolling-marquee-inner {
     display: flex;
@@ -93,7 +93,7 @@
     display: inline-block;
     margin-right: 20px;
     font-weight: bold;
-      font-family:var(--font-body-family);
+      font-family:var(--font-heading-family);
 
 }
 .scrolling-marquee-image {
