@@ -20,16 +20,18 @@ if (!customElements.get('media-gallery')) {
             .addEventListener('click', this.setActiveMedia.bind(this, mediaToSwitch.dataset.target, false));
         });
         if (this.dataset.desktopLayout.includes('thumbnail') && this.mql.matches) this.removeListSemantic();
-        console.log("NIKHIL IN CONSTRUCTOR")
         if(!this.mql.matches )
         {
         const x = this.elements.viewer.querySelector(".bb-slider--mobile");
         const h = this.elements.viewer.querySelector("#bb_product__media_first").querySelector("img").offsetHeight;
-        x.style.height = `${h+40}px`;
-        x.setAttribute("data-height", this.elements.viewer.querySelector("#bb_product__media_first").querySelector("img").offsetHeight);
+        const z = this.elements.viewer.getElementsByClassName("bb-product-video");
+        if(!(this.elements.viewer.getElementsByClassName("bb-product-video")))
+        {
+          x.style.height = `${h+40}px`;
+          x.setAttribute("data-height", this.elements.viewer.querySelector("#bb_product__media_first").querySelector("img").offsetHeight);
+        }
         }
       }
-
       onSlideChanged(event) {
         const thumbnail = this.elements.thumbnails.querySelector(
           `[data-target="${event.detail.currentElement.dataset.mediaId}"]`
@@ -84,8 +86,15 @@ if (!customElements.get('media-gallery')) {
         {
         const x = this.elements.viewer.querySelector(".bb-slider--mobile");
         const h = activeMedia.querySelector("#bb_product__media_first").querySelector("img").offsetHeight;
+        if(!(this.elements.viewer.getElementsByClassName("bb-product-video")))
+        {
         x.style.height = `${h+40}px`;
         x.setAttribute("data-height", activeMedia.querySelector("#bb_product__media_first").querySelector("img").offsetHeight);
+        }
+        else if(this.elements.viewer.querySelector("#bb-deferred-media"))
+        {
+          console.log("Inside else if", this.elements.viewer.querySelector("#bb-deferred-media").querySelector("video").offsetHeight)
+        }
         }
       }
 

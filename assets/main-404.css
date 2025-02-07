@@ -97,7 +97,6 @@
   }
 
   .bb-404-subtext {
-    font-family: "Fira Sans";
     font-weight: 600;
     font-size: 96px;
     line-height: 34px;
@@ -105,7 +104,6 @@
   }
 
   .bb-404-title {
-    font-family: "Fira Sans";
     font-weight: 600;
     font-size: 48px;
     line-height: 34px;
@@ -113,7 +111,6 @@
   }
 
   .bb-404-para {
-    font-family: "Inter";
     font-weight: 400;
     font-size: 24px;
     line-height: 36px;
@@ -139,7 +136,6 @@
         border: none;
     } */
   .bb-404-c-button {
-    font-family: "Fira Sans";
     margin-top: 2rem;
     font-size: 2rem;
   }
@@ -226,7 +222,6 @@
       padding: 1rem 0rem;
     }
     .bb-404-c-button {
-      font-family: "Fira Sans";
       margin-top: 2rem;
       font-size: 1.5rem;
     }
