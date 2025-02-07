@@ -381,7 +381,6 @@ nav-items::-webkit-scrollbar {
     align-items: center;
    display: flex !important;
   justify-content: center;
-  align-items: flex-start;
   padding-top: 4px;
   cursor: pointer;
   transition: transform 0.2s ease, color 0.2s ease;
