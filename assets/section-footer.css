@@ -2,6 +2,7 @@
 .footer-section {
     padding: 40px;
     text-align: center;
+    font-family:var(--font-body-family);
 }
 .footer-svg {
     width: 18px;
@@ -22,6 +23,7 @@
     align-items: center;
     justify-content: center;
     background-color: rgb(var(--color-background));
+    font-family:var(--font-body-family);
 }
 
 
@@ -40,7 +42,7 @@ background-color: var(--background_product_card);
     left: 50%;
     transform: translate(-50%, -50%) rotate(10deg);
     box-shadow: 0 8px 14px rgba(0, 0, 0, 0.3);
-    font-family: 'Fira Sans', sans-serif;
+    font-family:var(--font-heading-family);
   }
 
   .strip-left {
@@ -58,7 +60,7 @@ background-color: var(--background_product_card);
     left: 10%;
     transform: translate(-50%, -50%) rotate(-10deg);
     box-shadow: 0 8px 14px rgba(0, 0, 0, 0.3);
-    font-family: 'Fira Sans', sans-serif;
+    font-family:var(--font-heading-family);
   }
 
   .strip-right {
@@ -80,11 +82,12 @@ background-color: var(--background_product_card);
     white-space: nowrap;
     width: 100%;
     text-align: center;
+    font-family:var(--font-body-family);
 }
 
 .offer-text {
     padding: 0 20px;
-    font-family: 'Fira Sans', sans-serif;
+    font-family:var(--font-heading-family);
 }
 
 .strip-1 {
@@ -109,8 +112,9 @@ background-color: var(--background_product_card);
 
 .footer-content {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
     padding-top: 20px;
+    font-family:var(--font-body-family);
 }
 
 #stay-connected-title {
@@ -177,6 +181,7 @@ background-color: var(--background_product_card);
     padding: 10px 10px 10px 50px;
     border: 1px solid #ccc;
     margin-bottom: 11px;
+    font-family:var(--font-body-family);
     width: 70%;
     font-size: 16px;
   border-radius:6px;
@@ -272,6 +277,7 @@ margin-left: -1px;
 margin-bottom: 1px;
 margin-top: 15px;
 font-size: 15px;
+    font-family:var(--font-body-family);
 
 }
 /* .disclosure {
@@ -306,6 +312,7 @@ font-size: 15px;
   margin: 0.5rem 0;
   text-align: left;
   font-weight: bold;
+    font-family:var(--font-body-family);
 }
 
 
@@ -413,6 +420,7 @@ font-size: 15px;
     padding: 10px 10px 10px 50px;
     border: 1px solid #ccc;
     margin-bottom: 14px;
+    font-family:var(--font-body-family);
     width: 100%;
     font-size: 15px;
   }
