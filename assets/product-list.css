@@ -28,6 +28,13 @@
 .bb_cp-icon-wrapper > img {
   width: 100%;
   height: 100%;
+  object-fit: contain;
+  image-rendering: crisp-edges;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+.bb-pl-img{
+  width: 100%;
 }
 
 .filter-upper-container{
@@ -737,6 +744,10 @@ summary .icon-caret2 {
   width: 16px;
   top: calc(50% - 0.75rem)  !important;
   color: var(rgb(var(--color-foreground)));
+}
+
+.icon-filter {
+  color: rgb(var(--color-foreground));
 }
 
 .bb-parent-display, .bb-facets__price  {
