@@ -340,40 +340,40 @@
           "type": "collapsible_row",
           "settings": {
             "serialno": "01",
-            "questiontext": "What is number of wheels in wheel chair",
-            "solutionans": "At [Your Company Name], we are dedicated to enhancing patient care and clinical efficiency through state-of-the-art medical products. Our commitment to innovation and quality ensures that healthcare providers have the tools they need to deliver the best possible outcomes for their patients."
+            "questiontext": "Provide a question or statement",
+            "solutionans": "Use this section to answer a question, provide product information, or talk about your brand."
           }
         },
         "collapsible_row2": {
           "type": "collapsible_row",
           "settings": {
-            "serialno": "01",
-            "questiontext": "What is number of wheels in wheel chair",
-            "solutionans": "At [Your Company Name], we are dedicated to enhancing patient care and clinical efficiency through state-of-the-art medical products. Our commitment to innovation and quality ensures that healthcare providers have the tools they need to deliver the best possible outcomes for their patients."
+            "serialno": "02",
+            "questiontext": "Provide a question or statement",
+            "solutionans": "Use this section to answer a question, provide product information, or talk about your brand."
           }
         },
         "collapsible_row3": {
           "type": "collapsible_row",
           "settings": {
-            "serialno": "01",
-            "questiontext": "What is number of wheels in wheel chair",
-            "solutionans": "At [Your Company Name], we are dedicated to enhancing patient care and clinical efficiency through state-of-the-art medical products. Our commitment to innovation and quality ensures that healthcare providers have the tools they need to deliver the best possible outcomes for their patients."
+            "serialno": "03",
+            "questiontext": "Provide a question or statement",
+            "solutionans": "Use this section to answer a question, provide product information, or talk about your brand."
           }
         },
         "collapsible_row4": {
           "type": "collapsible_row",
           "settings": {
-            "serialno": "01",
-            "questiontext": "What is number of wheels in wheel chair",
-            "solutionans": "At [Your Company Name], we are dedicated to enhancing patient care and clinical efficiency through state-of-the-art medical products. Our commitment to innovation and quality ensures that healthcare providers have the tools they need to deliver the best possible outcomes for their patients."
+            "serialno": "04",
+            "questiontext": "Provide a question or statement",
+            "solutionans": "Use this section to answer a question, provide product information, or talk about your brand."
           }
         },
         "collapsible_row5": {
           "type": "collapsible_row",
           "settings": {
-            "serialno": "01",
-            "questiontext": "What is number of wheels in wheel chair",
-            "solutionans": "At [Your Company Name], we are dedicated to enhancing patient care and clinical efficiency through state-of-the-art medical products. Our commitment to innovation and quality ensures that healthcare providers have the tools they need to deliver the best possible outcomes for their patients."
+            "serialno": "05",
+            "questiontext": "Provide a question or statement",
+            "solutionans": "Use this section to answer a question, provide product information, or talk about your brand."
           }
         }
       },
