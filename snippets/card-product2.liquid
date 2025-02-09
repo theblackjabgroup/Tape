@@ -436,7 +436,6 @@
         </div>
 
         <div class="desktop-view icon-upper-wrapper">
-          <div>
           <div class="bb_cp-icon-wrapper">
             {% if section.settings.icon_1_image %}
               {{  section.settings.icon_1_image  | image_url: width: auto, height: auto| image_tag }}
@@ -444,15 +443,12 @@
             {% endif %}
             <span class="icon-name">{{ section.settings.icon_1_name }}</span>
           </div>
-          </div>
-          <div>
           <div class="bb_cp-icon-wrapper">
             {% if section.settings.icon_2_image %}
-              {{  section.settings.icon_2_image  | image_url: width: 100, height: 100| image_tag }}
+              {{  section.settings.icon_2_image  | image_url: width: auto, height: auto| image_tag }}
             {% else %}
             {% endif %}
             <span class="icon-name">{{ section.settings.icon_2_name }}</span>
-          </div>
           </div>
           <div class="bb_cp-icon-wrapper">
             {% if section.settings.icon_3_image %}
