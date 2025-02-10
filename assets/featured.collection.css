@@ -1,13 +1,16 @@
 body {
-    font-family: 'Inter', sans-serif;
+   font-family: var(--font-body-family);
+    font-weight: var(--font-body-weight);
   }
 
   h1, h7 {
-    font-family: 'Fira Sans', sans-serif;
+    font-family: var(--font-body-family);
+    font-weight: var(--font-body-weight);
   }
 
   h2, .model-number {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-body-family);
+    font-weight: var(--font-body-weight);
   }
 
 /* Add margin elements with color scheme support */

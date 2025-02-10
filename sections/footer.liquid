@@ -3,10 +3,12 @@
 
 <style>
 .footer-column form button {
+    font-family: var(--font-body-family);
+    font-weight: var(--font-body-weight);
     border-radius: {{ section.settings.footer_button_border_radius | default: 5 }}px;
     font-size: {{ section.settings.footer_button_font_size | default: 15 }}px;
     width: {{ section.settings.footer_button_width | default: 250 }}px;
-    height: {{ section.settings.footer_button_height | default: 40 }}px;
+    height: {{ section.settings.footer_button_height | default: 53 }}px;
     padding: {{ section.settings.footer_button_padding | default: '5px 10px' }};
     text-align: left;
     background: linear-gradient(to right, gray 50%, rgb(var(--color-button-text)) 50%);
@@ -17,8 +19,7 @@
     cursor: pointer;
     transition: background-position 1.5s ease-in-out, transform 0.3s ease;
 }
-
-.footer-column form button:hover {
+  .footer-column form button:hover {
     background-position: 0 0;
     transform: {{ section.settings.footer_button_hover_transform | default: 'scale(1.05)' }};
 }
@@ -28,6 +29,246 @@
     margin-left: 5px;
     font-size: {{ section.settings.footer_button_arrow_size | default: 14 }}px;
 }
+
+
+.footer-content {
+    display: flex;
+    justify-content: flex-start;
+    padding-top: 20px;
+    font-family: var(--font-body-family);
+    font-weight: var(--font-body-weight);
+    gap: 40px;
+}
+
+.footer-column h4 {
+    font-family: var(--font-heading-family);
+    font-weight: var(--font-heading-weight);
+}
+
+.footer-column ul li a {
+    font-family: var(--font-body-family);
+    font-weight: var(--font-body-weight);
+}
+
+#stay-connected-title {
+    font-family: var(--font-heading-family);
+    font-weight: var(--font-heading-weight);
+}
+
+.thank-you-message {
+    font-family: var(--font-body-family);
+    font-weight: var(--font-body-weight);
+}
+
+.footer-column form input {
+    font-family: var(--font-body-family);
+    font-weight: var(--font-body-weight);
+}
+
+.footer__country-selector,
+.footer__language-selector {
+    font-family: var(--font-body-family);
+    font-weight: var(--font-body-weight);
+}
+
+.container1 .offer-text {
+    font-family: var(--font-body-family);
+    font-weight: var(--font-body-weight);
+}
+.footer-column h4 {
+    font-family: var(--font-heading-family) !important;
+    font-weight: var(--font-heading-weight);
+}
+
+.footer-column ul {
+    font-family: var(--font-body-family) !important;
+}
+
+.footer-column ul li {
+    font-family: var(--font-body-family) !important;
+}
+
+.footer-column ul li a {
+    font-family: var(--font-body-family) !important;
+    font-weight: var(--font-body-weight);
+}
+</style>
+
+<footer class="color-{{ section.settings.color_scheme }}" style="
+    padding-top: {{ section.settings.footer_top_padding }}px;
+    padding-bottom: {{ section.settings.footer_bottom_padding }}px;
+    font-family: var(--font-body-family) !important;">
+  
+    {% if section.settings.show_announcement_strips %}
+        <div class="container1" style="background-color: {{ section.settings.strip_container_bg_color }};">
+            <div class="strip-right" style="background-color: {{ section.settings.strip_bg_color }};">
+                <div class="strip-1">
+                    <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text_1 }}</div>
+                    <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text_1 }}</div>
+                    <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text_1 }}</div>
+                </div>
+            </div>
+            <div class="strip-left" style="background-color: {{ section.settings.strip_bg_color }};">
+                <div class="strip-2">
+                    <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text_2 }}</div>
+                    <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text_2 }}</div>
+                    <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">{{ section.settings.offer_text_2 }}</div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="footer-content">
+        {% if section.settings.show_newsletter %}
+            <div id="newsletter-section1" class="footer-column">
+                <div id="stay-connected">
+                    <h4 id="stay-connected-title">
+                        {{ section.settings.STAY_CONNECTED_TITLE }}
+                    </h4>
+                    <h4 id="thank-you-message" class="thank-you-message" style="display: none;">
+                        {{ section.settings.thank_you_message_text | default: "Thank you for subscribing!" }}
+                    </h4>
+                </div>
+<form id="newsletter-form">
+    <div id="form-container" class="form-container">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <i class="fa-regular fa-envelope footer-envelope-icon1"></i>
+        <input 
+            type="email" 
+            id="email-input" 
+            name="email" 
+            style="width: 65%;" 
+            placeholder="Enter your email" 
+            required
+        >
+        <button type="submit">
+            {{ section.settings.subscribe_button_text }}
+            <svg class="footer-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+        </button>
+    </div>
+</form>
+
+                {% if section.settings.enable_country_selector and localization.available_countries.size > 1 %}
+                    <div class="footer__country-selector">
+                        <localization-form>
+                            {% form 'localization', id: 'FooterCountryForm', class: 'footer-country-form' %}
+                                <div class="footer-country-wrapper">
+                                    <h2 class="footer-country-label" id="FooterCountryLabel">{{ 'localization.country_label' | t }}</h2>
+                                    {% render 'country-localization', localPosition: 'FooterCountry' %}
+                                </div>
+                            {% endform %}
+                        </localization-form>
+                    </div>
+                {% endif %}
+
+                {% if section.settings.enable_language_selector and localization.available_languages.size > 1 %}
+                    <div class="footer__language-selector">
+                        <localization-form>
+                            {% form 'localization', id: 'FooterLanguageForm', class: 'footer-language-form' %}
+                                <div class="footer-language-wrapper">
+                                    <h2 class="footer-language-label" id="FooterLanguageLabel">{{ 'localization.language_label' | t }}</h2>
+                                    {% render 'language-localization', localPosition: 'FooterLanguage' %}
+                                </div>
+                            {% endform %}
+                        </localization-form>
+                    </div>
+                {% endif %}
+            </div>
+        {% endif %}
+
+        {% if section.blocks.size > 0 %}
+        {% for block in section.blocks %}
+            {% case block.type %}
+                {% when 'menu' %}
+                    <div class="footer-column" {{ block.shopify_attributes }}>
+                        <h4 style="font-family: var(--font-heading-family) !important;">{{ block.settings.menu_title }}</h4>
+                        <ul style="font-family: var(--font-body-family) !important;">
+                            {% for link in linklists[block.settings.menu_links].links %}
+                                <li style="font-family: var(--font-body-family) !important;">
+                                    <a href="{{ link.url }}" style="font-family: var(--font-body-family) !important;">{{ link.title }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                     {% when 'social_media' %}
+                    <div class="footer-column" {{ block.shopify_attributes }}>
+                        <h4 style="font-family: var(--font-heading-family) !important;">{{ block.settings.social_title }}</h4>
+                            {% if section.settings.show_social_icons %}
+                                <div class="social-icons">
+                                    {%- if settings.social_facebook_link != blank -%}
+                                        <a href="{{ settings.social_facebook_link }}" class="social-icon">
+                                            {{ 'icon-facebook.svg' | inline_asset_content | replace: '<svg', '<svg style="height: 25px; fill: ' | append: settings.social_icon_color | remove: "_" }}
+                                        </a>
+                                    {%- endif -%}
+                                </div>
+                            {% endif %}
+                        </div>
+                {% endcase %}
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.getElementById("newsletter-form");
+            const formContainer = document.getElementById("form-container");
+            const stayConnectedTitle = document.getElementById("stay-connected-title");
+            const thankYouMessage = document.getElementById("thank-you-message");
+
+            if (form) {
+                form.addEventListener("submit", function (event) {
+                    event.preventDefault();
+                    const emailInput = document.getElementById("email-input");
+                    const email = emailInput.value;
+                    if (!validateEmail(email)) {
+                        alert("Please enter a valid email address.");
+                        return;
+                    }
+
+                    formContainer.style.display = "none";
+                    stayConnectedTitle.style.opacity = "0";
+                    stayConnectedTitle.style.position = "absolute";
+                    thankYouMessage.style.display = "block";
+                    thankYouMessage.style.opacity = "1";
+                    thankYouMessage.style.position = "relative";
+                });
+            }
+
+            function validateEmail(email) {
+                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return re.test(email);
+            }
+
+            function initializeMobileMenu() {
+                if (window.innerWidth <= 480) {
+                    const footerTitles = document.querySelectorAll('.footer-column:not(#newsletter-section1) h4');
+                    footerTitles.forEach(title => {
+                        title.removeEventListener('click', handleTitleClick);
+                        title.addEventListener('click', handleTitleClick);
+                    });
+                }
+            }
+
+            function handleTitleClick(event) {
+                event.preventDefault();
+                this.classList.toggle('active');
+                const content = this.nextElementSibling;
+                if (content) {
+                    content.classList.toggle('show');
+                }
+            }
+
+            initializeMobileMenu();
+            window.addEventListener('resize', function() {
+                clearTimeout(window.resizeTimer);
+                window.resizeTimer = setTimeout(initializeMobileMenu, 250);
+            });
+        });
+    </script>
+
 </style>
 
 <footer class="color-{{ section.settings.color_scheme }}" style="
@@ -226,6 +467,7 @@
       });
     });
   </script>
+
 </footer>
 
 {% schema %}
