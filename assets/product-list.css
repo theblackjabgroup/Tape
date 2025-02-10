@@ -320,7 +320,6 @@ margin-bottom: 0rem !important;
 
   .bb-product-list-background {
     background-color: rgb(var(--color-background));
-    padding-top: 0px !important;
     overflow: hidden;
   }
 
