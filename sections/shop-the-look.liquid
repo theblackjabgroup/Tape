@@ -43,7 +43,7 @@
                   role="button"
                   aria-label="Click to view insights">
 
-                  <i class="icon {{ icon_style }} fa-plus" style="--fa-secondary-opacity: 1;"></i>
+                  <i class="icon fa fa-plus" style="--fa-secondary-opacity: 1; color:black;"></i>
                 </button>
               </div>
             {% endfor %}
@@ -56,12 +56,10 @@
     <div class="shop__the__look__text__wrapper color-{{ section.settings.bannerColor }} ">
       <div class="shop__the__look__text__container">
         <h1 class="shop__the__look__heading">{{ section.settings.section_heading }}</h1>
-        <p class="shop__the__look__description">{{ section.settings.section_description }}</p>
-        <h2 id="insightsHeading" class="shop__the__look__heading">{{ section.settings.moreInfo_heading }}</h2>
         <p
           id="insightsInfo"
           class="shop__the__look__description"
-          insightsDescription="{{ section.settings.moreInfo_description }}">{{ section.settings.moreInfo_description }}</p>
+          insightsDescription="{{ section.settings.moreInfo_description }}">{{ section.settings.section_description }}</p>
 
       </div>
     </div>
@@ -71,7 +69,6 @@
   document.addEventListener("DOMContentLoaded", function () {
   const dots = document.querySelectorAll(".shop-look__dots-item");
   const descriptionContainer = document.getElementById("insightsInfo");
-  const insights = document.getElementById("insightsHeading");
 
   dots.forEach(dot => {
     dot.addEventListener("click", function () {
@@ -79,9 +76,13 @@
       if (newDescription) {
         descriptionContainer.textContent = newDescription;
       }
+
+      dots.forEach(d => d.setAttribute("aria-expanded", "false"));
+      this.setAttribute("aria-expanded", "true"); 
     });
   });
   });
+
 
 </script>
 {% schema %}
