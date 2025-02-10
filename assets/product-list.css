@@ -196,6 +196,17 @@ summary .icon-caret2 {
   border-radius: 5px !important;
 }
 
+.bb-active-facets__button-wrapper {
+background-color: var( --card_background);
+padding-bottom: 1rem !important;
+margin-bottom: 0rem !important;
+}
+
+.bb-facets_remove {
+  background-color: var( --card_background);
+  padding-bottom: 1rem !important;
+  margin-bottom: 0rem !important;
+}
 /* Base state of the dropdown */
 .bb-dropdown-menu {
   opacity: 0 !important; /* Initially hidden */
@@ -253,7 +264,7 @@ summary .icon-caret2 {
 }
 
 .ticket-line-upper {
-    margin-top: 40px;
+  margin-top: 40px;
     position: relative;
     overflow: hidden;
     display: flex;
@@ -375,7 +386,8 @@ summary .icon-caret2 {
   }
 
   .bb-active-facets__button {
-     margin-left: 3.5rem;
+     margin-left: 1.5rem;
+     padding-right: 1.5rem;
   }
 
   .bb-active-facets__button-remove {
@@ -517,7 +529,9 @@ summary .icon-caret2 {
   .mobile-view {
     display: block;
   }
-
+  .ticket-dot {
+    transform: translate(45%, -45%);
+  }
   .desktop-view {
     display: none !important;
   }
@@ -615,7 +629,9 @@ summary .icon-caret2 {
     padding: 4px;
     transform: rotate(45deg);
   }
-  
+  .ticket-line-upper {
+    margin-top: 0px;
+  }
   .dropdown2 {
     position: absolute;
     opacity: 1 ;
