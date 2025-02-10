@@ -1,93 +1,100 @@
 {{ 'section-rich-text.css' | asset_url | stylesheet_tag }}
 <style>
-
-.color-{{ section.settings.color_scheme }} .dot,
-.color-{{ section.settings.color_scheme }} .dot-l {
-background-color: currentColor;
-}
-.rich_text_button{
-   border: 1px solid rgb(var(--color-button));  
-  color:rgb(var(--color-button));  
-}
-  .section-{{ section.id }}-padding.layout1,
-  .section-{{ section.id }}-padding.layout2 {
-    padding-top: {{section.settings.padding_top}}px;
-    padding-bottom: {{section.settings.padding_bottom}}px;
+  .color-{{ section.settings.color_scheme }} .dot,
+  .color-{{ section.settings.color_scheme }} .dot-l {
+  background-color: currentColor;
+  }
+  .rich_text_button{
+    border: 0.1rem solid rgba(var(--color-button), 1);
+   background: rgb(var(--color-button-text)) ;
+  color: rgb(var(--color-secondary-button-text));
+  }
+   .richtext_heading {
+    color: rgb(var(--color-foreground));
   }
 
-  .section-{{ section.id }}-padding.layout1 h2 {
-    font-size: {{ section.settings.heading_font_size }}px;
+  .richtext_subheading {
+    color: rgb(var(--color-foreground));
   }
+    .section-{{ section.id }}-padding.layout1,
+    .section-{{ section.id }}-padding.layout2 {
+      padding-top: {{section.settings.padding_top}}px;
+      padding-bottom: {{section.settings.padding_bottom}}px;
+    }
 
-  .section-{{ section.id }}-padding.layout1 .rich-text__text {
-    font-size: {{ section.settings.text_font_size }}px;
-  }
+    .section-{{ section.id }}-padding.layout1 h2 {
+      font-size: {{ section.settings.heading_font_size }}px;
+    }
 
-  .section-{{ section.id }}-padding.layout2 {
-    background-color: {{ section.settings.background_color }};
-  }
+    .section-{{ section.id }}-padding.layout1 .rich-text__text {
+      font-size: {{ section.settings.text_font_size }}px;
+    }
 
-  .section-{{ section.id }}-padding.layout2 h2 {
-    font-size: {{ section.settings.heading_font_size }}px;
-  }
-
-  .section-{{ section.id }}-padding.layout2 .rich-text__text {
-    font-size: {{ section.settings.text_font_size }}px;
-  }
-
-  @media screen and (max-width: 749px) {
-    .section-{{ section.id }}-padding.layout1 h2,
+  
     .section-{{ section.id }}-padding.layout2 h2 {
-      font-size: {{ section.settings.heading_font_size | times: 0.8 | round: 0 }}px;
+      font-size: {{ section.settings.heading_font_size }}px;
     }
-    
-    .section-{{ section.id }}-padding.layout1 .rich-text__text,
+
     .section-{{ section.id }}-padding.layout2 .rich-text__text {
-      font-size: {{ section.settings.text_font_size | times: 0.9 | round: 0 }}px;
+      font-size: {{ section.settings.text_font_size }}px;
     }
-  }
+
+    @media screen and (max-width: 749px) {
+      .section-{{ section.id }}-padding.layout1 h2,
+      .section-{{ section.id }}-padding.layout2 h2 {
+        font-size: {{ section.settings.heading_font_size | times: 0.8 | round: 0 }}px;
+      }
+
+      .section-{{ section.id }}-padding.layout1 .rich-text__text,
+      .section-{{ section.id }}-padding.layout2 .rich-text__text {
+        font-size: {{ section.settings.text_font_size | times: 0.9 | round: 0 }}px;
+      }
+    }
 </style>
 
-<div class="rich-text-section color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding {% if section.settings.layout_style == 'layout1' %}layout1{% else %}layout2{% endif %}">
-  {% if section.settings.layout_style == 'layout1' %} 
-    <div class="page-width">
+<div  class="rich-text-section color-{{ section.settings.color_scheme }} section-{{ section.id }}-padding {% if section.settings.layout_style == 'layout1' %}layout1{% else %}layout2{% endif %}">
+  {% if section.settings.layout_style == 'layout1' %}
+    <div class="page-width1">
+    {%- for block in section.blocks -%}
+        {% case block.type %}
+              {%- when 'heading' -%}
       <h2 class="richtext_heading">
-        {% for block in section.blocks %}
-          {% if block.type == 'heading' %}
             {{ block.settings.heading }}
-          {% endif %}
-        {% endfor %}  
       </h2>
       <div class="decorative-dots">
         {% for i in (1..section.settings.dots_number1) %}
           <span class="dot"></span>
         {% endfor %}
       </div>
+      {%- when 'subheading' -%}
       <p class="richtext_subheading">
-        {% for block in section.blocks %}
-          {% if block.type == 'subheading' %}
             {{ block.settings.caption }}
-          {% endif %}
-        {% endfor %}
       </p>
-      <div class="rich-text__text rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-        {% for block in section.blocks %}
-          {% if block.type == 'text' %}
-            {{ block.settings.text }}
-          {% endif %}
-        {% endfor %}
-      </div>
-      {% for block in section.blocks %}
-        {% if block.type == 'button' and block.settings.show_button %}
-          <div class="rich_text_button"> 
+         {%- when 'text' -%}
+       {{ block.settings.text }}
+        {%- when 'button' -%}
+            {% if block.settings.show_button %}
             <a href="{{ block.settings.button_link }}" class="rich_text_btn">
               {{ block.settings.button_text }}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="rich-text-svg"
+              >
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
             </a>
-          </div>
-        {% endif %}
-      {% endfor %}
+             {%-  endif -%}
+          {%- endcase -%}
+     {%- endfor -%}
     </div>
-  {% else %}
+   {% else %}   
     <div class="dots-container">
       <div class="side-dots left">
         {% for i in (1..section.settings.dots_number2) %}
@@ -95,36 +102,41 @@ background-color: currentColor;
         {% endfor %}
       </div>
       <div class="rich-text__blocks {{ section.settings.content_alignment }}">
+    {%- for block in section.blocks -%}
+         {% case block.type %}
+              {%- when 'heading' -%}
+     
         <h2 class="richtext_heading">
-          {% for block in section.blocks %}
-            {% if block.type == 'heading' %}
               {{ block.settings.heading }}
-            {% endif %}
-          {% endfor %}
         </h2>
+          {%- when 'subheading' -%}
         <p class="richtext_subheading">
-          {% for block in section.blocks %}
-            {% if block.type == 'subheading' %}
               {{ block.settings.caption }}
-            {% endif %}
-          {% endfor %}
         </p>
-        <div class="rich-text__text rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-          {% for block in section.blocks %}
-            {% if block.type == 'text' %}
-              {{ block.settings.text }}
-            {% endif %}
-          {% endfor %}
-        </div>
-        {% for block in section.blocks %}
-          {% if block.type == 'button' and block.settings.show_button %}
-            <div class="rich_text_button"> 
-              <a href="{{ block.settings.button_link }}" class="rich_text_btn">
-                {{ block.settings.button_text }}
-              </a>
-            </div>
-          {% endif %}
-        {% endfor %}
+          {%- when 'text' -%}
+           {{ block.settings.text }}
+         {%- when 'button' -%}
+       
+          {% if block.settings.show_button %}
+            <a href="{{ block.settings.button_link }}" class="rich_text_btn">
+              {{ block.settings.button_text }}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="rich-text-svg"
+              >
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+            {%-  endif -%}
+          {%- endcase -%}
+      {%- endfor -%}
       </div>
       <div class="side-dots right">
         {% for i in (1..section.settings.dots_number2) %}
@@ -140,8 +152,11 @@ background-color: currentColor;
 {% schema %}
 {
   "name": "Rich Text",
+"disabled_on": {
+    "groups": ["header", "footer"]
+  },
   "settings": [
-  
+
     {
       "type": "select",
       "id": "layout_style",
@@ -192,8 +207,8 @@ background-color: currentColor;
       "label": "Heading Font Size",
       "default": 22
     },
-   
-  
+
+
     {
       "type": "range",
       "id": "text_font_size",
@@ -204,8 +219,8 @@ background-color: currentColor;
       "label": "Text Font Size",
       "default": 14
     },
-   
-    
+
+
     {
       "type": "range",
       "id": "padding_top",
@@ -231,24 +246,26 @@ background-color: currentColor;
   {
       "type": "heading",
       "name": "Heading",
+      "limit": 1,
       "settings": [
         {
           "type": "text",
           "id": "heading",
           "label": "Heading",
-          "default": "Transforming Healthcare with Innovative Solutions"
+          "default": "Talk about your brand"
         }
       ]
     },
- {
+   {
       "type": "subheading",
       "name": "Sub Heading",
+       "limit": 1,
       "settings": [
         {
           "type": "text",
           "id": "caption",
           "label": "Caption",
-          "default": "Delivering Excellence in Medical Products"
+          "default": "Add additional Subheading"
         }
       ]
     },
@@ -256,15 +273,20 @@ background-color: currentColor;
  {
     "type": "text",
     "name": "Text",
-    "settings": [{
-        "type": "richtext", 
+     "limit": 1,
+    "settings": [
+      {
+        "type": "richtext",
         "id": "text",
-        "label": "Text"
-    }]
+        "label": "Text",
+        "default": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>"
+    },
+    ]
 },
 {
       "type": "button",
       "name": "Button",
+      "limit": 1,
       "settings": [
         {
           "type": "text",
@@ -285,7 +307,7 @@ background-color: currentColor;
         }
       ]
     }
-    
+
 ],
  "presets": [
   {
@@ -294,29 +316,15 @@ background-color: currentColor;
     "blocks": [
       {
         "type": "heading",
-        "settings": {
-          "heading": "Your Heading"
-        }
       },
       {
         "type": "subheading",
-        "settings": {
-          "caption":  "Delivering Excellence in Medical Products"
-        }
       },
       {
         "type": "text",
-        "settings": {
-           "text": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>",
-        }
       },
       {
         "type": "button",
-        "settings": {
-          "button_text": "Learn More",
-          "button_link": "/",
-          "show_button": true
-        }
       }
     ]
   }

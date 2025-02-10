@@ -61,6 +61,15 @@ clip-path: polygon(100% 81%, 84% 81%, 84% 100%);
   justify-content:flex-end;
 }
 .cart__ctas .button{
+    font-family: Inter;
+font-size: 16px;
+font-weight: 500;
+line-height: 24px;
+text-align: center;
+text-underline-position: from-font;
+text-decoration-skip-ink: none;
+
+  color:rgb(var(--color-secondary-button-text));
        width: 300px;
       height: 35px;
 }
@@ -135,8 +144,8 @@ margin-top: .5rem;
 }
 
 .totals__total-value {
-    background-color: var(--product_price_card);
-  color: var(--product_price_font);
+    background-color: var(--card_foreground);
+  color: rgb(var(--color-secondary-button-text));
        width: auto; 
       max-width: 100%;
        white-space: nowrap;

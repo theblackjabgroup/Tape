@@ -21,7 +21,6 @@ class IconWithText {
         const closeButton = card.querySelector(".description__close__button");
         const icon = card.querySelector(".description__button__inner_container");
 
-        if (openButton && box && closeButton && icon) {
           openButton.addEventListener("click", () => {
             box.classList.add("active");
             icon.classList.add("active");
@@ -30,8 +29,7 @@ class IconWithText {
           closeButton.addEventListener("click", () => {
             box.classList.remove("active");
             icon.classList.remove("active");
-          });
-        }
+        });
       });
 
       // Create an intersection observer for layout 1
@@ -142,7 +140,6 @@ document.addEventListener("DOMContentLoaded", () => {
           random.style.justifyContent = "center";
         }
         } else {
-            console.log("Showing navigation elements");
             arrows.forEach(arrow => arrow.style.display = "flex");
             if (pagination) pagination.style.display = "flex";
             if (mainContainer) mainContainer.style.textAlign = "center";

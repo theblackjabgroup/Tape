@@ -17,7 +17,13 @@
        
           <div class="backfold">
              {% if block.settings.image != blank %}
-                   <img src="{{ block.settings.image | img_url: 'master' }}" alt="{{ block.settings.title }}">
+                   {{
+                      block.settings.image
+                      | image_url: width: 1800
+                      | image_tag:
+                          class: 'media',
+                        alt: block.settings.title | escape
+                      }}
                 {% else %}
                    {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
               {% endif %}
@@ -297,6 +303,9 @@ if (typeof Shopify !== 'undefined' && Shopify.designMode) {
 {% schema %}
 {
 "name": "Interactive Slideshow",
+"disabled_on": {
+    "groups": ["header", "footer"]
+  },
 "settings": [
   {
     "type": "color_scheme",

@@ -31,7 +31,11 @@ slider-component.slider-component-full-width {
   flex-shrink: 0;
   padding-bottom: 0;
 }
-
+@media screen and (min-width: 749px) {
+  .bb-slider--mobile{
+  height: auto !important;
+  }
+}
 @media screen and (max-width: 749px) {
   .slider.slider--mobile {
     position: relative;
@@ -47,7 +51,10 @@ slider-component.slider-component-full-width {
 
   .bb-slider--mobile{
     gap: 3rem !important;
+    overflow-y: hidden;
   }
+
+
   /* Fix to show some space at the end of our sliders in all browsers */
   .slider--mobile:after {
     content: '';

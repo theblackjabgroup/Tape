@@ -14,7 +14,6 @@
   }
 
   {% if section.settings.layout == 'layout_2' %}
-    @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap');
 
     :root {
       --primary-card-top-padding: 40px;
@@ -27,7 +26,9 @@
       padding: 20px 0;
       background: rgb(var(--color-background));
     }
-
+    .icon-with-text-layout2-image{
+      width:100%; height:100%; object-fit:cover; border-radius: inherit;
+    }
     .primary-card-container {
       min-height: calc(332px - var(--primary-card-top-padding));
       width: 250px;
@@ -56,8 +57,8 @@
     }
 
     .card-main-heading {
-      font-family: 'Open Sans', sans-serif;
-      font-weight: 600;
+      /* font-family: 'Open Sans', sans-serif;
+      font-weight: 600; */
       font-size: 24px;
       line-height: 32.68px;
       text-align: center;
@@ -145,7 +146,7 @@
     }
 
     .card-description-text {
-      transform: translateY(100%);
+      transform: translateY(300px);
       transition: transform 0.5s ease-in-out;
       z-index: 1;
     }
@@ -200,11 +201,11 @@
 
 <div data-section-id="{{ section.id }}">
   {% if section.settings.layout == 'layout_1' %}
-    <div style="display: flex; flex-direction: column; gap: 32px; padding: 20px 0;"
+    <div style="display: flex; flex-direction: column; gap: 32px; padding: 20px;"
          class="color-{{ section.settings.sectionColor }} featured-icon-with-text-section">
-      <div style="display: flex; flex-direction: column; gap: 4px; padding: var(--heading-padding); ">
-        <p style="font-weight: 600; font-size: 24px; line-height: 30px; color: var(--featured-icon-with-text-section-headings-color)" class="fira-sans-semibold">{{ section.settings.heading }}</p>
-        <p style="font-weight: 500; font-size: 14px; line-height: 21px; color: var(--featured-icon-with-text-section-headings-color)" class="inter-medium">{{ section.settings.subheading }}</p>
+      <div style="display: flex; flex-direction: column; gap: 4px; ">
+        <p style="font-weight: 600; font-size: 24px; line-height: 30px; color: var(--featured-icon-with-text-section-headings-color)" >{{ section.settings.heading }}</p>
+        <p style="font-weight: 500; font-size: 14px; line-height: 21px; color: var(--featured-icon-with-text-section-headings-color)" >{{ section.settings.subheading }}</p>
       </div>
       <div class="icon-with-text-container color-{{ section.settings.sectionColor }}">
         {% for item in section.blocks %}
@@ -214,7 +215,14 @@
                 <div class="card__contents">
                   <div class="card__icon" style="background-color: var(--featured-icon-with-text-card-color);">
                     {% if item.settings.icon %}
-                      <img src="{{ item.settings.icon |  image_url  }}" width="100" height="100" alt="icon">
+                                          {{
+ item.settings.icon
+  | image_url: width: 1800
+  | image_tag:
+    width: 100,
+    height: 100,
+    alt: "icon" | escape
+}}
                     {% else %}
                       <div style="width: 100%; height: 100%;">{{ 'image' | placeholder_svg_tag: 'placeholder-svg' | replace: 'svg', 'svg style="width: 100%; height: 100%; scale: 2"' }}</div>
                     {% endif %}
@@ -224,7 +232,7 @@
                   </div>
                 </div>
                 <div class="description__button__outer__container">
-                  <button class="description__button__container">
+                  <button class="description__button__container" aria-label="Open"> 
                     <span class="description__button__inner_container">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="icon icon-plus" viewBox="0 0 10 10">
                         <path fill="currentColor" fill-rule="evenodd" d="M1 4.51a.5.5 0 0 0 0 1h3.5l.01 3.5a.5.5 0 0 0 1-.01V5.5l3.5-.01a.5.5 0 0 0-.01-1H5.5L5.49.99a.5.5 0 0 0-1 .01v3.5l-3.5.01z" clip-rule="evenodd"/>
@@ -256,8 +264,8 @@
   {% else %}
     <div class="icon-with-text-2 color-{{ section.settings.sectionColor }}">
       <div style="display: flex; flex-direction: column; gap: 4px; padding: 20px; ">
-        <p style="font-weight: 600; font-size: 24px; line-height: 30px; color: var(--featured-icon-with-text-section-headings-color)" class="fira-sans-semibold">{{ section.settings.heading }}</p>
-        <p style="font-weight: 500; font-size: 14px; line-height: 21px; color: var(--featured-icon-with-text-section-headings-color)" class="inter-medium">{{ section.settings.subheading }}</p>
+        <p style="font-weight: 600; font-size: 24px; line-height: 30px; color: var(--featured-icon-with-text-section-headings-color)" >{{ section.settings.heading }}</p>
+        <p style="font-weight: 500; font-size: 14px; line-height: 21px; color: var(--featured-icon-with-text-section-headings-color)" >{{ section.settings.subheading }}</p>
       </div>
       <div class="scroll-container" id="section-{{ section.id }}">
         <div class="card-container" id="cardContainer">
@@ -265,7 +273,15 @@
             <div class="primary-card-container">
               <div class="card-feature-image">
                 {% if item.settings.icon %}
-                  <img src="{{ item.settings.icon | image_url }}" width="500" height="500" alt="icon" style="width:100%; height:100%; object-fit:cover; border-radius: inherit;">
+                     {{
+ item.settings.icon
+  | image_url: width: 1800
+  | image_tag:
+    width: 500,
+    height: 500,
+    class: "icon-with-text-layout2-image",
+    alt: "icon" | escape
+}}
                 {% else %}
                   <div style="width:100%; height:100%;">{{ 'image' | placeholder_svg_tag: 'placeholder-svg' | replace: 'svg', 'svg style="width:100%; height:100%; scale:2"' }}</div>
                 {% endif %}
@@ -325,13 +341,13 @@
       "type": "text",
       "label": "Heading",
       "id": "heading",
-      "default": "Key Features"
+      "default": "Add heading here!"
     },
     {
       "type": "text",
       "label": "Subheading",
       "id": "subheading",
-      "default": "Prioritize your well-being"
+      "default": "Add sub-heading here!"
     },
     {
       "type": "color_scheme",
@@ -354,7 +370,7 @@
           "type": "text",
           "id": "title",
           "label": "Enter Title",
-          "default": "Pay On Delivery"
+          "default": "Card Heading"
         },
         {
           "type": "text",

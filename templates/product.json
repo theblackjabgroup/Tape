@@ -63,20 +63,75 @@
         "padding_bottom": 28
       }
     },
-    "collapsible-tabs": {
-        "type": "collapsible-tabs",
-        "settings": {
-            "heading": "Collapsible Tabs"
+     "collapsible_tabs": {
+      "type": "collapsible-tabs",
+      "blocks": {
+        "collapsible_row_1": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Collapsible row",
+            "Point_1": "",
+            "Point_2": "",
+            "Point_3": "",
+            "Point_4": ""
+          }
         },
-        "blocks": {
-            "collapsible_row" : {
-                "type": "collapsible_row",
-                "settings": {
-                    "heading": "Collapsible Rows"
-                }
-            }
+        "collapsible_row_2": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Collapsible row",
+            "Point_1": "",
+            "Point_2": "",
+            "Point_3": "",
+            "Point_4": ""
+          }
+        },
+        "collapsible_row_3": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Collapsible row",
+            "Point_1": "",
+            "Point_2": "",
+            "Point_3": "",
+            "Point_4": ""
+          }
+        },
+        "collapsible_row_4": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Collapsible row",
+            "Point_1": "",
+            "Point_2": "",
+            "Point_3": "",
+            "Point_4": ""
+          }
+        },
+        "collapsible_row_5": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Collapsible row",
+            "Point_1": "",
+            "Point_2": "",
+            "Point_3": "",
+            "Point_4": ""
+          }
         }
+      },
+      "block_order": [
+        "collapsible_row_1",
+        "collapsible_row_2",
+        "collapsible_row_3",
+        "collapsible_row_4",
+        "collapsible_row_5"
+      ],
+      "settings": {
+        "heading": "Product Details"
+      }
     }
   },
-  "order": ["main", "collapsible-tabs", "related-products"]
+   "order": [
+    "main",
+    "related-products",
+    "collapsible_tabs"
+  ]
 }

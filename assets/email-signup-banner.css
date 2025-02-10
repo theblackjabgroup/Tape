@@ -7,15 +7,18 @@
     width: auto;
     max-width: var(--page-width);
     border-radius: 5px;
-    overflow: hidden;
+   /* overflow: hidden;  */
 }
-
+ 
 .bb-email-uper-banner {
     height: 100%;
-    overflow: hidden;
+    /*overflow: hidden;*/
     padding: 7rem 0rem;
 }
 
+.bb-pwd-inner {
+    padding: 11rem 6rem;
+}
 .bb-template-signup {
     background-color: rgba(var(--color-button));
     display: block;
@@ -38,7 +41,7 @@
 }
 
 .vertical-bar-bottom-404 {
-    bottom: -1.5rem;
+    bottom: 2.5rem;
     left: 8rem;
     display: flex;
     flex-direction: row;
@@ -49,21 +52,24 @@
 
 .vertical-bar-left-404 {
     left: 2.5rem;
-    top: 8.25rem;
+    top: 2.75rem;
     display: flex;
     flex-direction: column;
     position: absolute;
-    gap: 54px;
+    /*gap: 54px;*/
+    height: 90%;
+    justify-content: space-evenly;
     z-index: 2;
 }
 
 .vertical-bar-right-404 {
     right: 2.5rem;
-    top: 8.25rem;
+    top: 2.75rem;
     display: flex;
     flex-direction: column;
     position: absolute;
-    gap: 54px;
+    height: 90%;
+    justify-content: space-evenly;
     z-index: 2;
 }
 
@@ -126,7 +132,6 @@
 }
 
 .bb-mail-signup-banner__heading {
-    font-family: 'Fira Sans';
     font-weight: 500;
     font-size: 36px;
     line-height: 34px;
@@ -134,10 +139,10 @@
 }
 
 .bb-newsletter__subheading {
-    font-family: 'Inter';
     font-weight: 400;
     font-size: 20px;
     line-height: 34px;
+    margin-bottom: 2rem;
     width: 70%;
 }
 
@@ -145,6 +150,14 @@
     max-width: none !important;
 }
 
+.bb-newsletter-form__field-wrapper::after {
+    border-radius: 5px !important;
+}
+
+.bb-newsletter-field:after {
+    border: .1rem solid rgba(var(--color-foreground));
+    border-radius: 5px;
+}
 .newsletter-form__field-wrapper  .bb-field__input {
 /*    padding-left: 80rem; */
 }
@@ -164,7 +177,6 @@
 }
 
 .bb-404-h-button , .bb-404-c-button {
-font-family: 'Fira Sans';
 margin-top: 2rem;
 border-radius: 5px;
 background-color: rgb(var(--color-button-text));
@@ -199,29 +211,28 @@ color: rgb(var(--color-secondary-button-text));
     background-color: rgba(var(--color-button));
     display: block;
     border-radius: 5px;
+    position: relative;
   }
 
   .bb-password-modal__content {
-    background-color: rgba(var(--color-button));
+  /*  background-color: rgba(var(--color-button)); */
     position: relative;
-    height: 54% !important;
+  /*  height: 54% !important; */
     max-width: var(--page-width);
+    border-radius: 5px;
   }
 
   .bb-password-form {
-    width: 100rem;
     max-width: none !important;
   }
 
   .pwd-para {
-    font-family: 'Inter';
     font-weight: 400;
     font-size: 20px;
     line-height: 34px;
   }
 
   .bb-password__footer-text a {
-    font-family: 'Inter';
     font-size: 1.5rem;
     font-weight: 400;
     line-height: 40px;
@@ -236,7 +247,6 @@ color: rgb(var(--color-secondary-button-text));
   
   .bb-password__footer-text {
     padding: 0;
-    font-family: 'Inter';
     font-size: 20px;
     font-weight: 400;
     line-height: 34px;
@@ -247,8 +257,6 @@ color: rgb(var(--color-secondary-button-text));
   }
 
   .bb-password__footer-text .bb-login-pwd {
-    font-family: 'Inter' !important;
-    font-size: 20px !important;
     font-weight: 500 !important;
     line-height: 34px !important;
     border-radius: 5px !important;
@@ -256,7 +264,9 @@ color: rgb(var(--color-secondary-button-text));
     color: rgb(var(--color-secondary-button-text)) !important;
   }
   @media screen and (max-width: 749px) {
-
+    .bb-pwd-inner-m {
+        padding: 7.5rem 0rem;
+    }
     .bb-modal__toggle-open {
         padding: 0.75rem;
     }
@@ -271,12 +281,13 @@ color: rgb(var(--color-secondary-button-text));
         line-height: 24px;       
     }
     .bb-password__footer-text a{
-        margin-left: 0rem;
+        margin-left: 1rem;
         margin-top: 2rem;
     }
     .bb-password-form {
         width: auto;
-        gap: 2rem;
+        display: block;
+        margin: 0rem 2rem;
     }
 
     .mobile-view {
@@ -302,12 +313,12 @@ color: rgb(var(--color-secondary-button-text));
     .vertical-bar-top-404 {
         top: -0.5rem;
         left: 1.25rem;
-        gap: 24.25px;
+        gap: 26.75px;
     }
     .vertical-bar-bottom-404 {
         bottom: -0.5rem;
         left: 1.25rem;
-        gap: 24.25px;
+        gap: 26.75px;
     }
 
     .bb-upper-template-signup {
@@ -316,27 +327,26 @@ color: rgb(var(--color-secondary-button-text));
         position: relative;
         margin: auto;
         padding: 0rem;
-        border-radius: 0px;
+        border-radius: 5px;
     }
 
     .bb-template-signup {
         background-color: unset;
         padding: 0rem !important; 
-        margin: 10rem 2rem !important;
+        padding: 10rem 2rem !important;
     }
 
     .bb-mail-signup-banner__heading {
-        font-family: 'Fira Sans';
         font-weight: 500;
         font-size: 32px;
         line-height: 34px;
     }
     
     .bb-newsletter__subheading {
-        font-family: 'Inter';
         font-weight: 400;
         font-size: 16px;
         line-height: 24px;
+        width: 100%;
     }
 
     .bb-newsletter-wrapper {

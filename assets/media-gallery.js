@@ -20,8 +20,22 @@ if (!customElements.get('media-gallery')) {
             .addEventListener('click', this.setActiveMedia.bind(this, mediaToSwitch.dataset.target, false));
         });
         if (this.dataset.desktopLayout.includes('thumbnail') && this.mql.matches) this.removeListSemantic();
+        if(!this.mql.matches )
+        {
+        const x = this.elements.viewer.querySelector(".bb-slider--mobile");
+        const h = this.elements.viewer.querySelector("#bb_product__media_first").querySelector("img").offsetHeight;
+        if(this.elements.viewer.getElementsByClassName("bb-product-video").length === 0)
+        {
+          x.style.height = `${h+40}px`;
+          x.setAttribute("data-height", this.elements.viewer.querySelector("#bb_product__media_first").querySelector("img").offsetHeight);
+        }
+        else if(this.elements.viewer.querySelector("#bb-deferred-media"))
+        {
+          const z = this.elements.viewer.querySelector("#bb-deferred-media").querySelector("img").offsetHeight;
+          x.style.height = `${z}px`;
+        }
+        }
       }
-
       onSlideChanged(event) {
         const thumbnail = this.elements.thumbnails.querySelector(
           `[data-target="${event.detail.currentElement.dataset.mediaId}"]`
@@ -70,7 +84,24 @@ if (!customElements.get('media-gallery')) {
         if (!this.elements.thumbnails) return;
         const activeThumbnail = this.elements.thumbnails.querySelector(`[data-target="${mediaId}"]`);
         this.setActiveThumbnail(activeThumbnail);
+
         this.announceLiveRegion(activeMedia, activeThumbnail.dataset.mediaPosition);
+        if(!this.mql.matches )
+        {
+        const x = this.elements.viewer.querySelector(".bb-slider--mobile");
+        const h = activeMedia.querySelector("#bb_product__media_first").querySelector("img").offsetHeight;
+
+        if(!(activeMedia.querySelector("#bb-deferred-media")))
+        {
+        x.style.height = `${h+40}px`;
+        x.setAttribute("data-height", activeMedia.querySelector("#bb_product__media_first").querySelector("img").offsetHeight);
+        }
+        else if(this.elements.viewer.querySelector("#bb-deferred-media"))
+        {
+          const z = activeMedia.querySelector("#bb-deferred-media").querySelector("video").offsetHeight;
+          x.style.height = `${z}px`;
+        }
+        }
       }
 
       setActiveThumbnail(thumbnail) {
@@ -97,7 +128,7 @@ if (!customElements.get('media-gallery')) {
           }, 2000);
         };
         image.src = image.src;
-        console.log("activeItem" ,activeItem)
+       // console.log("activeItem" ,activeItem)
         const images = activeItem.querySelectorAll('.product__modal-opener--image img');
         images.forEach((image) => {
           image.setAttribute('data-click', 0);

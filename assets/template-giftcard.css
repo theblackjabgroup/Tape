@@ -30,7 +30,7 @@ position: absolute;
 top: 50%;
 width: 72px;
   height: 68px;
-border-radius: 47%;
+border-radius: 50%;
 }
 
 .gift-container-design::before {
@@ -287,11 +287,11 @@ letter-spacing: 0%;
 margin-bottom:21px;
 }
 .gift-card__qr-code {
+  display:flex;
+  justify-content:center;
   margin: 30px auto;
 }
-.gift-card__qr-code img {
-  margin: auto;
-}
+
 .gift_card__apple-wallet {
 line-height: 0;
 display: block;
@@ -321,14 +321,24 @@ color:#FFFFFF;
   .semicircle-border-down > * {
       max-width: 100%; 
   }
+.gift-container-design::before,
+.gift-container-design::after {
+content: "";
+position: absolute;
+top: 50%;
+width: 69px;
+    height: 55px;
+border-radius: 50%;
+}
+
 
 .gift-container-design::before {
-left: -32px;
+left: -21px;
 transform: translateY(-50%);
 }
 
 .gift-container-design::after {
-right: -32px; 
+right: -21px; 
 transform: translateY(-50%);
 }
   
@@ -428,14 +438,7 @@ margin-bottom:13px;
 }
 
 
-/* 
-.gift-card__qr-code {
-width: 150px;
-height: 150px;
-margin: 0 auto 20px auto;
-background-color: #e0e0e0;
-border-radius: 10px;
-} */
+
 .button-container {
 display: flex;
 flex-direction: column;

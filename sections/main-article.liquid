@@ -11,7 +11,19 @@
     {
       "type": "checkbox",
       "id": "show_social_sharing",
-      "label": "Show Social Sharing Buttons",
+      "label": "Show Strip",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_blog_social_links",
+      "label": "Show Social Icons ",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_interaction_buttons",
+      "label": "Show Interaction Icons",
       "default": true
     },
     {
@@ -129,41 +141,60 @@
     </div>
 
 
-    {% if blog.next_article or blog.previous_article %}
-      <div class="blog-article-section" style="color: rgb(var(--color-secondary-button-text));">
-        {% if blog.previous_article %}
-          <a href="{{ blog.previous_article.url }}" class="link">← Previous Article</a>
-        {% endif %}
-        {% if blog.next_article %}
-          <a href="{{ blog.next_article.url }}" class="link">Next Article →</a>
-        {% endif %}
-      </div>
-    {% endif %}
-
     {% unless article.image %}
       {% if section.settings.show_social_sharing %}
         <div class="blog-social-container centered-social">
           <div class="blog-social-bar">
-            <div class="blog-interaction-buttons">
-  <span class="icon like-icon"></span>
-  <span class="icon share-icon" data-url="{{ shop.url }}{{ article.url }}"></span>
-  <span class="icon comment-icon"></span>
-  <span class="icon bookmark-icon"></span>
+            {% if section.settings.show_interaction_buttons %}
+       <div class="blog-interaction-buttons">
+  {% if section.settings.icon_like_image %}
+    {{ section.settings.icon_like_image | image_url: width: 50 | image_tag: class: "icon like-icon", alt: "Like Icon" }}
+  {% else %}
+    <i class="fas fa-thumbs-up blog-like-icon" style="padding: 5px;"></i>
+  {% endif %}
+  
+  {% if section.settings.icon_share_image %}
+    {{ section.settings.icon_share_image | image_url: width: 50 | image_tag: class: "icon share-icon", alt: "Share Icon" }}
+  {% else %}
+    <i class="fa fa-share blog-share-icon" aria-hidden="true" style="padding: 5px;"></i>
+  {% endif %}
+  
+  {% if section.settings.icon_comment_image %}
+    {{ section.settings.icon_comment_image | image_url: width: 50 | image_tag: class: "icon comment-icon", alt: "Comment Icon" }}
+  {% else %}
+    <i class="fa fa-comment blog-comment-icon" aria-hidden="true" style="padding: 5px;"></i>
+  {% endif %}
+  
+  {% if section.settings.icon_bookmark_image %}
+    {{ section.settings.icon_bookmark_image | image_url: width: 50 | image_tag: class: "icon bookmark-icon", alt: "Bookmark Icon" }}
+  {% else %}
+    <i class="fa fa-bookmark blog-bookmark-icon" aria-hidden="true" style="padding: 5px;"></i>
+  {% endif %}
 </div>
+{% endif %}
 
-            <div class="blog-social-links">
-              Follow us on:
-              <div class="blog-divider"></div>
-              <a href="{{ settings.social_facebook_link }}" class="blog-social-icon" target="_blank">
-                <i class="fab fa-facebook-f"></i>
-              </a>
-              <a href="{{ settings.social_instagram_link }}" class="blog-social-icon" target="_blank">
-                <i class="fab fa-instagram"></i>
-              </a>
-              <a href="{{ settings.social_twitter_link }}" class="blog-social-icon" target="_blank">
-                <i class="fab fa-twitter"></i>
-              </a>
-            </div>
+{% if section.settings.show_blog_social_links %}
+  <div class="blog-social-links">
+    Follow us on:
+    <div class="blog-divider"></div>
+
+    <a href="{{ settings.social_facebook_link | default: '#' }}" class="blog-social-icon" target="_blank">
+      <i class="fab fa-facebook-f"></i>
+    </a>
+    
+    <a href="{{ settings.social_instagram_link | default: '#' }}" class="blog-social-icon" target="_blank">
+      <i class="fab fa-instagram"></i>
+    </a>
+    
+    <a href="{{ settings.social_twitter_link | default: '#' }}" class="blog-social-icon" target="_blank">
+      <i class="fab fa-twitter"></i>
+    </a>
+
+  </div>
+{% endif %}
+
+
+
           </div>
         </div>
       {% endif %}
@@ -173,7 +204,14 @@
   {% if article.image %}
     <div class="blog-image-section">
       <div class="blog-image-content">
-        <img src="{{ article.image | img_url: '546x521', crop: 'center' }}" alt="{{ article.image.alt | escape }}" class="blog-main-image">
+        {{
+  article.image
+  | image_url: width: 1800
+  | image_tag:
+        class: "blog-main-image",
+    alt: article.image.alt | escape
+}}
+       
           <div class="blog-image-dots">
             {% for i in (1..20) %}
               <span class="blog-dot color-{{ section.settings.color_scheme }}"></span>
@@ -186,25 +224,58 @@
       {% if section.settings.show_social_sharing %}
         <div class="blog-social-container">
           <div class="blog-social-bar">
-             <div class="blog-interaction-buttons">
-  <img src="{{ section.settings.icon_like_image | img_url: '50x50' }}" alt="Like Icon" class="icon like-icon">
-  <img src="{{ section.settings.icon_share_image | img_url: '50x50' }}" alt="Share Icon" class="icon share-icon" data-url="{{ shop.url }}{{ article.url }}">
-  <img src="{{ section.settings.icon_comment_image | img_url: '50x50' }}" alt="Comment Icon" class="icon comment-icon">
-  <img src="{{ section.settings.icon_bookmark_image | img_url: '50x50' }}" alt="Bookmark Icon" class="icon bookmark-icon">
+            {% if section.settings.show_interaction_buttons %}
+    <div class="blog-interaction-buttons">
+  {% if section.settings.icon_like_image %}
+    {{ section.settings.icon_like_image | image_url: width: 50 | image_tag: class: "icon like-icon", alt: "Like Icon" }}
+  {% else %}
+    <i class="fas fa-thumbs-up blog-like-icon" style="padding: 5px;"></i>
+  {% endif %}
+  
+  {% if section.settings.icon_share_image %}
+    {{ section.settings.icon_share_image | image_url: width: 50 | image_tag: class: "icon share-icon", alt: "Share Icon" }}
+  {% else %}
+    <i class="fa fa-share blog-share-icon" aria-hidden="true" style="padding: 5px;"></i>
+  {% endif %}
+  
+  {% if section.settings.icon_comment_image %}
+    {{ section.settings.icon_comment_image | image_url: width: 50 | image_tag: class: "icon comment-icon", alt: "Comment Icon" }}
+  {% else %}
+    <i class="fa fa-comment blog-comment-icon" aria-hidden="true" style="padding: 5px;"></i>
+  {% endif %}
+  
+  {% if section.settings.icon_bookmark_image %}
+    {{ section.settings.icon_bookmark_image | image_url: width: 50 | image_tag: class: "icon bookmark-icon", alt: "Bookmark Icon" }}
+  {% else %}
+    <i class="fa fa-bookmark blog-bookmark-icon" aria-hidden="true" style="padding: 5px;"></i>
+  {% endif %}
 </div>
-     <div class="blog-social-links">
-              Follow us on:
-              <div class="blog-divider"></div>
-              <a href="{{ settings.social_facebook_link }}" class="blog-social-icon" target="_blank">
-                <i class="fab fa-facebook-f"></i>
-              </a>
-              <a href="{{ settings.social_instagram_link }}" class="blog-social-icon" target="_blank">
-                <i class="fab fa-instagram"></i>
-              </a>
-              <a href="{{ settings.social_twitter_link }}" class="blog-social-icon" target="_blank">
-                <i class="fab fa-twitter"></i>
-              </a>
-            </div>
+{% endif %}
+
+
+
+{% if section.settings.show_blog_social_links %}
+  <div class="blog-social-links">
+    Follow us on:
+    <div class="blog-divider"></div>
+
+    <a href="{{ settings.social_facebook_link | default: '#' }}" class="blog-social-icon" target="_blank">
+      <i class="fab fa-facebook-f"></i>
+    </a>
+    
+    <a href="{{ settings.social_instagram_link | default: '#' }}" class="blog-social-icon" target="_blank">
+      <i class="fab fa-instagram"></i>
+    </a>
+    
+    <a href="{{ settings.social_twitter_link | default: '#' }}" class="blog-social-icon" target="_blank">
+      <i class="fab fa-twitter"></i>
+    </a>
+
+  </div>
+{% endif %}
+
+
+
           </div>
         </div>
       {% endif %}
@@ -242,7 +313,7 @@
                 <article id="{{ comment.id }}" class="article-template__comments-comment">
                   {{ comment.content }}
                   <footer class="right">
-                    <span class="circle-divider caption" style="color:rgb(var(--color-secondary-button-text));">{{ comment.author }}</span>
+                    <span class="circle-divider caption" style="color:rgb(var(--color-foreground));">{{ comment.author }}</span>
                   </footer>
                 </article>
               {%- endif -%}
@@ -251,8 +322,8 @@
                 <article id="{{ comment.id }}" class="article-template__comments-comment" >
                   {{ comment.content }}
                   <footer class="right">
-                    <span class="circle-divider" style="color:rgb(var(--color-secondary-button-text));">{{ comment.author }}</span
-                    ><span class="caption" style="color:rgb(var(--color-secondary-button-text));">
+                    <span class="circle-divider" style="color:rgb(var(--color-foreground));">{{ comment.author }}</span
+                    ><span class="caption" style="color:rgb(var(--color-foreground));">
                       {{- comment.created_at | time_tag: format: 'date' -}}
                     </span>
                   </footer>
@@ -457,7 +528,14 @@
 
                         <!-- Blog Image -->
                         {% if article.image %}
-                            <img src="{{ article.image | img_url: '309x309', crop: 'center' }}" alt="{{ article.title }}" class="custom-blog-image">
+                                                {{
+  article.image
+  | image_url: width: 1800
+  | image_tag:
+    width: 309,
+    height: 309,
+    alt: article.title | escape
+}}
                         {% else %}
                              {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg placeholder'| replace: '<svg', '<svg style="width: 100%; height: 309px;"' }}
                         {% endif %}

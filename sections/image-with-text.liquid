@@ -1,13 +1,15 @@
-<script src="{{ 'image-with-text.js' | asset_url }}" defer></script>
 {{ 'image-with-text.css' | asset_url | stylesheet_tag }}
 
 {% style %}
-  :root {
+  :root  {
     --section-color: {{ section.settings.sectionBackground }};
   }
 {% endstyle %}
 
-<div class="image__with__text__section " data-section-id="{{ section.id }}">
+<div
+  class="image__with__text__section "
+  data-section-id="{{ section.id }}"
+  data-autoplay="{{ section.settings.autoplay }}">
   <div class="image__with__text__outer__container">
     <ul class="image__with__text__inner__container">
       {% for item in section.blocks %}
@@ -20,33 +22,35 @@
           data-heading="{{ item.settings.heading }}"
           data-description="{{ item.settings.description }}"
           data-link="{{ item.settings.url }}"
-        >
+          btn-text="{{ item.settings.btnText }}"
+          data-heading-tag="{{ item.settings.headingTag }}">
           <div class="media__container">
             {% if item.settings.image %}
-              <img width="1800" height="1600" class="media" src="{{ item.settings.image |  image_url  }}" alt="">
+              {{
+                item.settings.image | image_url: width: 1800 | image_tag: width: 1800, height: 1600, class: 'media', alt: item.settings.image.alt | escape
+              }}
             {% else %}
-                  <div style="width: 100%; height: 100%;">
+              <div style="width: 100%; height: 100%;">
                 {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
               </div>
             {% endif %}
           </div>
         </li>
       {% endfor %}
-      <div class="info__banner color-{{ section.settings.bannerColor }}">
+      <div class="info__banner color-{{ section.settings.bannerColor }}" style="opacity:{{ section.settings.opacity }}">
         <div class="info__banner__contents">
           <p class="info__banner__title inter-medium">NEW ARRIVAL</p>
-          <h1 class="info__banner__heading fira-sans-bold">Thanksgiving big billion sale!</h1>
+          <h1 class="info__banner__heading fira-sans-bold">Image With Text</h1>
           <div class="info__banner__details">
             <p class="info__banner__description inter-regular ">
-              Enhance patient care with our premium medical product, featuring advanced technology for precision and
-              reliability. Ideal for seamless integration into any practice!
+              Pair large text with an image to give focus to your chosen product. Add details on style, availabilty, share the product description or review.
             </p>
-            <a
-              href=""
-              style="color: rgb(var(--color-secondary-button-text)); background: rgb(var(--color-button-text));"
-              class="info__banner__shopnow__button link color-{{ section.settings.bannerColor }}"
-              >Shop Now</a
-            >
+            {% if section.settings.show_shop_button %}
+              <a
+                href=""
+                style="color: rgb(var(--color-secondary-button-text)); background: rgb(var(--color-button-text));"
+                class="info__banner__shopnow__button link color-{{ section.settings.bannerColor }}">Optional Button</a>
+            {% endif %}
           </div>
           <span id="info__banner__expand__button" class="svg-wrapper">
             {{- 'icon-arrow.svg' | inline_asset_content -}}
@@ -55,7 +59,7 @@
         <ul class="dot-items color-{{ section.settings.bannerColor }}">
           {% for item in section.blocks %}
             <li class="dot-item">
-              <a id="gallery-item-{{ forloop.index0 }}-trigger" href="#gallery-item-{{ forloop.index0 }}"> </a>
+              <a id="gallery-item-{{ forloop.index0 }}-trigger" href="#gallery-item-{{ forloop.index0 }}"></a>
             </li>
           {% endfor %}
         </ul>
@@ -65,193 +69,260 @@
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    // Find all instances of the section
-    const sections = document.querySelectorAll('.image__with__text__section');
+   document.addEventListener('DOMContentLoaded', () => {
+  const AUTOPLAY_INTERVAL = 3000;
 
-    sections.forEach((section) => {
-      const container = section.querySelector('.image__with__text__outer__container');
-      const dotItems = section.querySelectorAll('.dot-item');
-      const cards = section.querySelectorAll('.image__with__text__card');
+  const sections = document.querySelectorAll('.image__with__text__section');
 
-      // Banner elements specific to this section
-      const bannerHeading = section.querySelector('.info__banner__heading');
-      const bannerDescription = section.querySelector('.info__banner__description');
-      const bannerLink = section.querySelector('.info__banner__shopnow__button');
-      const infoBannerExpandButton = section.querySelector('#info__banner__expand__button');
-      const infoBannerDetails = section.querySelector('.info__banner__details');
+  sections.forEach((section) => {
+    const container = section.querySelector('.image__with__text__outer__container');
+    const dotItems = section.querySelectorAll('.dot-item');
+    const cards = section.querySelectorAll('.image__with__text__card');
+    const autoplayEnabled = section.getAttribute('data-autoplay') === 'true';
 
-      let ticking = false;
+    const bannerHeadingTag = section.querySelector('.info__banner__title');
+    const bannerHeading = section.querySelector('.info__banner__heading');
+    const bannerDescription = section.querySelector('.info__banner__description');
+    const bannerLink = section.querySelector('.info__banner__shopnow__button');
+    const infoBannerExpandButton = section.querySelector('#info__banner__expand__button');
+    const infoBannerDetails = section.querySelector('.info__banner__details');
 
-      // Function to update the banner content based on the current slide
-      const updateBannerContent = (currentIndex) => {
-        const currentCard = cards[currentIndex];
-        if (currentCard) {
-          const heading = currentCard.getAttribute('data-heading');
-          const description = currentCard.getAttribute('data-description');
-          const link = currentCard.getAttribute('data-link');
+    let ticking = false;
+    let autoplayInterval;
 
-          // Update the banner content
-          bannerHeading.textContent = heading || "Default Heading";
-          bannerDescription.textContent = description || "Default Description";
-          if (link) {
-            bannerLink.href = link;
-          }
+    const updateBannerContent = (currentIndex) => {
+      const currentCard = cards[currentIndex];
+      if (currentCard) {
+        const heading = currentCard.getAttribute('data-heading');
+        const description = currentCard.getAttribute('data-description');
+        const link = currentCard.getAttribute('data-link');
+        const btnText = currentCard.getAttribute('btn-text');
+        const headingTag = currentCard.getAttribute('data-heading-tag');
+
+        bannerHeadingTag.textContent = headingTag || "  ";
+        bannerHeading.textContent = heading || "Image With Text";
+        bannerDescription.textContent = description || " ";
+        bannerLink.textContent = btnText || "Optional Button";
+        if (link) {
+          bannerLink.href = link;
         }
-      };
+      }
+    };
 
-      // Function to update dot scaling based on scroll position
-      const updateDotScaling = () => {
-        const scrollPosition = container.scrollLeft;
-        const galleryWidth = cards[0].offsetWidth;
+    const updateDotScaling = () => {
+      const scrollPosition = container.scrollLeft;
+      const galleryWidth = cards[0].offsetWidth;
+      
+      // Calculate the exact position between slides
+      const exactIndex = scrollPosition / galleryWidth;
+      const currentIndex = Math.floor(exactIndex);
+      const progress = exactIndex - currentIndex;
 
-        const currentIndex = Math.floor(scrollPosition / galleryWidth);
-        const percentageScrolled = (scrollPosition % galleryWidth) / galleryWidth;
-
-        // Reset all dots to the default size
-        dotItems.forEach((dot) => {
-          dot.style.width = '8px';
-          dot.style.height = '8px';
-        });
-
-        // Scale the current dot and next dot based on scroll position
-        if (dotItems[currentIndex]) {
-          dotItems[currentIndex].style.width = `${48 - percentageScrolled * 40}px`;
-        }
-
-        if (dotItems[currentIndex + 1]) {
-          dotItems[currentIndex + 1].style.width = `${8 + percentageScrolled * 40}px`;
-        }
-
-        // Update the banner content based on the exact current index
-        updateBannerContent(Math.round(scrollPosition / galleryWidth));
-      };
-
-      // Throttled scroll handler using requestAnimationFrame
-      const onScroll = () => {
-        if (!ticking) {
-          window.requestAnimationFrame(() => {
-            updateDotScaling();
-            ticking = false;
-          });
-          ticking = true;
-        }
-      };
-
-      // Listen to scroll events on the container
-      container.addEventListener('scroll', onScroll);
-
-      // Set up initial state
-      dotItems[0].style.width = '48px'; // The first dot starts as the active one
-      updateBannerContent(0); // Initialize banner content with the first card
-
-      // Add click event listener to the dots
-      dotItems.forEach((dot, index) => {
-        dot.addEventListener('click', () => {
-          const cardWidth = cards[0].offsetWidth;
-          container.scrollTo({
-            left: index * cardWidth,
-            behavior: 'smooth',
-          });
-
-          // Update the banner content and active dot after the scroll
-          setTimeout(() => {
-            updateBannerContent(index);
-            dotItems.forEach((dot) => {
-              dot.style.width = '8px';
-              dot.style.height = '8px';
-            });
-            dot.style.width = '48px';
-            dot.style.height = '48px';
-          }, 300);
-        });
+      // Add smooth transition to all dots
+      dotItems.forEach((dot) => {
+        dot.style.transition = 'width 0.2s ease-out, height 0.2s ease-out';
+        dot.style.width = '8px';
+        dot.style.height = '8px';
       });
 
-      // Expand button functionality for showing/hiding banner details
-      if (infoBannerExpandButton) {
-        infoBannerExpandButton.addEventListener('click', () => {
-          infoBannerDetails.classList.toggle('show');
-          infoBannerExpandButton.classList.toggle('show');
-        });
+      // Update current dot
+      if (dotItems[currentIndex]) {
+        const currentDotWidth = Math.max(8, 48 - (progress * 40));
+        dotItems[currentIndex].style.width = `${currentDotWidth}px`;
       }
+
+      // Update next dot
+      if (dotItems[currentIndex + 1]) {
+        const nextDotWidth = Math.max(8, 8 + (progress * 40));
+        dotItems[currentIndex + 1].style.width = `${nextDotWidth}px`;
+      }
+
+      // Update banner content only when close to a slide
+      if (progress < 0.1 || progress > 0.9) {
+        updateBannerContent(Math.round(exactIndex));
+      }
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          updateDotScaling();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    const startAutoplay = () => {
+      container.classList.add('no-snap');
+      autoplayInterval = setInterval(() => {
+        const cardWidth = cards[0].offsetWidth;
+        const currentScroll = container.scrollLeft;
+        const maxScroll = cardWidth * (cards.length - 1);
+
+        const currentIndex = Math.round(currentScroll / cardWidth);
+        const nextIndex = currentIndex >= cards.length - 1 ? 0 : currentIndex + 1;
+
+        container.scrollTo({
+          left: nextIndex * cardWidth,
+          behavior: 'smooth'
+        });
+
+        updateBannerContent(nextIndex);
+
+        if (currentScroll >= maxScroll) {
+          setTimeout(() => {
+            container.scrollLeft = 0;
+          }, 300);
+        }
+      }, AUTOPLAY_INTERVAL);
+    };
+
+    const stopAutoplay = () => {
+      container.classList.remove('no-snap');
+      clearInterval(autoplayInterval);
+    };
+
+    container.addEventListener('scroll', onScroll);
+
+    dotItems.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        const cardWidth = cards[0].offsetWidth;
+        container.scrollTo({
+          left: index * cardWidth,
+          behavior: 'smooth'
+        });
+
+        updateBannerContent(index);
+
+        if (autoplayEnabled) {
+          stopAutoplay();
+          startAutoplay();
+        }
+      });
     });
+
+    if (infoBannerExpandButton) {
+      infoBannerExpandButton.addEventListener('click', () => {
+        infoBannerDetails.classList.toggle('show');
+        infoBannerExpandButton.classList.toggle('show');
+      });
+    }
+
+    // Initialize first dot
+    dotItems[0].style.width = '48px';
+    updateBannerContent(0);
+
+    if (autoplayEnabled) {
+      startAutoplay();
+      section.addEventListener('mouseenter', stopAutoplay);
+      section.addEventListener('mouseleave', startAutoplay);
+    }
+  });
   });
 </script>
 
-
-
-
 {% schema %}
-{
-  "name": "Image With Text",
-  "settings": [
-    {
-      "type": "color",
-      "id": "sectionBackground",
-      "label": "Section Color"
+  {
+    "name": "Image With Text",
+    "disabled_on": {
+      "groups": ["header", "footer"]
     },
-    {
-      "type": "color_scheme",
-      "label": "Banner Color",
-      "id": "bannerColor",
-      "default": "#000000"
-    }
-  ],
-  "blocks": [
-    {
-      "type": "card",
-      "name": "Card",
-      "settings": [
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Select Image"
-        },
-        {
-          "type": "text",
-          "id": "heading",
-          "label": "heading",
-          "default": "Thanksgiving big billion sale!"
-        },
-        {
-          "type": "text",
-          "id": "description",
-          "label": "decription",
-          "default":"Enhance patient care with our premium medical product, featuring advanced technology for precision and reliability. Ideal for seamless integration into any practice!"
-        },
-        {
-          "type": "url",
-          "id": "url",
-          "label": "link",
-          "default":"/"
-        },
-        {
-          "type": "color",
-          "id": "captionColor",
-          "label": "Text Color",
-          "default": "#000000"
-        }
-      ]
-    }
-  ],
-  "presets": [
-    {
-      "name": "Image With Text",
-      "blocks": [
-        {
-          "type": "card"
-        },
-        {
-          "type": "card"
-        },
-        {
-          "type": "card"
-        },
-        {
-          "type": "card"
-        }
-      ]
-    }
-  ]
-}
+    "settings": [
+      {
+        "type": "color",
+        "id": "sectionBackground",
+        "label": "Section Color"
+      },
+      {
+        "type": "color_scheme",
+        "label": "Banner Color",
+        "id": "bannerColor",
+        "default": "#000000"
+      },
+      {
+        "type": "range",
+        "id": "opacity",
+        "label": "Banner Opacity",
+        "min": 0.0,
+        "max": 1.0,
+        "step": 0.1,
+        "default": 0.8
+      },
+      {
+        "type": "checkbox",
+        "id": "autoplay",
+        "label": "Enable Autoplay",
+        "default": true
+      }, {
+        "type": "checkbox",
+        "id": "show_shop_button",
+        "label": "Show Button",
+        "default": true
+      }
+    ],
+    "blocks": [
+      {
+        "type": "card",
+        "name": "Card",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Select Image"
+          },
+          {
+            "type": "text",
+            "id": "headingTag",
+            "label": "Heading Tag",
+            "default": "Optional Heading Tag"
+          },
+          {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading",
+            "default": "IMAGE WITH TEXT"
+          },
+          {
+            "type": "text",
+            "id": "description",
+            "label": "Description",
+            "default": "Pair large text with an image to give focus to your chosen product. Add details on style, availabilty, share the product description or review."
+          }, {
+            "type": "text",
+            "id": "btnText",
+            "label": "Button Text",
+            "default": "Optional Button"
+          }, {
+            "type": "url",
+            "id": "url",
+            "label": "link",
+            "default": "/"
+          }
+
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Image With Text",
+        "blocks": [
+          {
+            "type": "card"
+          },
+          {
+            "type": "card"
+          },
+          {
+            "type": "card"
+          },
+          {
+            "type": "card"
+          }, {
+            "type": "card"
+          }
+        ]
+      }
+    ]
+  }
 {% endschema %}

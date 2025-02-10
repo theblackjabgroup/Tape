@@ -18,11 +18,15 @@
 
     <header class="header color-{{ section.settings.color_scheme }}">
       <nav style="width: 60%;">
+
         <ul class="nav-items" style="
           --nav-items-justify-content: Left;
           font-family: var(--font-heading-family);
           font-weight: var(--font-heading-weight);
           ">
+
+        <ul class="nav-items" style="--nav-items-justify-content: Left;">
+
           {% for link in section.settings.menu.links %}
             {% assign has_dropdown = false %}
             {% if link.links != blank %}

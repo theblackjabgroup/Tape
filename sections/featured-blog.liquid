@@ -1,6 +1,9 @@
 {% schema %}
 {
   "name": "Blog Posts",
+"disabled_on": {
+    "groups": ["header", "footer"]
+  },
   "settings": [
     {
       "type": "blog",
@@ -50,7 +53,7 @@
       "type": "text",
       "id": "section_title",
       "label": "Section Title",
-      "default": "Blog Posts",
+      "default": "Section Heading",
       "info": "This title will be displayed on the top left of the blog slider."
     },
     {
@@ -106,7 +109,14 @@
     {% endif %}
 
                 {% if article.image %}
-                    <img src="{{ article.image | img_url: '309x309', crop: 'center' }}" alt="{{ article.title }}">
+                    {{
+  article.image
+  | image_url: width: 1800
+  | image_tag:
+    width: 309,
+    height: 309,
+    alt: article.title | escape
+}}
                 {% else %}
                   <div class="custom-placeholder" >
   {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
@@ -160,19 +170,19 @@
                                 </svg>
                             </a>
                           {% if section.settings.show_excerpt %}
-                                <p class="blog-excerpt" >This is a preview of how your blog post will look. Select a blog to display your actual content.</p>
+                                <p class="blog-excerpt" >This is a preview of how your blog excerpt will look. Select a blog to display your actual content.</p>
                             {% endif %}
                           {% if section.settings.show_author or section.settings.show_date %}
                                 <div class="blog-meta">
                                     {% if section.settings.show_author %}
-                                        <span class="blog-author" >John Doe</span>
+                                        <span class="blog-author" >Author's Name</span>
                                     {% endif %}
                                     {% if section.settings.show_date %}
-                                        <span class="blog-date" >January {{ i }}, 2024</span>
+                                        <span class="blog-date" >Date</span>
                                     {% endif %}
                                 </div>
                             {% endif %}
-                            <h3 class="blog-card-title overridetitle" style="font-family='Fira Sans'; font-weight=500;" >Sample Blog Post {{ i }}</h3>
+                            <h3 class="blog-card-title overridetitle">Blog Title</h3>
 
                         </div>
                     </div>
@@ -184,7 +194,7 @@
 
     {% if section.settings.show_view_all %}
         <div class="blog-view-all-link  color-{{ section.settings.color_scheme }}">
-            <a href="{{ blogs[blog_handle].url }}" class="blog-view-all">
+          <a href="{{ blogs[blog_handle].url }}" class="blog-view-all">
                 View More
             </a>
         </div>
@@ -192,7 +202,95 @@
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('shopify:section:load', function() {
+    const blogSections = document.querySelectorAll('.blog-slider-section');
+
+    blogSections.forEach((section, sectionIndex) => {
+        let currentSlide = 0;
+        const sliderWrapper = section.querySelector('.blog-slider-wrapper');
+        const leftArrow = section.querySelector('.arrow-left');
+        const rightArrow = section.querySelector('.arrow-right');
+        const gap = 20; // Gap between cards
+
+        function updateCards() {
+            const cards = sliderWrapper.querySelectorAll('.blog-card');
+            const totalSlides = cards.length;
+
+            function getSlideWidth() {
+                const cardWidth = cards[0]?.offsetWidth || 0;
+                return cardWidth + gap; // Include the gap in the card width
+            }
+
+            function updateArrowState() {
+                const visibleSlides = getVisibleSlides();
+                leftArrow.disabled = currentSlide === 0;
+                rightArrow.disabled = currentSlide >= totalSlides - visibleSlides;
+            }
+
+            function getVisibleSlides() {
+                let visibleSlides = 0;
+                if (window.innerWidth < 768) {
+                    visibleSlides = totalSlides <= 1 ? totalSlides : 1; // Small screens show 1 card
+                } else if (window.innerWidth < 1024) {
+                    visibleSlides = totalSlides <= 3 ? totalSlides : 3; // Medium screens show 3 cards
+                } else {
+                    visibleSlides = totalSlides <= 4 ? totalSlides : 4; // Large screens show 4 cards
+                }
+                return visibleSlides;
+            }
+
+            function resizeCards() {
+                const visibleSlides = getVisibleSlides();
+                const cardWidthPercentage = (95 / visibleSlides); // Percentage of screen for each card
+                cards.forEach(card => {
+                    card.style.flex = `0 0 ${cardWidthPercentage}%`;
+                });
+            }
+
+            function moveSlide(direction) {
+                const visibleSlides = getVisibleSlides();
+                const maxSlides = totalSlides - visibleSlides;
+
+                currentSlide = Math.min(Math.max(currentSlide + direction, 0), maxSlides);
+
+                const slideWidth = getSlideWidth();
+                const offset = -currentSlide * slideWidth;
+
+                sliderWrapper.style.transform = `translateX(${offset}px)`;
+                updateArrowState();
+            }
+
+            resizeCards();
+            updateArrowState();
+
+            leftArrow.addEventListener('click', () => moveSlide(-1));
+            rightArrow.addEventListener('click', () => moveSlide(1));
+
+            let resizeTimer;
+            window.addEventListener('resize', function() {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(function() {
+                    resizeCards();
+                    const visibleSlides = getVisibleSlides();
+                    const maxSlides = totalSlides - visibleSlides;
+                    currentSlide = Math.min(currentSlide, maxSlides);
+
+                    const slideWidth = getSlideWidth();
+                    const offset = -currentSlide * slideWidth;
+
+                    sliderWrapper.style.transform = `translateX(${offset}px)`;
+                    updateArrowState();
+                }, 250);
+            });
+        }
+
+        updateCards();
+
+        const observer = new MutationObserver(updateCards);
+        observer.observe(sliderWrapper, { childList: true });
+    });
+});
+  document.addEventListener( "DOMContentLoaded", function() {
     const blogSections = document.querySelectorAll('.blog-slider-section');
 
     blogSections.forEach((section, sectionIndex) => {

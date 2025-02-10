@@ -1,174 +1,192 @@
 {{ 'collapsible-content.css' | asset_url | stylesheet_tag }}
+
 <style>
-.faq-item{
-  background-color: rgb(var(--color-button));  
-}
-.faq-main{
-   padding-top:{{section.settings.padding_top}}px;
-  padding-bottom:{{section.settings.padding_bottom}}px;
-}
-
-
-.collapse_dot {
- background-color:rgb(var(--color-background));
-}
-.striaght-line {
-  background-color: rgb(var(--color-background));
-}
-.faq-item::before,
-.faq-item::after {
-  background-color:rgb(var(--color-background));
-}
-.faq-main{
-  background-color:rgb(var(--color-background));
-}
+  .faq-item {
+    background-color: rgb(var(--color-button));
+  }
+  
+  .faq-main {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background-color: rgb(var(--color-background));
+  }
+  
+  .collapse_dot,
+  .striaght-line,
+  .faq-item::before,
+  .faq-item::after {
+    background-color: rgb(var(--color-background));
+  }
 </style>
 
-<div class="faq-section gradient" >
-  <div class='faq-main color-{{ section.settings.color_scheme }}' >
-    <!-- Left side -->
+<div class="faq-section gradient">
+  <div class="faq-main color-{{ section.settings.color_scheme }}">
     <div class="faq-header">
-     <h2 class="faq-title" >{{ section.settings.caption | default: 'Help & Support' }}</h2>
-  <p class="support-text" >{{ section.settings.description | default: "We're here to assist you with questions about products, sizing, or orders. Our customer support team is available via phone, email, or live chat." }}</p>
+      <h2 class="faq-title">{{ section.settings.caption | default: 'Help & Support' }}</h2>
+      <p class="support-text">{{ section.settings.description | default: "We're here to assist you with questions about products, sizing, or orders. Our customer support team is available via phone, email, or live chat." }}</p>
     </div>
-  <!--right side -->
-    <div class='faq-container '>
-       {% for block in section.blocks %}
-   
-  <div class="faq-item ">
-    <span class="faq-number " >{{ block.settings.serialno}}</span>
+    
+    <div class="faq-container" data-faq-container>
+      {% for block in section.blocks %}
+        <div class="faq-item" data-faq-item="{{ forloop.index }}">
+          <span class="faq-number">{{ block.settings.serialno }}</span>
+          
           {% if section.settings.layout_style == 'layout1' %}
-    <div class="dots-line" >
-       <span class="collapse_dot"></span>
+            <div class="dots-line" data-dots-line>
+              <span class="collapse_dot"></span>
       <span class="collapse_dot"></span>
       <span class="collapse_dot"></span>
        <span class="collapse_dot"></span>
       <span class="collapse_dot"></span> 
-     
+            </div>
+          {% else %}
+            <div class="striaght-line"><h6></h6></div>
+          {% endif %}
+          
+          <div class="faq-content">
+            <div class="faq-question">
+              <div class="question-text">{{ block.settings.questiontext }}</div>
+              <div class="faq-answer">{{ block.settings.solutionans }}</div>
+            </div>
+            <div>
+              <svg class="icon-arrow" width="24" height="24" viewBox="0 0 24 24">
+                <path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
     </div>
-      {% else %}
-            <div class="striaght-line">
-              </div>
-    {% endif %}
-            
-  <div class="faq-content">
-      <div class="faq-question">
-        <div class="question-text" >{{ block.settings.questiontext }}</div>
-        <div class="faq-answer">{{ block.settings.solutionans }}</div>
-      </div>
-      <div>
-
-        <svg class="icon-arrow "  width="24" height="24" viewBox="0 0 24 24">
-          <path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-      </div>
-         
-    </div>
-            
-             </div>
-               {% endfor %}
   </div>
-    </div>
 </div>
-            <script>
+
+<script>
 document.addEventListener('DOMContentLoaded', function() {
-  const createDots = (dotsLine, isExpanding = false) => {
-    const containerHeight = dotsLine.offsetHeight;
-    const dotHeight = 9;
-    const dotMargin = 8;
-    const dotSpacing = dotHeight + dotMargin;
-    const numberOfDots = Math.floor(containerHeight / dotSpacing);
-    const currentDots = dotsLine.querySelectorAll('.collapse_dot').length;
+  // Create a unique identifier for each FAQ section
+  const faqSections = document.querySelectorAll('.faq-section');
+  faqSections.forEach((section, sectionIndex) => {
+    section.setAttribute('data-faq-section', `faq-${sectionIndex}`);
     
-    if (isExpanding && currentDots < numberOfDots) {
-      for (let i = currentDots; i < numberOfDots; i++) {
-        const dot = document.createElement('span');
-        dot.className = 'collapse_dot new-dot';
-        dotsLine.appendChild(dot);
-      }
-    } else if (!isExpanding) {
-      dotsLine.innerHTML = '';
-      for (let i = 0; i < numberOfDots; i++) {
-        const dot = document.createElement('span');
-        dot.className = 'collapse_dot';
-        dotsLine.appendChild(dot);
-      }
-    }
-  };
-
-  const animateNewDots = (dotsLine) => {
-    const newDots = dotsLine.querySelectorAll('.collapse_dot.new-dot');
-    newDots.forEach((dot, index) => {
-      setTimeout(() => {
-        dot.classList.add('animated');
-      }, index * 200);
-    });
-  };
-
-  const handleFAQClick = (item) => {
-    const answer = item.querySelector('.faq-answer');
-    const arrow = item.querySelector('.icon-arrow');
-    
-    if (answer && arrow) {
-      const isExpanding = !answer.classList.contains('visible');
-      answer.classList.toggle('visible');
-      arrow.classList.toggle('rotated');
+    const createDots = (dotsLine, isExpanding='false' ) => {
+      if (!dotsLine) return;
+      const containerHeight = dotsLine.offsetHeight;
+      const dotHeight = 9;
+      const dotMargin = 8;
+      const dotSpacing = dotHeight + dotMargin;
+      const numberOfDots = Math.floor(containerHeight / dotSpacing);
+      const currentDots = dotsLine.querySelectorAll('.collapse_dot').length;
       
-      const dotsLine = item.querySelector('.dots-line');
-      if (dotsLine && isExpanding) {
-        setTimeout(() => {
-          createDots(dotsLine, true);
-          animateNewDots(dotsLine);
-        }, 200);
-      } else if (dotsLine) {
-        const dots = dotsLine.querySelectorAll('.collapse_dot');
-        dots.forEach((dot, index) => {
-          if (dot.classList.contains('new-dot')) {
-            dot.remove();
-          }
-        });
+      if (isExpanding && currentDots < numberOfDots) {
+        for (let i = currentDots; i < numberOfDots; i++) {
+          const dot = document.createElement('span');
+          dot.className = 'collapse_dot new-dot';
+          dotsLine.appendChild(dot);
+        }
+      } else if (!isExpanding) {
+        dotsLine.innerHTML = '';
+        for (let i = 0; i < numberOfDots; i++) {
+          const dot = document.createElement('span');
+          dot.className = 'collapse_dot';
+          dotsLine.appendChild(dot);
+        }
       }
-    }
-  };
-  document.querySelectorAll('.dots-line').forEach(dotsLine => {
-    createDots(dotsLine, false);
-  });
+    };
 
-  document.querySelectorAll('.faq-item').forEach(item => {
-    const arrow = item.querySelector('.icon-arrow');
-    if (arrow) {
-      arrow.addEventListener('click', (e) => {
-        e.stopPropagation();
-        handleFAQClick(item);
+    const animateNewDots = (dotsLine) => {
+      if (!dotsLine) return;
+      
+      const newDots = dotsLine.querySelectorAll('.collapse_dot.new-dot');
+      newDots.forEach((dot, index) => {
+        setTimeout(() => {
+          dot.classList.add('animated');
+        }, index * 100);
       });
-    }
-  });
-  let resizeTimer;
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => {
-      document.querySelectorAll('.dots-line').forEach(dotsLine => {
-        createDots(dotsLine, false);
-      });
-    }, 250);
+    };
+
+    const handleFAQClick = (item) => {
+      if (!item) return;
+      
+      // Only handle items within the current section
+     const parentSection = item.closest(`[data-faq-section="faq-${sectionIndex}"]`);
+      if (!parentSection) return;
+      
+      const answer = item.querySelector('.faq-answer');
+      const arrow = item.querySelector('.icon-arrow');
+      const dotsLine = item.querySelector('.dots-line');
+      
+      if (answer && arrow) {
+        const isExpanding = !answer.classList.contains('visible');
+        answer.classList.toggle('visible');
+        arrow.classList.toggle('rotated');
+        
+        if (dotsLine && isExpanding) {
+          requestAnimationFrame(() => {
+            setTimeout(() => {
+              createDots(dotsLine, true);
+              animateNewDots(dotsLine);
+            }, 200);
+          });
+        } else if (dotsLine) {
+          dotsLine.querySelectorAll('.collapse_dot.new-dot').forEach(dot => dot.remove());
+        }
+      }
+    };
+
+    // Initialize dots for each FAQ item within this section
+    const dotsLines = section.querySelectorAll('[data-dots-line]');
+    dotsLines.forEach(dotsLine => {
+      createDots(dotsLine, false);
+    });
+
+    // Add click handlers for items within this section
+    const faqItems = section.querySelectorAll('[data-faq-item]');
+    faqItems.forEach(item => {
+      const arrow = item.querySelector('.icon-arrow');
+      if (arrow) {
+        // Remove any existing click listeners
+        arrow.removeEventListener('click', arrow.clickHandler);
+      
+        arrow.clickHandler = (e) => {
+          e.stopPropagation();
+          handleFAQClick(item);
+        };
+        arrow.addEventListener('click', arrow.clickHandler);
+      }
+    });
+
+    let resizeTimeout;
+    const handleResize = () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        const sectionDotsLines = section.querySelectorAll('[data-dots-line]');
+        sectionDotsLines.forEach(dotsLine => {
+          createDots(dotsLine, false);
+        });
+      }, 250);
+    };
+    
+    window.addEventListener('resize', handleResize);
   });
 });
-    </script>
-            
+</script>
+
 {% schema %}
 {
   "name": "t:sections.collapsible_content.name",
   "tag": "section",
   "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
   "settings": [
-     {
+    {
       "type": "color_scheme",
       "id": "color_scheme",
       "label": "t:sections.all.colors.label",
       "default": "scheme-1"
     },
     {
-        "type": "text",
+      "type": "text",
       "id": "caption",
       "label": "FAQ Title",
       "default": "Help & Support"
@@ -177,9 +195,9 @@ document.addEventListener('DOMContentLoaded', function() {
       "type": "text",
       "id": "description",
       "label": "FAQ Description",
-      "default": "We're here to assist you with questions about products, sizing, or orders. Our customer support team is available via phone, email, or live chat."
+      "default": "Use this text to share more information about your store."
     },
-     {
+    {
       "type": "select",
       "id": "layout_style",
       "label": "Choose Layout",
@@ -194,7 +212,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       ],
       "default": "layout1"
-    },   
+    },
     {
       "type": "range",
       "id": "padding_top",
@@ -217,42 +235,41 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   ],
   "blocks": [
-  
     {
       "type": "collapsible_row",
       "name": "t:sections.collapsible_content.blocks.collapsible_row.name",
       "settings": [
         {
-  "type": "select",
-  "id": "serialno",
-  "label": "Bullet Number",
-  "options": [
-    { "label": "1", "value": "01" },
-    { "label": "2", "value": "02" },
-    { "label": "3", "value": "03" },
-    { "label": "4", "value": "04" },
-    { "label": "5", "value": "05" },
-    { "label": "6", "value": "06" },
-    { "label": "7", "value": "07" },
-    { "label": "8", "value": "08" },
-    { "label": "9", "value": "09" },
-    { "label": "10", "value": "10" }
-  ],
-  "default": "01"
-},
+          "type": "select",
+          "id": "serialno",
+          "label": "Bullet Number",
+          "options": [
+            { "label": "1", "value": "01" },
+            { "label": "2", "value": "02" },
+            { "label": "3", "value": "03" },
+            { "label": "4", "value": "04" },
+            { "label": "5", "value": "05" },
+            { "label": "6", "value": "06" },
+            { "label": "7", "value": "07" },
+            { "label": "8", "value": "08" },
+            { "label": "9", "value": "09" },
+            { "label": "10", "value": "10" }
+          ],
+          "default": "01"
+        },
         {
           "type": "text",
           "id": "questiontext",
-          "default": "What is number of wheels in wheel chair",
+          "default": "Provide a question or statement",
           "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.heading.label",
           "info": "t:sections.collapsible_content.blocks.collapsible_row.settings.heading.info"
         },
-         {
-      "type": "textarea",
-      "id": "solutionans",
-      "label": "Text",
-      "default": "At [Your Company Name], we are dedicated to enhancing patient care and clinical efficiency through state-of-the-art medical products. Our commitment to innovation and quality ensures that healthcare providers have the tools they need to deliver the best possible outcomes for their patients."
-    },
+        {
+          "type": "textarea",
+          "id": "solutionans",
+          "label": "Text",
+          "default": "Use this section to answer a question, provide product information, or talk about your brand."
+        }
       ]
     }
   ],
