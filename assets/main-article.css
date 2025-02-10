@@ -278,7 +278,6 @@ top: 561px;
 }
 
 .blog-social-icon {
-  /* font-family: Arial, sans-serif; */
   font-size: 16px;
   color:rgb(var(--color-text));
   text-decoration: none;
@@ -661,7 +660,6 @@ top: 561px;
 .custom-author,
 .custom-date,
 .custom-excerpt {
-    font-family: 'Fira Sans';
     font-weight: 500;
 } */
 
