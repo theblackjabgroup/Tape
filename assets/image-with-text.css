@@ -102,7 +102,7 @@
   font-size: var(--caption-font-size);
   font-weight: 600;
   letter-spacing: var(--caption-letter-spacing);
-  font-family: Arial, Helvetica, sans-serif;
+  /* font-family: Arial, Helvetica, sans-serif; */
   line-height: var(--caption-line-height);
 }
 

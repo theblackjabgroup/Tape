@@ -45,7 +45,7 @@
   font-size: 24px;
   padding: 10px 0 5px 10px;
   color: var(--product_price_card);
-  font-family: "Fira Sans";
+  /* font-family: "Fira Sans"; */
   font-weight: 600;
 }
 
@@ -66,21 +66,21 @@
 }
 
 .popup-email-Icon {
-    font-weight: 400;
-    position: absolute;
-    transform: translateY(93%);
-    color: #888;
-    font-size: 18px;
-    pointer-events: none;
-      margin-left: 20px;
+  font-weight: 400;
+  position: absolute;
+  transform: translateY(93%);
+  color: #888;
+  font-size: 18px;
+  pointer-events: none;
+  margin-left: 20px;
 }
 
 .popup-email-input-layout2 {
   border: none;
   border-radius: 4px;
   width: 345px;
-margin-left: 45px;
-    padding: 11px;
+  margin-left: 45px;
+  padding: 11px;
 }
 
 .popup-close-btn {
@@ -101,8 +101,7 @@ margin-left: 45px;
 }
 
 .popup-subscribe-btn {
-  font-family: "Inter", sans-serif;
-  font-weight: 500;
+  /* font-weight: 500; */
   background: linear-gradient(
     to right,
     gray 50%,
