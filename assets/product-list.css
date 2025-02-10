@@ -469,7 +469,7 @@ summary .icon-caret2 {
   }
 
   .ticket-dot {
-    transform: translate(50%, -45%);
+    transform: translate(45%, -45%);
   }
 .ticket-dot-first-product-list {
     height: 16px;
