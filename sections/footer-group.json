@@ -6,9 +6,9 @@
       "type": "barcode",
       "settings": {
         "color_scheme": "",
-        "animation_speed": 20,
+        "animation_speed": 1,
         "animation_direction": "normal",
-        "auto_play": true
+        "auto_play": false
       }
     },
     "subfooter": {
