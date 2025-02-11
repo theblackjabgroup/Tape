@@ -54,7 +54,15 @@
   overflow: auto;
   width: 10rem;
   padding: 0.5rem;
+  border-radius: 6px; 
 }
+
+.disclosure__list-wrapper{
+  border-radius: 22px !important;
+  border: 2px solid black; 
+
+}
+
 
 @media (max-width: 960px) {
   .site-header_categories_list-content {
