@@ -24,11 +24,15 @@ if (!customElements.get('media-gallery')) {
         {
         const x = this.elements.viewer.querySelector(".bb-slider--mobile");
         const h = this.elements.viewer.querySelector("#bb_product__media_first").querySelector("img").offsetHeight;
-        const z = this.elements.viewer.getElementsByClassName("bb-product-video");
-        if(!(this.elements.viewer.getElementsByClassName("bb-product-video")))
+        if(this.elements.viewer.getElementsByClassName("bb-product-video").length === 0)
         {
           x.style.height = `${h+40}px`;
           x.setAttribute("data-height", this.elements.viewer.querySelector("#bb_product__media_first").querySelector("img").offsetHeight);
+        }
+        else if(this.elements.viewer.querySelector("#bb-deferred-media"))
+        {
+          const z = this.elements.viewer.querySelector("#bb-deferred-media").querySelector("img").offsetHeight;
+          x.style.height = `${z}px`;
         }
         }
       }
@@ -86,14 +90,16 @@ if (!customElements.get('media-gallery')) {
         {
         const x = this.elements.viewer.querySelector(".bb-slider--mobile");
         const h = activeMedia.querySelector("#bb_product__media_first").querySelector("img").offsetHeight;
-        if(!(this.elements.viewer.getElementsByClassName("bb-product-video")))
+
+        if(!(activeMedia.querySelector("#bb-deferred-media")))
         {
         x.style.height = `${h+40}px`;
         x.setAttribute("data-height", activeMedia.querySelector("#bb_product__media_first").querySelector("img").offsetHeight);
         }
         else if(this.elements.viewer.querySelector("#bb-deferred-media"))
         {
-          console.log("Inside else if", this.elements.viewer.querySelector("#bb-deferred-media").querySelector("video").offsetHeight)
+          const z = activeMedia.querySelector("#bb-deferred-media").querySelector("video").offsetHeight;
+          x.style.height = `${z}px`;
         }
         }
       }

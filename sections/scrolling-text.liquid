@@ -3,12 +3,9 @@
 <div
   class="marquee-container color-{{ section.settings.color_scheme }}"
   style="
-    --text-strip-speed: {{ section.settings.scroll_speed }}s;
-    --first-strip-speed: {{ section.settings.scroll_speed }}s;
-    --second-strip-speed: {{ section.settings.scroll_speed }}s;
+    --animation-speed: {{ section.settings.scroll_speed }};
     --strip-padding-top: {{ section.settings.strip_padding_top }}px;
     --strip-padding-bottom: {{ section.settings.strip_padding_bottom }}px;
-    --third-strip-speed: {{ section.settings.scroll_speed }}s;
   "
 >
   <div class="scrolling-marquee-inner">
@@ -41,11 +38,12 @@
                 {% for i in (1..3) %}
                   {% assign text_key = 'text_' | append: i %}
                   {% assign image_key = 'image_' | append: i %}
+                  {% assign focal_point_key = 'image_' | append: i | append: '_focal_point' %}
                   {% if block.settings[text_key] != blank %}
                     <div class="scrolling-marquee-item">
                       <span class="scrolling-marquee-text">{{ block.settings[text_key] }}</span>
                       {% if block.settings[image_key] %}
-                        {{ block.settings[image_key] | image_url: width: section.settings.image_width, height: section.settings.image_height | image_tag:
+                        {{ block.settings[image_key] | image_url: width: section.settings.image_width, height: section.settings.image_height, crop: block.settings[focal_point_key] | image_tag:
                           class: 'scrolling-marquee-image',
                           loading: 'lazy',
                           alt: block.settings[text_key],
@@ -72,11 +70,12 @@
                 {% for i in (1..3) %}
                   {% assign text_key = 'text_' | append: i %}
                   {% assign image_key = 'image_' | append: i %}
+                  {% assign focal_point_key = 'image_' | append: i | append: '_focal_point' %}
                   {% if block.settings[text_key] != blank %}
                     <div class="scrolling-marquee-item">
                       <span class="scrolling-marquee-text">{{ block.settings[text_key] }}</span>
                       {% if block.settings[image_key] %}
-                        {{ block.settings[image_key] | image_url: width: section.settings.image_width, height: section.settings.image_height | image_tag:
+                        {{ block.settings[image_key] | image_url: width: section.settings.image_width, height: section.settings.image_height, crop: block.settings[focal_point_key] | image_tag:
                           class: 'scrolling-marquee-image',
                           loading: 'lazy',
                           alt: block.settings[text_key],
@@ -103,11 +102,12 @@
                 {% for i in (1..3) %}
                   {% assign text_key = 'text_' | append: i %}
                   {% assign image_key = 'image_' | append: i %}
+                  {% assign focal_point_key = 'image_' | append: i | append: '_focal_point' %}
                   {% if block.settings[text_key] != blank %}
                     <div class="scrolling-marquee-item">
                       <span class="scrolling-marquee-text">{{ block.settings[text_key] }}</span>
                       {% if block.settings[image_key] %}
-                        {{ block.settings[image_key] | image_url: width: section.settings.image_width, height: section.settings.image_height | image_tag:
+                        {{ block.settings[image_key] | image_url: width: section.settings.image_width, height: section.settings.image_height, crop: block.settings[focal_point_key] | image_tag:
                           class: 'scrolling-marquee-image',
                           loading: 'lazy',
                           alt: block.settings[text_key],
@@ -131,6 +131,9 @@
 {% schema %}
 {
   "name": "Scrolling Text",
+"enabled_on": {
+  "groups": ["footer"]
+},
   "settings": [
     {
       "type": "color_scheme",
@@ -185,12 +188,12 @@
     {
       "type": "range",
       "id": "scroll_speed",
-      "min": 10,
-      "max": 60,
-      "step": 5,
-      "unit": "s",
+      "min": 0.1,
+      "max": 2,
+      "step": 0.1,
+      "unit": "x",
       "label": "Scrolling Speed",
-      "default": 20
+      "default": 1
     },
     {
       "type": "range",
@@ -289,6 +292,19 @@
           "label": "Image 1"
         },
         {
+          "type": "select",
+          "id": "image_1_focal_point",
+          "label": "Image 1 Focal Point",
+          "options": [
+            {"value": "center", "label": "Center"},
+            {"value": "top", "label": "Top"},
+            {"value": "bottom", "label": "Bottom"},
+            {"value": "left", "label": "Left"},
+            {"value": "right", "label": "Right"}
+          ],
+          "default": "center"
+        },
+        {
           "type": "text",
           "id": "text_2",
           "label": "Text 2",
@@ -300,6 +316,19 @@
           "label": "Image 2"
         },
         {
+          "type": "select",
+          "id": "image_2_focal_point",
+          "label": "Image 2 Focal Point",
+          "options": [
+            {"value": "center", "label": "Center"},
+            {"value": "top", "label": "Top"},
+            {"value": "bottom", "label": "Bottom"},
+            {"value": "left", "label": "Left"},
+            {"value": "right", "label": "Right"}
+          ],
+          "default": "center"
+        },
+        {
           "type": "text",
           "id": "text_3",
           "label": "Text 3",
@@ -309,6 +338,19 @@
           "type": "image_picker",
           "id": "image_3",
           "label": "Image 3"
+        },
+        {
+          "type": "select",
+          "id": "image_3_focal_point",
+          "label": "Image 3 Focal Point",
+          "options": [
+            {"value": "center", "label": "Center"},
+            {"value": "top", "label": "Top"},
+            {"value": "bottom", "label": "Bottom"},
+            {"value": "left", "label": "Left"},
+            {"value": "right", "label": "Right"}
+          ],
+          "default": "center"
         }
       ]
     },
@@ -357,6 +399,19 @@
           "label": "Image 1"
         },
         {
+          "type": "select",
+          "id": "image_1_focal_point",
+          "label": "Image 1 Focal Point",
+          "options": [
+            {"value": "center", "label": "Center"},
+            {"value": "top", "label": "Top"},
+            {"value": "bottom", "label": "Bottom"},
+            {"value": "left", "label": "Left"},
+            {"value": "right", "label": "Right"}
+          ],
+          "default": "center"
+        },
+        {
           "type": "text",
           "id": "text_2",
           "label": "Text 2",
@@ -368,6 +423,19 @@
           "label": "Image 2"
         },
         {
+          "type": "select",
+          "id": "image_2_focal_point",
+          "label": "Image 2 Focal Point",
+          "options": [
+            {"value": "center", "label": "Center"},
+            {"value": "top", "label": "Top"},
+            {"value": "bottom", "label": "Bottom"},
+            {"value": "left", "label": "Left"},
+            {"value": "right", "label": "Right"}
+          ],
+          "default": "center"
+        },
+        {
           "type": "text",
           "id": "text_3",
           "label": "Text 3",
@@ -377,6 +445,19 @@
           "type": "image_picker",
           "id": "image_3",
           "label": "Image 3"
+        },
+        {
+          "type": "select",
+          "id": "image_3_focal_point",
+          "label": "Image 3 Focal Point",
+          "options": [
+            {"value": "center", "label": "Center"},
+            {"value": "top", "label": "Top"},
+            {"value": "bottom", "label": "Bottom"},
+            {"value": "left", "label": "Left"},
+            {"value": "right", "label": "Right"}
+          ],
+          "default": "center"
         }
       ]
     },
@@ -425,6 +506,19 @@
           "label": "Image 1"
         },
         {
+          "type": "select",
+          "id": "image_1_focal_point",
+          "label": "Image 1 Focal Point",
+          "options": [
+            {"value": "center", "label": "Center"},
+            {"value": "top", "label": "Top"},
+            {"value": "bottom", "label": "Bottom"},
+            {"value": "left", "label": "Left"},
+            {"value": "right", "label": "Right"}
+          ],
+          "default": "center"
+        },
+        {
           "type": "text",
           "id": "text_2",
           "label": "Text 2",
@@ -436,6 +530,19 @@
           "label": "Image 2"
         },
         {
+          "type": "select",
+          "id": "image_2_focal_point",
+          "label": "Image 2 Focal Point",
+          "options": [
+            {"value": "center", "label": "Center"},
+            {"value": "top", "label": "Top"},
+            {"value": "bottom", "label": "Bottom"},
+            {"value": "left", "label": "Left"},
+            {"value": "right", "label": "Right"}
+          ],
+          "default": "center"
+        },
+        {
           "type": "text",
           "id": "text_3",
           "label": "Text 3",
@@ -445,19 +552,33 @@
           "type": "image_picker",
           "id": "image_3",
           "label": "Image 3"
+        },
+        {
+          "type": "select",
+          "id": "image_3_focal_point",
+          "label": "Image 3 Focal Point",
+          "options": [
+            {"value": "center", "label": "Center"},
+            {"value": "top", "label": "Top"},
+            {"value": "bottom", "label": "Bottom"},
+            {"value": "left", "label": "Left"},
+            {"value": "right", "label": "Right"}
+          ],
+          "default": "center"
         }
       ]
     }
   ],
-  "presets": [
-    {
-      "name": "Scrolling Text",
-      "blocks": [
-        {
-          "type": "text_strip_1"
-        }
-      ]
-    }
-  ]
+"presets": [
+  {
+    "name": "Scrolling Text",
+    "category": "Promotional",
+    "blocks": [
+      {
+        "type": "text_strip_1"
+      },
+    ]
+  }
+]
 }
 {% endschema %}

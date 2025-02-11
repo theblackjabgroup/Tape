@@ -434,34 +434,26 @@
             {%- endif -%}
           </div>
         </div>
+
         <div class="desktop-view icon-upper-wrapper">
-          <div class="icon-wrapper">
+          <div class="bb_cp-icon-wrapper">
             {% if section.settings.icon_1_image %}
-              <img src="{{ section.settings.icon_1_image | img_url: '50x' }}" alt="Icon_1" width="auto" height="auto">
+              {{  section.settings.icon_1_image  | image_url: width: auto, height: auto| image_tag }}
             {% else %}
             {% endif %}
             <span class="icon-name">{{ section.settings.icon_1_name }}</span>
           </div>
-          <div class="icon-wrapper">
+          <div class="bb_cp-icon-wrapper">
             {% if section.settings.icon_2_image %}
-              <img src="{{ section.settings.icon_2_image | img_url: '50x' }}" alt="Icon_2" width="auto" height="auto">
+              {{  section.settings.icon_2_image  | image_url: width: auto, height: auto| image_tag }}
             {% else %}
             {% endif %}
             <span class="icon-name">{{ section.settings.icon_2_name }}</span>
           </div>
-          <div class="icon-wrapper">
+          <div class="bb_cp-icon-wrapper">
             {% if section.settings.icon_3_image %}
-              <img src="{{ section.settings.icon_3_image | img_url: '50x' }}" alt="Icon_3" width="auto" height="auto">
+              {{  section.settings.icon_3_image  | image_url: width: auto, height: auto| image_tag }}
             {% else %}
-            <!---
-              <span class="icon-placeholder">
-                <img
-                  src="https://cdn.shopify.com/s/files/1/0598/2758/5101/files/bolt_84cc4c52-619e-47d0-9029-a301abb8d4ca.png?v=1730485523"
-                  width="auto"
-                  height="auto"
-                >
-              </span>
-              --->
             {% endif %}
             <span class="icon-name">{{ section.settings.icon_3_name }}</span>
           </div>

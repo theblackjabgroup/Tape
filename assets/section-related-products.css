@@ -1,15 +1,35 @@
 body {
-    font-family: 'Inter', sans-serif;
+   font-family: var(--font-body-family);
+    font-weight: var(--font-body-weight);
   }
 
   h1, h7 {
-    font-family: 'Fira Sans', sans-serif;
+    font-family: var(--font-body-family);
+    font-weight: var(--font-body-weight);
   }
 
   h2, .model-number {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-body-family);
+    font-weight: var(--font-body-weight);
   }
 
+
+/* Add margin elements with color scheme support */
+.featured-collection-section::before,
+.featured-collection-section::after {
+    content: '';
+    display: block;
+    width: 100%;
+    background-color: rgb(var(--color-background));
+}
+
+.featured-collection-section::before {
+    height: var(--section-top-margin, 50px);
+}
+
+.featured-collection-section::after {
+    height: var(--section-bottom-margin, 50px);
+}
   .featured-collection {
     width: 100%;
     max-width: 1400px;

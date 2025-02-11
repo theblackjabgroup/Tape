@@ -728,6 +728,20 @@ a.active-facets__button.focused .active-facets__button-inner {
   align-items: flex-start;
 }
 
+.filter-container > facet-remove {
+  display: none;
+}
+
+.bb-active-facets__button-wrapper {
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.bb-facets_remove 
+{
+  margin-left: 15px;
+  margin-right: 15px;
+}
 .facets-vertical .active-facets__button {
   margin-top: 0;
 }

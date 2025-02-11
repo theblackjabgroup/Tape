@@ -1,6 +1,7 @@
 .cart__empty-text{
-  font-family: Fira Sans;
-font-size: 48px;
+  font-family: var(--font-body-family);
+    font-style: var(--font-body-style);
+    font-size: calc(var(--font-body-scale) * 48px);
 font-weight: 600;
 line-height: 65px;
 text-align: center;
@@ -8,8 +9,9 @@ text-underline-position: from-font;
 text-decoration-skip-ink: none;
 }
 .favouritestart{
-  font-family: Fira Sans;
-font-size: 32px;
+  font-family: var(--font-body-family);
+    font-style: var(--font-body-style);
+    font-size: calc(var(--font-body-scale) * 32px);
 font-weight: 400;
 line-height: 34px;
 text-align: center;
@@ -18,8 +20,9 @@ text-decoration-skip-ink: none;
 
 }
 button{
-  font-family: Fira Sans;
-font-size: 32px;
+  font-family: var(--font-body-family);
+    font-style: var(--font-body-style);
+    font-size: calc(var(--font-body-scale) * 32px);
 font-weight: 400;
 line-height: 34px;
 text-align: center;
@@ -41,17 +44,23 @@ text-decoration-skip-ink: auto;
   padding:20px;
 }
 .title{
-  font-family: 'Fira Sans', sans-serif;
+ font-family: var(--font-heading-family);
+    font-style: var(--font-heading-style);
+    font-size: calc(var(--font-heading-scale) * 40px);
   font-weight: 500;
   line-height: 34px;
 }
 .cart_total_count{
-  font-family: 'Fira Sans', sans-serif;
+  font-family: var(--font-body-family);
+    font-style: var(--font-body-style);
+    font-size: calc(var(--font-body-scale) * 20px);
   font-weight: 500;
   line-height: 34px;
 }
 .underlined-link{
-   font-family: 'Fira Sans', sans-serif;
+  font-family: var(--font-body-family);
+    font-style: var(--font-body-style);
+    font-size: calc(var(--font-body-scale) * 16px);
   font-weight: 500;
   line-height: 34px;
 }
