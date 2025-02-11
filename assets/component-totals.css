@@ -1,6 +1,7 @@
 .tax-note{
-  font-family: Inter;
-font-size: 14px;
+   font-family: var(--font-body-family);
+    font-style: var(--font-body-style);
+    font-size: calc(var(--font-body-scale) * 14px);
 font-weight: 400;
 line-height: 20px;
 text-align: left;
@@ -61,8 +62,9 @@ clip-path: polygon(100% 81%, 84% 81%, 84% 100%);
   justify-content:flex-end;
 }
 .cart__ctas .button{
-    font-family: Inter;
-font-size: 16px;
+    font-family: var(--font-body-family);
+    font-style: var(--font-body-style);
+    font-size: calc(var(--font-body-scale) * 16px);
 font-weight: 500;
 line-height: 24px;
 text-align: center;
@@ -89,11 +91,13 @@ border-radius: 4px 0px 0px 0px;
 justify-content: space-between;
 }
 .notelink{
+   font-family: var(--font-body-family) !important;
+    font-style: var(--font-body-style);
+    font-size: calc(var(--font-body-scale) * 14px);
    cursor: pointer;
     margin-top: 5px;
   margin-bottom: 3px;
   font-family: Inter;
-font-size: 14px;
 font-weight: 400;
 line-height: 20px;
 text-align: left;
@@ -112,8 +116,9 @@ align-items: flex-start;
 .total_heading{
       font-size: 24px;
       margin: 0; 
-    font-family: Fira Sans;
-font-size: 28px;
+    font-family: var(--font-heading-family);
+    font-style: var(--font-heading-style);
+    font-size: calc(var(--font-heading-scale) * 28px);
 font-weight: 500;
 line-height: 34px;
 text-align: left;
@@ -151,7 +156,9 @@ margin-top: .5rem;
        white-space: nowrap;
       overflow: hidden; 
       text-overflow: ellipsis;
-      font-size: 1.8rem;
+      font-family: var(--font-body-family);
+    font-style: var(--font-body-style);
+    font-size: calc(var(--font-body-scale) * 1.8rem);
        position: relative;
       padding: 16px 26px;
       border-radius: 4px;
