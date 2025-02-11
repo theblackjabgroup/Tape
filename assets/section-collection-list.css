@@ -5,8 +5,9 @@
 
 
 .cl_heading{
-font-family: Fira Sans;
-font-size: 28px;
+ font-family: var(--font-heading-family);
+    font-style: var(--font-heading-style);
+    font-size: calc(var(--font-heading-scale) * 28px);
 font-weight: 600;
 line-height: 24px;
 text-align: left;
@@ -54,8 +55,11 @@ margin: 13px 0px;
 
 
 .cl-sub_heading{
-  font-family: Inter;
-font-size: 16px;
+ font-family: var(--font-body-family);
+    font-style: var(--font-body-style);
+   
+    font-size: calc(var(--font-body-scale) * 16px);
+
 font-weight: 500;
 line-height: 24px;
 text-align: left;
@@ -64,8 +68,9 @@ text-underline-position: from-font;
 text-decoration-skip-ink: none;
 }
 .cl-description{
-  font-family: Inter;
-font-size: 16px;
+ font-family: var(--font-body-family);
+    font-style: var(--font-body-style);
+    font-size: calc(var(--font-body-scale) * 16px);
 font-weight: 400;
 line-height: 24px;
 text-align: left;

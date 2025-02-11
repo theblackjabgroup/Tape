@@ -11,13 +11,14 @@
     flex-direction: column;
 }
 .collection_list-more-btn{
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-body-family);
+    font-style: var(--font-body-style);
+    font-size: calc(var(--font-body-scale) * 12px);
   font-weight: 500;
   line-height: 20px;
   text-underline-position: from-font;
   text-decoration-skip-ink: none;
     padding:13px 7px;
-    font-size: 12px;
     display: inline-block;
     text-decoration: none;
     align-self: end;
@@ -59,8 +60,9 @@
     justify-content: space-evenly;
 }
 .collection-list_card__heading{
-font-family: Fira Sans;
-font-size: 18px;
+ font-family: var(--font-body-family);
+    font-style: var(--font-body-style);
+    font-size: calc(var(--font-body-scale) * 18px);
 font-weight: 600;
 line-height: 24px;
 text-align: left;
