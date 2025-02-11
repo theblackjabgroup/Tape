@@ -5,11 +5,11 @@
     --section-color: {{ section.settings.sectionBackground }};
   }
 {% endstyle %}
-<div class="mainWrapper">
+<div class="shop__the__look__mainWrapper">
   <div class="shop_the_look__container ">
 
     <div class="shop__the__look__media__container color-{{ section.settings.bannerColor }}">
-      <div class="wrapper">
+      <div class="shop__the__look__media__container__wrapper">
         {% if section.settings.main_image != blank %}
           <img
             width="100%"
@@ -117,16 +117,6 @@
         "type": "text",
         "id": "section_description",
         "label": "Section Description",
-        "default": "Experience ultimate comfort with our wheelchair's padded armrests. Designed for support and pressure relief, they feature an ergonomic shape and adjustable height for a personalized fit. Enjoy enhanced stability and comfort during every ride!"
-      }, {
-        "type": "text",
-        "id": "moreInfo_heading",
-        "label": "More Info Heading",
-        "default": "Insights"
-      }, {
-        "type": "text",
-        "id": "moreInfo_description",
-        "label": "More Info Description",
         "default": "Experience ultimate comfort with our wheelchair's padded armrests. Designed for support and pressure relief, they feature an ergonomic shape and adjustable height for a personalized fit. Enjoy enhanced stability and comfort during every ride!"
       }
 
