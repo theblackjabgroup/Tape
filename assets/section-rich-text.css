@@ -8,16 +8,12 @@
   }
   .richtext_heading {
     margin-bottom: 10px;
-    font-family: var(--font-heading-family);
-    font-style: var(--font-heading-style);
-    font-size: calc(var(--font-heading-scale) * 28px);
-    font-weight: var(--font-weight);
   }
 
   .richtext_subheading {
-     font-family: var(--font-body-family);
-    font-style: var(--font-body-style);
-    font-size: calc(var(--font-body-scale) * 20px);
+    font-family: var(--font-subheading-family);
+  font-style: var(--font-subheading-style);
+    font-size: calc(var(--font-subheading-scale) * 20px);
     font-weight: 500;
   }
   .rich-text__text p {
