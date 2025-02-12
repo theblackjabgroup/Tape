@@ -227,7 +227,7 @@
                       <div style="width: 100%; height: 100%;">{{ 'image' | placeholder_svg_tag: 'placeholder-svg' | replace: 'svg', 'svg style="width: 100%; height: 100%; scale: 2"' }}</div>
                     {% endif %}
                   </div>
-                  <div class="card__title fira-sans-semibold">
+                  <div class="card__title">
                     <p>{{ item.settings.title }}</p>
                   </div>
                 </div>
@@ -246,7 +246,7 @@
                       <path fill="currentColor" fill-rule="evenodd" d="M1 4.51a.5.5 0 0 0 0 1h3.5l.01 3.5a.5.5 0 0 0 1-.01V5.5l3.5-.01a.5.5 0 0 0-.01-1H5.5L5.49.99a.5.5 0 0 0-1 .01v3.5l-3.5.01z" clip-rule="evenodd"/>
                     </svg>
                   </span>
-                  <p class="inter-regular" style="color: var(--featured-icon-with-text-description-color);">
+                  <p style="color: var(--featured-icon-with-text-description-color);">
                     {{ item.settings.description }}
                   </p>
                 </div>
