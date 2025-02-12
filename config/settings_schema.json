@@ -145,7 +145,7 @@
       }
     ]
   },
-  {
+ {
     "name": "t:settings_schema.typography.name",
     "settings": [
       {
@@ -167,6 +167,27 @@
         "step": 5,
         "unit": "%",
         "label": "t:settings_schema.typography.settings.heading_scale.label",
+        "default": 100
+      },
+       {
+        "type": "header",
+        "content": "t:settings_schema.typography.settings.header__3.content"
+      },
+      {
+        "type": "font_picker",
+        "id": "type_subheader_font",
+        "default": "fira_sans_n4",
+        "label": "t:settings_schema.typography.settings.type_subheader_font.label",
+        "info": "t:settings_schema.typography.settings.type_subheader_font.info"
+      },
+      {
+        "type": "range",
+        "id": "subheading_scale",
+        "min": 100,
+        "max": 150,
+        "step": 5,
+        "unit": "%",
+        "label": "t:settings_schema.typography.settings.subheading_scale.label",
         "default": 100
       },
       {
