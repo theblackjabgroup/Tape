@@ -1,42 +1,34 @@
 /* Main Image section */
-.mainWrapper {
+.shop__the__look__mainWrapper {
   box-sizing: border-box;
   width: 100%;
   height: 100%;
 }
 .shop_the_look__container {
   width: 98%;
+  height: 100%;
   background: var(--section-color);
   position: relative;
-  height: 80vh;
-  display: flex;
   margin: auto;
 }
 
 .shop__the__look__media__container {
-  flex: 65%;
   height: 90%;
+  width: 60%;
   position: relative;
-  margin: auto;
-  padding-left: 5px;
+  margin-left: 15px;
+  margin-top: 15px;
   background: var(--section-color);
+  z-index: 50;
 }
 
-.wrapper {
-  /* border-radius: 5px; */
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
-  object-fit: cover;
-  height: 100%;
-  /* background: grey; */
+.shop__the__look__media__container__wrapper {
+  height: 90%;
 }
 
-.wrapper,
+.shop__the__look__media__container__wrapper,
 .media {
-  /* border-radius: 5px; */
   object-fit: cover;
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
   height: 100%;
 }
 
@@ -46,6 +38,7 @@
   left: 0;
   width: 100%;
   height: 100%;
+  z-index: 50;
 }
 
 .shop-look__dots-item-wrap {
@@ -110,17 +103,19 @@
 /* Text section */
 
 .shop__the__look__text__wrapper {
-  flex: 35%;
-  margin: auto;
-  margin-right: 5px;
-  padding: 10px;
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
   background-color: var(--background_product_card);
-  height: 90%;
+  min-height: 30vh;
+  max-height: fit-content;
   width: 100%;
-  position: relative;
+  position: absolute;
+  top: 65%;
   overflow: hidden;
+}
+
+.shop__the__look__text__container {
+  width: 37%;
+  float: inline-end;
+  margin: 10px;
 }
 
 .shop__the__look__heading {
@@ -148,35 +143,45 @@
 
 @media (max-width: 1000px) {
   .shop_the_look__container {
-    flex-direction: column;
-    height: auto;
+    width: 98%;
+    height: 80vh;
+    /* background-color: cadetblue; */
+    position: relative;
+    margin: auto;
   }
 
   .shop__the__look__media__container {
-    flex: none;
-    width: 100%;
+    width: 96%;
     height: 50vh;
-    padding: 5px;
+    margin: auto;
+    padding: 0;
   }
 
-  .wrapper {
+  .shop__the__look__media__container__wrapper {
     height: 50vh;
   }
 
   .media {
     border-radius: 5px;
     height: 50vh;
+    margin-top: 10px;
   }
 
   .shop__the__look__text__wrapper {
     border-radius: 5px;
+    min-height: 20vh;
+    max-height: fit-content;
+    padding: 5px;
+  }
+
+  .shop__the__look__text__container {
+    width: 100%;
+    margin: auto;
   }
 
   .shop__the__look__heading {
     font-size: 20px;
     font-weight: 500;
-    padding: 5px 10px;
-    margin-left: 0;
   }
 
   .shop__the__look__description {
