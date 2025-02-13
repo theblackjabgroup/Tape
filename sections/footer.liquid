@@ -135,8 +135,7 @@
         <input 
             type="email" 
             id="email-input" 
-            name="email" 
-            style="width: 65%;" 
+            name="email"
             placeholder="Enter your email" 
             required
         >
@@ -150,33 +149,32 @@
     </div>
 </form>
 
-                {% if section.settings.enable_country_selector and localization.available_countries.size > 1 %}
-                    <div class="footer__country-selector">
-                        <localization-form>
-                            {% form 'localization', id: 'FooterCountryForm', class: 'footer-country-form' %}
-                                <div class="footer-country-wrapper">
-                                    <h2 class="footer-country-label" id="FooterCountryLabel">{{ 'localization.country_label' | t }}</h2>
-                                    {% render 'country-localization', localPosition: 'FooterCountry' %}
-                                </div>
-                            {% endform %}
-                        </localization-form>
-                    </div>
-                {% endif %}
-
-                {% if section.settings.enable_language_selector and localization.available_languages.size > 1 %}
-                    <div class="footer__language-selector">
-                        <localization-form>
-                            {% form 'localization', id: 'FooterLanguageForm', class: 'footer-language-form' %}
-                                <div class="footer-language-wrapper">
-                                    <h2 class="footer-language-label" id="FooterLanguageLabel">{{ 'localization.language_label' | t }}</h2>
-                                    {% render 'language-localization', localPosition: 'FooterLanguage' %}
-                                </div>
-                            {% endform %}
-                        </localization-form>
-                    </div>
-                {% endif %}
-            </div>
-        {% endif %}
+           
+       
+          {% if section.settings.enable_country_selector and localization.available_countries.size > 1 %}
+    <div class="footer__country-selector" style="font-size: 13px;">
+        <localization-form>
+            {% form 'localization', id: 'FooterCountryForm', class: 'footer-country-form' %}
+                <div class="footer-country-wrapper">
+                    {% render 'country-localization', localPosition: 'FooterCountry' %}
+                </div>
+            {% endform %}
+        </localization-form>
+    </div>
+{% endif %}
+{% if section.settings.enable_language_selector and localization.available_languages.size > 1 %}
+    <div class="footer__language-selector" style="font-size: 13px;">
+        <localization-form>
+            {% form 'localization', id: 'FooterLanguageForm', class: 'footer-language-form' %}
+                <div class="footer-language-wrapper">
+                    {% render 'language-localization', localPosition: 'FooterLanguage' %}
+                </div>
+            {% endform %}
+        </localization-form>
+    </div>
+{% endif %}
+</div>
+{% endif %}
 
         {% if section.blocks.size > 0 %}
         {% for block in section.blocks %}
@@ -198,10 +196,50 @@
                             {% if section.settings.show_social_icons %}
                                 <div class="social-icons">
                                     {%- if settings.social_facebook_link != blank -%}
-                                        <a href="{{ settings.social_facebook_link }}" class="social-icon">
-                                            {{ 'icon-facebook.svg' | inline_asset_content | replace: '<svg', '<svg style="height: 25px; fill: ' | append: settings.social_icon_color | remove: "_" }}
-                                        </a>
-                                    {%- endif -%}
+                                       <a href="{{ settings.social_facebook_link }}" class="social-icon" style="color: {{ section.settings.menu_item_color }};">
+                {{ 'icon-facebook.svg' | inline_asset_content | replace: '<svg', '<svg style="height: 25px; fill: ' | append: settings.social_icon_color | remove: "_" }}
+            </a>
+        {%- endif -%}
+{%- if settings.social_instagram_link != blank -%}
+            <a href="{{ settings.social_instagram_link }}" class="social-icon" aria-label="{{ 'general.social.links.instagram' | t }}" style="color: {{ section.settings.menu_item_color }};">
+                {{ 'icon-instagram.svg' | inline_asset_content | replace: '<svg', '<svg style="height: 25px; fill: ' | append: settings.social_icon_color | remove: "_" }}
+            </a>
+        {%- endif -%}
+        {%- if settings.social_youtube_link != blank -%}
+            <a href="{{ settings.social_youtube_link }}" class="social-icon" aria-label="{{ 'general.social.links.youtube' | t }}" style="color: {{ section.settings.menu_item_color }};">
+                {{ 'icon-youtube.svg' | inline_asset_content | replace: '<svg', '<svg style="height: 25px; fill: ' | append: settings.social_icon_color | remove: "_" }}
+            </a>
+        {%- endif -%}
+        {%- if settings.social_tiktok_link != blank -%}
+            <a href="{{ settings.social_tiktok_link }}" class="social-icon" aria-label="{{ 'general.social.links.tiktok' | t }}" style="color: {{ section.settings.menu_item_color }};">
+                {{ 'icon-tiktok.svg' | inline_asset_content | replace: '<svg', '<svg style="height: 25px; fill: ' | append: settings.social_icon_color | remove: "'" }}
+            </a>
+        {%- endif -%}
+        {%- if settings.social_twitter_link != blank -%}
+            <a href="{{ settings.social_twitter_link }}" class="social-icon" aria-label="{{ 'general.social.links.twitter' | t }}" style="color: {{ section.settings.menu_item_color }};">
+                {{ 'icon-twitter.svg' | inline_asset_content | replace: '<svg', '<svg style="height: 25px; fill: ' | append: settings.social_icon_color | remove: "'" }}
+            </a>
+        {%- endif -%}
+        {%- if settings.social_pinterest_link != blank -%}
+            <a href="{{ settings.social_pinterest_link }}" class="social-icon" aria-label="{{ 'general.social.links.pinterest' | t }}" style="color: {{ section.settings.menu_item_color }};">
+                {{ 'icon-pinterest.svg' | inline_asset_content | replace: '<svg', '<svg style="height: 25px; fill: ' | append: settings.social_icon_color | remove: "'" }}
+            </a>
+        {%- endif -%}
+        {%- if settings.social_snapchat_link != blank -%}
+            <a href="{{ settings.social_snapchat_link }}" class="social-icon" aria-label="{{ 'general.social.links.snapchat' | t }}" style="color: {{ section.settings.menu_item_color }};">
+                {{ 'icon-snapchat.svg' | inline_asset_content | replace: '<svg', '<svg style="height: 25px; fill: ' | append: settings.social_icon_color | remove: "'" }}
+            </a>
+        {%- endif -%}
+        {%- if settings.social_tumblr_link != blank -%}
+            <a href="{{ settings.social_tumblr_link }}" class="social-icon" aria-label="{{ 'general.social.links.tumblr' | t }}" style="color: {{ section.settings.menu_item_color }};">
+                {{ 'icon-tumblr.svg' | inline_asset_content | replace: '<svg', '<svg style="height: 25px; fill: ' | append: settings.social_icon_color | remove: "'" }}
+            </a>
+        {%- endif -%}
+        {%- if settings.social_vimeo_link != blank -%}
+            <a href="{{ settings.social_vimeo_link }}" class="social-icon" aria-label="{{ 'general.social.links.vimeo' | t }}" style="color: {{ section.settings.menu_item_color }};">
+                {{ 'icon-vimeo.svg' | inline_asset_content | replace: '<svg', '<svg style="height: 25px; fill: ' | append: settings.social_icon_color | remove: "'" }}
+            </a>
+        {%- endif -%}
                                 </div>
                             {% endif %}
                         </div>
