@@ -1,10 +1,5 @@
 {{ 'shop-the-look.css' | asset_url | stylesheet_tag }}
 
-{% style %}
-  :root  {
-    --section-color: {{ section.settings.sectionBackground }};
-  }
-{% endstyle %}
 <div class="shop__the__look__mainWrapper">
   <div class="shop_the_look__container ">
 
@@ -43,7 +38,7 @@
                   role="button"
                   aria-label="Click to view insights">
 
-                  <i class="icon fa fa-plus" style="--fa-secondary-opacity: 1; color:black;"></i>
+                  <i class="icon fa fa-plus" style="--fa-secondary-opacity: 1; color:rgb(var(--color-secondary-button-text));"></i>
                 </button>
               </div>
             {% endfor %}
@@ -92,23 +87,17 @@
       "groups": ["header", "footer"]
     },
     "settings": [
-      {
-        "type": "color",
-        "id": "sectionBackground",
-        "label": "Section Color"
-      },
+
       {
         "type": "color_scheme",
         "label": "Banner Color",
         "id": "bannerColor",
         "default": "#000000"
-      },
-      {
+      }, {
         "type": "image_picker",
         "id": "main_image",
         "label": "Main Look Image"
-      },
-      {
+      }, {
         "type": "text",
         "id": "section_heading",
         "label": "Section Heading",
