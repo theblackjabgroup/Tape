@@ -37,10 +37,16 @@
   >
     <div class="product-stories-page-width product-stories-page-width--without-padding">
       {%- if section.settings.title != blank -%}
-        <h2 class="product-stories-h1 product-stories-scroll-animate product-stories-fade-in">{{ section.settings.title }}</h2>
+        <h2 class="product-stories-h1 product-stories-scroll-animate product-stories-fade-in" style="  font-family: var(--font-heading-family);
+  font-style: var(--font-heading-style);
+  font-size: calc(var(--font-heading-scale)* 28px);
+  font-weight: var(--font-body-weight);">{{ section.settings.title }}</h2>
       {%- endif -%}
       {%- if section.settings.description != blank -%}
-        <p class="product-stories-scroll-animate product-stories-fade-in">{{ section.settings.description }}</p>
+        <p class="product-stories-scroll-animate product-stories-fade-in" style="  font-family: var(--font-subheading-family);
+  font-style: var(--font-subheading-style);
+    font-size: calc(var(--font-subheading-scale) * 20px);
+    font-weight: 500;">{{ section.settings.description }}</p>
       {%- endif -%}
       
       <video-column
@@ -55,7 +61,10 @@
             <div class="product-stories-video-column__content-item-wrap">
               <!-- Box above the video column -->
               <span class="product-stories-heading-background">
-                <h2 class="product-stories-heading">{{ block.settings.video_title }} </h2>
+                <h2 class="product-stories-heading" style="  font-family: var(--font-heading-family);
+  font-style: var(--font-heading-style);
+  font-size: calc(var(--font-heading-scale)* 28px);
+  font-weight: var(--font-body-weight);">{{ block.settings.video_title }} </h2>
               </span>
               
               <!-- Video column content -->
