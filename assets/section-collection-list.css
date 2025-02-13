@@ -168,7 +168,6 @@ text-decoration-skip-ink: none;
     animation-name: marquee-first-strip-cl;
     animation-duration: calc(var(--first-strip-speed, 20s) );
     transform: rotate(-5deg);
-    z-index: 20;
 }
 
 .scrolling-marquee-item-cl {
