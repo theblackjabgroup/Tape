@@ -144,7 +144,7 @@
 @media (max-width: 1000px) {
   .shop_the_look__container {
     width: 98%;
-    height: 80vh;
+    height: auto;
     /* background-color: cadetblue; */
     position: relative;
     margin: auto;
@@ -172,6 +172,7 @@
     min-height: 20vh;
     max-height: fit-content;
     padding: 5px;
+    position: static;
   }
 
   .shop__the__look__text__container {
