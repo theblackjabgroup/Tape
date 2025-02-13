@@ -10,6 +10,10 @@
   color: rgb(var(--color-secondary-button-text));
   }
    .richtext_heading {
+    font-family: var(--font-heading-family);
+    font-style: var(--font-heading-style);
+    font-size: calc(var(--font-heading-scale) * {{ section.settings.heading_font_size }}px);
+    font-weight:700;
     color: rgb(var(--color-foreground));
   }
   .richtext_subheading {
@@ -19,35 +23,6 @@
     .section-{{ section.id }}-padding.layout2 {
       padding-top: {{section.settings.padding_top}}px;
       padding-bottom: {{section.settings.padding_bottom}}px;
-    }
-
-    .section-{{ section.id }}-padding.layout1 h2 {
-      font-size: {{ section.settings.heading_font_size }}px;
-    }
-
-    .section-{{ section.id }}-padding.layout1 .rich-text__text {
-      font-size: {{ section.settings.text_font_size }}px;
-    }
-
-  
-    .section-{{ section.id }}-padding.layout2 h2 {
-      font-size: {{ section.settings.heading_font_size }}px;
-    }
-
-    .section-{{ section.id }}-padding.layout2 .rich-text__text {
-      font-size: {{ section.settings.text_font_size }}px;
-    }
-
-    @media screen and (max-width: 749px) {
-      .section-{{ section.id }}-padding.layout1 h2,
-      .section-{{ section.id }}-padding.layout2 h2 {
-        font-size: {{ section.settings.heading_font_size | times: 0.8 | round: 0 }}px;
-      }
-
-      .section-{{ section.id }}-padding.layout1 .rich-text__text,
-      .section-{{ section.id }}-padding.layout2 .rich-text__text {
-        font-size: {{ section.settings.text_font_size | times: 0.9 | round: 0 }}px;
-      }
     }
 </style>
 
