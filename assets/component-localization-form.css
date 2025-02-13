@@ -49,6 +49,7 @@
   transition: opacity 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   white-space: nowrap;
   padding-right: 1.7rem;
+color: rgb(var(--color-foreground));
 }
 
 @media screen and (max-width: 749px) {
@@ -100,7 +101,7 @@
 }
 
 .localization-selector option {
-  color: #000000;
+  color: rgb(var(--color-foreground));
 }
 
 .localization-selector + .disclosure__list-wrapper {
@@ -335,20 +336,17 @@
   padding: 0.9rem 1.5rem;
   text-decoration: none;
   line-height: calc(1 + 0.8 / var(--font-body-scale));
-  color: rgba(var(--color-foreground), 0.75);
+   color: rgb(var(--color-foreground));
   word-break: break-word;
 }
 
-.disclosure__link:hover {
-  color: rgb(var(--color-foreground));
-}
 
 .disclosure__link .icon-checkmark {
   width: 1rem;
   margin-right: 0.2rem;
 }
 
-.disclosure__link:hover .localization-form__currency,
+ .localization-form__currency,
 .disclosure__link:focus-visible .localization-form__currency,
 .disclosure__link:focus .localization-form__currency {
   display: inline-block;
