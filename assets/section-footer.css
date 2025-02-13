@@ -178,13 +178,13 @@ background-color: var(--background_product_card);
 }
 
 .footer-column form input {
-    padding: 10px 10px 10px 50px;
-    border: 1px solid #ccc;
-    margin-bottom: 11px;
-    font-family:var(--font-body-family);
-    width: 60%;
-    font-size: 16px;
-  border-radius:6px;
+  padding: 10px 10px 10px 50px;
+  border: 1px solid #ccc;
+  margin-bottom: 11px;
+  font-family: var(--font-body-family);
+  width: 300px;  
+  font-size: 16px;
+  border-radius: 6px;
 }
 
  .social-icons {
@@ -273,7 +273,7 @@ a {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-    margin-left: 100px;
+    margin-left: 60px;
 margin-bottom: -45px;
     margin-top: 30px;
      color: rgb(var(--color-foreground));
