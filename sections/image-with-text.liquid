@@ -1,8 +1,49 @@
 {{ 'image-with-text.css' | asset_url | stylesheet_tag }}
 
 {% style %}
-  :root  {
+:root {
     --section-color: {{ section.settings.sectionBackground }};
+    --banner-position: {% if section.settings.banner_position == 'center' %}
+      calc(50% - 200px)
+    {% elsif section.settings.banner_position == 'right' %}
+      calc(90% - 400px - 5%)
+    {% else %}
+      15%
+    {% endif %};
+  }
+
+  .info__banner {
+    left: var(--banner-position) !important;
+    width: 400px;
+    max-width: 90%;
+    position: absolute;
+  }
+
+  /* Tablet adjustments */
+  @media (max-width: 1024px) {
+    :root {
+      --banner-position: {% if section.settings.banner_position == 'center' %}
+        calc(50% - 175px) /* Adjusted for smaller banner width */
+      {% elsif section.settings.banner_position == 'right' %}
+        calc(100% - 350px - 5%)
+      {% else %}
+        10%
+      {% endif %};
+    }
+
+    .info__banner {
+      width: 350px;
+    }
+  }
+
+  /* Mobile adjustments */
+  @media (max-width: 734px) {
+    .info__banner {
+      left: 0 !important;
+      width: 100%;
+      max-width: 100%;
+      position: relative;
+    }
   }
 {% endstyle %}
 
@@ -39,10 +80,10 @@
       {% endfor %}
       <div class="info__banner color-{{ section.settings.bannerColor }}" style="opacity:{{ section.settings.opacity }}">
         <div class="info__banner__contents">
-          <p class="info__banner__title">NEW ARRIVAL</p>
-          <h1 class="info__banner__heading">Image With Text</h1>
+          <p class="info__banner__title inter-medium">NEW ARRIVAL</p>
+          <h1 class="info__banner__heading fira-sans-bold">Image With Text</h1>
           <div class="info__banner__details">
-            <p class="info__banner__description ">
+            <p class="info__banner__description inter-regular ">
               Pair large text with an image to give focus to your chosen product. Add details on style, availabilty, share the product description or review.
             </p>
             {% if section.settings.show_shop_button %}
@@ -112,7 +153,7 @@
     const updateDotScaling = () => {
       const scrollPosition = container.scrollLeft;
       const galleryWidth = cards[0].offsetWidth;
-      
+
       // Calculate the exact position between slides
       const exactIndex = scrollPosition / galleryWidth;
       const currentIndex = Math.floor(exactIndex);
@@ -250,11 +291,32 @@
         "default": 0.8
       },
       {
+        "type": "select",
+        "id": "banner_position",
+        "label": "Banner Position",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          }
+        ],
+        "default": "left"
+      },
+      {
         "type": "checkbox",
         "id": "autoplay",
         "label": "Enable Autoplay",
         "default": true
-      }, {
+      },
+      {
         "type": "checkbox",
         "id": "show_shop_button",
         "label": "Show Button",
@@ -288,18 +350,19 @@
             "id": "description",
             "label": "Description",
             "default": "Pair large text with an image to give focus to your chosen product. Add details on style, availabilty, share the product description or review."
-          }, {
+          },
+          {
             "type": "text",
             "id": "btnText",
             "label": "Button Text",
             "default": "Optional Button"
-          }, {
+          },
+          {
             "type": "url",
             "id": "url",
             "label": "link",
             "default": "/"
           }
-
         ]
       }
     ],
@@ -318,7 +381,8 @@
           },
           {
             "type": "card"
-          }, {
+          },
+          {
             "type": "card"
           }
         ]
