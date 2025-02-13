@@ -1,7 +1,11 @@
 .card{
   background-color: unset;
 }
-.card-wrapper {
+.collections_data{
+  min-height:60px;
+  border-bottom: 2px dashed yellow;
+}
+.collection_list-card-wrapper {
   color: inherit;
   position: relative;
   text-decoration: none;
@@ -9,44 +13,14 @@
   border-radius: 8px;
     overflow: hidden;
     flex-direction: column;
+  min-height:360px;
 }
-.collection_list-more-btn{
-  font-family: var(--font-body-family);
-    font-style: var(--font-body-style);
-    font-size: calc(var(--font-body-scale) * 12px);
-  font-weight: 500;
-  line-height: 20px;
-  text-underline-position: from-font;
-  text-decoration-skip-ink: none;
-    padding:13px 7px;
-    display: inline-block;
-    text-decoration: none;
-    align-self: end;
-    border-radius: 5px;
-        background: linear-gradient(to right, gray 50%, rgb(var(--color-button-text)) 50%);
-    background-size: 200% 100%;
-        background-position: 100% 0;
-    transition: all 1.5s ease-in-out;
-     text-decoration:none;
-      color: rgb(var(--color-secondary-button-text)) !important;
-}
-.collection_list-more-btn:hover{
- background-position: 0 0;
-}
-.collection_list-more-btn .icon-wrap {
-  margin-left: 8px;
-  transition: transform 0.3s ease; 
+.semicircle1 {
+  bottom: 280px;
 }
 
-.collection_list-more-btn .icon-wrap {
-  transform: translateX(4px); 
-}
-.semicircle {
-  top: 305px;
-}
-
-.collection_card_inner{
-  height:305px;
+.collection_list_inner{
+  height:300px;
 }
 .collection_card-content{
     height:auto;
@@ -60,9 +34,8 @@
     justify-content: space-evenly;
 }
 .collection-list_card__heading{
- font-family: var(--font-body-family);
-    font-style: var(--font-body-style);
-    font-size: calc(var(--font-body-scale) * 18px);
+font-family: Fira Sans;
+font-size: 18px;
 font-weight: 600;
 line-height: 24px;
 text-align: left;
@@ -107,7 +80,7 @@ text-decoration-skip-ink: none;
 }
 
 .card--card,
-.card--standard .collection_card_inner {
+.card--standard .collection_list_inner {
   position: relative;
   box-sizing: border-box;
   border-radius: var(--border-radius);
@@ -116,7 +89,7 @@ text-decoration-skip-ink: none;
 }
 
 .card--card:after,
-.card--standard .collection_card_inner:after {
+.card--standard .collection_list_inner:after {
   content: "";
   position: absolute;
   z-index: -1;
@@ -131,16 +104,16 @@ text-decoration-skip-ink: none;
 
 /* Needed for gradient continuity with or without animation, the transform scopes the gradient to its container which happens already when animation are turned on */
 .card--card.gradient,
-.collection_card_inner.gradient {
+.collection_list_inner.gradient {
   transform: perspective(0);
 }
 
 /* Needed for gradient continuity with or without animation so that transparent PNG images come up as we would expect */
-.collection_card_inner.color-scheme-1 {
+.collection_list_inner.color-scheme-1 {
   background: transparent;
 }
 
-.card .collection_card_inner .card__media {
+.card .collection_list_inner .card__media {
   overflow: hidden;
   /* Fix for Safari border bug on hover */
   z-index: 0;
@@ -149,7 +122,7 @@ text-decoration-skip-ink: none;
   );
 }
 
-.card--card .collection_card_inner .card__media {
+.card--card .collection_list_inner .card__media {
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
@@ -173,11 +146,11 @@ text-decoration-skip-ink: none;
   width: 100%;
 }
 
-.collection_card_innerr {
+.collection_list_innerr {
   width: 100%;
 }
 
-.card--media .collection_card_inner .card__content {
+.card--media .collection_list_inner .card__content {
   position: relative;
   padding: calc(var(--image-padding) + 1rem);
 }
@@ -282,10 +255,8 @@ text-decoration-skip-ink: none;
 }
 
 @media screen and (max-width: 749px) {
-     .semicircle {
-            top: 173px;
-      }
-    .collection_card_inner{
+   
+    .collection_list_inner{
           height:173px;
     }
   .grid--2-col-tablet-down .card__content quick-add-bulk .quantity__button {
@@ -370,7 +341,7 @@ text-decoration-skip-ink: none;
   width: 100%;
 }
 
-.collection_card_inner:not(.ratio) > .card__content {
+.collection_list_inner:not(.ratio) > .card__content {
   height: 100%;
 }
 
@@ -458,22 +429,22 @@ text-decoration-skip-ink: none;
 
 @media screen and (min-width: 990px) {
   .card .media.media--hover-effect > img:only-child,
-  .card-wrapper .media.media--hover-effect > img:only-child {
+  .collection_list-card-wrapper .media.media--hover-effect > img:only-child {
     transition: transform var(--duration-long) ease;
   }
 
   .card:hover .media.media--hover-effect > img:first-child:only-child,
-  .card-wrapper:hover .media.media--hover-effect > img:first-child:only-child {
+  .collection_list-card-wrapper:hover .media.media--hover-effect > img:first-child:only-child {
     transform: scale(1.03);
   }
 
-  .card-wrapper:hover
+  .collection_list-card-wrapper:hover
     .media.media--hover-effect
     > img:first-child:not(:only-child) {
     opacity: 0;
   }
 
-  .card-wrapper:hover .media.media--hover-effect > img + img {
+  .collection_list-card-wrapper:hover .media.media--hover-effect > img + img {
     opacity: 1;
     transition: transform var(--duration-long) ease;
     transform: scale(1.03);
@@ -485,7 +456,7 @@ text-decoration-skip-ink: none;
   }
 }
 
-.card--standard.card--media .collection_card_inner .card__information,
+.card--standard.card--media .collection_list_inner .card__information,
 .card--standard.card--text:not(.card--horizontal)
   > .card__content
   .card__heading:not(.card__heading--placeholder),
@@ -508,14 +479,14 @@ text-decoration-skip-ink: none;
   padding-right: 0;
 }
 
-.card--card.card--media .collection_card_innerr .card__information,
-.card--card.card--text .collection_card_inner,
+.card--card.card--media .collection_list_innerr .card__information,
+.card--card.card--text .collection_list_inner,
 .card--card.card--media > .card__content .card__badge {
   display: none;
 }
 
 .card--horizontal .card__badge,
-.card--horizontal.card--text .collection_card_inner {
+.card--horizontal.card--text .collection_list_inner {
   display: none;
 }
 
@@ -529,8 +500,8 @@ text-decoration-skip-ink: none;
   flex-direction: column;
 }
 
-.card--extend-height.card--standard.card--text .collection_card_inner,
-.card--extend-height.card--media .collection_card_inner {
+.card--extend-height.card--standard.card--text .collection_list_inner,
+.card--extend-height.card--media .collection_list_inner {
   flex-grow: 1;
 }
 
@@ -595,7 +566,7 @@ text-decoration-skip-ink: none;
   padding-top: 0;
 }
 
-.card--shape.card--standard:not(.card--text) .collection_card_inner {
+.card--shape.card--standard:not(.card--text) .collection_list_inner {
   border: 0;
   /* Border is not currently compatible with image shapes for standard cards. */
   background-color: transparent;
@@ -605,7 +576,7 @@ text-decoration-skip-ink: none;
   );
 }
 
-.card--shape.card--standard:not(.card--text) .collection_card_inner:after {
+.card--shape.card--standard:not(.card--text) .collection_list_inner:after {
   display: none;
 }
 
@@ -636,43 +607,114 @@ text-decoration-skip-ink: none;
 /* Card Shape Hover Rules */
 
 @media (prefers-reduced-motion: no-preference) {
-  .product-card-wrapper .shape--round {
+  .product-collection_list-card-wrapper .shape--round {
     transition: clip-path var(--duration-long) ease;
   }
 
-  .product-card-wrapper:hover .shape--round {
+  .product-collection_list-card-wrapper:hover .shape--round {
     clip-path: ellipse(47% 47% at 50% 50%);
   }
 
-  .product-card-wrapper .shape--blob {
+  .product-collection_list-card-wrapper .shape--blob {
     transition: clip-path var(--duration-long) ease-in-out;
   }
 
-  .product-card-wrapper:hover .shape--blob {
+  .product-collection_list-card-wrapper:hover .shape--blob {
     clip-path: polygon(var(--shape--blob-5));
   }
 
-  .grid__item:nth-child(2n) .product-card-wrapper:hover .shape--blob {
+  .grid__item:nth-child(2n) .product-collection_list-card-wrapper:hover .shape--blob {
     clip-path: polygon(var(--shape--blob-6));
   }
 
-  .grid__item:nth-child(3n) .product-card-wrapper:hover .shape--blob {
+  .grid__item:nth-child(3n) .product-collection_list-card-wrapper:hover .shape--blob {
     clip-path: polygon(var(--shape--blob-1));
   }
 
-  .grid__item:nth-child(4n) .product-card-wrapper:hover .shape--blob {
+  .grid__item:nth-child(4n) .product-collection_list-card-wrapper:hover .shape--blob {
     clip-path: polygon(var(--shape--blob-2));
   }
 
-  .grid__item:nth-child(5n) .product-card-wrapper:hover .shape--blob {
+  .grid__item:nth-child(5n) .product-collection_list-card-wrapper:hover .shape--blob {
     clip-path: polygon(var(--shape--blob-3));
   }
 
-  .grid__item:nth-child(7n) .product-card-wrapper:hover .shape--blob {
+  .grid__item:nth-child(7n) .product-collection_list-card-wrapper:hover .shape--blob {
     clip-path: polygon(var(--shape--blob-4));
   }
 
-  .grid__item:nth-child(8n) .product-card-wrapper:hover .shape--blob {
+  .grid__item:nth-child(8n) .product-collection_list-card-wrapper:hover .shape--blob {
     clip-path: polygon(var(--shape--blob-5));
   }
+}
+
+.semicircle1{
+      background-color: rgb(var(--color-background));
+}
+.collection-list_headingpart{
+    width: 57%;
+    margin:10px 40px 40px 40px;
+}
+
+
+@media screen and (max-width: 749px) {
+  .collection-list {
+  margin: 0 10px 0 10px;
+  }
+  .collection-list:not(.slider) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .section-collection-list .page-width {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .section-collection-list .collection-list:not(.slider) {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+.collection-list__item:only-child {
+  max-width: 100%;
+  width: 100%;
+}
+
+@media screen and (max-width: 749px) {
+  .slider.collection-list--1-items {
+    padding-bottom: 0;
+  }
+}
+@media screen and (max-width: 989px){
+  .collection-list_headingpart{
+    width: 95%;
+     margin: 0px 10px 0px 10px;
+    }
+}
+
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .slider.collection-list--1-items,
+  .slider.collection-list--2-items,
+  .slider.collection-list--3-items,
+  .slider.collection-list--4-items {
+    padding-bottom: 0;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .collection-list__item a:hover {
+    box-shadow: none;
+  }
+}
+
+@media screen and (max-width: 989px) {
+  .collection-list.slider .collection-list__item {
+    max-width: 100%;
+  }
+}
+
+.collection-list-view-all {
+  margin-top: 2rem;
 }

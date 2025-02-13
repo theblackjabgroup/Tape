@@ -88,7 +88,9 @@
        <header>
           <h1 class="gift-card-title">Your Gift Card</h1>
            {% if section.settings.logo %}
-          <div class="gift_card-logo">  <img src="{{ section.settings.logo | img_url: 'master' }}" alt="{{ block.settings.title }}"> </div>
+          <div class="gift_card-logo">    {{
+                section.settings.logo | image_url: width: 1800 | image_tag: width: 1800, height: 1600, class: 'media'
+              }} </div>
           {% else  %}
               <p class="gift-card-theme">Theme-{{ shop.name }}</p>
              {% endif %}

@@ -178,13 +178,13 @@ background-color: var(--background_product_card);
 }
 
 .footer-column form input {
-    padding: 10px 10px 10px 50px;
-    border: 1px solid #ccc;
-    margin-bottom: 11px;
-    font-family:var(--font-body-family);
-    width: 70%;
-    font-size: 16px;
-  border-radius:6px;
+  padding: 10px 10px 10px 50px;
+  border: 1px solid #ccc;
+  margin-bottom: 11px;
+  font-family: var(--font-body-family);
+  width: 300px;  
+  font-size: 16px;
+  border-radius: 6px;
 }
 
  .social-icons {
@@ -230,12 +230,10 @@ a {
 }
 
 /* Common button styles for language selector, country selector, and form button */
-.footer__language-selector .footer-language-form .disclosure__button,
-.footer__country-selector .footer-country-form .disclosure__button,
 .footer-column form button {
 
-    width: 250px;
-    height: 40px;
+    width: 200px;
+    height: 50px;
     padding: 0.5rem 1rem;
     margin: 0.5rem 0;
   font-weight:600;
@@ -251,6 +249,7 @@ a {
 
 }
 
+
 .footer-column form button {
     background: linear-gradient(to right, gray 50%, rgb(var(--color-button-text)) 50%);
     background-size: 200% 100%;
@@ -261,77 +260,58 @@ a {
     transition: background-position 1.5s ease-in-out, transform 0.3s ease;
 }
 
-
-.footer__language-selector .footer-language-form .disclosure__button {
-    padding-right: 65px;
-}
-
-.footer__country-selector .footer-country-form .disclosure__button {
-    padding-right: 40px;
-}
-
-
-/* Optional Adjustments for Margins and Layout */
-.footer__country-selector .footer-country-label {
-margin-left: -1px;
-margin-bottom: 1px;
-margin-top: 15px;
-font-size: 15px;
-    font-family:var(--font-body-family);
-
-}
-/* .disclosure {
-  margin-right: 85px;
-} */
-.footer-country-label::first-letter {
-  text-transform: uppercase;
-}
-
-
-/* Footer Langauage Selector Container */
-.footer__language-selector {
- width:100%;
-}
-
-/* Localization Form */
-.footer__language-selector .footer-language-form {
-  width: 100%;
-}
-
-/* Wrapper for Form Content */
-.footer__language-selector .footer-language-wrapper {
+/* Ensure the selectors are in a flex container */
+.footer-localization {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  gap: 1rem; /* Space between the selectors */
+  flex-wrap: wrap; /* Prevents overflow issues on small screens */
+}
+
+/* Ensure both selectors align properly */
+ .footer__country-selector {
+  display: flex;
+  align-items: center;
   gap: 0.5rem;
-  margin-top:-5px;
+    margin-left: 60px;
+margin-bottom: -45px;
+    margin-top: 30px;
+     color: rgb(var(--color-foreground));
+    background: none;
+    border: none;
+   width:20px;
+
+} 
+
+.footer__language-selector {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* Space between label and dropdown */
+     margin-top: -15px;
+margin-left: -15px;
+   color: rgb(var(--color-foreground));
+    background: none;
+    border: none;
+     width:20px;
 }
 
-/* Country Label */
-.footer__language-selector .footer-language-label {
-  margin: 0.5rem 0;
-  text-align: left;
-  font-weight: bold;
-    font-family:var(--font-body-family);
+/* Ensure form elements align properly */
+.footer-country-form,
+.footer-language-form {
+  display: flex;
+  align-items: center;
 }
 
 
-
-
-/* Optional Adjustments for Margins and Layout */
-.footer__language-selector .footer-language-label {
-margin-left: 1px;
-margin-bottom: 1px;
-margin-top: 15px;
-font-size: 15px;
-
+/* Container for both selectors */
+.mobile-nav-indicators {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem;
 }
-/* .disclosure {
-  margin-right: 85px;
-} */
-.footer-language-label::first-letter {
-  text-transform: uppercase;
-}
+
+
 
 @media (max-width: 768px) {
   .footer-content {
@@ -359,6 +339,9 @@ font-size: 15px;
     font-weight: 400;
     margin-left: 20px;
   }
+.footer-column{
+      margin-left: 50px;
+}
 }
 
 @media (max-width: 480px) {
@@ -421,7 +404,7 @@ font-size: 15px;
     border: 1px solid #ccc;
     margin-bottom: 14px;
     font-family:var(--font-body-family);
-    width: 100%;
+    width: 80%;
     font-size: 15px;
   }
 
