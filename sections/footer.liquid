@@ -179,17 +179,17 @@
         {% if section.blocks.size > 0 %}
         {% for block in section.blocks %}
             {% case block.type %}
-                {% when 'menu' %}
-                    <div class="footer-column" {{ block.shopify_attributes }}>
-                        <h4 style="font-family: var(--font-heading-family) !important;">{{ block.settings.menu_title }}</h4>
-                        <ul style="font-family: var(--font-body-family) !important;">
-                            {% for link in linklists[block.settings.menu_links].links %}
-                                <li style="font-family: var(--font-body-family) !important;">
-                                    <a href="{{ link.url }}" style="font-family: var(--font-body-family) !important;">{{ link.title }}</a>
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    </div>
+               {% when 'menu' %}
+    <div class="footer-column" {{ block.shopify_attributes }}>
+        <h4 style="font-family: var(--font-heading-family) !important;">{{ block.settings.menu_title }}</h4>
+        <ul style="font-family: var(--font-body-family) !important;">
+            {% for link in linklists[block.settings.menu_links].links %}
+                <li style="font-family: var(--font-body-family) !important;">
+                    <a href="{{ link.url }}" style="font-family: var(--font-body-family) !important; color: {{ section.settings.menu_item_color }};">{{ link.title }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
                      {% when 'social_media' %}
                     <div class="footer-column" {{ block.shopify_attributes }}>
                         <h4 style="font-family: var(--font-heading-family) !important;">{{ block.settings.social_title }}</h4>
@@ -322,18 +322,12 @@
       "label": "t:sections.all.colors.label",
       "default": "scheme-1"
     },
-    {
-      "type": "color",
-      "id": "menu_item_color",
-      "label": "Menu Item Color",
-      "default": "#333333"
-    },
-    {
-      "type": "color",
-      "id": "menu_title_color",
-      "label": "Menu Title Color",
-      "default": "#000000"
-    },
+  {
+  "type": "color",
+  "id": "menu_item_color",
+  "label": "Menu Item Color",
+  "default": "#333333"
+},
     {
       "type": "header",
       "content": "Footer Layout"
@@ -501,7 +495,6 @@
         "footer_top_padding": 50,
         "footer_bottom_padding": 50,
         "menu_item_color": "#333333",
-        "menu_title_color": "#000000"
       }
     }
   ]
