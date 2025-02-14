@@ -16,9 +16,14 @@ class FacetFiltersForm extends HTMLElement {
   }
 
   static setListeners() {
+    console.log("in set listeners")
     const onHistoryChange = (event) => {
+      console.log("in history change")
       const searchParams = event.state ? event.state.searchParams : FacetFiltersForm.searchParamsInitial;
-      if (searchParams === FacetFiltersForm.searchParamsPrev) return;
+      if (searchParams === FacetFiltersForm.searchParamsPrev) {
+        console.log("in searchParams")
+        return;
+      }
       FacetFiltersForm.renderPage(searchParams, null, false);
     };
     window.addEventListener('popstate', onHistoryChange);
@@ -31,6 +36,7 @@ class FacetFiltersForm extends HTMLElement {
   }
 
   static renderPage(searchParams, event, updateURLHash = true) {
+    console.log("rederPage")
     FacetFiltersForm.searchParamsPrev = searchParams;
     const sections = FacetFiltersForm.getSections();
     const countContainer = document.getElementById('ProductCount');
@@ -48,6 +54,7 @@ class FacetFiltersForm extends HTMLElement {
     }
 
     sections.forEach((section) => {
+      console.log("sections ", section)
       const url = `${window.location.pathname}?section_id=${section.section}&${searchParams}`;
       const filterDataUrl = (element) => element.url === url;
 
