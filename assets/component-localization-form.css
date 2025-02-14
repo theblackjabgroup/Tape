@@ -129,14 +129,15 @@ color: rgb(var(--color-foreground));
   border-color: rgba(var(--color-foreground), var(--popup-border-opacity));
   overflow: hidden;
   position: absolute;
-  bottom: 100%;
-  transform: translateY(-1rem);
+  bottom: auto;
+top:100%;
+  transform: translateY(0);
   z-index: 2;
   background-color: rgb(var(--color-background));
   border-radius: var(--popup-corner-radius);
   box-shadow: var(--popup-shadow-horizontal-offset) var(--popup-shadow-vertical-offset) var(--popup-shadow-blur-radius)
     rgba(var(--color-shadow), var(--popup-shadow-opacity));
-  max-height: 27.5rem;
+  max-height: 25rem;
 }
 
 .disclosure__list {
@@ -146,8 +147,8 @@ color: rgb(var(--color-foreground));
   padding-bottom: 0.5rem;
   padding-top: 0.5rem;
   scroll-padding: 0.5rem 0;
-  max-height: 20.5rem;
-  max-width: 25.5rem;
+  max-height: 15rem;
+  max-width: 22rem;
   min-width: 12rem;
   width: 100%;
 }

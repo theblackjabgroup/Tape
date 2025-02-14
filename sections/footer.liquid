@@ -1,3 +1,4 @@
+
 {% comment %}theme-check-disable UndefinedObject{% endcomment %}
 {{ 'section-footer.css' | asset_url | stylesheet_tag }}
 
@@ -7,7 +8,6 @@
     font-weight: var(--font-body-weight);
     border-radius: {{ section.settings.footer_button_border_radius | default: 5 }}px;
     font-size: {{ section.settings.footer_button_font_size | default: 15 }}px;
-    width: {{ section.settings.footer_button_width | default: 200 }}px;
     height: {{ section.settings.footer_button_height | default:50 }}px;
     padding: {{ section.settings.footer_button_padding | default: '5px 10px' }};
     text-align: left;
@@ -22,6 +22,28 @@
   .footer-column form button:hover {
     background-position: 0 0;
     transform: {{ section.settings.footer_button_hover_transform | default: 'scale(1.05)' }};
+}
+
+.subscribe-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  cursor: pointer;
+  padding: 12px 24px;
+  position: relative;
+font-family: var(--font-body-family);
+    font-weight: var(--font-body-weight);
+}
+
+.subscribe-button .footer-svg {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s ease;
+}
+
+.subscribe-button:hover .footer-svg {
+  transform: translateX(5px);
 }
 
 .footer-column form button::after {
@@ -139,13 +161,13 @@
             placeholder="Enter your email" 
             required
         >
-        <button type="submit">
-            {{ section.settings.subscribe_button_text }}
-            <svg class="footer-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
-            </svg>
-        </button>
+       <button type="submit" class="subscribe-button">
+    {{ section.settings.subscribe_button_text }}
+    <svg class="footer-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+        <polyline points="12 5 19 12 12 19"></polyline>
+    </svg>
+</button>
     </div>
 </form>
 
