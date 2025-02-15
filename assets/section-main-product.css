@@ -191,7 +191,6 @@ product-info {
 
 .product-form__submit {
   margin-bottom: 1rem;
-  font-family: 'Inter';
   font-weight: 500;
 }
 
@@ -257,7 +256,6 @@ a.product__text {
 
 .product__title > * {
   margin: 0;
-  font-family: 'Fira Sans';
   font-weight: 700;
   font-size: 28px;
 }
@@ -397,7 +395,6 @@ a.product__text {
 @media screen and (max-width: 749px) {
   .product__title > * {
     margin: 0;
-    font-family: 'Fira Sans';
     font-weight: 700;
     font-size: 24px;
   }
