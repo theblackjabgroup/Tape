@@ -74,7 +74,6 @@ variant-selects {
   cursor: pointer;
   position: relative;
   border-radius: 5px;
-  font-family: 'Inter';
 }
 .product-form__input--pill input[type='radio'] + label::before {
   content: "" !important;

@@ -57,6 +57,8 @@
   {%- endif -%}
 
   {%- assign first_3d_model = product.media | where: 'media_type', 'model' | first -%}
+  {%- assign show_pickup_availability = false -%}
+
   {%- if first_3d_model -%}
     {{ 'component-product-model.css' | asset_url | stylesheet_tag }}
     <link
@@ -268,6 +270,39 @@
                     </div>
                   </details>
                 </div>
+              {%- when 'pickup_availability' -%}
+                {{ 'component-pickup-availability.css' | asset_url | stylesheet_tag }}
+
+                {%- assign pick_up_availabilities = product.selected_or_first_available_variant.store_availabilities
+                  | where: 'pick_up_enabled', true
+                -%}
+            
+                <pickup-availability
+                  class="product__pickup-availabilities quick-add-hidden"
+                  {% if product.selected_or_first_available_variant.available and pick_up_availabilities.size > 0 %}
+                    available
+                  {% endif %}
+                  data-root-url="{{ routes.root_url }}"
+                  data-variant-id="{{ product.selected_or_first_available_variant.id }}"
+                  data-has-only-default-variant="{{ product.has_only_default_variant }}"
+                  data-product-page-color-scheme="gradient color-{{ section.settings.color_scheme }}"
+                >
+                  <template>
+                    <pickup-availability-preview class="pickup-availability-preview">
+                      <span class="svg-wrapper">
+                        {{- 'icon-unavailable.svg' | inline_asset_content -}}
+                      </span>
+                      <div class="pickup-availability-info">
+                        <p class="caption-large">{{ 'products.product.pickup_availability.unavailable' | t }}</p>
+                        <button class="pickup-availability-button link link--text underlined-link">
+                          {{ 'products.product.pickup_availability.refresh' | t }}
+                        </button>
+                      </div>
+                    </pickup-availability-preview>
+                  </template>
+                </pickup-availability>
+            
+                <script src="{{ 'pickup-availability.js' | asset_url }}" defer="defer"></script>
               {%- when 'quantity_selector' -%}
                 <div
                   id="Quantity-Form-{{ section.id }}"
@@ -514,7 +549,7 @@
                   product: product,
                   product_form_id: product_form_id,
                   section_id: section.id,
-                  show_pickup_availability: true
+                  show_pickup_availability: show_pickup_availability
                 -%}
               {%- when 'rating' -%}
                 {%- if product.metafields.reviews.rating.value != blank -%}
@@ -893,6 +928,11 @@
     {
       "type": "quantity_selector",
       "name": "t:sections.main-product.blocks.quantity_selector.name",
+      "limit": 1
+    },
+    {
+      "type": "pickup_availability",
+      "name": "Pickup Availability",
       "limit": 1
     },
     {

@@ -2,6 +2,7 @@
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
 {{ 'component-search.css' | asset_url | stylesheet_tag }}
+{{ 'product-list.css' | asset_url | stylesheet_tag }}
 
 {%- if section.settings.enable_filtering or section.settings.enable_sorting -%}
   {{ 'component-facets.css' | asset_url | stylesheet_tag }}
@@ -73,6 +74,7 @@
   assign terms = search.terms | escape
   assign search_url = '?q=' | append: terms | append: '&options%5Bprefix%5D=last&sort_by=' | append: sort_by
 -%}
+{% assign sort_default = "Featured" %}
 
 {%- style -%}
   .section-{{ section.id }}-padding {
