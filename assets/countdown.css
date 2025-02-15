@@ -138,7 +138,35 @@
   background-color: rgb(var(--color-background)); 
   border-radius: 50%;
 }
-/* Previous CSS remains the same until mobile media query */
+.layout-layout_2 {
+  clip-path: polygon(90% 0, 100% 17%, 100% 90%, 75% 100%, 0 100%, 0% 60%, 0 0);
+}
+.top-right-fold {
+position: absolute;
+    top: 17px;
+    right: 0;
+    width: 90px;
+    height: 90px;
+    background-color: rgb(var(--color-button-text));
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+    transform: rotate(271deg);
+    transform-origin: top left;
+    z-index: 10;
+}
+
+.bottom-right-fold {
+position: absolute;
+    top: 255px;
+    right: -206px;
+    width: 218px;
+    height: 50px;
+    background-color: rgb(var(--color-button-text));
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+    transform: rotate(168deg);
+    transform-origin: bottom left;
+    z-index: 10;
+}
+
 
 @media screen and (max-width: 750px) {
   .countdown-section {
@@ -220,10 +248,36 @@
   .countdown-border-bottom {
     left: 3px;
   }
+  .layout-layout_2 {
+           clip-path: polygon(85% 0, 100% 9%, 100% 93%, 55% 100%, 0 100%, 0% 60%, 0 0);
+  }
+  .top-right-fold{
+   top: -7px;
+        right: -13px;
+        width: 57px;
+        height: 50px;
+  }
+  .bottom-right-fold {
+           top: 437px;
+        right: -150px;
+        width: 155px;
+        height: 50px;
+    transform: rotate(164deg);
+  }
 }
 
 @media screen and (min-width: 1250px) {
   .countdown-timer {
     font-size: calc(var(--timer-font-size, 21px) * 1.2) !important;
+  }
+  .top-right-fold{
+    width: 117px;
+    height: 200px;
+  }
+  .bottom-right-fold{
+    top: 255px;
+    right: -340px;
+    width: 350px;
+    transform: rotate(169deg);
   }
 }
