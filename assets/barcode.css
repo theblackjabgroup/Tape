@@ -13,7 +13,7 @@
     width: max-content;
     overflow-x: visible;
     position: relative;
-    margin:20px 0;
+    margin: 20px 0;
     animation: marquee 20s linear infinite;
   }
 
@@ -40,6 +40,8 @@
   .bar {
     display: inline-block;
     position: relative;
+    height: {{ section.settings.bar_height | default: 100 }}px;
+    margin: 0 {{ section.settings.bar_spacing | default: 3 }}px;
   }
 
   .visually-hidden {
@@ -54,96 +56,32 @@
     border: 0;
   }
 
-  /* Desktop styles */
-  .bar-1 {
-    width: 5px;
-    height: 100px;
-    margin: 0 3px;
-  }
+  .bar-1 { width: {{ section.settings.bar_width | default: 5 | times: 1 }}px; }
+  .bar-2 { width: {{ section.settings.bar_width | default: 5 | times: 0.6 }}px; }
+  .bar-3 { width: {{ section.settings.bar_width | default: 5 | times: 1.6 }}px; }
+  .bar-4 { width: {{ section.settings.bar_width | default: 5 | times: 2 }}px; }
+  .bar-5 { width: {{ section.settings.bar_width | default: 5 | times: 1 }}px; }
+  .bar-6 { width: {{ section.settings.bar_width | default: 5 | times: 0.6 }}px; }
+  .bar-7 { width: {{ section.settings.bar_width | default: 5 | times: 1.6 }}px; }
+  .bar-8 { width: {{ section.settings.bar_width | default: 5 | times: 2 }}px; }
+  .bar-9 { width: {{ section.settings.bar_width | default: 5 | times: 0.6 }}px; }
+  .bar-10 { width: {{ section.settings.bar_width | default: 5 | times: 1.4 }}px; }
 
-  .bar-2 {
-    width: 3px;
-    height: 100px;
-    margin: 0 2px;
-  }
-
-  .bar-3 {
-    width: 8px;
-    height: 100px;
-    margin: 0 4px;
-  }
-
-  .bar-4 {
-    width: 10px;
-    height: 100px;
-    margin: 0 6px;
-  }
-
-  .bar-5 {
-    width: 5px;
-    height: 100px;
-    margin: 0 3px;
-  }
-
-  .bar-6 {
-    width: 3px;
-    height: 100px;
-    margin: 0 3px;
-  }
-
-  .bar-7 {
-    width: 8px;
-    height: 100px;
-    margin: 0 2px;
-  }
-
-  .bar-8 {
-    width:10px;
-    height: 100px;
-    margin: 0 4px;
-  }
-  .bar-9{
-      width:3px;
-    height: 100px;
-    margin: 0 4px;
-  }
-  .bar-10{
-      width:7px;
-    height: 100px;
-    margin: 0 4px;
-  }
-
-  /* Tablet styles */
   @media screen and (max-width: 990px) {
     .barcode {
       min-height: 50px;
       padding: 6px;
     }
 
-    .bar-1, .bar-2, .bar-3, .bar-4,
-    .bar-5, .bar-6, .bar-7, .bar-8 {
-      height: 75px;
+    .bar {
+      height: {{ section.settings.bar_height | default: 100 | times: 0.75 }}px;
     }
 
-    .bar-1 { width: 6px; margin: 0 3px; }
-    .bar-2 { width: 4px; margin: 0 2px; }
-    .bar-3 { width: 8px; margin: 0 3px; }
-    .bar-4 { width: 10px; margin: 0 4px; }
-    .bar-5 { width: 6px; margin: 0 3px; }
-    .bar-6 { width: 4px; margin: 0 2px; }
-    .bar-7 { width: 8px; margin: 0 3px; }
-    .bar-8 { width: 10px; margin: 0 4px; }
-    .bar-9 { width: 3px; margin: 0 2px; }
-    .bar-10 { width: 7px; margin: 0 3px; }
-
-
-    /* Hide every fourth bar in tablet view */
     .barcode-content > div:nth-child(4n) {
       display: none;
     }
   }
 
-  /* Mobile styles */
   @media screen and (max-width: 480px) {
     .barcode {
       min-height: 35px;
@@ -151,28 +89,14 @@
       gap: 3px;
     }
 
-    .bar-1, .bar-2, .bar-3, .bar-4,
-    .bar-5, .bar-6, .bar-7, .bar-8,.bar-9,.bar-10 {
-      height: 50px;
+    .bar {
+      height: {{ section.settings.bar_height | default: 100 | times: 0.5 }}px;
     }
 
-    .bar-1 { width: 4px; margin: 0 2px; }
-    .bar-2 { width: 3px; margin: 0 2px; }
-    .bar-3 { width: 5px; margin: 0 2px; }
-    .bar-4 { width: 8px; margin: 0 2px; }
-    .bar-5 { width: 4px; margin: 0 2px; }
-    .bar-6 { width: 3px; margin: 0 2px; }
-    .bar-7 { width: 5px; margin: 0 2px; }
-    .bar-8 { width: 8px; margin: 0 2px; }
-    .bar-9 { width: 2px; margin: 0 2px; }
-    .bar-10 { width: 4px; margin: 0 2px; }
-
-    /* Hide every third bar in mobile view */
     .barcode-content > div:nth-child(3n) {
       display: none;
     }
 
-    /* Keep center section bars visible */
     .barcode-content > div.bar-5,
     .barcode-content > div.bar-6,
     .barcode-content > div.bar-7,
@@ -181,38 +105,27 @@
     }
   }
 
-  /* Extra small screen styles */
   @media screen and (max-width: 320px) {
     .barcode {
       min-height: 30px;
     }
 
-    .bar-1, .bar-2, .bar-3, .bar-4 .bar-5, .bar-6, .bar-7, .bar-8{
-      height: 40px;
+    .bar {
+      height: {{ section.settings.bar_height | default: 100 | times: 0.4 }}px;
     }
 
-
-    /* Hide more bars for very small screens */
     .barcode-content > div:nth-child(2n) {
       display: none;
     }
   }
 
-  /* Large screen styles */
   @media screen and (min-width: 1440px) {
     .barcode {
       height: 100px;
       margin-bottom: 13px;
     }
 
-    .bar-1 { width: 8px; margin: 0 3px; }
-    .bar-2 { width: 5px; margin: 0 4px; }
-    .bar-3 { width: 3px; margin: 0 3px; }
-    .bar-4 { width: 10px; margin: 0 4px; }
-    .bar-5 { width: 8px; margin: 0 3px; }
-    .bar-6 { width: 5px; margin: 0 4px; }
-    .bar-7 { width: 3px; margin: 0 3px; }
-    .bar-8 { width: 10px; margin: 0 4px; }
-    .bar-9 { width: 3px; margin: 0 3px; }
-    .bar-10 { width: 5px; margin: 0 4px; }
+    .bar {
+      height: {{ section.settings.bar_height | default: 100 }}px;
+    }
   }
