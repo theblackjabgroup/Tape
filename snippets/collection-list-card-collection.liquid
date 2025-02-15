@@ -1,740 +1,143 @@
-.card{
-  background-color: unset;
-}
-.dashed_line{
-  position:absolute;
-      display: flex;
-    gap: 6px;
-    width: 100%;
-    height: 4px;
-    justify-content: center;
-    overflow: hidden;
-  bottom:298px;
-}
-.rectangle{
-  flex-shrink:0;
-    width: 15px;
-    height: 100%;
-    border-radius: 2px;
-       background-color: rgb(var(--color-background));
-  z-index:1;
-}
-.card__media{
-  width:100%;
-}
-.collections_data{
-  min-height:60px;
-      background-color: rgb(var(--color-button));
-}
-.collection_list-card-wrapper {
-  color: inherit;
-  position: relative;
-  text-decoration: none;
-    display: flex;
-  border-radius: 8px;
-    overflow: hidden;
-    flex-direction: column;
-}
-.semicircle1 {
-  bottom: 280px;
-}
-
-.collection_list_inner{
-  height:300px;
-}
-.collection_card-content{
-    height:auto;
-    min-height:140px;
-   background-color: rgb(var(--color-button));
-}
-.collection_list-card__content{
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: space-evenly;
-}
-.collection-list_card__heading{
-font-family: Fira Sans;
-font-size: 18px;
-font-weight: 600;
-line-height: 24px;
-text-align: left;
-text-underline-position: from-font;
-text-decoration-skip-ink: none;
-}
-
-
-.card {
-  text-decoration: none;
-  text-align: var(--text-alignment);
-}
-
-.card:not(.ratio) {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
-.card.card--horizontal {
-  --text-alignment: left;
-  --image-padding: 0rem;
-  flex-direction: row;
-  align-items: flex-start;
-  gap: 1.5rem;
-}
-
-.card--horizontal.ratio:before {
-  padding-bottom: 0;
-}
-
-.card--card.card--horizontal {
-  padding: 1.2rem;
-}
-
-.card--card.card--horizontal.card--text {
-  column-gap: 0;
-}
-
-.card--card {
-  height: 100%;
-}
-
-.card--card,
-.card--standard .collection_list_inner {
-  position: relative;
-  box-sizing: border-box;
-  border-radius: var(--border-radius);
-  border: var(--border-width) solid
-    rgba(var(--color-foreground), var(--border-opacity));
-}
-
-.card--card:after,
-.card--standard .collection_list_inner:after {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  width: calc(var(--border-width) * 2 + 100%);
-  height: calc(var(--border-width) * 2 + 100%);
-  top: calc(var(--border-width) * -1);
-  left: calc(var(--border-width) * -1);
-  border-radius: var(--border-radius);
-  box-shadow: var(--shadow-horizontal-offset) var(--shadow-vertical-offset)
-    var(--shadow-blur-radius) rgba(var(--color-shadow), var(--shadow-opacity));
-}
-
-/* Needed for gradient continuity with or without animation, the transform scopes the gradient to its container which happens already when animation are turned on */
-.card--card.gradient,
-.collection_list_inner.gradient {
-  transform: perspective(0);
-}
-
-/* Needed for gradient continuity with or without animation so that transparent PNG images come up as we would expect */
-.collection_list_inner.color-scheme-1 {
-  background: transparent;
-}
-
-.card .collection_list_inner .card__media {
-  overflow: hidden;
-  /* Fix for Safari border bug on hover */
-  z-index: 0;
-  border-radius: calc(
-    var(--border-radius) - var(--border-width) - var(--image-padding)
-  );
-}
-
-.card--card .collection_list_inner .card__media {
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-}
-
-.card--standard.card--text {
-  background-color: transparent;
-}
-
-.card-information {
-  text-align: var(--text-alignment);
-}
-
-.card__media,
-.card .media {
-  bottom: 0;
-  position: absolute;
-  top: 0;
-}
-
-.card .media {
-  width: 100%;
-}
-
-.collection_list_innerr {
-  width: 100%;
-}
-
-.card--media .collection_list_inner .card__content {
-  position: relative;
-  padding: calc(var(--image-padding) + 1rem);
-}
-
-.card__content {
-  display: grid;
-  grid-template-rows: minmax(0, 1fr) max-content minmax(0, 1fr);
-  padding: 1rem;
-  width: 100%;
-  flex-grow: 1;
-}
-
-.card__content--auto-margins {
-  grid-template-rows: minmax(0, auto) max-content minmax(0, auto);
-}
-
-.card__information {
-  grid-row-start: 2;
-}
-
-.card:not(.ratio) > .card__content {
-  grid-template-rows: max-content minmax(0, 1fr) max-content auto;
-}
-
-.card-information .card__information-volume-pricing-note {
-  margin-top: 0.6rem;
-  line-height: calc(0.5 + 0.4 / var(--font-body-scale));
-  color: rgba(var(--color-foreground), 0.75);
-}
-
-.card__information-volume-pricing-note--button,
-.card__information-volume-pricing-note--button.quantity-popover__info-button--icon-with-label {
-  position: relative;
-  z-index: 1;
-  cursor: pointer;
-  padding: 0;
-  margin: 0;
-  text-align: var(--text-alignment);
-  min-width: auto;
-}
-
-.card__information-volume-pricing-note--button:hover {
-  text-decoration: underline;
-}
-
-.card__information-volume-pricing-note--button
-  + .global-settings-popup.quantity-popover__info {
-  transform: initial;
-  top: auto;
-  bottom: 4rem;
-  max-width: 20rem;
-  width: calc(95% + 2rem);
-}
-
-.card__information-volume-pricing-note--button
-  + .global-settings-popup.quantity-popover__info
-  span:first-of-type {
-  padding-right: 0.3rem;
-}
-
-.card__information-volume-pricing-note--button-right
-  + .global-settings-popup.quantity-popover__info {
-  right: 0;
-  left: auto;
-}
-
-.card__information-volume-pricing-note--button-center
-  + .global-settings-popup.quantity-popover__info {
-  left: 50%;
-  transform: translate(-50%);
-}
-
-.card__information-volume-pricing-note--button
-  + .global-settings-popup.quantity-popover__info
-  .quantity__rules {
-  text-align: left;
-}
-
-@media screen and (min-width: 990px) {
-  .grid--6-col-desktop .card__content quick-add-bulk .quantity {
-    width: auto;
-  }
-
-  .grid--6-col-desktop .card__content quick-add-bulk .quantity__button {
-    width: calc(3rem / var(--font-body-scale));
-  }
-
-  .grid--6-col-desktop
-    .card__information-volume-pricing-note--button
-    + .global-settings-popup.quantity-popover__info {
-    left: 50%;
-    transform: translate(-50%);
-    width: calc(100% + var(--border-width) + 3.5rem);
-  }
-
-  .grid--6-col-desktop
-    .card--standard
-    .card__information-volume-pricing-note--button
-    + .global-settings-popup.quantity-popover__info {
-    width: calc(100% + var(--border-width) + 1rem);
-  }
-}
-
-@media screen and (max-width: 749px) {
-   
-    .collection_list_inner{
-          height:173px;
-    }
-  .grid--2-col-tablet-down .card__content quick-add-bulk .quantity__button {
-    width: calc(3.5rem / var(--font-body-scale));
-  }
-
-  .grid--2-col-tablet-down
-    .card--card
-    .card__information-volume-pricing-note--button
-    + .global-settings-popup.quantity-popover__info,
-  .grid--2-col-tablet-down
-    .card--standard
-    .card__information-volume-pricing-note--button
-    + .global-settings-popup.quantity-popover__info {
-    left: 50%;
-    transform: translate(-50%);
-  }
-
-  .grid--2-col-tablet-down
-    .card--standard
-    .card__information-volume-pricing-note--button
-    + .global-settings-popup.quantity-popover__info {
-    width: 100%;
-  }
-
-  .grid--2-col-tablet-down
-    .card--card
-    .card__information-volume-pricing-note--button
-    + .global-settings-popup.quantity-popover__info {
-    width: calc(100% + var(--border-width) + 4rem);
-  }
-
-  .grid--2-col-tablet-down .card__content quick-add-bulk .quantity {
-    width: auto;
-  }
-}
-
-.card-information quantity-popover volume-pricing {
-  margin-top: 0;
-}
-
-@media screen and (max-width: 989px) {
-  .card-information quantity-popover .quantity__rules ~ volume-pricing {
-    margin-top: 0;
-  }
-
-  .card-information quantity-popover volume-pricing {
-    margin-top: 4.2rem;
-  }
-}
-
-@media screen and (min-width: 750px) {
-  .card__information {
-    padding-bottom: 1.7rem;
-    padding-top: 1.7rem;
-  }
-}
-
-.card__badge {
-  align-self: flex-end;
-  grid-row-start: 3;
-  justify-self: flex-start;
-}
-
-.card__badge.top {
-  align-self: flex-start;
-  grid-row-start: 1;
-}
-
-.card__badge.right {
-  justify-self: flex-end;
-}
-
-.card:not(.card--horizontal) > .card__content > .card__badge {
-  margin: 1.3rem;
-}
-
-.card__media .media img {
-  height: 100%;
-  object-fit: cover;
-  object-position: center center;
-  width: 100%;
-}
-
-.collection_list_inner:not(.ratio) > .card__content {
-  height: 100%;
-}
-
-.card__heading {
-  margin-top: 0;
-  margin-bottom: 0;
-}
-
-.card__heading:last-child {
-  margin-bottom: 0;
-}
-
-.card--horizontal .card__heading,
-.card--horizontal .price__container .price-item,
-.card--horizontal__quick-add {
-  font-size: calc(var(--font-heading-scale) * 1.2rem);
-}
-
-.card--horizontal
-  .card-information
-  > *:not(.visually-hidden:first-child)
-  + *:not(.rating):not(.card__information-volume-pricing-note) {
-  margin-top: 0;
-}
-
-.card--horizontal__quick-add:before {
-  box-shadow: none;
-}
-
-@media only screen and (min-width: 750px) {
-  .card--horizontal .card__heading,
-  .card--horizontal .price__container .price-item,
-  .card--horizontal__quick-add {
-    font-size: calc(var(--font-heading-scale) * 1.3rem);
-  }
-}
-
-.card--card.card--media > .card__content {
-  margin-top: calc(0rem - var(--image-padding));
-}
-
-.card--standard.card--text a::after,
-.card--card .card__heading a::after {
-  bottom: calc(var(--border-width) * -1);
-  left: calc(var(--border-width) * -1);
-  right: calc(var(--border-width) * -1);
-  top: calc(var(--border-width) * -1);
-}
-
-.card__heading a::after {
-  bottom: 0;
-  content: "";
-  left: 0;
-  position: absolute;
-  right: 0;
-  top: 0;
-  z-index: 1;
-}
-
-.card__heading a:after {
-  outline-offset: 0.3rem;
-}
-
-.card__heading a:focus:after {
-  box-shadow: 0 0 0 0.3rem rgb(var(--color-background)),
-    0 0 0.5rem 0.4rem rgba(var(--color-foreground), 0.3);
-  outline: 0.2rem solid rgba(var(--color-foreground), 0.5);
-}
-
-.card__heading a:focus-visible:after {
-  box-shadow: 0 0 0 0.3rem rgb(var(--color-background)),
-    0 0 0.5rem 0.4rem rgba(var(--color-foreground), 0.3);
-  outline: 0.2rem solid rgba(var(--color-foreground), 0.5);
-}
-
-.card__heading a:focus:not(:focus-visible):after {
-  box-shadow: none;
-  outline: 0;
-}
-
-.card__heading a:focus {
-  box-shadow: none;
-  outline: 0;
-}
-
-@media screen and (min-width: 990px) {
-  .card .media.media--hover-effect > img:only-child,
-  .collection_list-card-wrapper .media.media--hover-effect > img:only-child {
-    transition: transform var(--duration-long) ease;
-  }
-
-  .card:hover .media.media--hover-effect > img:first-child:only-child,
-  .collection_list-card-wrapper:hover .media.media--hover-effect > img:first-child:only-child {
-    transform: scale(1.03);
-  }
-
-  .collection_list-card-wrapper:hover
-    .media.media--hover-effect
-    > img:first-child:not(:only-child) {
-    opacity: 0;
-  }
-
-  .collection_list-card-wrapper:hover .media.media--hover-effect > img + img {
-    opacity: 1;
-    transition: transform var(--duration-long) ease;
-    transform: scale(1.03);
-  }
-
-  .underline-links-hover:hover a {
-    text-decoration: underline;
-    text-underline-offset: 0.3rem;
-  }
-}
-
-.card--standard.card--media .collection_list_inner .card__information,
-.card--standard.card--text:not(.card--horizontal)
-  > .card__content
-  .card__heading:not(.card__heading--placeholder),
-.card--standard:not(.card--horizontal) > .card__content .card__badge,
-.card--standard.card--text.article-card > .card__content .card__information,
-.card--standard > .card__content .card__caption {
-  display: none;
-}
-
-.card--standard:not(.card--horizontal) .placeholder-svg {
-  width: 100%;
-}
-
-.card--standard > .card__content {
-  padding: 0;
-}
-
-.card--standard > .card__content .card__information {
-  padding-left: 0;
-  padding-right: 0;
-}
-
-.card--card.card--media .collection_list_innerr .card__information,
-.card--card.card--text .collection_list_inner,
-.card--card.card--media > .card__content .card__badge {
-  display: none;
-}
-
-.card--horizontal .card__badge,
-.card--horizontal.card--text .collection_list_inner {
-  display: none;
-}
-
-.card--extend-height {
-  height: 100%;
-}
-
-.card--extend-height.card--standard.card--text,
-.card--extend-height.card--media {
-  display: flex;
-  flex-direction: column;
-}
-
-.card--extend-height.card--standard.card--text .collection_list_inner,
-.card--extend-height.card--media .collection_list_inner {
-  flex-grow: 1;
-}
-
-.card .icon-wrap {
-  margin-left: 0.8rem;
-  white-space: nowrap;
-  transition: transform var(--duration-short) ease;
-  overflow: hidden;
-}
-
-.card-information > * + * {
-  margin-top: 0.5rem;
-}
-
-.card-information {
-  width: 100%;
-}
-
-.card-information > * {
-  line-height: calc(1 + 0.4 / var(--font-body-scale));
-  color: rgb(var(--color-foreground));
-}
-
-.card-information > .price {
-  color: rgb(var(--color-foreground));
-}
-
-.card--horizontal .card-information > .price {
-  color: rgba(var(--color-foreground), 0.75);
-}
-
-.card-information > .rating {
-  margin-top: 0.4rem;
-}
-
-/* Specificity needed due to the changes below */
-.card-information
-  > *:not(.visually-hidden:first-child)
-  + quantity-popover:not(.rating):not(.card__information-volume-pricing-note),
-.card-information
-  .card__information-volume-pricing-note.card__information-volume-pricing-note--button {
-  margin-top: 0;
-}
-
-.card-information
-  > *:not(.visually-hidden:first-child)
-  + *:not(.rating):not(.card__information-volume-pricing-note) {
-  margin-top: 0.7rem;
-}
-
-.card-information .caption {
-  letter-spacing: 0.07rem;
-}
-
-.card-article-info {
-  margin-top: 1rem;
-}
-
-/* Card Shapes */
-
-.card--shape .card__content {
-  padding-top: 0;
-}
-
-.card--shape.card--standard:not(.card--text) .collection_list_inner {
-  border: 0;
-  /* Border is not currently compatible with image shapes for standard cards. */
-  background-color: transparent;
-  filter: drop-shadow(
-    var(--shadow-horizontal-offset) var(--shadow-vertical-offset)
-      var(--shadow-blur-radius) rgba(var(--color-shadow), var(--shadow-opacity))
-  );
-}
-
-.card--shape.card--standard:not(.card--text) .collection_list_inner:after {
-  display: none;
-}
-
-.grid__item:nth-child(2n) .shape--blob {
-  clip-path: polygon(var(--shape--blob-2));
-}
-
-.grid__item:nth-child(3n) .shape--blob {
-  clip-path: polygon(var(--shape--blob-3));
-}
-
-.grid__item:nth-child(4n) .shape--blob {
-  clip-path: polygon(var(--shape--blob-4));
-}
-
-.grid__item:nth-child(5n) .shape--blob {
-  clip-path: polygon(var(--shape--blob-5));
-}
-
-.grid__item:nth-child(7n) .shape--blob {
-  clip-path: polygon(var(--shape--blob-6));
-}
-
-.grid__item:nth-child(8n) .shape--blob {
-  clip-path: polygon(var(--shape--blob-1));
-}
-
-/* Card Shape Hover Rules */
-
-@media (prefers-reduced-motion: no-preference) {
-  .product-collection_list-card-wrapper .shape--round {
-    transition: clip-path var(--duration-long) ease;
-  }
-
-  .product-collection_list-card-wrapper:hover .shape--round {
-    clip-path: ellipse(47% 47% at 50% 50%);
-  }
-
-  .product-collection_list-card-wrapper .shape--blob {
-    transition: clip-path var(--duration-long) ease-in-out;
-  }
-
-  .product-collection_list-card-wrapper:hover .shape--blob {
-    clip-path: polygon(var(--shape--blob-5));
-  }
-
-  .grid__item:nth-child(2n) .product-collection_list-card-wrapper:hover .shape--blob {
-    clip-path: polygon(var(--shape--blob-6));
-  }
-
-  .grid__item:nth-child(3n) .product-collection_list-card-wrapper:hover .shape--blob {
-    clip-path: polygon(var(--shape--blob-1));
-  }
-
-  .grid__item:nth-child(4n) .product-collection_list-card-wrapper:hover .shape--blob {
-    clip-path: polygon(var(--shape--blob-2));
-  }
-
-  .grid__item:nth-child(5n) .product-collection_list-card-wrapper:hover .shape--blob {
-    clip-path: polygon(var(--shape--blob-3));
-  }
-
-  .grid__item:nth-child(7n) .product-collection_list-card-wrapper:hover .shape--blob {
-    clip-path: polygon(var(--shape--blob-4));
-  }
-
-  .grid__item:nth-child(8n) .product-collection_list-card-wrapper:hover .shape--blob {
-    clip-path: polygon(var(--shape--blob-5));
-  }
-}
-
-.semicircle1{
-      background-color: rgb(var(--color-background));
-}
-.collection-list_headingpart{
-    width: 57%;
-    margin:10px 40px 40px 40px;
-}
-
-
-@media screen and (max-width: 749px) {
-  .collection-list {
-  margin: 0 10px 0 10px;
-  }
-  .collection-list:not(.slider) {
-    padding-left: 0;
-    padding-right: 0;
-  }
-
-  .section-collection-list .page-width {
-    padding-left: 0;
-    padding-right: 0;
-  }
-
-  .section-collection-list .collection-list:not(.slider) {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
-}
-
-.collection-list__item:only-child {
-  max-width: 100%;
-  width: 100%;
-}
-
-@media screen and (max-width: 749px) {
-  .slider.collection-list--1-items {
-    padding-bottom: 0;
-  }
-}
-@media screen and (max-width: 989px){
-  .collection-list_headingpart{
-    width: 95%;
-     margin: 0px 10px 0px 10px;
-    }
-}
-
-@media screen and (min-width: 750px) and (max-width: 989px) {
-  .slider.collection-list--1-items,
-  .slider.collection-list--2-items,
-  .slider.collection-list--3-items,
-  .slider.collection-list--4-items {
-    padding-bottom: 0;
-  }
-}
-
-@media screen and (min-width: 750px) {
-  .collection-list__item a:hover {
-    box-shadow: none;
-  }
-}
-
-@media screen and (max-width: 989px) {
-  .collection-list.slider .collection-list__item {
-    max-width: 100%;
-  }
-}
-
-.collection-list-view-all {
-  margin-top: 2rem;
-}
+{% comment %}
+  Renders a collection card
+
+  Accepts:
+  - card_collection: {Object} Collection Liquid object
+  - media_aspect_ratio: {String} Size of the product image card. Values are "square" and "portrait". Default is "square" (optional)
+  - columns: {Number}
+  - extend_height: {Boolean} Card height extends to available container space. Default: false (optional)
+  - wrapper_class: {String} Wrapper class for card (optional)
+  - placeholder_image: {String} Placeholder image when collection is empty (optional)
+
+  Usage:
+  {% render 'card-collection' %}
+{% endcomment %}
+
+{%- liquid
+  assign ratio = 1
+  if card_collection.featured_image and media_aspect_ratio == 'portrait'
+    assign ratio = 0.8
+  elsif card_collection.featured_image and media_aspect_ratio == 'adapt'
+    assign ratio = card_collection.featured_image.aspect_ratio
+  endif
+  if ratio == 0 or ratio == null
+    assign ratio = 1
+  endif
+  assign card_color_scheme = settings.card_color_scheme
+  assign card_style = settings.card_style
+  if wrapper_class == null or wrapper_class == 'none'
+    assign card_color_scheme = settings.collection_card_color_scheme
+    assign card_style = settings.collection_card_style
+  endif
+-%}
+
+<div class="collection_list-card-wrapper animate-arrow {% if wrapper_class and wrapper_class != 'none' %}{{ wrapper_class }}{% else %}collection-card-wrapper{% endif %}">
+  <div
+    class="
+      card
+      card--{{ card_style }}
+      {% if card_collection.featured_image %} card--media{% else %} card--text{% endif %}
+      {% if card_style == 'card' %} color-{{ card_color_scheme }} gradient{% endif %}
+      {% if extend_height %} card--extend-height{% endif %}
+      {% if card_collection.featured_image == nil and card_style == 'card' %} ratio{% endif %}
+    "
+    style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
+  >
+    <div class="collections_data">
+        {%- if card_collection != blank and card_style == 'card' or card_collection.featured_image -%}
+      <div class="card__content">
+        <div class="card__information">
+          <h3 class="card__heading">
+            <a
+              {% if card_collection == blank %}
+                role="link" aria-disabled="true"
+              {% else %}
+                href="{{ card_collection.url }}"
+              {% endif %}
+              class="full-unstyled-link"
+            >
+              {%- if card_collection.title != blank -%}
+                {{- card_collection.title | escape -}}
+              {%- else -%}
+                {{ 'onboarding.collection_title' | t }}
+              {%- endif -%}
+              {%- if card_collection.featured_image or card_collection.description == blank -%}
+                <span class="icon-wrap">
+                  {{- 'icon-arrow.svg' | inline_asset_content -}}
+                </span>
+              {%- endif %}
+            </a>
+          </h3>
+          {%- if card_collection.featured_image == null and card_collection.description != blank -%}
+            <p class="card__caption">
+              {{- card_collection.description | strip_html | truncatewords: 12 -}}
+              <span class="icon-wrap">
+                {{- 'icon-arrow.svg' | inline_asset_content -}}
+              </span>
+            </p>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endif -%}
+  {%- if card_collection == blank -%}
+      <div class="card__content">
+        <div class="card__information">
+          <h3 class="card__heading card__heading--placeholder">
+            <a role="link" aria-disabled="true" class="full-unstyled-link">
+              {{ 'onboarding.collection_title' | t }}
+              <span class="icon-wrap">
+                {{- 'icon-arrow.svg' | inline_asset_content -}}
+              </span>
+            </a>
+          </h3>
+        </div>
+      </div>
+    {%- endif -%}
+    </div>
+     <div class="semicircle1 semicircle-leftl" style="position: absolute; width: 20px; height: 20px; border-radius: 50%; z-index: 2; left: -8px; transform: translateY(-50%);" ><h6></h6></div>
+      <div class="semicircle1 semicircle-rightf" style="position: absolute; width: 20px; height: 20px; border-radius: 50%; z-index: 2; right: -8px; transform: translateY(-50%);" ><h6></h6></div>
+      <div class="dashed_line">
+    {% for i in (1..100) %}
+        <div class="rectangle"><h1></h1></div>
+      {% endfor %}
+     </div>
+    <!-- Image start from here  -->
+    <div
+      class="collection_list_inner"
+      style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
+    >
+      {%- if card_collection.featured_image -%}
+        <div class="card__media" style="
+    width: 100%; ">
+          <div class="media media--transparent media--hover-effect">
+            <img
+              srcset="
+                {%- if card_collection.featured_image.width >= 165 -%}{{ card_collection.featured_image | image_url: width: 165 }} 165w,{%- endif -%}
+                {%- if card_collection.featured_image.width >= 330 -%}{{ card_collection.featured_image | image_url: width: 330 }} 330w,{%- endif -%}
+                {%- if card_collection.featured_image.width >= 535 -%}{{ card_collection.featured_image | image_url: width: 535 }} 535w,{%- endif -%}
+                {%- if card_collection.featured_image.width >= 750 -%}{{ card_collection.featured_image | image_url: width: 750 }} 750w,{%- endif -%}
+                {%- if card_collection.featured_image.width >= 1000 -%}{{ card_collection.featured_image | image_url: width: 1000 }} 1000w,{%- endif -%}
+                {%- if card_collection.featured_image.width >= 1500 -%}{{ card_collection.featured_image | image_url: width: 1500 }} 1500w,{%- endif -%}
+                {%- if card_collection.featured_image.width >= 3000 -%}{{ card_collection.featured_image | image_url: width: 3000 }} 3000w,{%- endif -%}
+                {{ card_collection.featured_image | image_url }} {{ card_collection.featured_image.width }}w
+              "
+              src="{{ card_collection.featured_image | image_url: width: 1500 }}"
+             
+              alt="{{ card_collection.featured_image.alt | escape }}"
+              height="{{ card_collection.featured_image.height }}"
+              width="{{ card_collection.featured_image.width }}"
+              loading="lazy"
+              class="motion-reduce"
+            >
+          </div>
+        </div>
+      {%- else -%}
+        <div class="card__media">
+          {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
+        </div>
+    {%- endif -%}
+    </div>
+
+  
+  </div>
+</div>
