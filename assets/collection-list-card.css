@@ -9,9 +9,10 @@
     height: 4px;
     justify-content: center;
     overflow: hidden;
-  bottom:297px;
+  bottom:298px;
 }
 .rectangle{
+  flex-shrink:0;
     width: 15px;
     height: 100%;
     border-radius: 2px;
