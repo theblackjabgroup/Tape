@@ -1,25 +1,26 @@
 
 .headingtext {
-  font-family: 'Fira Sans', sans-serif;
-  font-weight: 600;
-  font-style: normal;
-  font-size: 30px;
+   font-family: var(--font-heading-family);
+    font-style: var(--font-heading-style);
+    font-size: calc(var(--font-heading-scale) * 30px);
+  font-weight: var(--font-body-weight);
 }
 .feature1 {
-  font-family: 'Inter', sans-serif;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 16px;
+    font-family: var(--font-body-family);
+    font-style: var(--font-body-style);
+    font-weight: var(--font-body-weight);
+    font-size: calc(var(--font-body-scale) * 16px);
 }
 .slide-text h2 {
-  font-family: 'Fira Sans', sans-serif;
-  font-weight: bold;
-  font-style: normal;
-  font-size: 28px;
+   font-family: var(--font-heading-family);
+    font-style: var(--font-heading-style);
+    font-size: calc(var(--font-heading-scale) * 28px);
+  font-weight: var(--font-body-weight);
   margin: 5px 0;
 }
 .slideshow_btn {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-body-family);
+    font-style: var(--font-body-style);
   font-weight: 400;
   font-style: normal;
   font-size: 16px;
@@ -38,9 +39,10 @@
   padding: 20px;
 }
 .feature {
-  font-family: 'Inter', sans-serif;
-  font-size: 14px;
-  font-weight: 500;
+  font-family: var(--font-heading-family);
+    font-style: var(--font-heading-style);
+    font-size: calc(var(--font-heading-scale) * 14px);
+  font-weight: var(--font-body-weight);
   text-transform: uppercase;
   margin-bottom: 5px;
 }

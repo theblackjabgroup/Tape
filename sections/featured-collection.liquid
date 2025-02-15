@@ -1,13 +1,11 @@
 {{ 'featured.collection.css' | asset_url | stylesheet_tag }}
 
-
-<link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
-
 <div class="featured-collection-section color-{{ section.settings.color_scheme }}" 
      style="--section-top-margin: {{ section.settings.section_top_margin }}px; 
             --section-bottom-margin: {{ section.settings.section_bottom_margin }}px;
             padding-top: {{ section.settings.footer_top_padding }}px;
-            padding-bottom: {{ section.settings.footer_bottom_padding }}px;">
+            padding-bottom: {{ section.settings.footer_bottom_padding }}px;
+            font-family: var(--font-body-family) !important;">
 
   <h1 class="heading" style="font-size: {{ section.settings.title_font_size }}px;">
     {{ section.settings.title }}
@@ -35,22 +33,27 @@
     </div>
   </div>
   
-  <div class="product-container">
+<div class="product-container">
     {% if current_collection.products.size > 0 %}
       {% for product in current_collection.products limit: section.settings.products_to_show %}
         <div class="product-card" 
              style="--pseudo-bg-color: {{ section.settings.product_card_background_color }}; 
                     background-color: {{ section.settings.product_card_background_color }};">
           
-          {% if section.settings.show_offer_banner and section.settings.offer_tag_text != blank %}
-            <div class="offer-banner" 
-                 style="--banner-bg-color: {{ section.settings.special_offer_background_color }}; 
-                        background-color: {{ section.settings.special_offer_background_color }}; 
-                        color: {{ section.settings.special_offer_text_color }};">
-              {{ section.settings.offer_tag_text }}
-            </div>
+          {% if section.settings.show_offer_banner %}
+            {% if product.compare_at_price > product.price or product.tags contains 'special_offer' %}
+              <div class="offer-banner" 
+                   style="--banner-bg-color: {{ section.settings.special_offer_background_color }}; 
+                          background-color: {{ section.settings.special_offer_background_color }}; 
+                          color: {{ section.settings.special_offer_text_color }};">
+                {% assign savings = product.compare_at_price | minus: product.price %}
+                {% assign savings_percentage = savings | times: 100.0 | divided_by: product.compare_at_price | round %}
+                SPECIAL OFFER {{ savings_percentage }}%  DISCOUNT
+              </div>
+            {% endif %}
           {% endif %}
-          
+
+
           <div class="product-image{% unless section.settings.show_offer_banner and section.settings.offer_tag_text != blank %} no-banner{% endunless %}">
             <a href="{{ product.url }}">
               {% if product.featured_image %}
@@ -92,11 +95,12 @@
             </a>
           </div>
           
-          <div class="product-info">
-            <h7 style="color: {{ section.settings.text_color }};">{{ product.title }}</h7>
-            <p class="model-number" style="color: {{ section.settings.text_color }};">Model no. #{{ product.sku }}</p>
-          </div>
-
+         <div class="product-info">
+  <h7 style="color: {{ section.settings.text_color }};">{{ product.title }}</h7>
+  <p class="model-number" style="color: {{ section.settings.text_color }};">
+    {{ section.settings.model_label }} {{ product.sku }}
+  </p>
+</div>
          <div class="price-reviews-icons">
   <p class="price-tag" 
      style="background-color: {{ section.settings.price_background_color }};
@@ -144,17 +148,18 @@
         </div>
       {% endfor %}
     {% else %}
-       {% for i in (1..section.settings.products_to_show) %}
+        {% for i in (1..section.settings.products_to_show) %}
         <div class="product-card" 
              style="--pseudo-bg-color: {{ section.settings.product_card_background_color }}; 
                     background-color: {{ section.settings.product_card_background_color }};">
           
-          {% if section.settings.show_offer_banner and section.settings.offer_tag_text != blank %}
+          {% assign should_show_offer = i | modulo: 2 %}
+          {% if section.settings.show_offer_banner and should_show_offer == 1 %}
             <div class="offer-banner" 
                  style="--banner-bg-color: {{ section.settings.special_offer_background_color }}; 
                         background-color: {{ section.settings.special_offer_background_color }}; 
                         color: {{ section.settings.special_offer_text_color }};">
-              {{ section.settings.offer_tag_text }}
+            SPECIAL OFFER 20% DISCOUNT
             </div>
           {% endif %}
           
@@ -164,9 +169,11 @@
 
           
           <div class="product-info">
-            <h7 style="color: {{ section.settings.text_color }};">Sample Product</h7>
-            <p class="model-number" style="color: {{ section.settings.text_color }};">Model no. #SAMPLE</p>
-          </div>
+  <h7 style="color: {{ section.settings.text_color }};">{{ product.title }}</h7>
+  <p class="model-number" style="color: {{ section.settings.text_color }};">
+    {{ section.settings.model_label }} {{ product.sku }}
+  </p>
+</div>
 
           <div class="price-reviews-icons">
              <p class="price-tag" 
@@ -342,18 +349,20 @@ document.addEventListener('DOMContentLoaded', function() {
       "default": 4,
       "label": "Number of products to show"
     },
-     {
+    
+ {
       "type": "checkbox",
       "id": "show_offer_banner",
       "label": "Show Offer Banner",
       "default": true,
-      "info": "Enable or disable the offer banner on product cards"
+      "info": "Show discount banner on products with special offers"
     },
-    {
+ {
       "type": "text",
-      "id": "offer_tag_text",
-      "label": "Offer Tag Text",
-      "default": "SPECIAL OFFER - 20% DISCOUNT"
+      "id": "model_label",
+      "label": "Model Number Label",
+      "default": "Model no. #",
+      "info": "Text that appears before the model number"
     },
    {
       "type": "header",

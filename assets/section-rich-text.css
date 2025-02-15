@@ -8,20 +8,13 @@
   }
   .richtext_heading {
     margin-bottom: 10px;
-    font-family: "Fira Sans", sans-serif;
-    font-size: 28px;
-    font-weight: bold;
   }
 
   .richtext_subheading {
-    font-family: "Inter", sans-serif;
-    font-size: 20px;
+    font-family: var(--font-subheading-family);
+  font-style: var(--font-subheading-style);
+    font-size: calc(var(--font-subheading-scale) * 20px);
     font-weight: 500;
-  }
-  .rich-text__text {
-    font-family: "Inter", sans-serif;
-    font-size: 16px;
-    font-weight: normal;
   }
   .rich-text__text p {
     margin-bottom: 1em;
@@ -100,10 +93,10 @@
   .rich_text_btn {
     margin:20px auto 0 auto;
     padding:10px 25px;
-    font-family: "Inter", sans-serif;
+   font-family: var(--font-body-family);
+    font-style: var(--font-body-style);
+    font-size: calc(var(--font-body-scale) * 17px);
     font-weight: 400;
-    font-style: normal;
-    font-size: 17px;
     display: inline-block;
     text-decoration: none;
     align-self: end;

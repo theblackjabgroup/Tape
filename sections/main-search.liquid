@@ -63,6 +63,10 @@
   .search__button .icon {
     height: 1.8rem;
   }
+
+  .bb-dropdown-menu.show {
+    z-index: 5;
+  }
 </style>
 
 {%- liquid
@@ -193,21 +197,27 @@
                 <h2 class="facet-filters__label caption-large text-body">
                   <label for="SortBy">{{ 'products.facets.sort_by_label' | t }}</label>
                 </h2>
+                {% assign sort_default = "Featured" %}
                 <div class="bb-sort-dropdown">
-                  <button 
-                    class="bb-sort-options dropdown-toggle" 
-                    type="button" 
-                    id="dropdownMenuButton1" 
-                    data-bs-toggle="dropdown" 
+                  <button
+                    class="bb-sort-options dropdown-toggle"
+                    type="button"
+                    id="dropdownMenuButton1"
+                    data-bs-toggle="dropdown"
                     aria-expanded="false">
-                    {{ sort_default }}  
-                    {{- 'icon-caret5.svg' | inline_asset_content -}}  
+                    {{ sort_default }}
+                    {{- 'icon-caret5.svg' | inline_asset_content -}}
                   </button>
                   <div class="dropdown-menu bb-dropdown-menu" aria-labelledby="dropdownMenuButton1">
                     {%- for option in search.sort_options -%}
-                        <input type="hidden" name="sort_by" id="dropdownValue" value="{{ option.value | escape }}" class="option">
-                        <label for="{{ option.value | escape }}" class="bb-dropdown-item dropdown-item select-item">{{ option.name | escape }}</label>
-                    {%- endfor -%}  
+                      <input
+                        type="hidden"
+                        name="sort_by"
+                        id="dropdownValue"
+                        value="{{ option.value | escape }}"
+                        class="option">
+                      <label for="{{ option.value | escape }}" class="bb-dropdown-item dropdown-item select-item">{{ option.name | escape }}</label>
+                    {%- endfor -%}
                   </div>
                 </div>
               </div>
@@ -243,7 +253,7 @@
               class="facets-wrapper{% unless section.settings.enable_filtering %} facets-wrapper--no-filters{% endunless %}{% if section.settings.filter_type != 'vertical' %} page-width{% endif %}"
               id="main-search-filters"
               data-id="{{ section.id }}">
-              {% render 'facets'
+              {% render 'facets2'
                 , results: search
                 , enable_filtering: section.settings.enable_filtering
                 , enable_sorting: section.settings.enable_sorting
@@ -467,17 +477,11 @@
         "id": "filter_type",
         "options": [
           {
-            "value": "horizontal",
-            "label": "t:sections.main-collection-product-grid.settings.filter_type.options__1.label"
-          }, {
             "value": "vertical",
             "label": "t:sections.main-collection-product-grid.settings.filter_type.options__2.label"
-          }, {
-            "value": "drawer",
-            "label": "t:sections.main-collection-product-grid.settings.filter_type.options__3.label"
           }
         ],
-        "default": "horizontal",
+        "default": "vertical",
         "label": "t:sections.main-collection-product-grid.settings.filter_type.label",
         "info": "t:sections.main-collection-product-grid.settings.filter_type.info"
       }, {

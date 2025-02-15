@@ -1,61 +1,68 @@
-
 <link rel="stylesheet" href="{{ 'header.css' | asset_url }}">
 
 <script src="{{ 'header.js' | asset_url }}" defer></script>
 
-<{% if section.settings.sticky_header_type != 'none' %}sticky-header data-sticky-type="{{ section.settings.sticky_header_type }}"{% else %}div{% endif %} class="header-wrapper color-{{ section.settings.color_scheme }}" style="--padding-top: {{ section.settings.padding_top }}px; --padding-bottom: {{ section.settings.padding_bottom }}px;">
+<{% if section.settings.sticky_header_type != 'none' %}sticky-header data-sticky-type="{{ section.settings.sticky_header_type }}"{% else %}div{% endif %} class="header-wrapper color-{{ section.settings.color_scheme }}" style="
+  --padding-top: {{ section.settings.padding_top }}px; 
+  --padding-bottom: {{ section.settings.padding_bottom }}px;
+  font-family: var(--font-heading-family);
+  ">
   <div class="flex-container" style="--margin-right: {{ section.settings.margin_right }}px; --margin-left: {{ section.settings.margin_left }}px">
     <a href="{{ routes.root_url }}" class="logo-container">
       {% if section.settings.logo or settings.logo != blank %}
       <img src="{% if section.settings.logo != blank %}{{ section.settings.logo | image_url }}{% else %}{{ settings.logo | image_url }}{% endif %}" alt="{{ shop.name }}" loading="lazy" width="500" height="500">
       {% else %}
-        <span>{{ shop.name }}</span>
+        <span style="font-family: var(--font-heading-family);">{{ shop.name }}</span>
       {% endif %}
     </a>
 
     <header class="header color-{{ section.settings.color_scheme }}">
       <nav style="width: 60%;">
+
+        <ul class="nav-items" style="
+          --nav-items-justify-content: Left;
+          font-family: var(--font-heading-family);
+          font-weight: var(--font-heading-weight);
+          ">
+
         <ul class="nav-items" style="--nav-items-justify-content: Left;">
+
           {% for link in section.settings.menu.links %}
             {% assign has_dropdown = false %}
             {% if link.links != blank %}
               {% assign has_dropdown = true %}
             {% endif %}
             <li class="nav-item{% if has_dropdown %} has-dropdown{% endif %}">
-            <a href="{{ link.url }}" class="nav-link{% if link.active %} active{% endif %} color-{{ section.settings.color_scheme }}" style="--font-size: {{ section.settings.font_size }};">{{ link.title }}</a>
+            <a href="{{ link.url }}" class="nav-link{% if link.active %} active{% endif %} color-{{ section.settings.color_scheme }}" style="
+              --font-size: {{ section.settings.font_size }};
+              font-family: var(--font-heading-family);
+              ">{{ link.title }}</a>
               {% if has_dropdown %}
                 <div class="dropdown-container color-{{ section.settings.color_scheme }}">
-                  <ul class="dropdown">
+                  <ul class="dropdown" style="font-family: var(--font-body-family);">
                     {% for childlink in link.links %}
                       <li>
-                      <a href="{{ childlink.url }}" class="dropdown-item{% if childlink.active %} active{% endif %} color-{{ section.settings.color_scheme }}">
+                      <a href="{{ childlink.url }}" class="dropdown-item{% if childlink.active %} active{% endif %} color-{{ section.settings.color_scheme }}" style="font-family: var(--font-body-family);">
                           {{- childlink.title -}}
                         </a>
                         {% if childlink.links != blank %}
-                          <ul class="nested-dropdown color-{{ section.settings.color_scheme }}">
+                          <ul class="nested-dropdown color-{{ section.settings.color_scheme }}" style="font-family: var(--font-body-family);">
                             {% for grandchildlink in childlink.links %}
                               <li>
                                 <a
                                   href="{{ grandchildlink.url }}"
                                   class="dropdown-item{% if grandchildlink.active %} active{% endif %} color-{{ section.settings.color_scheme }}"
+                                  style="font-family: var(--font-body-family);"
                                 >
                                   {{- grandchildlink.title -}}
                                 </a>
                               </li>
                             {% endfor %}
-                            <div class="nested-dropdown-overlay">
-                              <div class="nested-dropdown-overlay-circles">
-                                {% for i in (1..100) %}
-                                  <div class="nested-dropdown-overlay-circle"></div>
-                                {% endfor %}
-                              </div>
-                            </div>
                           </ul>
                         {% endif %}
                       </li>
                     {% endfor %}
                   </ul>
-                  <div class="dropdown-overlay" style="z-index: 999;"></div>
                 </div>
               {% endif %}
             </li>

@@ -204,8 +204,14 @@
     <div style="display: flex; flex-direction: column; gap: 32px; padding: 20px;"
          class="color-{{ section.settings.sectionColor }} featured-icon-with-text-section">
       <div style="display: flex; flex-direction: column; gap: 4px; ">
-        <p style="font-weight: 600; font-size: 24px; line-height: 30px; color: var(--featured-icon-with-text-section-headings-color)" >{{ section.settings.heading }}</p>
-        <p style="font-weight: 500; font-size: 14px; line-height: 21px; color: var(--featured-icon-with-text-section-headings-color)" >{{ section.settings.subheading }}</p>
+        <h1 style="font-weight: 600; font-size: 24px; line-height: 30px; color: var(--featured-icon-with-text-section-headings-color);   font-family: var(--font-heading-family);
+  font-style: var(--font-heading-style);
+  font-size: calc(var(--font-heading-scale)* 28px);
+  font-weight: var(--font-body-weight);" >{{ section.settings.heading }}</h1>
+        <h2 style="font-weight: 500; font-size: 14px; line-height: 21px; color: var(--featured-icon-with-text-section-headings-color);   font-family: var(--font-subheading-family);
+  font-style: var(--font-subheading-style);
+    font-size: calc(var(--font-subheading-scale) * 20px);
+    font-weight: 500; " >{{ section.settings.subheading }}</h2>
       </div>
       <div class="icon-with-text-container color-{{ section.settings.sectionColor }}">
         {% for item in section.blocks %}
@@ -227,7 +233,7 @@
                       <div style="width: 100%; height: 100%;">{{ 'image' | placeholder_svg_tag: 'placeholder-svg' | replace: 'svg', 'svg style="width: 100%; height: 100%; scale: 2"' }}</div>
                     {% endif %}
                   </div>
-                  <div class="card__title fira-sans-semibold">
+                  <div class="card__title">
                     <p>{{ item.settings.title }}</p>
                   </div>
                 </div>
@@ -246,7 +252,7 @@
                       <path fill="currentColor" fill-rule="evenodd" d="M1 4.51a.5.5 0 0 0 0 1h3.5l.01 3.5a.5.5 0 0 0 1-.01V5.5l3.5-.01a.5.5 0 0 0-.01-1H5.5L5.49.99a.5.5 0 0 0-1 .01v3.5l-3.5.01z" clip-rule="evenodd"/>
                     </svg>
                   </span>
-                  <p class="inter-regular" style="color: var(--featured-icon-with-text-description-color);">
+                  <p style="color: var(--featured-icon-with-text-description-color);">
                     {{ item.settings.description }}
                   </p>
                 </div>
@@ -264,8 +270,14 @@
   {% else %}
     <div class="icon-with-text-2 color-{{ section.settings.sectionColor }}">
       <div style="display: flex; flex-direction: column; gap: 4px; padding: 20px; ">
-        <p style="font-weight: 600; font-size: 24px; line-height: 30px; color: var(--featured-icon-with-text-section-headings-color)" >{{ section.settings.heading }}</p>
-        <p style="font-weight: 500; font-size: 14px; line-height: 21px; color: var(--featured-icon-with-text-section-headings-color)" >{{ section.settings.subheading }}</p>
+        <h1 style="font-weight: 600; font-size: 24px; line-height: 30px; color: var(--featured-icon-with-text-section-headings-color);   font-family: var(--font-heading-family);
+  font-style: var(--font-heading-style);
+  font-size: calc(var(--font-heading-scale)* 28px);
+  font-weight: var(--font-body-weight);" >{{ section.settings.heading }}</h1>
+        <h2 style="font-weight: 500; font-size: 14px; line-height: 21px; color: var(--featured-icon-with-text-section-headings-color);   font-family: var(--font-subheading-family);
+  font-style: var(--font-subheading-style);
+    font-size: calc(var(--font-subheading-scale) * 20px);
+    font-weight: 500;" >{{ section.settings.subheading }}</h2>
       </div>
       <div class="scroll-container" id="section-{{ section.id }}">
         <div class="card-container" id="cardContainer">
