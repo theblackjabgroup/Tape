@@ -4,18 +4,19 @@
 .dashed_line{
   position:absolute;
       display: flex;
-    gap: 7px;
+    gap: 6px;
     width: 100%;
     height: 4px;
     justify-content: center;
     overflow: hidden;
-  bottom:297px;
+  bottom:298px;
 }
 .rectangle{
-    width: 14px;
+  flex-shrink:0;
+    width: 15px;
     height: 100%;
     border-radius: 2px;
-    background-color: #fff;
+       background-color: rgb(var(--color-background));
   z-index:1;
 }
 .card__media{
@@ -23,6 +24,7 @@
 }
 .collections_data{
   min-height:60px;
+      background-color: rgb(var(--color-button));
 }
 .collection_list-card-wrapper {
   color: inherit;
@@ -32,7 +34,6 @@
   border-radius: 8px;
     overflow: hidden;
     flex-direction: column;
-  min-height:360px;
 }
 .semicircle1 {
   bottom: 280px;
