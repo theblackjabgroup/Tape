@@ -112,7 +112,7 @@ background-color: var(--background_product_card);
 
 .footer-content {
     display: flex;
-    justify-content: space-around;
+    justify-content: center !important;
     padding-top: 20px;
     font-family:var(--font-body-family);
 }
@@ -182,7 +182,7 @@ background-color: var(--background_product_card);
   border: 1px solid #ccc;
   margin-bottom: 11px;
   font-family: var(--font-body-family);
-  width: 300px;  
+  width: 300px;
   font-size: 16px;
   border-radius: 6px;
 }
@@ -281,7 +281,7 @@ margin-bottom: -45px;
     border: none;
    width:20px;
 
-} 
+}
 
 .footer__language-selector {
   display: flex;
