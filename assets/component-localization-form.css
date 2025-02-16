@@ -128,8 +128,8 @@
   border-color: rgba(var(--color-foreground), var(--popup-border-opacity));
   overflow: hidden;
   position: absolute;
-  bottom: 100%;
-  transform: translateY(-1rem);
+  bottom: auto;
+  transform: translateY(0em);
   z-index: 2;
   background-color: rgb(var(--color-background));
   border-radius: var(--popup-corner-radius);
@@ -326,11 +326,35 @@
   margin-right: 0.2rem;
 }
 
-.disclosure__link:hover .localization-form__currency,
+ .localization-form__currency,
 .disclosure__link:focus-visible .localization-form__currency,
 .disclosure__link:focus .localization-form__currency {
   display: inline-block;
   opacity: 1;
+}
+
+
+
+.disclosure__item a {
+  font-size: 10px !important;
+}
+.field__input {
+  font-size: 10px !important;
+  padding: 0;
+  border-radius: 8px;
+}
+
+.field__button{
+  height: 100%;
+}
+
+.field__button svg {
+  height: 14px;
+  width: 14px;
+}
+
+.field__label {
+  font-size: 12px !important;
 }
 
 .disclosure__button[aria-expanded='true'] .icon-caret {
