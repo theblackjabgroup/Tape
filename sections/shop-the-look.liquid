@@ -1,6 +1,6 @@
 {{ 'shop-the-look.css' | asset_url | stylesheet_tag }}
 
-<div class="shop__the__look__mainWrapper">
+<div class="shop__the__look__mainWrapper color-{{ section.settings.bannerColor }}">
   <div class="shop_the_look__container ">
 
     <div class="shop__the__look__media__container__wrapper color-{{ section.settings.bannerColor }}">
@@ -90,7 +90,7 @@
 
       {
         "type": "color_scheme",
-        "label": "Banner Color",
+        "label": "Color Scheme",
         "id": "bannerColor",
         "default": "#000000"
       }, {
