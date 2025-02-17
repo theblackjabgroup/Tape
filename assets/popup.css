@@ -45,7 +45,7 @@
   font-size: 24px;
   padding: 10px 0 5px 10px;
   color: var(--product_price_card);
-  /* font-family: "Fira Sans"; */
+  font-family: var(--font-heading-family);
   font-weight: 600;
 }
 

@@ -5,12 +5,12 @@ body {
   }
 
   h1, h7 {
-    font-family: var(--font-body-family);
+    font-family: var(--font-heading-family);
     font-weight: var(--font-body-weight);
   }
 
   h2, .model-number {
-    font-family: var(--font-body-family);
+    font-family: var(--font-heading-family);
     font-weight: var(--font-body-weight);
   }
 
