@@ -36,8 +36,15 @@
 
 .description {
   flex: 2;
+}
+.description.has-content {
   padding: 20px;
 }
+
+.des-button.has-button {
+  padding: 10px;
+}
+
 .feature {
   font-family: var(--font-heading-family);
     font-style: var(--font-heading-style);
@@ -153,7 +160,6 @@
 }
 .des-button {
   flex: 1;
-  padding: 10px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
