@@ -60,7 +60,7 @@
             <!-- Wrapper for individual content items -->
             <div class="product-stories-video-column__content-item-wrap">
               <!-- Box above the video column -->
-              <span class="product-stories-heading-background">
+            <span class="product-stories-heading-background {{ section.settings.heading_style }}">
                 <h2 class="product-stories-heading" style="  font-family: var(--font-heading-family);
   font-style: var(--font-heading-style);
   font-size: calc(var(--font-heading-scale)* 28px);
@@ -219,6 +219,22 @@
       "max": 100,
       "unit": "%",
       "step": 5
+    },
+    {
+  "type": "select",
+  "id": "heading_style",
+  "label": "Title Background",
+  "default": "layout1",
+  "options": [
+    {
+      "value": "layout1",
+      "label": "Layout 1 (Small)"
+    },
+    {
+      "value": "layout2",
+      "label": "Layout 2 (Big)"
+    }
+  ]
     },
     {
       "type": "checkbox",
