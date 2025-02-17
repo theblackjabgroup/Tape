@@ -216,8 +216,13 @@
                     <div class="product-stories-media media--transparent">
                       {{
                         block.settings.image
-                        | image_url: width: image_width, height: image_height, crop: 'center'
-                        | image_tag: alt: block.settings.image.alt
+                        | image_url: width: 940
+                        | image_tag:
+                          width: block.settings.image.width,
+                          height: image_height,
+                          sizes: sizes,
+                          widths: '165, 360, 533, 720, 940',
+                          alt: block.settings.image.alt
                         | escape
                       }}
                     </div>
