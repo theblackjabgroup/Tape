@@ -5,6 +5,60 @@
   overflow: hidden;
   font-size: calc(1.5rem * var(--font-section-scale));
 }
+.product-stories-product-cards {
+  margin-top: 20px;
+  padding: 15px;
+  background: rgb(var(--color-background));
+  border-radius: 8px;
+}
+
+.product-stories-product-card {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 10px;
+  background: rgb(var(--color-background-subtle));
+  border-radius: 4px;
+}
+
+.product-stories-product-image {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  margin-right: 15px;
+}
+
+.product-stories-product-info {
+  flex-grow: 1;
+  text-align: left;
+}
+
+.product-stories-product-title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgb(var(--color-text));
+}
+
+.product-stories-product-price {
+  margin: 4px 0 0;
+  font-size: 14px;
+  color: rgb(var(--color-text));
+}
+
+.product-stories-shop-button {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: rgb(var(--color-button));
+  color: rgb(var(--color-button-text));
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
 .product-stories-section-video-column h2,
 .product-stories-product-stories-heading,
 .product-stories-h3 {
