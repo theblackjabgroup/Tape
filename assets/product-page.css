@@ -535,7 +535,7 @@ border-radius: 50%;
   /* box-shadow: inset 0 0 0 2px black; */
   border-radius: 7px;
   transition: transform .1s cubic-bezier(.215,.61,.355,1);
-  color: rgb(var(--color-button-text));
+  color: var(--secondary_button_label);
 }
 .bb-push-bnt {
   display: block !important;
@@ -658,6 +658,11 @@ border-radius: 50%;
 .bb-card-variant {
   background-color: grey;
   padding: 10px;
+}
+
+#bb-deferred-media {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 @media screen and (max-width: 749px) {

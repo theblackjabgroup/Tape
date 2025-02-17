@@ -50,21 +50,21 @@
     animation-name: marquee-text-only-strip;
     animation-duration: calc(20s / var(--animation-speed, 1));
     transform: rotate(5deg);
-    z-index: 30;
+    z-index: 15;
 }
 
 .scrolling-first-strip-content {
     animation-name: marquee-first-strip;
     animation-duration: calc(20s / var(--animation-speed, 1));
     transform: rotate(-5deg);
-    z-index: 20;
+    z-index: 10;
 }
 
 .scrolling-second-strip-content {
     animation-name: marquee-second-strip;
     animation-duration: calc(20s / var(--animation-speed, 1));
     transform: rotate(5deg);
-    z-index: 10;
+    z-index: 5;
 }
 
 .scrolling-third-strip-content {
