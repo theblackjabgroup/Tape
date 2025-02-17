@@ -134,8 +134,8 @@
   border-radius: 5px;
   font-size: 40px;
   font-weight: 600;
-  background-color: rgb(var(--color-button-text));
-  color: rgb(var(--color-secondary-button-text));
+  /* background-color: rgb(var(--color-button-text)); */
+  /* color: rgb(var(--color-secondary-button-text)); */
 }
 
 .shop__the__look__description {
