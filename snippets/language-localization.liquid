@@ -12,7 +12,7 @@
     aria-controls="{{ localPosition }}List"
     aria-describedby="{{ localPosition }}Label"
   >
-    <span>{{ localization.language.endonym_name | slice: 0, 3 | upcase }}</span>
+     <span>{{ localization.language.endonym_name | capitalize }}</span>
     {{ 'icon-caret.svg' | inline_asset_content }}
   </button>
   <div class="disclosure__list-wrapper language-selector" hidden>
@@ -37,7 +37,7 @@
               {{- 'icon-checkmark.svg' | inline_asset_content -}}
             </span>
             <span>
-              {{ language.endonym_name | slice: 0, 3 | upcase }}
+                   {{ language.endonym_name | capitalize }}
             </span>
           </a>
         </li>
