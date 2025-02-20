@@ -224,6 +224,12 @@ position: absolute;
     width: calc(333px * var(--mobile-width) / 100) !important;
     height: calc(188px * var(--mobile-width) / 100) !important;
   }
+   .countdown_placeholder, 
+  .countdown-section__image,
+  .countdown-section__image-wrapper-layout2 {
+    width: 300px !important;
+    height: 188px !important;
+  }
   .countdown-border-left, 
   .countdown-border-right {
     display: none;
@@ -236,7 +242,7 @@ position: absolute;
 
   .countdown-container {
     padding: 10px 0 !important;
-    overflow-x: hidden !important;
+    overflow-x: hidden;
   }
 
   .countdown-border-top .countdown-cutout:nth-child(n+9),
@@ -252,17 +258,17 @@ position: absolute;
            clip-path: polygon(85% 0, 100% 9%, 100% 93%, 55% 100%, 0 100%, 0% 60%, 0 0);
   }
   .top-right-fold{
-   top: -7px;
-        right: -13px;
+           top: -12px;
+        right: -12px;
         width: 57px;
-        height: 50px;
+        height: 100px;
   }
   .bottom-right-fold {
-           top: 437px;
+        top: 330px;
         right: -150px;
         width: 155px;
         height: 50px;
-    transform: rotate(164deg);
+        transform: rotate(165deg);
   }
 }
 

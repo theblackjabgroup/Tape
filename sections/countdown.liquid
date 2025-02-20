@@ -28,11 +28,6 @@
       "default": "scheme-1"
     },
     {
-      "type": "image_picker",
-      "id": "image",
-      "label": "Image"
-    },
-    {
       "type": "text",
       "id": "heading",
       "label": "Heading",
@@ -55,6 +50,21 @@
       "id": "end_time",
       "label": "End Time (HH:mm:ss)",
       "default": "00:00"
+    },
+     {
+      "type": "header",
+      "content": "Image Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Desktop Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile Image (Optional)",
+      "info": "If not set, desktop image will be used"
     },
     {
       "type": "header",
@@ -196,20 +206,30 @@
         {% endfor %}
       </div>
     {% else %}
-    <div class="countdown-section layout-2">
+    <div class="countdown-section layout-2" style="width: 100%; height: 100%;">
       <div class="top-right-fold"><h2></h2></div>
        <div class="bottom-right-fold"><h2></h2></div>
        </div>
-  {% endif %}
+    {% endif %}
 
     <div class="countdown-section__container page-width">
       <div class="countdown-section__image-wrapper">
         {% if section.settings.image %}
+          <!-- Desktop Image -->
           {{
             section.settings.image
             | image_url: width: 1800
             | image_tag:
-                class: 'countdown-section__image',
+                class: 'countdown-section__image desktop-only-image',
+                alt: "Countdown Image" | escape
+          }}
+          
+          <!-- Mobile Image (falls back to desktop if not set) -->
+          {{
+            section.settings.mobile_image | default: section.settings.image
+            | image_url: width: 800
+            | image_tag:
+                class: 'countdown-section__image mobile-only-image',
                 alt: "Countdown Image" | escape
           }}
         {% else %}
@@ -222,13 +242,13 @@
         <h2 class="countdown-section__heading" style="font-size: {{ section.settings.heading_font_size }}px;">
           {{ section.settings.heading }}
         </h2>
-       <div class="countdown-section__description" style="font-size: {{ section.settings.description_font_size }}px;">
-  {% if section.settings.layout_style == 'layout_2' %}
-    {{ section.settings.description | slice: 0, 450 }}
-  {% else %}
-    {{ section.settings.description }}
-  {% endif %}
-</div>
+        <div class="countdown-section__description" style="font-size: {{ section.settings.description_font_size }}px;">
+          {% if section.settings.layout_style == 'layout_2' %}
+            {{ section.settings.description | slice: 0, 450 }}
+          {% else %}
+            {{ section.settings.description }}
+          {% endif %}
+        </div>
 
         <div class="countdown-timer" id="countdown-timer-{{ section.id }}" style="font-size: {{ section.settings.timer_font_size }}px;"></div>
         {% if section.settings.show_button %}
@@ -246,6 +266,24 @@
     </div>
   </div>
 </div>
+
+<style>
+  .desktop-only-image {
+    display: block;
+  }
+  .mobile-only-image {
+    display: none;
+  }
+  
+  @media screen and (max-width: 750px) {
+    .desktop-only-image {
+      display: none;
+    }
+    .mobile-only-image {
+      display: block;
+    }
+  }
+</style>
 
 <script>
   (function () {
