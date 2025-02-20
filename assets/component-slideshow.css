@@ -1,4 +1,8 @@
-
+.slideshow_media{
+    background-color: rgba(var(--color-foreground), .1);
+    position: relative;
+    overflow: hidden;
+}
 .headingtext {
    font-family: var(--font-heading-family);
     font-style: var(--font-heading-style);
@@ -209,7 +213,6 @@
     width: 100%;
     height: 100%;
     object-fit: cover; 
-    display: block;
 }
 
 
