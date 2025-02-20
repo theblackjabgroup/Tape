@@ -9,6 +9,21 @@
     background-color:rgb(var(--color-button-text));
     color:rgb(var(--color-secondary-button-text));
   }
+  .slideshow_desktop {
+    display: block;
+  }
+  .slideshow_mobile {
+    display: none;
+  }
+  
+  @media screen and (max-width: 900px) {
+    .slideshow_desktop {
+      display: none;
+    }
+    .slideshow_mobile {
+      display: block;
+    }
+  }  
 </style>
 <div class="slideshow-section color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
   <div class="interactive-slideshow">
@@ -17,11 +32,20 @@
        
           <div class="backfold">
              {% if block.settings.image != blank %}
+                 <!-- Desktop Image -->
                    {{
                       block.settings.image
                       | image_url: width: 1800
                       | image_tag:
-                          class: 'media',
+                          class: 'slideshow_media slideshow_desktop',
+                        alt: block.settings.title | escape
+                      }}
+                    <!-- Mobile Image -->
+                      {{
+                      block.settings.mobile_image | default: block.settings.image
+                      | image_url: width: 800
+                      | image_tag:
+                          class: 'slideshow_media slideshow_mobile',
                         alt: block.settings.title | escape
                       }}
                 {% else %}
@@ -322,10 +346,20 @@ if (typeof Shopify !== 'undefined' && Shopify.designMode) {
     "name": "Slide",
     "settings": [
       {
-        "type": "image_picker",
-        "id": "image",
-        "label": "Image"
-      },
+      "type": "header",
+      "content": "Image Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Desktop Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile Image (Optional)",
+      "info": "If not set, desktop image will be used"
+    },
        {
         "type": "text",
         "id": "feature",
