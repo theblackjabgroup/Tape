@@ -104,7 +104,8 @@
       {%- if card_collection.featured_image -%}
         <div class="card__media" style="
     width: 100%; ">
-          <div class="media media--transparent media--hover-effect">
+          <div class="media media--transparent media--hover-effect" style="
+    height: 100%; ">
             <img
               srcset="
                 {%- if card_collection.featured_image.width >= 165 -%}{{ card_collection.featured_image | image_url: width: 165 }} 165w,{%- endif -%}
