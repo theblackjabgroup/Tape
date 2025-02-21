@@ -11,6 +11,7 @@
   }
 {% endstyle %}
 {% if section.blocks.first.settings.heading != blank %}
+  <div class="color-{{ section.settings.color_scheme }}">
 <div class="collapse-width">
   <div class="collapse-tab">
     {%- for block in section.blocks -%}
@@ -56,7 +57,8 @@
     {% endfor %}
   </div>
 </div>
-<div class="mobile-collapsible-tabs">
+</div>
+<div class="color-{{ section.settings.color_scheme }} mobile-collapsible-tabs" style="padding-bottom: 10px;">
   <div class="accordion" id="accordionExample">
     {%- for block in section.blocks -%}
   <div class="accordion-item">
@@ -125,6 +127,12 @@
       "id": "heading",
       "label": "t:sections.collapsible_tabs.settings.heading.label",
       "default": "t:sections.collapsible_tabs.settings.heading.default"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Collapsible Tabs Color Scheme",
+      "default": "scheme-1"
     }
   ],
   "blocks": [

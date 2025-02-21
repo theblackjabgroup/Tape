@@ -37,8 +37,8 @@
 
 .collapse-width {
     padding: 0 5rem;
-    max-width: var(--page-width);
-    margin: 3rem auto;
+    /*max-width: var(--page-width);*/
+    padding: 3rem 5rem;
 }
 
 .product-description-drawer {
