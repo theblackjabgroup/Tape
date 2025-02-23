@@ -196,6 +196,10 @@
   border-radius: 1px;
 }
 
+.bb-input-color-label {
+  padding: 0 !important;
+}
+
 .bb-triangle-offer {
   border-left: 7px solid transparent;
   border-right: 7px solid transparent;
@@ -204,6 +208,20 @@
   height: 0;
   width: 0;
   display: block !important;
+}
+
+.bb-social-icons {
+  display: flex;
+}
+
+.bb-social-span {
+  font-size: 18px;
+}
+
+.bb-input-color-label-inner {
+  margin: .4rem;
+  padding: 0.5rem 0.4rem;
+  border-radius: 5px;
 }
 
 .tri-0 {

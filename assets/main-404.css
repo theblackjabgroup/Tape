@@ -1,7 +1,7 @@
 .bb-template-404 {
-    background-color: rgba(var(--color-button));
+   /* background-color: rgba(var(--color-button)); */
     display: block;
-    padding: 10rem 5rem;
+    /*padding: 10rem 5rem;*/
     max-width: none;
     margin: 2rem 2rem;
     position: relative;
@@ -9,7 +9,7 @@
   }
 
   .bb-upper-template-404 {
-    background-color: rgba(var(--color-button));
+    /*background-color: rgba(var(--color-button));*/
     border-radius: 5px;
     /* margin: 7rem auto; */
     margin: auto;
@@ -20,7 +20,7 @@
   }
 
   .bb-404-uper-banner {
-    padding: 7rem 0rem;
+    /*padding: 7rem 0rem;*/
   }
   .vertical-bar-top-404 {
     top: -1.5rem;
@@ -64,11 +64,11 @@
 
   .bb-404-h-button {
     font-size: 1.5rem;
-    color: #000;
+    color: var(--secondary_button_label);
     text-transform: uppercase;
     padding: 10px 20px;
     border-radius: 10px;
-    background: var(--product_special_offer);
+    background: var(--button_label);
     box-shadow: 3px 3px #000;
     cursor: pointer;
     margin: 35px 0;
@@ -77,7 +77,25 @@
   .bb-404-h-button:hover {
     box-shadow: none;
     transform: translate(3px, 3px);
-    color:#000;
+    color: var(--secondary_button_label);
+  }
+
+  .bb-404-h2-button {
+    font-size: 1.5rem;
+    color: var(--product_price_font);
+    text-transform: uppercase;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background: var(--secondary_product_button_color);
+    box-shadow: 3px 3px #000;
+    cursor: pointer;
+    margin: 35px 0;
+  }
+
+  .bb-404-h2-button:hover {
+    box-shadow: none;
+    transform: translate(3px, 3px);
+    color: var(--product_price_font);;
   }
 
   .vertical-bar-circle-404 {
@@ -104,17 +122,23 @@
   }
 
   .bb-404-title {
-    font-weight: 600;
+    font-weight: 700;
     font-size: 48px;
     line-height: 34px;
     padding-bottom: 30px;
+  }
+
+  .bb-404-sub-title {
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 24px;
   }
 
   .bb-404-para {
     font-weight: 400;
     font-size: 24px;
     line-height: 36px;
-    margin-bottom: 50px;
+    margin-bottom: 25px;
   }
   /* .bb-404-h-button:hover {
             color: black;
@@ -168,7 +192,7 @@
     }
 
     .bb-upper-template-404 {
-      background-color: rgba(var(--color-button));
+    /*  background-color: rgba(var(--color-button)); */
       border-radius: 0px;
       display: block;
       position: relative;
@@ -179,7 +203,7 @@
     }
     .bb-template-404 {
       background-color: unset;
-      padding: 10rem 0rem 1rem 0rem;
+     /* padding: 10rem 0rem 1rem 0rem; */
     }
 
     .bb-404-subtext {
@@ -191,7 +215,7 @@
 
     .bb-404-title {
       font-weight: 500;
-      font-size: 24px;
+      font-size: 28px;
       line-height: 34px;
       padding-bottom: 0px;
     }
@@ -228,7 +252,18 @@
     .bb-404-h-button {
       padding: 10px 20px;
       font-size:1rem;
-      margin:25px 0;
+      margin:10px 0;
     }
 
+    .bb-404-h2-button {
+      padding: 10px 20px;
+      font-size:1rem;
+      margin:10px 0;
+    }
+
+    .bb-404-sub-title {
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 14px;
+    }
   }

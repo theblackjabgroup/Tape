@@ -534,6 +534,32 @@
                     {{ block.settings.text | default: block.settings.page.title | escape }}
                   </button>
                 </modal-opener>
+                {%- when 'share' -%}
+                <div class="bb-social-icons social-icons">
+                  <span class="bb-social-span">Share: </span>
+  {%- if block.settings.fb_link != blank -%}
+    <a href="{{ block.settings.fb_link }}" class="social-icon" style="color: {{ section.settings.menu_item_color }};">
+{{ 'icon-facebook2.svg' | inline_asset_content | replace: '<svg', '<svg style="height: 25px;' | append: settings.social_icon_color | remove: "_" }}
+</a>
+{%- endif -%}
+
+{%- if block.settings.insta_link != blank -%}
+<a href="{{ block.settings.insta_link }}" class="social-icon" aria-label="{{ 'general.social.links.instagram' | t }}" style="color: {{ section.settings.menu_item_color }};">
+{{ 'icon-instagram2.svg' | inline_asset_content | replace: '<svg', '<svg style="height: 25px; fill: ' | append: settings.social_icon_color | remove: "_" }}
+</a>
+{%- endif -%}
+
+{%- if block.settings.linkedin_link != blank -%}
+<a href="{{ block.settings.linkedin_link }}" class="social-icon" aria-label="{{ 'general.social.links.linkedin' | t }}" style="color: {{ section.settings.menu_item_color }};">
+{{ 'icon-linkedin.svg' | inline_asset_content | replace: '<svg', '<svg style="height: 25px; fill: ' | append: settings.social_icon_color | remove: "_" }}
+</a>
+{%- endif -%}
+{%- if block.settings.x_link != blank -%}
+<a href="{{ block.settings.x_link }}" class="social-icon" aria-label="{{ 'general.social.links.x' | t }}" style="color: {{ section.settings.menu_item_color }};">
+{{ 'icon-x.svg' | inline_asset_content | replace: '<svg', '<svg style="height: 25px; fill: ' | append: settings.social_icon_color | remove: "'" }}
+</a>
+{%- endif -%}
+              </div>
 
               {%- when 'variant_picker' -%}
                 {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
@@ -983,6 +1009,43 @@
       "type": "description",
       "name": "t:sections.main-product.blocks.description.name",
       "limit": 1
+    },
+    {
+      "type": "share",
+      "name": "t:sections.main-product.blocks.share.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "share_label",
+          "label": "t:sections.main-product.blocks.share.settings.text.label",
+          "default": "t:sections.main-product.blocks.share.settings.text.default"
+        },
+        {
+          "type": "text",
+          "id": "fb_link",
+          "default": "https://facebook.com/shopify",
+          "label": "Facebook link"
+        },
+        {
+          "type": "text",
+          "id": "insta_link",
+          "default": "https://instagram.com/shopify",
+          "label": "Instagram link"
+        },
+        {
+          "type": "text",
+          "id": "linkedin_link",
+          "default": "https://linkedin.com/shopify",
+          "label": "Linkedin Link"
+        },
+        {
+          "type": "text",
+          "id": "x_link",
+          "default": "https://x.com/shopify",
+          "label": "X Link"
+        }
+      ]
     },
     {
       "type": "custom_liquid",

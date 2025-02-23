@@ -315,6 +315,14 @@
         "social_vimeo_link": {
           "label": "Vimeo",
           "info": "https://vimeo.com/shopify"
+        },
+        "social_linkedin_link": {
+          "label": "Vimeo",
+          "info": "https://linkedin.com/shopify"
+        },
+        "social_x_link": {
+          "label": "Vimeo",
+          "info": "https://x.com/shopify"
         }
       }
     },
