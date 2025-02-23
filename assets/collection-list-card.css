@@ -4,7 +4,14 @@
     font-size: calc(var(--font-heading-scale) * 28px);
     font-weight:600;
 }
-
+.collection_list_title{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
 
 .card{
   background-color: unset;
@@ -45,6 +52,14 @@
 }
 .semicircle1 {
   bottom: 280px;
+}
+@media screen and (max-width: 749px) {
+  .semicircle1 {
+    bottom: 154px;
+}
+  .dashed_line{
+    bottom :171px;
+  }
 }
 
 .collection_list_inner{
