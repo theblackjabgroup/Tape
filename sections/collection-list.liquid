@@ -1,5 +1,5 @@
 {{ 'collection-list-card.css' | asset_url | stylesheet_tag }}
-{{ 'component-slider.css' | asset_url | stylesheet_tag }}
+
 
 {%- style -%}
   .section-{{ section.id }}-padding {
@@ -13,6 +13,41 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  /* Add styles for dots navigation */
+ .slider-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .slider-dot {
+    background: #000;
+    display: block !important;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    transition: all .45s ease;
+    margin: 0 !important;
+  }
+
+  .slider-dot--active {
+   width:23px;
+  border-radius:13px;
+  }
+
+  /* Hide the numerical counter */
+  .slider-counter {
+    display: none;
+  }
+
+  /* Ensure smooth scrolling on the slider */
+  .slider {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+  
 {%- endstyle -%}
 
 {%- liquid
@@ -26,7 +61,7 @@
 <div class="color-{{ section.settings.color_scheme }} gradient">
   <div class="collection-list-wrapper page-width isolate{% if show_mobile_slider %} page-width-desktop{% endif %}{% if section.settings.title == blank %} no-heading{% endif %}{% if section.settings.show_view_all == false or section.blocks.size > collections.size %} no-mobile-link{% endif %} section-{{ section.id }}-padding">
     {%- unless section.settings.title == blank -%}
-      <div class="title-wrapper-with-link{% if show_mobile_slider %} title-wrapper--self-padded-tablet-down{% else %} title-wrapper--self-padded-mobile{% endif %} title-wrapper--no-top-margin">
+      <div class="collection_list_title {% if show_mobile_slider %} title-wrapper--self-padded-tablet-down{% else %} title-wrapper--self-padded-mobile{% endif %} title-wrapper--no-top-margin">
         <h2
           id="SectionHeading-{{ section.id }}"
           class="collection-list-title inline-richtext {{ section.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
@@ -80,36 +115,24 @@
           </li>
         {%- endfor -%}
       </ul>
-      {%- if show_mobile_slider -%}
-        <div class="slider-buttons">
-          <button
-            type="button"
-            class="slider-button slider-button--prev"
-            name="previous"
-            aria-label="{{ 'general.slider.previous_slide' | t }}"
-          >
-            <span class="svg-wrapper">
-              {{- 'icon-caret.svg' | inline_asset_content -}}
-            </span>
-          </button>
-          <div class="slider-counter caption">
-            <span class="slider-counter--current">1</span>
-            <span aria-hidden="true"> / </span>
-            <span class="visually-hidden">{{ 'general.slider.of' | t }}</span>
-            <span class="slider-counter--total">{{ section.blocks.size }}</span>
-          </div>
-          <button
-            type="button"
-            class="slider-button slider-button--next"
-            name="next"
-            aria-label="{{ 'general.slider.next_slide' | t }}"
-          >
-            <span class="svg-wrapper">
-              {{- 'icon-caret.svg' | inline_asset_content -}}
-            </span>
-          </button>
-        </div>
-      {%- endif -%}
+  {%- if show_mobile_slider -%}
+  <div class="slider-buttons">
+    <div class="slider-dots" role="tablist" data-slider-dots>
+      {%- for block in section.blocks -%}
+        <button
+          type="button"
+          class="slider-dot{% if forloop.first %} slider-dot--active{% endif %}"
+          role="tab"
+          aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+          aria-controls="Slide-{{ section.id }}-{{ forloop.index }}"
+          data-index="{{ forloop.index0 }}"
+        >
+          <span class="visually-hidden">{{ 'general.slider.slide' | t }} {{ forloop.index }} {{ 'general.slider.of' | t }} {{ section.blocks.size }}</span>
+        </button>
+      {%- endfor -%}
+    </div>
+  </div>
+{%- endif -%}
     </slider-component>
 
     {%- if section.settings.show_view_all and section.blocks.size < collections.size -%}
@@ -131,6 +154,86 @@
     {%- endif -%}
   </div>
 </div>
+
+<script>
+  class SliderComponent extends HTMLElement {
+    constructor() {
+      super();
+      this.slider = this.querySelector('[id^="Slider-"]');
+      this.sliderItems = this.querySelectorAll('[id^="Slide-"]');
+      this.dots = this.querySelectorAll('.slider-dot');
+      
+      this.init();
+    }
+
+    init() {
+      if (!this.slider || !this.sliderItems.length) return;
+
+      // Initialize intersection observer to detect slide changes
+      const options = {
+        root: this.slider,
+        threshold: 0.5
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const slideIndex = Array.from(this.sliderItems).indexOf(entry.target);
+            this.updateDots(slideIndex);
+          }
+        });
+      }, options);
+
+      // Observe all slides
+      this.sliderItems.forEach(slide => observer.observe(slide));
+
+      // Add click handlers for dots
+      this.dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+          const slideElement = this.sliderItems[index];
+          slideElement.scrollIntoView({
+            behavior: 'smooth',
+            inline: 'start',
+            block: 'nearest'
+          });
+          this.updateDots(index);
+        });
+      });
+
+      // Add scroll event listener with debounce
+      let timeout;
+      this.slider.addEventListener('scroll', () => {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+          this.snapToClosestSlide();
+        }, 150);
+      });
+    }
+
+    updateDots(activeIndex) {
+      this.dots.forEach((dot, index) => {
+        const isActive = index === activeIndex;
+        dot.classList.toggle('slider-dot--active', isActive);
+        dot.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      });
+    }
+
+    snapToClosestSlide() {
+      const slideWidth = this.sliderItems[0].offsetWidth;
+      const scrollPosition = this.slider.scrollLeft;
+      const slideIndex = Math.round(scrollPosition / slideWidth);
+      
+      this.slider.scrollTo({
+        left: slideIndex * slideWidth,
+        behavior: 'smooth'
+      });
+      
+      this.updateDots(slideIndex);
+    }
+  }
+
+  customElements.define('slider-component', SliderComponent);
+</script>
 
 {% schema %}
 {
