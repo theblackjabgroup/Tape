@@ -14,6 +14,11 @@
   gap:18px;
   overflow:hidden;
 }
+.custom-blog-slider-subheading{
+  font-size: 16px;
+  font-weight: 400 !important;
+  max-width: 55%;
+}
 .field__input{
   background-color: rgb(var(--color-button));
   border: 1px solid black;
@@ -361,7 +366,9 @@ top: 561px;
   .blog-image-dots .blog-semicircle:nth-child(n+11) {
     display: none;
   }
-
+.custom-blog-slider-subheading{
+  max-width: 80%;
+}
   .page-width--narrow {
     max-width: 100%;
     padding-left: 15px;
@@ -655,80 +662,81 @@ top: 561px;
 }
 }
 
-/* .custom-slider-title,
-.custom-card-title,
-.custom-author,
-.custom-date,
-.custom-excerpt {
-    font-weight: 500;
-} */
-
 .custom-blog-slider-section {
-    position: relative;
-    width: 100%;
-    padding: 20px;
-    text-align: right;
+  position: relative;
+  width: 100%;
+  padding: 20px;
+  overflow: hidden; /* Contain everything within bounds */
 }
-.custom-blog-arrow-buttons {
-    margin-bottom: 10px;
+.custom-blog-arrow-buttons202 {
+  width: 100%;
+  text-align: right;
+  z-index: 10;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 .field__input{
   border-radius: 4px !important;
   border: 1px solid black;
 }
 .custom-arrow {
-    color: rgb(var(--color-foreground));
-    border: none;
-    padding: 0px 5px;
-    cursor: pointer;
-    margin: 0 5px;
-    font-size: 32px;
-    background: transparent;
-    transition: opacity 0.3s ease;
-    opacity: 1;
+  color: rgb(var(--color-foreground));
+  border: none;
+  padding: 10px 15px;
+  margin: 0 5px;
+  font-size: 32px;
+  background: transparent;
+  cursor: pointer;
+  transition: opacity 0.3s ease, color 0.3s ease;
+  opacity: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  /* Add a larger hit area */
+  min-width: 44px;
+  min-height: 44px;
 }
-
 .custom-arrow:disabled {
     opacity: 0.5;
     cursor: not-allowed;
 }
+.custom-arrow:hover {
+  color: rgb(var(--color-button));
+}
 
 .custom-blog-slider-title {
-    position: absolute;
-    top: 40px;
-    left: 25px;
+  transform: translateY(50px);
+  padding: 0 20px;
     font-size: 2rem;
     font-weight: bold;
     color: #333;
 }
 .custom-blog-slider-container {
-    width: 100%;
-    overflow: hidden;
-  padding: 10px 0;
+  width: 100%;
+  overflow: hidden; /* Change from auto to hidden */
+  padding: 10px;
+  position: relative; /* Add position relative */
 }
 
 .custom-blog-slider-wrapper {
-    display: flex;
-    flex-wrap: wrap; 
-    gap: 20px;
-    justify-content: flex-start;
-    will-change: transform;
-    transition: transform 0.5s ease-in-out;
+  display: flex;
+  gap: 20px;
+  transition: transform 0.5s ease-in-out;
+  width: max-content; /* Ensure wrapper takes full width of all cards */
+  min-width: 100%; /* Minimum width of container */
 }
 
 .custom-blog-card {
-    flex: 0 0 auto; 
-    width: 309px;
-    box-sizing: border-box; 
-    margin: 0; 
-    border-radius: 5px;
-    overflow: hidden;
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    min-height: 450px;
-    position: relative;
-    transition: flex 0.3s ease;
+  flex: 0 0 309px; /* Fixed width, no growing or shrinking */
+  width: 309px;
+  min-height: 450px;
+  margin: 0;
+  position: relative;
+  overflow: visible; /* Allow semicircles to show */
+  display: flex;
+  flex-direction: column;
 }
 .custom-blog-semicircle {
     content: '';
@@ -759,13 +767,11 @@ top: 561px;
 }
 
 .custom-blog-card-content {
-    padding: 15px;
-    background-color: #f0f0f8;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    height: auto; 
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  position: relative;
 }
 .custom-blog-card-title {
     color: #333;
@@ -854,8 +860,9 @@ top: 561px;
 
  @media (max-width: 767px) {
     .custom-blog-card {
-        flex: 0 0 100%;
-    }
+    flex: 0 0 340px;
+    width: 340px;
+  }
 
     .custom-blog-card-title {
         font-size: 1.2rem;
@@ -869,7 +876,15 @@ top: 561px;
     .custom-blog-read-more-btn {
         width: 50%;
     }
-
+  .custom-arrow {
+    padding: 12px 18px;
+    min-width: 48px;
+    min-height: 48px;
+  }
+  
+  .custom-blog-arrow-buttons202 {
+    top: 40px;
+  }
 }
 
 @media (min-width: 768px) {
@@ -886,6 +901,7 @@ top: 561px;
   .custom-blog-semicircle-right{
     top: 300px;
   }
+
 }
 
 @media (min-width: 1024px) {
