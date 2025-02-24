@@ -1,17 +1,4 @@
-{% comment %}
-  Renders a collection card
 
-  Accepts:
-  - card_collection: {Object} Collection Liquid object
-  - media_aspect_ratio: {String} Size of the product image card. Values are "square" and "portrait". Default is "square" (optional)
-  - columns: {Number}
-  - extend_height: {Boolean} Card height extends to available container space. Default: false (optional)
-  - wrapper_class: {String} Wrapper class for card (optional)
-  - placeholder_image: {String} Placeholder image when collection is empty (optional)
-
-  Usage:
-  {% render 'card-collection' %}
-{% endcomment %}
 
 {%- liquid
   assign ratio = 1
@@ -46,8 +33,9 @@
     <div class="collections_data">
         {%- if card_collection != blank and card_style == 'card' or card_collection.featured_image -%}
       <div class="card__content">
-        <div class="card__information" style="
+        <div class="collection_text_card" style="
     display: flex;
+     grid-row-start: 2;
     justify-content: center;
 ">
           <h3 class="card__heading">
@@ -105,7 +93,8 @@
         <div class="card__media" style="
     width: 100%; ">
           <div class="media media--transparent media--hover-effect" style="
-    height: 100%; ">
+    height: 100%;
+            margin:0px">
             <img
               srcset="
                 {%- if card_collection.featured_image.width >= 165 -%}{{ card_collection.featured_image | image_url: width: 165 }} 165w,{%- endif -%}
