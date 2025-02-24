@@ -13,7 +13,73 @@
     }
   }
   
+  .video-section__media {
+    {% if section.settings.video_focus == 'left' %}
+    --video-focus-position: 25% center;
+    {% elsif section.settings.video_focus == 'right' %}
+    --video-focus-position: 75% center;
+    {% else %}
+    --video-focus-position: center center;
+    {% endif %}
+  }
+  
+  .video-section__media video,
+  .video-section__media iframe,
+  .video-section_poster img {
+    object-position: var(--video-focus-position);
+  }
+  
+  @media screen and (max-width: 749px) {
+    .video-section__media {
+      background-position: var(--video-focus-position);
+    }
+  }
+  
+  /* Animation styles */
+  .video-animation-none {
+    opacity: 1;
+  }
+  
+  .video-animation-fade-in {
+    animation: videoFadeIn 1.2s ease-out;
+  }
+  
+  .video-animation-slide-in {
+    animation: videoSlideIn 1s ease-out;
+  }
+  
+  .video-animation-zoom-in {
+    animation: videoZoomIn 1.2s ease-out;
+  }
+  
+  @keyframes videoFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes videoSlideIn {
+    from { 
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to { 
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes videoZoomIn {
+    from { 
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to { 
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
 {%- endstyle -%}
+
 {%- liquid
   assign video_source = section.settings.video_source
   if video_source == blank or video_source == 'youtube'
@@ -28,6 +94,18 @@
   assign video_alt = section.settings.video.alt | default: section.settings.description
   assign alt = 'sections.video.load_video' | t: description: video_alt | escape
   assign poster = section.settings.cover_image
+  
+  assign animation_class = ''
+  case section.settings.video_animation
+    when 'fade'
+      assign animation_class = 'video-animation-fade-in'
+    when 'slide'
+      assign animation_class = 'video-animation-slide-in'
+    when 'zoom'
+      assign animation_class = 'video-animation-zoom-in'
+    else
+      assign animation_class = 'video-animation-none'
+  endcase
 -%}
 
 <div class="color-{{ section.settings.color_scheme }} gradient">
@@ -45,7 +123,7 @@
     </div>
     
     <deferred-media
-      class="video-section__media deferred-media gradient global-media-settings{% if section.settings.full_width %} global-media-settings--full-width{% endif %}{% if fix_ratio %} media-fit-cover{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+      class="video-section__media deferred-media gradient global-media-settings {{ animation_class }}{% if section.settings.full_width %} global-media-settings--full-width{% endif %}{% if fix_ratio %} media-fit-cover{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger{% endif %}"
       data-media-id="{{ video_id }}"
       {% if poster != blank %}
         style="--ratio-percent: {{ 1 | divided_by: poster.aspect_ratio | times: 100 }}%;"
@@ -61,10 +139,9 @@
       >
         {%- if poster != blank -%}
           {{  poster | image_url: width: 1920 | image_tag }}
-          {%- else -%}
-  {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg placeholder'}}
-{%- endif -%}
-
+        {%- else -%}
+          {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg placeholder'}}
+        {%- endif -%}
 
         <span class="deferred-media__poster-button motion-reduce"
           style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
@@ -74,42 +151,41 @@
           </svg>
         </span>
       </button>
-     <template>
-  {%- case video_source -%}
-    {%- when 'youtube' -%}
-      <iframe
-        src="https://www.youtube.com/embed/{{ video_id }}?enablejsapi=1&autoplay=1&rel=0&showinfo=0{% if section.settings.enable_video_looping %}&loop=1&playlist={{ video_id }}{% endif %}"
-        class="js-youtube"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-        title="{{ section.settings.description | escape }}"
-        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;"
-        loading="lazy"
-      ></iframe>
-    {%- when 'vimeo' -%}
-      <iframe
-        src="https://player.vimeo.com/video/{{ video_id }}?autoplay=1&color=ffffff&muted=0{% if section.settings.enable_video_looping %}&loop=1{% endif %}"
-        class="js-vimeo"
-        allow="autoplay; encrypted-media"
-        allowfullscreen
-        title="{{ section.settings.description | escape }}"
-        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;"
-      ></iframe>
-    {%- else -%}
-      {{ section.settings.video | video_tag: 
-        image_size: '1100x',
-        autoplay: true,
-        loop: section.settings.enable_video_looping,
-        controls: true,
-        muted: false,
-        preload: "none"
-      }}
-  {%- endcase -%}
-</template>
-                <div class="overlay-left overlay"></div>
+      <template>
+        {%- case video_source -%}
+          {%- when 'youtube' -%}
+            <iframe
+              src="https://www.youtube.com/embed/{{ video_id }}?enablejsapi=1&autoplay=1&rel=0&showinfo=0{% if section.settings.enable_video_looping %}&loop=1&playlist={{ video_id }}{% endif %}"
+              class="js-youtube"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              title="{{ section.settings.description | escape }}"
+              style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;"
+              loading="lazy"
+            ></iframe>
+          {%- when 'vimeo' -%}
+            <iframe
+              src="https://player.vimeo.com/video/{{ video_id }}?autoplay=1&color=ffffff&muted=0{% if section.settings.enable_video_looping %}&loop=1{% endif %}"
+              class="js-vimeo"
+              allow="autoplay; encrypted-media"
+              allowfullscreen
+              title="{{ section.settings.description | escape }}"
+              style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;"
+            ></iframe>
+          {%- else -%}
+            {{ section.settings.video | video_tag: 
+              image_size: '1100x',
+              autoplay: true,
+              loop: section.settings.enable_video_looping,
+              controls: true,
+              muted: false,
+              preload: "none"
+            }}
+        {%- endcase -%}
+      </template>
+      <div class="overlay-left overlay"></div>
       <div class="overlay-right overlay"></div>
     </deferred-media>
-                
   </div>
 </div>
 
@@ -164,38 +240,38 @@
       "type": "header",
       "content": "Video Source Settings"
     },
-   {
-  "type": "select",
-  "id": "video_source",
-  "label": "Video Source",
-  "options": [
     {
-      "value": "uploaded",
-      "label": "Mp4 Video"
+      "type": "select",
+      "id": "video_source",
+      "label": "Video Source",
+      "options": [
+        {
+          "value": "uploaded",
+          "label": "Mp4 Video"
+        },
+        {
+          "value": "youtube",
+          "label": "YouTube URL"
+        },
+        {
+          "value": "vimeo",
+          "label": "Vimeo URL"
+        }
+      ],
+      "default": "youtube"
     },
-    {
-      "value": "youtube",
-      "label": "YouTube URL"
-    },
-    {
-      "value": "vimeo",
-      "label": "Vimeo URL"
-    }
-  ],
-  "default": "youtube"  // Set YouTube as the default
-},
     {
       "type": "video",
       "id": "video",
       "label": "t:sections.video.settings.video.label"
     },
-   {
-  "type": "video_url",
-  "id": "youtube_link",
-  "accept": ["youtube"],
-  "label": "YouTube Video URL",
-  "default": "https://www.youtube.com/watch?v=_9VUPq3SxOc",  // Default YouTube video URL
-},
+    {
+      "type": "video_url",
+      "id": "youtube_link",
+      "accept": ["youtube"],
+      "label": "YouTube Video URL",
+      "default": "https://www.youtube.com/watch?v=_9VUPq3SxOc"
+    },
     {
       "type": "text",
       "id": "vimeo_url",
@@ -206,6 +282,56 @@
       "type": "image_picker",
       "id": "cover_image",
       "label": "t:sections.video.settings.cover_image.label"
+    },
+    {
+      "type": "header",
+      "content": "Video Display Settings"
+    },
+    {
+      "type": "select",
+      "id": "video_focus",
+      "label": "Video Focus Area",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center",
+      "info": "Controls which part of the video is focused on smaller screens"
+    },
+    {
+      "type": "select",
+      "id": "video_animation",
+      "label": "Entry Animation",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "fade",
+          "label": "Fade In"
+        },
+        {
+          "value": "slide",
+          "label": "Slide Up"
+        },
+        {
+          "value": "zoom",
+          "label": "Zoom In"
+        }
+      ],
+      "default": "none",
+      "info": "Animation effect when the video section appears"
     },
     {
       "type": "header",
@@ -250,7 +376,7 @@
   ],
   "presets": [
     {
-           "name": "Video Banner",
+      "name": "Video Banner"
     }
   ]
 }

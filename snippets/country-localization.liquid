@@ -31,7 +31,9 @@
     aria-describedby="{{ localPosition }}Label"
   >
     <span>
-      {{- localization.country.currency.iso_code }} {{ localization.country.currency.symbol -}}
+      {{- localization.country.name }} |
+      {{ localization.country.currency.iso_code }}
+      {{ localization.country.currency.symbol -}}
     </span>
     {{ 'icon-caret.svg' | inline_asset_content }}
   </button>
@@ -64,7 +66,8 @@
                 >
                   {{- 'icon-checkmark.svg' | inline_asset_content -}}
                 </span>
-                <span class="localization-form__currency motion-reduce">
+                <span class="country">{{- country.name }}</span>
+                <span class="localization-form__currency motion-reduce{% unless show_currencies %} hidden{% endunless %}">
                   {{ country.currency.iso_code }}
                   {{ country.currency.symbol -}}
                 </span>
@@ -92,7 +95,8 @@
               >
                 {{- 'icon-checkmark.svg' | inline_asset_content -}}
               </span>
-              <span class="localization-form__currency motion-reduce">
+              <span class="country">{{- country.name }}</span>
+                <span class="localization-form__currency motion-reduce{% unless show_currencies %} hidden{% endunless %}">
                 {{ country.currency.iso_code }}
                 {{ country.currency.symbol -}}
               </span>
