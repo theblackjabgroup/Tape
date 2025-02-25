@@ -1,0 +1,114 @@
+{% comment %}
+  Team Section for Shopify Store
+  - Supports a minimum of 3 team members and a maximum of 8.
+{% endcomment %}
+
+{{ 'meet-the-team.css' | asset_url | stylesheet_tag }}
+
+<section class="team-section">
+  <h2 class="team-title">{{ section.settings.section_heading }}</h2>
+  <p class="team-description">{{ section.settings.section_description }}</p>
+
+  <div class="team-grid" style="text-align:
+    {{ section.settings.text_alignment }}
+    ;">
+    {% for member in section.blocks %}
+      <div class="team-member">
+        <div class="team-photo">
+          {% if member.settings.image != blank %}
+            <img src="{{ member.settings.image | img_url: 'medium' }}" alt="{{ member.settings.name }}">
+          {% else %}
+            <div class="placeholder">
+              <img src="/assets/user.png" alt="default user image"></div>
+          {% endif %}
+        </div>
+        <h3 class="team-name">{{ member.settings.name }}</h3>
+        <p class="team-role">{{ member.settings.role }}</p>
+        <p class="team-bio">{{ member.settings.bio }}</p>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Team Section",
+    "disabled_on": {
+      "groups": ["header", "footer"]
+    },
+    "settings": [
+      {
+        "type": "text",
+        "id": "section_heading",
+        "label": "Section Heading",
+        "default": "Meet the Team"
+      }, {
+        "type": "text",
+        "id": "section_description",
+        "label": "Section Description",
+        "default": "Experience ultimate comfort with our wheelchair's padded armrests. Designed for support and pressure relief, they feature an ergonomic shape and adjustable height for a personalized fit. Enjoy enhanced stability and comfort during every ride!"
+      }, {
+        "type": "select",
+        "id": "text_alignment",
+        "label": "Text Alignment",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          }, {
+            "value": "center",
+            "label": "Center"
+          }, {
+            "value": "right",
+            "label": "Right"
+          }
+        ],
+        "default": "center"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "member",
+        "name": "Team Member",
+        "limit": 8,
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Member Image"
+          }, {
+            "type": "text",
+            "id": "name",
+            "label": "Member Name",
+            "default": "Member Name"
+          }, {
+            "type": "text",
+            "id": "role",
+            "label": "Role",
+            "default": "Member Role"
+          }, {
+            "type": "textarea",
+            "id": "bio",
+            "label": "Short Bio",
+            "default": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque corporis aspernatur sed, quam nostrum quis perferendis ab aliquam vel architecto dolorem amet optio corrupti. Magnam."
+          }
+        ]
+      }
+    ],
+    "max_blocks": 9,
+    "presets": [
+      {
+        "name": "Team Section",
+        "blocks": [
+          {
+            "type": "member"
+          }, {
+            "type": "member"
+          }, {
+            "type": "member"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
