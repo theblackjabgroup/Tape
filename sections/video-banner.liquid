@@ -31,15 +31,29 @@
         onclick="this.style.display='none'; this.nextElementSibling.style.display='block';"
         aria-label="Play the video"
       >
-     {%- if block.settings.placeholder_image != blank -%}
-  {{
-    block.settings.placeholder_image 
-    | image_url: width: 1920, height: 1080 
-    | image_tag: style: 'width: 100%; height: 85%; object-fit: cover;'
-  }}
-{%- else -%}
-  {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
-{%- endif -%}
+        {%- if block.settings.placeholder_image != blank -%}
+          {{
+            block.settings.placeholder_image 
+            | image_url: width: 1920, height: 1080 
+            | image_tag: style: 'width: 100%; height: 85%; object-fit: cover;', class: 'desktop-only-image'
+          }}
+        {%- endif -%}
+        
+        {%- if block.settings.mobile_placeholder_image != blank -%}
+          {{
+            block.settings.mobile_placeholder_image 
+            | image_url: width: 768, height: 432
+            | image_tag: style: 'width: 100%; height: 85%; object-fit: cover;', class: 'mobile-only-image'
+          }}
+        {%- elsif block.settings.placeholder_image != blank -%}
+          {{
+            block.settings.placeholder_image 
+            | image_url: width: 768, height: 432 
+            | image_tag: style: 'width: 100%; height: 85%; object-fit: cover;', class: 'mobile-only-image'
+          }}
+        {%- else -%}
+          {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
+        {%- endif -%}
         <span
           class="deferred-media__poster-button motion-reduce"
           style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"
@@ -78,15 +92,29 @@
         onclick="this.style.display='none'; this.nextElementSibling.style.display='block';"
         aria-label="Play the video"
       >
-      {%- if block.settings.placeholder_image != blank -%}
-  {{
-    block.settings.placeholder_image 
-    | image_url: width: 1920, height: 1080 
-    | image_tag: style: 'width: 100%; height: 85%; object-fit: cover;'
-  }}
-{%- else -%}
-  {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
-{%- endif -%}
+        {%- if block.settings.placeholder_image != blank -%}
+          {{
+            block.settings.placeholder_image 
+            | image_url: width: 1920, height: 1080 
+            | image_tag: style: 'width: 100%; height: 85%; object-fit: cover;', class: 'desktop-only-image'
+          }}
+        {%- endif -%}
+        
+        {%- if block.settings.mobile_placeholder_image != blank -%}
+          {{
+            block.settings.mobile_placeholder_image 
+            | image_url: width: 768, height: 432
+            | image_tag: style: 'width: 100%; height: 85%; object-fit: cover;', class: 'mobile-only-image'
+          }}
+        {%- elsif block.settings.placeholder_image != blank -%}
+          {{
+            block.settings.placeholder_image 
+            | image_url: width: 768, height: 432 
+            | image_tag: style: 'width: 100%; height: 85%; object-fit: cover;', class: 'mobile-only-image'
+          }}
+        {%- else -%}
+          {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
+        {%- endif -%}
 
         <span
           class="deferred-media__poster-button motion-reduce"
@@ -125,6 +153,23 @@
   </div>
 </div>
 
+<style>
+  .desktop-only-image {
+    display: block;
+  }
+  .mobile-only-image {
+    display: none !important;
+  }
+  
+  @media screen and (max-width: 750px) {
+    .desktop-only-image {
+      display: none !important;
+    }
+    .mobile-only-image {
+      display: block !important;
+    }
+  }
+</style>
 
 {% schema %}
 {
@@ -160,8 +205,13 @@
         {
           "type": "image_picker",
           "id": "placeholder_image",
-          "label": "Custom Placeholder Image",
-          "info": "Optional: Upload a custom placeholder image"
+          "label": "Desktop Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "mobile_placeholder_image",
+          "label": "Mobile Image (Optional)",
+          "info": "If not set, desktop image will be used"
         }
       ]
     },
@@ -179,8 +229,13 @@
         {
           "type": "image_picker",
           "id": "placeholder_image",
-          "label": "Custom Placeholder Image",
-          "info": "Optional: Upload a custom placeholder image"
+          "label": "Desktop Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "mobile_placeholder_image",
+          "label": "Mobile Image (Optional)",
+          "info": "If not set, desktop image will be used"
         }
       ]
     },
@@ -197,8 +252,13 @@
         {
           "type": "image_picker",
           "id": "placeholder_image",
-          "label": "Custom Placeholder Image",
-          "info": "Optional: Upload a custom placeholder image"
+          "label": "Desktop Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "mobile_placeholder_image",
+          "label": "Mobile Image (Optional)",
+          "info": "If not set, desktop image will be used"
         }
       ]
     }
