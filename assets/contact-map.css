@@ -2,6 +2,7 @@
     padding: 60px 20px;
     background-color: rgb(var(--color-background));
     color: rgb(var(--color-foreground));
+  overflow:hidden;
   }
   .contact-container {
     margin: 0 50px;
@@ -68,15 +69,33 @@
   .contact-info a:hover {
     opacity: 0.8;
   }
-  @media (max-width: 768px) {
-    .contact-grid {
-      grid-template-columns: 1fr;
-      gap: 20px;
-    }
-    .contact-header h2 {
-      font-size: 28px;
-    }
-    .contact-container {
-      margin: 0 0px;
-    }
+@media (max-width: 768px) {
+  .contact-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
   }
+  .contact-header h2 {
+    font-size: 28px;
+  }
+  .contact-container {
+    margin: 0 0px;
+  }
+  .contact-info {
+    width: 100%;
+  }
+  .contact-info a,
+  .contact-info p {
+    font-size: 14px;
+    word-break: break-word;
+    display: block;
+    overflow-wrap: break-word;
+    max-width: 100%;
+  }
+  .contact-info h3 {
+    font-size: 16px;
+    margin-bottom: 4px;
+  }
+  .contact-item {
+    padding-right: 10px;
+  }
+}
