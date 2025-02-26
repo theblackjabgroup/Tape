@@ -1,5 +1,8 @@
 {
   "general": {
+    "breadcrumb": {
+      "home": "Home"
+    },
     "password_page": {
       "login_form_heading": "ENTER PASSWORD",
       "login_password_button": "ENTER USING PASSWORD",
