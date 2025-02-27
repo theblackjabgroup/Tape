@@ -125,56 +125,66 @@
   object-fit: contain;
   display: block !important;
 }
-.hamburger {
-   width: var(--hamburger-size);
- 
-  height: var(--hamburger-size);
-    
-  position: relative;
-  cursor: pointer;
-  display: inline-block !important;
- 
-  border-radius: 5px;
-  background-color: var(--background_product_card);
-}
 
-.ham {
-  width: 100%;
-    height: 100%;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-  transition: transform 400ms;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-.line {
-  fill:none;
-  transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
-  stroke:#000;
-  stroke-width:2.5;
-  stroke-linecap:round;
-}
-.ham2 .top {
-  stroke-dasharray: 40 121;
-}
-.ham2 .bottom {
-  stroke-dasharray: 40 121;
-}
 
-.hamburger-line {
-  width: calc(var(--hamburger-size) * 0.38);
-  height: 1px;
-background-color: rgb(var(--color-secondary-button-text));
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  display: block !important;
-}
+    .hamburger {
+      width: var(--hamburger-size);
+      height: var(--hamburger-size);
+      padding: 21px 18px;
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 5px;
+      background-color: var(--background_product_card);
+    }
 
+    .hamburger-menu {
+      width: 100%;
+      height: 24px; /* Fixed height for the menu container */
+      position: relative;
+      cursor: pointer;
+    }
+
+    .line {
+      width: 100%;
+      height: 2px;
+     background-color: rgb(var(--color-secondary-button-text));
+      border-radius: 2px;
+      display: block;
+      transition: all 0.3s ease;
+      transform-origin: center;
+      position: absolute;
+      left: 0;
+    }
+
+    .line:nth-child(1) {
+      top: 0;
+    }
+
+    .line:nth-child(2) {
+      top: 10px; 
+    }
+
+    .line:nth-child(3) {
+      top: 20px; 
+    }
 
   
+    .hamburger.active .line:nth-child(1) {
+      top: 10px; /* Move to center */
+      transform: rotate(45deg);
+    }
+
+    .hamburger.active .line:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active .line:nth-child(3) {
+      top: 10px;
+      transform: rotate(-45deg);
+    }
 
 .header {
   width: var(--header-width);
@@ -511,6 +521,9 @@ body.drawer-open {
     margin: 0;
     padding: 0 20px;
   }
+   .hamburger {
+      padding: 11px 8px;
+   }
 }
 
 @media (max-width: 768px) {
