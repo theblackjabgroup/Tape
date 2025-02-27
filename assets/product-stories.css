@@ -92,7 +92,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: white;
+  background-color: rg(var(--button_label));
   margin: 0 auto 10px auto;
 }
 
