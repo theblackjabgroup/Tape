@@ -39,7 +39,7 @@
 }
 .collections_data{
   min-height:60px;
-      background-color: rgb(var(--color-button));
+      background-color: var(--card_foreground);
 }
 .collection_list-card-wrapper {
   color: inherit;
@@ -391,6 +391,7 @@ text-decoration-skip-ink: none;
 .card__heading {
   margin-top: 0;
   margin-bottom: 0;
+  color: var(--product_price_card);
 }
 
 .card__heading:last-child {
