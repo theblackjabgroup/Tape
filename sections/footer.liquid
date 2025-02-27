@@ -2,38 +2,38 @@
 {{ 'section-footer.css' | asset_url | stylesheet_tag }}
 
 <style>
-  .footer-column form button {
-      font-family: var(--font-body-family);
-      font-weight: var(--font-body-weight);
-      border-radius: {{ section.settings.footer_button_border_radius | default: 5 }}px;
-      font-size: {{ section.settings.footer_button_font_size | default: 15 }}px;
-      height: {{ section.settings.footer_button_height | default:50 }}px;
-      padding: {{ section.settings.footer_button_padding | default: '5px 10px' }};
-      text-align: left;
-      background: linear-gradient(to right, gray 50%, rgb(var(--color-button-text)) 50%);
-      background-size: 200% 100%;
-      background-position: 100% 0;
-      color: rgb(var(--color-secondary-button-text));
-      border: {{ section.settings.footer_button_border | default: 'none' }};
-      cursor: pointer;
-      transition: background-position 1.5s ease-in-out, transform 0.3s ease;
-  }
+.footer-column form button {
+    font-family: var(--font-body-family);
+    font-weight: var(--font-body-weight);
+    border-radius: {{ section.settings.footer_button_border_radius | default: 5 }}px;
+    font-size: {{ section.settings.footer_button_font_size | default: 16 }}px;
+    height: {{ section.settings.footer_button_height | default:50 }}px;
+    padding: {{ section.settings.footer_button_padding | default: '24px 12px' }};
+    text-align: center; 
+    background: linear-gradient(to right, gray 50%, rgb(var(--color-button-text)) 50%);
+    background-size: 200% 100%;
+    background-position: 100% 0;
+    color: rgb(var(--color-secondary-button-text));
+    transition: background-position 1.5s ease-in-out, transform 0.3s ease;
+}
+
+.subscribe-button {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Added to center the text and icon */
+    gap: 8px;
+    border: none;
+    cursor: pointer;
+    padding: 24px 12px;
+    position: relative;
+    font-family: var(--font-body-family);
+    font-weight: var(--font-body-weight);
+}
     .footer-column form button:hover {
       background-position: 0 0;
       transform: {{ section.settings.footer_button_hover_transform | default: 'scale(1.05)' }};
   }
 
-  .subscribe-button {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    border: none;
-    cursor: pointer;
-    padding: 12px 24px;
-    position: relative;
-  font-family: var(--font-body-family);
-      font-weight: var(--font-body-weight);
-  }
 
   .subscribe-button .footer-svg {
     width: 20px;
