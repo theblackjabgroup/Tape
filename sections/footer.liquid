@@ -1,653 +1,421 @@
-{% comment %}theme-check-disable UndefinedObject{% endcomment %}
-{{ 'section-footer.css' | asset_url | stylesheet_tag }}
 
-<style>
-  .footer-column form button {
-      font-family: var(--font-body-family);
-      font-weight: var(--font-body-weight);
-      border-radius: {{ section.settings.footer_button_border_radius | default: 5 }}px;
-      font-size: {{ section.settings.footer_button_font_size | default: 15 }}px;
-      height: {{ section.settings.footer_button_height | default:50 }}px;
-      padding: {{ section.settings.footer_button_padding | default: '5px 10px' }};
-      text-align: left;
-      background: linear-gradient(to right, gray 50%, rgb(var(--color-button-text)) 50%);
-      background-size: 200% 100%;
-      background-position: 100% 0;
-      color: rgb(var(--color-secondary-button-text));
-      border: {{ section.settings.footer_button_border | default: 'none' }};
-      cursor: pointer;
-      transition: background-position 1.5s ease-in-out, transform 0.3s ease;
-  }
-    .footer-column form button:hover {
-      background-position: 0 0;
-      transform: {{ section.settings.footer_button_hover_transform | default: 'scale(1.05)' }};
+body {
+   font-family: var(--font-body-family);
+    font-weight: var(--font-body-weight);
   }
 
-  .subscribe-button {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    border: none;
-    cursor: pointer;
-    padding: 12px 24px;
-    position: relative;
-  font-family: var(--font-body-family);
-      font-weight: var(--font-body-weight);
+  h1{
+     font-family: var(--font-heading-family);
+    font-style: var(--font-heading-style);
+    font-weight: var(--font-heading-weight);
   }
 
-  .subscribe-button .footer-svg {
-    width: 20px;
-    height: 20px;
-    transition: transform 0.3s ease;
+h7 {
+    font-family: var(--font-body-family);
+    font-weight: var(--font-body-weight);
   }
 
-  .subscribe-button:hover .footer-svg {
-    transform: translateX(5px);
+  h2{
+    font-family: var(--font-subheading-family);
+    font-style: var(--font-subheading-style);
+    font-weight: var(--font-subheading-weight);
   }
 
-  .footer-column form button::after {
-      position: relative;
-      margin-left: 5px;
-      font-size: {{ section.settings.footer_button_arrow_size | default: 14 }}px;
+.model-number {
+    font-family: var(--font-body-family);
+    font-weight: var(--font-body-weight);
   }
 
-  .footer-content {
-      display: flex;
-      justify-content: space-evenly;
-      padding-top: 20px;
-      font-family: var(--font-body-family);
-      font-weight: var(--font-body-weight);
-      gap: 40px;
-  }
-
-  /* Special class for when no blocks exist */
-  .footer-content--no-blocks {
-      justify-content: flex-start !important;
-      padding-left: 20px;
-  }
-
-  .footer-column h4 {
-      font-family: var(--font-heading-family);
-      font-weight: var(--font-heading-weight);
-  }
-
-  .footer-column ul li a {
-      font-family: var(--font-body-family);
-      font-weight: var(--font-body-weight);
-  }
-
-  #stay-connected-title {
-      font-family: var(--font-heading-family);
-      font-weight: var(--font-heading-weight);
-  }
-
-  .thank-you-message {
-      font-family: var(--font-body-family);
-      font-weight: var(--font-body-weight);
-  }
-
-  .footer-column form input {
-      font-family: var(--font-body-family);
-      font-weight: var(--font-body-weight);
-  }
-
-  .footer__country-selector,
-  .footer__language-selector {
-      font-family: var(--font-body-family);
-      font-weight: var(--font-body-weight);
-  }
-
-  .container1 .offer-text {
-      font-family: var(--font-body-family);
-      font-weight: var(--font-body-weight);
-  }
-  .footer-column h4 {
-      font-family: var(--font-heading-family) !important;
-      font-weight: var(--font-heading-weight);
-  }
-
-  .footer-column ul {
-      font-family: var(--font-body-family) !important;
-  }
-
-  .footer-column ul li {
-      font-family: var(--font-body-family) !important;
-  }
-
-  .footer-column ul li a {
-      font-family: var(--font-body-family) !important;
-      font-weight: var(--font-body-weight);
-  }
-</style>
-
-<footer
-  class="color-{{ section.settings.color_scheme }}"
-  style="
-    padding-top: {{ section.settings.footer_top_padding }}px;
-    padding-bottom: {{ section.settings.footer_bottom_padding }}px;
-    font-family: var(--font-body-family) !important;
-  "
->
-  {% if section.settings.show_announcement_strips %}
-    <div class="container1" style="background-color: {{ section.settings.strip_container_bg_color }};">
-      <div class="strip-right" style="background-color: {{ section.settings.strip_bg_color }};">
-        <div class="strip-1">
-          <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">
-            {{ section.settings.offer_text_1 }}
-          </div>
-          <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">
-            {{ section.settings.offer_text_1 }}
-          </div>
-          <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">
-            {{ section.settings.offer_text_1 }}
-          </div>
-        </div>
-      </div>
-      <div class="strip-left" style="background-color: {{ section.settings.strip_bg_color }};">
-        <div class="strip-2">
-          <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">
-            {{ section.settings.offer_text_2 }}
-          </div>
-          <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">
-            {{ section.settings.offer_text_2 }}
-          </div>
-          <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">
-            {{ section.settings.offer_text_2 }}
-          </div>
-        </div>
-      </div>
-    </div>
-  {% endif %}
-
-  <div class="footer-content {% if section.blocks.size == 0 %}footer-content--no-blocks{% endif %}">
-    {% if section.settings.show_newsletter %}
-      <div id="newsletter-section1" class="footer-column">
-        <div id="stay-connected">
-          <h4 id="stay-connected-title">
-            {{ section.settings.STAY_CONNECTED_TITLE }}
-          </h4>
-          <h4 id="thank-you-message" class="thank-you-message" style="display: none;">
-            {{ section.settings.thank_you_message_text | default: 'Thank you for subscribing!' }}
-          </h4>
-        </div>
-        <form id="newsletter-form">
-          <div id="form-container" class="form-container">
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-            <i class="fa-regular fa-envelope footer-envelope-icon1"></i>
-            <input
-              type="email"
-              id="email-input"
-              name="email"
-              placeholder="Enter your email"
-              required
-            >
-            <button type="submit" class="subscribe-button">
-              {{ section.settings.subscribe_button_text }}
-              <svg
-                class="footer-svg"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
-              </svg>
-            </button>
-          </div>
-        </form>
-
-        {% if section.settings.enable_country_selector and localization.available_countries.size > 1 %}
-          <div class="footer__country-selector" style="font-size: 13px;">
-            <localization-form>
-              {% form 'localization', id: 'FooterCountryForm', class: 'footer-country-form' %}
-                <div class="footer-country-wrapper">
-                  {% render 'country-localization', localPosition: 'FooterCountry' %}
-                </div>
-              {% endform %}
-            </localization-form>
-          </div>
-        {% endif %}
-        {% if section.settings.enable_language_selector and localization.available_languages.size > 1 %}
-          <div class="footer__language-selector" style="font-size: 13px;">
-            <localization-form>
-              {% form 'localization', id: 'FooterLanguageForm', class: 'footer-language-form' %}
-                <div class="footer-language-wrapper">
-                  {% render 'language-localization', localPosition: 'FooterLanguage' %}
-                </div>
-              {% endform %}
-            </localization-form>
-          </div>
-        {% endif %}
-      </div>
-    {% endif %}
-
-    {% if section.blocks.size > 0 %}
-      {% for block in section.blocks %}
-        {% case block.type %}
-          {% when 'menu' %}
-            <div class="footer-column" {{ block.shopify_attributes }}>
-              <h4 style="font-family: var(--font-heading-family) !important;">{{ block.settings.menu_title }}</h4>
-              <ul style="font-family: var(--font-body-family) !important;">
-                {% for link in linklists[block.settings.menu_links].links %}
-                  <li style="font-family: var(--font-body-family) !important;">
-                    <a
-                      href="{{ link.url }}"
-                      style="font-family: var(--font-body-family) !important; color: {{ section.settings.menu_item_color }};"
-                    >
-                      {{- link.title -}}
-                    </a>
-                  </li>
-                {% endfor %}
-              </ul>
-            </div>
-          {% when 'social_media' %}
-            <div class="footer-column" {{ block.shopify_attributes }}>
-              <h4 style="font-family: var(--font-heading-family) !important;">{{ block.settings.social_title }}</h4>
-              {% if section.settings.show_social_icons %}
-                <div class="social-icons">
-                  {%- if settings.social_facebook_link != blank -%}
-                    <a
-                      href="{{ settings.social_facebook_link }}"
-                      class="social-icon"
-                      style="color: {{ section.settings.menu_item_color }};"
-                    >
-                      {{
-                        'icon-facebook.svg'
-                        | inline_asset_content
-                        | replace: '<svg', '<svg style="height: 25px; fill: '
-                        | append: settings.social_icon_color
-                        | remove: '_'
-                      }}
-                    </a>
-                  {%- endif -%}
-                  {%- if settings.social_instagram_link != blank -%}
-                    <a
-                      href="{{ settings.social_instagram_link }}"
-                      class="social-icon"
-                      aria-label="{{ 'general.social.links.instagram' | t }}"
-                      style="color: {{ section.settings.menu_item_color }};"
-                    >
-                      {{
-                        'icon-instagram.svg'
-                        | inline_asset_content
-                        | replace: '<svg', '<svg style="height: 25px; fill: '
-                        | append: settings.social_icon_color
-                        | remove: '_'
-                      }}
-                    </a>
-                  {%- endif -%}
-                  {%- if settings.social_youtube_link != blank -%}
-                    <a
-                      href="{{ settings.social_youtube_link }}"
-                      class="social-icon"
-                      aria-label="{{ 'general.social.links.youtube' | t }}"
-                      style="color: {{ section.settings.menu_item_color }};"
-                    >
-                      {{
-                        'icon-youtube.svg'
-                        | inline_asset_content
-                        | replace: '<svg', '<svg style="height: 25px; fill: '
-                        | append: settings.social_icon_color
-                        | remove: '_'
-                      }}
-                    </a>
-                  {%- endif -%}
-                  {%- if settings.social_tiktok_link != blank -%}
-                    <a
-                      href="{{ settings.social_tiktok_link }}"
-                      class="social-icon"
-                      aria-label="{{ 'general.social.links.tiktok' | t }}"
-                      style="color: {{ section.settings.menu_item_color }};"
-                    >
-                      {{
-                        'icon-tiktok.svg'
-                        | inline_asset_content
-                        | replace: '<svg', '<svg style="height: 25px; fill: '
-                        | append: settings.social_icon_color
-                        | remove: "'"
-                      }}
-                    </a>
-                  {%- endif -%}
-                  {%- if settings.social_twitter_link != blank -%}
-                    <a
-                      href="{{ settings.social_twitter_link }}"
-                      class="social-icon"
-                      aria-label="{{ 'general.social.links.twitter' | t }}"
-                      style="color: {{ section.settings.menu_item_color }};"
-                    >
-                      {{
-                        'icon-twitter.svg'
-                        | inline_asset_content
-                        | replace: '<svg', '<svg style="height: 25px; fill: '
-                        | append: settings.social_icon_color
-                        | remove: "'"
-                      }}
-                    </a>
-                  {%- endif -%}
-                  {%- if settings.social_pinterest_link != blank -%}
-                    <a
-                      href="{{ settings.social_pinterest_link }}"
-                      class="social-icon"
-                      aria-label="{{ 'general.social.links.pinterest' | t }}"
-                      style="color: {{ section.settings.menu_item_color }};"
-                    >
-                      {{
-                        'icon-pinterest.svg'
-                        | inline_asset_content
-                        | replace: '<svg', '<svg style="height: 25px; fill: '
-                        | append: settings.social_icon_color
-                        | remove: "'"
-                      }}
-                    </a>
-                  {%- endif -%}
-                  {%- if settings.social_snapchat_link != blank -%}
-                    <a
-                      href="{{ settings.social_snapchat_link }}"
-                      class="social-icon"
-                      aria-label="{{ 'general.social.links.snapchat' | t }}"
-                      style="color: {{ section.settings.menu_item_color }};"
-                    >
-                      {{
-                        'icon-snapchat.svg'
-                        | inline_asset_content
-                        | replace: '<svg', '<svg style="height: 25px; fill: '
-                        | append: settings.social_icon_color
-                        | remove: "'"
-                      }}
-                    </a>
-                  {%- endif -%}
-                  {%- if settings.social_tumblr_link != blank -%}
-                    <a
-                      href="{{ settings.social_tumblr_link }}"
-                      class="social-icon"
-                      aria-label="{{ 'general.social.links.tumblr' | t }}"
-                      style="color: {{ section.settings.menu_item_color }};"
-                    >
-                      {{
-                        'icon-tumblr.svg'
-                        | inline_asset_content
-                        | replace: '<svg', '<svg style="height: 25px; fill: '
-                        | append: settings.social_icon_color
-                        | remove: "'"
-                      }}
-                    </a>
-                  {%- endif -%}
-                  {%- if settings.social_vimeo_link != blank -%}
-                    <a
-                      href="{{ settings.social_vimeo_link }}"
-                      class="social-icon"
-                      aria-label="{{ 'general.social.links.vimeo' | t }}"
-                      style="color: {{ section.settings.menu_item_color }};"
-                    >
-                      {{
-                        'icon-vimeo.svg'
-                        | inline_asset_content
-                        | replace: '<svg', '<svg style="height: 25px; fill: '
-                        | append: settings.social_icon_color
-                        | remove: "'"
-                      }}
-                    </a>
-                  {%- endif -%}
-                </div>
-              {% endif %}
-            </div>
-        {% endcase %}
-      {% endfor %}
-    {% endif %}
-  </div>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const form = document.getElementById("newsletter-form");
-        const formContainer = document.getElementById("form-container");
-        const stayConnectedTitle = document.getElementById("stay-connected-title");
-        const thankYouMessage = document.getElementById("thank-you-message");
-
-        if (form) {
-            form.addEventListener("submit", function (event) {
-                event.preventDefault();
-                const emailInput = document.getElementById("email-input");
-                const email = emailInput.value;
-                if (!validateEmail(email)) {
-                    alert("Please enter a valid email address.");
-                    return;
-                }
-
-                formContainer.style.display = "none";
-                stayConnectedTitle.style.opacity = "0";
-                stayConnectedTitle.style.position = "absolute";
-                thankYouMessage.style.display = "block";
-                thankYouMessage.style.opacity = "1";
-                thankYouMessage.style.position = "relative";
-            });
-        }
-
-        function validateEmail(email) {
-            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return re.test(email);
-        }
-
-        function initializeMobileMenu() {
-            if (window.innerWidth <= 480) {
-                const footerTitles = document.querySelectorAll('.footer-column:not(#newsletter-section1) h4');
-                footerTitles.forEach(title => {
-                    title.removeEventListener('click', handleTitleClick);
-                    title.addEventListener('click', handleTitleClick);
-                });
-            }
-        }
-
-        function handleTitleClick(event) {
-            event.preventDefault();
-            this.classList.toggle('active');
-            const content = this.nextElementSibling;
-            if (content) {
-                content.classList.toggle('show');
-            }
-        }
-
-        initializeMobileMenu();
-        window.addEventListener('resize', function() {
-            clearTimeout(window.resizeTimer);
-            window.resizeTimer = setTimeout(initializeMobileMenu, 250);
-        });
-    });
-  </script>
-</footer>
-
-{% schema %}
-{
-  "name": "t:sections.footer.name",
-  "class": "section-footer",
-  "enabled_on": {
-  "groups": ["footer"]
-},
-  "settings": [
-    {
-      "type": "color_scheme",
-      "id": "color_scheme",
-      "label": "t:sections.all.colors.label",
-      "default": "scheme-1"
-    },
-  {
-  "type": "color",
-  "id": "menu_item_color",
-  "label": "Menu Item Color",
-  "default": "#333333"
-},
-    {
-      "type": "header",
-      "content": "Footer Layout"
-    },
-    {
-      "type": "range",
-      "id": "footer_top_padding",
-      "label": "Top Padding (px)",
-      "min": 0,
-      "max": 200,
-      "step": 5,
-      "default": 50
-    },
-    {
-      "type": "range",
-      "id": "footer_bottom_padding",
-      "label": "Bottom Padding (px)",
-      "min": 0,
-      "max": 200,
-      "step": 5,
-      "default": 50
-    },
-    {
-      "type": "header",
-      "content": "Newsletter Section"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_newsletter",
-      "label": "Show Newsletter Section",
-      "default": true
-    },
-    {
-      "type": "text",
-      "id": "STAY_CONNECTED_TITLE",
-      "label": "Newsletter Title",
-      "default": "STAY CONNECTED WITH US"
-    },
-    {
-      "type": "text",
-      "id": "thank_you_message_text",
-      "label": "Thank You Message",
-      "default": "Thank you for subscribing!"
-    },
-    {
-      "type": "text",
-      "id": "subscribe_button_text",
-      "label": "Subscribe Button Text",
-      "default": "Subscribe"
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_language_selector",
-      "default": true,
-      "label": "t:sections.footer.settings.enable_language_selector.label"
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_country_selector",
-      "default": true,
-      "label": "t:sections.footer.settings.enable_country_selector.label"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_social_icons",
-      "label": "Show Social Icons",
-      "default": true
-    },
-    {
-      "type": "header",
-      "content": "Announcement Strips"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_announcement_strips",
-      "label": "Show Announcement Strips",
-      "default": true
-    },
-    {
-      "type": "text",
-      "id": "offer_text_1",
-      "label": "First Strip Text",
-      "default": "Subscribe for exclusive offers →"
-    },
-    {
-      "type": "text",
-      "id": "offer_text_2",
-      "label": "Second Strip Text",
-      "default": "Free shipping on orders over $50 →"
-    }
-  ],
-  "blocks": [
-    {
-      "type": "menu",
-      "name": "Menu Column",
-      "limit": 5,
-      "settings": [
-        {
-          "type": "text",
-          "id": "menu_title",
-          "label": "Menu Title",
-          "default": "Menu"
-        },
-        {
-          "type": "link_list",
-          "id": "menu_links",
-          "label": "Menu Links"
-        }
-      ]
-    },
-    {
-      "type": "social_media",
-      "name": "Social Media",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "text",
-          "id": "social_title",
-          "label": "Social Media Title",
-          "default": "SOCIAL MEDIA"
-        }
-      ]
-    }
-  ],
-
-  "presets": [
-    {
-      "name": "Footer",
-      "blocks": [
-        {
-          "type": "menu",
-          "settings": {
-            "menu_title": "SHOP",
-            "menu_links": "footer"
-          }
-        },
-        {
-          "type": "menu",
-          "settings": {
-            "menu_title": "HELP",
-            "menu_links": "footer"
-          }
-        },
-        {
-          "type": "menu",
-          "settings": {
-            "menu_title": "ABOUT",
-            "menu_links": "footer"
-          }
-        },
-        {
-          "type": "social_media",
-          "settings": {
-            "social_title": "FOLLOW US"
-          }
-        }
-      ],
-      "settings": {
-        "show_newsletter": true,
-        "STAY_CONNECTED_TITLE": "STAY CONNECTED WITH US",
-        "enable_language_selector": true,
-        "enable_country_selector": true,
-        "show_announcement_strips": true,
-        "show_social_icons": true,
-        "footer_top_padding": 50,
-        "footer_bottom_padding": 50,
-        "menu_item_color": "#333333",
-      }
-    }
-  ]
+/* Add margin elements with color scheme support */
+.featured-collection-section::before,
+.featured-collection-section::after {
+    content: '';
+    display: block;
+    width: 100%;
+    background-color: rgb(var(--color-background));
 }
-{% endschema %}
+
+.featured-collection-section::before {
+    height: var(--section-top-margin, 50px);
+}
+
+.featured-collection-section::after {
+    height: var(--section-bottom-margin, 50px);
+}
+  .featured-collection{
+    width: 100%;
+    max-width: 1400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: rgb(var(--color-background));
+    position: relative;
+    overflow: hidden;
+  }
+
+  .offer-banner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background:var(--product_special_offer);
+    color: rgb(var(--primary_textcolor));
+    height: 37px;
+    text-align: center;
+    font-size: 13px;
+    padding: 6px;
+    font-weight: 500;
+    border-radius: 3px 3px 0 0;
+  }
+
+  .offer-banner::after {
+    content: '';
+    position: absolute;
+    right: 45%;
+    top: 99%;
+    width: 26px;
+    height: 22px;
+    background-color: var(--product_special_offer);
+    border-radius: 50%;
+    transform: translateY(-50%);
+  }
+
+  h1, p {
+    margin: 0;
+  }
+
+  .heading {
+    font-size: 24px;
+    margin-bottom: -11px;
+    margin-left: 25px;
+    font-weight:600;
+    
+  }
+
+  .product-container {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 25px;
+    scroll-behavior: smooth;
+    padding: 20px 0;
+    margin: 0 18px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .product-container::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Default for normal screens (4 cards) */
+  .product-card {
+    position: relative;
+    flex: 0 0 calc(25% - 15px);
+    min-width: calc(25% - 15px);
+    max-width: calc(25% - 15px);
+    height: auto;
+    padding: 0;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    overflow: visible;
+    border-radius: 4px;
+    background-color:rgb(var(--color-button));
+  }
+
+  .product-image {
+    width: 100%;
+  height: 240px;
+  overflow: hidden;
+  border-radius: 4px 4px 0 0;
+  flex-shrink: 0;
+  margin-top: 34px; /* Default margin for when banner is present */
+  }
+
+.product-image.no-banner {
+  margin-top: 0;
+  height: 275px; /* Increased height to compensate for removed banner space */
+}
+
+  .product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .subheading {
+    font-size: 18px;
+    margin-top: 18px;
+    margin-bottom: 70px;
+    margin-left: 25px;
+    font-weight:600;
+  }
+
+  h7 {
+    font-size: 18px;
+    margin: 10px 0 5px 14px;
+    font-weight: bold;
+    line-height: 1.4;
+    color: rgb(var(--primary_textcolor));
+  }
+
+  .product-info {
+    padding: 0 15px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: auto;
+  }
+
+  .model-number {
+    margin: 5px 0;
+    text-align: left;
+    padding: 0 15px;
+    font-size: 14px;
+    flex-shrink: 0;
+    color:rgb(var(--primary_textcolor));
+  }
+
+  .price-reviews-icons {
+    margin-top: auto;
+    padding: 15px;
+    flex-shrink: 0;
+  }
+  .price-tag {
+    padding: 8px 11px;
+    border-radius: 3px;
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--secondary_button_label);
+    display: inline-block;
+    position: absolute;
+    left: 23px; /* Fixed left position */
+    background: var(--button_label);
+    text-align: left;
+    max-width: 100%; /* Limit the width to prevent overflow */
+  }
+
+  .price-tag::before,
+    .price-tag::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 10px;
+      height: 13px;
+      background-color:rgb(var(--color-button));
+      transform: translateY(-50%);
+      border-radius: 50%;
+    }
+
+
+  .price-tag::before {
+    left: -5px;
+  }
+
+  .price-tag::after {
+    right: -5px;
+  }
+
+  .icons {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    margin-top: 20px;
+    gap: 2px;
+    margin-right: 110px;
+  }
+
+  .icon-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .icon-placeholder {
+    font-size: 24px;
+    margin-bottom: 5px;
+  }
+
+  .icon-name {
+    font-size: 15px;
+    margin-top: 5px;
+  }
+  .featured-collection-arrow-buttons {
+      margin-bottom: 10px;
+    position:absolute;
+    right:15px;
+    top:-80px;
+  }
+  .featured-arrow-parent{
+  position:relative;}
+
+  .featured-arrow {
+      border: none;
+      padding: 0px 5px;
+      cursor: pointer;
+      margin: 0 5px;
+      font-size: 50px;
+      background: transparent;
+
+      transition: scale 0.3s ease;
+      opacity: 1;
+      scale:1;
+     color: rgb(var(--primary_textcolor));
+
+  }
+  .featured-arrow.arrow1,.featured-arrow.arrow2{
+  font-weight:200 !important;}
+  .featured-arrow:hover{
+    scale:1.1;
+  }
+
+  .featured-arrow:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+  }
+
+  .dotted-line-wrapper {
+        width: 106%;
+      display: flex;
+      justify-content: center;
+      margin-top: 80px;
+      margin-left: -6px;
+      color: rgb(var(--color-background));
+      position: relative;
+      border-top: 7px dotted;
+  }
+
+  .view-all-wrapper {
+    display: none;
+    width: 100%;
+    padding: 0 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .view-all-link {
+  display: block;
+      width: 83%;
+    margin-left:20px;
+      padding: 12px 20px;
+      background-color: #fff;
+      border: 1px solid #000;
+      border-radius: 4px;
+      text-align: center;
+      color: #333;
+     margin-top: -90px;
+    margin-bottom: 60px;
+      text-decoration: none;
+      font-family: Inter, sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all .3s ease;
+      transform: translateY(0);
+      box-shadow: 5px 6px 0px #000, 0 0 0 transparent;
+  }
+
+  .view-all-link:active {
+    /* Pressed-in state */
+    transform: translateY(6px);
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2), 0 0 0 transparent; /* Adjusted box-shadow */
+  }
+   @media screen and (min-width: 1440px) {
+    .product-card {
+      flex: 0 0 calc(20% - 16px);
+      min-width: calc(20% - 16px);
+      max-width: calc(20% - 16px);
+    }
+
+    .slider-arrow1.left {
+      left: 93%;
+    }
+
+    .slider-arrow1.right {
+      right: 30px;
+    }
+  }
+
+  /* Tablet view (3 cards) */
+  @media screen and (max-width: 1124px) {
+    .product-card {
+      flex: 0 0 calc(33.333% - 13.333px);
+      min-width: calc(33.333% - 13.333px);
+      max-width: calc(33.333% - 13.333px);
+    }
+
+    .featured-collection__title {
+      font-size: 18px;
+    }
+
+    .slider-arrow1.left {
+      left: 89%;
+    }
+
+    .slider-arrow1.right {
+      right: 40px;
+    }
+
+  }
+
+  /* Small tablet/Large mobile */
+  @media screen and (max-width: 990px) {
+    .offer-banner {
+      height: 35px;
+      padding: 7px;
+      font-size: 11px;
+      font-weight: 500;
+    }
+
+    .slider-arrow1.right {
+      right: 20px;
+
+    }
+
+    .slider-arrow1.left {
+
+      left: 85%;
+    }
+  }
+
+  /* Mobile view (1 card) */
+  @media screen and (max-width: 480px) {
+    .product-card {
+      flex: 0 0 calc(100% - 20px);
+      min-width: 250px;
+      max-width: 100%;
+    }
+
+    .offer-banner {
+      height: 40px;
+      font-size:15px;
+    }
+
+    .featured-collection__title {
+      font-size: 18px;
+    }
+
+    .dotted-line-wrapper {
+      width: 109%;
+      margin-left: -12px;
+    }
+
+    .slider-arrow1 {
+      display: none;
+    }
+
+    .view-all-wrapper {
+      display: block; /* Show only on mobile */
+    }
+
+    .product-container {
+      margin: 20px;
+      padding: 20px 0;
+      margin-bottom: 10px; /* Add some space above the view all button */
+      margin-right: 2px;
+    }
+  }
