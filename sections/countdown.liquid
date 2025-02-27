@@ -177,7 +177,7 @@
 {{ 'countdown.css' | asset_url | stylesheet_tag }}
 <div class="countdown-container color-{{ section.settings.color_scheme }}" style="width: 100%;">
   <div class="countdown-section color-{{ section.settings.color_scheme }} layout-{{ section.settings.layout_style }}" 
-       style="background-color: rgb(var(--color-button)); 
+       style="
               padding-top: {{ section.settings.padding_top }}px; 
               padding-bottom: {{ section.settings.padding_bottom }}px;
               --desktop-width: {{ section.settings.background_width_desktop }}%;
@@ -252,7 +252,7 @@
 
         <div class="countdown-timer" id="countdown-timer-{{ section.id }}" style="font-size: {{ section.settings.timer_font_size }}px;"></div>
         {% if section.settings.show_button %}
-          <a href="{{ section.settings.button_link }}" class="countdown-section__button" style="background-color: rgb(var(--color-button-text)); color: rgb(var(--color-secondary-button-text));">
+          <a href="{{ section.settings.button_link }}" class="countdown-section__button">
             {{ section.settings.button_label }}
             {% if section.settings.show_arrow %}
               <svg class="countdown_svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
