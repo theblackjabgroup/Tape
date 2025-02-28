@@ -5,22 +5,23 @@
   background-color: var(--gradient-background);
   }
   .rich-text-section{
-  background-color: var(--background_product_card);
+  background-color: var(--card_foreground);
+    color: var(--product_price_card);
   }
   .rich_text_button{
     border: 0.1rem solid rgba(var(--color-button), 1);
-   background: rgb(var(--color-button-text)) ;
-  color: rgb(var(--color-secondary-button-text));
+   background: var(--secondary_product_button_color) ;
+  color: var(--product_price_font);
   }
    .richtext_heading {
     font-family: var(--font-heading-family);
     font-style: var(--font-heading-style);
     font-size: calc(var(--font-heading-scale) * {{ section.settings.heading_font_size }}px);
     font-weight:700;
-    color: rgb(var(--color-foreground));
+    color: rgb(var(--product_price_card));
   }
   .richtext_subheading {
-    color: rgb(var(--color-foreground));
+    color: rgb(var(--product_price_card));
   }
     .section-{{ section.id }}-padding.layout1,
     .section-{{ section.id }}-padding.layout2 {
