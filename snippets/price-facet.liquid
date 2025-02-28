@@ -1,47 +1,94 @@
 {{ 'product-list.css' | asset_url | stylesheet_tag }}
 
-<span class="bb-field-currency field-currency">{{ cart.currency.symbol }}</span>
-
-<div class="field bb-pro-field">
-  <input
-    class="field__input"
-    name="{{ filter.min_value.param_name }}"
-    id="{{ id_prefix }}{{ filter.label | escape }}-GTE"
-    {%- if filter.min_value.value -%}
-      value="{{ filter.min_value.value | money_without_currency }}"
-    {%- endif -%}
-    type="text"
-    inputmode="decimal"
-    placeholder="0"
-    data-pattern="\d| |,|\."
-    data-min="0" 
-    data-max="{{ filter.range_max | money_without_currency }}"
-  >
-  <label class="bb-field__label field__label" for="{{ id_prefix }}{{ filter.label | escape }}-GTE">
-    {{- 'products.facets.from' | t -}}
-  </label>
-</div>
+<!--
+  <div class="field bb-pro-field">
+    <input
+      class="field__input"
+      name="{{ filter.min_value.param_name }}"
+      id="{{ id_prefix }}{{ filter.label | escape }}-GTE"
+      {%- if filter.min_value.value -%}
+        value="{{ filter.min_value.value | money_without_currency }}"
+      {%- endif -%}
+      type="text"
+      inputmode="decimal"
+      placeholder="0"
+      data-pattern="\d| |,|\."
+      data-min="0"
+      data-max="{{ filter.range_max | money_without_currency }}"
+    >
+    <label class="bb-field__label field__label" for="{{ id_prefix }}{{ filter.label | escape }}-GTE">
+      {{- 'products.facets.from' | t -}}
+    </label>
+  </div>
+-->
 
 {%- if filter_type != 'vertical' -%}
   <span class="field-currency ">{{ cart.currency.symbol }}</span>
 {%- endif -%}
-
-<div class="field bb-pro-field">
+<!--
+  <div class="field bb-pro-field">
+    <input
+      class="field__input"
+      name="{{ filter.max_value.param_name }}"
+      id="{{ id_prefix }}{{ filter.label | escape }}-LTE"
+      {%- if filter.max_value.value -%}
+        value="{{ filter.max_value.value | money_without_currency }}"
+      {%- endif -%}
+      type="text"
+      inputmode="decimal"
+      placeholder="{{ filter.range_max | money_without_currency }}"
+      data-pattern="\d| |,|\."
+      data-min="0"
+      data-max="{{ filter.range_max | money_without_currency }}"
+    >
+    <label class="field__label" for="{{ id_prefix }}{{ filter.label | escape }}-LTE" >
+      {{- 'products.facets.to' | t -}}
+    </label>
+  </div>
+-->
+<div class="bb-slidecontainer">
   <input
-    class="field__input"
-    name="{{ filter.max_value.param_name }}"
-    id="{{ id_prefix }}{{ filter.label | escape }}-LTE"
-    {%- if filter.max_value.value -%}
-      value="{{ filter.max_value.value | money_without_currency }}"
-    {%- endif -%}
-    type="text"
-    inputmode="decimal"
-    placeholder="{{ filter.range_max | money_without_currency }}"
-    data-pattern="\d| |,|\."
-    data-min="0"
+    name="{{ filter.min_value.param_name }}"
+    type="range"
+    min="0"
+    max="{{ filter.range_max | money_without_currency }}"
+    value="0"
+    class="bb-slider"
+    id="{{ id_prefix }}{{ filter.label | escape }}-GTE"
+    data-min="{{ filter.min_value.value }}"
     data-max="{{ filter.range_max | money_without_currency }}"
   >
-  <label class="field__label" for="{{ id_prefix }}{{ filter.label | escape }}-LTE">
-    {{- 'products.facets.to' | t -}}
-  </label>
+  <div class="bb-price-upper">
+    <div>
+      <span class="bb-field-currency field-currency">{{ cart.currency.symbol }}</span>
+      {% if mobile == false %}
+      <span id="bb-demo"></span>
+      {% else %}
+      <span id="bb-demo-mobile"></span>
+      {% endif %}
+    </div>
+    <div>
+      <span class="bb-field-currency field-currency">{{ cart.currency.symbol }}</span>
+      <span class="bb-demo2">{{ filter.range_max | money_without_currency }}</span>
+    </div>
+  </div>
 </div>
+
+<script>
+  var slider = document.getElementById('{{ id_prefix }}{{ filter.label | escape }}-GTE');
+  console.log("slider ", slider)
+
+  var output = document.getElementById('bb-demo');
+  output.innerHTML = slider.value;
+  slider.oninput = function () {
+    output.innerHTML = this.value;
+  };
+  var output2 = document.getElementById('bb-demo-mobile');
+  console.log("output2 ", output2)
+  console.log("slider.value ", slider.value)
+
+  output2.innerHTML = slider.value;
+  slider.oninput = function () {
+    output2.innerHTML = this.value;
+  };
+</script>

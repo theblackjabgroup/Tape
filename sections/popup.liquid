@@ -1,5 +1,5 @@
+{% if template == 'index' %}
 <link rel="stylesheet" href="{{ 'popup.css' | asset_url }}">
-
 
 <div class="popup-box color-{{ section.settings.color_scheme }}" id="popup-box">
   <div class="popup-heading-container-layout2">
@@ -18,7 +18,8 @@
       </svg>
     </div>
   </div>
-  <div class="popup-message-layout2">
+  <div class="popup-message-layout2 {% if section.settings.enable_dots %}has-dots{% endif %}" 
+       style="--dot-count: {{ section.settings.dot_count }}; --dot-spacing: {{ section.settings.dot_spacing }}px;">
     {{ section.settings.popup_message | richtext }}
   </div>
 
@@ -78,7 +79,7 @@
     });
   });
 </script>
-
+{% endif %}
 {% schema %}
   {
     "name": "Popup",
@@ -86,7 +87,6 @@
       "groups": ["footer"]
     },
     "settings": [
-
       {
         "type": "color_scheme",
         "id": "color_scheme",
@@ -110,26 +110,49 @@
         "id": "email_placeholder",
         "label": "Email Placeholder Text",
         "default": "Enter your email address"
-      }, {
+      }, 
+      {
         "type": "text",
         "id": "button_text",
         "label": "Button Text",
         "default": "Subscribe"
-      }, {
+      }, 
+      {
         "type": "text",
         "id": "empty_email_message",
         "label": "Empty Email Error Message",
         "default": "Please enter an email address."
-      }, {
+      }, 
+      {
         "type": "text",
         "id": "invalid_email_message",
         "label": "Invalid Email Error Message",
         "default": "Please enter a valid email address."
-      }, {
+      }, 
+      {
         "type": "text",
         "id": "success_message",
         "label": "Success Message",
         "default": "Thank you for subscribing!"
+      },
+      {
+        "type": "header",
+        "content": "Dot Customization"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_dots",
+        "label": "Enable Dots",
+        "default": true
+      },
+      {
+        "type": "range",
+        "id": "dot_spacing",
+        "min": 10,
+        "max": 50,
+        "step": 5,
+        "default": 35,
+        "label": "Dot Spacing (px)"
       }
     ],
     "blocks": [],
