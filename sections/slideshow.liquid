@@ -1,6 +1,5 @@
 {{ 'component-slideshow.css' | asset_url | stylesheet_tag }}
 <style>
-
   .slide-text{
       background-color: var(--background_product_card);
       color:var(--color_text);
@@ -15,7 +14,32 @@
   .slideshow_mobile {
     display: none;
   }
-  
+
+  /* Header styles */
+  .slideshow-header {
+    text-align: center;
+    margin-top: 15px;
+    position: relative;
+  }
+
+  .slideshow-breadcrumb {
+    font-size: 14px;
+    color: rgba(var(--color-foreground), 0.75);
+    margin-bottom: 5px;
+  }
+
+  .slideshow-breadcrumb a {
+    color: rgba(var(--color-foreground), 0.75);
+    text-decoration: none;
+  }
+
+  .slideshow-title {
+    font-size: 32px;
+    font-weight: bold;
+    margin: 0;
+    color: rgb(var(--color-foreground));
+  }
+
   @media screen and (max-width: 900px) {
     .slideshow_desktop {
       display: none;
@@ -23,13 +47,31 @@
     .slideshow_mobile {
       display: block;
     }
-  }  
+    .slideshow-title {
+      font-size: 28px;
+    }
+  }
 </style>
 <div class="slideshow-section color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
+  <div class="slideshow-header">
+    {% if section.settings.show_breadcrumb %}
+      <div class="slideshow-breadcrumb">
+        <a href="{{ routes.root_url }}">{{ 'general.breadcrumb.home' | t }}</a> /
+        {% if section.settings.breadcrumb_link != blank %}
+          <a href="{{ section.settings.breadcrumb_link }}">{{ section.settings.breadcrumb_text }}</a>
+        {% else %}
+          {{ section.settings.breadcrumb_text }}
+        {% endif %}
+      </div>
+    {% endif %}
+    {% if section.settings.heading != blank %}
+      <h1 class="slideshow-title">{{ section.settings.heading }}</h1>
+    {% endif %}
+  </div>
   <div class="interactive-slideshow">
     {% for block in section.blocks %}
       <div class="slide {% if forloop.first %}active{% endif %}" data-index="{{ forloop.index0 }}">
-       
+
           <div class="backfold">
              {% if block.settings.image != blank %}
                  <!-- Desktop Image -->
@@ -52,7 +94,7 @@
                    {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
               {% endif %}
           </div>
-     
+
        {% if block.settings.feature != blank %}
   <div class="headarrow">
     <h3 class="headingtext">{{ block.settings.feature }}</h3>
@@ -85,13 +127,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function initializeSlideshows() {
   const slideshowSections = document.querySelectorAll('.slideshow-section');
-  
+
   slideshowSections.forEach(section => {
     const slideshow = section.querySelector('.interactive-slideshow');
     const slides = section.querySelectorAll('.slide');
-    
+
     if (!slideshow || !slides.length) return;
-    
+
     new InteractiveSlideshow(slideshow, slides);
   });
 }
@@ -107,27 +149,27 @@ class InteractiveSlideshow {
     this.isDown = false;
     this.clickHandlers = new Map();
     this.activeDropdown = null;
-    
-   
+
+
     this.handleResize = this.handleResize.bind(this);
     this.handleClickOutside = this.handleClickOutside.bind(this);
     this.handleMouseDown = this.handleMouseDown.bind(this);
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
     this.handleMouseUp = this.handleMouseUp.bind(this);
     this.handleMouseMove = this.handleMouseMove.bind(this);
-    
+
     this.init();
-    
-  
+
+
     window.addEventListener('resize', this.debounce(this.handleResize, 250));
   }
-  
+
   init() {
-    this.cleanupListeners(); 
+    this.cleanupListeners();
     this.adjustJustifyContent();
     this.setupViewMode();
   }
-  
+
   setupViewMode() {
     if (this.isMobile) {
       this.setupMobileView();
@@ -135,28 +177,28 @@ class InteractiveSlideshow {
       this.setupDesktopView();
     }
   }
-  
+
   setupMobileView() {
     this.removeActiveState();
     this.addMobileListeners();
     this.slideshow.style.cursor = 'grab';
   }
-  
+
   setupDesktopView() {
     this.addDesktopListeners();
     this.setActiveSlide(this.slides[0]);
     this.slideshow.style.cursor = 'default';
   }
-  
+
   adjustJustifyContent() {
     if (!this.isMobile) {
-      this.slideshow.style.justifyContent = 
+      this.slideshow.style.justifyContent =
         this.slideshow.scrollWidth <= this.slideshow.clientWidth ? 'center' : 'flex-start';
     } else {
       this.slideshow.style.justifyContent = '';
     }
   }
-  
+
   setActiveSlide(slide) {
     if (!this.isMobile && slide !== this.activeSlide) {
       this.slides.forEach(s => s.classList.remove('active'));
@@ -164,44 +206,44 @@ class InteractiveSlideshow {
       this.activeSlide = slide;
     }
   }
-  
+
   toggleSlideText(slideText, arrow, event) {
     if (event) {
       event.stopPropagation();
       event.preventDefault();
     }
-    
+
     if (slideText.classList.contains('expanded')) {
       this.closeDropdown(slideText, arrow);
     } else {
       this.openDropdown(slideText, arrow);
     }
   }
-  
+
   closeDropdown(slideText, arrow) {
     slideText.classList.remove('expanded');
     arrow.classList.remove('expanded');
     this.activeDropdown = null;
     document.removeEventListener('click', this.handleClickOutside);
   }
-  
+
   openDropdown(slideText, arrow) {
-   
+
     if (this.activeDropdown) {
       const activeArrow = this.activeDropdown.parentElement.querySelector('.headarrow_svg-wrapper');
       this.closeDropdown(this.activeDropdown, activeArrow);
     }
-    
+
     slideText.classList.add('expanded');
     arrow.classList.add('expanded');
     this.activeDropdown = slideText;
-    
-   
+
+
     setTimeout(() => {
       document.addEventListener('click', this.handleClickOutside);
     }, 0);
   }
-  
+
   handleClickOutside(event) {
     if (this.activeDropdown && !this.activeDropdown.contains(event.target)) {
       const activeArrow = this.activeDropdown.parentElement.querySelector('.headarrow_svg-wrapper');
@@ -210,24 +252,24 @@ class InteractiveSlideshow {
       }
     }
   }
-  
+
   handleMouseDown(e) {
     this.isDown = true;
     this.slideshow.style.cursor = 'grabbing';
     this.startX = e.pageX - this.slideshow.offsetLeft;
     this.scrollLeft = this.slideshow.scrollLeft;
   }
-  
+
   handleMouseLeave() {
     this.isDown = false;
     this.slideshow.style.cursor = 'grab';
   }
-  
+
   handleMouseUp() {
     this.isDown = false;
     this.slideshow.style.cursor = 'grab';
   }
-  
+
   handleMouseMove(e) {
     if (!this.isDown) return;
     e.preventDefault();
@@ -235,28 +277,28 @@ class InteractiveSlideshow {
     const walk = (x - this.startX) * 2;
     this.slideshow.scrollLeft = this.scrollLeft - walk;
   }
-  
+
   addMobileListeners() {
-   
+
     this.slideshow.addEventListener('mousedown', this.handleMouseDown);
     this.slideshow.addEventListener('mouseleave', this.handleMouseLeave);
     this.slideshow.addEventListener('mouseup', this.handleMouseUp);
     this.slideshow.addEventListener('mousemove', this.handleMouseMove);
-   
+
     this.slides.forEach(slide => {
       const arrow = slide.querySelector('.headarrow_svg-wrapper');
       const slideText = slide.querySelector('.slide-text');
-      
+
       if (arrow && slideText) {
         const clickHandler = (e) => this.toggleSlideText(slideText, arrow, e);
         this.clickHandlers.set(arrow, clickHandler);
-        
+
         arrow.addEventListener('click', clickHandler);
         arrow.addEventListener('touchend', clickHandler);
       }
     });
   }
-  
+
   addDesktopListeners() {
     this.slides.forEach(slide => {
       const mouseEnterHandler = () => this.setActiveSlide(slide);
@@ -264,34 +306,34 @@ class InteractiveSlideshow {
       slide.addEventListener('mouseenter', mouseEnterHandler);
     });
   }
-  
+
   cleanupListeners() {
 
     this.slideshow.removeEventListener('mousedown', this.handleMouseDown);
     this.slideshow.removeEventListener('mouseleave', this.handleMouseLeave);
     this.slideshow.removeEventListener('mouseup', this.handleMouseUp);
     this.slideshow.removeEventListener('mousemove', this.handleMouseMove);
-  
+
     this.clickHandlers.forEach((handler, element) => {
       element.removeEventListener('click', handler);
       element.removeEventListener('touchend', handler);
       element.removeEventListener('mouseenter', handler);
     });
     this.clickHandlers.clear();
-    
+
     if (this.activeDropdown) {
       const activeArrow = this.activeDropdown.parentElement.querySelector('.headarrow_svg-wrapper');
       this.closeDropdown(this.activeDropdown, activeArrow);
     }
-    
+
     document.removeEventListener('click', this.handleClickOutside);
   }
-  
+
   removeActiveState() {
     this.slides.forEach(slide => slide.classList.remove('active'));
     this.activeSlide = null;
   }
-  
+
   handleResize() {
     const newIsMobile = window.innerWidth <= 900;
     if (newIsMobile !== this.isMobile) {
@@ -300,7 +342,7 @@ class InteractiveSlideshow {
     }
     this.adjustJustifyContent();
   }
-  
+
   debounce(func, wait) {
     let timeout;
     return function executedFunction(...args) {
@@ -321,10 +363,7 @@ if (typeof Shopify !== 'undefined' && Shopify.designMode) {
     }
   });
 }
-</script> 
-
-
-
+</script>
 
 {% schema %}
 {
@@ -339,6 +378,34 @@ if (typeof Shopify !== 'undefined' && Shopify.designMode) {
     "label": "t:sections.all.colors.label",
     "default": "scheme-1"
   },
+  {
+    "type": "header",
+    "content": "Header Settings"
+  },
+  {
+    "type": "text",
+    "id": "heading",
+    "label": "Title",
+    "default": "Blog"
+  },
+  {
+    "type": "checkbox",
+    "id": "show_breadcrumb",
+    "label": "Show Breadcrumb",
+    "default": true
+  },
+  {
+    "type": "text",
+    "id": "breadcrumb_text",
+    "label": "Breadcrumb Text",
+    "default": "Blog"
+  },
+  {
+    "type": "url",
+    "id": "breadcrumb_link",
+    "label": "Breadcrumb Link",
+    "info": "Leave blank if not clickable"
+  }
 ],
 "blocks": [
   {
@@ -384,7 +451,7 @@ if (typeof Shopify !== 'undefined' && Shopify.designMode) {
         "label": "Show Button",
         "default": true
       },
-      
+
       {
         "type": "text",
         "id": "button_text",
@@ -395,7 +462,7 @@ if (typeof Shopify !== 'undefined' && Shopify.designMode) {
         "type": "url",
         "id": "button_link",
         "label": "Button Link"
-      },
+      }
     ]
   }
 ],
@@ -412,15 +479,15 @@ if (typeof Shopify !== 'undefined' && Shopify.designMode) {
       {
         "type": "slide"
       },
-        {
+      {
         "type": "slide"
       },
-        {
+      {
         "type": "slide"
       },
-        {
+      {
         "type": "slide"
-      },
+      }
     ]
   }
 ]
