@@ -102,7 +102,7 @@
     width: 100%;
     overflow: hidden;
     position: relative;
-    background-color: rgb(var(--color-background));
+    background-color: var(--background_product_card);
   }
 
   .barcode {
@@ -135,7 +135,7 @@
   }
 
   .bar {
-    background-color: var(--background_product_card);
+    background-color: rgb(var(--color-background));
     height: {{ section.settings.bar_height | default: 100 }}px;
     margin: 0 {{ section.settings.bar_spacing | default: 3 }}px;
   }

@@ -1,5 +1,5 @@
 .bb-announcement-bar-background {
-    background-color: var(--background_product_card);
+    background-color: var(--card_background);
     border-radius: 5px;
 }
 

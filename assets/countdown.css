@@ -52,6 +52,8 @@
   margin: 10px auto;
   border-radius: 4px;
   transition: width 0.3s ease;
+  background-color: var(--button_label); 
+  color: var(--product_price_card);
 }
   .countdown_placeholder{
     width: 400px;
@@ -78,6 +80,7 @@
   }
   .countdown-section__heading {
     margin-bottom: 10px;
+    color: var(--product_price_card);
   }
   .countdown-section__description {
     margin-bottom: 20px;
@@ -100,15 +103,15 @@
     font-size: 1em;
     border-radius: 4px;
     cursor: pointer;
-     background: linear-gradient(to right, gray 50%, rgb(var(--color-button-text)) 50%);
+     background: linear-gradient(to right, gray 50%, var(--secondary_product_button_color) 50%);
     background-size: 200% 100%;
     background-position: 100% 0;
-    color:rgb(var(--color-secondary-button-text));
+    color:var(--product_price_font);
   transition: background-position 1.5s ease-in-out, transform 0.3s ease;
   }
 .countdown-section__button:hover{
   background-position: 0 0;
-  olor:rgb(var(--color-secondary-button-text));
+  color:var(--product_price_font);
 }
 .countdown_svg {
     width: 18px;

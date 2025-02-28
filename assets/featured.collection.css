@@ -190,11 +190,11 @@ h7 {
     border-radius: 3px;
     font-size: 14px;
     font-weight: bold;
-    color: rgb(var(--primary_textcolor));
+    color: var(--secondary_button_label);
     display: inline-block;
     position: absolute;
     left: 23px; /* Fixed left position */
-    background: var(--card_foreground);
+    background: var(--button_label);
     text-align: left;
     max-width: 100%; /* Limit the width to prevent overflow */
   }
