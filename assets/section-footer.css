@@ -14,66 +14,50 @@
   }
 
   .container1 {
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-    height: 230px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgb(var(--color-background));
-    font-family: var(--font-body-family);
-  }
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 230px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(var(--color-background));
+  font-family: var(--font-body-family);
+}
 
-  .strip-right {
-    position: absolute;
-    width: 114%;
-    height: 60px;
-    background-color: var(--background_product_card);
-    color: rgb(var(--color-foreground));
-    font-size: 23px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+ .strip-right, .strip-left {
+  position: absolute;
+  width: 114%;
+  height: 60px;
+  background-color: var(--background_product_card);
+  color: rgb(var(--color-foreground));
+  font-size: 23px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 8px 14px rgba(0, 0, 0, 0.3);
+  font-family: var(--font-heading-family);
+}
 
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) rotate(10deg);
-    box-shadow: 0 8px 14px rgba(0, 0, 0, 0.3);
-    font-family: var(--font-heading-family);
-  }
+ .strip-right {
+  background-color: var(--background_product_card);
+  top: 45%;
+  left: 45%;
+  transform: translate(-51%, -40%) rotate(6deg);
+}
 
-  .strip-left {
-    position: absolute;
-    width: 114%;
-    height: 60px;
-    background-color: var(--background_product_card);
-    color: rgb(var(--color-foreground));
-    font-size: 23px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.strip-left {
+  background-color: var(--background_product_card);
+  top: 62%;
+  left: 53%;
+  transform: translate(-47%, -103%) rotate(-6deg);
+}
 
-    top: 50%;
-    left: 10%;
-    transform: translate(-50%, -50%) rotate(-10deg);
-    box-shadow: 0 8px 14px rgba(0, 0, 0, 0.3);
-    font-family: var(--font-heading-family);
-  }
-
-  .strip-right {
-    background-color: var(--background_product_card);
-    top: 45%;
-    left: 45%;
-    transform: translate(-51%, -40%) rotate(6deg);
-  }
-
-  .strip-left {
-    background-color: var(--background_product_card);
-    top: 62%;
-    left: 53%;
-    transform: translate(-47%, -103%) rotate(-6deg);
-  }
+.strip-wrapper {
+  display: flex;
+  width: 200%;
+}
 
   .strip-1,
   .strip-2 {
@@ -272,14 +256,14 @@
     flex-wrap: wrap; /* Prevents overflow issues on small screens */
   }
 
-  /* Ensure both selectors align properly */
+ /* Ensure both selectors align properly */
   .footer__country-selector {
     display: flex;
     align-items: center;
     gap: 0.5rem;
     margin-left: 70px;
     margin-bottom: -38px;
-    margin-top: 30px;
+    margin-top: 0px;
     color: rgb(var(--color-foreground));
     background: none;
     border: none;
@@ -290,13 +274,14 @@
     display: flex;
     align-items: center;
     gap: 0.5rem; /* Space between label and dropdown */
-    margin-top: -22px;
+    margin-top: -60px;
     margin-left: -17px;
     color: rgb(var(--color-foreground));
     background: none;
     border: none;
-    width: 20px;
+   ?
   }
+
 
   /* Ensure form elements align properly */
   .footer-country-form,
@@ -377,6 +362,8 @@
 
     #newsletter-section1 {
       margin-left: 17px;
+flex-direction: column;
+  padding-bottom: 20px; /* This ensures space for the selectors */
     }
 
     #newsletter-section1 h4 {
@@ -396,6 +383,9 @@
       position: absolute;
       right: 20px;
     }
+.form-container {
+  margin-bottom: 20px;
+}
 
     .footer-column form input {
       padding: 10px 10px 10px 50px;
