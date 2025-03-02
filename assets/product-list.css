@@ -136,7 +136,7 @@ border-top: none !important;
     font-weight: 600;
     font-size: 24px;
     margin: 0;
-    color: var(--filter-by-text-color) !important;
+    color: var(--product_price_card) !important;
 }
 
 .filter-upper{
@@ -247,13 +247,13 @@ summary .icon-caret2 {
 .bb-sortby {
     font-size: 20px;
     font-weight: 500;
-    color: rgb(var(--color-foreground));
+   color: var(--product_price_card);
 }
 
 .bb-sort-options {
     font-size: 20px;
     font-weight: 500;
-    color: rgb(var(--color-foreground));
+    color: var(--product_price_card);
     font-family: var(--font-heading-family);
     background-color: var(--card_foreground);
     border: none;
