@@ -256,14 +256,14 @@
     flex-wrap: wrap; /* Prevents overflow issues on small screens */
   }
 
-  /* Ensure both selectors align properly */
+ /* Ensure both selectors align properly */
   .footer__country-selector {
     display: flex;
     align-items: center;
     gap: 0.5rem;
     margin-left: 70px;
     margin-bottom: -38px;
-    margin-top: 30px;
+    margin-top: 0px;
     color: rgb(var(--color-foreground));
     background: none;
     border: none;
@@ -274,13 +274,14 @@
     display: flex;
     align-items: center;
     gap: 0.5rem; /* Space between label and dropdown */
-    margin-top: -22px;
+    margin-top: -61px;
     margin-left: -17px;
     color: rgb(var(--color-foreground));
     background: none;
     border: none;
-    width: 20px;
+   ?
   }
+
 
   /* Ensure form elements align properly */
   .footer-country-form,
@@ -361,6 +362,8 @@
 
     #newsletter-section1 {
       margin-left: 17px;
+flex-direction: column;
+  padding-bottom: 20px; /* This ensures space for the selectors */
     }
 
     #newsletter-section1 h4 {
@@ -380,6 +383,9 @@
       position: absolute;
       right: 20px;
     }
+.form-container {
+  margin-bottom: 20px;
+}
 
     .footer-column form input {
       padding: 10px 10px 10px 50px;
