@@ -58,6 +58,7 @@
       font-family: var(--font-body-family);
       font-weight: var(--font-body-weight);
       gap: 40px;
+        background-color: var(--background_product_card);
   }
 
   /* Special class for when no blocks exist */
@@ -129,34 +130,60 @@
   "
 >
   {% if section.settings.show_announcement_strips %}
-    <div class="container1" style="background-color: {{ section.settings.strip_container_bg_color }};">
-      <div class="strip-right" style="background-color: {{ section.settings.strip_bg_color }};">
-        <div class="strip-1">
-          <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">
-            {{ section.settings.offer_text_1 }}
-          </div>
-          <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">
-            {{ section.settings.offer_text_1 }}
-          </div>
-          <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">
-            {{ section.settings.offer_text_1 }}
-          </div>
+<div class="container1" style="background-color: {{ section.settings.strip_container_bg_color }};">
+  <div class="strip-right" style="background-color: {{ section.settings.strip_bg_color }};">
+    <div class="strip-wrapper">
+      <div class="strip-1">
+        <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">
+          {{ section.settings.offer_text_1 }}
+        </div>
+        <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">
+          {{ section.settings.offer_text_1 }}
+        </div>
+        <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">
+          {{ section.settings.offer_text_1 }}
         </div>
       </div>
-      <div class="strip-left" style="background-color: {{ section.settings.strip_bg_color }};">
-        <div class="strip-2">
-          <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">
-            {{ section.settings.offer_text_2 }}
-          </div>
-          <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">
-            {{ section.settings.offer_text_2 }}
-          </div>
-          <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">
-            {{ section.settings.offer_text_2 }}
-          </div>
+      <div class="strip-1">
+        <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">
+          {{ section.settings.offer_text_1 }}
+        </div>
+        <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">
+          {{ section.settings.offer_text_1 }}
+        </div>
+        <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">
+          {{ section.settings.offer_text_1 }}
         </div>
       </div>
     </div>
+  </div>
+  <div class="strip-left" style="background-color: {{ section.settings.strip_bg_color }};">
+    <div class="strip-wrapper">
+      <div class="strip-2">
+        <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">
+          {{ section.settings.offer_text_2 }}
+        </div>
+        <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">
+          {{ section.settings.offer_text_2 }}
+        </div>
+        <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">
+          {{ section.settings.offer_text_2 }}
+        </div>
+      </div>
+      <div class="strip-2">
+        <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">
+          {{ section.settings.offer_text_2 }}
+        </div>
+        <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">
+          {{ section.settings.offer_text_2 }}
+        </div>
+        <div class="offer-text" style="color: {{ section.settings.strip_text_color }};">
+          {{ section.settings.offer_text_2 }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
   {% endif %}
 
   <div class="footer-content {% if section.blocks.size == 0 %}footer-content--no-blocks{% endif %}">
@@ -490,7 +517,7 @@
       "min": 0,
       "max": 200,
       "step": 5,
-      "default": 50
+      "default": 20
     },
     {
       "type": "range",
@@ -499,7 +526,7 @@
       "min": 0,
       "max": 200,
       "step": 5,
-      "default": 50
+      "default": 20
     },
     {
       "type": "header",
@@ -643,8 +670,8 @@
         "enable_country_selector": true,
         "show_announcement_strips": true,
         "show_social_icons": true,
-        "footer_top_padding": 50,
-        "footer_bottom_padding": 50,
+        "footer_top_padding": 20,
+        "footer_bottom_padding": 20,
         "menu_item_color": "#333333",
       }
     }
