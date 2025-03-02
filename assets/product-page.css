@@ -54,7 +54,7 @@
 }
 
 #bb_product__media_first {
-  background-color: var(--background_product_card);
+  background-color: var(--card_background);
   overflow: visible !important;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -378,7 +378,7 @@ border-radius: 50%;
 }
 
 #product-upper-bg {
-  background-color: var(--background_product_card);
+  background-color: var(--card_background);
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
   padding-bottom: 10px;
@@ -727,7 +727,7 @@ border-radius: 50%;
 
 .bb-fp__media {
   padding: 40px !important;
-  background-color: var(--background_product_card);
+  background-color: var(--card_background);
   overflow: visible !important;
   border-radius: 10px;
 }
