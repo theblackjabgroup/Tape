@@ -1,7 +1,7 @@
 /* Style the collapse-tab with the tabs */
 .collapse-tab {
     display: flex;
-    background-color: var(--card_background);
+    background-color: var(--card_foreground);
     padding: 4rem 4rem;
     justify-content: space-around;
     border-top-left-radius: 10px;
@@ -18,13 +18,13 @@
     letter-spacing: inherit;
     transition: background-color 0.3s ease;
     font-weight: 500;
-    color: var(--utilities);
+    color: var(--product_price_card);
 }
 
 /* Style the active tab */
 .collapse-tab button.active {
     background-color: var(--card_foreground);
-    color: var(--text);
+    color: var(--product_price_card);
     font-weight: 600;
     border-radius: 10px;
 }

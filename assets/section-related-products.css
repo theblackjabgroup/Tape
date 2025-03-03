@@ -171,7 +171,7 @@ body {
     border-radius: 3px;
     font-size: 14px;
     font-weight: bold;
-    color:rgb(var(--primary_textcolor));
+        color: var(--product_price_card);
     display: inline-block;
     position: absolute;
     left: 30px; /* Fixed left position */
