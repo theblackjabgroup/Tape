@@ -240,7 +240,7 @@
         <h2 class="countdown-section__heading" style="font-size: {{ section.settings.heading_font_size }}px;">
           {{ section.settings.heading }}
         </h2>
-        <div class="countdown-section__description" style="font-size: {{ section.settings.description_font_size }}px;">
+        <div class="countdown-section__description" style="font-family: {{ section.settings.type_body_font }}">
           {% if section.settings.layout_style == 'layout_2' %}
             <span class="desktop-description">{{ section.settings.description | slice: 0, 350 }}</span>
             <span class="mobile-description">{{ section.settings.description | slice: 0, 83 }}</span>
