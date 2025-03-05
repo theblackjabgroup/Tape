@@ -1,3 +1,10 @@
+.countdown-timer__item, .countdown-section__heading{
+  font-family: var(--font-heading-family);
+  font-style: var(--font-heading-style);
+  font-size: calc(var(--font-heading-scale));
+  font-weight: var(--font-body-weight);
+}
+
   .countdown-border-cutouts {
   position: absolute;
   display: flex;
@@ -84,6 +91,7 @@
   }
   .countdown-section__description {
     margin-bottom: 20px;
+    font-size: 14px !important;
   }
   .countdown-timer {
     display: flex;
@@ -150,7 +158,7 @@ position: absolute;
     right: 0;
     width: 90px;
     height: 90px;
-    background-color: rgb(var(--color-button-text));
+    background-color: var(--background_product_card);
     clip-path: polygon(0 0, 100% 0, 0 100%);
     transform: rotate(271deg);
     transform-origin: top left;
@@ -163,7 +171,7 @@ position: absolute;
     right: -206px;
     width: 218px;
     height: 50px;
-    background-color: rgb(var(--color-button-text));
+    background-color: var(--background_product_card);
     clip-path: polygon(0 0, 100% 0, 0 100%);
     transform: rotate(168deg);
     transform-origin: bottom left;
@@ -288,5 +296,8 @@ position: absolute;
     right: -340px;
     width: 350px;
     transform: rotate(169deg);
+  }
+   .countdown_placeholder{
+        margin-left: 40px !important;
   }
 }

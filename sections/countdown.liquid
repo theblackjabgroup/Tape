@@ -38,7 +38,7 @@
       "id": "description",
       "label": "Description",
       "default": "<p>Use this section to create urgency and boost sales.</p>",
-      "info": "Max 450 characters will be displayed in Layout 2."
+      "info": "Max 350 characters will be displayed in Layout 2 for desktop, 80 characters for mobile."
     },
     {
       "type": "text",
@@ -215,7 +215,6 @@
     <div class="countdown-section__container page-width">
       <div class="countdown-section__image-wrapper">
         {% if section.settings.image %}
-          <!-- Desktop Image -->
           {{
             section.settings.image
             | image_url: width: 1800
@@ -223,8 +222,7 @@
                 class: 'countdown-section__image desktop-only-image',
                 alt: "Countdown Image" | escape
           }}
-          
-          <!-- Mobile Image (falls back to desktop if not set) -->
+
           {{
             section.settings.mobile_image | default: section.settings.image
             | image_url: width: 800
@@ -242,9 +240,10 @@
         <h2 class="countdown-section__heading" style="font-size: {{ section.settings.heading_font_size }}px;">
           {{ section.settings.heading }}
         </h2>
-        <div class="countdown-section__description" style="font-size: {{ section.settings.description_font_size }}px;">
+        <div class="countdown-section__description" style="font-family: {{ section.settings.type_body_font }}">
           {% if section.settings.layout_style == 'layout_2' %}
-            {{ section.settings.description | slice: 0, 450 }}
+            <span class="desktop-description">{{ section.settings.description | slice: 0, 350 }}</span>
+            <span class="mobile-description">{{ section.settings.description | slice: 0, 83 }}</span>
           {% else %}
             {{ section.settings.description }}
           {% endif %}
@@ -275,11 +274,25 @@
     display: none;
   }
   
+  .desktop-description {
+    display: block;
+  }
+  .mobile-description {
+    display: none;
+  }
+  
   @media screen and (max-width: 750px) {
     .desktop-only-image {
       display: none;
     }
     .mobile-only-image {
+      display: block;
+    }
+    
+    .desktop-description {
+      display: none;
+    }
+    .mobile-description {
       display: block;
     }
   }
