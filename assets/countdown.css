@@ -150,7 +150,7 @@ position: absolute;
     right: 0;
     width: 90px;
     height: 90px;
-    background-color: rgb(var(--color-button-text));
+    background-color: var(--background_product_card);
     clip-path: polygon(0 0, 100% 0, 0 100%);
     transform: rotate(271deg);
     transform-origin: top left;
@@ -163,7 +163,7 @@ position: absolute;
     right: -206px;
     width: 218px;
     height: 50px;
-    background-color: rgb(var(--color-button-text));
+    background-color: var(--background_product_card);
     clip-path: polygon(0 0, 100% 0, 0 100%);
     transform: rotate(168deg);
     transform-origin: bottom left;
@@ -288,5 +288,8 @@ position: absolute;
     right: -340px;
     width: 350px;
     transform: rotate(169deg);
+  }
+   .countdown_placeholder{
+        margin-left: 40px !important;
   }
 }
