@@ -13,13 +13,15 @@
   .richtext_subheading {
     font-family: var(--font-subheading-family);
   font-style: var(--font-subheading-style);
-    font-size: calc(var(--font-subheading-scale) * 20px);
+    font-size: calc(var(--font-subheading-scale) * 22px) !important;
     font-weight: 500;
   }
+.rich-text-section p{
+  font-size: calc(var(--font-body-scale) * 16px);
+}
   .rich-text__text p {
     margin-bottom: 1em;
   }
-
   .layout1 p {
     margin-bottom: 5px;
   }
