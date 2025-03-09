@@ -190,17 +190,18 @@ h7 {
 .original-price-container {
   position: absolute;
   top: 5px;
-  left: 23px;
+  left: 32px;
   z-index: 1;
   font-size: 15px;
   font-weight: 700;
-color: rgb(var(--primary_textcolor));
+  color: rgb(var(--primary_textcolor));
 }
 
 .original-price {
   opacity: 0.8;
 }
 
+/* Price tag base styling common to both states */
 .price-tag {
   padding: 8px 11px;
   border-radius: 3px;
@@ -208,14 +209,29 @@ color: rgb(var(--primary_textcolor));
   font-weight: bold;
   color: var(--secondary_button_label);
   display: inline-block;
-  position: absolute;
-  left: 105px; /* Fixed left position */
-  top: -5px; /* Added top position to move it down to accommodate the original price */
   background: var(--button_label);
   text-align: left;
-  max-width: 100%; /* Limit the width to prevent overflow */
+  max-width: 100%;
 }
 
+/* Styling for price tag with discount active */
+.price-tag.discount-active {
+  position: absolute;
+  left: 115px;
+  top: -5px;
+}
+
+/* Styling for price tag without discount */
+.price-tag.no-discount {
+ margin-top: 0px;
+    margin-bottom: 10px;
+    margin-left: -100px;
+    position: relative;
+  left: auto;
+  top: auto;
+}
+
+/* Circular decorations for both price tag styles */
 .price-tag::before,
 .price-tag::after {
   content: "";
@@ -262,6 +278,23 @@ color: rgb(var(--primary_textcolor));
   margin-top: 5px;
 }
 
+/* Dotted line styling with adjustments for both price tag states */
+.dotted-line-wrapper {
+  width: 106%;
+  display: flex;
+  justify-content: center;
+  margin-top: 80px;
+  margin-left: -6px;
+  color: rgb(var(--color-background));
+  position: relative;
+  border-top: 7px dotted;
+}
+
+/* Adjust dotted line position when price tag has no discount */
+.price-tag.no-discount + .dotted-line-wrapper {
+  margin-top: 50px;
+}
+
 .featured-collection-arrow-buttons {
   margin-bottom: 10px;
   position: absolute;
@@ -297,17 +330,6 @@ color: rgb(var(--primary_textcolor));
 .featured-arrow:disabled {
   opacity: 0.5;
   cursor: not-allowed;
-}
-
-.dotted-line-wrapper {
-  width: 106%;
-  display: flex;
-  justify-content: center;
-  margin-top: 80px;
-  margin-left: -6px;
-  color: rgb(var(--color-background));
-  position: relative;
-  border-top: 7px dotted;
 }
 
 .view-all-wrapper {
