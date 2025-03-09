@@ -1,4 +1,4 @@
-v{{ 'featured.collection.css' | asset_url | stylesheet_tag }}
+{{ 'featured.collection.css' | asset_url | stylesheet_tag }}
 
 <div class="featured-collection-section color-{{ section.settings.color_scheme }}" 
      style="--section-top-margin: {{ section.settings.section_top_margin }}px; 
@@ -109,14 +109,21 @@ v{{ 'featured.collection.css' | asset_url | stylesheet_tag }}
                  {{ product.compare_at_price | money }}
                </span>
              </div>
+             
+             <p class="price-tag discount-active" 
+                style="background-color: {{ section.settings.price_background_color }};
+                       --pseudo-bg-color: {{ section.settings.product_card_background_color }};
+                       color: {{ section.settings.price_text_color }};">
+               <span class="current-price">{{ product.price | money }}</span>
+             </p>
+           {% else %}
+             <p class="price-tag no-discount" 
+                style="background-color: {{ section.settings.price_background_color }};
+                       --pseudo-bg-color: {{ section.settings.product_card_background_color }};
+                       color: {{ section.settings.price_text_color }};">
+               <span class="current-price">{{ product.price | money }}</span>
+             </p>
            {% endif %}
-           
-           <p class="price-tag" 
-              style="background-color: {{ section.settings.price_background_color }};
-                     --pseudo-bg-color: {{ section.settings.product_card_background_color }};
-                     color: {{ section.settings.price_text_color }};">
-             <span class="current-price">{{ product.price | money }}</span>
-           </p>
            
            <div class="dotted-line-wrapper" style="border-top-color: {{ section.settings.dotted_line_color }};">
              <div class="dotted-line"></div>
@@ -187,14 +194,21 @@ v{{ 'featured.collection.css' | asset_url | stylesheet_tag }}
                   {{ 2499 | money }}
                 </span>
               </div>
+              
+              <p class="price-tag discount-active" 
+                 style="background-color: {{ section.settings.price_background_color }};
+                       --pseudo-bg-color: {{ section.settings.product_card_background_color }};
+                       color: {{ section.settings.price_text_color }};">
+                <span class="current-price">{{ 1999 | money }}</span>
+              </p>
+            {% else %}
+              <p class="price-tag no-discount" 
+                 style="background-color: {{ section.settings.price_background_color }};
+                       --pseudo-bg-color: {{ section.settings.product_card_background_color }};
+                       color: {{ section.settings.price_text_color }};">
+                <span class="current-price">{{ 1999 | money }}</span>
+              </p>
             {% endif %}
-             
-            <p class="price-tag" 
-               style="background-color: {{ section.settings.price_background_color }};
-                     --pseudo-bg-color: {{ section.settings.product_card_background_color }};
-                     color: {{ section.settings.price_text_color }};">
-              <span class="current-price">{{ 1999 | money }}</span>
-            </p>
 
             <div class="dotted-line-wrapper" style="border-top-color: {{ section.settings.dotted_line_color }};">
               <div class="dotted-line"></div>
