@@ -97,7 +97,7 @@
   width: 100%;
   padding-top: var(--padding-top);
   padding-bottom: var(--padding-bottom);
-  height: calc(100% + var(--header-height-auto));
+  height: calc(100% + 56px);
   background: rgb(var(--color-background));
 }
 
@@ -188,7 +188,7 @@
 
 .header {
   width: var(--header-width);
-  --header-height-auto: auto;
+  --header-height-auto: 56px;
   height: var(--header-height-auto); 
   padding: 2px 16px;
   display: flex !important;
