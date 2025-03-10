@@ -87,6 +87,8 @@
   --logo-height: 72px;
   --logo-width: 128px;
   --hamburger-size: 84px;
+   --hamburger-width: 84px;
+   --hamburger-height: 80px;
   --header-width: calc(100% - var(--logo-width) - var(--hamburger-size) - 18px);
   --header-height: 56px;
   --nav-icon-size: 32px;
@@ -97,7 +99,7 @@
   width: 100%;
   padding-top: var(--padding-top);
   padding-bottom: var(--padding-bottom);
-  height: calc(100% + var(--header-height-auto));
+  height: calc(100% + 56px);
   background: rgb(var(--color-background));
 }
 
@@ -128,9 +130,9 @@
 
 
     .hamburger {
-      width: var(--hamburger-size);
-      height: var(--hamburger-size);
-      padding: 21px 18px;
+      width:var(--hamburger-width);
+      height:var(--hamburger-height);
+      padding: 12px 24px 12px 24px;
       position: relative;
       cursor: pointer;
       display: flex;
@@ -188,7 +190,7 @@
 
 .header {
   width: var(--header-width);
-  --header-height-auto: auto;
+  --header-height-auto: 56px;
   height: var(--header-height-auto); 
   padding: 2px 16px;
   display: flex !important;
@@ -530,15 +532,19 @@ body.drawer-open {
     --logo-height: 48px;
     --logo-width: 86px;
     --hamburger-size: 48px;
+      --hamburger-width: 40px;
+   --hamburger-height: 40px;
     /* --header-width: calc(100% - var(--logo-width) - var(--hamburger-size) - 24px); */
     --dropdown-min-height: 110px;
   }
+  
   .flex-container{
     margin: 0;
     padding: 0 20px;
   }
    .hamburger {
-      padding: 11px 8px;
+      padding: 8px;
+     border-radius:4px;
    }
 }
 
