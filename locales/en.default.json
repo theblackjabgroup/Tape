@@ -1,5 +1,8 @@
 {
   "general": {
+    "breadcrumb": {
+      "home": "Home"
+    },
     "password_page": {
       "login_form_heading": "ENTER PASSWORD",
       "login_password_button": "ENTER USING PASSWORD",
@@ -25,7 +28,9 @@
         "snapchat": "Snapchat",
         "youtube": "YouTube",
         "vimeo": "Vimeo",
-        "tiktok": "TikTok"
+        "tiktok": "TikTok",
+        "linkedin": "Linkedin",
+        "x": "X"
       }
     },
     "continue_shopping": "Continue shopping",
@@ -287,10 +292,11 @@
       "title": "Your cart",
       "caption": "Cart items",
       "remove_title": "Remove {{ title }}",
-      "estimated_total": "Estimated total",
-      "new_estimated_total": "New estimated total",
-      "note": "Order special instructions",
+       "total": "Total",
+      "new_estimated_total": "New Total",
+      "note": "Add Order Note",
       "checkout": "Checkout",
+      "view_cart": "View cart",
       "empty": "Oops, It Looks Like You Forget To Shop!",
       "cart_error": "There was an error while updating your cart. Please try again.",
       "cart_quantity_error_html": "You can only add {{ quantity }} of this item to your cart.",

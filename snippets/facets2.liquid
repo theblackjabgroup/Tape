@@ -72,15 +72,17 @@
                     </div>
                     </div>
                   {%- endunless -%}
-                  <facet-remove class="active-facets__button-wrapper">
+                  
+                  <facet-remove class="bb-active-facets__button-wrapper active-facets__button-wrapper">
                     <a href="{{ results_url }}" class="bb-active-facets__button-remove active-facets__button-remove underlined-link">
                       <span>{{ 'products.facets.clear_all' | t }}</span>
                     </a>
                   </facet-remove>
+                  
                 </div>
                 {%- for filter in results.filters -%}
                   {%- for value in filter.active_values -%}
-                    <facet-remove>
+                    <facet-remove class="bb-facets_remove">
                       <a href="{{ value.url_to_remove }}" class="bb-active-facets__button active-facets__button active-facets__button--light">
                         <span class="active-facets__button-inner button button--tertiary">
                           {{ filter.label | escape }}: {{ value.label | escape }}
@@ -96,7 +98,7 @@
                     {% assign min = filter.min_value.value %}
                     {% assign max = filter.max_value.value %}
                     {%- if min != null or max != null -%}
-                      <facet-remove>
+                      <facet-remove class="bb-facets_remove">
                         <a href="{{ filter.url_to_remove }}" class="bb-active-facets__button active-facets__button active-facets__button--light">
                           <span class="active-facets__button-inner button button--tertiary">
                             {{ min | default: 0 | money }} - {{ max | default: filter.range_max | money }}
@@ -116,8 +118,21 @@
             <script src="{{ 'show-more.js' | asset_url }}" defer="defer"></script>
             {% comment %} Filters for both horizontal and vertical filter {% endcomment %}
             <div class="filter-container">
+              <facet-remove class="bb-active-facets__button-wrapper active-facets__button-wrapper">
+                <a href="{{ results_url }}" class="bb-active-facets__button-remove active-facets__button-remove underlined-link">
+                  <span>{{ 'products.facets.clear_all' | t }}</span>
+                </a>
+              </facet-remove>
             <div class="filter-background">
             {%- for filter in results.filters -%}
+              {% liquid 
+              assign is_color = false
+           %}
+            {% if filter.label == 'Color' %} 
+              {% liquid 
+                 assign is_color = true
+              %}
+            {% endif %}
               {% liquid
                 assign total_active_values = total_active_values | plus: filter.active_values.size
                 assign presentation = filter.presentation | default: default_presentation
@@ -175,7 +190,7 @@
                               </span>
                             {%- endif -%}
                           </div>
-                          <facet-remove>
+                          <facet-remove class="bb-facets_remove">
                             <a href="{{ filter.url_to_remove }}" class="facets__reset link underlined-link">
                               {{ 'products.facets.reset' | t }}
                             </a>
@@ -194,7 +209,7 @@
                           endif
                         -%}
                         <ul
-                          class="{{ visual_layout_class }}{% if filter_type == 'vertical' %} facets__list--vertical{% else %} facets__list{% endif %} list-unstyled"
+                          class="{{ visual_layout_class }}{% if filter_type == 'vertical' %} facets__list--vertical{% else %} facets__list{% endif %} list-unstyled {% if is_color == true %} bb-color-filter-upper{% endif %} "
                           role="list"
                         >
                           {%- for value in sorted_values -%}
@@ -206,11 +221,12 @@
                               endif
                             %}
                             {%- capture label_class -%}
-                            facets__label facet-checkbox{% if is_disabled %} disabled{% endif %}{% if value.active %} active{% endif %}
+                            bb-facets__label facet-checkbox{% if is_disabled %} disabled{% endif %}{% if value.active %} active{% endif %}
                             {%- endcapture -%}
 
                             {%- capture text_value -%}
-                              <span class="facet-checkbox__text-bb facet-checkbox__text" aria-hidden="true">
+                            {% if is_color != true %}
+                              <span class="facet-checkbox__text-bb facet-checkbox__text" aria-hidden="true" data-x="{{ filter.label |  escape }}">
                                 <span class="facet-checkbox__text-label">{{- value.label | escape }}</span> ({{- value.count -}})
                               </span>
                               <span class="visually-hidden">
@@ -222,9 +238,10 @@
                                 {%- endif -%}
                                 )
                               </span>
+                              {% endif %}
                             {%- endcapture -%}
 
-                            <li class="list-menu__item facets__item{% if forloop.index > show_more_number and filter_type == 'vertical' %} show-more-item hidden{% endif %}">
+                            <li class="{% if is_color != true %} bb-list-menu__item {% endif %} list-menu__item facets__item{% if forloop.index > show_more_number and filter_type == 'vertical' %} show-more-item hidden{% endif %}">
                               {%- if presentation == 'swatch' -%}
                                 <div class="{{ label_class }}">
                                   <div class="swatch-input-wrapper">
@@ -268,11 +285,16 @@
                                       {%- endif -%}
                                     </div>
                                   {%- else -%}
+                                  {%- if is_color == true -%}
+                                    <div>
+                                  <div class="bb-filter-color" style="background-color: {{ value.value }}"></div>
+                                  </div>
+                                  {% else %}
                                     {{- 'square.svg' | inline_asset_content -}}
-
                                     <div class="svg-wrapper">
                                       {{- 'icon-checkmark.svg' | inline_asset_content -}}
                                     </div>
+                                  {% endif %}
                                   {%- endif -%}
 
                                   {{ text_value }}
@@ -318,11 +340,11 @@
                     >
                       <div class="{% if filter_type == 'horizontal' %}facets__header{% else %}facets__header-vertical{% endif %}">
                         {%- assign max_price_amount = filter.range_max | money | strip_html | escape -%}
-                        <span class="bb2-facets__selected facets__selected">
+                      <!--  <span class="bb2-facets__selected facets__selected">
                           {{- 'products.facets.max_price' | t: price: max_price_amount -}}
-                        </span>
+                        </span> -->
                         {%- if filter_type != 'vertical' -%}
-                          <facet-remove>
+                          <facet-remove class="bb-facets_remove">
                             <a href="{{ filter.url_to_remove }}" class="facets__reset link underlined-link">
                               {{ 'products.facets.reset' | t }}
                             </a>
@@ -330,7 +352,7 @@
                         {%- endif -%}
                       </div>
                       <price-range class="facets__price">
-                        {% render 'price-facet', filter: filter, id_prefix: 'Filter-', filter_type: filter_type %}
+                        {% render 'price-facet', filter: filter, id_prefix: 'Filter-', filter_type: filter_type, mobile: false%}
                       </price-range>
                     </div>
                   </details>
@@ -521,6 +543,14 @@
             >
               {%- if enable_filtering -%}
                 {%- for filter in results.filters -%}
+                  {% liquid 
+                  assign is_color = false
+               %}
+                {% if filter.label == 'Color' %} 
+                  {% liquid 
+                     assign is_color = true
+                  %}
+                {% endif %}
                   {% liquid
                     assign presentation = filter.presentation | default: default_presentation
                     if presentation == 'image'
@@ -580,7 +610,7 @@
                             endif
                           -%}
                           <ul
-                            class="{{ visual_layout_class }}{% if filter_type == 'vertical' %} facets__list--vertical{% else %} facets__list{% endif %} list-unstyled"
+                            class="{{ visual_layout_class }}{% if filter_type == 'vertical' %} facets__list--vertical{% else %} facets__list{% endif %} list-unstyled {% if is_color == true %} bb-color-filter-upper{% endif %}"
                             role="list"
                           >
                             {%- for value in sorted_values -%}
@@ -592,25 +622,27 @@
                                 endif
                               %}
                               {%- capture label_class -%}
-                              facets__label facet-checkbox{% if is_disabled %} disabled{% endif %}{% if value.active %} active{% endif %}
+                              bb-facets__label facets__label facet-checkbox{% if is_disabled %} disabled{% endif %}{% if value.active %} active{% endif %}
                               {%- endcapture -%}
   
                               {%- capture text_value -%}
-                                <span class="bb-facet-checkbox__text facet-checkbox__text" aria-hidden="true">
-                                  <span class="facet-checkbox__text-label">{{- value.label | escape }}</span> ({{- value.count -}})
-                                </span>
-                                <span class="visually-hidden">
-                                  {{- value.label | escape }} (
-                                  {%- if value.count == 1 -%}
-                                    {{- 'products.facets.product_count_simple.one' | t: count: value.count -}}
-                                  {%- else -%}
-                                    {{- 'products.facets.product_count_simple.other' | t: count: value.count -}}
-                                  {%- endif -%}
-                                  )
-                                </span>
+                                {% if is_color != true %}
+                                  <span class="facet-checkbox__text-bb facet-checkbox__text" aria-hidden="true" data-x="{{ filter.label |  escape }}">
+                                    <span class="facet-checkbox__text-label">{{- value.label | escape }}</span> ({{- value.count -}})
+                                  </span>
+                                  <span class="visually-hidden">
+                                    {{- value.label | escape }} (
+                                    {%- if value.count == 1 -%}
+                                      {{- 'products.facets.product_count_simple.one' | t: count: value.count -}}
+                                    {%- else -%}
+                                      {{- 'products.facets.product_count_simple.other' | t: count: value.count -}}
+                                    {%- endif -%}
+                                    )
+                                  </span>
+                                  {% endif %}
                               {%- endcapture -%}
   
-                              <li class="list-menu__item facets__item{% if forloop.index > show_more_number and filter_type == 'vertical' %} show-more-item hidden{% endif %}">
+                              <li class="{% if is_color != true %} bb-list-menu__item {% endif %}list-menu__item facets__item{% if forloop.index > show_more_number and filter_type == 'vertical' %} show-more-item hidden{% endif %}">
                                 {%- if presentation == 'swatch' -%}
                                   <div class="{{ label_class }}">
                                     <div class="swatch-input-wrapper">
@@ -654,13 +686,17 @@
                                         {%- endif -%}
                                       </div>
                                     {%- else -%}
+                                    {%- if is_color == true -%}
+                                      <div>
+                                    <div class="bb-filter-color" style="background-color: {{ value.value }}"></div>
+                                    </div>
+                                    {% else %}
                                       {{- 'square.svg' | inline_asset_content -}}
-  
                                       <div class="svg-wrapper">
                                         {{- 'icon-checkmark.svg' | inline_asset_content -}}
                                       </div>
+                                    {% endif %}
                                     {%- endif -%}
-  
                                     {{ text_value }}
                                   </label>
                                 {%- endif -%}
@@ -706,9 +742,9 @@
                       >
                         <div class="{% if filter_type == 'horizontal' %}facets__header{% else %}facets__header-vertical{% endif %}">
                           {%- assign max_price_amount = filter.range_max | money | strip_html | escape -%}
-                          <span class="bb-facets__selected facets__selected">
+                      <!--    <span class="bb-facets__selected facets__selected">
                             {{- 'products.facets.max_price' | t: price: max_price_amount -}}
-                          </span>
+                          </span>  -->
                           {%- if filter_type != 'vertical' -%}
                             <facet-remove>
                               <a href="{{ filter.url_to_remove }}" class="facets__reset link underlined-link">
@@ -718,7 +754,7 @@
                           {%- endif -%}
                         </div>
                         <price-range class="facets__price">
-                          {% render 'price-facet', filter: filter, id_prefix: 'Filter-', filter_type: filter_type %}
+                          {% render 'price-facet', filter: filter, id_prefix: 'Filter-mobile-', filter_type: filter_type, mobile: true %}
                         </price-range>
                       </div>
                       </details>

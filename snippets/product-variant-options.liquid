@@ -75,11 +75,13 @@
       {{ input_dataset }}
     >
 
-    <label for="{{ input_id }}" class="bb-input-label" aria-label="Select option: {{ value }}" {% if option.name == "Color" %} style="background-color: {{ value }} !important; color: {{ value }}" {% endif %}>
+    <label for="{{ input_id }}" class="bb-input-label {% if option.name == "Color" %} bb-input-color-label {% endif %}" aria-label="Select option: {{ value }}" {% if option.name == "Color" %} style="background-color: transparent !important; color: {{ value }}" {% endif %}>
       {% if option.name != "Color" %}
       {{ value }}  
       {% else  %}
+      <div class="bb-input-color-label-inner" style="background-color: {{ value }} !important; color: {{ value }}">
       xx
+      </div>
       {% endif %}
       {{ label_unavailable }}
     </label>

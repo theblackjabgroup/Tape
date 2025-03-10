@@ -1,7 +1,9 @@
+
 body {
   font-family: var(--font-body-family);
   font-weight: var(--font-body-weight);
 }
+
 
 h1 {
   font-family: var(--font-heading-family);
@@ -24,6 +26,29 @@ h2 {
   font-family: var(--font-body-family);
   font-weight: var(--font-body-weight);
 }
+
+  h1{
+     font-family: var(--font-heading-family);
+    font-style: var(--font-heading-style);
+    font-weight: var(--font-heading-weight);
+  }
+
+h7 {
+    font-family: var(--font-body-family);
+    font-weight: var(--font-body-weight);
+  }
+
+  h2{
+    font-family: var(--font-subheading-family);
+    font-style: var(--font-subheading-style);
+    font-weight: var(--font-subheading-weight);
+  }
+
+.model-number {
+    font-family: var(--font-body-family);
+    font-weight: var(--font-body-weight);
+  }
+
 
 /* Add margin elements with color scheme support */
 .featured-collection-section::before,
@@ -179,12 +204,33 @@ h7 {
   color: rgb(var(--primary_textcolor));
 }
 
+
 .price-reviews-icons {
   margin-top: auto;
   padding: 15px;
   flex-shrink: 0;
   position: relative;
 }
+
+  .price-reviews-icons {
+    margin-top: auto;
+    padding: 15px;
+    flex-shrink: 0;
+  }
+  .price-tag {
+    padding: 8px 11px;
+    border-radius: 3px;
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--secondary_button_label);
+    display: inline-block;
+    position: absolute;
+    left: 23px; /* Fixed left position */
+    background: var(--button_label);
+    text-align: left;
+    max-width: 100%; /* Limit the width to prevent overflow */
+  }
+
 
 /* New styles for original price outside price tag */
 .original-price-container {

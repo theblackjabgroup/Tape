@@ -57,6 +57,8 @@
   {%- endif -%}
 
   {%- assign first_3d_model = product.media | where: 'media_type', 'model' | first -%}
+  {%- assign show_pickup_availability = false -%}
+
   {%- if first_3d_model -%}
     {{ 'component-product-model.css' | asset_url | stylesheet_tag }}
     <link
@@ -268,6 +270,39 @@
                     </div>
                   </details>
                 </div>
+              {%- when 'pickup_availability' -%}
+                {{ 'component-pickup-availability.css' | asset_url | stylesheet_tag }}
+
+                {%- assign pick_up_availabilities = product.selected_or_first_available_variant.store_availabilities
+                  | where: 'pick_up_enabled', true
+                -%}
+            
+                <pickup-availability
+                  class="product__pickup-availabilities quick-add-hidden"
+                  {% if product.selected_or_first_available_variant.available and pick_up_availabilities.size > 0 %}
+                    available
+                  {% endif %}
+                  data-root-url="{{ routes.root_url }}"
+                  data-variant-id="{{ product.selected_or_first_available_variant.id }}"
+                  data-has-only-default-variant="{{ product.has_only_default_variant }}"
+                  data-product-page-color-scheme="gradient color-{{ section.settings.color_scheme }}"
+                >
+                  <template>
+                    <pickup-availability-preview class="pickup-availability-preview">
+                      <span class="svg-wrapper">
+                        {{- 'icon-unavailable.svg' | inline_asset_content -}}
+                      </span>
+                      <div class="pickup-availability-info">
+                        <p class="caption-large">{{ 'products.product.pickup_availability.unavailable' | t }}</p>
+                        <button class="pickup-availability-button link link--text underlined-link">
+                          {{ 'products.product.pickup_availability.refresh' | t }}
+                        </button>
+                      </div>
+                    </pickup-availability-preview>
+                  </template>
+                </pickup-availability>
+            
+                <script src="{{ 'pickup-availability.js' | asset_url }}" defer="defer"></script>
               {%- when 'quantity_selector' -%}
                 <div
                   id="Quantity-Form-{{ section.id }}"
@@ -499,6 +534,32 @@
                     {{ block.settings.text | default: block.settings.page.title | escape }}
                   </button>
                 </modal-opener>
+                {%- when 'share' -%}
+                <div class="bb-social-icons social-icons">
+                  <span class="bb-social-span">Share: </span>
+  {%- if block.settings.fb_link != blank -%}
+    <a href="{{ block.settings.fb_link }}" class="social-icon" style="color: {{ section.settings.menu_item_color }};">
+{{ 'icon-facebook2.svg' | inline_asset_content | replace: '<svg', '<svg style="height: 25px;' | append: settings.social_icon_color | remove: "_" }}
+</a>
+{%- endif -%}
+
+{%- if block.settings.insta_link != blank -%}
+<a href="{{ block.settings.insta_link }}" class="social-icon" aria-label="{{ 'general.social.links.instagram' | t }}" style="color: {{ section.settings.menu_item_color }};">
+{{ 'icon-instagram2.svg' | inline_asset_content | replace: '<svg', '<svg style="height: 25px; fill: ' | append: settings.social_icon_color | remove: "_" }}
+</a>
+{%- endif -%}
+
+{%- if block.settings.linkedin_link != blank -%}
+<a href="{{ block.settings.linkedin_link }}" class="social-icon" aria-label="{{ 'general.social.links.linkedin' | t }}" style="color: {{ section.settings.menu_item_color }};">
+{{ 'icon-linkedin.svg' | inline_asset_content | replace: '<svg', '<svg style="height: 25px; fill: ' | append: settings.social_icon_color | remove: "_" }}
+</a>
+{%- endif -%}
+{%- if block.settings.x_link != blank -%}
+<a href="{{ block.settings.x_link }}" class="social-icon" aria-label="{{ 'general.social.links.x' | t }}" style="color: {{ section.settings.menu_item_color }};">
+{{ 'icon-x.svg' | inline_asset_content | replace: '<svg', '<svg style="height: 25px; fill: ' | append: settings.social_icon_color | remove: "'" }}
+</a>
+{%- endif -%}
+              </div>
 
               {%- when 'variant_picker' -%}
                 {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
@@ -514,7 +575,7 @@
                   product: product,
                   product_form_id: product_form_id,
                   section_id: section.id,
-                  show_pickup_availability: true
+                  show_pickup_availability: show_pickup_availability
                 -%}
               {%- when 'rating' -%}
                 {%- if product.metafields.reviews.rating.value != blank -%}
@@ -896,6 +957,11 @@
       "limit": 1
     },
     {
+      "type": "pickup_availability",
+      "name": "Pickup Availability",
+      "limit": 1
+    },
+    {
       "type": "buy_buttons",
       "name": "t:sections.main-product.blocks.buy_buttons.name",
       "limit": 1,
@@ -943,6 +1009,43 @@
       "type": "description",
       "name": "t:sections.main-product.blocks.description.name",
       "limit": 1
+    },
+    {
+      "type": "share",
+      "name": "t:sections.main-product.blocks.share.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "share_label",
+          "label": "t:sections.main-product.blocks.share.settings.text.label",
+          "default": "t:sections.main-product.blocks.share.settings.text.default"
+        },
+        {
+          "type": "text",
+          "id": "fb_link",
+          "default": "https://facebook.com/shopify",
+          "label": "Facebook link"
+        },
+        {
+          "type": "text",
+          "id": "insta_link",
+          "default": "https://instagram.com/shopify",
+          "label": "Instagram link"
+        },
+        {
+          "type": "text",
+          "id": "linkedin_link",
+          "default": "https://linkedin.com/shopify",
+          "label": "Linkedin Link"
+        },
+        {
+          "type": "text",
+          "id": "x_link",
+          "default": "https://x.com/shopify",
+          "label": "X Link"
+        }
+      ]
     },
     {
       "type": "custom_liquid",

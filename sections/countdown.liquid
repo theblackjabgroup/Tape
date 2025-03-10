@@ -6,15 +6,26 @@
   },
   "settings": [
     {
+      "type": "select",
+      "id": "layout_style",
+      "label": "Background Layout Style",
+      "options": [
+        {
+          "value": "layout_1",
+          "label": "Layout 1"
+        },
+        {
+          "value": "layout_2",
+          "label": "Layout 2"
+        }
+      ],
+      "default": "layout_1"
+    },
+    {
       "type": "color_scheme",
       "id": "color_scheme",
       "label": "t:sections.all.colors.label",
       "default": "scheme-1"
-    },
-    {
-      "type": "image_picker",
-      "id": "image",
-      "label": "Image"
     },
     {
       "type": "text",
@@ -26,18 +37,34 @@
       "type": "richtext",
       "id": "description",
       "label": "Description",
-      "default": "<p>Use this section to create urgency and boost sales.</p>"
+      "default": "<p>Use this section to create urgency and boost sales.</p>",
+      "info": "Max 350 characters will be displayed in Layout 2 for desktop, 80 characters for mobile."
     },
     {
       "type": "text",
       "id": "end_date",
-      "label": "End Date (YYYY-MM-DD)",
+      "label": "End Date (YYYY-MM-DD)"
     },
     {
       "type": "text",
       "id": "end_time",
       "label": "End Time (HH:mm:ss)",
       "default": "00:00"
+    },
+     {
+      "type": "header",
+      "content": "Image Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Desktop Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile Image (Optional)",
+      "info": "If not set, desktop image will be used"
     },
     {
       "type": "header",
@@ -149,40 +176,42 @@
 
 {{ 'countdown.css' | asset_url | stylesheet_tag }}
 <div class="countdown-container color-{{ section.settings.color_scheme }}" style="width: 100%;">
-  <div class="countdown-section color-{{ section.settings.color_scheme }}" 
-       style="background-color: rgb(var(--color-button)); 
+  <div class="countdown-section color-{{ section.settings.color_scheme }} layout-{{ section.settings.layout_style }}" 
+       style="
               padding-top: {{ section.settings.padding_top }}px; 
               padding-bottom: {{ section.settings.padding_bottom }}px;
               --desktop-width: {{ section.settings.background_width_desktop }}%;
               --mobile-width: {{ section.settings.background_width_mobile }}%;
-               width: var(--desktop-width);">
-    <!-- Top border cutouts -->
-    <div class="countdown-border-cutouts countdown-border-top">
-      {% for i in (1..18) %}
-        <div class="countdown-cutout">&nbsp;</div>
-      {% endfor %}
-    </div>
+              width: var(--desktop-width);">
     
-    <!-- Left border cutouts -->
-    <div class="countdown-border-cutouts countdown-border-left">
-      {% for i in (1..8) %}
-        <div class="countdown-cutout">&nbsp;</div>
-      {% endfor %}
-    </div>
-    
-    <!-- Right border cutouts -->
-    <div class="countdown-border-cutouts countdown-border-right">
-      {% for i in (1..8) %}
-        <div class="countdown-cutout">&nbsp;</div>
-      {% endfor %}
-    </div>
-    
-    <!-- Bottom border cutouts -->
-    <div class="countdown-border-cutouts countdown-border-bottom">
-      {% for i in (1..18) %}
-        <div class="countdown-cutout">&nbsp;</div>
-      {% endfor %}
-    </div>
+    {% if section.settings.layout_style == 'layout_1' %}
+      <div class="countdown-border-cutouts countdown-border-top">
+        {% for i in (1..18) %}
+          <div class="countdown-cutout">&nbsp;</div>
+        {% endfor %}
+      </div>
+      <div class="countdown-border-cutouts countdown-border-left">
+        {% for i in (1..8) %}
+          <div class="countdown-cutout">&nbsp;</div>
+        {% endfor %}
+      </div>
+      <div class="countdown-border-cutouts countdown-border-right">
+        {% for i in (1..8) %}
+          <div class="countdown-cutout">&nbsp;</div>
+        {% endfor %}
+      </div>
+      <div class="countdown-border-cutouts countdown-border-bottom">
+        {% for i in (1..18) %}
+          <div class="countdown-cutout">&nbsp;</div>
+        {% endfor %}
+      </div>
+    {% else %}
+    <div class="countdown-section layout-2" style="width: 100%; height: 100%;">
+      <div class="top-right-fold"><h2></h2></div>
+       <div class="bottom-right-fold"><h2></h2></div>
+       </div>
+    {% endif %}
+
     <div class="countdown-section__container page-width">
       <div class="countdown-section__image-wrapper">
         {% if section.settings.image %}
@@ -190,7 +219,15 @@
             section.settings.image
             | image_url: width: 1800
             | image_tag:
-                class: 'countdown-section__image',
+                class: 'countdown-section__image desktop-only-image',
+                alt: "Countdown Image" | escape
+          }}
+
+          {{
+            section.settings.mobile_image | default: section.settings.image
+            | image_url: width: 800
+            | image_tag:
+                class: 'countdown-section__image mobile-only-image',
                 alt: "Countdown Image" | escape
           }}
         {% else %}
@@ -203,12 +240,18 @@
         <h2 class="countdown-section__heading" style="font-size: {{ section.settings.heading_font_size }}px;">
           {{ section.settings.heading }}
         </h2>
-        <div class="countdown-section__description" style="font-size: {{ section.settings.description_font_size }}px;">
-          {{ section.settings.description }}
+        <div class="countdown-section__description" style="font-family: {{ section.settings.type_body_font }}">
+          {% if section.settings.layout_style == 'layout_2' %}
+            <span class="desktop-description">{{ section.settings.description | slice: 0, 350 }}</span>
+            <span class="mobile-description">{{ section.settings.description | slice: 0, 83 }}</span>
+          {% else %}
+            {{ section.settings.description }}
+          {% endif %}
         </div>
+
         <div class="countdown-timer" id="countdown-timer-{{ section.id }}" style="font-size: {{ section.settings.timer_font_size }}px;"></div>
         {% if section.settings.show_button %}
-          <a href="{{ section.settings.button_link }}" class="countdown-section__button" style="background-color: rgb(var(--color-button-text)); color: rgb(var(--color-secondary-button-text));">
+          <a href="{{ section.settings.button_link }}" class="countdown-section__button">
             {{ section.settings.button_label }}
             {% if section.settings.show_arrow %}
               <svg class="countdown_svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -222,6 +265,39 @@
     </div>
   </div>
 </div>
+
+<style>
+  .desktop-only-image {
+    display: block;
+  }
+  .mobile-only-image {
+    display: none;
+  }
+  
+  .desktop-description {
+    display: block;
+  }
+  .mobile-description {
+    display: none;
+  }
+  
+  @media screen and (max-width: 750px) {
+    .desktop-only-image {
+      display: none;
+    }
+    .mobile-only-image {
+      display: block;
+    }
+    
+    .desktop-description {
+      display: none;
+    }
+    .mobile-description {
+      display: block;
+    }
+  }
+</style>
+
 <script>
   (function () {
     function startCountdown(elementId, endDateTime) {
@@ -245,11 +321,11 @@
 
         timerElement.innerHTML = `
           <div class="countdown-timer__item"><span>${days}</span> Days</div>
-          <div class= "countdown_dots"> <span></span> </div>
+          <div class="countdown_dots"><span></span></div>
           <div class="countdown-timer__item"><span>${hours}</span> Hours</div>
-          <div class= "countdown_dots"> <span></span> </div>
+          <div class="countdown_dots"><span></span></div>
           <div class="countdown-timer__item"><span>${minutes}</span> Minutes</div>
-          <div class= "countdown_dots"> <span></span> </div>
+          <div class="countdown_dots"><span></span></div>
           <div class="countdown-timer__item"><span>${seconds}</span> Seconds</div>
         `;
       }, 1000);

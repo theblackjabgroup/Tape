@@ -2,53 +2,31 @@
 <style>
   .color-{{ section.settings.color_scheme }} .dot,
   .color-{{ section.settings.color_scheme }} .dot-l {
-  background-color: currentColor;
+  background-color: var(--gradient-background);
+  }
+  .rich-text-section{
+  background-color: var(--card_foreground);
+    color: var(--product_price_card);
   }
   .rich_text_button{
     border: 0.1rem solid rgba(var(--color-button), 1);
-   background: rgb(var(--color-button-text)) ;
-  color: rgb(var(--color-secondary-button-text));
+   background: var(--secondary_product_button_color) ;
+  color: var(--product_price_font);
   }
    .richtext_heading {
-    color: rgb(var(--color-foreground));
+    font-family: var(--font-heading-family);
+    font-style: var(--font-heading-style);
+    font-size: calc(var(--font-heading-scale) * {{ section.settings.heading_font_size }}px);
+    font-weight:700;
+    color: rgb(var(--product_price_card));
   }
-
   .richtext_subheading {
-    color: rgb(var(--color-foreground));
+    color: rgb(var(--product_price_card));
   }
     .section-{{ section.id }}-padding.layout1,
     .section-{{ section.id }}-padding.layout2 {
       padding-top: {{section.settings.padding_top}}px;
       padding-bottom: {{section.settings.padding_bottom}}px;
-    }
-
-    .section-{{ section.id }}-padding.layout1 h2 {
-      font-size: {{ section.settings.heading_font_size }}px;
-    }
-
-    .section-{{ section.id }}-padding.layout1 .rich-text__text {
-      font-size: {{ section.settings.text_font_size }}px;
-    }
-
-  
-    .section-{{ section.id }}-padding.layout2 h2 {
-      font-size: {{ section.settings.heading_font_size }}px;
-    }
-
-    .section-{{ section.id }}-padding.layout2 .rich-text__text {
-      font-size: {{ section.settings.text_font_size }}px;
-    }
-
-    @media screen and (max-width: 749px) {
-      .section-{{ section.id }}-padding.layout1 h2,
-      .section-{{ section.id }}-padding.layout2 h2 {
-        font-size: {{ section.settings.heading_font_size | times: 0.8 | round: 0 }}px;
-      }
-
-      .section-{{ section.id }}-padding.layout1 .rich-text__text,
-      .section-{{ section.id }}-padding.layout2 .rich-text__text {
-        font-size: {{ section.settings.text_font_size | times: 0.9 | round: 0 }}px;
-      }
     }
 </style>
 
@@ -207,20 +185,6 @@
       "label": "Heading Font Size",
       "default": 22
     },
-
-
-    {
-      "type": "range",
-      "id": "text_font_size",
-      "min": 12,
-      "max": 24,
-      "step": 1,
-      "unit": "px",
-      "label": "Text Font Size",
-      "default": 14
-    },
-
-
     {
       "type": "range",
       "id": "padding_top",

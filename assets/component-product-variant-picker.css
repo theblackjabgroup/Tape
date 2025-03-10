@@ -65,7 +65,7 @@ variant-selects {
   color: rgb(var(--color-foreground));
   display: inline-block;
   margin: 0.7rem 0.5rem 0.2rem 0;
-  padding: 1rem 2rem;
+  padding: 0.9rem 3rem;
   font-size: 1.4rem;
   letter-spacing: 0.1rem;
   line-height: 1;
@@ -74,26 +74,29 @@ variant-selects {
   cursor: pointer;
   position: relative;
   border-radius: 5px;
-  font-family: 'Inter';
 }
 .product-form__input--pill input[type='radio'] + label::before {
   content: "" !important;
   position: absolute !important;
+  /*
   width: 9px;
   height: 14px;
   background-color: rgb(var(--color-background));
   border-radius: 50% !important;
   transform: translate(-3px,11px);
+  */
   }
    
 .product-form__input--pill input[type='radio'] + label::after {
 content: "";
 position: absolute;
+/*
 width: 9px;
 height: 14px;
 background-color: rgb(var(--color-background));
 border-radius: 50%;
 transform: translate(15px, 0px);
+*/
 }
 
 .product-form__input--pill input[type='radio'] + label:before {

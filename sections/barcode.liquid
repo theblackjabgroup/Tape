@@ -1,4 +1,5 @@
 {{ 'barcode.css' | asset_url | stylesheet_tag }}
+
 {% schema %}
 {
   "name": "Barcode",
@@ -20,7 +21,7 @@
       "id": "animation_speed",
       "type": "range",
       "min": 0.1,
-      "max":2,
+      "max": 2,
       "step": 0.1,
       "unit": "x",
       "label": "Animation Speed",
@@ -49,6 +50,43 @@
       "label": "Auto-play animation",
       "default": false,
       "info": "Enable or disable animation"
+    },
+    {
+      "type": "header",
+      "content": "Bar Customization"
+    },
+    {
+      "id": "bar_height",
+      "type": "range",
+      "min": 20,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Bar Height",
+      "default": 100,
+      "info": "Set the height of the bars"
+    },
+    {
+      "id": "bar_width",
+      "type": "range",
+      "min": 1,
+      "max": 20,
+      "step": 1,
+      "unit": "x",
+      "label": "Bar Width",
+      "default": 5,
+      "info": "Set the width of the bars"
+    },
+    {
+      "id": "bar_spacing",
+      "type": "range",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "Bar Spacing",
+      "default": 3,
+      "info": "Set the spacing between bars"
     }
   ],
   "presets": [
@@ -64,7 +102,7 @@
     width: 100%;
     overflow: hidden;
     position: relative;
-    background-color: rgb(var(--color-background));
+    background-color: var(--background_product_card);
   }
 
   .barcode {
@@ -97,9 +135,22 @@
   }
 
   .bar {
-    background-color: var(--background_product_card);
+    background-color: rgb(var(--color-background));
+    height: {{ section.settings.bar_height | default: 100 }}px;
+    margin: 0 {{ section.settings.bar_spacing | default: 3 }}px;
   }
 
+  /* Desktop styles */
+  .bar-1 { width: {{ section.settings.bar_width | default: 5 | times: 1 }}px; }
+  .bar-2 { width: {{ section.settings.bar_width | default: 5 | times: 0.6 }}px; }
+  .bar-3 { width: {{ section.settings.bar_width | default: 5 | times: 1.6 }}px; }
+  .bar-4 { width: {{ section.settings.bar_width | default: 5 | times: 2 }}px; }
+  .bar-5 { width: {{ section.settings.bar_width | default: 5 | times: 1 }}px; }
+  .bar-6 { width: {{ section.settings.bar_width | default: 5 | times: 0.6 }}px; }
+  .bar-7 { width: {{ section.settings.bar_width | default: 5 | times: 1.6 }}px; }
+  .bar-8 { width: {{ section.settings.bar_width | default: 5 | times: 2 }}px; }
+  .bar-9 { width: {{ section.settings.bar_width | default: 5 | times: 0.6 }}px; }
+  .bar-10 { width: {{ section.settings.bar_width | default: 5 | times: 1.4 }}px; }
 </style>
 
 <div class="barcode-container color-{{ section.settings.color_scheme }}">

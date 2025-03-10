@@ -48,25 +48,28 @@
 }
 .scrolling-text-only-strip-content {
     animation-name: marquee-text-only-strip;
-    animation-duration: calc(var(--text-strip-speed, 20s) );
+    animation-duration: calc(20s / var(--animation-speed, 1));
     transform: rotate(5deg);
-    z-index: 30;
+    z-index: 15;
 }
+
 .scrolling-first-strip-content {
     animation-name: marquee-first-strip;
-    animation-duration: calc(var(--first-strip-speed, 20s) );
+    animation-duration: calc(20s / var(--animation-speed, 1));
     transform: rotate(-5deg);
-    z-index: 20;
-}
-.scrolling-second-strip-content {
-    animation-name: marquee-second-strip;
-    animation-duration: calc(var(--second-strip-speed, 20s) );
-    transform: rotate(5deg);
     z-index: 10;
 }
+
+.scrolling-second-strip-content {
+    animation-name: marquee-second-strip;
+    animation-duration: calc(20s / var(--animation-speed, 1));
+    transform: rotate(5deg);
+    z-index: 5;
+}
+
 .scrolling-third-strip-content {
     animation-name: marquee-third-strip;
-    animation-duration: calc(var(--third-strip-speed, 20s) );
+    animation-duration: calc(20s / var(--animation-speed, 1));
     transform: rotate(-5deg);
     z-index: 0;
 }
@@ -130,24 +133,25 @@
     }
     .scrolling-text-only-strip-content {
         transform: rotate(3deg);
-        animation-duration: var(--text-strip-speed, 10s);
         filter: drop-shadow(0px 4px 4px #00000026);
+        animation-duration: calc(20s / var(--animation-speed, 1));
     }
     .scrolling-first-strip-content {
         transform: rotate(-3deg);
-        animation-duration: var(--first-strip-speed, 10s);
         filter: drop-shadow(0px 4px 4px #00000026);
+        animation-duration: calc(20s / var(--animation-speed, 1));
     }
     .scrolling-second-strip-content {
         transform: rotate(3deg);
-        animation-duration: var(--second-strip-speed, 10s);
         filter: drop-shadow(0px 4px 4px #00000026);
+        animation-duration: calc(20s / var(--animation-speed, 1));
     }
     .scrolling-third-strip-content {
         transform: rotate(-3deg);
-        animation-duration: var(--third-strip-speed, 10s);
         filter: drop-shadow(0px 4px 4px #00000026);
+        animation-duration: calc(20s / var(--animation-speed, 1));
     }
+
     @keyframes marquee-text-only-strip {
         0% { transform: rotate(3deg) translateX(10%); }
         100% { transform: rotate(3deg) translateX(-10%); }

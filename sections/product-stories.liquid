@@ -6,10 +6,6 @@
     padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
   }
 
-  .section-{{ section.id }} .product-stories-heading {
-    font-size: calc(1.8rem * {{ section.settings.video_title_font_size | divided_by: 100.0 }});
-  }
-
   @media screen and (min-width: 750px) {
     .section-{{ section.id }}-padding {
       padding-top: {{ section.settings.padding_top }}px;
@@ -17,16 +13,128 @@
     }
   }
 
+
+  .product-stories-video-column__content-item {
+    position: relative;
+  }
+
+  .product-stories-video-column__custom-video {
+    position: relative;
+    width: 100%;
+  }
+
+  .product-stories-product-cards {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(1px);
+    border-radius: 8px;
+    height:572px !important;
+  }
+
+  .product-stories-product-card {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 0px;
+    background: white;
+    border-radius: 4px;
+    height:70px;
+    width:250px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .product-stories-product-image {
+    width: 60px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 0px;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    margin-right: 12px;
+  }
+
+  .product-stories-product-info {
+    flex: 1;
+  }
+
+  .product-stories-product-title {
+    margin: 0 0 4px 0;
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  .product-stories-product-price {
+    margin: 0;
+    font-size: 12px;
+    color: #666;
+  }
+
+  .product-stories-shop-button {
+   display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    width: 170px;
+    font-weight: 500;
+    background: linear-gradient(to right, gray 50%, rgb(var(--color-button-text)) 50%);
+    background-size: 200% 100%;
+    background-position: 100% 0;
+    border: none;
+    cursor: pointer;
+  color:rgb(var(--color-secondary-button-text));
+  transition: background-position 1.5s ease-in-out, transform 0.3s ease;
+}
+   .product-stories-shop-button:hover {
+  background-position: 0 0;
+  color: rgb(var(--color-secondary-button-text));
+}
+
   @media screen and (max-width: 749px) {
-    .section-{{ section.id }} .product-stories-heading {
-      font-size: calc(1.5rem * {{ section.settings.video_title_font_size | divided_by: 100.0 }});
+    .product-stories-product-cards {
+      position: relative;
+      margin-top: 15px;
+      background: white;
     }
   }
+    @media screen and (max-width:600px) {
+        .product-stories-product-cards {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    position: absolute;
+    bottom: unset;
+          top:-15px;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(1px);
+    border-radius: 8px;
+    height:572px !important;
+  }
+    }
 {%- endstyle -%}
 <style>
-  .product-stories-heading-background{
-  background-color: rgb(var(--color-button));
-}
+    .product-stories-heading-background{
+    background-color: var(--background_product_card);
+  }
 </style>
 
 {% assign animation_delay = 0.00 %}
@@ -37,33 +145,67 @@
   >
     <div class="product-stories-page-width product-stories-page-width--without-padding">
       {%- if section.settings.title != blank -%}
-        <h2 class="product-stories-h1 product-stories-scroll-animate product-stories-fade-in">{{ section.settings.title }}</h2>
+        <h2
+          class="product-stories-h1 product-stories-scroll-animate product-stories-fade-in"
+          style="
+            font-family: var(--font-heading-family);
+            font-style: var(--font-heading-style);
+            font-size: calc(var(--font-heading-scale)* 28px);
+            font-weight: var(--font-body-weight);
+          "
+        >
+          {{ section.settings.title }}
+        </h2>
       {%- endif -%}
       {%- if section.settings.description != blank -%}
-        <p class="product-stories-scroll-animate product-stories-fade-in">{{ section.settings.description }}</p>
+        <p
+          class="product-stories-scroll-animate product-stories-fade-in"
+          style="
+            font-family: var(--font-subheading-family);
+            font-style: var(--font-subheading-style);
+              font-size: calc(var(--font-subheading-scale) * 20px);
+              font-weight: 500;
+          "
+        >
+          {{ section.settings.description }}
+        </p>
       {%- endif -%}
-      
+
       <video-column
         {% if section.settings.play_onload %}
           data-play-on-load="true"
         {% endif %}
-      >   
+      >
         <div class="product-stories-video-column__content" id="Slider-{{ section.id }}">
           {%- for block in section.blocks -%}
             {%- assign animation_delay = animation_delay | plus: 0.08 -%}
             <!-- Wrapper for individual content items -->
             <div class="product-stories-video-column__content-item-wrap">
               <!-- Box above the video column -->
-              <span class="product-stories-heading-background">
-                <h2 class="product-stories-heading">{{ block.settings.video_title }} </h2>
+              <span class="product-stories-heading-background {{ section.settings.heading_style }}">
+                <h2
+                  class="product-stories-heading"
+                  style="
+                    font-family: var(--font-heading-family);
+                    font-style: var(--font-heading-style);
+                    font-size: calc(var(--font-heading-scale)* 28px);
+                    font-weight: var(--font-body-weight);
+                  "
+                >
+                  {{ block.settings.video_title }}
+                </h2>
               </span>
-              
+
               <!-- Video column content -->
               <div
                 class="product-stories-video-column__content-item product-stories-scroll-animate product-stories-fade-in-up"
                 style="animation-delay: {{ animation_delay }}s;"
               >
-                {%- if block.settings.youtube_url != blank or block.settings.video != blank or block.settings.video_embed != blank or block.settings.image != blank -%}
+                {%- if block.settings.youtube_url != blank
+                  or block.settings.video != blank
+                  or block.settings.video_embed != blank
+                  or block.settings.image != blank
+                -%}
                   <!-- Display YouTube video -->
 
                   <!-- Display image -->
@@ -71,75 +213,81 @@
                     {% if block.settings.video_link != blank %}
                       <a href="{{ block.settings.video_link }}">
                     {%- endif -%}
-                    {%- assign image_height = 570 -%} 
-                    {%- assign image_width = 600 -%} 
+                    {%- assign image_height = 570 -%}
+                    {%- assign image_width = 600 -%}
 
-                      <div class="product-stories-media media--transparent">
-                        {{
-                          block.settings.image
-                          | image_url: width: image_width, height: image_height, crop: 'center'
-                          | image_tag:
-                              alt: block.settings.image.alt | escape
-                        }}
-                      </div>
-                                          {%- elsif block.settings.youtube_url != blank -%}
-                    {% assign youtube_video_id = block.settings.youtube_url 
-                      | replace: 'https://www.youtube.com/watch?v=', '' 
-                      | replace: 'https://youtu.be/', '' 
-                      | split: '&' | first 
+                    <div class="product-stories-media media--transparent">
+                      {{
+                        block.settings.image
+                        | image_url: width: 940
+                        | image_tag:
+                          width: block.settings.image.width,
+                          height: image_height,
+                          sizes: sizes,
+                          widths: '165, 360, 533, 720, 940',
+                          alt: block.settings.image.alt
+                        | escape
+                      }}
+                    </div>
+                  {%- elsif block.settings.youtube_url != blank -%}
+                    {% assign youtube_video_id = block.settings.youtube_url
+                      | replace: 'https://www.youtube.com/watch?v=', ''
+                      | replace: 'https://youtu.be/', ''
+                      | split: '&'
+                      | first
                     %}
                     <div class="product-stories-video-column__youtube-embed">
-                      <iframe 
-                        width="560" 
-                        height="315" 
-                        src="https://www.youtube.com/embed/{{ youtube_video_id }}" 
-                        frameborder="0" 
+                      <iframe
+                        width="560"
+                        height="315"
+                        src="https://www.youtube.com/embed/{{ youtube_video_id }}"
+                        frameborder="0"
                         allowfullscreen
                       ></iframe>
                     </div>
                     {% if block.settings.video_link != blank %}
                       </a>
                     {%- endif -%}
-                  <!-- Display custom embed -->
+                    <!-- Display custom embed -->
                   {%- elsif block.settings.video_embed != blank -%}
                     <div class="product-stories-video-column__custom-embed">
                       {{ block.settings.video_embed }}
                     </div>
-                  <!-- Display uploaded video -->
+                    <!-- Display uploaded video -->
                   {%- elsif block.settings.video != blank -%}
                     {% if block.settings.video_link != blank %}
                       <a href="{{ block.settings.video_link }}">
                     {%- endif -%}
-                         {%- liquid
-  if section.settings.play_onload
-    assign autoplay = true
-    assign loop = true
-    assign muted = true
-    assign playsinline = true
-  else
-    assign autoplay = false
-    assign loop = false
-    assign muted = true
-    assign playsinline = false
-  endif
--%}
+                    {%- liquid
+                      if section.settings.play_onload
+                        assign autoplay = true
+                        assign loop = true
+                        assign muted = true
+                        assign playsinline = true
+                      else
+                        assign autoplay = false
+                        assign loop = false
+                        assign muted = true
+                        assign playsinline = false
+                      endif
+                    -%}
 
-<div class="product-stories-video-column__custom-video">
-  {%- capture video_classes -%}
+                    <div class="product-stories-video-column__custom-video">
+                      {%- capture video_classes -%}
     feature-row_image{% if autoplay %} feature-rowvideo--autoplay{% else %} feature-row_video{% endif %}
   {%- endcapture -%}
-  {{
-    block.settings.video
-    | video_tag:
-      image_size: '694x',
-      class: video_classes,
-      autoplay: autoplay,
-      playsinline: playsinline,
-      loop: loop,
-      muted: muted,
-      controls: true
-  }}
-</div>
+                      {{
+                        block.settings.video
+                        | video_tag:
+                          image_size: '694x',
+                          class: video_classes,
+                          autoplay: autoplay,
+                          playsinline: playsinline,
+                          loop: loop,
+                          muted: muted,
+                          controls: true
+                      }}
+                    </div>
                     {% if block.settings.video_link != blank %}
                       </a>
                     {%- endif -%}
@@ -147,12 +295,42 @@
                 {%- else -%}
                   {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
                 {%- endif -%}
+
+                {%- if block.settings.show_products and block.settings.products != blank -%}
+                  <div class="product-stories-product-cards">
+                    {%- for product in block.settings.products -%}
+                      <div class="product-stories-product-card">
+                        {%- if product.featured_image != blank -%}
+                          <img
+                            src="{{ product.featured_image | img_url: '100x100', crop: 'center' }}"
+                            alt="{{ product.title | escape }}"
+                            class="product-stories-product-image"
+                            loading="lazy"
+                            width="100"
+                            height="100"
+                          >
+                        {%- endif -%}
+                        <div class="product-stories-product-info">
+                          <h3 class="product-stories-product-title">{{ product.title }}</h3>
+                          <p class="product-stories-product-price">
+                            {{ product.price | money }}
+                          </p>
+                        </div>
+                      </div>
+                    {%- endfor -%}
+                    {%- if block.settings.button_link != blank or block.settings.button_text != blank -%}
+                      <a href="{{ block.settings.button_link }}" class="product-stories-shop-button">
+                        {{ block.settings.button_text }}
+                      </a>
+                    {%- endif -%}
+                  </div>
+                {%- endif -%}
               </div>
             </div>
           {% endfor %}
         </div>
       </video-column>
-      
+
       {%- if section.settings.social_handle != blank -%}
         <h3 class="product-stories-h3 product-stories-scroll-animate product-stories-fade-in">
           {% assign social_link = settings[section.settings.social_link] %}
@@ -168,9 +346,6 @@
     </div>
   </div>
 </div>
-
-
-
 
 {% schema %}
 {
@@ -192,24 +367,20 @@
       "default": "Join us on TikTok for exclusive releases, unboxing and try-on videos, reviews, and more from our top brands and stylists."
     },
     {
-      "type": "range",
-      "id": "font_size",
-      "label": "Font Size",
-      "default": 100,
-      "min": 50,
-      "max": 100,
-      "unit": "%",
-      "step": 1
+  "type": "select",
+  "id": "heading_style",
+  "label": "Title Background",
+  "default": "layout1",
+  "options": [
+    {
+      "value": "layout1",
+      "label": "Layout 1 (Small)"
     },
     {
-      "type": "range",
-      "id": "video_title_font_size",
-      "label": "Video Title Font Size",
-      "default": 100,
-      "min": 50,
-      "max": 100,
-      "unit": "%",
-      "step": 5
+      "value": "layout2",
+      "label": "Layout 2 (Big)"
+    }
+  ]
     },
     {
       "type": "checkbox",
@@ -306,7 +477,34 @@
           "id": "image",
           "label": "Image",
           "info": "Add if you want to show an image instead of a video."
-        }
+        },
+        {
+  "type": "header",
+  "content": "Products"
+},
+{
+  "type": "checkbox",
+  "id": "show_products",
+  "label": "Show Products",
+  "default": false
+},
+{
+  "type": "product_list",
+  "id": "products",
+  "label": "Products",
+  "limit": 3
+},
+{
+  "type": "text",
+  "id": "button_text",
+  "label": "Button Text",
+  "default": "Shop the Product"
+},
+{
+  "type": "url",
+  "id": "button_link",
+  "label": "Button Link"
+}
       ]
     }
   ],

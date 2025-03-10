@@ -101,6 +101,8 @@
     "social_facebook_link": "",
     "social_instagram_link": "",
     "social_youtube_link": "",
+    "social_linkedin_link": "",
+    "social_x_link": "",
     "social_tiktok_link": "",
     "social_twitter_link": "",
     "social_snapchat_link": "",
@@ -146,20 +148,20 @@
     "color_schemes": {
       "scheme-1": {
         "settings": {
-          "background": "#fdf4d7",
-          "background_product_card": "#c7e1bf",
+          "background": "#ffffff",
+          "background_product_card": "#e2e9ff",
           "text": "#000000",
-          "product_price_card": "#000000",
+          "product_price_card": "#ffffff",
           "background_gradient": "",
-          "button_label": "#225647",
-          "secondary_product_button_color": "#9bbae0",
-          "secondary_button_label": "#ffffff",
+          "button_label": "#273363",
+          "secondary_product_button_color": "#e2e9ff",
+          "secondary_button_label": "#faf5f5",
           "product_price_font": "#000000",
-          "button": "#C7E1BF",
-          "card_foreground": "#FDF4D7",
+          "button": "#e8e8e8",
+          "card_foreground": "#273363",
           "product_price_secondary_font": "#000000",
-          "quatity_selector_background": "#9bbae0",
-          "product_special_offer": "#9bbae0"
+          "quatity_selector_background": "#e2e9ff",
+          "product_special_offer": "#ffe66d"
         }
       },
       "scheme-2": {
@@ -260,12 +262,20 @@
       "color_schemes": {
         "scheme-1": {
           "settings": {
-            "background": "#FFFFFF",
-            "background_gradient": "",
-            "text": "#121212",
-            "button": "#121212",
-            "button_label": "#FFFFFF",
-            "secondary_button_label": "#121212",
+            "background": "#fdf4d7",
+          "background_product_card": "#c7e1bf",
+          "text": "#000000",
+          "product_price_card": "#000000",
+          "background_gradient": "",
+          "button_label": "#225647",
+          "secondary_product_button_color": "#9bbae0",
+          "secondary_button_label": "#ffffff",
+          "product_price_font": "#000000",
+          "button": "#C7E1BF",
+          "card_foreground": "#FDF4D7",
+          "product_price_secondary_font": "#000000",
+          "quatity_selector_background": "#9bbae0",
+          "product_special_offer": "#9bbae0",
             "shadow": "#121212"
           }
         },
@@ -435,6 +445,8 @@
       "social_pinterest_link": "",
       "social_instagram_link": "",
       "social_tiktok_link": "",
+      "social_linkedin_link": "",
+      "social_x_link": "",
       "social_tumblr_link": "",
       "social_snapchat_link": "",
       "social_youtube_link": "",

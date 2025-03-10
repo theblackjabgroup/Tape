@@ -53,8 +53,7 @@
  <div class="footer__copyright caption" style="width: 100%; max-width: 100%; ">
     <div style="width: 100%; ">
         <small class="copyright__content">
-            <span style="font-weight: 400; font-size: 13px; color: rgba(var(--color-foreground));">&copy;</span> <span style="font-size: 13px; font-weight:400; color: rgba(var(--color-foreground));">{{ 'now' | date: '%Y' }}</span>, {{ shop.name | link_to: routes.root_url -}}
-        </small>
+<span style="font-weight: 400; font-size: 13px; color: rgba(var(--color-foreground)); margin-top: 10px; display: inline-block;">&copy;</span> <span style="font-size: 13px; font-weight:400; color: rgba(var(--color-foreground));">{{ 'now' | date: '%Y' }}</span>, {{ shop.name | link_to: routes.root_url -}}        </small>
         <small class="copyright__content">{{ powered_by_link }}</small>
     </div>
     {%- if section.settings.show_policy -%}
@@ -82,5 +81,4 @@
           </ul>
         {% endunless %}
       {% endif %}
-</div>
 </div>

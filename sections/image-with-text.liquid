@@ -1,15 +1,125 @@
 {{ 'image-with-text.css' | asset_url | stylesheet_tag }}
 
 {% style %}
-  :root  {
-    --section-color: {{ section.settings.sectionBackground }};
-  }
+  :root {
+      --section-color: {{ section.settings.sectionBackground }};
+      --banner-position: {% if section.settings.banner_position == 'center' %}
+        calc(50% - 200px)
+      {% elsif section.settings.banner_position == 'right' %}
+        calc(94% - 300px)
+      {% else %}
+        0%
+      {% endif %};
+      /* Font settings based on theme typography */
+      --title-font-family: {{ settings.type_header_font.family }}, {{ settings.type_header_font.fallback_families }};
+      --title-font-weight: {{ settings.type_header_font.weight }};
+      --title-font-style: {{ settings.type_header_font.style }};
+      --body-font-family: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
+      --body-font-weight: {{ settings.type_body_font.weight }};
+      --body-font-style: {{ settings.type_body_font.style }};
+    }
+
+    .info__banner {
+      left: var(--banner-position) !important;
+      width: 400px;
+      max-width: 90%;
+      position: absolute;
+    }
+
+    .title-small {
+      font-family: var(--body-font-family);
+      font-weight: 500;
+      font-size: 14px;
+      text-transform: uppercase;
+    }
+
+    .title-large {
+      font-family: var(--title-font-family);
+      font-weight: 700;
+      font-size: 28px;
+    }
+
+    .body-text {
+      font-family: var(--body-font-family);
+      font-weight: 400; /* Inter Regular */
+      font-size: 16px;
+    }
+
+    .button-text {
+      font-family: var(--body-font-family);
+      font-weight: 500;
+      font-size: 16px;
+    }
+
+    .info__banner__shopnow__button {
+      padding: 12px 24px !important;
+      display: inline-block;
+    }
+
+    @media (max-width: 1024px) {
+      :root {
+        --banner-position: {% if section.settings.banner_position == 'center' %}
+          calc(50% - 175px) /* Adjusted for smaller banner width */
+        {% elsif section.settings.banner_position == 'right' %}
+          calc(100% - 350px - 5%)
+        {% else %}
+          10%
+        {% endif %};
+      }
+
+      .info__banner {
+        width: 350px;
+      }
+
+      .title-large {
+        font-size: 24px;
+      }
+
+      .body-text {
+        font-size: 14px;
+        line-height: 20px;
+      }
+    }
+
+    @media (max-width: 734px) {
+      .info__banner {
+        left: 0 !important;
+        bottom: 50px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        position: absolute !important;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        z-index: 100 !important;
+      }
+
+      .title-small {
+        font-size: 10px;
+      }
+
+      .title-large {
+        font-size: 18px;
+        line-height: 24px;
+      }
+
+      .image__with__text__section {
+        position: relative;
+      }
+
+      .mobile-banner-container {
+        position: relative;
+        width: 100%;
+        z-index: 15;
+      }
+    }
 {% endstyle %}
 
 <div
-  class="image__with__text__section "
+  class="image__with__text__section color-{{ section.settings.color_scheme }}"
   data-section-id="{{ section.id }}"
-  data-autoplay="{{ section.settings.autoplay }}">
+  data-autoplay="{{ section.settings.autoplay }}"
+>
   <div class="image__with__text__outer__container">
     <ul class="image__with__text__inner__container">
       {% for item in section.blocks %}
@@ -23,11 +133,15 @@
           data-description="{{ item.settings.description }}"
           data-link="{{ item.settings.url }}"
           btn-text="{{ item.settings.btnText }}"
-          data-heading-tag="{{ item.settings.headingTag }}">
+          data-heading-tag="{{ item.settings.headingTag }}"
+        >
           <div class="media__container">
             {% if item.settings.image %}
               {{
-                item.settings.image | image_url: width: 1800 | image_tag: width: 1800, height: 1600, class: 'media', alt: item.settings.image.alt | escape
+                item.settings.image
+                | image_url: width: 1800
+                | image_tag: width: 1800, height: 1600, class: 'media', alt: item.settings.image.alt
+                | escape
               }}
             {% else %}
               <div style="width: 100%; height: 100%;">
@@ -37,33 +151,39 @@
           </div>
         </li>
       {% endfor %}
-      <div class="info__banner color-{{ section.settings.bannerColor }}" style="opacity:{{ section.settings.opacity }}">
-        <div class="info__banner__contents">
-          <p class="info__banner__title inter-medium">NEW ARRIVAL</p>
-          <h1 class="info__banner__heading fira-sans-bold">Image With Text</h1>
-          <div class="info__banner__details">
-            <p class="info__banner__description inter-regular ">
-              Pair large text with an image to give focus to your chosen product. Add details on style, availabilty, share the product description or review.
-            </p>
-            {% if section.settings.show_shop_button %}
-              <a
-                href=""
-                style="color: rgb(var(--color-secondary-button-text)); background: rgb(var(--color-button-text));"
-                class="info__banner__shopnow__button link color-{{ section.settings.bannerColor }}">Optional Button</a>
-            {% endif %}
-          </div>
-          <span id="info__banner__expand__button" class="svg-wrapper">
-            {{- 'icon-arrow.svg' | inline_asset_content -}}
-          </span>
-        </div>
-        <ul class="dot-items color-{{ section.settings.bannerColor }}">
-          {% for item in section.blocks %}
-            <li class="dot-item">
-              <a id="gallery-item-{{ forloop.index0 }}-trigger" href="#gallery-item-{{ forloop.index0 }}"></a>
-            </li>
-          {% endfor %}
-        </ul>
+    </ul>
+  </div>
+
+  <!-- Banner with updated typography classes -->
+  <div class="info__banner color-{{ section.settings.color_scheme }}" style="opacity:{{ section.settings.opacity }}">
+    <div class="info__banner__contents">
+      <p class="info__banner__title title-small">NEW ARRIVAL</p>
+      <h1 class="info__banner__heading title-large">Image With Text</h1>
+      <div class="info__banner__details">
+        <p class="info__banner__description body-text">
+          Pair large text with an image to give focus to your chosen product. Add details on style, availabilty, share
+          the product description or review.
+        </p>
+        {% if section.settings.show_shop_button %}
+          <a
+            href=""
+            class="info__banner__shopnow__button button-text link color-{{ section.settings.color_scheme }}"
+            >Optional Button</a
+          >
+        {% endif %}
       </div>
+      <span id="info__banner__expand__button" class="svg-wrapper">
+        {{- 'icon-arrow.svg' | inline_asset_content -}}
+      </span>
+    </div>
+    <ul class="dot-items color-{{ section.settings.color_scheme }}">
+      <ul class="dot-items color-{{ section.settings.color_scheme }}">
+        {% for item in section.blocks %}
+          <li class="dot-item {% if forloop.first %}current{% endif %}">
+            <a id="gallery-item-{{ forloop.index0 }}-trigger" href="#gallery-item-{{ forloop.index0 }}"></a>
+          </li>
+        {% endfor %}
+      </ul>
     </ul>
   </div>
 </div>
@@ -86,6 +206,34 @@
     const bannerLink = section.querySelector('.info__banner__shopnow__button');
     const infoBannerExpandButton = section.querySelector('#info__banner__expand__button');
     const infoBannerDetails = section.querySelector('.info__banner__details');
+    const infoBanner = section.querySelector('.info__banner');
+
+    function setupMobileBanner() {
+      if (window.innerWidth <= 734) {
+        if (infoBanner.parentElement !== section) {
+          section.appendChild(infoBanner);
+        }
+
+        infoBanner.style.display = 'block';
+        infoBanner.style.visibility = 'visible';
+        infoBanner.style.opacity = '1';
+        infoBanner.style.zIndex = '100';
+        infoBanner.style.position = 'relative';
+        infoBanner.style.left = '0';
+        infoBanner.style.width = '100%';
+        infoBanner.style.maxWidth = '100%';
+      } else {
+        if (infoBanner.parentElement === section) {
+          const innerContainer = section.querySelector('.image__with__text__inner__container');
+          if (innerContainer) {
+            innerContainer.appendChild(infoBanner);
+          }
+        }
+      }
+    }
+
+    setupMobileBanner();
+    window.addEventListener('resize', setupMobileBanner);
 
     let ticking = false;
     let autoplayInterval;
@@ -106,40 +254,47 @@
         if (link) {
           bannerLink.href = link;
         }
+
+        if (window.innerWidth <= 734) {
+          infoBanner.style.display = 'block';
+          infoBanner.style.visibility = 'visible';
+          infoBanner.style.opacity = '1';
+        }
       }
     };
 
     const updateDotScaling = () => {
       const scrollPosition = container.scrollLeft;
       const galleryWidth = cards[0].offsetWidth;
-      
-      // Calculate the exact position between slides
+
       const exactIndex = scrollPosition / galleryWidth;
       const currentIndex = Math.floor(exactIndex);
       const progress = exactIndex - currentIndex;
 
-      // Add smooth transition to all dots
       dotItems.forEach((dot) => {
         dot.style.transition = 'width 0.2s ease-out, height 0.2s ease-out';
         dot.style.width = '8px';
         dot.style.height = '8px';
       });
 
-      // Update current dot
       if (dotItems[currentIndex]) {
         const currentDotWidth = Math.max(8, 48 - (progress * 40));
         dotItems[currentIndex].style.width = `${currentDotWidth}px`;
       }
 
-      // Update next dot
       if (dotItems[currentIndex + 1]) {
         const nextDotWidth = Math.max(8, 8 + (progress * 40));
         dotItems[currentIndex + 1].style.width = `${nextDotWidth}px`;
       }
 
-      // Update banner content only when close to a slide
       if (progress < 0.1 || progress > 0.9) {
         updateBannerContent(Math.round(exactIndex));
+      }
+
+      if (window.innerWidth <= 734) {
+        infoBanner.style.display = 'block';
+        infoBanner.style.visibility = 'visible';
+        infoBanner.style.opacity = '1';
       }
     };
 
@@ -175,6 +330,12 @@
             container.scrollLeft = 0;
           }, 300);
         }
+
+        if (window.innerWidth <= 734) {
+          infoBanner.style.display = 'block';
+          infoBanner.style.visibility = 'visible';
+          infoBanner.style.opacity = '1';
+        }
       }, AUTOPLAY_INTERVAL);
     };
 
@@ -209,7 +370,6 @@
       });
     }
 
-    // Initialize first dot
     dotItems[0].style.width = '48px';
     updateBannerContent(0);
 
@@ -218,111 +378,147 @@
       section.addEventListener('mouseenter', stopAutoplay);
       section.addEventListener('mouseleave', startAutoplay);
     }
+
+    window.addEventListener('load', () => {
+      setupMobileBanner();
+      setTimeout(() => {
+        if (window.innerWidth <= 734) {
+          infoBanner.style.display = 'block';
+          infoBanner.style.visibility = 'visible';
+          infoBanner.style.opacity = '1';
+          infoBanner.style.zIndex = '100';
+        }
+      }, 100);
+    });
   });
   });
 </script>
 
 {% schema %}
-  {
-    "name": "Image With Text",
-    "disabled_on": {
-      "groups": ["header", "footer"]
+{
+  "name": "Image With Text",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
     },
-    "settings": [
-      {
-        "type": "color",
-        "id": "sectionBackground",
-        "label": "Section Color"
-      },
-      {
-        "type": "color_scheme",
-        "label": "Banner Color",
-        "id": "bannerColor",
-        "default": "#000000"
-      },
-      {
-        "type": "range",
-        "id": "opacity",
-        "label": "Banner Opacity",
-        "min": 0.0,
-        "max": 1.0,
-        "step": 0.1,
-        "default": 0.8
-      },
-      {
-        "type": "checkbox",
-        "id": "autoplay",
-        "label": "Enable Autoplay",
-        "default": true
-      }, {
-        "type": "checkbox",
-        "id": "show_shop_button",
-        "label": "Show Button",
-        "default": true
-      }
-    ],
-    "blocks": [
-      {
-        "type": "card",
-        "name": "Card",
-        "settings": [
-          {
-            "type": "image_picker",
-            "id": "image",
-            "label": "Select Image"
-          },
-          {
-            "type": "text",
-            "id": "headingTag",
-            "label": "Heading Tag",
-            "default": "Optional Heading Tag"
-          },
-          {
-            "type": "text",
-            "id": "heading",
-            "label": "Heading",
-            "default": "IMAGE WITH TEXT"
-          },
-          {
-            "type": "text",
-            "id": "description",
-            "label": "Description",
-            "default": "Pair large text with an image to give focus to your chosen product. Add details on style, availabilty, share the product description or review."
-          }, {
-            "type": "text",
-            "id": "btnText",
-            "label": "Button Text",
-            "default": "Optional Button"
-          }, {
-            "type": "url",
-            "id": "url",
-            "label": "link",
-            "default": "/"
-          }
-
-        ]
-      }
-    ],
-    "presets": [
-      {
-        "name": "Image With Text",
-        "blocks": [
-          {
-            "type": "card"
-          },
-          {
-            "type": "card"
-          },
-          {
-            "type": "card"
-          },
-          {
-            "type": "card"
-          }, {
-            "type": "card"
-          }
-        ]
-      }
-    ]
-  }
+    {
+      "type": "color",
+      "id": "sectionBackground",
+      "label": "Section Background Color (Legacy)",
+      "info": "Use the color scheme option above for consistent colors"
+    },
+    {
+      "type": "range",
+      "id": "opacity",
+      "label": "Banner Opacity",
+      "min": 0.0,
+      "max": 1.0,
+      "step": 0.1,
+      "default": 0.8
+    },
+    {
+      "type": "select",
+      "id": "banner_position",
+      "label": "Banner Position",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Enable Autoplay",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_shop_button",
+      "label": "Show Button",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Select Image"
+        },
+        {
+          "type": "text",
+          "id": "headingTag",
+          "label": "Heading Tag",
+          "default": "Optional Heading Tag"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "IMAGE WITH TEXT"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description",
+          "default": "Pair large text with an image to give focus to your chosen product. Add details on style, availabilty, share the product description or review."
+        },
+        {
+          "type": "text",
+          "id": "btnText",
+          "label": "Button Text",
+          "default": "Optional Button"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "link",
+          "default": "/"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image With Text",
+      "blocks": [
+        {
+          "type": "card"
+        },
+        {
+          "type": "card"
+        },
+        {
+          "type": "card"
+        },
+        {
+          "type": "card"
+        },
+        {
+          "type": "card"
+        }
+      ]
+    }
+  ]
+}
 {% endschema %}

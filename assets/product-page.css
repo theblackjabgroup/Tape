@@ -54,7 +54,7 @@
 }
 
 #bb_product__media_first {
-  background-color: var(--background_product_card);
+  background-color: var(--card_background);
   overflow: visible !important;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -196,6 +196,10 @@
   border-radius: 1px;
 }
 
+.bb-input-color-label {
+  padding: 0 !important;
+}
+
 .bb-triangle-offer {
   border-left: 7px solid transparent;
   border-right: 7px solid transparent;
@@ -204,6 +208,20 @@
   height: 0;
   width: 0;
   display: block !important;
+}
+
+.bb-social-icons {
+  display: flex;
+}
+
+.bb-social-span {
+  font-size: 18px;
+}
+
+.bb-input-color-label-inner {
+  margin: .4rem;
+  padding: 0.5rem 0.4rem;
+  border-radius: 5px;
 }
 
 .tri-0 {
@@ -360,7 +378,7 @@ border-radius: 50%;
 }
 
 #product-upper-bg {
-  background-color: var(--background_product_card);
+  background-color: var(--card_background);
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
   padding-bottom: 10px;
@@ -535,7 +553,7 @@ border-radius: 50%;
   /* box-shadow: inset 0 0 0 2px black; */
   border-radius: 7px;
   transition: transform .1s cubic-bezier(.215,.61,.355,1);
-  color: rgb(var(--color-button-text));
+  color: var(--secondary_button_label);
 }
 .bb-push-bnt {
   display: block !important;
@@ -660,6 +678,11 @@ border-radius: 50%;
   padding: 10px;
 }
 
+#bb-deferred-media {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
 @media screen and (max-width: 749px) {
 
   .bb-global-media-settings {
@@ -704,7 +727,7 @@ border-radius: 50%;
 
 .bb-fp__media {
   padding: 40px !important;
-  background-color: var(--background_product_card);
+  background-color: var(--card_background);
   overflow: visible !important;
   border-radius: 10px;
 }
