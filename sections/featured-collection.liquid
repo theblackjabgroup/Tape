@@ -11,7 +11,7 @@
     {{ section.settings.title }}
   </h1>
 
-    {% assign current_collection = collections[section.settings.collection] %}
+  {% assign current_collection = collections[section.settings.collection] %}
   {% if current_collection == blank %}
     {% assign current_collection = collections[section.settings.default_collection] %}
   {% endif %}
@@ -96,55 +96,68 @@
           </div>
           
          <div class="product-info">
-  <h7 style="color: {{ section.settings.text_color }};">{{ product.title }}</h7>
-  <p class="model-number" style="color: {{ section.settings.text_color }};">
-    {{ section.settings.model_label }} {{ product.sku }}
-  </p>
-</div>
+           <h7 style="color: {{ section.settings.text_color }};">{{ product.title }}</h7>
+           <p class="model-number" style="color: {{ section.settings.text_color }};">
+             {{ section.settings.model_label }} {{ product.sku }}
+           </p>
+         </div>
+         
          <div class="price-reviews-icons">
-  <p class="price-tag" 
-     style="background-color: {{ section.settings.price_background_color }};
-            --pseudo-bg-color: {{ section.settings.product_card_background_color }};
-            color: {{ section.settings.price_text_color }};">
-    {% if product.compare_at_price > product.price %}
-      <span class="original-price" style="color: {{ section.settings.price_text_color }}; text-decoration: line-through; margin-right: 5px;">
-        {{ product.compare_at_price | money }}
-      </span>
-    {% endif %}
-    <span class="current-price">{{ product.price | money }}</span>
-  </p>
-            <div class="dotted-line-wrapper" style="border-top-color: {{ section.settings.dotted_line_color }};">
-              <div class="dotted-line"></div>
-            </div>
-            <div class="icons">
-              {% for i in (1..3) %}
-                {% assign icon_key = 'icon_' | append: i | append: '_image' %}
-                {% assign icon_image = section.settings[icon_key] %}
-                {% if icon_image != blank %}
-                  <div class="icon-wrapper">
-                    <picture>
-                      <source
-                        type="image/webp"
-                        srcset="
-                          {{ icon_image | img_url: '100x100', format: 'webp', scale: 2 }} 1x,
-                          {{ icon_image | img_url: '200x200', format: 'webp', scale: 2 }} 2x,
-                          {{ icon_image | img_url: '300x300', format: 'webp', scale: 2 }} 3x">
-                      <img
-                        srcset="
-                          {{ icon_image | img_url: '100x100', scale: 2 }} 1x,
-                          {{ icon_image | img_url: '200x200', scale: 2 }} 2x,
-                          {{ icon_image | img_url: '300x300', scale: 2 }} 3x"
-                        src="{{ icon_image | img_url: '200x200', scale: 2 }}"
-                        loading="lazy"
-                        decoding="async"
-                        width="30"
-                        height="30">
-                    </picture>
-                  </div>
-                {% endif %}
-              {% endfor %}
-            </div>
-          </div>
+           {% if product.compare_at_price > product.price %}
+             <div class="original-price-container">
+               <span class="original-price" style="color: {{ section.settings.text_color }}; text-decoration: line-through;">
+                 {{ product.compare_at_price | money }}
+               </span>
+             </div>
+             
+             <p class="price-tag discount-active" 
+                style="background-color: {{ section.settings.price_background_color }};
+                       --pseudo-bg-color: {{ section.settings.product_card_background_color }};
+                       color: {{ section.settings.price_text_color }};">
+               <span class="current-price">{{ product.price | money }}</span>
+             </p>
+           {% else %}
+             <p class="price-tag no-discount" 
+                style="background-color: {{ section.settings.price_background_color }};
+                       --pseudo-bg-color: {{ section.settings.product_card_background_color }};
+                       color: {{ section.settings.price_text_color }};">
+               <span class="current-price">{{ product.price | money }}</span>
+             </p>
+           {% endif %}
+           
+           <div class="dotted-line-wrapper" style="border-top-color: {{ section.settings.dotted_line_color }};">
+             <div class="dotted-line"></div>
+           </div>
+           
+           <div class="icons">
+             {% for i in (1..3) %}
+               {% assign icon_key = 'icon_' | append: i | append: '_image' %}
+               {% assign icon_image = section.settings[icon_key] %}
+               {% if icon_image != blank %}
+                 <div class="icon-wrapper">
+                   <picture>
+                     <source
+                       type="image/webp"
+                       srcset="
+                         {{ icon_image | img_url: '100x100', format: 'webp', scale: 2 }} 1x,
+                         {{ icon_image | img_url: '200x200', format: 'webp', scale: 2 }} 2x,
+                         {{ icon_image | img_url: '300x300', format: 'webp', scale: 2 }} 3x">
+                     <img
+                       srcset="
+                         {{ icon_image | img_url: '100x100', scale: 2 }} 1x,
+                         {{ icon_image | img_url: '200x200', scale: 2 }} 2x,
+                         {{ icon_image | img_url: '300x300', scale: 2 }} 3x"
+                       src="{{ icon_image | img_url: '200x200', scale: 2 }}"
+                       loading="lazy"
+                       decoding="async"
+                       width="30"
+                       height="30">
+                   </picture>
+                 </div>
+               {% endif %}
+             {% endfor %}
+           </div>
+         </div>
         </div>
       {% endfor %}
     {% else %}
@@ -167,25 +180,40 @@
             {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
           </div>
 
-          
           <div class="product-info">
-  <h7 style="color: {{ section.settings.text_color }};">{{ product.title }}</h7>
-  <p class="model-number" style="color: {{ section.settings.text_color }};">
-    {{ section.settings.model_label }} {{ product.sku }}
-  </p>
-</div>
+            <h7 style="color: {{ section.settings.text_color }};">Product Title</h7>
+            <p class="model-number" style="color: {{ section.settings.text_color }};">
+              {{ section.settings.model_label }} 12345
+            </p>
+          </div>
 
           <div class="price-reviews-icons">
-             <p class="price-tag" 
-     style="background-color: {{ section.settings.price_background_color }};
-            --pseudo-bg-color: {{ section.settings.product_card_background_color }};
-            color: {{ section.settings.price_text_color }};">
-    <span class="current-price">{{ 1999 | money }}</span>
-  </p>
+            {% if should_show_offer == 1 %}
+              <div class="original-price-container">
+                <span class="original-price" style="color: {{ section.settings.text_color }}; text-decoration: line-through;">
+                  {{ 2499 | money }}
+                </span>
+              </div>
+              
+              <p class="price-tag discount-active" 
+                 style="background-color: {{ section.settings.price_background_color }};
+                       --pseudo-bg-color: {{ section.settings.product_card_background_color }};
+                       color: {{ section.settings.price_text_color }};">
+                <span class="current-price">{{ 1999 | money }}</span>
+              </p>
+            {% else %}
+              <p class="price-tag no-discount" 
+                 style="background-color: {{ section.settings.price_background_color }};
+                       --pseudo-bg-color: {{ section.settings.product_card_background_color }};
+                       color: {{ section.settings.price_text_color }};">
+                <span class="current-price">{{ 1999 | money }}</span>
+              </p>
+            {% endif %}
 
             <div class="dotted-line-wrapper" style="border-top-color: {{ section.settings.dotted_line_color }};">
               <div class="dotted-line"></div>
             </div>
+            
             <div class="icons">
               {% for i in (1..3) %}
                 {% assign icon_key = 'icon_' | append: i | append: '_image' %}
@@ -224,8 +252,6 @@
 <div class="view-all-wrapper">
   <a href="/collections/all" class="view-all-link"> View all Products → </a>
 </div>
-
-<!-- testing script starts  -->
 
 <script>
 function scrollCards(direction) {
@@ -290,7 +316,6 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 </script>
-
 
 {% schema %}
 {
