@@ -222,7 +222,7 @@
 
 .nav-items {
   display: flex !important;
-  gap: 1rem;
+  gap: 32px;
   flex-direction: row;
   justify-content: var(--nav-items-justify-content);
   align-items: center;
@@ -402,7 +402,7 @@ nav-items::-webkit-scrollbar {
 .nav-icons {
           display: flex !important;
     align-items: center;
-    gap: 20px;
+    gap: 32px;
     height: 100%;
     margin-right: 40px;
 }
