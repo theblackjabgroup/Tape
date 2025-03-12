@@ -42,8 +42,8 @@
   }
 
   .card__icon {
-    width: 120px;
-    height: 120px;
+    width: 90px;
+    height: 90px;
     margin: auto;
     position: relative;
     border-radius: 4px;
@@ -57,10 +57,12 @@
   }
 
   .card__title {
+    padding-top: 10px;
     line-height: 20px !important;
     text-align: center;
     font-size: 17px;
     color: rgb(var(--color-text));
+    width: 230px;
   }
 
   .description__container {
