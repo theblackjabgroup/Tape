@@ -67,6 +67,22 @@
       "type": "image_picker",
       "id": "icon_bookmark_image",
       "label": "Bookmark Icon Image"
+    },
+    {
+      "type": "header",
+      "content": "Suggested Blogs Section"
+    },
+     {
+      "type": "text",
+      "id": "suggested_blogs_title",
+      "label": "Suggested Blogs Title",
+      "default": "Suggested Blogs"
+    },
+    {
+      "type": "text",
+      "id": "suggested_blogs_subheading",
+      "label": "Suggested Blogs Subheading",
+      "default": "Discover more articles"
     }
   ],
   "blocks": [
@@ -104,10 +120,9 @@
         }
       ]
     }
-  ],
+  ]
 }
 {% endschema %}
-
 
 <link rel="stylesheet" href="{{ 'main-article.css' | asset_url }}">
 <div class="blog-article-container color-{{ section.settings.color_scheme }} {% unless article.image %}no-image{% endunless %}">
@@ -505,15 +520,17 @@
 </div>
 
 <div class="custom-blog-slider-section color-{{ section.settings.color_scheme }}">
-    <!-- Title Section -->
-    <div class="custom-blog-slider-title" style="{{ section.settings.slider_section_title }};">
-        <h2>Suggested Blogs</h2>
-    </div>
+   <div class="custom-blog-slider-title">
+    <h2>{{ section.settings.suggested_blogs_title }}</h2>
+    {% if section.settings.suggested_blogs_subheading != blank %}
+        <p class="custom-blog-slider-subheading">{{ section.settings.suggested_blogs_subheading }}</p>
+    {% endif %}
+</div>
     <!-- Arrow Buttons -->
-    <div class="custom-blog-arrow-buttons">
+    <div class="custom-blog-arrow-buttons202">
         <button class="custom-arrow custom-arrow-left" onclick="moveSlide(-1)">‹</button>
         <button class="custom-arrow custom-arrow-right" onclick="moveSlide(1)">›</button>
-    </div>   
+    </div> 
 <div class="custom-blog-slider-container">
     <div class="custom-blog-slider-wrapper" id="sliderWrapper" style="display: flex; flex-wrap: nowrap; gap: 20px;">
         {% assign count = 0 %}
@@ -584,142 +601,73 @@
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     let currentSlide = 0;
-    const sliderWrapper = document.getElementById('sliderWrapper');
+    const sliderWrapper = document.querySelector('.custom-blog-slider-wrapper');
     const leftArrow = document.querySelector('.custom-arrow-left');
     const rightArrow = document.querySelector('.custom-arrow-right');
 
-    function getGap() {
-        // Dynamically fetch the gap from the container's computed styles
-        return parseInt(window.getComputedStyle(sliderWrapper.parentElement).gap) || 20;
+    function getCardWidth() {
+        const card = sliderWrapper.querySelector('.custom-blog-card');
+        return card ? card.offsetWidth + parseInt(window.getComputedStyle(sliderWrapper).gap) : 329; // 309px + 20px gap
     }
 
     function getVisibleSlides() {
-        // Determine visible slides based on screen width
-        if (window.innerWidth < 768) return 1;
-        if (window.innerWidth < 1024) return 2;
-        if (window.innerWidth < 1200) return 3;
-        return 4;
+        const containerWidth = sliderWrapper.parentElement.offsetWidth;
+        const cardWidth = getCardWidth();
+        return Math.floor(containerWidth / cardWidth);
     }
 
-    function resizeCards() {
+    function updateArrowState() {
         const cards = sliderWrapper.querySelectorAll('.custom-blog-card');
         const visibleSlides = getVisibleSlides();
-        const cardWidthPercentage = 95 / visibleSlides;
-
-        cards.forEach((card) => {
-            card.style.flex = `0 0 ${cardWidthPercentage}%`;
-        });
-    }
-
-    function updateArrowState(totalSlides, visibleSlides) {
-        // Enable or disable arrows based on slide position
-        leftArrow.disabled = currentSlide === 0;
-        rightArrow.disabled = currentSlide >= totalSlides - visibleSlides;
+        const maxSlides = Math.max(0, cards.length - visibleSlides);
+        
+        leftArrow.disabled = currentSlide <= 0;
+        rightArrow.disabled = currentSlide >= maxSlides;
+        
+        leftArrow.style.opacity = leftArrow.disabled ? '0.5' : '1';
+        rightArrow.style.opacity = rightArrow.disabled ? '0.5' : '1';
     }
 
     function updateSliderPosition() {
-        const slideWidth = sliderWrapper.querySelector('.custom-blog-card').offsetWidth + getGap();
-        const offset = -currentSlide * slideWidth;
-
+        const cardWidth = getCardWidth();
+        const offset = -currentSlide * cardWidth;
         sliderWrapper.style.transform = `translateX(${offset}px)`;
     }
 
     function moveSlide(direction) {
         const cards = sliderWrapper.querySelectorAll('.custom-blog-card');
-        const totalSlides = cards.length;
         const visibleSlides = getVisibleSlides();
-        const maxSlides = totalSlides - visibleSlides;
-
+        const maxSlides = Math.max(0, cards.length - visibleSlides);
+        
         currentSlide = Math.min(Math.max(currentSlide + direction, 0), maxSlides);
-
+        
         updateSliderPosition();
-        updateArrowState(totalSlides, visibleSlides);
+        updateArrowState();
     }
 
+    // Initialize and handle window resize
     function initializeSlider() {
-        const cards = sliderWrapper.querySelectorAll('.custom-blog-card');
-        if (cards.length === 0) return;
-
-        resizeCards();
-        updateArrowState(cards.length, getVisibleSlides());
+        updateArrowState();
         updateSliderPosition();
-
-        leftArrow.addEventListener('click', () => moveSlide(-1));
-        rightArrow.addEventListener('click', () => moveSlide(1));
-
-        window.addEventListener('resize', () => {
-            resizeCards();
-            updateArrowState(cards.length, getVisibleSlides());
-            updateSliderPosition();
-        });
     }
 
+    window.addEventListener('resize', initializeSlider);
     initializeSlider();
 
-    // Observe dynamic changes to the slider content
-    const observer = new MutationObserver(initializeSlider);
-    observer.observe(sliderWrapper, { childList: true });
+    // Event listeners for arrows
+    leftArrow.addEventListener('click', () => moveSlide(-1));
+    rightArrow.addEventListener('click', () => moveSlide(1));
+
+    // Add keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft' && !leftArrow.disabled) moveSlide(-1);
+        if (e.key === 'ArrowRight' && !rightArrow.disabled) moveSlide(1);
+    });
 });
-// Adjust the dots dynamically based on container width
-function adjustDots() {
-  const container = document.querySelector(".blog-circle"); // Select the dots container
-  if (!container) return; // Exit if the container is not found
-
-  const containerWidth = container.offsetWidth; // Get the container's width
-  const dotSize = 13; // Approximate size of a dot (dot width + gap)
-  const maxDots = Math.floor(containerWidth / dotSize); // Calculate how many dots can fit
-
-  // Clear existing dots
-  container.innerHTML = "";
-
-  // Add new dots based on the available space
-  for (let i = 0; i < maxDots; i++) {
-    const dot = document.createElement("span"); // Create a new dot
-    dot.className = "blog-circle"; // Assign the class for styling
-    container.appendChild(dot); // Append the dot to the container
-  }
-}
-
-// Call the adjustDots function when the window resizes
-window.addEventListener("resize", adjustDots);
-
-// Call the adjustDots function when the page loads
-document.addEventListener("DOMContentLoaded", adjustDots);
-
   
     </script>
-
-
-
-
 
 <script type="application/ld+json">
   {{ article | structured_data }}
 </script>
 
-
-{% javascript %}
-document.addEventListener('DOMContentLoaded', function() {
-  // Handle the dot navigation click event
-  document.querySelectorAll('.dot').forEach((dot, index) => {
-    dot.addEventListener('click', () => {
-      document.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
-      dot.classList.add('active');
-    });
-  });
-
-  // Handle the share button click event
-  document.querySelector('.share-button')?.addEventListener('click', function() {
-    const url = this.dataset.url;
-    if (navigator.share) {
-      navigator.share({
-        title: {{ article.title | json }},
-        url: url
-      });
-    } else {
-      navigator.clipboard.writeText(url);
-    }
-  });
-
-
-{% endjavascript %}

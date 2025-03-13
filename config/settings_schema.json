@@ -38,13 +38,13 @@
             "type": "color",
             "id": "background",
             "label": "Background",
-            "default": "#FDF4D7"
+            "default": "#FFFFFF"
           },
           {
             "type": "color",
             "id": "background_product_card",
             "label": "Foreground",
-            "default": "#C7E1BF"
+            "default": "#E2E9FF"
           },
          {
             "type": "color",
@@ -56,7 +56,7 @@
             "type": "color",
             "id": "product_price_card",
             "label": "Secondary Text Color",
-            "default": "#000000"           
+            "default": "#FFFFFF"           
           },
           {
             "type": "color_background",
@@ -72,13 +72,13 @@
             "type": "color",
             "id": "button_label",
             "label": " Primary Button Color",
-            "default": "#225647"
+            "default": "#273363"
           },
           {
             "type": "color",
             "id": "secondary_product_button_color",
             "label": "Secondary Button Color",
-            "default": "#9BBAE0"
+            "default": "#E2E9FF"
           },
            {
             "type": "color",
@@ -96,18 +96,19 @@
         "type": "header",
         "content": "Cards"
       },
-           {
-            "type": "color",
-            "id": "button",
-            "label": "Card Background",
-            "default": "#C7E1BF"
-          },
           {
             "type": "color",
-            "id": "card_foreground",
-            "label": "Card Foreground",
-            "default": "#FDF4D7"           
+            "id":"button",
+            "label": "Card Background",
+            "default": "#E8E8E8"           
           },
+           {
+            "type": "color",
+            "id":  "card_foreground",
+            "label": "Card Foreground",
+            "default": "#273363"
+          },
+          
           {
             "type": "color",
             "id": "product_price_secondary_font",
@@ -118,13 +119,13 @@
             "type": "color",
             "id": "quatity_selector_background",
             "label": "t:settings_schema.colors.settings.quatity_selector_background.label",
-            "default": "#9BBAE0"           
+            "default": "#E2E9FF"           
           },
           {
             "type": "color",
             "id": "product_special_offer",
             "label": "t:settings_schema.colors.settings.product_special_offer.label",
-            "default": "#9BBAE0"           
+            "default": "#FFE66D"           
           }, 
         ],
         "role": {
@@ -307,6 +308,18 @@
         "id": "social_vimeo_link",
         "label": "t:settings_schema.social-media.settings.social_vimeo_link.label",
         "placeholder": "t:settings_schema.social-media.settings.social_vimeo_link.info"
+      },
+      {
+        "type": "text",
+        "id": "social_linkedin_link",
+        "label": "t:settings_schema.social-media.settings.social_linkedin_link.label",
+        "placeholder": "t:settings_schema.social-media.settings.social_linkedin_link.info"
+      },
+      {
+        "type": "text",
+        "id": "social_x_link",
+        "label": "t:settings_schema.social-media.settings.social_x_link.label",
+        "placeholder": "t:settings_schema.social-media.settings.social_x_link.info"
       }
     ]
   },
@@ -358,5 +371,58 @@
       }
     ]
   },
- 
+  {
+    "name": "t:settings_schema.cart.name",
+    "settings": [
+      {
+        "type": "select",
+        "id": "cart_type",
+        "options": [
+          {
+            "value": "drawer",
+            "label": "t:settings_schema.cart.settings.cart_type.drawer.label"
+          },
+          {
+            "value": "page",
+            "label": "t:settings_schema.cart.settings.cart_type.page.label"
+          },
+          {
+            "value": "notification",
+            "label": "t:settings_schema.cart.settings.cart_type.notification.label"
+          }
+        ],
+        "default": "notification",
+        "label": "t:settings_schema.cart.settings.cart_type.label"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_vendor",
+        "label": "t:settings_schema.cart.settings.show_vendor.label",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "show_cart_note",
+        "label": "t:settings_schema.cart.settings.show_cart_note.label",
+        "default": false
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.cart.settings.cart_drawer.header"
+      },
+      {
+        "type": "collection",
+        "id": "cart_drawer_collection",
+        "label": "t:settings_schema.cart.settings.cart_drawer.collection.label",
+        "info": "t:settings_schema.cart.settings.cart_drawer.collection.info"
+      },
+      {
+        "type": "color_scheme",
+        "id": "cart_color_scheme",
+        "label": "t:sections.all.colors.label",
+        "default": "scheme-1"
+      }
+    ]
+  }
 ]
+

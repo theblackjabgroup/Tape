@@ -1,5 +1,5 @@
 .bb-announcement-bar-background {
-    background-color: var(--background_product_card);
+    background-color: var(--card_background);
     border-radius: 5px;
 }
 
@@ -22,9 +22,16 @@
     height:50px;
 }
 .vertical-bar-second-top-desktop{
-    height:50px;
+    height:60px;
 }
 
 .scrollable-text {
     padding: 1.2rem 0;
 }
+.announcement-bar-height {
+    height: 56px;
+  }
+  .announcement-icon {
+    height: 32px;
+    width: 32px;
+  }

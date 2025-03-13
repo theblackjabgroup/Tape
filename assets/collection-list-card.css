@@ -1,3 +1,18 @@
+.collectionlist_title{
+   font-family: var(--font-heading-family);
+    font-style: var(--font-heading-style);
+    font-size: calc(var(--font-heading-scale) * 28px);
+    font-weight:600;
+}
+.collection_list_title{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
 .card{
   background-color: unset;
 }
@@ -24,7 +39,7 @@
 }
 .collections_data{
   min-height:60px;
-      background-color: rgb(var(--color-button));
+      background-color: var(--background_product_card);
 }
 .collection_list-card-wrapper {
   color: inherit;
@@ -37,6 +52,14 @@
 }
 .semicircle1 {
   bottom: 280px;
+}
+@media screen and (max-width: 749px) {
+  .semicircle1 {
+    bottom: 154px;
+}
+  .dashed_line{
+    bottom :171px;
+  }
 }
 
 .collection_list_inner{
@@ -368,6 +391,7 @@ text-decoration-skip-ink: none;
 .card__heading {
   margin-top: 0;
   margin-bottom: 0;
+  color: var(--product_price_font);
 }
 
 .card__heading:last-child {

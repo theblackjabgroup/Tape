@@ -27,7 +27,6 @@
   align-items: center;
   justify-content: center;
   background-color: rgb(var(--color-background));
-
   font-family: var(--font-body-family);
 }
 

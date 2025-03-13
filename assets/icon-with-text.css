@@ -30,7 +30,7 @@
     position: relative;
     width: 261px;
     height: 261px;
-    background: var(--card_foreground);
+    background: var(--gradient-background);
     border-radius: inherit;
   }
 
@@ -42,8 +42,8 @@
   }
 
   .card__icon {
-    width: 120px;
-    height: 120px;
+    width: 90px;
+    height: 90px;
     margin: auto;
     position: relative;
     border-radius: 4px;
@@ -57,10 +57,12 @@
   }
 
   .card__title {
+    padding-top: 10px;
     line-height: 20px !important;
     text-align: center;
     font-size: 17px;
     color: rgb(var(--color-text));
+    width: 230px;
   }
 
   .description__container {
@@ -103,8 +105,8 @@
     cursor: pointer;
     border: none;
     outline: none;
-    width: 69px;
-    height: 69px;
+    width: 59px;
+    height: 59px;
     border-radius: 0 50% 0 0;
     background-color: var(--card_background);
   }
@@ -151,7 +153,7 @@
   .icon {
     width: 24px;
     height: 24px;
-    color: rgb(var(--color-secondary-button-text));
+    color: var(--button_label);
   }
   @media only screen and (max-width: 990px) {
     :root {

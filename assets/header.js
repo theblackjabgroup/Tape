@@ -107,6 +107,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   hamburger.addEventListener('click', function () {
     header.classList.toggle('show');
+     hamburger.classList.toggle('active');
     mobileHeaderDrawer.classList.toggle('open');
   });
 
@@ -163,6 +164,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // Close mobile drawer when clicking the close icon
   closeIcon.addEventListener('click', function() {
     mobileHeaderDrawer.classList.remove('open');
+    hamburger.classList.toggle('active');
   });
 
   // Initialize scroll tracking variables

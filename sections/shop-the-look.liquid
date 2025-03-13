@@ -1,7 +1,11 @@
 {{ 'shop-the-look.css' | asset_url | stylesheet_tag }}
 
-<div class="shop__the__look__mainWrapper">
+<div class="shop__the__look__mainWrapper color-{{ section.settings.bannerColor }}">
   <div class="shop_the_look__container ">
+    <div class="mainTitleContainer">
+      <h2 class="main_title_heading">{{ section.settings.main_heading }}</h2>
+      <p class="main_title_description">{{ section.settings.main_description }}</p>
+    </div>
 
     <div class="shop__the__look__media__container__wrapper color-{{ section.settings.bannerColor }}">
       <div class="shop__the__look__media__container">
@@ -38,7 +42,7 @@
                   role="button"
                   aria-label="Click to view insights">
 
-                  <i class="icon fa fa-plus" style="--fa-secondary-opacity: 1; color:rgb(var(--color-secondary-button-text));"></i>
+                  <i class="icon fa fa-plus fa-2xm" style="--fa-secondary-opacity: 1; color:rgb(var(--color-secondary-button-text));"></i>
                 </button>
               </div>
             {% endfor %}
@@ -48,16 +52,68 @@
 
     </div>
 
-    <div class="shop__the__look__text__wrapper color-{{ section.settings.bannerColor }} ">
-      <div class="shop__the__look__text__container">
-        <h1 class="shop__the__look__heading">{{ section.settings.section_heading }}</h1>
-        <p
-          id="insightsInfo"
-          class="shop__the__look__description"
-          insightsDescription="{{ section.settings.moreInfo_description }}">{{ section.settings.section_description }}</p>
+    <div class="shop__the__look__slider__wrapper">
+      <div
+        class="shop__the__look__slider-container"
+        id="slider-container"
+        data-autoplay="{{ section.settings.autoplay }}">
+        {% assign has_images = false %}
 
+        {% for i in (1..5) %}
+          {% assign image_key = 'slider_image_' | append: i %}
+          {% assign image_url = section.settings[image_key] | image_url %}
+
+          {% if section.settings[image_key] %}
+            {% assign has_images = true %}
+            <div class="shop__the__look__slider-item">
+              <img src="{{ image_url }}" alt="Slider Image {{ i }}">
+            </div>
+          {% endif %}
+        {% endfor %}
+
+        {% if has_images == false %}
+          <!-- Show a default placeholder if no images are uploaded -->
+          <div class="shop__the__look__slider-item" style="background-color: rgb(218, 218, 218); border: 2px solid black; border-radius 5px">
+            {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          </div>
+        {% endif %}
       </div>
+
+      <!-- Navigation Dots -->
+      {% if has_images %}
+        <div class="shop__the__look__slider-dots">
+          {% for i in (1..5) %}
+            {% assign image_key = 'slider_image_' | append: i %}
+            {% if section.settings[image_key] %}
+              <span class="slider-dot" data-index="{{ forloop.index0 }}"></span>
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      <!-- Slider Controls -->
+      {% if has_images %}
+        <div class="shop__the__look__slider-controls">
+          <button class="shop__the__look__slider-control" id="prev-slide">&#10094;</button>
+          <button class="shop__the__look__slider-control" id="next-slide">&#10095;</button>
+        </div>
+      {% endif %}
     </div>
+
+
+  </div>
+
+
+</div>
+
+<div class="shop__the__look__text__wrapper color-{{ section.settings.bannerColor }} ">
+  <div class="shop__the__look__text__container">
+    <h1 class="shop__the__look__heading">{{ section.settings.section_heading }}</h1>
+    <p
+      id="insightsInfo"
+      class="shop__the__look__description"
+      insightsDescription="{{ section.settings.moreInfo_description }}">{{ section.settings.section_description }}</p>
+
   </div>
 </div>
 <script>
@@ -76,10 +132,75 @@
       this.setAttribute("aria-expanded", "true"); 
     });
   });
+      // Slider functionality
+      const sliderContainer = document.getElementById("slider-container");
+  const prevSlide = document.getElementById("prev-slide");
+  const nextSlide = document.getElementById("next-slide");
+  const slideDot = document.querySelectorAll(".slider-dot"); // Renamed variable
+
+  if (sliderContainer && prevSlide && nextSlide) {
+    const slides = document.querySelectorAll(".shop__the__look__slider-item");
+    let currentSlide = 0;
+    const totalSlides = slides.length;
+    let autoplayInterval;
+
+    function showSlide(index) {
+      if (index >= totalSlides) currentSlide = 0;
+      if (index < 0) currentSlide = totalSlides - 1;
+
+      const offset = -currentSlide * 100; // Adjust for full-width slides
+      sliderContainer.style.transform = `translateX(${offset}%)`;
+
+      // Update Slide Dots
+      slideDot.forEach(dot => dot.classList.remove("active"));
+      slideDot[currentSlide].classList.add("active");
+    }
+
+    function next() {
+      currentSlide++;
+      showSlide(currentSlide);
+    }
+
+    function prev() {
+      currentSlide--;
+      showSlide(currentSlide);
+    }
+
+    nextSlide.addEventListener("click", next);
+    prevSlide.addEventListener("click", prev);
+
+    // Slide Dot Click Event
+    slideDot.forEach((dot, i) => {
+      dot.addEventListener("click", () => {
+        currentSlide = i;
+        showSlide(currentSlide);
+      });
+    });
+
+    // Auto-Slide Function
+    function startAutoplay() {
+      autoplayInterval = setInterval(next, 3000);
+    }
+
+    function stopAutoplay() {
+      clearInterval(autoplayInterval);
+    }
+
+    // Start Auto-Slide
+    startAutoplay();
+
+    // Stop Auto-Slide on Hover
+    sliderContainer.addEventListener("mouseenter", stopAutoplay);
+    sliderContainer.addEventListener("mouseleave", startAutoplay);
+
+    showSlide(currentSlide);
+  }
   });
 
 
 </script>
+
+
 {% schema %}
   {
     "name": "Shop The Look",
@@ -90,13 +211,51 @@
 
       {
         "type": "color_scheme",
-        "label": "Banner Color",
+        "label": "Color Scheme",
         "id": "bannerColor",
         "default": "#000000"
-      }, {
+      },
+      {
         "type": "image_picker",
         "id": "main_image",
         "label": "Main Look Image"
+      },
+      {
+        "type": "text",
+        "id": "main_heading",
+        "label": "Main Heading",
+        "default": "SHOP THE LOOK"
+      },
+      {
+        "type": "checkbox",
+        "id": "autoplay",
+        "label": "Enable Autoplay",
+        "default": true
+      }, {
+        "type": "image_picker",
+        "id": "slider_image_1",
+        "label": "Slider Image 1"
+      }, {
+        "type": "image_picker",
+        "id": "slider_image_2",
+        "label": "Slider Image 2"
+      }, {
+        "type": "image_picker",
+        "id": "slider_image_3",
+        "label": "Slider Image 3"
+      }, {
+        "type": "image_picker",
+        "id": "slider_image_4",
+        "label": "Slider Image 4"
+      }, {
+        "type": "image_picker",
+        "id": "slider_image_5",
+        "label": "Slider Image 5"
+      }, {
+        "type": "text",
+        "id": "main_description",
+        "label": "Main Description",
+        "default": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas est, eligendi, at amet officiis sit sequi dolor minus nulla voluptatibus ex magni modi maxime suscipit provident tempore minima eum repellendus? Lorem ipsum dolor sit amet, consectetur adipisicing elit."
       }, {
         "type": "text",
         "id": "section_heading",
@@ -141,6 +300,7 @@
           }
         ]
       }
+
     ],
     "presets": [
       {
