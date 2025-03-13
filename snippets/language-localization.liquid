@@ -15,7 +15,7 @@
       {% if localization.language.iso_code == 'en' %}
         English (ENG)
       {% else %}
-        {{ localization.language.endonym_name | capitalize }}
+        {{ localization.language.endonym_name | capitalize }} ({{ localization.language.iso_code | upcase | slice: 0, 3 }})
       {% endif %}
     </span>
     {{ 'icon-caret.svg' | inline_asset_content }}
@@ -45,7 +45,7 @@
               {% if language.iso_code == 'en' %}
                 English (ENG)
               {% else %}
-                {{ language.endonym_name | capitalize }}
+                {{ language.endonym_name | capitalize }} ({{ language.iso_code | upcase | slice: 0, 3 }})
               {% endif %}
             </span>
           </a>
