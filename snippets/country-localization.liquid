@@ -24,19 +24,17 @@
 
 <div class="disclosure">
   <button
-    type="button"
-    class="disclosure__button localization-form__select localization-selector link link--text caption-large"
-    aria-expanded="false"
-    aria-controls="{{ localPosition }}-country-results"
-    aria-describedby="{{ localPosition }}Label"
-  >
-    <span>
-      {{- localization.country.name }} |
-      {{ localization.country.currency.iso_code }}
-      {{ localization.country.currency.symbol -}}
-    </span>
-    {{ 'icon-caret.svg' | inline_asset_content }}
-  </button>
+  type="button"
+  class="disclosure__button localization-form__select localization-selector link link--text caption-large"
+  aria-expanded="false"
+  aria-controls="{{ localPosition }}-country-results"
+  aria-describedby="{{ localPosition }}Label"
+>
+  <span>
+    {{- localization.country.currency.iso_code -}}
+  </span>
+  {{ 'icon-caret.svg' | inline_asset_content }}
+</button>
   <div class="disclosure__list-wrapper country-selector" hidden>
     <div
       class="disclosure__list country-selector__list{% if show_currencies %} country-selector__list--with-multiple-currencies{% endif %}"
@@ -66,11 +64,11 @@
                 >
                   {{- 'icon-checkmark.svg' | inline_asset_content -}}
                 </span>
-                <span class="country">{{- country.name }}</span>
-                <span class="localization-form__currency motion-reduce{% unless show_currencies %} hidden{% endunless %}">
-                  {{ country.currency.iso_code }}
-                  {{ country.currency.symbol -}}
-                </span>
+<span class="country">{{- country.name }}</span>
+<span class="localization-form__currency motion-reduce{% unless show_currencies %} hidden{% endunless %}">
+  {{ country.currency.iso_code }}
+  {{ country.currency.symbol -}}
+</span>
               </a>
             </li>
           {%- endfor -%}
