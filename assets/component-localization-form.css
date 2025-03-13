@@ -132,7 +132,7 @@
   transform: translateY(0em);
   z-index: 2;
   background-color: rgb(var(--color-background));
-  border-radius: var(--popup-corner-radius);
+  border-radius: 1px;
   box-shadow: var(--popup-shadow-horizontal-offset) var(--popup-shadow-vertical-offset) var(--popup-shadow-blur-radius)
     rgba(var(--color-shadow), var(--popup-shadow-opacity));
   max-height: 22rem;
@@ -145,7 +145,7 @@
   padding-bottom: 0.5rem;
   padding-top: 0.5rem;
   scroll-padding: 0.5rem 0;
-    max-height: 16rem; 
+    max-height: 20rem; 
   max-width: 22rem;
   min-width: 13rem; 
   width: max-content;
@@ -196,7 +196,7 @@
   }
 
   .disclosure__list.country-selector__list {
-    max-height: 75%;
+    max-height: 80%;
     min-width: 100%;
     margin-bottom: 0;
     z-index: 5;
@@ -408,4 +408,5 @@
 
 .language-selector .disclosure__list {
  min-width: 16rem; /* Reduced from 200px */
+max-height: 20rem; /* Added height increase */
 }
