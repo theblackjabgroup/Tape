@@ -262,7 +262,7 @@ h7 {
 /* Styling for price tag with discount active */
 .price-tag.discount-active {
   position: absolute;
-  left: 115px;
+  left: 120px;
   top: -5px;
 }
 
