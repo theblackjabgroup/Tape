@@ -88,6 +88,7 @@
   .countdown-section__heading {
     margin-bottom: 10px;
     color: var(--product_price_card);
+    font-weight: bold;
   }
   .countdown-section__description {
     margin-bottom: 20px;
