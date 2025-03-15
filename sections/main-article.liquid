@@ -45,6 +45,12 @@
       "default": true
     },
     {
+  "type": "text",
+  "id": "social_follow_text",
+  "label": " Display Text",
+  "default": "Follow us on:"
+},
+    {
       "type": "header",
       "content": "Icon Settings"
     },
@@ -70,8 +76,14 @@
     },
     {
       "type": "header",
-      "content": "Suggested Blogs Section"
+      "content": "Suggested Blogs"
     },
+    {
+  "type": "checkbox",
+  "id": "show_suggested_blogs",
+  "label": "Show Suggested Blogs",
+  "default": true
+},
      {
       "type": "text",
       "id": "suggested_blogs_title",
@@ -190,7 +202,7 @@
 
 {% if section.settings.show_blog_social_links %}
   <div class="blog-social-links">
-    Follow us on:
+   {{ section.settings.social_follow_text }}
     <div class="blog-divider"></div>
 
     <a href="{{ settings.social_facebook_link | default: '#' }}" class="blog-social-icon" target="_blank">
@@ -271,7 +283,7 @@
 
 {% if section.settings.show_blog_social_links %}
   <div class="blog-social-links">
-    Follow us on:
+    {{ section.settings.social_follow_text }}
     <div class="blog-divider"></div>
 
     <a href="{{ settings.social_facebook_link | default: '#' }}" class="blog-social-icon" target="_blank">
@@ -518,7 +530,7 @@
   <!-- Right semicircle -->
   <span class="blog-semicircle3 blog-semicircle3-r"></span>
 </div>
-
+{% if section.settings.show_suggested_blogs %}
 <div class="custom-blog-slider-section color-{{ section.settings.color_scheme }}">
    <div class="custom-blog-slider-title">
     <h2>{{ section.settings.suggested_blogs_title }}</h2>
@@ -595,9 +607,11 @@
         {% endfor %}
       
     </div>
-</div>
+
 </div>
 
+</div>
+    {% endif %}
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     let currentSlide = 0;
