@@ -1,27 +1,29 @@
 {% comment %}
   Renders a set of links for paginated results. Must be used within paginate tags.
-
   Usage:
   {% paginate results by 2 %}
-    {% render 'pagination', paginate: paginate, anchor: '#yourID' %}
+    {% render 'pagination', paginate: paginate, anchor: '#yourID', color_scheme: section.settings.color_scheme %}
   {% endpaginate %}
-
   Accepts:
   - paginate: {Object}
   - anchor: {String} (optional) This can be added so that on page reload it takes you to wherever you've placed your anchor tag.
+  - color_scheme: {String} (optional) Color scheme to apply to the pagination
 {% endcomment %}
 
 {{ 'component-pagination.css' | asset_url | stylesheet_tag }}
 
 {%- if paginate.parts.size > 0 -%}
-  <div class="pagination-wrapper">
+  {%- liquid
+    assign color_scheme = color_scheme | default: 'scheme-1'
+  -%}
+  <div class="pagination-wrapper color-{{ color_scheme }}">
     <nav class="pagination" role="navigation" aria-label="{{ 'general.pagination.label' | t }}">
-      <ul class="pagination__list list-unstyled" role="list">
+      <ul class="pagination__list list-unstyled color-{{ color_scheme }}" role="list">
         {%- if paginate.previous -%}
           <li>
             <a
               href="{{ paginate.previous.url }}{{ anchor }}"
-              class="pagination__item pagination__item--next pagination__item-arrow link motion-reduce"
+              class="pagination__item pagination__item--prev pagination__item-arrow link motion-reduce"
               aria-label="{{ 'general.pagination.previous' | t }}"
             >
               <span class="svg-wrapper">
@@ -30,7 +32,6 @@
             </a>
           </li>
         {%- endif -%}
-
         {%- for part in paginate.parts -%}
           <li>
             {%- if part.is_link -%}
@@ -46,7 +47,7 @@
                 <a
                   role="link"
                   aria-disabled="true"
-                  class="pagination__item pagination__item--current light"
+                  class="pagination__item pagination__item--current"
                   aria-current="page"
                   aria-label="{{ 'general.pagination.page' | t: number: part.title }}"
                 >
@@ -58,12 +59,11 @@
             {%- endif -%}
           </li>
         {%- endfor -%}
-
         {%- if paginate.next -%}
           <li>
             <a
               href="{{ paginate.next.url }}{{ anchor }}"
-              class="pagination__item pagination__item--prev pagination__item-arrow link motion-reduce"
+              class="pagination__item pagination__item--next pagination__item-arrow link motion-reduce"
               aria-label="{{ 'general.pagination.next' | t }}"
             >
               <span class="svg-wrapper">
