@@ -2,17 +2,22 @@
   Renders the language picker for the localization form
   Accepts:
     - localPosition: pass in the position in which the form is coming up to create specific IDs
-    - ab: wether this snippet is called from announcement bar or not
 {%- endcomment -%}
 <div class="disclosure">
   <button
     type="button"
-    class="disclosure__button localization-form__select localization-selector link link--text caption-large {% if ab %} bb-localization {% endif %}"
+    class="disclosure__button localization-form__select localization-selector link link--text caption-large"
     aria-expanded="false"
     aria-controls="{{ localPosition }}List"
     aria-describedby="{{ localPosition }}Label"
   >
-     <span>{{ localization.language.endonym_name | capitalize }}</span>
+    <span>
+      {% if localization.language.iso_code == 'en' %}
+        English (ENG)
+      {% else %}
+        {{ localization.language.endonym_name | capitalize }} ({{ localization.language.iso_code | upcase | slice: 0, 3 }})
+      {% endif %}
+    </span>
     {{ 'icon-caret.svg' | inline_asset_content }}
   </button>
   <div class="disclosure__list-wrapper language-selector" hidden>
@@ -37,7 +42,11 @@
               {{- 'icon-checkmark.svg' | inline_asset_content -}}
             </span>
             <span>
-                   {{ language.endonym_name | capitalize }}
+              {% if language.iso_code == 'en' %}
+                English (ENG)
+              {% else %}
+                {{ language.endonym_name | capitalize }} ({{ language.iso_code | upcase | slice: 0, 3 }})
+              {% endif %}
             </span>
           </a>
         </li>
@@ -45,3 +54,4 @@
     </ul>
   </div>
 </div>
+<input type="hidden" name="locale_code" value="{{ localization.language.iso_code }}">

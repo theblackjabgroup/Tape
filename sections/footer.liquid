@@ -125,7 +125,6 @@
   class="color-{{ section.settings.color_scheme }}"
   style="
     padding-top: {{ section.settings.footer_top_padding }}px;
-    padding-bottom: {{ section.settings.footer_bottom_padding }}px;
     font-family: var(--font-body-family) !important;
   "
 >
@@ -510,24 +509,15 @@
       "type": "header",
       "content": "Footer Layout"
     },
-    {
-      "type": "range",
-      "id": "footer_top_padding",
-      "label": "Top Padding (px)",
-      "min": 0,
-      "max": 200,
-      "step": 5,
-      "default": 20
-    },
-    {
-      "type": "range",
-      "id": "footer_bottom_padding",
-      "label": "Bottom Padding (px)",
-      "min": 0,
-      "max": 200,
-      "step": 5,
-      "default": 20
-    },
+ {
+  "type": "range",
+  "id": "footer_top_padding",
+  "label": "Top Padding (px)",
+  "min": 0,
+  "max": 200,
+  "step": 5,
+  "default": 0
+},
     {
       "type": "header",
       "content": "Newsletter Section"
@@ -670,8 +660,7 @@
         "enable_country_selector": true,
         "show_announcement_strips": true,
         "show_social_icons": true,
-        "footer_top_padding": 20,
-        "footer_bottom_padding": 20,
+       "footer_top_padding": 0,
         "menu_item_color": "#333333",
       }
     }

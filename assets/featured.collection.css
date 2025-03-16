@@ -109,10 +109,10 @@ h1, p {
 }
 
 .heading {
-  font-size: 24px;
+  font-size: 28px;
   margin-bottom: -11px;
   margin-left: 25px;
-  font-weight: 600;
+  font-weight: ;
 }
 
 .product-container {
@@ -171,15 +171,14 @@ h1, p {
 }
 
 .subheading {
-  font-size: 18px;
+  font-size: 16px;
   margin-top: 18px;
   margin-bottom: 70px;
   margin-left: 25px;
-  font-weight: 600;
 }
 
 h7 {
-  font-size: 18px;
+  font-size: 20px;
   margin: 10px 0 5px 14px;
   font-weight: bold;
   line-height: 1.4;
@@ -263,18 +262,17 @@ h7 {
 /* Styling for price tag with discount active */
 .price-tag.discount-active {
   position: absolute;
-  left: 115px;
+  left: 120px;
   top: -5px;
 }
 
 /* Styling for price tag without discount */
 .price-tag.no-discount {
- margin-top: 0px;
+ margin-top: 0;
     margin-bottom: 10px;
-    margin-left: -100px;
-    position: relative;
-  left: auto;
-  top: auto;
+    position: absolute;
+    left: 30px;
+    bottom: 90px;
 }
 
 /* Circular decorations for both price tag styles */
