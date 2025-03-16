@@ -17,6 +17,20 @@
     height: 50%;
     font-size: 13px !important;
   }
+  {% if section.settings.show_excerpt == false %}
+  .card__information{
+    height: auto !important;
+    min-height: 80px !important;
+  }
+  .card__content{
+    height: auto !important;
+  }
+  {% else %}
+  .card__information{
+    height: 300px !important;
+  }
+  {% endif %}
+  
    @media screen and (max-width: 1250px){
       .article-card, .card__heading, .h2{
       font-size: 16px !important;
@@ -34,7 +48,7 @@
   }
   .card{
      background: rgb(var(--color-button)) !important;
-    border-radius:10px !important;
+    border-radius:4px !important;
   }
   .main-blog-test{
      background: rgb(var(--color-button)) !important;
@@ -48,9 +62,6 @@
   .card__content{
         font-size: 12px;
     padding: 10px !important;
-  }
-  .card__information{
-    height:300px !important;
   }
   .blog-articles__article{
     overflow: hidden;
@@ -72,7 +83,7 @@
     color: var(--color-foreground);
     text-decoration: none;
     padding: 5px 10px;
-    border-radius: 5px;
+    border-radius: 4px;
     font-size: 12px;
   }
   .article-tags .tag:hover {
@@ -93,7 +104,7 @@
 
 {%- endstyle -%}
 
-{%- paginate blog.articles by 9 -%}
+{%- paginate blog.articles by 12 -%}
   <div class="main-blog color-{{ section.settings.color_scheme }} page-width section-{{ section.id }}-padding">
     <h1 class=" title--primary{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
       {{ blog.title | escape }}
@@ -123,7 +134,7 @@
             show_image: true, 
             show_date: section.settings.show_date,
             show_author: section.settings.show_author,
-            show_excerpt: true,
+            show_excerpt: section.settings.show_excerpt,
           -%}
         </div>
       {%- endfor -%}
@@ -163,6 +174,12 @@
       "id": "show_author",
       "default": false,
       "label": "t:sections.main-blog.settings.show_author.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_excerpt",
+      "default": true,
+      "label": "Show excerpt"
     },
     {
       "type": "checkbox",
@@ -212,4 +229,3 @@
   ]
 }
 {% endschema %}
-
