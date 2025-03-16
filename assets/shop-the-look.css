@@ -20,7 +20,7 @@
 }
 .main_title_heading {
   font-size: 20px;
-  font-weight: 400;
+  font-family: --title-font-family;
 }
 .main_title_description {
   font-size: 16px;
