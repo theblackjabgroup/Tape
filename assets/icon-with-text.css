@@ -170,6 +170,9 @@
     .card__count__container {
       display: flex;
     }
+    .featured-icon-with-text-heading{
+      width: 350px !important;
+    }
   }
   @media only screen and (min-width: 990px) {
     .card__count__container {
@@ -194,3 +197,6 @@
     width: 23px;
     border-radius: 13px;
   }
+.featured-icon-with-text-heading{
+       width: 547px; 
+    }
