@@ -6,22 +6,6 @@
   },
   "settings": [
     {
-      "type": "select",
-      "id": "layout_style",
-      "label": "Background Layout Style",
-      "options": [
-        {
-          "value": "layout_1",
-          "label": "Layout 1"
-        },
-        {
-          "value": "layout_2",
-          "label": "Layout 2"
-        }
-      ],
-      "default": "layout_1"
-    },
-    {
       "type": "color_scheme",
       "id": "color_scheme",
       "label": "t:sections.all.colors.label",
@@ -38,7 +22,6 @@
       "id": "description",
       "label": "Description",
       "default": "<p>Use this section to create urgency and boost sales.</p>",
-      "info": "Max 350 characters will be displayed in Layout 2 for desktop, 80 characters for mobile."
     },
     {
       "type": "text",
@@ -184,7 +167,6 @@
               --mobile-width: {{ section.settings.background_width_mobile }}%;
               width: var(--desktop-width);">
     
-    {% if section.settings.layout_style == 'layout_1' %}
       <div class="countdown-border-cutouts countdown-border-top">
         {% for i in (1..18) %}
           <div class="countdown-cutout">&nbsp;</div>
@@ -205,12 +187,6 @@
           <div class="countdown-cutout">&nbsp;</div>
         {% endfor %}
       </div>
-    {% else %}
-    <div class="countdown-section layout-2" style="width: 100%; height: 100%;">
-      <div class="top-right-fold"><h2></h2></div>
-       <div class="bottom-right-fold"><h2></h2></div>
-       </div>
-    {% endif %}
 
     <div class="countdown-section__container page-width">
       <div class="countdown-section__image-wrapper">
@@ -241,12 +217,7 @@
           {{ section.settings.heading }}
         </h2>
         <div class="countdown-section__description" style="font-family: {{ section.settings.type_body_font }}">
-          {% if section.settings.layout_style == 'layout_2' %}
-            <span class="desktop-description">{{ section.settings.description | slice: 0, 350 }}</span>
-            <span class="mobile-description">{{ section.settings.description | slice: 0, 83 }}</span>
-          {% else %}
             {{ section.settings.description }}
-          {% endif %}
         </div>
 
         <div class="countdown-timer" id="countdown-timer-{{ section.id }}" style="font-size: {{ section.settings.timer_font_size }}px;"></div>
@@ -274,25 +245,12 @@
     display: none;
   }
   
-  .desktop-description {
-    display: block;
-  }
-  .mobile-description {
-    display: none;
-  }
   
   @media screen and (max-width: 750px) {
     .desktop-only-image {
       display: none;
     }
     .mobile-only-image {
-      display: block;
-    }
-    
-    .desktop-description {
-      display: none;
-    }
-    .mobile-description {
       display: block;
     }
   }
