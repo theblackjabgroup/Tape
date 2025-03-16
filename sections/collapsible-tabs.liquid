@@ -8,110 +8,161 @@
     --collapse_header_text_color: {{ section.settings.collapse_header_text_color }};
     --collapse_body_background_color: {{ section.settings.collapse_body_background_color }};
     --collapse_body_text_color: {{ section.settings.collapse_body_text_color }};
+    --active_tab_background_color: {{ section.settings.active_tab_background_color | default: '#000000' }};
   }
-{% endstyle %}
+{%- endstyle -%}
 {% if section.blocks.first.settings.heading != blank %}
   <div class="color-{{ section.settings.color_scheme }}">
-<div class="collapse-width">
-  <div class="collapse-tab">
-    {%- for block in section.blocks -%}
-      <button class="tablinks" onclick="openTab(event, 'Tab{{ forloop.index }}')">{{ block.settings.heading }}</button>
-    {% endfor %}
-  </div>
-  <div class="product-description-drawer">
-    <div class="product-description-bottom_container">
-      {% for i in (0..14) %}
-        <div class="product-description-semicircles"></div>
-      {% endfor %}
+    <div class="collapse-width">
+      <div class="collapse-tab">
+        {%- for block in section.blocks -%}
+          <button
+            class="tablinks {% if forloop.first %}active{% endif %}"
+            onclick="openTab(event, 'Tab{{ forloop.index }}')"
+          >
+            {{ block.settings.heading }}
+          </button>
+        {% endfor %}
+      </div>
+      <div class="product-description-drawer">
+        <div class="product-description-bottom_container">
+          {% for i in (0..14) %}
+            <div class="product-description-semicircles"></div>
+          {% endfor %}
+        </div>
+      </div>
+      <!-- Tab Content -->
+      <div class="product-description-wrapper">
+        {%- for block in section.blocks -%}
+          <div
+            id="Tab{{ forloop.index }}"
+            class="product-description-grid-container"
+            {% if forloop.first %}
+              style="display: grid;"
+            {% endif %}
+          >
+            {% if block.settings.Point_1 != '' %}
+              <div class="product-description-paragraph">
+                <div class="product-description-in-semicircles"></div>
+                <p class="product-description-subclass">{{ block.settings.Point_1 }}</p>
+              </div>
+            {% endif %}
+            {% if block.settings.Point_2 != '' %}
+              <div class="product-description-paragraph">
+                <div class="product-description-in-semicircles"></div>
+                <p class="product-description-subclass">{{ block.settings.Point_2 }}</p>
+              </div>
+            {% endif %}
+            {% if block.settings.Point_3 != '' %}
+              <div class="product-description-paragraph">
+                <div class="product-description-in-semicircles"></div>
+                <p class="product-description-subclass">{{ block.settings.Point_3 }}</p>
+              </div>
+            {% endif %}
+            {% if block.settings.Point_4 != '' %}
+              <div class="product-description-paragraph">
+                <div class="product-description-in-semicircles"></div>
+                <p class="product-description-subclass">{{ block.settings.Point_4 }}</p>
+              </div>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
     </div>
   </div>
-  <!-- Tab Content -->
-  <div class="product-description-wrapper">
-    {%- for block in section.blocks -%}
-      <div id="Tab{{ forloop.index }}" class="product-description-grid-container">
-          {% if block.settings.Point_1 != '' %}
-            <div class="product-description-paragraph">
-              <div class="product-description-in-semicircles"></div>
-              <p class="product-description-subclass">{{ block.settings.Point_1 }}</p>
+  <div class="color-{{ section.settings.color_scheme }} mobile-collapsible-tabs" style="padding-bottom: 10px;">
+    <div class="accordion" id="accordionExample">
+      {%- for block in section.blocks -%}
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="heading{{ forloop.index }}">
+            <button
+              class="accordion-button {% unless forloop.first %}collapsed{% endunless %}"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapse{{ forloop.index }}"
+              aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}"
+              aria-controls="collapse{{ forloop.index }}"
+            >
+              {{ block.settings.heading }}
+            </button>
+          </h2>
+          <div
+            id="collapse{{ forloop.index }}"
+            class="accordion-collapse collapse {% if forloop.first %}show{% endif %}"
+            aria-labelledby="heading{{ forloop.index }}"
+            data-bs-parent="#accordionExample"
+          >
+            <div class="accordion-body">
+              <div class="product-description-grid-container" style="display: grid">
+                {% if block.settings.Point_1 != '' %}
+                  <div class="product-description-paragraph">
+                    <div class="product-description-in-semicircles"></div>
+                    <p class="product-description-subclass">{{ block.settings.Point_1 }}</p>
+                  </div>
+                {% endif %}
+                {% if block.settings.Point_2 != '' %}
+                  <div class="product-description-paragraph">
+                    <div class="product-description-in-semicircles"></div>
+                    <p class="product-description-subclass">{{ block.settings.Point_2 }}</p>
+                  </div>
+                {% endif %}
+                {% if block.settings.Point_3 != '' %}
+                  <div class="product-description-paragraph">
+                    <div class="product-description-in-semicircles"></div>
+                    <p class="product-description-subclass">{{ block.settings.Point_3 }}</p>
+                  </div>
+                {% endif %}
+                {% if block.settings.Point_4 != '' %}
+                  <div class="product-description-paragraph">
+                    <div class="product-description-in-semicircles"></div>
+                    <p class="product-description-subclass">{{ block.settings.Point_4 }}</p>
+                  </div>
+                {% endif %}
+              </div>
             </div>
-          {% endif %}
-          {% if block.settings.Point_2 != '' %}
-            <div class="product-description-paragraph">
-              <div class="product-description-in-semicircles"></div>
-              <p class="product-description-subclass">{{ block.settings.Point_2 }}</p>
-            </div>
-          {% endif %}
-          {% if block.settings.Point_3 != '' %}
-            <div class="product-description-paragraph">
-              <div class="product-description-in-semicircles"></div>
-              <p class="product-description-subclass">{{ block.settings.Point_3 }}</p>
-            </div>
-          {% endif %}
-          {% if block.settings.Point_4 != '' %}
-            <div class="product-description-paragraph">
-              <div class="product-description-in-semicircles"></div>
-              <p class="product-description-subclass">{{ block.settings.Point_4 }}</p>
-            </div>
-          {% endif %}
-      </div>
-    {% endfor %}
-  </div>
-</div>
-</div>
-<div class="color-{{ section.settings.color_scheme }} mobile-collapsible-tabs" style="padding-bottom: 10px;">
-  <div class="accordion" id="accordionExample">
-    {%- for block in section.blocks -%}
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="heading{{ forloop.index }}">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ forloop.index }}" aria-expanded="true" aria-controls="collapse{{ forloop.index }}">
-        {{ block.settings.heading }}
-      </button>
-    </h2>
-    <div id="collapse{{ forloop.index }}" class="accordion-collapse collapse" aria-labelledby="heading{{ forloop.index }}" data-bs-parent="#accordionExample">
-      <div class="accordion-body">
-        <div class="product-description-grid-container" style="display: grid">
-          {% if block.settings.Point_1 != '' %}
-            <div class="product-description-paragraph">
-              <div class="product-description-in-semicircles"></div>
-              <p class="product-description-subclass">{{ block.settings.Point_1 }}</p>
-            </div>
-          {% endif %}
-          {% if block.settings.Point_2 != '' %}
-            <div class="product-description-paragraph">
-              <div class="product-description-in-semicircles"></div>
-              <p class="product-description-subclass">{{ block.settings.Point_2 }}</p>
-            </div>
-          {% endif %}
-          {% if block.settings.Point_3 != '' %}
-            <div class="product-description-paragraph">
-              <div class="product-description-in-semicircles"></div>
-              <p class="product-description-subclass">{{ block.settings.Point_3 }}</p>
-            </div>
-          {% endif %}
-          {% if block.settings.Point_4 != '' %}
-            <div class="product-description-paragraph">
-              <div class="product-description-in-semicircles"></div>
-              <p class="product-description-subclass">{{ block.settings.Point_4 }}</p>
-            </div>
-          {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+      <div class="accordion-below">
+        <div class="product-description-drawer">
+          <div class="product-description-bottom_container">
+            {% for i in (0..10) %}
+              <div class="product-description-semicircles"></div>
+            {% endfor %}
+          </div>
         </div>
       </div>
     </div>
   </div>
-    {% endfor %}
-    <div class="accordion-below">
-<div class="product-description-drawer">
-  <div class="product-description-bottom_container">
-    {% for i in (0..10) %}
-      <div class="product-description-semicircles"></div>
-    {% endfor %}
-  </div>
-</div>
-</div>
-</div>
-</div>
-
 {% endif %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Set first tab as active by default
+    if (document.querySelector('.tablinks')) {
+      document.querySelector('.tablinks').classList.add('active');
+      document.getElementById('Tab1').style.display = 'grid';
+    }
+
+    // Original openTab function
+    window.openTab = function(evt, tabName) {
+      var i, tabcontent, tablinks;
+
+      tabcontent = document.getElementsByClassName("product-description-grid-container");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+
+      document.getElementById(tabName).style.display = "grid";
+      evt.currentTarget.className += " active";
+    }
+  });
+</script>
 
 {% schema %}
 {
