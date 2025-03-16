@@ -10,12 +10,18 @@
   .card__inner{
     height: 50%;
   }
+   .card__heading{
+     font-weight: 500!important;
+     font-size: 20px !important;
+   }
   .article-card__excerpt{
     margin: 5px 0 !important;
   }
   .card__content{
     height: 50%;
     font-size: 13px !important;
+    display: flex;
+    flex-direction: column;
   }
   {% if section.settings.show_excerpt == false %}
   .card__information{
@@ -27,7 +33,9 @@
   }
   {% else %}
   .card__information{
-    height: 300px !important;
+    height: 350px !important;
+    display: flex;
+    flex-direction: column;
   }
   {% endif %}
   
@@ -35,7 +43,7 @@
       .article-card, .card__heading, .h2{
       font-size: 16px !important;
     }
-     .h2{
+     .h2, .card__heading{
        font-weight: bold !important;
      }
    }
@@ -49,9 +57,14 @@
   .card{
      background: rgb(var(--color-button)) !important;
     border-radius:4px !important;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
   }
   .main-blog-test{
      background: rgb(var(--color-button)) !important;
+    display: flex;
+    flex-direction: column;
   }
   .page-width {
     max-width: none;
@@ -60,24 +73,26 @@
     height: 345px;
   }
   .card__content{
-        font-size: 12px;
+    font-size: 12px;
     padding: 10px !important;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
   }
   .blog-articles__article{
     overflow: hidden;
-      position: relative;
+    position: relative;
   }
 
-
-.article-tags {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  display: flex;
-  gap: 5px;
-  flex-wrap: wrap;
-  z-index: 10; 
-}
+  .article-tags {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    z-index: 10; 
+  }
   .article-tags .tag {
     background-color: rgb(var(--color-background));
     color: var(--color-foreground);
@@ -89,12 +104,50 @@
   .article-tags .tag:hover {
     text-decoration: underline;
   }
+  .main-blog-title{
+    font-weight: 500 !important;
+  }
 
   .blog-articles {
     display: grid;
     grid-template-columns: repeat({{ section.settings.articles_per_row }}, 1fr);
     gap: 20px;
   }
+  .main-blog-read-more-button{
+    font-weight: 500;
+    background: linear-gradient(to right, gray 50%, rgb(var(--color-button-text)) 50%);
+    background-size: 200% 100%;
+    background-position: 100% 0;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.6rem;
+    text-decoration: none !important;
+    position: relative;
+    bottom: 10px;
+    margin-top: 70px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 170px;
+    color: rgb(var(--color-secondary-button-text)) !important;
+    transition: background-position 1.5s ease-in-out, transform .3s ease;
+  }
+  .main-blog-read-more-button:hover {
+    background-position: 0 0 !important;
+    color:rgb(var(--color-secondary-button-text)) !important;
+  }
+  .main-blog-read-more-button svg {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.3s ease;
+}
+
+.main-blog-read-more-button:hover svg {
+    transform: translateX(4px);
+}
 
   @media screen and (max-width: 750px) {
     .blog-articles {
@@ -106,14 +159,14 @@
 
 {%- paginate blog.articles by 12 -%}
   <div class="main-blog color-{{ section.settings.color_scheme }} page-width section-{{ section.id }}-padding">
-    <h1 class=" title--primary{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
+    <h1 class=" main-blog-title title--primary{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
       {{ blog.title | escape }}
     </h1>
 
     <div class="blog-articles {% if section.settings.layout == 'collage' %}blog-articles--collage{% endif %}">
       {%- for article in blog.articles -%}
         <div
-          class="blog-articles__article main-blog-test  article{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %} "
+          class="blog-articles__article main-blog-test article{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %} "
           {% if settings.animations_reveal_on_scroll %}
             data-cascade
             style="--animation-order: {{ forloop.index }};"
@@ -135,6 +188,7 @@
             show_date: section.settings.show_date,
             show_author: section.settings.show_author,
             show_excerpt: section.settings.show_excerpt,
+            read_more_text: section.settings.enable_read_more_button ? section.settings.read_more_text : ''
           -%}
         </div>
       {%- endfor -%}
@@ -145,7 +199,6 @@
     {%- endif -%}
   </div>
 {%- endpaginate -%}
-
 
 {% schema %}
 {
@@ -186,6 +239,24 @@
       "id": "show_tags",
       "default": false,
       "label": "Show tags"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_comments",
+      "label": "Show Comments",
+      "default": true
+    },
+     {
+      "type": "checkbox",
+      "id": "enable_read_more_button",
+      "default": true,
+      "label": "Show button"
+    },
+    {
+      "type": "text",
+      "id": "read_more_text",
+      "label": "Button text",
+      "default": "Read More"
     },
     {
       "type": "select",
