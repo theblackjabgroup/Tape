@@ -94,8 +94,9 @@
                    {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
               {% endif %}
           </div>
-
+<div class="arrowtext-wrapper">
        {% if block.settings.feature != blank %}
+
   <div class="headarrow">
     <h3 class="headingtext">{{ block.settings.feature }}</h3>
     <span id="info__banner__expand__button" class="headarrow_svg-wrapper">
@@ -114,8 +115,11 @@
     <a href="{{ block.settings.button_link }}" class="slideshow_btn">{{ block.settings.button_text }}</a>
   {% endif %}
 </div>
+          </div>
         </div>
+        
       </div>
+      
     {% endfor %}
   </div>
 </div>
