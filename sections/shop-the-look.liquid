@@ -1,5 +1,32 @@
 {{ 'shop-the-look.css' | asset_url | stylesheet_tag }}
 
+<style>
+
+  :root {
+    /* Font settings based on theme typography */
+    --title-font-family: {{ settings.type_header_font.family }}, 
+    {{ settings.type_header_font.fallback_families }};
+    --title-font-weight: {{ settings.type_header_font.weight }};
+    --title-font-style: {{ settings.type_header_font.style }};
+    --body-font-family: {{ settings.type_body_font.family }}, 
+    {{ settings.type_body_font.fallback_families }};
+    --body-font-weight: {{ settings.type_body_font.weight }};
+    --body-font-style: {{ settings.type_body_font.style }};
+  }
+
+  .main_title_heading,
+  .shop__the__look__heading {
+    font-family: var(--title-font-family);
+  }
+
+  .main_title_description,
+  .shop__the__look__description {
+    font-family: var(--body-font-family);
+  }
+
+
+</style>
+
 <div class="shop__the__look__mainWrapper color-{{ section.settings.bannerColor }}">
   <div class="shop_the_look__container ">
     <div class="mainTitleContainer">
