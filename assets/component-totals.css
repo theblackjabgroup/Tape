@@ -163,9 +163,7 @@ margin-top: .5rem;
       padding: 16px 26px;
       border-radius: 4px;
       font-weight: bold; 
-     
       display: inline-flex;
-    
       margin:0 10px;
 }
 
@@ -176,14 +174,15 @@ margin-top: 2rem;
 
 .totals__total-value::before,
 .totals__total-value::after {
-content: '';
-position: absolute;
-width: 23px;
-height: 23px;
-top: 50%;
-transform: translateY(-50%);
-border-radius: 50%;
-z-index: 1;
+  content: '';
+  position: absolute;
+  width: 23px;
+  height: 23px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  z-index: 1;
+  background-color: var(--background_product_card); /* Add this line */
 }
 
 .totals__total-value::before {
