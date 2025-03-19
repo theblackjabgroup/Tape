@@ -2,15 +2,15 @@
   {
     "name": "theme_info",
     "theme_name": "Mumbai",
-    "theme_version": "1.0.0",
-    "theme_author": "BlackBytt",
-    "theme_documentation_url": "https://blackbytt.gitbook.io/mumbai-theme-documentation",
-    "theme_support_url": "https://blackbytt.gitbook.io/mumbai-theme-documentation"
+    "theme_version": "15.1.0",
+    "theme_author": "Shopify",
+    "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
+    "theme_support_url": "https://support.shopify.com/"
   },
   {
     "name": "t:settings_schema.logo.name",
     "settings": [
-      {
+       {
         "type": "image_picker",
         "id": "logo",
         "label": "t:settings_schema.logo.settings.logo_image.label"
@@ -30,10 +30,10 @@
         "type": "color_scheme_group",
         "id": "color_schemes",
         "definition": [
-          {
-            "type": "header",
-            "content": "General"
-          },
+           {
+        "type": "header",
+        "content": "General"
+      },
           {
             "type": "color",
             "id": "background",
@@ -46,17 +46,17 @@
             "label": "Foreground",
             "default": "#E2E9FF"
           },
-          {
+         {
             "type": "color",
             "id": "text",
             "label": "Primary Text Color",
             "default": "#000000"
           },
-          {
+          { 
             "type": "color",
             "id": "product_price_card",
             "label": "Secondary Text Color",
-            "default": "#FFFFFF"
+            "default": "#FFFFFF"           
           },
           {
             "type": "color_background",
@@ -65,10 +65,10 @@
             "info": "t:settings_schema.colors.settings.background_gradient.info"
           },
           {
-            "type": "header",
-            "content": "Buttons"
-          },
-          {
+        "type": "header",
+        "content": "Buttons"
+      },
+          { 
             "type": "color",
             "id": "button_label",
             "label": " Primary Button Color",
@@ -80,7 +80,7 @@
             "label": "Secondary Button Color",
             "default": "#E2E9FF"
           },
-          {
+           {
             "type": "color",
             "id": "secondary_button_label",
             "label": " Primary Button Text Color",
@@ -90,43 +90,43 @@
             "type": "color",
             "id": "product_price_font",
             "label": "Secondary Button Text Color",
-            "default": "#000000"
+            "default": "#000000"           
           },
-          {
-            "type": "header",
-            "content": "Cards"
-          },
+           {
+        "type": "header",
+        "content": "Cards"
+      },
           {
             "type": "color",
-            "id": "button",
+            "id":"button",
             "label": "Card Background",
-            "default": "#E8E8E8"
+            "default": "#E8E8E8"           
           },
-          {
+           {
             "type": "color",
-            "id": "card_foreground",
+            "id":  "card_foreground",
             "label": "Card Foreground",
             "default": "#273363"
           },
-
+          
           {
             "type": "color",
             "id": "product_price_secondary_font",
             "label": "t:settings_schema.colors.settings.product_price_secondary_font.label",
-            "default": "#000000"
+            "default": "#000000"           
           },
           {
             "type": "color",
             "id": "quatity_selector_background",
             "label": "t:settings_schema.colors.settings.quatity_selector_background.label",
-            "default": "#E2E9FF"
+            "default": "#E2E9FF"           
           },
           {
             "type": "color",
             "id": "product_special_offer",
             "label": "t:settings_schema.colors.settings.product_special_offer.label",
-            "default": "#FFE66D"
-          }
+            "default": "#FFE66D"           
+          }, 
         ],
         "role": {
           "text": "text",
@@ -146,7 +146,7 @@
       }
     ]
   },
-  {
+ {
     "name": "t:settings_schema.typography.name",
     "settings": [
       {
@@ -170,7 +170,7 @@
         "label": "t:settings_schema.typography.settings.heading_scale.label",
         "default": 100
       },
-      {
+       {
         "type": "header",
         "content": "t:settings_schema.typography.settings.header__3.content"
       },
@@ -391,3 +391,4 @@
     ]
   }
 ]
+
