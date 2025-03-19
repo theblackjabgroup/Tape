@@ -19,10 +19,10 @@
     color: var(--text) !important;
   }
   .vertical-bar-second-top {
-    height: 56px;
+    min-height: 56px;
   }
   .vertical-bar-second-top-desktop {
-    height: 55px;
+    min-height: 55px;
   }
   .scrollable-text {
     padding: 1.2rem 0;
@@ -31,7 +31,7 @@
     font-size: 16px;
   }
   .announcement-bar-height {
-    height: 56px !important;
+    min-height: 56px !important;
   }
   .announcement-icon-wrapper {
     width: 32px !important;
