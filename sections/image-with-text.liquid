@@ -1,125 +1,129 @@
 {{ 'image-with-text.css' | asset_url | stylesheet_tag }}
 
 {% style %}
+  :root  {
+    --section-color: {{ section.settings.sectionBackground }};
+    --banner-position: {% if section.settings.banner_position == 'center' %}
+      calc(50% - 300px)
+    {% elsif section.settings.banner_position == 'right' %}
+    calc(94% - 500px)
+  {% else %}
+  0%
+{% endif %};
+/* Font settings based on theme typography */
+--title-font-family: {{ settings.type_header_font.family }}, 
+{{ settings.type_header_font.fallback_families }};
+--title-font-weight: {{ settings.type_header_font.weight }};
+--title-font-style: {{ settings.type_header_font.style }};
+--body-font-family: {{ settings.type_body_font.family }}, 
+{{ settings.type_body_font.fallback_families }};
+--body-font-weight: {{ settings.type_body_font.weight }};
+--body-font-style: {{ settings.type_body_font.style }};
+}
+
+.info__banner {
+  left: var(--banner-position) !important;
+  width: 400px;
+  max-width: 90%;
+  position: absolute;
+  margin-left: 40px;
+}
+
+.title-small {
+  font-family: var(--body-font-family);
+  font-weight: 500;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+.title-large {
+  font-family: var(--title-font-family);
+  font-weight: 700;
+  font-size: 28px;
+}
+
+.body-text {
+  font-family: var(--body-font-family);
+  font-weight: 400;
+  /* Inter Regular */
+  font-size: 16px;
+}
+
+.button-text {
+  font-family: var(--body-font-family);
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.info__banner__shopnow__button {
+  padding: 12px 24px !important;
+  display: inline-block;
+}
+
+@media (max-width: 1024px) {
   :root {
-      --section-color: {{ section.settings.sectionBackground }};
-      --banner-position: {% if section.settings.banner_position == 'center' %}
-        calc(50% - 200px)
-      {% elsif section.settings.banner_position == 'right' %}
-        calc(94% - 300px)
-      {% else %}
-        0%
-      {% endif %};
-      /* Font settings based on theme typography */
-      --title-font-family: {{ settings.type_header_font.family }}, {{ settings.type_header_font.fallback_families }};
-      --title-font-weight: {{ settings.type_header_font.weight }};
-      --title-font-style: {{ settings.type_header_font.style }};
-      --body-font-family: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
-      --body-font-weight: {{ settings.type_body_font.weight }};
-      --body-font-style: {{ settings.type_body_font.style }};
-    }
+    --banner-position: {% if section.settings.banner_position == 'center' %}
+      calc(50% - 175px)/* Adjusted for smaller banner width */
+    {% elsif section.settings.banner_position == 'right' %}
+    calc(100% - 350px - 5%)
+  {% else %}
+  10%
+{% endif %};
+}
 
-    .info__banner {
-      left: var(--banner-position) !important;
-      width: 400px;
-      max-width: 90%;
-      position: absolute;
-    }
+.info__banner {
+  width: 350px;
+}
 
-    .title-small {
-      font-family: var(--body-font-family);
-      font-weight: 500;
-      font-size: 14px;
-      text-transform: uppercase;
-    }
+.title-large {
+  font-size: 24px;
+}
 
-    .title-large {
-      font-family: var(--title-font-family);
-      font-weight: 700;
-      font-size: 28px;
-    }
+.body-text {
+  font-size: 14px;
+  line-height: 20px;
+}
+}
 
-    .body-text {
-      font-family: var(--body-font-family);
-      font-weight: 400; /* Inter Regular */
-      font-size: 16px;
-    }
+@media (max-width: 734px) {
+  .info__banner {
+    left: 0 !important;
+    bottom: 50px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    position: absolute !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    z-index: 100 !important;
+    margin: 0;
+  }
 
-    .button-text {
-      font-family: var(--body-font-family);
-      font-weight: 500;
-      font-size: 16px;
-    }
+  .title-small {
+    font-size: 10px;
+  }
 
-    .info__banner__shopnow__button {
-      padding: 12px 24px !important;
-      display: inline-block;
-    }
+  .title-large {
+    font-size: 18px;
+    line-height: 24px;
+  }
 
-    @media (max-width: 1024px) {
-      :root {
-        --banner-position: {% if section.settings.banner_position == 'center' %}
-          calc(50% - 175px) /* Adjusted for smaller banner width */
-        {% elsif section.settings.banner_position == 'right' %}
-          calc(100% - 350px - 5%)
-        {% else %}
-          10%
-        {% endif %};
-      }
+  .image__with__text__section {
+    position: relative;
+  }
 
-      .info__banner {
-        width: 350px;
-      }
-
-      .title-large {
-        font-size: 24px;
-      }
-
-      .body-text {
-        font-size: 14px;
-        line-height: 20px;
-      }
-    }
-
-    @media (max-width: 734px) {
-      .info__banner {
-        left: 0 !important;
-        bottom: 50px !important;
-        width: 100% !important;
-        max-width: 100% !important;
-        position: absolute !important;
-        display: block !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-        z-index: 100 !important;
-      }
-
-      .title-small {
-        font-size: 10px;
-      }
-
-      .title-large {
-        font-size: 18px;
-        line-height: 24px;
-      }
-
-      .image__with__text__section {
-        position: relative;
-      }
-
-      .mobile-banner-container {
-        position: relative;
-        width: 100%;
-        z-index: 15;
-      }
-    }
+  .mobile-banner-container {
+    position: relative;
+    width: 100%;
+    z-index: 15;
+  }
+}
 {% endstyle %}
 
 <div
   class="image__with__text__section color-{{ section.settings.color_scheme }}"
   data-section-id="{{ section.id }}"
-  data-autoplay="{{ section.settings.autoplay }}"
->
+  data-autoplay="{{ section.settings.autoplay }}">
   <div class="image__with__text__outer__container">
     <ul class="image__with__text__inner__container">
       {% for item in section.blocks %}
@@ -133,15 +137,11 @@
           data-description="{{ item.settings.description }}"
           data-link="{{ item.settings.url }}"
           btn-text="{{ item.settings.btnText }}"
-          data-heading-tag="{{ item.settings.headingTag }}"
-        >
+          data-heading-tag="{{ item.settings.headingTag }}">
           <div class="media__container">
             {% if item.settings.image %}
               {{
-                item.settings.image
-                | image_url: width: 1800
-                | image_tag: width: 1800, height: 1600, class: 'media', alt: item.settings.image.alt
-                | escape
+                item.settings.image | image_url: width: 1800 | image_tag: width: 1800, height: 1600, class: 'media', alt: item.settings.image.alt | escape
               }}
             {% else %}
               <div style="width: 100%; height: 100%;">
@@ -161,15 +161,11 @@
       <h1 class="info__banner__heading title-large">Image With Text</h1>
       <div class="info__banner__details">
         <p class="info__banner__description body-text">
-          Pair large text with an image to give focus to your chosen product. Add details on style, availabilty, share
+          Pair large text with an image to give focus to your chosen product. Add details on style, availabilty, share                               
           the product description or review.
         </p>
         {% if section.settings.show_shop_button %}
-          <a
-            href=""
-            class="info__banner__shopnow__button button-text link color-{{ section.settings.color_scheme }}"
-            >Optional Button</a
-          >
+          <a href="" class="info__banner__shopnow__button button-text link color-{{ section.settings.color_scheme }}">Optional Button</a>
         {% endif %}
       </div>
       <span id="info__banner__expand__button" class="svg-wrapper">
@@ -395,130 +391,123 @@
 </script>
 
 {% schema %}
-{
-  "name": "Image With Text",
-  "disabled_on": {
-    "groups": ["header", "footer"]
-  },
-  "settings": [
-    {
-      "type": "color_scheme",
-      "id": "color_scheme",
-      "label": "t:sections.all.colors.label",
-      "default": "scheme-1"
+  {
+    "name": "Image With Text",
+    "disabled_on": {
+      "groups": ["header", "footer"]
     },
-    {
-      "type": "color",
-      "id": "sectionBackground",
-      "label": "Section Background Color (Legacy)",
-      "info": "Use the color scheme option above for consistent colors"
-    },
-    {
-      "type": "range",
-      "id": "opacity",
-      "label": "Banner Opacity",
-      "min": 0.0,
-      "max": 1.0,
-      "step": 0.1,
-      "default": 0.8
-    },
-    {
-      "type": "select",
-      "id": "banner_position",
-      "label": "Banner Position",
-      "options": [
-        {
-          "value": "left",
-          "label": "Left"
-        },
-        {
-          "value": "center",
-          "label": "Center"
-        },
-        {
-          "value": "right",
-          "label": "Right"
-        }
-      ],
-      "default": "left"
-    },
-    {
-      "type": "checkbox",
-      "id": "autoplay",
-      "label": "Enable Autoplay",
-      "default": true
-    },
-    {
-      "type": "checkbox",
-      "id": "show_shop_button",
-      "label": "Show Button",
-      "default": true
-    }
-  ],
-  "blocks": [
-    {
-      "type": "card",
-      "name": "Card",
-      "settings": [
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Select Image"
-        },
-        {
-          "type": "text",
-          "id": "headingTag",
-          "label": "Heading Tag",
-          "default": "Optional Heading Tag"
-        },
-        {
-          "type": "text",
-          "id": "heading",
-          "label": "Heading",
-          "default": "IMAGE WITH TEXT"
-        },
-        {
-          "type": "text",
-          "id": "description",
-          "label": "Description",
-          "default": "Pair large text with an image to give focus to your chosen product. Add details on style, availabilty, share the product description or review."
-        },
-        {
-          "type": "text",
-          "id": "btnText",
-          "label": "Button Text",
-          "default": "Optional Button"
-        },
-        {
-          "type": "url",
-          "id": "url",
-          "label": "link",
-          "default": "/"
-        }
-      ]
-    }
-  ],
-  "presets": [
-    {
-      "name": "Image With Text",
-      "blocks": [
-        {
-          "type": "card"
-        },
-        {
-          "type": "card"
-        },
-        {
-          "type": "card"
-        },
-        {
-          "type": "card"
-        },
-        {
-          "type": "card"
-        }
-      ]
-    }
-  ]
-}
+    "settings": [
+      {
+        "type": "color_scheme",
+        "id": "color_scheme",
+        "label": "t:sections.all.colors.label",
+        "default": "scheme-1"
+      },
+      {
+        "type": "color",
+        "id": "sectionBackground",
+        "label": "Section Background Color (Legacy)",
+        "info": "Use the color scheme option above for consistent colors"
+      },
+      {
+        "type": "range",
+        "id": "opacity",
+        "label": "Banner Opacity",
+        "min": 0.0,
+        "max": 1.0,
+        "step": 0.1,
+        "default": 0.8
+      },
+      {
+        "type": "select",
+        "id": "banner_position",
+        "label": "Banner Position",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          }, {
+            "value": "center",
+            "label": "Center"
+          }, {
+            "value": "right",
+            "label": "Right"
+          }
+        ],
+        "default": "left"
+      }, {
+        "type": "checkbox",
+        "id": "autoplay",
+        "label": "Enable Autoplay",
+        "default": true
+      }, {
+        "type": "checkbox",
+        "id": "show_shop_button",
+        "label": "Show Button",
+        "default": true
+      }
+    ],
+    "blocks": [
+      {
+        "type": "card",
+        "name": "Card",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Select Image"
+          },
+          {
+            "type": "text",
+            "id": "headingTag",
+            "label": "Heading Tag",
+            "default": "Optional Heading Tag"
+          },
+          {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading",
+            "default": "IMAGE WITH TEXT"
+          },
+          {
+            "type": "text",
+            "id": "description",
+            "label": "Description",
+            "default": "Pair large text with an image to give focus to your chosen product. Add details on style, availabilty, share the product description or review."
+          }, {
+            "type": "text",
+            "id": "btnText",
+            "label": "Button Text",
+            "default": "Optional Button"
+          }, {
+            "type": "url",
+            "id": "url",
+            "label": "link",
+            "default": "/"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Image With Text",
+        "blocks": [
+          {
+            "type": "card"
+          },
+          {
+            "type": "card"
+          },
+          {
+            "type": "card"
+          },
+          {
+            "type": "card"
+          }, {
+            "type": "card"
+          }
+        ]
+      }
+    ]
+  }
 {% endschema %}

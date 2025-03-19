@@ -40,7 +40,14 @@
              style="--pseudo-bg-color: {{ section.settings.product_card_background_color }}; 
                     background-color: {{ section.settings.product_card_background_color }};">
           
-          {% if section.settings.show_offer_banner %}
+          {% if product.available == false %}
+            <div class="offer-banner" 
+                 style="--banner-bg-color: {{ section.settings.sold_out_background_color }}; 
+                        background-color: {{ section.settings.sold_out_background_color }}; 
+                        color: {{ section.settings.sold_out_text_color }};">
+              SOLD OUT
+            </div>
+          {% elsif section.settings.show_offer_banner %}
             {% if product.compare_at_price > product.price or product.tags contains 'special_offer' %}
               <div class="offer-banner" 
                    style="--banner-bg-color: {{ section.settings.special_offer_background_color }}; 
@@ -166,13 +173,20 @@
              style="--pseudo-bg-color: {{ section.settings.product_card_background_color }}; 
                     background-color: {{ section.settings.product_card_background_color }};">
           
-          {% assign should_show_offer = i | modulo: 2 %}
-          {% if section.settings.show_offer_banner and should_show_offer == 1 %}
+          {% assign should_show_offer = i | modulo: 3 %}
+          {% if should_show_offer == 0 %}
+            <div class="offer-banner" 
+                 style="--banner-bg-color: {{ section.settings.sold_out_background_color }}; 
+                        background-color: {{ section.settings.sold_out_background_color }}; 
+                        color: {{ section.settings.sold_out_text_color }};">
+              SOLD OUT
+            </div>
+          {% elsif section.settings.show_offer_banner and should_show_offer == 1 %}
             <div class="offer-banner" 
                  style="--banner-bg-color: {{ section.settings.special_offer_background_color }}; 
                         background-color: {{ section.settings.special_offer_background_color }}; 
                         color: {{ section.settings.special_offer_text_color }};">
-            SPECIAL OFFER 20% DISCOUNT
+              SPECIAL OFFER 20% DISCOUNT
             </div>
           {% endif %}
           

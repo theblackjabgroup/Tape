@@ -14,6 +14,29 @@ class CartRemoveButton extends HTMLElement {
 
 customElements.define('cart-remove-button', CartRemoveButton);
 
+class CartQuantityDecrement extends HTMLElement {
+  constructor() {
+    super();
+
+    this.addEventListener('click', (event) => {
+      event.preventDefault();
+      const cartItems = this.closest('cart-items') || this.closest('cart-drawer-items');
+      const input = this.parentNode.querySelector('input[type="number"]');
+      const currentQuantity = parseInt(input.value);
+      
+      // If the current quantity is 1, remove the item completely
+      if (currentQuantity === 1) {
+        cartItems.updateQuantity(input.dataset.index, 0);
+      } else {
+        // Otherwise decrease by 1
+        cartItems.updateQuantity(input.dataset.index, currentQuantity - 1);
+      }
+    });
+  }
+}
+
+customElements.define('cart-quantity-decrement', CartQuantityDecrement);
+
 class CartItems extends HTMLElement {
   constructor() {
     super();
@@ -61,7 +84,7 @@ class CartItems extends HTMLElement {
     const index = event.target.dataset.index;
     let message = '';
 
-    if (inputValue < event.target.dataset.min) {
+    if (inputValue !== 0 && inputValue < event.target.dataset.min) {
       message = window.quickOrderListStrings.min_error.replace('[min]', event.target.dataset.min);
     } else if (inputValue > parseInt(event.target.max)) {
       message = window.quickOrderListStrings.max_error.replace('[max]', event.target.max);

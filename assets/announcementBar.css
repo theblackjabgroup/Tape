@@ -1,37 +1,39 @@
 .bb-announcement-bar-background {
     background-color: var(--card_background);
     border-radius: 5px;
-}
+  }
 
-.announcement-bar-arrow-svg {
+  .announcement-bar-arrow-svg {
     color: var(--text) !important;
-}
+  }
 
-.bb-announcement-bar-wrapper {
-    background-color: rgb(var(--color-background))
-}
+  .bb-announcement-bar-wrapper {
+    background-color: rgb(var(--color-background));
+  }
 
-.bb-localization {
+  .bb-localization {
     color: var(--text) !important;
     padding-left: 0.5rem !important;
-}
-.bb-localization .link{
-    color: var(--text) !important;
-}
-.vertical-bar-second-top{
-    height:50px;
-}
-.vertical-bar-second-top-desktop{
-    height:60px;
-}
-
-.scrollable-text {
-    padding: 1.2rem 0;
-}
-.announcement-bar-height {
-    height: 56px;
   }
-  .announcement-icon {
-    height: 32px;
-    width: 32px;
+  .bb-localization .link {
+    color: var(--text) !important;
+  }
+  .vertical-bar-second-top {
+    min-height: 56px;
+  }
+  .vertical-bar-second-top-desktop {
+    min-height: 55px;
+  }
+  .scrollable-text {
+    padding: 1.2rem 0;
+    font-family: var(--body-font-family) !important;
+    font-weight: var(--font-body-weight) !important;
+    font-size: 16px;
+  }
+  .announcement-bar-height {
+    min-height: 56px !important;
+  }
+  .announcement-icon-wrapper {
+    width: 32px !important;
+    height: 32px !important;
   }
