@@ -273,7 +273,7 @@
                     -%}
                     <td class="cart-item__quantity{% if has_qty_rules or has_vol_pricing %} cart-item__quantity--info{% endif %}">
                       <quantity-popover>
-                        <div class="cart-item__quantity-wrapper quantity-popover-wrapper">
+                        <div class="cart-item__quantity-wrapper quantity-popover-wrapper " style="display:flex;">
                           <label class="visually-hidden" for="Quantity-{{ item.index | plus: 1 }}">
                             {{ 'products.product.quantity.label' | t }}
                           </label>
