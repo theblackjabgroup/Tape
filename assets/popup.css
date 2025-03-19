@@ -172,7 +172,7 @@
   }
 
   .popup-message-layout2.has-dots > *:first-child {
-    background-position: var(--offset) 0;
+    background-position: -10px 0;
   }
   
   .popup-form {
