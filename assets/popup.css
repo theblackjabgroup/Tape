@@ -15,16 +15,8 @@
   border-top: none;
 }
 
-.popup-message-layout2.has-dots p,
-.popup-message-layout2.has-dots span,
-.popup-message-layout2.has-dots h1,
-.popup-message-layout2.has-dots h2,
-.popup-message-layout2.has-dots h3,
-.popup-message-layout2.has-dots h4,
-.popup-message-layout2.has-dots a,
-.popup-message-layout2.has-dots li,
-.popup-message-layout2.has-dots ul,
-.popup-message-layout2.has-dots ol {
+/* Apply dots only to the first direct child element */
+.popup-message-layout2.has-dots > *:first-child {
   background-image: radial-gradient(circle, var(--dot-color, var(--card_foreground)) 5px, transparent 5px);
   background-size: calc(var(--dot-spacing, 30px)) 10px; 
   background-position: center top;
@@ -38,16 +30,7 @@
   position: relative;
 }
 
-.popup-message-layout2.has-dots p,
-.popup-message-layout2.has-dots span,
-.popup-message-layout2.has-dots h1,
-.popup-message-layout2.has-dots h2,
-.popup-message-layout2.has-dots h3,
-.popup-message-layout2.has-dots h4,
-.popup-message-layout2.has-dots a,
-.popup-message-layout2.has-dots li,
-.popup-message-layout2.has-dots ul,
-.popup-message-layout2.has-dots ol {
+.popup-message-layout2.has-dots > *:first-child {
   background-position: var(--offset) 0;
 }
 
@@ -132,15 +115,11 @@
 }
 
 .popup-close-btn svg {
-  fill: var(--product_price_card);
+      fill: var(--product_price_font)
 }
 
 .popup-subscribe-btn {
-  background: linear-gradient(
-    to right,
-    gray 50%,
-    rgb(var(--color-button-text)) 50%
-  );
+  background: linear-gradient(to right, gray 50%, rgb(var(--color-button-text)) 50%);
   background-size: 200% 100%;
   color: rgb(var(--color-secondary-button-text));
   background-position: 100% 0;
@@ -188,12 +167,12 @@
     text-align: justify;
   }
   
-  .popup-message-layout2 p {
+  .popup-message-layout2 > *:first-child {
     padding: 20px 8px 20px 0;
   }
 
-  .popup-message-layout2.has-dots p {
-    background-position: -10px 0;
+  .popup-message-layout2.has-dots > *:first-child {
+    background-position: var(--offset) 0;
   }
   
   .popup-form {
