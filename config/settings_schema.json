@@ -2,10 +2,10 @@
   {
     "name": "theme_info",
     "theme_name": "Mumbai",
-    "theme_version": "15.1.0",
-    "theme_author": "Shopify",
-    "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
-    "theme_support_url": "https://support.shopify.com/"
+    "theme_version": "1.0.0",
+    "theme_author": "BlackBytt",
+    "theme_documentation_url": "https://blackbytt.gitbook.io/mumbai-theme-documentation",
+    "theme_support_url": "https://blackbytt.gitbook.io/mumbai-theme-documentation"
   },
   {
     "name": "t:settings_schema.logo.name",
