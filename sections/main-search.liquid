@@ -67,6 +67,9 @@
   .bb-dropdown-menu.show {
     z-index: 5;
   }
+  .search-product-grid{
+    padding-left:30px;
+}
 </style>
 
 {%- liquid
@@ -243,9 +246,7 @@
         </facet-filters-form>
       {%- endif -%}
       <div
-        {% if section.settings.filter_type == 'vertical' %}
         class="facets-vertical page-width"
-        {% endif %}>
         {%- if search.filters != empty -%}
           {%- if section.settings.enable_filtering or section.settings.enable_sorting -%}
             <aside
@@ -263,7 +264,7 @@
             </aside>
           {%- endif -%}
         {%- endif -%}
-        <div class="product-grid-container" id="ProductGridContainer">
+        <div class="product-grid-container search-product-grid" id="ProductGridContainer">
           {%- if search.results.size == 0 and search.filters != empty -%}
             <div
               class="template-search__results collection collection--empty{% if section.settings.filter_type != 'vertical' %} page-width{% endif %}"
