@@ -29,10 +29,13 @@
   font-weight: bold;
   margin-top: 20px;
   display: inline-block;
+  color: var(--product_price_font);
 }
 .team-role {
-  color: #777;
   display: inline-block;
+}
+.team-description {
+  color: var(--secondary_button_label);
 }
 @media (max-width: 1000px) {
   .team-description {
