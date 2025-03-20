@@ -32,7 +32,8 @@
           {% endif %}
         </div>
         <h3 class="team-name">{{ member.settings.name }}</h3>
-        <p class="team-role">{{ member.settings.role }}</p>
+        <p class="team-role">
+          - {{ member.settings.role }}</p>
         <p class="team-bio">{{ member.settings.bio }}</p>
       </div>
     {% endfor %}
