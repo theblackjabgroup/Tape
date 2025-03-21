@@ -34,9 +34,7 @@
 .team-role {
   display: inline-block;
 }
-.team-description {
-  color: var(--secondary_button_label);
-}
+
 @media (max-width: 1000px) {
   .team-description {
     width: 100%;
