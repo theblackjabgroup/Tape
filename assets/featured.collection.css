@@ -183,6 +183,14 @@ h7 {
   font-weight: bold;
   line-height: 1.4;
   color: rgb(var(--primary_textcolor));
+    word-wrap: break-word;
+    word-break: break-word;
+display: block;
+  width: calc(100% - 28px);
+  hyphens: auto;
+  max-height: 2.8em; 
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .product-info {
@@ -192,6 +200,7 @@ h7 {
   flex-direction: column;
   flex: 1;
   min-height: auto;
+  width: 100%; 
 }
 
 .model-number {
