@@ -130,13 +130,21 @@ margin-bottom: 80px;
     margin-left: 25px;
   }
 
-  h7 {
-    font-size: 18px;
-    margin: 10px 0 5px 14px;
-    font-weight: bold;
-    line-height: 1.4;
-      color:rgb(var(--primary_textcolor));
-  }
+    h7 {
+  font-size: 20px;
+  margin: 10px 0 5px 14px;
+  font-weight: bold;
+  line-height: 1.4;
+  color: rgb(var(--primary_textcolor));
+    word-wrap: break-word;
+    word-break: break-word;
+display: block;
+  width: calc(100% - 28px);
+  hyphens: auto;
+  max-height: 2.8em; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
   .product-info {
     padding: 0 15px;
@@ -146,6 +154,7 @@ margin-bottom: 80px;
     flex: 1;
     min-height: auto;
       color:rgb(var(--primary_textcolor));
+  width: 100%; /* Ensure full width */
   }
 
 
