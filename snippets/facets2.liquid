@@ -56,7 +56,7 @@
               </h2>
             {%- endif -%}
             {% comment %} Pills are right below the title for filter type vertical {% endcomment %}
-            {%- if filter_type == 'vertical' -%}    
+            {%- if filter_type == 'vertical' -%}
               <div class="active-facets active-facets-desktop">
                 <div class="bb-facets-vertical-filter active-facets-vertical-filter">
                   {%- unless results.filters == empty -%}
@@ -72,13 +72,13 @@
                     </div>
                     </div>
                   {%- endunless -%}
-                  
+
                   <facet-remove class="bb-active-facets__button-wrapper active-facets__button-wrapper">
                     <a href="{{ results_url }}" class="bb-active-facets__button-remove active-facets__button-remove underlined-link">
                       <span>{{ 'products.facets.clear_all' | t }}</span>
                     </a>
                   </facet-remove>
-                  
+
                 </div>
                 {%- for filter in results.filters -%}
                   {%- for value in filter.active_values -%}
@@ -125,11 +125,11 @@
               </facet-remove>
             <div class="filter-background">
             {%- for filter in results.filters -%}
-              {% liquid 
+              {% liquid
               assign is_color = false
            %}
-            {% if filter.label == 'Color' %} 
-              {% liquid 
+            {% if filter.label == 'Color' %}
+              {% liquid
                  assign is_color = true
               %}
             {% endif %}
@@ -543,11 +543,11 @@
             >
               {%- if enable_filtering -%}
                 {%- for filter in results.filters -%}
-                  {% liquid 
+                  {% liquid
                   assign is_color = false
                %}
-                {% if filter.label == 'Color' %} 
-                  {% liquid 
+                {% if filter.label == 'Color' %}
+                  {% liquid
                      assign is_color = true
                   %}
                 {% endif %}
@@ -624,7 +624,7 @@
                               {%- capture label_class -%}
                               bb-facets__label facets__label facet-checkbox{% if is_disabled %} disabled{% endif %}{% if value.active %} active{% endif %}
                               {%- endcapture -%}
-  
+
                               {%- capture text_value -%}
                                 {% if is_color != true %}
                                   <span class="facet-checkbox__text-bb facet-checkbox__text" aria-hidden="true" data-x="{{ filter.label |  escape }}">
@@ -641,7 +641,7 @@
                                   </span>
                                   {% endif %}
                               {%- endcapture -%}
-  
+
                               <li class="{% if is_color != true %} bb-list-menu__item {% endif %}list-menu__item facets__item{% if forloop.index > show_more_number and filter_type == 'vertical' %} show-more-item hidden{% endif %}">
                                 {%- if presentation == 'swatch' -%}
                                   <div class="{{ label_class }}">
@@ -657,7 +657,7 @@
                                         disabled: is_disabled
                                       %}
                                     </div>
-  
+
                                     {{ text_value }}
                                   </div>
                                 {%- else -%}
@@ -674,7 +674,7 @@
                                         disabled
                                       {% endif %}
                                     >
-  
+
                                     {%- if presentation == 'image' -%}
                                       <div class="facets__image-wrapper">
                                         {%- if value.image -%}
@@ -790,7 +790,7 @@
           </div>
         </form>
       </facet-filters-form>
-    </details> 
+    </details>
     <facet-filters-form class="facets facets-vertical-sort bb-facets-vertical-sort">
       <form class="facets-vertical-form" id="FacetFiltersFormMobile">
         <div class="bb-select-sorting select sorting">
@@ -803,13 +803,13 @@
             {{- 'icon-caret3.svg' | inline_asset_content -}}
           </span>
           {%- assign sort_by = results.sort_by | default: results.default_sort_by -%}
-  
+
           <div class="dropdown2 hidden" id="dropdown">
             {%- for option in collection.sort_options -%}
               <input type="radio" id="{{ option.value | escape }}" name="sort_by" value="{{ option.value | escape }}" class="option">
               <label for="{{ option.value | escape }}" class="select-item">{{ option.name | escape }}</label>
-            {%- endfor -%}  
-          </div> 
+            {%- endfor -%}
+          </div>
         </div>
   </div>
         </form>

@@ -118,13 +118,7 @@
         </div>
       {% endif %}
 
-      <!-- Slider Controls -->
-      {% if has_images %}
-        <div class="shop__the__look__slider-controls">
-          <button class="shop__the__look__slider-control" id="prev-slide">&#10094;</button>
-          <button class="shop__the__look__slider-control" id="next-slide">&#10095;</button>
-        </div>
-      {% endif %}
+
     </div>
 
 
@@ -161,11 +155,10 @@
   });
       // Slider functionality
       const sliderContainer = document.getElementById("slider-container");
-  const prevSlide = document.getElementById("prev-slide");
-  const nextSlide = document.getElementById("next-slide");
+
   const slideDot = document.querySelectorAll(".slider-dot"); // Renamed variable
 
-  if (sliderContainer && prevSlide && nextSlide) {
+  if (sliderContainer ) {
     const slides = document.querySelectorAll(".shop__the__look__slider-item");
     let currentSlide = 0;
     const totalSlides = slides.length;
@@ -193,8 +186,7 @@
       showSlide(currentSlide);
     }
 
-    nextSlide.addEventListener("click", next);
-    prevSlide.addEventListener("click", prev);
+    
 
     // Slide Dot Click Event
     slideDot.forEach((dot, i) => {
@@ -214,11 +206,10 @@
     }
 
     // Start Auto-Slide
-    startAutoplay();
+    if (autoplayEnabled) {
+      startAutoplay();
+    }
 
-    // Stop Auto-Slide on Hover
-    sliderContainer.addEventListener("mouseenter", stopAutoplay);
-    sliderContainer.addEventListener("mouseleave", startAutoplay);
 
     showSlide(currentSlide);
   }

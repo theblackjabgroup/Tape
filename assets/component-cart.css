@@ -90,7 +90,7 @@ cart-items .title-wrapper-with-link {
   z-index: 1; 
    margin:18px; 
   font-size: 17px;
-   color:var(--product_price_card);
+   color:rgba(var(--color-foreground));
       top: 4px;
   }
 .svg-path{
