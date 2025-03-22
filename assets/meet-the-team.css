@@ -19,6 +19,11 @@
   background-color: var(--background_product_card);
   padding: 15px;
 }
+
+.team-photo {
+  text-align: center;
+}
+
 .team-photo img,
 .placeholder-meet-the-team {
   width: auto;
