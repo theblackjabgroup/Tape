@@ -1,9 +1,39 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "current": {
+    "logo": "shopify://shop_images/Final_Logo_1.svg",
     "type_header_font": "fira_sans_n4",
     "heading_scale": 100,
+    "type_subheader_font": "bevan_n4",
     "type_body_font": "inter_n4",
     "body_scale": 100,
+    "social_facebook_link": "",
+    "social_instagram_link": "",
+    "social_youtube_link": "",
+    "social_tiktok_link": "",
+    "social_twitter_link": "",
+    "social_snapchat_link": "",
+    "social_pinterest_link": "",
+    "social_tumblr_link": "",
+    "social_vimeo_link": "",
+    "social_linkedin_link": "",
+    "social_x_link": "",
+    "predictive_search_enabled": true,
+    "predictive_search_show_vendor": false,
+    "predictive_search_show_price": false,
+    "currency_code_enabled": true,
+    "cart_type": "notification",
+    "show_vendor": false,
+    "show_cart_note": false,
+    "cart_color_scheme": "scheme-1",
     "page_width": 1200,
     "spacing_sections": 0,
     "spacing_grid_horizontal": 8,
@@ -98,26 +128,7 @@
     "brand_headline": "",
     "brand_description": "<p></p>",
     "brand_image_width": 100,
-    "social_facebook_link": "",
-    "social_instagram_link": "",
-    "social_youtube_link": "",
-    "social_linkedin_link": "",
-    "social_x_link": "",
-    "social_tiktok_link": "",
-    "social_twitter_link": "",
-    "social_snapchat_link": "",
-    "social_pinterest_link": "",
-    "social_tumblr_link": "",
-    "social_vimeo_link": "",
-    "predictive_search_enabled": true,
-    "predictive_search_show_vendor": false,
-    "predictive_search_show_price": false,
-    "currency_code_enabled": true,
-    "cart_type": "notification",
-    "show_vendor": false,
-    "show_cart_note": false,
     "cart_drawer_collection": "",
-    "cart_color_scheme": "scheme-1",
     "logo_width": 90,
     "sections": {
       "main-password-header": {
@@ -167,37 +178,37 @@
       "scheme-2": {
         "settings": {
           "background": "#000000",
-          "background_product_card": "#FF6214",
-          "text": "#FFFFFF",
+          "background_product_card": "#ff6214",
+          "text": "#ffffff",
           "product_price_card": "#000000",
-          "button_label": "#000000",
-          "secondary_product_button_color": "#FF6214",
-          "secondary_button_label": "#FFFFFF",
-          "product_price_font": "#000000",
-          "button": "#FF6214",
-          "card_foreground": "#000000",
           "background_gradient": "",
-          "product_price_secondary_font": "#FFFFFF",
-          "quatity_selector_background": "#FF6214",
-          "product_special_offer": "#FA4200"
+          "button_label": "#000000",
+          "secondary_product_button_color": "#ff6214",
+          "secondary_button_label": "#ffffff",
+          "product_price_font": "#000000",
+          "button": "#ff6214",
+          "card_foreground": "#000000",
+          "product_price_secondary_font": "#ffffff",
+          "quatity_selector_background": "#ff6214",
+          "product_special_offer": "#fa4200"
         }
       },
       "scheme-3": {
         "settings": {
-          "background": "#FFE88A",
+          "background": "#ffe88a",
           "background_product_card": "#225647",
           "text": "#000000",
-          "product_price_card": "#FFFFFF",
+          "product_price_card": "#ffffff",
+          "background_gradient": "",
           "button_label": "#225647",
           "secondary_product_button_color": "#225647",
-          "secondary_button_label": "#FFFFFF",
-          "product_price_font": "#FFFFFF",
+          "secondary_button_label": "#ffffff",
+          "product_price_font": "#ffffff",
           "button": "#225647",
-          "card_foreground": "#FFE88A",
-          "background_gradient": "",
+          "card_foreground": "#ffe88a",
           "product_price_secondary_font": "#000000",
           "quatity_selector_background": "#225647",
-          "product_special_offer": "#9BBAE0"
+          "product_special_offer": "#9bbae0"
         }
       },
       "scheme-4": {
@@ -206,13 +217,13 @@
           "background_product_card": "#fdf4d7",
           "text": "#ffffff",
           "product_price_card": "#ffffff",
+          "background_gradient": "",
           "button_label": "#121212",
           "secondary_product_button_color": "#c7e1bf",
           "secondary_button_label": "#121212",
           "product_price_font": "#121212",
           "button": "#2e63e9",
           "card_foreground": "#18332e",
-          "background_gradient": "",
           "product_price_secondary_font": "#ffffff",
           "quatity_selector_background": "#9db792",
           "product_special_offer": "#9bbae0"
@@ -224,13 +235,13 @@
           "background_product_card": "#af8f2a",
           "text": "#ffffff",
           "product_price_card": "#225647",
+          "background_gradient": "",
           "button_label": "#334fb4",
           "secondary_product_button_color": "#c7e1bf",
           "secondary_button_label": "#ffffff",
           "product_price_font": "#ffffff",
           "button": "#ffffff",
           "card_foreground": "#18332e",
-          "background_gradient": "",
           "product_price_secondary_font": "#225647",
           "quatity_selector_background": "#9db792",
           "product_special_offer": "#9bbae0"
@@ -242,13 +253,13 @@
           "background_product_card": "#fdf4d7",
           "text": "#121212",
           "product_price_card": "#225647",
+          "background_gradient": "",
           "button_label": "#ffffff",
           "secondary_product_button_color": "#c7e1bf",
           "secondary_button_label": "#121212",
           "product_price_font": "#ffffff",
           "button": "#18332e",
           "card_foreground": "#18332e",
-          "background_gradient": "",
           "product_price_secondary_font": "#225647",
           "quatity_selector_background": "#9db792",
           "product_special_offer": "#9bbae0"
@@ -257,25 +268,25 @@
     }
   },
   "presets": {
-    "Default": {
+    "Papercut": {
       "logo_width": 90,
       "color_schemes": {
         "scheme-1": {
           "settings": {
             "background": "#fdf4d7",
-          "background_product_card": "#c7e1bf",
-          "text": "#000000",
-          "product_price_card": "#000000",
-          "background_gradient": "",
-          "button_label": "#225647",
-          "secondary_product_button_color": "#9bbae0",
-          "secondary_button_label": "#ffffff",
-          "product_price_font": "#000000",
-          "button": "#C7E1BF",
-          "card_foreground": "#FDF4D7",
-          "product_price_secondary_font": "#000000",
-          "quatity_selector_background": "#9bbae0",
-          "product_special_offer": "#9bbae0",
+            "background_product_card": "#c7e1bf",
+            "text": "#000000",
+            "product_price_card": "#000000",
+            "background_gradient": "",
+            "button_label": "#225647",
+            "secondary_product_button_color": "#9bbae0",
+            "secondary_button_label": "#ffffff",
+            "product_price_font": "#000000",
+            "button": "#C7E1BF",
+            "card_foreground": "#FDF4D7",
+            "product_price_secondary_font": "#000000",
+            "quatity_selector_background": "#9bbae0",
+            "product_special_offer": "#9bbae0",
             "shadow": "#121212"
           }
         },
