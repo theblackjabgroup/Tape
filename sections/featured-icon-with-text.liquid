@@ -64,7 +64,7 @@
       text-align: center;
       color: rgb(var(--color-foreground));
       z-index: 1;
-      word-break: break-word;
+word-break: break-word;
     }
 
     .card-action-button {
@@ -208,10 +208,7 @@
         <h1 style="font-weight: 700; font-size: 24px; line-height: 30px; color: var(--featured-icon-with-text-section-headings-color);   font-family: var(--font-heading-family);
   font-style: var(--font-heading-style);
   font-size: calc(var(--font-heading-scale)* 28px);" >{{ section.settings.heading }}</h1>
-        <h2 style="font-weight: 500; font-size: 14px; line-height: 21px; color: var(--featured-icon-with-text-section-headings-color);   font-family: var(--font-subheading-family);
-  font-style: var(--font-subheading-style);
-    font-size: calc(var(--font-subheading-scale) * 20px);
-    font-weight: 500; " >{{ section.settings.subheading }}</h2>
+        <p style="font-weight: 500; font-size: 16px; line-height: 21px; color: var(--featured-icon-with-text-section-headings-color); font-family: {{ section.settings.type_body_font }}" >{{ section.settings.subheading }}</p>
       </div>
       <div class="icon-with-text-container color-{{ section.settings.sectionColor }}">
         {% for item in section.blocks %}
@@ -274,10 +271,7 @@
   font-style: var(--font-heading-style);
   font-size: calc(var(--font-heading-scale)* 28px);
   font-weight: var(--font-body-weight);" >{{ section.settings.heading }}</h1>
-        <h2 style="font-weight: 500; font-size: 14px; line-height: 21px; color: var(--featured-icon-with-text-section-headings-color);   font-family: var(--font-subheading-family);
-  font-style: var(--font-subheading-style);
-    font-size: calc(var(--font-subheading-scale) * 20px);
-    font-weight: 500;" >{{ section.settings.subheading }}</h2>
+                <p style="font-weight: 500; font-size: 16px; line-height: 21px; color: var(--featured-icon-with-text-section-headings-color); font-family: {{ section.settings.type_body_font }}" >{{ section.settings.subheading }}</p>
       </div>
       <div class="scroll-container" id="section-{{ section.id }}">
         <div class="card-container" id="cardContainer">
