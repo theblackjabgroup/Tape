@@ -466,9 +466,9 @@
 
   .bb-card-image-media {
     /*
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
-        */
+          border-top-left-radius: 5px;
+          border-top-right-radius: 5px;
+          */
   }
 
   .bb-card__innner {
@@ -825,9 +825,9 @@
 
     .bb-select-sorting {
       /*
-      padding-top: .5rem;
-      padding-bottom: .5rem;
-      */
+        padding-top: .5rem;
+        padding-bottom: .5rem;
+        */
     }
 
     .bb-sort-svg-wrapper {
@@ -853,11 +853,6 @@
 
     .icon-filter {
       color: rgb(var(--color-foreground));
-    }
-
-    .bb-parent-display,
-    .bb-facets__price {
-      padding: 0 1.5rem;
     }
 
     .bb-mobile-facets__summary {
