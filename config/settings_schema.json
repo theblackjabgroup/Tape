@@ -2,10 +2,10 @@
   {
     "name": "theme_info",
     "theme_name": "Mumbai",
-    "theme_version": "15.1.0",
-    "theme_author": "Shopify",
-    "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
-    "theme_support_url": "https://support.shopify.com/"
+    "theme_version": "1.0.0",
+    "theme_author": "BlackBytt",
+    "theme_documentation_url": "https://blackbytt.gitbook.io/mumbai-theme-documentation",
+    "theme_support_url": "https://blackbytt.gitbook.io/mumbai-theme-documentation"
   },
   {
     "name": "t:settings_schema.logo.name",
@@ -31,9 +31,9 @@
         "id": "color_schemes",
         "definition": [
            {
-        "type": "header",
-        "content": "General"
-      },
+            "type": "header",
+            "content": "General"
+          },
           {
             "type": "color",
             "id": "background",
@@ -65,9 +65,9 @@
             "info": "t:settings_schema.colors.settings.background_gradient.info"
           },
           {
-        "type": "header",
-        "content": "Buttons"
-      },
+            "type": "header",
+            "content": "Buttons"
+          },
           { 
             "type": "color",
             "id": "button_label",
@@ -93,9 +93,9 @@
             "default": "#000000"           
           },
            {
-        "type": "header",
-        "content": "Cards"
-      },
+            "type": "header",
+            "content": "Cards"
+          },
           {
             "type": "color",
             "id":"button",
@@ -108,7 +108,6 @@
             "label": "Card Foreground",
             "default": "#273363"
           },
-          
           {
             "type": "color",
             "id": "product_price_secondary_font",
@@ -126,7 +125,7 @@
             "id": "product_special_offer",
             "label": "t:settings_schema.colors.settings.product_special_offer.label",
             "default": "#FFE66D"           
-          }, 
+          }
         ],
         "role": {
           "text": "text",
@@ -146,7 +145,7 @@
       }
     ]
   },
- {
+  {
     "name": "t:settings_schema.typography.name",
     "settings": [
       {
@@ -351,13 +350,9 @@
           {
             "value": "page",
             "label": "t:settings_schema.cart.settings.cart_type.page.label"
-          },
-          {
-            "value": "notification",
-            "label": "t:settings_schema.cart.settings.cart_type.notification.label"
           }
         ],
-        "default": "notification",
+        "default": "page",
         "label": "t:settings_schema.cart.settings.cart_type.label"
       },
       {
@@ -377,18 +372,36 @@
         "content": "t:settings_schema.cart.settings.cart_drawer.header"
       },
       {
-        "type": "collection",
-        "id": "cart_drawer_collection",
-        "label": "t:settings_schema.cart.settings.cart_drawer.collection.label",
-        "info": "t:settings_schema.cart.settings.cart_drawer.collection.info"
-      },
-      {
         "type": "color_scheme",
         "id": "cart_color_scheme",
         "label": "t:sections.all.colors.label",
         "default": "scheme-1"
+      },
+      {
+        "type": "header",
+        "content": "Upsell Products"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_upsell_products",
+        "label": "Show upsell products",
+        "default": true
+      },
+      {
+        "type": "product_list",
+        "id": "upsell_products",
+        "label": "Upsell products",
+        "limit": 10
+      },
+      {
+        "type": "range",
+        "id": "upsell_products_limit",
+        "min": 1,
+        "max": 5,
+        "step": 1,
+        "default": 5,
+        "label": "Number of upsell products to display"
       }
     ]
   }
 ]
-
