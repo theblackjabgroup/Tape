@@ -121,7 +121,6 @@
   z-index: 2;
 }
 .faq-question {
-
   flex: 1;
   margin-right: 1.5rem;
 }
@@ -129,8 +128,9 @@
     font-family: var(--font-heading-family);
     font-style: var(--font-heading-style);
     font-size: calc(var(--font-heading-scale) * 20px);
-    font-weight: var(--font-weight);
+    font-weight: 600;
     margin-top:8px;
+  word-break: break-word;
 }
 .faq-answer {
   margin-top: 0.5rem;
@@ -138,7 +138,7 @@
     font-style: var(--font-body-style);
     font-weight: var(--font-body-weight);
     font-size: calc(var(--font-body-scale) * 16px);
-
+word-break: break-word;
   line-height: 1.5;
   overflow: hidden;
   max-height: 0;

@@ -1,6 +1,5 @@
 {{ 'collection-list-card.css' | asset_url | stylesheet_tag }}
 
-
 {%- style -%}
   .section-{{ section.id }}-padding {
     padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
@@ -13,8 +12,6 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
-
-  /* Add styles for dots navigation */
  .slider-dots {
     display: flex;
     justify-content: center;
@@ -36,13 +33,9 @@
    width:23px;
   border-radius:13px;
   }
-
-  /* Hide the numerical counter */
   .slider-counter {
     display: none;
   }
-
-  /* Ensure smooth scrolling on the slider */
   .slider {
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
@@ -83,7 +76,7 @@
       </div>
     {%- endunless -%}
 
-    <slider-component class="slider-mobile-gutter{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+    <collection-slider class="slider-mobile-gutter{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
       <ul
         class="collection-list contains-card contains-card--collection{% if settings.card_style == 'standard' %} contains-card--standard{% endif %} grid grid--{{ section.settings.columns_desktop }}-col-desktop grid--{{ section.settings.columns_mobile }}-col-tablet-down{% if section.settings.swipe_on_mobile %} slider slider--tablet grid--peek{% endif %} collection-list--{{ section.blocks.size }}-items"
         id="Slider-{{ section.id }}"
@@ -134,7 +127,7 @@
     </div>
   </div>
 {%- endif -%}
-    </slider-component>
+    </collection-slider>
 
     {%- if section.settings.show_view_all and section.blocks.size < collections.size -%}
       <div
@@ -157,20 +150,19 @@
 </div>
 
 <script>
-  class SliderComponent extends HTMLElement {
+  class CollectionSlider extends HTMLElement {
     constructor() {
       super();
       this.slider = this.querySelector('[id^="Slider-"]');
       this.sliderItems = this.querySelectorAll('[id^="Slide-"]');
       this.dots = this.querySelectorAll('.slider-dot');
-      
+    
       this.init();
     }
 
     init() {
       if (!this.slider || !this.sliderItems.length) return;
 
-      // Initialize intersection observer to detect slide changes
       const options = {
         root: this.slider,
         threshold: 0.5
@@ -185,10 +177,10 @@
         });
       }, options);
 
-      // Observe all slides
+ 
       this.sliderItems.forEach(slide => observer.observe(slide));
 
-      // Add click handlers for dots
+
       this.dots.forEach((dot, index) => {
         dot.addEventListener('click', () => {
           const slideElement = this.sliderItems[index];
@@ -201,7 +193,6 @@
         });
       });
 
-      // Add scroll event listener with debounce
       let timeout;
       this.slider.addEventListener('scroll', () => {
         clearTimeout(timeout);
@@ -209,6 +200,16 @@
           this.snapToClosestSlide();
         }, 150);
       });
+      
+      window.dispatchEvent(new CustomEvent('collection-slider:initialized', {
+        detail: {
+          sectionId: this.closest('[id^="shopify-section"]')?.id || 'unknown'
+        }
+      }));
+
+      setTimeout(() => {
+        window.dispatchEvent(new CustomEvent('collection-slider:ready'));
+      }, 100);
     }
 
     updateDots(activeIndex) {
@@ -230,10 +231,18 @@
       });
       
       this.updateDots(slideIndex);
+      
+      setTimeout(() => {
+        window.dispatchEvent(new CustomEvent('collection-slider:scrolled'));
+      }, 350);
+    }
+    
+
+    disconnectedCallback() {
     }
   }
 
-  customElements.define('slider-component', SliderComponent);
+  customElements.define('collection-slider', CollectionSlider);
 </script>
 
 {% schema %}

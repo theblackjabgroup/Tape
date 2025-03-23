@@ -869,7 +869,7 @@ border-radius: 50%;
     width: 32%;
     padding: 6px 2px;
     display: flex;
-    transform: translate(-14px, -6px) rotate(-20deg);
+    transform: translate(0px, -12px) rotate(-12deg);
     justify-content: center;
     border: none;
   }

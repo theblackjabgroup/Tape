@@ -60,9 +60,10 @@
     padding-top: 10px;
     line-height: 20px !important;
     text-align: center;
-    font-size: 17px;
+    font-size: 20px;
     color: rgb(var(--color-text));
     width: 230px;
+    word-break: break-word;
   }
 
   .description__container {
@@ -92,7 +93,7 @@
   .description__container.active {
     opacity: 1;
     border-radius: 0;
-    padding: 2rem;
+    /* padding: 2rem; */
     top: 0;
     right: 0;
   }

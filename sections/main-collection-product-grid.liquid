@@ -23,7 +23,7 @@
 {%- endif -%}
 
 {%- style -%}
-  :root { 
+  :root {
   --filter-by-banner-color: {{ section.settings.filter_by_banner_color }};
   --filter-by-text-color: {{ section.settings.filter_by_text_color }};
   --mobile-filter-by-text-color: {{ section.settings.mobile_filter_by_text_color }};
@@ -43,7 +43,7 @@
   --special-offer-text-color : {{ section.settings.special_offer_text_color }};
   --product-card-text-color: {{ section.settings.product_card_text_color }};
   }
-  
+
   .section-{{ section.id }}-padding {
     padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
     padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
@@ -72,20 +72,20 @@
                 <label class="bb-sortby" for="SortBy">{{ 'products.facets.sort_by_label' | t }}</label>
               </h2>
         <div class="bb-sort-dropdown">
-          <button 
-            class="bb-sort-options dropdown-toggle" 
-            type="button" 
-            id="dropdownMenuButton1" 
-            data-bs-toggle="dropdown" 
+          <button
+            class="bb-sort-options dropdown-toggle"
+            type="button"
+            id="dropdownMenuButton1"
+            data-bs-toggle="dropdown"
             aria-expanded="false">
-            {{ sort_default }}  
-            {{- 'icon-caret5.svg' | inline_asset_content -}}  
+            {{ sort_default }}
+            {{- 'icon-caret5.svg' | inline_asset_content -}}
           </button>
           <div class="dropdown-menu bb-dropdown-menu" aria-labelledby="dropdownMenuButton1">
             {%- for option in collection.sort_options -%}
                 <input type="hidden" name="sort_by" id="dropdownValue" value="{{ option.value | escape }}" class="option">
                 <label for="{{ option.value | escape }}" class="bb-dropdown-item dropdown-item select-item">{{ option.name | escape }}</label>
-            {%- endfor -%}  
+            {%- endfor -%}
           </div>
         </div>
             </div>
@@ -188,7 +188,7 @@
         {%- endif -%}
       </div>
     </div>
-    
+
   {%- endpaginate -%}
   {% if section.settings.image_shape == 'arch' %}
     {{ 'mask-arch.svg' | inline_asset_content }}
@@ -224,7 +224,7 @@
     },
     {
       "type": "checkbox",
-      "id": "show_secondary_image", 
+      "id": "show_secondary_image",
       "default": false,
       "label": "t:sections.main-collection-product-grid.settings.show_secondary_image.label"
     },
