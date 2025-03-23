@@ -71,6 +71,18 @@
   .bb-dropdown-menu.show {
     z-index: 5;
   }
+
+  .search__input.field__input {
+    padding-right: 9.8rem;
+    border: 2px solid black;
+    border-radius: 4px;
+    font-size: 16px !important;
+  }
+
+  .bb-sort-options {
+    padding: 0 10px;
+    border-radius: 4px;
+  }
 </style>
 
 {%- liquid
@@ -386,9 +398,9 @@
         "type": "range",
         "id": "columns_desktop",
         "min": 1,
-        "max": 6,
+        "max": 5,
         "step": 1,
-        "default": 4,
+        "default": 3,
         "label": "t:sections.main-search.settings.columns_desktop.label"
       },
       {
