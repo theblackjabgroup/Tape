@@ -85,7 +85,7 @@
 }
 :root {
   --logo-height: 72px;
-  --logo-width: 128px;
+  --logo-width: 160px;
   --hamburger-size: 84px;
    --hamburger-width: 84px;
    --hamburger-height: 80px;
@@ -105,7 +105,7 @@
 
 .logo-container {
 
-  max-width: 160px;
+  max-width: var(--logo-width);
   display: flex !important;
   justify-content: center;
   align-items: center;
@@ -524,7 +524,7 @@ body.drawer-open {
 @media (max-width: 1280px) {
   :root {
     --logo-height: 60px;
-    --logo-width: 107px;
+    --logo-width: 150px;
     --hamburger-size: 75px;
     --header-height: 50px;
     --nav-icon-size: 28px;
@@ -538,11 +538,11 @@ body.drawer-open {
   }
   :root {
     --logo-height: 48px;
-    --logo-width: 86px;
+    --logo-width: 120px;
     --hamburger-size: 48px;
       --hamburger-width: 40px;
    --hamburger-height: 40px;
-    /* --header-width: calc(100% - var(--logo-width) - var(--hamburger-size) - 24px); */
+    --header-width: calc(100% - var(--logo-width) - var(--hamburger-size) - 24px);
     --dropdown-min-height: 110px;
   }
   
@@ -588,7 +588,7 @@ body.drawer-open {
 @media (min-width: 1441px) {
   :root {
     --logo-height: 84px;
-    --logo-width: 149px;
+    /* --logo-width: 140px; */
     --hamburger-size: 72px;
     /* --header-width: calc(100% - var(--logo-width) - var(--hamburger-size) - 16px); */
     --header-height: 62px;
