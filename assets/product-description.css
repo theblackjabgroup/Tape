@@ -95,7 +95,7 @@
     margin-top: 26px;
     width: 8px;
     height: 16px;
-    background-color: var(--background_product_card);
+    background-color: rgb(var(--color-foreground));
     border-radius: 50%;
     border-top-left-radius: 50px;
     border-bottom-left-radius: 50px;
