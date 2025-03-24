@@ -165,182 +165,29 @@
           "quatity_selector_background": "#e2e9ff",
           "product_special_offer": "#ffe66d"
         }
-      },
-      "scheme-2": {
-        "settings": {
-          "background": "#000000",
-          "background_product_card": "#ff6214",
-          "text": "#ffffff",
-          "product_price_card": "#000000",
-          "background_gradient": "",
-          "button_label": "#000000",
-          "secondary_product_button_color": "#ff6214",
-          "secondary_button_label": "#ffffff",
-          "product_price_font": "#000000",
-          "button": "#ff6214",
-          "card_foreground": "#000000",
-          "product_price_secondary_font": "#ffffff",
-          "quatity_selector_background": "#ff6214",
-          "product_special_offer": "#fa4200"
-        }
-      },
-      "scheme-3": {
-        "settings": {
-          "background": "#ffe88a",
-          "background_product_card": "#225647",
-          "text": "#000000",
-          "product_price_card": "#ffffff",
-          "background_gradient": "",
-          "button_label": "#225647",
-          "secondary_product_button_color": "#225647",
-          "secondary_button_label": "#ffffff",
-          "product_price_font": "#ffffff",
-          "button": "#225647",
-          "card_foreground": "#ffe88a",
-          "product_price_secondary_font": "#000000",
-          "quatity_selector_background": "#225647",
-          "product_special_offer": "#9bbae0"
-        }
-      },
-      "scheme-4": {
-        "settings": {
-          "background": "#121212",
-          "background_product_card": "#fdf4d7",
-          "text": "#ffffff",
-          "product_price_card": "#ffffff",
-          "background_gradient": "",
-          "button_label": "#121212",
-          "secondary_product_button_color": "#c7e1bf",
-          "secondary_button_label": "#121212",
-          "product_price_font": "#121212",
-          "button": "#2e63e9",
-          "card_foreground": "#18332e",
-          "product_price_secondary_font": "#ffffff",
-          "quatity_selector_background": "#9db792",
-          "product_special_offer": "#9bbae0"
-        }
-      },
-      "scheme-5": {
-        "settings": {
-          "background": "#334fb4",
-          "background_product_card": "#af8f2a",
-          "text": "#ffffff",
-          "product_price_card": "#225647",
-          "background_gradient": "",
-          "button_label": "#334fb4",
-          "secondary_product_button_color": "#c7e1bf",
-          "secondary_button_label": "#ffffff",
-          "product_price_font": "#ffffff",
-          "button": "#ffffff",
-          "card_foreground": "#18332e",
-          "product_price_secondary_font": "#225647",
-          "quatity_selector_background": "#9db792",
-          "product_special_offer": "#9bbae0"
-        }
-      },
-      "scheme-6": {
-        "settings": {
-          "background": "#ffffff",
-          "background_product_card": "#fdf4d7",
-          "text": "#121212",
-          "product_price_card": "#225647",
-          "background_gradient": "",
-          "button_label": "#ffffff",
-          "secondary_product_button_color": "#c7e1bf",
-          "secondary_button_label": "#121212",
-          "product_price_font": "#ffffff",
-          "button": "#18332e",
-          "card_foreground": "#18332e",
-          "product_price_secondary_font": "#225647",
-          "quatity_selector_background": "#9db792",
-          "product_special_offer": "#9bbae0"
-        }
       }
     }
   },
-  "presets": {
+ "presets": {
     "Papercut": {
       "logo_width": 90,
       "color_schemes": {
         "scheme-1": {
           "settings": {
-            "background": "#fdf4d7",
-            "background_product_card": "#c7e1bf",
-            "text": "#000000",
-            "product_price_card": "#000000",
-            "background_gradient": "",
-            "button_label": "#225647",
-            "secondary_product_button_color": "#9bbae0",
-            "secondary_button_label": "#ffffff",
-            "product_price_font": "#000000",
-            "button": "#C7E1BF",
-            "card_foreground": "#FDF4D7",
-            "product_price_secondary_font": "#000000",
-            "quatity_selector_background": "#9bbae0",
-            "product_special_offer": "#9bbae0",
-            "shadow": "#121212"
-          }
-        },
-        "scheme-2": {
-          "settings": {
-            "background": "#F3F3F3",
-            "background_gradient": "",
-            "text": "#121212",
-            "button": "#121212",
-            "button_label": "#F3F3F3",
-            "secondary_button_label": "#121212",
-            "shadow": "#121212"
-          }
-        },
-        "scheme-3": {
-          "settings": {
-            "background": "#242833",
-            "background_gradient": "",
-            "text": "#FFFFFF",
-            "button": "#FFFFFF",
-            "button_label": "#000000",
-            "secondary_button_label": "#FFFFFF",
-            "shadow": "#121212"
-          }
-        },
-        "scheme-4": {
-          "settings": {
-            "background": "#121212",
-            "background_gradient": "",
-            "text": "#FFFFFF",
-            "button": "#FFFFFF",
-            "button_label": "#121212",
-            "secondary_button_label": "#FFFFFF",
-            "shadow": "#121212"
-          }
-        },
-        "scheme-5": {
-          "settings": {
-            "background": "#334FB4",
-            "background_gradient": "",
-            "text": "#FFFFFF",
-            "button": "#FFFFFF",
-            "button_label": "#334FB4",
-            "secondary_button_label": "#FFFFFF",
-            "shadow": "#121212"
-          }
-        },
-        "scheme-6": {
-          "settings": {
-            "background": "#FFFFFF",
-            "background_gradient": "",
-            "background_product_card": "#FDF4D7",
-            "text": "#121212",
-            "button": "#18332E",
-            "button_label": "#FFFFFF",
-            "secondary_button_label": "#121212",
-            "secondary_product_button_color": "#C7E1BF",
-            "product_price_card": "#225647",
-            "product_price_font": "#FFFFFF",
-            "product_price_secondary_font": "#225647",
-            "quatity_selector_background": "#9DB792",
-            "utilities": "#18332E",
-            "product_special_offer": "#9BBAE0"
+            "background": "#ffffff",
+          "background_product_card": "#e2e9ff",
+          "text": "#000000",
+          "product_price_card": "#ffffff",
+          "background_gradient": "",
+          "button_label": "#273363",
+          "secondary_product_button_color": "#e2e9ff",
+          "secondary_button_label": "#faf5f5",
+          "product_price_font": "#000000",
+          "button": "#e8e8e8",
+          "card_foreground": "#273363",
+          "product_price_secondary_font": "#000000",
+          "quatity_selector_background": "#e2e9ff",
+          "product_special_offer": "#ffe66d"
           }
         }
       },
