@@ -243,12 +243,12 @@ display: block;
 /* New styles for original price outside price tag */
 .original-price-container {
   position: absolute;
-  top: 5px;
-  left: 32px;
-  z-index: 1;
-  font-size: 15px;
-  font-weight: 700;
-  color: rgb(var(--primary_textcolor));
+    top: 50px;
+    left: 32px;
+    z-index: 1;
+    font-size: 15px;
+    font-weight: 700;
+    color: rgb(var(--primary_textcolor));
 }
 
 .original-price {
@@ -270,9 +270,9 @@ display: block;
 
 /* Styling for price tag with discount active */
 .price-tag.discount-active {
-  position: absolute;
-  left: 120px;
-  top: -5px;
+ position: absolute;
+    left: 30px;
+    top: 3px;
 }
 
 /* Styling for price tag without discount */
@@ -281,7 +281,7 @@ display: block;
     margin-bottom: 10px;
     position: absolute;
     left: 30px;
-    bottom: 90px;
+    bottom: 85px;
 }
 
 /* Circular decorations for both price tag styles */
