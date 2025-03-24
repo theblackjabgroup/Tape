@@ -401,7 +401,7 @@
           "settings": {
             "position_left": 13,
             "position_top": 78,
-            "insightsText": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam, nobis."
+            "insightsText": " This is the text hotspot, use it to display the product feature as the user intracts with the image."
           }
         },
         "hotspot_2": {
@@ -409,7 +409,7 @@
           "settings": {
             "position_left": 50,
             "position_top": 50,
-            "insightsText": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam, nobis."
+            "insightsText": "This is the text hotspot, use it to display the product feature as the user intracts with the image."
           }
         },
         "hotspot_3": {
@@ -417,7 +417,7 @@
           "settings": {
             "position_left": 88,
             "position_top": 74,
-            "insightsText": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam, nobis."
+            "insightsText": "This is the text hotspot, use it to display the product feature as the user intracts with the image."
           }
         }
       },
