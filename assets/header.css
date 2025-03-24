@@ -736,7 +736,7 @@ mobile-nav-items::-webkit-scrollbar {
 }
 
 .mobile-dropdown.show {
-  background-color: var(--card_foreground);
+ background-color:var(--background_product_card);
   max-height: 1000px;
   opacity: 1;
   font-weight:400;
