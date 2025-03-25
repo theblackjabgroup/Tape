@@ -175,7 +175,7 @@ margin-top: .5rem;
 }
 
 .totals__total-value {
-    background-color: var(--card_foreground);
+    background-color: var(--button_label);
   color: rgb(var(--color-secondary-button-text));
        width: auto; 
       max-width: 100%;
