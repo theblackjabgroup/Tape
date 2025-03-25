@@ -30,7 +30,7 @@
     .suggestions-title {
       font-size: 17px;
       font-weight: bold;
-      color: #333;
+      color: rgb(var(--color-foreground));
       margin: 0;
     }
     
@@ -74,7 +74,7 @@
     .suggestion-card {
       min-width: 400px;
       flex: 0 0 280px;
-      background-color: #f9f9f9;
+      background-color: var(--background_product_card);
       border-radius: 3px;
       padding: 30px;
       display: flex;
@@ -91,26 +91,31 @@
     
     .suggestion-card > div {
       flex: 1;
+ overflow: hidden; 
     }
     
     .suggestion-card p {
-      font-weight: bold;
-      font-size: 15px;
-      margin-bottom: 5px;
-      color: #333;
-    }
+  font-weight: bold;
+  font-size: 15px;
+  margin-bottom: 5px;
+  color: rgb(var(--color-foreground));
+  word-wrap: break-word; 
+  overflow-wrap: break-word; 
+  hyphens: auto;
+  line-height: 1.4; 
+}
     
     .suggestion-card .price {
       font-size: 16px;
       font-weight: bold;
-      color: #333;
+      color: rgb(var(--color-foreground));
       margin-bottom: 8px;
     }
     
     .add-btn {
       background-color: transparent;
       border: 1px solid #ddd;
-      color: #555;
+      color:rgb(var(--color-foreground));
       padding: 6px 12px;
       border-radius: 6px;
       font-size: 14px;
@@ -120,9 +125,6 @@
       gap: 5px;
     }
     
-    .add-btn:hover {
-      background-color: #f0f0f0;
-    }
 
 </style>
 
