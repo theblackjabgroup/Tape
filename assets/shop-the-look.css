@@ -68,7 +68,7 @@
   position: relative;
   width: 35px;
   height: 35px;
-  background-color: rgb(var(--color-background));
+  background-color: rgb(var(--color-button-text));
   color: rgb(var(--color-foreground));
   border: none;
   border-radius: 50%;
@@ -261,7 +261,6 @@
   .media {
     border-radius: 5px;
     height: 50vh;
-    margin-top: 10px;
   }
 
   .shop__the__look__slider__wrapper {

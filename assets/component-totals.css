@@ -57,24 +57,50 @@ clip-path: polygon(100% 81%, 84% 81%, 84% 100%);
   gap: 4px;
 }
 
-.cart__ctas{
-  display:flex;
-  justify-content:flex-end;
+.cart__ctas {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px; /* Add space between buttons */
+margin-bottom: -10px;
+    margin-top: 10px;
 }
-.cart__ctas .button{
-    font-family: var(--font-body-family);
-    font-style: var(--font-body-style);
-    font-size: calc(var(--font-body-scale) * 16px);
-font-weight: 500;
-line-height: 24px;
-text-align: center;
-text-underline-position: from-font;
-text-decoration-skip-ink: none;
 
-  color:rgb(var(--color-secondary-button-text));
-       width: 300px;
-      height: 35px;
+.cart__ctas .button {
+  font-family: var(--font-body-family);
+  font-style: var(--font-body-style);
+  font-size: calc(var(--font-body-scale) * 16px);
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  width: 300px;
+  height: 35px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
 }
+
+/* View Cart button specific styles */
+.cart__ctas .button--secondary {
+  background-color: var(--button_label);
+  color: rgb(var(--color-secondary-button-text));
+}
+
+
+/* Checkout button specific styles */
+.cart__ctas .cart__checkout-button {
+  background-color: var(--secondary_product_button_color);
+  color: rgb(var(--color-foreground));
+}
+
+
+
+/* Disabled state for checkout button */
+.cart__ctas .cart__checkout-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .footer-checkout{
 display:flex;
 justify-content:space-between;
@@ -133,7 +159,7 @@ margin: 0;
 }
 
 .totals > h2 {
-font-size: calc(var(--font-heading-scale) * 1.6rem);
+font-size: calc(var(--font-heading-scale) * 2.6rem);
 }
 
 .totals * {
@@ -149,7 +175,7 @@ margin-top: .5rem;
 }
 
 .totals__total-value {
-    background-color: var(--card_foreground);
+    background-color: var(--button_label);
   color: rgb(var(--color-secondary-button-text));
        width: auto; 
       max-width: 100%;
@@ -182,7 +208,7 @@ margin-top: 2rem;
   transform: translateY(-50%);
   border-radius: 50%;
   z-index: 1;
-  background-color: var(--background_product_card); /* Add this line */
+  background-color: var(--gradient-background); 
 }
 
 .totals__total-value::before {
