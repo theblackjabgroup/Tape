@@ -68,7 +68,7 @@
   position: relative;
   width: 35px;
   height: 35px;
-  background-color: rgb(var(--color-background));
+  background-color: rgb(var(--color-button-text));
   color: rgb(var(--color-foreground));
   border: none;
   border-radius: 50%;
