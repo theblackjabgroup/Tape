@@ -355,8 +355,6 @@
 
         "default": "page",
 
-        "default": "drawer",
-
         "label": "t:settings_schema.cart.settings.cart_type.label"
       },
       {
