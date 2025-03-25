@@ -82,7 +82,7 @@ margin-bottom: -10px;
 
 /* View Cart button specific styles */
 .cart__ctas .button--secondary {
-  background-color: rgb(var(--color-button-text));
+  background-color: var(--secondary_product_button_color);
   color: rgb(var(--color-foreground));
 }
 
@@ -91,8 +91,8 @@ margin-bottom: -10px;
 
 /* Checkout button specific styles */
 .cart__ctas .cart__checkout-button {
-  background-color: rgb(var(--color-button));
-  color: rgb(var(--color-button-text));
+  background-color: rgb(var(--color-button-text));
+  color: rgb(var(--color-secondary-button-text));
 }
 
 
