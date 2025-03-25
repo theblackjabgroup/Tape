@@ -82,7 +82,7 @@ margin-bottom: -10px;
 
 /* View Cart button specific styles */
 .cart__ctas .button--secondary {
-  background-color: rgb(var(--color-button-text));
+  background-color: var(--button_label);
   color: rgb(var(--color-secondary-button-text));
 }
 
