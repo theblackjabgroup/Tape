@@ -257,14 +257,32 @@
 </style>
 
 <script>
-  (function () {
+ (function () {
     function startCountdown(elementId, endDateTime) {
       const timerElement = document.getElementById(elementId);
       if (!timerElement) return;
 
+      function displayDefaultTimer() {
+        timerElement.innerHTML = `
+          <div class="countdown-timer__item"><span>00</span> Days</div>
+          <div class="countdown_dots"><span></span></div>
+          <div class="countdown-timer__item"><span>00</span> Hours</div>
+          <div class="countdown_dots"><span></span></div>
+          <div class="countdown-timer__item"><span>00</span> Minutes</div>
+          <div class="countdown_dots"><span></span></div>
+          <div class="countdown-timer__item"><span>00</span> Seconds</div>
+        `;
+      }
+
+      const endDate = new Date(endDateTime);
+      if (isNaN(endDate.getTime())) {
+        displayDefaultTimer();
+        return;
+      }
+
       const interval = setInterval(() => {
         const now = new Date().getTime();
-        const distance = new Date(endDateTime).getTime() - now;
+        const distance = endDate.getTime() - now;
 
         if (distance < 0) {
           clearInterval(interval);
@@ -277,19 +295,24 @@
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
+        const pad = (num) => num.toString().padStart(2, '0');
+
         timerElement.innerHTML = `
-          <div class="countdown-timer__item"><span>${days}</span> Days</div>
+          <div class="countdown-timer__item"><span>${pad(days)}</span> Days</div>
           <div class="countdown_dots"><span></span></div>
-          <div class="countdown-timer__item"><span>${hours}</span> Hours</div>
+          <div class="countdown-timer__item"><span>${pad(hours)}</span> Hours</div>
           <div class="countdown_dots"><span></span></div>
-          <div class="countdown-timer__item"><span>${minutes}</span> Minutes</div>
+          <div class="countdown-timer__item"><span>${pad(minutes)}</span> Minutes</div>
           <div class="countdown_dots"><span></span></div>
-          <div class="countdown-timer__item"><span>${seconds}</span> Seconds</div>
+          <div class="countdown-timer__item"><span>${pad(seconds)}</span> Seconds</div>
         `;
       }, 1000);
+
+      displayDefaultTimer();
     }
+
     const countdownTimerId = "countdown-timer-{{ section.id }}";
     const endDateTime = "{{ section.settings.end_date }}T{{ section.settings.end_time }}";
     startCountdown(countdownTimerId, endDateTime);
-  })();
+})();
 </script>
