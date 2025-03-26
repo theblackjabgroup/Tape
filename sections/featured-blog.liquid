@@ -1,7 +1,7 @@
 {% schema %}
 {
   "name": "Blog Posts",
-"disabled_on": {
+  "disabled_on": {
     "groups": ["header", "footer"]
   },
   "settings": [
@@ -38,11 +38,11 @@
       "default": false
     },
     {
-  "type": "checkbox",
-  "id": "show_tags",
-  "label": "Show Tags",
-  "default": true
-},
+      "type": "checkbox",
+      "id": "show_tags",
+      "label": "Show Tags",
+      "default": true
+    },
     {
       "type": "checkbox",
       "id": "show_view_all",
@@ -61,7 +61,7 @@
       "id": "color_scheme",
       "label": "t:sections.all.colors.label",
       "default": "scheme-1"
-    },
+    }
   ],
   "presets": [
     {
@@ -72,33 +72,52 @@
 }
 {% endschema %}
 
-
 <link rel="stylesheet" href="{{ 'blog-slider.css' | asset_url }}">
 
-<div class="blog-slider-section color-{{ section.settings.color_scheme }}"  >
+<div class="blog-slider-section color-{{ section.settings.color_scheme }}" role="region" aria-labelledby="blog-section-title">
     <!-- Title Section -->
     <div class="blog-header">
-      <div class="blog-slider-title" >
-       <h2>{{ section.settings.section_title }}</h2>
+      <div class="blog-slider-title">
+       <h2 id="blog-section-title">{{ section.settings.section_title }}</h2>
     </div>
 
     <!-- Arrow Buttons -->
-    <div class="blog-arrow-buttons" >
-        <button class="arrow arrow-left"  onclick="moveSlide(-1)">‹</button>
-        <button class="arrow arrow-right"  onclick="moveSlide(1)">›</button>
+    <div class="blog-arrow-buttons">
+        <button 
+            class="arrow arrow-left" 
+            onclick="moveSlide(-1)" 
+            aria-label="Previous blog post"
+            tabindex="0"
+        >‹</button>
+        <button 
+            class="arrow arrow-right" 
+            onclick="moveSlide(1)" 
+            aria-label="Next blog post"
+            tabindex="0"
+        >›</button>
     </div>
     </div>
     <!-- Slider Container -->
-    <div class="blog-slider-container color-{{ section.settings.color_scheme }} ">
-        <div class="blog-slider-wrapper" id="sliderWrapper">
+    <div class="blog-slider-container color-{{ section.settings.color_scheme }}">
+        <div 
+            class="blog-slider-wrapper" 
+            id="sliderWrapper" 
+            role="list" 
+            aria-live="polite"
+        >
             {% assign blog_handle = section.settings.blog %}
             {% assign post_limit = section.settings.post_limit %}
           {% if blog_handle != blank and blogs[blog_handle].articles.size > 0 %}
             {% for article in blogs[blog_handle].articles limit: post_limit %}
-            <div class="blog-card" >
+            <div 
+                class="blog-card" 
+                role="listitem" 
+                tabindex="0"
+            >
                 <!-- Semicircle divs -->
-                <div class="semicircle semicircle-left" ><h6></h6></div>
-                <div class="semicircle semicircle-right" ><h6></h6></div>
+                <div class="semicircle semicircle-left"><h6></h6></div>
+                <div class="semicircle semicircle-right"><h6></h6></div>
+                
                 <!-- Tags overlay -->
     {% if section.settings.show_tags and article.tags.size > 0 %}
         <div class="blog-tags-overlay">
@@ -118,29 +137,33 @@
     alt: article.title | escape
 }}
                 {% else %}
-                  <div class="custom-placeholder" >
+                  <div class="custom-placeholder">
   {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
 </div>
 
                 {% endif %}
-                <div class="blog-card-content color-{{ section.settings.color_scheme }}" >
-                    <h3 class="blog-card-title" >{{ article.title | escape }}</h3>
+                <div class="blog-card-content color-{{ section.settings.color_scheme }}">
+                    <h3 class="blog-card-title">{{ article.title | escape }}</h3>
 
                     {% if section.settings.show_author or section.settings.show_date %}
                         <div class="blog-meta">
                             {% if section.settings.show_author %}
-                                <span class="blog-author" >{{ article.author }}</span>
+                                <span class="blog-author">{{ article.author }}</span>
                             {% endif %}
                             {% if section.settings.show_date %}
-                                <span class="blog-date" >{{ article.published_at | date: "%B %d, %Y" }}</span>
+                                <span class="blog-date">{{ article.published_at | date: "%B %d, %Y" }}</span>
                             {% endif %}
                         </div>
                     {% endif %}
                     {% if section.settings.show_excerpt %}
-                        <p class="blog-excerpt" >{{ article.excerpt | strip_html | truncate: 200 }}</p>
+                        <p class="blog-excerpt">{{ article.excerpt | strip_html | truncate: 200 }}</p>
                     {% endif %}
 
-                    <a href="{{ article.url }}" class="blog-read-more-btn" >
+                    <a 
+                        href="{{ article.url }}" 
+                        class="blog-read-more-btn"
+                        aria-label="Read more about {{ article.title | escape }}"
+                    >
                         Read more
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -153,16 +176,24 @@
           {% else %}
                 <!-- Placeholder Blog Cards for Preview with Default Image -->
                 {% for i in (1..4) %}
-                    <div class="blog-card overrideblog color-{{ section.settings.color_scheme }}" >
+                    <div 
+                        class="blog-card overrideblog color-{{ section.settings.color_scheme }}" 
+                        role="listitem" 
+                        tabindex="0"
+                    >
                         <!-- Semicircle divs -->
-                        <div class="semicircle semicircle-left" style="position: absolute; width: 20px; height: 20px; border-radius: 50%; z-index: 2; left: -8px; top: 310px; transform: translateY(-50%);" ><h6></h6></div>
-                        <div class="semicircle semicircle-right" style="position: absolute; width: 20px; height: 20px; border-radius: 50%; z-index: 2; right: -8px; top: 310px; transform: translateY(-50%);" ><h6></h6></div>
+                        <div class="semicircle semicircle-left"><h6></h6></div>
+                        <div class="semicircle semicircle-right"><h6></h6></div>
 
-                       <div class="overrideimg"> <!-- Default Placeholder Image -->
+                       <div class="overrideimg">
                         {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg placeholder'}}
-</div>
+                       </div>
                         <div class="blog-card-content overridecontent">
-                          <a href="#" class="blog-read-more-btn" >
+                          <a 
+                            href="#" 
+                            class="blog-read-more-btn"
+                            aria-label="Read more about blog post"
+                          >
                                 Read more
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -170,31 +201,33 @@
                                 </svg>
                             </a>
                           {% if section.settings.show_excerpt %}
-                                <p class="blog-excerpt" >This is a preview of how your blog excerpt will look. Select a blog to display your actual content.</p>
+                                <p class="blog-excerpt">This is a preview of how your blog excerpt will look. Select a blog to display your actual content.</p>
                             {% endif %}
                           {% if section.settings.show_author or section.settings.show_date %}
                                 <div class="blog-meta">
                                     {% if section.settings.show_author %}
-                                        <span class="blog-author" >Author's Name</span>
+                                        <span class="blog-author">Author's Name</span>
                                     {% endif %}
                                     {% if section.settings.show_date %}
-                                        <span class="blog-date" >Date</span>
+                                        <span class="blog-date">Date</span>
                                     {% endif %}
                                 </div>
                             {% endif %}
                             <h3 class="blog-card-title overridetitle">Blog Title</h3>
-
                         </div>
                     </div>
                 {% endfor %}
             {% endif %}
-
         </div>
     </div>
 
     {% if section.settings.show_view_all %}
-        <div class="blog-view-all-link  color-{{ section.settings.color_scheme }}">
-          <a href="{{ blogs[blog_handle].url }}" class="blog-view-all">
+        <div class="blog-view-all-link color-{{ section.settings.color_scheme }}">
+          <a 
+            href="{{ blogs[blog_handle].url }}" 
+            class="blog-view-all"
+            aria-label="View all blog posts"
+          >
                 View More
             </a>
         </div>
@@ -211,9 +244,36 @@ document.addEventListener('shopify:section:load', function() {
         const leftArrow = section.querySelector('.arrow-left');
         const rightArrow = section.querySelector('.arrow-right');
         const gap = 20; // Gap between cards
+        const cards = sliderWrapper.querySelectorAll('.blog-card');
+
+        // Keyboard navigation for blog cards
+        cards.forEach((card) => {
+            card.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    const link = card.querySelector('.blog-read-more-btn');
+                    if (link) link.click();
+                }
+            });
+        });
+
+        // Keyboard navigation for arrow buttons
+        function handleArrowKeyNavigation(event) {
+            if (event.key === 'ArrowRight') {
+                event.preventDefault();
+                moveSlide(1);
+                rightArrow.focus();
+            } else if (event.key === 'ArrowLeft') {
+                event.preventDefault();
+                moveSlide(-1);
+                leftArrow.focus();
+            }
+        }
+
+        // Add keyboard support to arrows
+        leftArrow.addEventListener('keydown', handleArrowKeyNavigation);
+        rightArrow.addEventListener('keydown', handleArrowKeyNavigation);
 
         function updateCards() {
-            const cards = sliderWrapper.querySelectorAll('.blog-card');
             const totalSlides = cards.length;
 
             function getSlideWidth() {
@@ -290,7 +350,8 @@ document.addEventListener('shopify:section:load', function() {
         observer.observe(sliderWrapper, { childList: true });
     });
 });
-  document.addEventListener( "DOMContentLoaded", function() {
+
+document.addEventListener("DOMContentLoaded", function() {
     const blogSections = document.querySelectorAll('.blog-slider-section');
 
     blogSections.forEach((section, sectionIndex) => {
@@ -378,5 +439,4 @@ document.addEventListener('shopify:section:load', function() {
         observer.observe(sliderWrapper, { childList: true });
     });
 });
-
-  </script>
+</script>
