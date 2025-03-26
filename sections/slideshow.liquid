@@ -112,7 +112,7 @@
 </div>
 <div class="des-button {% if block.settings.show_button %}has-button{% endif %}">
   {% if block.settings.show_button %}
-    <a href="{{ block.settings.button_link }}" class="slideshow_btn">{{ block.settings.button_text }}</a>
+    <a href="{{ block.settings.button_link }}" tabindex="0" class="slideshow_btn">{{ block.settings.button_text }}</a>
   {% endif %}
 </div>
           </div>
@@ -134,7 +134,10 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   initializeSlideshows();
+  
 });
+
+  
 
 function initializeSlideshows() {
   const slideshowSections = document.querySelectorAll('.slideshow-section');
@@ -148,6 +151,16 @@ function initializeSlideshows() {
     new InteractiveSlideshow(slideshow, slides);
   });
 }
+ const buttons = document.querySelectorAll('.slideshow_btn');
+  
+  buttons.forEach(button => {
+    button.addEventListener('keydown', function(event) {
+      if (event.key === 'Enter' || event.key === ' ' || event.key === 'Spacebar') {
+        event.preventDefault();
+        window.location.href = this.getAttribute('href');
+      }
+    });
+  });
 
 class InteractiveSlideshow {
   constructor(slideshow, slides) {
