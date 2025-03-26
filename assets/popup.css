@@ -14,6 +14,33 @@
   color: rgb(var(--color-foreground));
   border-top: none;
 }
+/* Keyboard focus styles for popup buttons */
+.popup-close-btn:focus,
+.popup-subscribe-btn:focus {
+  outline: 2px solid rgb(var(--color-foreground));
+  outline-offset: 2px;
+}
+
+/* Ensure buttons can receive focus */
+.popup-close-btn,
+.popup-subscribe-btn {
+  outline: none;
+  transition: outline 0.3s ease;
+}
+
+/* Improve keyboard navigation */
+.popup-email-input-layout2:focus {
+  outline: 2px solid rgb(var(--color-foreground));
+  outline-offset: 2px;
+  border: none;
+}
+
+/* Ensure all interactive elements are keyboard accessible */
+.popup-close-btn,
+.popup-subscribe-btn,
+.popup-email-input-layout2 {
+  cursor: pointer;
+}
 
 /* Apply dots only to the first direct child element */
 .popup-message-layout2.has-dots > *:first-child {
