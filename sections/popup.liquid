@@ -46,37 +46,90 @@
   }
 
   // subscription logic
-  function handleSubscribe(layout) {
-    const emailInputId = 'emailInputLayout2';
-    const emailInput = document.getElementById(emailInputId).value.trim();
+  function handleSubscribe(event) {
+    // Prevent default form submission
+    if (event) {
+      event.preventDefault();
+    }
 
-    if (!emailInput) {
+    const emailInput = document.getElementById('emailInputLayout2');
+    const emailValue = emailInput.value.trim();
+
+    if (!emailValue) {
       alert("{{ section.settings.empty_email_message }}");
+      emailInput.focus();
       return;
     }
 
-    if (!validateEmail(emailInput)) {
+    if (!validateEmail(emailValue)) {
       alert("{{ section.settings.invalid_email_message }}");
+      emailInput.focus();
       return;
     }
 
     alert("{{ section.settings.success_message }}");
-    document.getElementById('popupOverlay').style.display = 'none';
+    document.getElementById('popup-box').style.display = 'none';
   }
 
-  // Close popup when the close button is clicked
-  document.querySelectorAll('#closePopupbox').forEach((closeButton) => {
-    closeButton.addEventListener('click', function () {
-      document.getElementById('popup-box').style.display = 'none';
-    });
-  });
+  // Enhanced popup initialization
+  document.addEventListener('DOMContentLoaded', function() {
+    const popupBox = document.getElementById('popup-box');
+    const closeButton = document.getElementById('closePopupbox');
+    const subscribeForm = document.getElementById('popupForm');
+    const emailInput = document.getElementById('emailInputLayout2');
 
-  // subscribe buttons event listners
-  document.querySelectorAll('.popup-subscribe-btn').forEach((button) => {
-    button.addEventListener('click', function () {
-      const layout = button.closest('.popup').classList.contains('popup-overlay-layout2') ? 'layout2' : 'layout1';
-      handleSubscribe(layout);
+    // Ensure close button is keyboard accessible
+    closeButton.setAttribute('tabindex', '0');
+    closeButton.setAttribute('role', 'button');
+    closeButton.setAttribute('aria-label', 'Close popup');
+
+    // Add keyboard support to close button
+    closeButton.addEventListener('click', function() {
+      popupBox.style.display = 'none';
     });
+    closeButton.addEventListener('keydown', function(event) {
+      if (event.key === 'Enter' || event.key === ' ') {
+        popupBox.style.display = 'none';
+      }
+    });
+
+    // Handle form submission
+    subscribeForm.addEventListener('submit', handleSubscribe);
+
+    // Add keyboard support to email input
+    emailInput.setAttribute('aria-required', 'true');
+    emailInput.setAttribute('aria-label', 'Email address for newsletter subscription');
+
+    // Trap focus within the popup when it's open
+    function trapFocus(element) {
+      const focusableElements = element.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+
+      element.addEventListener('keydown', function(e) {
+        if (e.key === 'Tab') {
+          // Shift + Tab
+          if (e.shiftKey) {
+            if (document.activeElement === firstElement) {
+              lastElement.focus();
+              e.preventDefault();
+            }
+          } 
+          // Tab
+          else {
+            if (document.activeElement === lastElement) {
+              firstElement.focus();
+              e.preventDefault();
+            }
+          }
+        }
+      });
+    }
+
+    // Apply focus trapping to the popup
+    trapFocus(popupBox);
   });
 </script>
 {% endif %}
