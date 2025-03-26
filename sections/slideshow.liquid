@@ -176,22 +176,17 @@ class InteractiveSlideshow {
   }
   setupKeyboardNavigation() {
     this.slides.forEach((slide, index) => {
-      // Ensure keyboard focusability and proper aria attributes
       slide.setAttribute('tabindex', '0');
       slide.setAttribute('aria-roledescription', 'Slide');
       slide.setAttribute('aria-label', `Slide ${index + 1}`);
-
-      // Add keyboard event listeners
       slide.addEventListener('keydown', (event) => {
-        // Handle keyboard interactions
         switch(event.key) {
           case 'Enter':
           case ' ':
           case 'Spacebar':
-            // Prevent default scrolling
+          
             event.preventDefault();
-            
-            // Toggle slide text (similar to mobile dropdown)
+  
             const arrow = slide.querySelector('.headarrow_svg-wrapper');
             const slideText = slide.querySelector('.slide-text');
             
@@ -202,13 +197,13 @@ class InteractiveSlideshow {
 
           case 'ArrowRight':
           case 'ArrowLeft':
-            // Navigate between slides
+         
             event.preventDefault();
             this.navigateSlides(event.key === 'ArrowRight' ? 1 : -1);
             break;
         }
       });
-        // Ensure desktop-like behavior on focus for non-mobile view
+
       slide.addEventListener('focus', () => {
         if (!this.isMobile) {
           this.setActiveSlide(slide);
@@ -218,12 +213,11 @@ class InteractiveSlideshow {
   }
 
    navigateSlides(direction) {
-    if (this.isMobile) return; // Only navigate in desktop mode
+    if (this.isMobile) return;
 
     const currentIndex = this.slides.findIndex(slide => slide === this.activeSlide);
     let newIndex = currentIndex + direction;
 
-    // Wrap around if at the beginning or end
     if (newIndex < 0) {
       newIndex = this.slides.length - 1;
     } else if (newIndex >= this.slides.length) {
@@ -258,12 +252,12 @@ class InteractiveSlideshow {
   setupDesktopView() {
     this.addDesktopListeners();
     
-    // Set first slide as active and focused by default
+    
     if (this.slides.length > 0) {
       const firstSlide = this.slides[0];
       this.setActiveSlide(firstSlide);
       
-      // Only focus if not already focused
+
       if (document.activeElement !== firstSlide) {
         firstSlide.focus();
       }
