@@ -14,8 +14,6 @@
   .slideshow_mobile {
     display: none;
   }
-
-  /* Header styles */
   .slideshow-header {
     text-align: center;
     margin-top: 15px;
@@ -70,7 +68,7 @@
   </div>
   <div class="interactive-slideshow">
     {% for block in section.blocks %}
-      <div class="slide {% if forloop.first %}active{% endif %}" data-index="{{ forloop.index0 }}" role="button" tabindex="0" aria-label="Toggle menu" aria-expanded="false"  >
+      <div class="slide {% if forloop.first %}active{% endif %}" data-index="{{ forloop.index0 }}" role="button"  aria-label="Toggle menu" aria-expanded="false"  >
 
           <div class="backfold">
              {% if block.settings.image != blank %}
