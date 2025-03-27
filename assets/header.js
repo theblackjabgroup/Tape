@@ -7,6 +7,28 @@ document.addEventListener('DOMContentLoaded', function () {
   const mobileHeaderDrawer = document.querySelector('.mobile-header-drawer');
   const mobileNavItems = document.querySelectorAll('.mobile-nav-item');
   const closeIcon = document.querySelector('.close-icon');
+  
+  hamburger.addEventListener('keydown', function (event) {
+  if (event.key === 'Enter' || event.key === ' ' || event.key === 'Spacebar') {
+    event.preventDefault(); 
+    toggleMenu();
+  }
+  if (event.key === 'Escape') {
+    if (hamburger.getAttribute('aria-expanded') === 'true') {
+      toggleMenu();
+    }
+  }
+});
+
+function toggleMenu() {
+  header.classList.toggle('show');
+  hamburger.classList.toggle('active');
+  mobileHeaderDrawer.classList.toggle('open');
+
+  
+  const isExpanded = hamburger.classList.contains('active');
+  hamburger.setAttribute('aria-expanded', isExpanded);
+}
 
   function closeAllDropdowns() {
     document.querySelectorAll('.dropdown-container.show, .nested-dropdown.show').forEach((dropdown) => {

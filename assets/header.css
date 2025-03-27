@@ -3,7 +3,10 @@
 .list-menu--right {
   right: 0;
 }
-
+.hamburger:focus {
+  outline: 2px solid blue;
+  outline-offset: 2px;
+}
 .details--list-menu {
   position: initial;
 }
