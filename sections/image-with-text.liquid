@@ -161,7 +161,7 @@
       <h1 class="info__banner__heading title-large">Image With Text</h1>
       <div class="info__banner__details">
         <p class="info__banner__description body-text">
-          Pair large text with an image to give focus to your chosen product. Add details on style, availabilty, share                                           
+          Pair large text with an image to give focus to your chosen product. Add details on style, availabilty, share                                            
           the product description or review.
         </p>
         {% if section.settings.show_shop_button %}
@@ -275,17 +275,17 @@
 
         container.scrollTo({ left: nextIndex * cardWidth, behavior: 'smooth' });
 
-  if (firstAutoplay) {
-  firstAutoplay = false; // Ensure initial content is not overwritten again
-  } else {
-  updateBannerContent(nextIndex);
-  }
+        if (firstAutoplay) {
+        firstAutoplay = false; // Ensure initial content is not overwritten again
+        } else {
+        updateBannerContent(nextIndex);
+        }
 
-  if (currentScroll >= maxScroll) {
-  setTimeout(() => container.scrollLeft = 0, 300);
-  }
-  }, AUTOPLAY_INTERVAL);
-  };
+        if (currentScroll >= maxScroll) {
+        setTimeout(() => container.scrollLeft = 0, 300);
+        }
+        }, AUTOPLAY_INTERVAL);
+        };
 
     const stopAutoplay = () => {
       clearInterval(autoplayInterval);
