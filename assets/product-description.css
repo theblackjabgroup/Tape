@@ -136,10 +136,6 @@
   .mobile-collapsible-tabs {
     display: none;
   }
-  .tablinks.active {
-    background-color: var(--secondary_product_button_color) !important;
-    color: var(--product_price_font) !important;
-  }
 
   .accordion-button:not(.collapsed) {
     background-color: rgb(var(--color-button-text)) !important;
