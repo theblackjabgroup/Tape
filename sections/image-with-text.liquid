@@ -161,7 +161,7 @@
       <h1 class="info__banner__heading title-large">Image With Text</h1>
       <div class="info__banner__details">
         <p class="info__banner__description body-text">
-          Pair large text with an image to give focus to your chosen product. Add details on style, availabilty, share                                      
+          Pair large text with an image to give focus to your chosen product. Add details on style, availabilty, share                                          
           the product description or review.
         </p>
         {% if section.settings.show_shop_button %}
@@ -272,7 +272,9 @@
 
         container.scrollTo({ left: nextIndex * cardWidth, behavior: 'smooth' });
 
-        cards[nextIndex].focus(); // Ensure slide is focused for accessibility
+        if (document.activeElement.closest('.image__with__text__section')) {
+        cards[nextIndex].focus(); 
+        }
 
         // Only update banner content after the first autoplay cycle
         if (!isFirstAutoplay) {
