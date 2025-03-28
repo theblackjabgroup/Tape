@@ -161,7 +161,7 @@
       <h1 class="info__banner__heading title-large">Image With Text</h1>
       <div class="info__banner__details">
         <p class="info__banner__description body-text">
-          Pair large text with an image to give focus to your chosen product. Add details on style, availabilty, share                                    
+          Pair large text with an image to give focus to your chosen product. Add details on style, availabilty, share                                           
           the product description or review.
         </p>
         {% if section.settings.show_shop_button %}
@@ -198,12 +198,16 @@
     const bannerHeading = section.querySelector('.info__banner__heading');
     const bannerDescription = section.querySelector('.info__banner__description');
     const bannerLink = section.querySelector('.info__banner__shopnow__button');
+    const infoBannerExpandButton = section.querySelector('#info__banner__expand__button');
+    const infoBannerDetails = section.querySelector('.info__banner__details');
     const infoBanner = section.querySelector('.info__banner');
+
+    
 
     let autoplayInterval;
 
-    // Remove focus trap issue
-    cards.forEach(card => card.removeAttribute('tabindex'));
+    // Ensure all slides are focusable for keyboard users
+    cards.forEach(card => card.setAttribute('tabindex', '0'));
 
     function setupMobileBanner() {
       if (window.innerWidth <= 734) {
@@ -232,6 +236,8 @@
         if (link) bannerLink.href = link;
       }
     };
+
+    updateBannerContent(0); // for loading the inital banner content
 
     const updateDotScaling = () => {
       const scrollPosition = container.scrollLeft;
@@ -269,9 +275,17 @@
 
         container.scrollTo({ left: nextIndex * cardWidth, behavior: 'smooth' });
 
-        updateBannerContent(nextIndex);
-      }, AUTOPLAY_INTERVAL);
-    };
+  if (firstAutoplay) {
+  firstAutoplay = false; // Ensure initial content is not overwritten again
+  } else {
+  updateBannerContent(nextIndex);
+  }
+
+  if (currentScroll >= maxScroll) {
+  setTimeout(() => container.scrollLeft = 0, 300);
+  }
+  }, AUTOPLAY_INTERVAL);
+  };
 
     const stopAutoplay = () => {
       clearInterval(autoplayInterval);
@@ -291,21 +305,24 @@
       });
     });
 
-    //  Keyboard Navigation 
+    if (infoBannerExpandButton) {
+      infoBannerExpandButton.addEventListener('click', () => {
+        infoBannerDetails.classList.toggle('show');
+        infoBannerExpandButton.classList.toggle('show');
+      });
+    }
+
+    // Keyboard navigation (← → keys)
     document.addEventListener('keydown', (event) => {
       let focusedElement = document.activeElement;
       let currentIndex = Array.from(cards).indexOf(focusedElement);
 
       if (event.key === "ArrowRight" && currentIndex < cards.length - 1) {
-        event.preventDefault(); // Prevent unintended scrolling
-        cards[currentIndex + 1].setAttribute('tabindex', '0'); 
         cards[currentIndex + 1].focus();
         container.scrollTo({ left: (currentIndex + 1) * cards[0].offsetWidth, behavior: 'smooth' });
         updateBannerContent(currentIndex + 1);
       } 
       else if (event.key === "ArrowLeft" && currentIndex > 0) {
-        event.preventDefault();
-        cards[currentIndex - 1].setAttribute('tabindex', '0'); 
         cards[currentIndex - 1].focus();
         container.scrollTo({ left: (currentIndex - 1) * cards[0].offsetWidth, behavior: 'smooth' });
         updateBannerContent(currentIndex - 1);
@@ -322,7 +339,6 @@
     window.addEventListener('load', setupMobileBanner);
   });
   });
-
 
 </script>
 
@@ -375,7 +391,7 @@
         "type": "checkbox",
         "id": "autoplay",
         "label": "Enable Autoplay",
-        "default": false
+        "default": true
       }, {
         "type": "checkbox",
         "id": "show_shop_button",
