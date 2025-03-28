@@ -161,7 +161,7 @@
       <h1 class="info__banner__heading title-large">Image With Text</h1>
       <div class="info__banner__details">
         <p class="info__banner__description body-text">
-          Pair large text with an image to give focus to your chosen product. Add details on style, availabilty, share                                            
+          Pair large text with an image to give focus to your chosen product. Add details on style, availabilty, share                                     
           the product description or review.
         </p>
         {% if section.settings.show_shop_button %}
@@ -185,7 +185,7 @@
 </div>
 
 <script>
-   document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('DOMContentLoaded', () => {
   const AUTOPLAY_INTERVAL = 3000;
   const sections = document.querySelectorAll('.image__with__text__section');
 
@@ -202,9 +202,8 @@
     const infoBannerDetails = section.querySelector('.info__banner__details');
     const infoBanner = section.querySelector('.info__banner');
 
-    
-
     let autoplayInterval;
+    let isFirstAutoplay = true; // Prevents multiple banner updates on autoplay start
 
     // Ensure all slides are focusable for keyboard users
     cards.forEach(card => card.setAttribute('tabindex', '0'));
@@ -236,8 +235,6 @@
         if (link) bannerLink.href = link;
       }
     };
-
-    updateBannerContent(0); // for loading the inital banner content
 
     const updateDotScaling = () => {
       const scrollPosition = container.scrollLeft;
@@ -275,17 +272,20 @@
 
         container.scrollTo({ left: nextIndex * cardWidth, behavior: 'smooth' });
 
-        if (firstAutoplay) {
-        firstAutoplay = false; // Ensure initial content is not overwritten again
+        cards[nextIndex].focus(); // Ensure slide is focused for accessibility
+
+        // Only update banner content after the first autoplay cycle
+        if (!isFirstAutoplay) {
+          updateBannerContent(nextIndex);
         } else {
-        updateBannerContent(nextIndex);
+          isFirstAutoplay = false;
         }
 
         if (currentScroll >= maxScroll) {
-        setTimeout(() => container.scrollLeft = 0, 300);
+          setTimeout(() => container.scrollLeft = 0, 300);
         }
-        }, AUTOPLAY_INTERVAL);
-        };
+      }, AUTOPLAY_INTERVAL);
+    };
 
     const stopAutoplay = () => {
       clearInterval(autoplayInterval);
@@ -337,6 +337,9 @@
     }
 
     window.addEventListener('load', setupMobileBanner);
+
+    // **Ensure banner is correctly set initially**
+    updateBannerContent(0);
   });
   });
 
