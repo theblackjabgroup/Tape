@@ -45,6 +45,7 @@
                 href="{{ card_collection.url }}"
               {% endif %}
               class="collection-list-full-unstyled-link collectionlist_title"
+              style="color: var(--product_price_card);"
             >
               {%- if card_collection.title != blank -%}
                 {{- card_collection.title | escape -}}
@@ -68,7 +69,7 @@
     justify-content: center;
 ">
           <h3 class="collection-list-card_heading collection-list-card_heading--placeholder">
-            <a role="link" aria-disabled="true" class="collection-list-full-unstyled-link collection-list-title">
+            <a role="link" aria-disabled="true" class="collection-list-full-unstyled-link collection-list-title"  style="color: var(--product_price_card);" >
               {{ 'onboarding.collection_title' | t }}
             </a>
           </h3>
