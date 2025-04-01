@@ -2,15 +2,15 @@
 <script src="{{ 'product-description.js' | asset_url }}" defer="defer"></script>
 
 {%- style -%}
-    :root {
-      --collapse_header_background_color: {{ section.settings.collapse_header_background_color }};
-      --collapse_header_secondary_background_color: {{ section.settings.collapse_header_secondary_background_color }};
-      --collapse_header_text_color: {{ section.settings.collapse_header_text_color }};
-      --collapse_body_background_color: {{ section.settings.collapse_body_background_color }};
-      --collapse_body_text_color: {{ section.settings.collapse_body_text_color }};
-      --active_tab_background_color: {{ section.settings.active_tab_background_color | default: '#000000' }};
-    }
-  .tablinks:focus {
+  :root {
+    --collapse_header_background_color: {{ section.settings.collapse_header_background_color }};
+    --collapse_header_secondary_background_color: {{ section.settings.collapse_header_secondary_background_color }};
+    --collapse_header_text_color: {{ section.settings.collapse_header_text_color }};
+    --collapse_body_background_color: {{ section.settings.collapse_body_background_color }};
+    --collapse_body_text_color: {{ section.settings.collapse_body_text_color }};
+    --active_tab_background_color: {{ section.settings.active_tab_background_color | default: '#000000' }};
+  }
+    .tablinks:focus {
     outline: 2px solid var(--active_tab_background_color, #000000);
     outline-offset: 2px;
   }
@@ -20,10 +20,13 @@
     outline: none;
   }
 {%- endstyle -%}
+
 {% if section.blocks.first.settings.heading != blank %}
   <div class="color-{{ section.settings.color_scheme }}">
     <div class="collapse-width">
       <div class="collapse-tab">
+        <!-- The animated background element -->
+        <div class="active-tab-background">&nbsp;</div>
         {%- for block in section.blocks -%}
           <button
             class="tablinks {% if forloop.first %}active{% endif %}"
@@ -146,31 +149,123 @@
 {% endif %}
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    // Set first tab as active by default
-    if (document.querySelector('.tablinks')) {
-      document.querySelector('.tablinks').classList.add('active');
-      document.getElementById('Tab1').style.display = 'grid';
+document.addEventListener('DOMContentLoaded', function() {
+  // Create the sliding background element if it doesn't exist
+  let backgroundElement = document.querySelector('.active-tab-background');
+  if (!backgroundElement && document.querySelector('.collapse-tab')) {
+    backgroundElement = document.createElement('div');
+    backgroundElement.className = 'active-tab-background';
+    document.querySelector('.collapse-tab').appendChild(backgroundElement);
+  }
+
+  // Set first tab as active by default and position the sliding background
+  if (document.querySelector('.tablinks')) {
+    const firstTab = document.querySelector('.tablinks');
+    firstTab.classList.add('active');
+    document.getElementById('Tab1').style.display = 'grid';
+
+    // Initialize the background position with a delay to ensure DOM is fully rendered
+    setTimeout(initializeBackground, 100);
+  }
+
+  // Function to initialize the background position without animation
+  function initializeBackground() {
+    const activeTab = document.querySelector('.tablinks.active');
+    const backgroundBox = document.querySelector('.active-tab-background');
+    const tabContainer = document.querySelector('.collapse-tab');
+
+    if (activeTab && backgroundBox && tabContainer) {
+      // Get the active tab's position relative to its container
+      const tabRect = activeTab.getBoundingClientRect();
+      const containerRect = tabContainer.getBoundingClientRect();
+
+      // Position the background without transition
+      backgroundBox.style.transition = 'none';
+      backgroundBox.style.width = `${tabRect.width}px`;
+      backgroundBox.style.left = `${tabRect.left - containerRect.left}px`;
+
+      // Force a reflow to apply the changes immediately
+      backgroundBox.offsetWidth;
+
+      // Restore the transition
+      setTimeout(() => {
+        backgroundBox.style.transition = 'left 0.4s cubic-bezier(0.25, 0.1, 0.25, 1), width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1)';
+      }, 50);
+    }
+  }
+
+  // Improved openTab function for fluid animation
+  window.openTab = function(evt, tabName) {
+    // Prevent default behavior
+    evt.preventDefault();
+
+    var i, tabcontent, tablinks;
+    const targetTab = evt.currentTarget;
+
+    // Skip if already on this tab
+    if (targetTab.classList.contains('active')) {
+      return;
     }
 
-    // Original openTab function
-    window.openTab = function(evt, tabName) {
-      var i, tabcontent, tablinks;
+    // First, animate the background
+    const backgroundBox = document.querySelector('.active-tab-background');
+    const tabContainer = document.querySelector('.collapse-tab');
 
-      tabcontent = document.getElementsByClassName("product-description-grid-container");
-      for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
-      }
+    if (backgroundBox && tabContainer) {
+      // Calculate the new position
+      const tabRect = targetTab.getBoundingClientRect();
+      const containerRect = tabContainer.getBoundingClientRect();
+      const newLeft = tabRect.left - containerRect.left;
 
-      tablinks = document.getElementsByClassName("tablinks");
-      for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
-      }
-
-      document.getElementById(tabName).style.display = "grid";
-      evt.currentTarget.className += " active";
+      // Apply the new position and width with animation
+      backgroundBox.style.width = `${tabRect.width}px`;
+      backgroundBox.style.left = `${newLeft}px`;
     }
+
+    // Hide all tab content
+    tabcontent = document.getElementsByClassName("product-description-grid-container");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+
+    // Remove active class from all tabs
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].classList.remove("active");
+    }
+
+    // Show the current tab content and add active class to the button
+    document.getElementById(tabName).style.display = "grid";
+    targetTab.classList.add("active");
+  };
+
+  // Update background position on window resize
+  window.addEventListener('resize', function() {
+    // Debounce the resize event
+    clearTimeout(window.resizeTimer);
+    window.resizeTimer = setTimeout(function() {
+      const activeTab = document.querySelector('.tablinks.active');
+      const backgroundBox = document.querySelector('.active-tab-background');
+      const tabContainer = document.querySelector('.collapse-tab');
+
+      if (activeTab && backgroundBox && tabContainer) {
+        const tabRect = activeTab.getBoundingClientRect();
+        const containerRect = tabContainer.getBoundingClientRect();
+
+        // Update position without animation during resize
+        backgroundBox.style.transition = 'none';
+        backgroundBox.style.width = `${tabRect.width}px`;
+        backgroundBox.style.left = `${tabRect.left - containerRect.left}px`;
+
+        // Restore animation after position update
+        setTimeout(() => {
+          backgroundBox.style.transition = 'left 0.4s cubic-bezier(0.25, 0.1, 0.25, 1), width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1)';
+        }, 50);
+      }
+    }, 100);
   });
+});
+
 </script>
 
 {% schema %}
