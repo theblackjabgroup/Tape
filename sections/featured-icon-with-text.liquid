@@ -18,10 +18,15 @@
     :root {
       --primary-card-top-padding: 40px;
     }
-.card-action-button:focus,
-.scroll-button:focus {
+.card-action-button:focus-visible,
+.scroll-button:focus-visible {
   outline: 2px solid rgb(var(--color-foreground));
   outline-offset: 2px;
+}
+
+.card-action-button:focus:not(:focus-visible),
+.scroll-button:focus:not(:focus-visible) {
+  outline: none;
 }
     .icon-with-text-2 {
       display: flex;

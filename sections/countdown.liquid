@@ -87,7 +87,7 @@
       "label": "Heading Font Size",
       "min": 15,
       "max": 30,
-      "default": 16
+      "default": 28
     },
     {
       "type": "range",
@@ -95,7 +95,7 @@
       "label": "Description Font Size",
       "min": 12,
       "max": 24,
-      "default": 12
+      "default": 16
     },
     {
       "type": "range",
@@ -216,7 +216,7 @@
         <h2 class="countdown-section__heading" style="font-size: {{ section.settings.heading_font_size }}px;">
           {{ section.settings.heading }}
         </h2>
-        <div class="countdown-section__description" style="font-family: {{ section.settings.type_body_font }}">
+        <div class="countdown-section__description" style="font-family: {{ section.settings.type_body_font }}; font-size: {{ section.settings.description_font_size }}px;">
             {{ section.settings.description }}
         </div>
 
