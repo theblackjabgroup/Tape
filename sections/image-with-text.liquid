@@ -6,7 +6,7 @@
     --banner-position: {% if section.settings.banner_position == 'center' %}
       calc(50% - 300px)
     {% elsif section.settings.banner_position == 'right' %}
-    calc(94% - 500px)
+    calc(95% - 600px)
   {% else %}
   0%
 {% endif %};
@@ -133,6 +133,7 @@
           tabindex="-1"
           id="gallery-item-{{ forloop.index0 }}"
           style="--current-item: {{ forloop.index0 }}"
+          data-title="{{item.settings.headingTag}}"
           data-heading="{{ item.settings.heading }}"
           data-description="{{ item.settings.description }}"
           data-link="{{ item.settings.url }}"
@@ -161,7 +162,7 @@
       <h1 class="info__banner__heading title-large">Image With Text</h1>
       <div class="info__banner__details">
         <p class="info__banner__description body-text">
-          Pair large text with an image to give focus to your chosen product. Add details on style, availabilty, share                                          
+          Pair large text with an image to give focus to your chosen product. Add details on style, availabilty, share                                                   
           the product description or review.
         </p>
         {% if section.settings.show_shop_button %}
@@ -195,6 +196,7 @@
     const cards = section.querySelectorAll('.image__with__text__card');
     const autoplayEnabled = section.getAttribute('data-autoplay') === 'true';
 
+    const bannerTitle = section.querySelector('.info__banner__title');
     const bannerHeading = section.querySelector('.info__banner__heading');
     const bannerDescription = section.querySelector('.info__banner__description');
     const bannerLink = section.querySelector('.info__banner__shopnow__button');
@@ -228,6 +230,7 @@
     const updateBannerContent = (currentIndex) => {
       const currentCard = cards[currentIndex];
       if (currentCard) {
+        bannerTitle.textContent = currentCard.getAttribute('data-title')
         bannerHeading.textContent = currentCard.getAttribute('data-heading') || "Image With Text";
         bannerDescription.textContent = currentCard.getAttribute('data-description') || " ";
         const link = currentCard.getAttribute('data-link');
