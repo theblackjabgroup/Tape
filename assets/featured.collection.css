@@ -338,9 +338,16 @@ display: block;
   justify-content: center;
   margin-top: 80px;
   margin-left: -6px;
-  color: rgb(var(--color-background));
   position: relative;
-  border-top: 7px dotted;
+color: rgb(var(--color-background));
+  border-style: dotted;
+  border-bottom: none;
+  border-left: none;
+  border-right: none;
+  border-image-slice: 0 0 1 0;
+  border-image-width: 0 0 var(--dot-spacing, 7px) 0;
+  border-image-outset: 0;
+  border-image-repeat: round;
 }
 
 /* Adjust dotted line position when price tag has no discount */
