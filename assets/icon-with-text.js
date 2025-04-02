@@ -5,6 +5,7 @@ class IconWithText {
 
       if (this.isLayout1) {
         this.initLayout1();
+        this.centerCardsInLayout1();
       } else {
         this.initLayout2();
       }
@@ -68,6 +69,22 @@ class IconWithText {
       });
 
       items.forEach(item => observer.observe(item));
+    }
+
+    centerCardsInLayout1() {
+      const container = this.section.querySelector(".icon-with-text-container");
+      const cards = container.querySelectorAll(".card__outer__container");
+      
+      const centerCards = () => {
+        if (window.innerWidth > 768 && cards.length < 4) {
+          container.style.justifyContent = "center";
+        } else {
+          container.style.justifyContent = "";
+        }
+      };
+      
+      centerCards();
+      window.addEventListener('resize', centerCards);
     }
 
     initLayout2() {

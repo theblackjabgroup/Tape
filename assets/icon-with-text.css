@@ -1,4 +1,3 @@
-
 * {
     margin: 0;
     padding: 0;
@@ -200,7 +199,7 @@
   }
   .card__count__container {
     gap: 1rem;
-    justify-content: center;
+    justify-content: center; 
   }
   .card__count__container > .dot {
     background: black;
@@ -219,3 +218,9 @@
 .featured-icon-with-text-heading{
        width: 547px; 
     }
+
+@media only screen and (min-width: 769px) {
+  .icon-with-text-container.centered {
+    justify-content: center;
+  }
+}
