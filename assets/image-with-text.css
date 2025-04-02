@@ -51,13 +51,12 @@
 }
 
 .image__with__text__outer__container {
-  overflow-x: scroll;
-  overflow-y: hidden;
+  display: flex;
+  overflow-x: auto;
   scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-  display: grid;
-  align-items: center;
-  /* padding: 0 20px; */
+  scroll-behavior: smooth;
+  scrollbar-width: none; /* Hides scrollbar in Firefox */
+  margin: 0 20px;
 }
 
 .image__with__text__outer__container.no-snap {
@@ -74,9 +73,10 @@
 
 .image__with__text__card {
   position: relative;
+  flex: 0 0 100%;
   width: var(--media-gallery-width);
   min-height: var(--media-gallery-height);
-  scroll-snap-align: center;
+  scroll-snap-align: start;
   width: var(--media-gallery-width);
   border-radius: 8px;
 }
