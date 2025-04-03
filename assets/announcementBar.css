@@ -37,3 +37,24 @@
     width: 32px !important;
     height: 32px !important;
   }
+  @media (max-width: 768px) {
+    .announcement-bar {
+      overflow: hidden;
+    }
+    .scrollable-text {
+      max-width: 200px;
+      text-wrap: auto;
+    }
+    .scrolling-text {
+      animation-duration: 10s !important;
+    }
+    .announcement-icon-mobile-upper {
+      margin: 0px 10px;
+    }
+    .scrolling-text-container {
+      margin: 0 0 0 10px;
+    }
+    .scrolling-text-container {
+      height: auto !important;
+    }
+  }
