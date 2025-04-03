@@ -223,10 +223,13 @@
                 <span class="current-price">{{ 1999 | money }}</span>
               </p>
             {% endif %}
-
-            <div class="dotted-line-wrapper" style="border-top-color: {{ section.settings.dotted_line_color }};">
-              <div class="dotted-line"></div>
-            </div>
+            
+<div class="dotted-line-wrapper" 
+     style="border-top: {{ section.settings.dotted_line_size }}px dotted {{ section.settings.dotted_line_color }};
+            border-top-width: {{ section.settings.dotted_line_size }}px;">
+           
+  <div class="dotted-line"></div>
+</div>    
             
             <div class="icons">
               {% for i in (1..3) %}
@@ -329,6 +332,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }, false);
   });
 });
+  
 </script>
 
 {% schema %}
@@ -403,6 +407,16 @@ document.addEventListener('DOMContentLoaded', function() {
       "default": "Model no. #",
       "info": "Text that appears before the model number"
     },
+{
+  "type": "range",
+  "id": "dotted_line_size",
+  "label": "Dotted Line Size",
+  "min": 1,
+  "max": 10,
+  "step": 1,
+  "default": 7,
+  "info": "Control the size of dots in the dotted line"
+},
    {
       "type": "header",
       "content": "Section Layout"
