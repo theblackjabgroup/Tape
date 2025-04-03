@@ -287,8 +287,8 @@ nav-items::-webkit-scrollbar {
   position: absolute;
   height: 1px;
   bottom: 0;
-  left: 25%;
-  width: 50%;
+  left: 0%;
+  width: 100%;
   background-color:currentColor;
   transform: scaleX(0);
   transform-origin: left;
@@ -378,8 +378,8 @@ nav-items::-webkit-scrollbar {
 .dropdown-item::after {
   content: '';
   position: absolute;
-  left: 25%;
-  width: 50%;
+  left: 0%;
+  width: 100%;
   height: 1px;
   bottom: 6px;
   background-color:currentColor;
@@ -666,6 +666,7 @@ mobile-nav-items::-webkit-scrollbar {
   color: rgb(var(--color-text));
   font-family: var(--font-heading-family);
     font-weight: var(--font-heading-weight);
+  z-index: 100;
 }
 
 .mobile-dropdown {
