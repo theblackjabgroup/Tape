@@ -69,7 +69,7 @@
       "scheme-1": {
         "settings": {
           "background": "#ffffff",
-          "background_product_card": "#e2e9ff",
+          "background_product_card": "#C5CAE5",
           "text": "#000000",
           "product_price_card": "#ffffff",
           "background_gradient": "",
@@ -93,7 +93,7 @@
         "scheme-1": {
           "settings": {
             "background": "#ffffff",
-            "background_product_card": "#e2e9ff",
+            "background_product_card": "#C5CAE5",
             "text": "#000000",
             "product_price_card": "#ffffff",
             "background_gradient": "",
