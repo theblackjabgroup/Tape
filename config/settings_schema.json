@@ -44,7 +44,7 @@
             "type": "color",
             "id": "background_product_card",
             "label": "Foreground",
-            "default": "#E2E9FF"
+            "default": "#C5CAE5"
           },
          {
             "type": "color",
