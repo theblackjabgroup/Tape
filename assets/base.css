@@ -1633,7 +1633,7 @@ details[open] > .share-button__fallback {
   font-size: 1.2rem;
   color: rgba(var(--color-foreground), 0.75);
 }
- 
+
 .field:hover.field:after,
 .select:hover.select:after,
 .select__select:hover.select__select:after,
@@ -1974,7 +1974,7 @@ input[type='checkbox'] {
 .quantity__button:not(:focus-visible):not(.focused),
 .quantity__input:not(:focus-visible):not(.focused) {
   box-shadow: inherit;
-  background-color: inherit; 
+  background-color: inherit;
   border-radius: 7px;
 }
 
@@ -2146,7 +2146,7 @@ input[type='checkbox'] {
 }
 
 .announcement-bar .custom-button-upper {
-  padding: 0.3rem 0; 
+  padding: 0.3rem 0;
 }
 
 /*
@@ -2181,7 +2181,7 @@ input[type='checkbox'] {
   .vertical-bar-second-top {
     display: none;
   }
-  
+
 .vertical-bar-first {
     left: 0px;
     height: 6px;
@@ -2305,33 +2305,33 @@ input[type='checkbox'] {
 }
 
 .announcement-icon {
-  
+
   line-height: 0.3rem;
     text-align: center;
     margin: 0;
     letter-spacing: 0;
-    grid-area: announcement-icons; 
+    grid-area: announcement-icons;
 }
 
 .announcement-icon-wrapper>img {
-  
+
   width: 100%;
   height: 100%;
-  
+
 }
 
 .announcement-icon-wrapper {
-  
+
     width: 40px;
     height: 40px;
     margin: auto;
-    position: relative; 
+    position: relative;
 }
 
 .announcement-icon,
 .announcement-icon-sub {
  /* padding: 0.25rem 0;  */
-  margin: auto auto; 
+  margin: auto auto;
 }
 .announcement-bar .slider--everywhere {
   margin-bottom: 0;
@@ -3215,7 +3215,7 @@ details-disclosure > details {
   .announcement-bar-desktop-content {
     display: block;
   }
-  
+
 @media screen and (max-width: 749px) {
   .content-container--full-width-mobile {
     border-left: none;
@@ -3279,7 +3279,7 @@ details-disclosure > details {
     position: relative;
     overflow: hidden;
   }
-  
+
   .vertical-bar-first {
     left: 0px;
     height: 6px;
@@ -3405,18 +3405,18 @@ details-disclosure > details {
 }
 
 .scroll-enabled {
-  width: calc(180px - var(--announcement-bar-mobile-margin)); 
-  overflow: hidden; 
-  white-space: nowrap; 
+  width: calc(180px - var(--announcement-bar-mobile-margin));
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .scrolling-text-container.scroll-enabled .scrolling-text {
   display: inline-block;
-  animation: scrollText linear infinite; 
+  /* animation: scrollText linear infinite;  */
 }
 @keyframes scrollText {
   0% {
-    transform: translateX(90%); 
+    transform: translateX(90%);
   }
   100% {
     transform: translateX(-90%);
