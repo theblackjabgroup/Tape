@@ -71,7 +71,7 @@
     background: var(--button_label);
     box-shadow: 3px 3px #000;
     cursor: pointer;
-    margin: 35px 0;
+    margin: 35px 10px;
   }
 
   .bb-404-h-button:hover {
@@ -114,47 +114,48 @@
     font-weight: 600;
     font-size: 96px;
     line-height: 34px;
-    padding-bottom: 30px;
+    padding-bottom: 0px;
   }
 
   .bb-404-title {
     font-weight: 700;
     font-size: 48px;
     line-height: 34px;
-    padding-bottom: 30px;
+    padding: 40px 0 20px 0;
   }
 
   .bb-404-sub-title {
     font-weight: 500;
     font-size: 28px;
     line-height: 24px;
+    padding-bottom: 10px;
   }
 
   .bb-404-para {
     font-weight: 400;
     font-size: 24px;
     line-height: 36px;
-    margin-bottom: 25px;
+    margin-bottom: 0px;
   }
   /* .bb-404-h-button:hover {
-              color: black;
-          background: #e5e5ea;
-          border: none;
-      } */
+                color: black;
+            background: #e5e5ea;
+            border: none;
+        } */
 
   /* .bb-404-h-button:hover {
-              color: black;
-          background: #e5e5ea;
-          border: none;
-          box-shadow: none;
-      } */
+                color: black;
+            background: #e5e5ea;
+            border: none;
+            box-shadow: none;
+        } */
 
   /* .bb-404-c-button:hover {
-              background-color: black;
-          color: #e5e5ea;
+                background-color: black;
+            color: #e5e5ea;
 
-          border: none;
-      } */
+            border: none;
+        } */
   .bb-404-c-button {
     margin-top: 2rem;
     font-size: 2rem;
@@ -166,8 +167,8 @@
   }
 
   /* .button:not([disabled]):hover:after {
-          box-shadow: none;
-      } */
+            box-shadow: none;
+        } */
   .desktop-view {
     display: block;
   }
