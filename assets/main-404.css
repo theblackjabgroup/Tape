@@ -1,5 +1,5 @@
 .bb-template-404 {
-   /* background-color: rgba(var(--color-button)); */
+    /* background-color: rgba(var(--color-button)); */
     display: block;
     /*padding: 10rem 5rem;*/
     max-width: none;
@@ -75,8 +75,6 @@
   }
 
   .bb-404-h-button:hover {
-    box-shadow: none;
-    transform: translate(3px, 3px);
     color: var(--secondary_button_label);
   }
 
@@ -93,9 +91,7 @@
   }
 
   .bb-404-h2-button:hover {
-    box-shadow: none;
-    transform: translate(3px, 3px);
-    color: var(--product_price_font);;
+    color: var(--product_price_font);
   }
 
   .vertical-bar-circle-404 {
@@ -141,24 +137,24 @@
     margin-bottom: 25px;
   }
   /* .bb-404-h-button:hover {
-            color: black;
-        background: #e5e5ea;
-        border: none;
-    } */
+              color: black;
+          background: #e5e5ea;
+          border: none;
+      } */
 
   /* .bb-404-h-button:hover {
-            color: black;
-        background: #e5e5ea;
-        border: none;
-        box-shadow: none;
-    } */
+              color: black;
+          background: #e5e5ea;
+          border: none;
+          box-shadow: none;
+      } */
 
   /* .bb-404-c-button:hover {
-            background-color: black;
-        color: #e5e5ea;
+              background-color: black;
+          color: #e5e5ea;
 
-        border: none;
-    } */
+          border: none;
+      } */
   .bb-404-c-button {
     margin-top: 2rem;
     font-size: 2rem;
@@ -170,8 +166,8 @@
   }
 
   /* .button:not([disabled]):hover:after {
-        box-shadow: none;
-    } */
+          box-shadow: none;
+      } */
   .desktop-view {
     display: block;
   }
@@ -192,7 +188,7 @@
     }
 
     .bb-upper-template-404 {
-    /*  background-color: rgba(var(--color-button)); */
+      /*  background-color: rgba(var(--color-button)); */
       border-radius: 0px;
       display: block;
       position: relative;
@@ -203,7 +199,7 @@
     }
     .bb-template-404 {
       background-color: unset;
-     /* padding: 10rem 0rem 1rem 0rem; */
+      /* padding: 10rem 0rem 1rem 0rem; */
     }
 
     .bb-404-subtext {
@@ -251,14 +247,14 @@
     }
     .bb-404-h-button {
       padding: 10px 20px;
-      font-size:1rem;
-      margin:10px 0;
+      font-size: 1rem;
+      margin: 10px 0;
     }
 
     .bb-404-h2-button {
       padding: 10px 20px;
-      font-size:1rem;
-      margin:10px 0;
+      font-size: 1rem;
+      margin: 10px 0;
     }
 
     .bb-404-sub-title {
@@ -266,4 +262,8 @@
       font-size: 18px;
       line-height: 14px;
     }
+  }
+
+  .button:not([disabled]):hover:after {
+    box-shadow: none !important;
   }
