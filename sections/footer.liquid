@@ -10,17 +10,17 @@
     height: {{ section.settings.footer_button_height | default:50 }}px;
     padding: {{ section.settings.footer_button_padding | default: '24px 12px' }};
     text-align: center; 
-    background: linear-gradient(to right, gray 50%, rgb(var(--color-button-text)) 50%);
+    background: linear-gradient(to right, var(--secondary_product_button_color) 50%, rgb(var(--color-button-text)) 50%);
     background-size: 200% 100%;
     background-position: 100% 0;
-    color: rgb(var(--color-secondary-button-text));
-    transition: background-position 1.5s ease-in-out, transform 0.3s ease;
+    color: rgb(var(--color-secondary-button-text)); /* White text by default */
+    transition: background-position 1.5s ease-in-out, transform 0.3s ease, color 0.3s ease; /* Added color transition */
 }
 
 .subscribe-button {
     display: flex;
     align-items: center;
-    justify-content: center; /* Added to center the text and icon */
+    justify-content: center;
     gap: 8px;
     border: none;
     cursor: pointer;
@@ -29,10 +29,12 @@
     font-family: var(--font-body-family);
     font-weight: var(--font-body-weight);
 }
-    .footer-column form button:hover {
-      background-position: 0 0;
-      transform: {{ section.settings.footer_button_hover_transform | default: 'scale(1.05)' }};
-  }
+
+.footer-column form button:hover {
+    background-position: 0 0;
+    transform: {{ section.settings.footer_button_hover_transform | default: 'scale(1.05)' }};
+    color: var(--product_price_font);
+}
 
 
   .subscribe-button .footer-svg {
