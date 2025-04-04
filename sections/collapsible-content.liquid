@@ -54,7 +54,7 @@
               <div class="faq-answer">{{ block.settings.solutionans }}</div>
             </div>
             <div>
-              <svg class="icon-arrow" width="24" height="24" viewBox="0 0 24 24">
+              <svg class="collapsible-icon-arrow" width="28" height="28" viewBox="0 0 24 24">
                 <path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
               </svg>
             </div>
@@ -77,11 +77,11 @@
   box-shadow: 0 0 0 3px rgba(var(--color-foreground), 0.3); 
 }
 
-[data-faq-item] .icon-arrow {
+[data-faq-item] .collapsible-icon-arrow {
   transition: transform 0.3s ease;
 }
 
-[data-faq-item] .icon-arrow.rotated {
+[data-faq-item] .collapsible-icon-arrow.rotated {
   transform: rotate(180deg);
 }
 
@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', function() {
       if (!item) return;
       
       const answer = item.querySelector('.faq-answer');
-      const arrow = item.querySelector('.icon-arrow');
+      const arrow = item.querySelector('.collapsible-icon-arrow');
       const dotsLine = item.querySelector('.dots-line');
       
       if (answer && arrow) {
