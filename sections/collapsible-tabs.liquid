@@ -10,6 +10,15 @@
     --collapse_body_text_color: {{ section.settings.collapse_body_text_color }};
     --active_tab_background_color: {{ section.settings.active_tab_background_color | default: '#000000' }};
   }
+    .tablinks:focus {
+    outline: 2px solid var(--active_tab_background_color, #000000);
+    outline-offset: 2px;
+  }
+
+  .accordion-button:focus {
+    box-shadow: 0 0 0 0.25rem rgba(0, 0, 0, 0.25);
+    outline: none;
+  }
 {%- endstyle -%}
 
 {% if section.blocks.first.settings.heading != blank %}
@@ -256,6 +265,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 100);
   });
 });
+
 </script>
 
 {% schema %}

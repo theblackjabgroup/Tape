@@ -2,7 +2,6 @@
   font-family: var(--font-heading-family);
   font-style: var(--font-heading-style);
   font-size: calc(var(--font-heading-scale));
-  font-weight: var(--font-body-weight);
 }
 
   .countdown-border-cutouts {
@@ -92,7 +91,6 @@
   }
   .countdown-section__description {
     margin-bottom: 20px;
-    font-size: 14px !important;
   }
   .countdown-timer {
     display: flex;
@@ -102,8 +100,10 @@
   }
   .countdown-timer__item {
     text-align: center;
-    font-weight: bold;
   }
+.countdown-timer__item span {
+  font-weight: bold; 
+}
   .countdown-section__button {
     display: inline-block;
     padding: 12px 24px;

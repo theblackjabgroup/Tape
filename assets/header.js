@@ -7,6 +7,27 @@ document.addEventListener('DOMContentLoaded', function () {
   const mobileHeaderDrawer = document.querySelector('.mobile-header-drawer');
   const mobileNavItems = document.querySelectorAll('.mobile-nav-item');
   const closeIcon = document.querySelector('.close-icon');
+  
+  hamburger.addEventListener('keydown', function (event) {
+    if (event.key === 'Enter' || event.key === ' ' || event.key === 'Spacebar') {
+      event.preventDefault(); 
+      toggleMenu();
+    }
+    if (event.key === 'Escape') {
+      if (hamburger.getAttribute('aria-expanded') === 'true') {
+        toggleMenu();
+      }
+    }
+  });
+
+  function toggleMenu() {
+    header.classList.toggle('show');
+    hamburger.classList.toggle('active');
+    mobileHeaderDrawer.classList.toggle('open');
+    
+    const isExpanded = hamburger.classList.contains('active');
+    hamburger.setAttribute('aria-expanded', isExpanded);
+  }
 
   function closeAllDropdowns() {
     document.querySelectorAll('.dropdown-container.show, .nested-dropdown.show').forEach((dropdown) => {
@@ -107,71 +128,114 @@ document.addEventListener('DOMContentLoaded', function () {
 
   hamburger.addEventListener('click', function () {
     header.classList.toggle('show');
-     hamburger.classList.toggle('active');
+    hamburger.classList.toggle('active');
     mobileHeaderDrawer.classList.toggle('open');
   });
 
-  // Mobile dropdown functionality
   mobileNavItems.forEach((item) => {
     const link = item.querySelector('.mobile-nav-link');
     const dropdown = item.querySelector('.mobile-dropdown');
-
-    link.addEventListener('click', function (e) {
-      e.preventDefault();
-
-      if (dropdown) {
-        item.classList.toggle('open');
-        dropdown.classList.toggle('show');
-
-        // Close other open dropdowns
-        mobileNavItems.forEach((otherItem) => {
-          if (otherItem !== item) {
-            otherItem.classList.remove('open');
-            const otherDropdown = otherItem.querySelector('.mobile-dropdown');
-            if (otherDropdown) {
-              otherDropdown.classList.remove('show');
+    
+    if (link && dropdown) {
+      const hasChildren = dropdown.children.length > 0;
+      
+      if (hasChildren) {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          
+          item.classList.toggle('open');
+          dropdown.classList.toggle('show');
+          
+          mobileNavItems.forEach((otherItem) => {
+            if (otherItem !== item && otherItem.classList.contains('open')) {
+              otherItem.classList.remove('open');
+              const otherDropdown = otherItem.querySelector('.mobile-dropdown');
+              if (otherDropdown) {
+                otherDropdown.classList.remove('show');
+              }
             }
-          }
+          });
         });
-      }
-    });
-  });
-
-  // Mobile nested dropdown functionality
-  const mobileDropdownItems = document.querySelectorAll('.mobile-dropdown-item');
-  mobileDropdownItems.forEach((item) => {
-    const nestedDropdown = item.nextElementSibling;
-    if (nestedDropdown && nestedDropdown.classList.contains('mobile-nested-dropdown')) {
-      item.addEventListener('click', function (e) {
-        e.preventDefault();
-        nestedDropdown.classList.toggle('show');
-        // Add 'open' class to mobile-dropdown-item-container
-        const container = this.closest('.mobile-dropdown-item-container');
-        if (container) {
-          container.classList.toggle('open');
+        
+        const caretIcon = link.querySelector('.svg-wrapper');
+        if (caretIcon) {
+          caretIcon.style.display = 'inline-flex';
         }
-      });
+      } else {
+        const caretIcon = link.querySelector('.svg-wrapper');
+        if (caretIcon) {
+          caretIcon.style.display = 'none';
+        }
+        
+        if (dropdown.children.length === 0) {
+          dropdown.remove();
+        }
+      }
     }
   });
 
-  // Close mobile drawer when clicking outside
+  document.querySelectorAll('.mobile-dropdown-item-container').forEach((container) => {
+    const item = container.querySelector('.mobile-dropdown-item');
+    const nestedDropdown = container.querySelector('.mobile-nested-dropdown');
+    
+    if (item && nestedDropdown) {
+      const hasChildren = nestedDropdown.children.length > 0;
+      
+      if (hasChildren) {
+        item.addEventListener('click', function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          
+          nestedDropdown.classList.toggle('show');
+          container.classList.toggle('open');
+          
+          const parentDropdown = container.closest('.mobile-dropdown');
+          if (parentDropdown) {
+            parentDropdown.querySelectorAll('.mobile-dropdown-item-container').forEach((otherContainer) => {
+              if (otherContainer !== container && otherContainer.classList.contains('open')) {
+                otherContainer.classList.remove('open');
+                const otherNestedDropdown = otherContainer.querySelector('.mobile-nested-dropdown');
+                if (otherNestedDropdown) {
+                  otherNestedDropdown.classList.remove('show');
+                }
+              }
+            });
+          }
+        });
+        
+        const caretIcon = item.querySelector('.svg-wrapper');
+        if (caretIcon) {
+          caretIcon.style.display = 'inline-flex';
+        }
+      } else {
+        const caretIcon = item.querySelector('.svg-wrapper');
+        if (caretIcon) {
+          caretIcon.style.display = 'none';
+        }
+        
+        if (nestedDropdown.children.length === 0) {
+          nestedDropdown.remove();
+        }
+      }
+    }
+  });
+  
   document.addEventListener('click', function(e) {
     if (!mobileHeaderDrawer.contains(e.target) && !hamburger.contains(e.target)) {
       mobileHeaderDrawer.classList.remove('open');
+      hamburger.classList.remove('active');
     }
   });
 
-  // Close mobile drawer when clicking the close icon
   closeIcon.addEventListener('click', function() {
     mobileHeaderDrawer.classList.remove('open');
-    hamburger.classList.toggle('active');
+    hamburger.classList.remove('active');
   });
 
-  // Initialize scroll tracking variables
   let scrollDistance = parseFloat(localStorage.getItem('scrollDistance')) || 0;
   let prevScrollY = window.scrollY;
 
-  // Update scroll distance display on page load
   const scrollDistanceElements = document.querySelectorAll('.scroll-distance');
   const updateScrollDisplays = () => {
     scrollDistanceElements.forEach(el => {
@@ -179,13 +243,10 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   };
 
-  // Update displays on initial load
   updateScrollDisplays();
 
-  // Throttle scroll handler for better performance
   let ticking = false;
 
-  // Calculate and update scroll distance
   const updateScrollDistance = () => {
     if (ticking) return;
 
@@ -194,10 +255,8 @@ document.addEventListener('DOMContentLoaded', function () {
       const currentScrollY = window.scrollY;
       const deltaY = Math.abs(currentScrollY - prevScrollY);
 
-      // Convert pixels to kilometers
       scrollDistance += deltaY / 1000000;
 
-      // Update displays and save to localStorage
       updateScrollDisplays();
       localStorage.setItem('scrollDistance', scrollDistance);
 
@@ -206,10 +265,8 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   };
 
-  // Add scroll event listener
   window.addEventListener('scroll', updateScrollDistance, { passive: true });
 
-  // Smooth scroll to bottom functionality
   document.getElementById('scroll-to-bottom')?.addEventListener('click', () => {
     window.scrollTo({
       top: document.body.scrollHeight,
@@ -217,73 +274,3 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 });
-
-class StickyHeader extends HTMLElement {
-  constructor() {
-    super();
-  }
-
-  connectedCallback() {
-    this.header = document.querySelector('.section-header');
-    this.headerIsAlwaysSticky = this.getAttribute('data-sticky-type') === 'always' || this.getAttribute('data-sticky-type') === 'reduce-logo-size';
-    this.headerBounds = {};
-
-    this.setHeaderHeight();
-
-    window.matchMedia('(max-width: 990px)').addEventListener('change', this.setHeaderHeight.bind(this));
-
-    if (this.headerIsAlwaysSticky) {
-      this.header.classList.add('shopify-section-header-sticky');
-    };
-
-    this.currentScrollTop = 0;
-    this.preventReveal = false;
-
-    this.onScrollHandler = this.onScroll.bind(this);
-    window.addEventListener('scroll', this.onScrollHandler, false);
-  }
-
-  setHeaderHeight() {
-    document.documentElement.style.setProperty('--header-height', `${this.header.offsetHeight}px`);
-  }
-
-  disconnectedCallback() {
-    window.removeEventListener('scroll', this.onScrollHandler);
-  }
-
-  onScroll() {
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-    if (scrollTop > this.currentScrollTop && scrollTop > this.header.offsetHeight) {
-      requestAnimationFrame(this.hide.bind(this));
-    } else if (scrollTop < this.currentScrollTop) {
-      requestAnimationFrame(this.reveal.bind(this));
-    }
-
-    this.currentScrollTop = scrollTop;
-
-    // Update scroll distance
-    const deltaY = Math.abs(scrollTop - this.currentScrollTop);
-    let scrollDistance = parseFloat(localStorage.getItem('scrollDistance')) || 0;
-    scrollDistance += deltaY / 1000000;
-    localStorage.setItem('scrollDistance', scrollDistance);
-
-    const scrollDistanceEl = document.getElementById('scrollDistance');
-    if (scrollDistanceEl) {
-      scrollDistanceEl.textContent = scrollDistance.toFixed(2);
-    }
-  }
-
-  hide() {
-    if (this.headerIsAlwaysSticky) return;
-    this.header.classList.add('shopify-section-header-hidden', 'shopify-section-header-sticky');
-  }
-
-  reveal() {
-    if (this.headerIsAlwaysSticky) return;
-    this.header.classList.add('shopify-section-header-sticky', 'animate');
-    this.header.classList.remove('shopify-section-header-hidden');
-  }
-}
-
-customElements.define('sticky-header', StickyHeader);

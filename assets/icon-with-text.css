@@ -1,4 +1,3 @@
-
 * {
     margin: 0;
     padding: 0;
@@ -8,6 +7,24 @@
     --heading-padding: 0 40px;
   }
 
+.description__button__container:focus-visible,
+.description__close__button:focus-visible {
+  outline: 2px solid rgb(var(--color-foreground));
+  outline-offset: 2px;
+}
+
+.description__button__container:focus:not(:focus-visible),
+.description__close__button:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.description__button__container,
+.description__close__button,
+.card-action-button,
+.scroll-button {
+  outline: none;
+  transition: outline 0.3s ease;
+}
   .icon-with-text-container {
     background: var(--color-background);
     display: flex;
@@ -182,7 +199,7 @@
   }
   .card__count__container {
     gap: 1rem;
-    justify-content: center;
+    justify-content: center; 
   }
   .card__count__container > .dot {
     background: black;
@@ -201,3 +218,9 @@
 .featured-icon-with-text-heading{
        width: 547px; 
     }
+
+@media only screen and (min-width: 769px) {
+  .icon-with-text-container.centered {
+    justify-content: center;
+  }
+}

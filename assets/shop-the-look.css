@@ -68,7 +68,7 @@
   position: relative;
   width: 35px;
   height: 35px;
-  background-color: rgb(var(--color-background));
+  background-color: rgb(var(--color-button-text));
   color: rgb(var(--color-foreground));
   border: none;
   border-radius: 50%;
@@ -225,6 +225,7 @@
 }
 
 .shop__the__look__description {
+  line-height: 24px;
   font-size: 16px;
   font-weight: 400;
   padding: 15px;
@@ -261,7 +262,6 @@
   .media {
     border-radius: 5px;
     height: 50vh;
-    margin-top: 10px;
   }
 
   .shop__the__look__slider__wrapper {
@@ -290,7 +290,6 @@
   }
 
   .shop__the__look__description {
-    line-height: 1.5em;
     font-size: 16px;
     font-weight: 300;
     text-align: justify;

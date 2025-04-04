@@ -1,4 +1,20 @@
 <link rel="stylesheet" href="{{ 'header.css' | asset_url }}">
+<style>
+  .header-logo {
+  display:block;
+}
+.header-mobile-logo {
+  display: none;
+}
+  @media screen and (max-width: 900px) {
+  .header-logo {
+    display: none; 
+  }
+  .header-mobile-logo {
+    display: block; 
+  }
+}
+</style>
 
 <script src="{{ 'header.js' | asset_url }}" defer></script>
 
@@ -10,7 +26,18 @@
   <div class="flex-container" style="--margin-right: {{ section.settings.margin_right }}px; --margin-left: {{ section.settings.margin_left }}px">
     <a href="{{ routes.root_url }}" class="logo-container">
       {% if section.settings.logo or settings.logo != blank %}
-      <img src="{% if section.settings.logo != blank %}{{ section.settings.logo | image_url }}{% else %}{{ settings.logo | image_url }}{% endif %}" alt="{{ shop.name }}" loading="lazy" width="500" height="500">
+     <img class="header-logo" src="{% if section.settings.logo != blank %}
+        {{ section.settings.logo | image_url }}{% else %}{{ settings.logo | image_url }}{% endif %}" alt="{{ shop.name }}" loading="lazy" width="500" height="500">
+        <!-- Mobile logo -->
+     <img class="header-mobile-logo" src="{% if section.settings.mobile_image != blank %}
+    {{ section.settings.mobile_image | image_url }}
+    {% elsif settings.logo != blank %}
+    {{ settings.logo | image_url }}
+    {% else %}
+    {{ section.settings.logo | image_url }}
+    {% endif %}" 
+    alt="{{ shop.name }}" loading="lazy" width="300" height="300">
+
       {% else %}
         <span style="font-family: var(--font-heading-family);">{{ shop.name }}</span>
       {% endif %}
@@ -277,7 +304,7 @@
         </div>
       </div>
     </div>
-   <div class="hamburger" id="hamburger">
+   <div class="hamburger" id="hamburger" role="button" tabindex="0" aria-label="Toggle menu" aria-expanded="false">
     <div class="hamburger-menu">
       <div class="hamlines">
            <span class="line"></span>
@@ -371,6 +398,13 @@ observer.observe(document.querySelector('.header'), {
       "id": "logo",
       "label": "Logo"
     },
+       {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile Image (Optional)",
+      "info": "If not set, desktop image will be used"
+    },
+
     {
       "type": "select",
       "id": "font_size",

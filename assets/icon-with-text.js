@@ -5,6 +5,7 @@ class IconWithText {
 
       if (this.isLayout1) {
         this.initLayout1();
+        this.centerCardsInLayout1();
       } else {
         this.initLayout2();
       }
@@ -21,18 +22,38 @@ class IconWithText {
         const closeButton = card.querySelector(".description__close__button");
         const icon = card.querySelector(".description__button__inner_container");
 
-          openButton.addEventListener("click", () => {
-            box.classList.add("active");
-            icon.classList.add("active");
-          });
+        openButton.setAttribute('role', 'button');
+        openButton.setAttribute('tabindex', '0');
+        openButton.setAttribute('aria-label', 'Open description');
 
-          closeButton.addEventListener("click", () => {
-            box.classList.remove("active");
-            icon.classList.remove("active");
+        closeButton.setAttribute('role', 'button');
+        closeButton.setAttribute('tabindex', '0');
+        closeButton.setAttribute('aria-label', 'Close description');
+
+        const toggleDescription = (isOpen) => {
+          box.classList.toggle("active", isOpen);
+          icon.classList.toggle("active", isOpen);
+          openButton.setAttribute('aria-expanded', isOpen);
+        };
+
+        openButton.addEventListener("click", () => toggleDescription(true));
+        closeButton.addEventListener("click", () => toggleDescription(false));
+
+        openButton.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggleDescription(true);
+          }
+        });
+
+        closeButton.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggleDescription(false);
+          }
         });
       });
 
-      // Create an intersection observer for layout 1
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -50,6 +71,22 @@ class IconWithText {
       items.forEach(item => observer.observe(item));
     }
 
+    centerCardsInLayout1() {
+      const container = this.section.querySelector(".icon-with-text-container");
+      const cards = container.querySelectorAll(".card__outer__container");
+      
+      const centerCards = () => {
+        if (window.innerWidth > 768 && cards.length < 4) {
+          container.style.justifyContent = "center";
+        } else {
+          container.style.justifyContent = "";
+        }
+      };
+      
+      centerCards();
+      window.addEventListener('resize', centerCards);
+    }
+
     initLayout2() {
       const sectionId = this.section.id.replace('section-', '');
       this.container = document.querySelector(`#section-${sectionId} .card-container`);
@@ -59,17 +96,53 @@ class IconWithText {
       if (!this.container) return;
 
       const scrollButton = this.container.querySelector('.scroll-button');
+
+      scrollButton?.setAttribute('role', 'button');
+      scrollButton?.setAttribute('tabindex', '0');
+      scrollButton?.setAttribute('aria-label', 'Scroll to next card');
+
       scrollButton?.addEventListener('click', () => this.scrollCards());
+      scrollButton?.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          this.scrollCards();
+        }
+      });
 
       this.container.querySelectorAll('.card-action-button')
-        .forEach(button => button.addEventListener('click', () => this.toggleDescription(button)));
+        .forEach(button => {
+          button.setAttribute('role', 'button');
+          button.setAttribute('tabindex', '0');
+          button.setAttribute('aria-label', 'Toggle card description');
+          
+          button.addEventListener('click', () => this.toggleDescription(button));
+          button.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              this.toggleDescription(button);
+            }
+          });
+        });
+
+      this.dots.forEach((dot, index) => {
+        dot.setAttribute('role', 'button');
+        dot.setAttribute('tabindex', '0');
+        dot.setAttribute('aria-label', `Go to card ${index + 1}`);
+
+        dot.addEventListener('click', () => this.scrollToCard(index));
+        dot.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            this.scrollToCard(index);
+          }
+        });
+      });
 
       this.container.addEventListener('scroll', () => {
         const cardWidth = this.container.querySelector('.primary-card-container').offsetWidth + 20;
         this.currentCard = Math.round(this.container.scrollLeft / cardWidth);
       });
 
-      // Add intersection observer for layout 2
       const cards = this.container.querySelectorAll('.primary-card-container');
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -88,9 +161,19 @@ class IconWithText {
 
     toggleDescription(button) {
       const card = button.closest('.primary-card-container');
+      const descriptionText = card.querySelector('.card-description-text');
+      const backgroundDecoration = card.querySelector('.background-decoration');
+      
       button.classList.toggle('active');
-      card.querySelector('.card-description-text').classList.toggle('show');
-      card.querySelector('.background-decoration').classList.toggle('show');
+      button.setAttribute('aria-expanded', button.classList.contains('active'));
+      
+      descriptionText.classList.toggle('show');
+      backgroundDecoration.classList.toggle('show');
+
+      const descriptionHeight = descriptionText ? descriptionText.scrollHeight : 0;
+      card.style.height = button.classList.contains('active') 
+        ? `${descriptionHeight + 300}px` 
+        : '200px';
     }
 
     scrollCards() {
@@ -101,21 +184,30 @@ class IconWithText {
         left: this.currentCard * cardWidth,
         behavior: 'smooth'
       });
+      this.updateDots(this.currentCard);
+    }
+
+    scrollToCard(index) {
+      const cardWidth = this.container.querySelector('.primary-card-container').offsetWidth + 20;
+      this.container.scrollTo({
+        left: index * cardWidth,
+        behavior: 'smooth'
+      });
+      this.updateDots(index);
     }
 
     updateDots(activeIndex) {
       this.dots.forEach((dot, index) => {
         dot.classList.toggle('active', index === activeIndex);
+        dot.setAttribute('aria-selected', index === activeIndex);
       });
     }
   }
 
-  // Initialize on section load
   document.addEventListener('shopify:section:load', function(event) {
     new IconWithText(event.target);
   });
 
-  // Initialize on DOM load
   document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.featured-icon-with-text-section, [id^="section-"]').forEach(section => {
       new IconWithText(section);
@@ -136,9 +228,9 @@ document.addEventListener("DOMContentLoaded", () => {
             if (pagination) pagination.style.display = "none";
             if (mainContainer) mainContainer.style.textAlign = "center";
            if (random) {
-          random.style.display = "flex";
-          random.style.justifyContent = "center";
-        }
+              random.style.display = "flex";
+              random.style.justifyContent = "center";
+            }
         } else {
             arrows.forEach(arrow => arrow.style.display = "flex");
             if (pagination) pagination.style.display = "flex";
@@ -158,21 +250,3 @@ document.addEventListener("DOMContentLoaded", () => {
         requestAnimationFrame(updateNavigationVisibility);
     });
 });
-  document.addEventListener("DOMContentLoaded", () => {
-    const components = document.querySelectorAll(".primary-card-container");
-
-    components.forEach(component => {
-      const toggleButton = component.querySelector(".card-action-button");
-      const descriptionText = component.querySelector(".card-description-text");
-
-      toggleButton.addEventListener("click", () => {
-        const descriptionHeight = descriptionText ? descriptionText.scrollHeight : 0;
-
-        if (toggleButton.classList.contains("active")) {
-          component.style.height = `${descriptionHeight + 300}px`;
-        } else {
-          component.style.height = "200px";
-        }
-      });
-    });
-  });

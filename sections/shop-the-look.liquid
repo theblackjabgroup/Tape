@@ -67,6 +67,7 @@
                   is="toggle-button"
                   aria-expanded="false"
                   data-look-dot="{{ forloop.index }}"
+                  data-heading="{{block.settings.productHeading}}"
                   data-description="{{ block.settings.insightsText }}"
                   role="button"
                   aria-label="Click to view insights">
@@ -131,7 +132,7 @@
 
 <div class="shop__the__look__text__wrapper color-{{ section.settings.bannerColor }} ">
   <div class="shop__the__look__text__container">
-    <h1 class="shop__the__look__heading">{{ section.settings.section_heading }}</h1>
+    <h1 id="productHeading" class="shop__the__look__heading">{{ section.settings.section_heading }}</h1>
     <p
       id="insightsInfo"
       class="shop__the__look__description"
@@ -142,14 +143,22 @@
 <script>
   document.addEventListener("DOMContentLoaded", function () {
   const dots = document.querySelectorAll(".shop-look__dots-item");
+  const headingContainer = document.getElementById("productHeading");
   const descriptionContainer = document.getElementById("insightsInfo");
 
   dots.forEach(dot => {
     dot.addEventListener("click", function () {
+      const newHeading = this.getAttribute("data-heading");
       const newDescription = this.getAttribute("data-description");
+
+      if (newHeading) {
+        headingContainer.textContent = newHeading;
+      }
+
       if (newDescription) {
         descriptionContainer.textContent = newDescription;
       }
+
 
       dots.forEach(d => d.setAttribute("aria-expanded", "false"));
       this.setAttribute("aria-expanded", "true"); 
@@ -275,7 +284,7 @@
         "type": "text",
         "id": "main_description",
         "label": "Main Description",
-        "default": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas est, eligendi, at amet officiis sit sequi dolor minus nulla voluptatibus ex magni modi maxime suscipit provident tempore minima eum repellendus? Lorem ipsum dolor sit amet, consectetur adipisicing elit."
+        "default": "Pair multiple products with text hotspots to give focus to your chosen product. Add details on style, availabilty, share the product description or review."
       }, {
         "type": "text",
         "id": "section_heading",
@@ -285,7 +294,7 @@
         "type": "text",
         "id": "section_description",
         "label": "Section Description",
-        "default": "Experience ultimate comfort with our wheelchair's padded armrests. Designed for support and pressure relief, they feature an ergonomic shape and adjustable height for a personalized fit. Enjoy enhanced stability and comfort during every ride!"
+        "default": "Pair multiple products with text hotspots to give focus to your chosen product. Add details on style, availabilty, share the product description or review."
       }
 
     ],
@@ -314,9 +323,14 @@
             "default": 50
           }, {
             "type": "text",
+            "id": "productHeading",
+            "label": "Heading",
+            "default": "Product Heading"
+          }, {
+            "type": "text",
             "id": "insightsText",
             "label": "Insight Text",
-            "default": "    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam, nobis."
+            "default": "   THis is the text hotspot, use it to display the product feature as the user intracts with the image."
           }
         ]
       }

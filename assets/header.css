@@ -666,8 +666,8 @@ mobile-nav-items::-webkit-scrollbar {
   cursor: pointer;
   color: rgb(var(--color-text));
   font-family: var(--font-heading-family);
-    font-weight: var(--font-heading-weight);
-
+    font-weight: var(--font-head
+  z-index: 10
 }
 
 .mobile-dropdown {

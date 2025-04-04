@@ -28,7 +28,12 @@
     
     <div class="faq-container" data-faq-container>
       {% for block in section.blocks %}
-        <div class="faq-item" data-faq-item="{{ forloop.index }}">
+      <div class="faq-item" 
+     data-faq-item="{{ forloop.index }}"
+     role="button" 
+     tabindex="0" 
+     aria-expanded="false" 
+     aria-controls="faq-content-{{ forloop.index }}">
           <span class="faq-number">{{ block.settings.serialno }}</span>
           
           {% if section.settings.layout_style == 'layout1' %}
@@ -59,8 +64,40 @@
     </div>
   </div>
 </div>
+<style>
+[data-faq-item] {
+  outline: none; 
+  transition: box-shadow 0.2s ease-in-out;
+}
 
-<script>
+
+[data-faq-item]:focus-visible {
+  outline: 2px solid rgb(var(--color-foreground));
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px rgba(var(--color-foreground), 0.3); 
+}
+
+[data-faq-item] .icon-arrow {
+  transition: transform 0.3s ease;
+}
+
+[data-faq-item] .icon-arrow.rotated {
+  transform: rotate(180deg);
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+
+.faq-answer.visible {
+  max-height: 500px;
+  opacity: 1;
+}
+</style>
+           <script>
 document.addEventListener('DOMContentLoaded', function() {
   // Create a unique identifier for each FAQ section
   const faqSections = document.querySelectorAll('.faq-section');
@@ -91,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       }
     };
-
+  
     const animateNewDots = (dotsLine) => {
       if (!dotsLine) return;
       
@@ -103,12 +140,8 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     };
 
-    const handleFAQClick = (item) => {
+    const toggleFAQItem = (item) => {
       if (!item) return;
-      
-      // Only handle items within the current section
-     const parentSection = item.closest(`[data-faq-section="faq-${sectionIndex}"]`);
-      if (!parentSection) return;
       
       const answer = item.querySelector('.faq-answer');
       const arrow = item.querySelector('.icon-arrow');
@@ -116,8 +149,14 @@ document.addEventListener('DOMContentLoaded', function() {
       
       if (answer && arrow) {
         const isExpanding = !answer.classList.contains('visible');
+        
+        // Toggle visibility
         answer.classList.toggle('visible');
         arrow.classList.toggle('rotated');
+        
+        // Update ARIA attributes
+        const currentState = item.getAttribute('aria-expanded') === 'true';
+        item.setAttribute('aria-expanded', !currentState);
         
         if (dotsLine && isExpanding) {
           requestAnimationFrame(() => {
@@ -138,20 +177,55 @@ document.addEventListener('DOMContentLoaded', function() {
       createDots(dotsLine, false);
     });
 
-    // Add click handlers for items within this section
+    // Add keyboard and click event handlers for items within this section
     const faqItems = section.querySelectorAll('[data-faq-item]');
-    faqItems.forEach(item => {
-      const arrow = item.querySelector('.icon-arrow');
-      if (arrow) {
-        // Remove any existing click listeners
-        arrow.removeEventListener('click', arrow.clickHandler);
-      
-        arrow.clickHandler = (e) => {
-          e.stopPropagation();
-          handleFAQClick(item);
-        };
-        arrow.addEventListener('click', arrow.clickHandler);
+    faqItems.forEach((item, index) => {
+      // Ensure each item has unique ID and content has corresponding ID
+      item.id = `faq-item-${sectionIndex}-${index}`;
+      const answer = item.querySelector('.faq-answer');
+      if (answer) {
+        answer.id = `faq-content-${sectionIndex}-${index}`;
+        item.setAttribute('aria-controls', answer.id);
       }
+
+      // Handle both click and keyboard events
+      const handleActivation = (e) => {
+        // Prevent default to stop any unwanted scrolling or default behavior
+        e.preventDefault();
+        toggleFAQItem(item);
+      };
+
+      // Click event for mouse users
+      item.addEventListener('click', handleActivation);
+
+      // Keyboard events for accessibility
+      item.addEventListener('keydown', (e) => {
+        // Trigger on Enter or Space key
+        if (e.key === 'Enter' || e.key === ' ' || e.key === 'Space') {
+          handleActivation(e);
+        }
+        
+        // Add arrow key navigation
+        if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+          e.preventDefault();
+          const items = Array.from(faqItems);
+          const currentIndex = items.indexOf(item);
+          
+          // Calculate next index with wrap-around
+          let nextIndex;
+          if (e.key === 'ArrowDown') {
+            nextIndex = (currentIndex + 1) % items.length;
+          } else {
+            nextIndex = (currentIndex - 1 + items.length) % items.length;
+          }
+          
+          // Focus on the next/previous item
+          items[nextIndex].focus();
+        }
+      });
+
+      // Ensure the item can receive keyboard focus
+      item.setAttribute('tabindex', '0');
     });
 
     let resizeTimeout;
@@ -168,8 +242,7 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('resize', handleResize);
   });
 });
-</script>
-
+           </script>
 {% schema %}
 {
   "name": "t:sections.collapsible_content.name",
