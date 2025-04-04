@@ -53,6 +53,30 @@
       "type": "header",
       "content": "Button Settings"
     },
+      {
+  "type": "color",
+  "id": "countdown_button_color",
+  "label": "Button Color",
+  "default": "#ffffff"
+},
+  {
+  "type": "color",
+  "id": "countdown_button_text_color",
+  "label": "Button Text Color",
+  "default": "#000000"
+},
+        {
+  "type": "color",
+  "id": "countdown_button_hover_color",
+  "label": "Button Hover Color",
+  "default": "#E2E9FF"
+},
+        {
+  "type": "color",
+  "id": "countdown_button_hover_text_color",
+  "label": "Button Hover Text Color",
+  "default": "#000000"
+},
     {
       "type": "checkbox",
       "id": "show_button",
@@ -221,17 +245,22 @@
         </div>
 
         <div class="countdown-timer" id="countdown-timer-{{ section.id }}" style="font-size: {{ section.settings.timer_font_size }}px;"></div>
-        {% if section.settings.show_button %}
-          <a href="{{ section.settings.button_link }}" class="countdown-section__button">
-            {{ section.settings.button_label }}
-            {% if section.settings.show_arrow %}
-              <svg class="countdown_svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
-              </svg>
-            {% endif %}
-          </a>
-        {% endif %}
+       {% if section.settings.show_button %}
+  <a href="{{ section.settings.button_link }}" class="countdown-section__button" style="
+    --button-color: {{ section.settings.countdown_button_color }};
+    --button-text-color: {{ section.settings.countdown_button_text_color }};
+    --button-hover-color: {{ section.settings.countdown_button_hover_color }};
+    --button-hover-text-color: {{ section.settings.countdown_button_hover_text_color }};
+  ">
+    {{ section.settings.button_label }}
+    {% if section.settings.show_arrow %}
+      <svg class="countdown_svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+        <polyline points="12 5 19 12 12 19"></polyline>
+      </svg>
+    {% endif %}
+  </a>
+{% endif %}
       </div>
     </div>
   </div>
