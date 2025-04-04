@@ -544,7 +544,7 @@
     ~ .svg-wrapper
     > .icon-checkmark {
     visibility: visible;
-    transform: translateX(10px) translateY(2px);
+    transform: translateX(10px) translateY(5px);
   }
 
   @media screen and (forced-colors: active) {
