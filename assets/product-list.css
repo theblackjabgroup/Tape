@@ -757,7 +757,7 @@
     }
 
     .select-item:hover {
-      background-color: var(--card_foreground);
+      background-color: var(--background_product_card);
     }
 
     .dropdown2.hidden {

@@ -667,6 +667,7 @@ mobile-nav-items::-webkit-scrollbar {
   color: rgb(var(--color-text));
   font-family: var(--font-heading-family);
     font-weight: var(--font-heading-weight);
+  z-index: 100;
 }
 
 .mobile-dropdown {
