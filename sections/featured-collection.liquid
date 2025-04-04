@@ -132,7 +132,9 @@
              </p>
            {% endif %}
            
-           <div class="dotted-line-wrapper" style="border-top-color: {{ section.settings.dotted_line_color }};">
+           <div class="dotted-line-wrapper" 
+                style="border-top: {{ section.settings.dotted_line_size }}px dotted {{ section.settings.dotted_line_color }};
+                       border-top-width: {{ section.settings.dotted_line_size }}px;">
              <div class="dotted-line"></div>
            </div>
            
@@ -224,12 +226,11 @@
               </p>
             {% endif %}
             
-<div class="dotted-line-wrapper" 
-     style="border-top: {{ section.settings.dotted_line_size }}px dotted {{ section.settings.dotted_line_color }};
-            border-top-width: {{ section.settings.dotted_line_size }}px;">
-           
-  <div class="dotted-line"></div>
-</div>    
+            <div class="dotted-line-wrapper" 
+                 style="border-top: {{ section.settings.dotted_line_size }}px dotted {{ section.settings.dotted_line_color }};
+                        border-top-width: {{ section.settings.dotted_line_size }}px;">
+              <div class="dotted-line"></div>
+            </div>    
             
             <div class="icons">
               {% for i in (1..3) %}
