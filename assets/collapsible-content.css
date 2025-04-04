@@ -151,12 +151,12 @@ word-break: break-word;
   opacity: 1;
   margin-top: 1rem;
 }
-.icon-arrow {
-    margin-top:10px;
+.collapsible-icon-arrow {
+    margin:10px;
   cursor: pointer;
   transition: transform 0.3s ease;
 }
-.icon-arrow.rotated {
+.collapsible-icon-arrow.rotated {
   transform: rotate(180deg);
 }
 .faq-header{
@@ -246,9 +246,5 @@ word-break: break-word;
   .faq-answer.visible {
     max-height: none; 
     margin-top: 0.75rem;
-  }
-  .icon-arrow {
-    width: 20px;
-    height: 20px;
   }
 }
