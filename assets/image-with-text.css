@@ -248,18 +248,18 @@
   text-decoration: none;
   background: linear-gradient(
     to right,
-    gray 50%,
+    var(--secondary_product_button_color) 50%,
     rgb(var(--color-button-text)) 50%
   ) !important;
   background-size: 200% 100% !important;
-  color: rgb(var(--color-secondary-button-text)) !important;
+  color: var(--secondary_button_label) !important;
   background-position: 100% 0 !important;
   transition: background-position 1.5s ease-in-out, transform 0.3s ease !important;
 }
 
 .info__banner__shopnow__button:hover {
   background-position: 0 0 !important;
-  color: rgb(var(--color-secondary-button-text)) !important;
+  color: var(--product_price_font) !important;
 }
 
 .info__banner__contents > .svg-wrapper {
