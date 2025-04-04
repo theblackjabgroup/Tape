@@ -104,23 +104,24 @@
 .countdown-timer__item span {
   font-weight: bold; 
 }
-  .countdown-section__button {
-    display: inline-block;
-    padding: 12px 24px;
-    border: none;
-    text-decoration: none;
-    font-size: 1em;
-    border-radius: 4px;
-    cursor: pointer;
-     background: linear-gradient(to right, gray 50%, var(--secondary_product_button_color) 50%);
-    background-size: 200% 100%;
-    background-position: 100% 0;
-    color:var(--product_price_font);
+.countdown-section__button {
+  display: inline-block;
+  padding: 12px 24px;
+  border: none;
+  text-decoration: none;
+  font-size: 1em;
+  border-radius: 4px;
+  cursor: pointer;
+  background: linear-gradient(to right, var(--button-hover-color) 50%, var(--button-color) 50%);
+  background-size: 200% 100%;
+  background-position: 100% 0;
+  color: var(--button-text-color);
   transition: background-position 1.5s ease-in-out, transform 0.3s ease;
-  }
+}
+
 .countdown-section__button:hover{
   background-position: 0 0;
-  color:var(--product_price_font);
+  color: var(--button-hover-text-color);
 }
 .countdown_svg {
     width: 18px;

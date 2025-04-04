@@ -223,7 +223,7 @@ font-weight:200 !important;}
 
 .blog-read-more-btn {
 font-weight: 500;
-    background: linear-gradient(to right, gray 50%, rgb(var(--color-button-text)) 50%);
+    background: linear-gradient(to right, var(--secondary_product_button_color) 50%, rgb(var(--color-button-text)) 50%);
     background-size: 200% 100%;
     background-position: 100% 0;
     border: none;
@@ -243,7 +243,7 @@ font-weight: 500;
 }
 .blog-read-more-btn:hover{
    background-position: 0 0;
-  color:rgb(var(--color-secondary-button-text));
+  color:var(--product_price_font);
 }
 
 
